@@ -13,11 +13,13 @@ class stack:
 class exception(Exception):
 	@classmethod
 	def __init__(self,
-				name="Exception",
+				name=None,
 				message="",
 				file="Unknown Source File",
 				stack=[]):
 		
+		if name==None:
+			name=self.__name__
 		self.name   =name
 		self.message=message
 		self.file   =file
@@ -25,7 +27,9 @@ class exception(Exception):
 		
 	@classmethod
 	def throw(self):
-		exception_list.append(self)
+		print(self.__str__())
+		print("Syntax Parser terminated due to an error")
+		exit()
 	@classmethod
 	def tostring(self):
 		err='%s:%s(in %s)\n'%(self.name,self.message,self.file)
@@ -35,11 +39,15 @@ class exception(Exception):
 		return err
 	@classmethod
 	def __str__(self):
-		print(self.tostring())
+		# print(self.tostring())
 		return self.tostring()
-		
+
+class EOFException(exception):
+	def __init__(self):
+		exception.__init__(self,message="got unexpected EOF")	
 
 def throw_all():
 	for err in exception_list:
 		print(err.tostring())
 	raise "Terminated due to runtime error"
+	
