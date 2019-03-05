@@ -28,8 +28,10 @@ nddata={
 
 '''Identifiers used for variable declaration'''
 var_identifiers=["let","const","var","ref","obj","changable"]
+'''Identifiers in if statement but not need to be connected'''
+no_need_if_identifiers=["if","with","while","signal","foreach"]
 '''Identifiers used for if statement'''
-if_identifiers=["if","elif","else"]
+if_identifiers=[*no_need_if_identifiers,"elif","else"]
 
 '''
 basic operations
@@ -150,6 +152,10 @@ class NumNodeData(InstanceNodeData):
 	def __init__(self,num,restStr):
 		InstanceNodeData.__init__(self,num,cls="number",restStr=restStr)
 
+class ArrayNodeData(InstanceNodeData):
+	def __init__(self,arr=[],restStr=''):
+		InstanceNodeData.__init__(self,arr,cls="arr",restStr=restStr)
+
 class UnaryOperation(NodeData):
 	'''
 		NodeData class to store unary operations
@@ -180,6 +186,8 @@ class ExprNodeData(NodeData):
 				*args,
 				**kwargs):
 		NodeData.__init__(self,value,type="expr",cls=cls,err=err,length=length,restStr=restStr,*args,**kwargs)
+		
+
 class IfNodeData(ExprNodeData):
 	def __init__(self,cls="null",cond=None,do=None,restStr=""):
 		ExprNodeData.__init__(self,None,cls=cls,restStr=restStr)
@@ -574,10 +582,13 @@ class BinaryOpNode(Node):
 	def valid(self,s):
 		return matchStart(binary_operations,s)
 	def process(self,s):
-		currentab=self.parent.codebuf[self.parent.coden]
-		if len(currentab)<1:
-			Exceptions.exception(name="SyntaxError",message="using binary operation after nothing",stack=[Exceptions.stack(line=self.parent.line,column=self.parent.column,code=s)]).throw()
+		# currentab=self.parent.codebuf[self.parent.coden]
 		currenta=self.parent.current
+		if currenta==None:
+			Exceptions.exception(name="SyntaxError",message="using binary operation after nothing",stack=[Exceptions.stack(line=self.parent.line,column=self.parent.column,code=s)]).throw()
+		print("---BINARY OPCODE CURRENT---")
+		print(currenta)
+		print("---END BINARY OPCODE CURRENT---")
 		current=None
 		types=[]
 		en=ExprNode()
@@ -643,6 +654,36 @@ class UnaryOpNode(Node):
 		s=end.restStr
 		current=UnaryOperation(op,end,s)
 		return current
+		
+class ArrayNode(Node):
+	def valid(self,s):
+		if len(s)>0:
+			return s[0]=="["
+		return False
+	def process(self,s):
+		s=s[1:]
+		en=ExprNode()
+		en.bind(self.parent)
+		elements=[]
+		while len(s)>0:
+			if s[0]=="]":
+				s=s[1:]
+				break
+			vld=en.valid(s)
+			if vld.__name__==CommaNode.__name__:
+				s=s[1:]
+				self.parent.current=None
+				continue
+			if not vld:
+				Exceptions.exception(message="Invalid Statement Array Element",stack=[Exceptions.stack(line=self.parent.line,column=self.parent.column,code=s)]).throw()
+			end=en.process(s)
+			s=end.restStr
+			if end.needsAdd:
+				elements.append(end)
+			print("---ARR CURRENT---")
+			print(self.parent.current)
+			print("---END ARR CURRENT---")
+		return ArrayNodeData(elements,restStr=s)
 
 class IfNode(Node):
 	'''TODO:all stuff related to if statement'''
@@ -669,7 +710,7 @@ class IfNode(Node):
 		dosth=cbn.process(s)
 		s=dosth.restStr
 		ifnd=IfNodeData(cls=cls,cond=cond,do=dosth,restStr=s)
-		if cls=="if":
+		if cls in no_need_if_identifiers:
 			return ifnd
 		else:
 			current=self.parent.current
@@ -688,6 +729,7 @@ class IfNode(Node):
 	
 
 exprs=[
+	ArrayNode,
 	BinaryOpNode,
 	UnaryOpNode,
 	CodeBlockNode,
