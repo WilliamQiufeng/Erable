@@ -95,7 +95,7 @@ binary_operations=[
 evaluation_operations=["+","-","*","/","%"]
 
 '''digits'''
-nums=list("0123456789abcdef")
+nums=list("0123456789abcdefghijklmnopqrstuvwxyz")
 
 class Code:
 	'''I dont know what this is for'''
@@ -331,14 +331,10 @@ class NumNode(Node):
 		radix=10
 		if len(s)>0:
 			for c in copy.deepcopy(s):
-				if c=='x':
-					radix=16
-				elif c=='o':
-					radix=8
-				elif c=='t':
-					radix=2
-				elif c=='p':
-					radix=10
+				if c=='r':
+					radix=res
+					res=0
+					print("radix changed to:%d"%(radix))
 				else:
 					if c in nums:
 						print("found %s in nums"%(c))
