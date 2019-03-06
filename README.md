@@ -13,10 +13,13 @@ And then, Typing LeafLang Code and `enter` ,you will get the parsed NodeData
 ### Syntax Parser
 > - [x] Variable Declaration
 > - [x] Binary and Unary Operations
-> - [x] if Expression
+> - [x] If Expression
 > - [x] Function Call
 > - [x] CodeBlock
-> - [ ] Loop Expression
+> - [x] Loop Expression
+> - [x] With Expression
+> - [x] Signal and Emit
+> - [x] Basic instances (integer,string,array)
 > - [ ] Import Expression
 > - [ ] Function Declaration
 > - [ ] Class Definition
