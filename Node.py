@@ -5,7 +5,7 @@ import Exceptions
 
 
 def arrToStr(arr):
-	''' an tool function which turns list-fied string back to the string '''
+	''' an tool function which turns list-ified string back to the string '''
 	string=""
 	for c in arr:
 		string+=c
@@ -18,6 +18,10 @@ def matchStart(arr,s):
 			if arrToStr(s).startswith(b):
 				return True
 	return False
+def cleanWhiteSpaces(s):
+	wsn = WhitespaceNode()
+	wsnd= wsn.process(s)
+	return wsnd.restStr
 nddata={
 	"isValid":"isValid",
 	"isList" :"isList",
@@ -29,9 +33,14 @@ nddata={
 '''Identifiers used for variable declaration'''
 var_identifiers=["let","const","var","ref","obj","changable"]
 '''Identifiers in if statement but not need to be connected'''
-no_need_if_identifiers=["if","with","while","signal","foreach"]
+no_need_if_identifiers=["if","with","while","signal","foreach","protect"]
 '''Identifiers used for if statement'''
 if_identifiers=[*no_need_if_identifiers,"elif","else"]
+
+'''Left Bracket'''
+left_bracket=["(","{"]
+'''Right Bracket'''
+right_bracket=[")","}"]
 
 '''
 basic operations
@@ -195,6 +204,17 @@ class IfNodeData(ExprNodeData):
 		self.do=do
 		self.elses=[]
 		self.elifs=[]
+
+anonymous_func_id=0
+class FuncDeclNodeData(ExprNodeData):
+	def __init__(self,name=None,args=[],do=None,restStr=""):
+		global anonymous_func_id
+		ExprNodeData.__init__(self,value=do,cls="function",restStr=restStr)
+		if name==None:
+			name="anonymous_func%d"%(anonymous_func_id)
+			anonymous_func_id+=1
+		self.args=args
+		self.name=name
 class Node:		
 	'''Basic Node Class'''
 	@classmethod
@@ -227,7 +247,7 @@ class WhitespaceNode(Node):
 				s.remove(s[0])
 			else:
 				break
-		return ExprNodeData(None,restStr=s,cls="whitespace")
+		return ExprNodeData(None,restStr=s,cls="whitespace",needsAdd=False)
 
 class SplitNode(Node):		
 	'''Used to process split.'''
@@ -386,12 +406,12 @@ class CodeBlockNode(Node):
 			which=0
 			for c in copy.deepcopy(s):
 				s.remove(s[0])
-				if c in ['{','(']:
+				if c in left_bracket:
 					which+=1
 					if which!=1:
 						cbk+=c
 					continue
-				elif c in ['}',')']:
+				elif c in right_bracket:
 					which-=1
 					if which==0:
 						break
@@ -508,16 +528,16 @@ class FuncCallNode(Node):
 			s=nnd.restStr
 			aargs=[]
 			rargs=[]
-			if s[0]=='(':
+			if s[0] in left_bracket:
 				isInArgs+=1
 				s.remove(s[0])
 				for c in copy.deepcopy(s):
 					cct+=c
 					s.remove(s[0])
-					if c=='(':
+					if c in left_bracket:
 						if not isInStr:
 							isInArgs+=1
-					if c==')':
+					if c in right_bracket:
 						if not isInStr:
 							isInArgs-=1
 							if isInArgs==0:
@@ -688,10 +708,19 @@ class ArrayNode(Node):
 class IfNode(Node):
 	'''TODO:all stuff related to if statement'''
 	def valid(self,s):
-		for i in if_identifiers:
-			if arrToStr(s).startswith(i+"(") or arrToStr(s).startswith(i+"{"):
-				return True
+		cct=""
+		for c in s:
+			if c.isspace() or c in left_bracket:
+				if cct in if_identifiers:
+					return True
+			elif not (c.isalpha()):
+				return False
+			cct+=c
 		return False
+		# for i in if_identifiers:
+		# 	if arrToStr(s).startswith(i+"(") or arrToStr(s).startswith(i+"{"):
+		# 		return True
+		# return False
 	def process(self,s):
 		cls="null"
 		for i in if_identifiers:
@@ -701,7 +730,10 @@ class IfNode(Node):
 			Exceptions.exception(message="Not a valid if statement",stack=[Exceptions.stack(line=self.parent.line,column=self.parent.column,code=s)]).throw()
 		print("IF STATE MENT '%s' FOUND"%(cls))
 		s=s[len(cls):]
-		cbn=CodeBlockNode()
+		wsn = WhitespaceNode()
+		wsnd=   wsn.process(s)
+		s	=     wsnd.restStr
+		cbn =  CodeBlockNode()
 		# cbn.bind(self.parent)
 		cond=None
 		if cls!="else":
@@ -727,8 +759,75 @@ class IfNode(Node):
 				Exceptions.exception(message="Undefined Behavior").throw()
 		Exceptions.exception(message="unknown").throw()
 	
+class FuncDeclNode(Node):
+	'''
+	Usage:
+		function name(arg1,arg2,arg3,...){do sth}
+	'''
+	def valid(self,s):
+		cct=""
+		for c in s:
+			if c.isspace() or c in left_bracket or c==":":
+				if cct=="function":
+					return True
+				return False
+			if c not in ["f","u","n","c","t","i","o"]:
+				return False
+			cct+=c
+	def process(self,s):
+		s=s[8:]# length of 'function' is 8
+		# first,clean whitespaces
+		s   = cleanWhiteSpaces(s)
+		# second,read the function name
+		nn  = NameNode()
+		nn  . bind(self.parent)
+		name= None
+		# function name will be anonymous if not valid
+		if nn.valid(s):
+			nnd=nn.process(s)
+			s=nnd.restStr
+			name=nnd.value
+		# clean whitespaces again
+		s   = cleanWhiteSpaces(s)
+		# now read argument declaration
+		args=[]
+		if len(s)>0:
+			if s[0]==":":
+				s=s[2:]
+				en  = NameNode()
+				en  . bind(self.parent)
+				for char in copy.deepcopy(s):
+					# clean whitespaces
+					s=cleanWhiteSpaces(s)
+					print("---WS CLEANED---")
+					print(s)
+					print("---END WS CLEANED---")
+					if char in right_bracket:
+						s=s[1:]
+						break
+					if char==",":
+						s=s[1:]
+						continue
+					vld=en.valid(s)
+					if not vld:
+							Exceptions.exception(message="Invalid Args Declaration Element",stack=[Exceptions.stack(line=self.parent.line,column=self.parent.column,code=s)]).throw()
+					end=en.process(s)
+					s=end.restStr
+					args.append(end.value)
+		# process the 'do' part
+		do=None
+		don = CodeBlockNode()
+		don.bind(self.parent)
+		# if not valid just skip
+		if don.valid(s):
+			dod=don.process(s)
+			s=dod.restStr
+			do=dod
+			
+		return FuncDeclNodeData(name=name,args=args,do=do)
 
 exprs=[
+	FuncDeclNode,
 	ArrayNode,
 	BinaryOpNode,
 	UnaryOpNode,

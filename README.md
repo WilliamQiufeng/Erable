@@ -7,7 +7,7 @@ Run Syntax Parser:
 ```shell
 cd LeafLang-compiler
 python3 Node.py
-```  
+```
 And then, Typing LeafLang Code and `enter` ,you will get the parsed NodeData
 ## Current Progress
 ### Syntax Parser
@@ -20,10 +20,10 @@ And then, Typing LeafLang Code and `enter` ,you will get the parsed NodeData
 > - [x] With Expression
 > - [x] Signal and Emit
 > - [x] Basic instances (integer,string,array)
+> - [x] Function Declaration
 > - [ ] Import Expression
-> - [ ] Function Declaration
 > - [ ] Class Definition
-  
+
 ### Compiler
 Nothing yet...  
 ### Executer
