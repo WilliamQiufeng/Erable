@@ -48,7 +48,15 @@ basic operations
 basic_operations=[
 	"return ",
 	"delete ",
-	"emit "  
+	"emit "  ,
+	"import "
+]
+'''
+zero operations
+'''
+zero_operations=[
+	"break"
+	"continue"
 ]
 
 '''
@@ -164,7 +172,12 @@ class NumNodeData(InstanceNodeData):
 class ArrayNodeData(InstanceNodeData):
 	def __init__(self,arr=[],restStr=''):
 		InstanceNodeData.__init__(self,arr,cls="arr",restStr=restStr)
-
+class ZeroOperation(NodeData):
+	'''
+	NodeData class to store zero operation
+	'''
+	def __init__(self,operation="null",restStr=""):
+		NodeData.__init__(self,None,type="operation",cls=operation,restStr=restStr)
 class UnaryOperation(NodeData):
 	'''
 		NodeData class to store unary operations
@@ -204,7 +217,10 @@ class IfNodeData(ExprNodeData):
 		self.do=do
 		self.elses=[]
 		self.elifs=[]
-
+class ArgsDeclNodeData(ExprNodeData):
+	def __init__(self,args=[],restStr=""):
+		ExprNodeData.__init__(self,value=args,cls="args",restStr=restStr)
+		
 anonymous_func_id=0
 class FuncDeclNodeData(ExprNodeData):
 	def __init__(self,name=None,args=[],do=None,restStr=""):
@@ -214,6 +230,16 @@ class FuncDeclNodeData(ExprNodeData):
 			name="anonymous_func%d"%(anonymous_func_id)
 			anonymous_func_id+=1
 		self.args=args
+		self.name=name
+anonymous_class_id=0
+class ClassDeclNodeData(ExprNodeData):
+	def __init__(self,name=None,extends=[],do=None,restStr=""):
+		global anonymous_class_id
+		ExprNodeData.__init__(self,value=do,cls="class",restStr=restStr)
+		if name==None:
+			name="anonymous_class%d"%(anonymous_class_id)
+			anonymous_class_id+=1
+		self.extends=extends
 		self.name=name
 class Node:		
 	'''Basic Node Class'''
@@ -389,11 +415,16 @@ class CodeBlockNode(Node):
 			[codes]
 		)
 	'''
+	def __init__(self):
+		# Node.__init__(self)
+		self.nodes=exprs
 	def valid(self,s):
 		if len(s)>0:
 			if s[0] in ["{","("]:
 				return True
 		return False
+	def setExprs(self,nodes):
+		self.nodes=nodes
 	def process(self,s):
 		if len(s)>0:
 			# codes inside the code block
@@ -420,6 +451,7 @@ class CodeBlockNode(Node):
 			print("---END CODE BLOCK---")
 			blk=[[]]
 			pcs=Processor()
+			pcs.setExprs(self.nodes)
 			blk=pcs.process(cbk)
 			return ExprNodeData(value=blk,cls="codeblock",restStr=s)
 
@@ -754,11 +786,49 @@ class IfNode(Node):
 			else:
 				Exceptions.exception(message="Undefined Behavior").throw()
 		Exceptions.exception(message="unknown").throw()
-	
+
+class ArgsDeclNode(Node):
+	'''
+	this node is used by Class Declaration and Function Declaration.
+	'''
+	def valid(self,s):
+		if len(s)>0:
+			return s[0]==":"
+		return False
+	def process(self,s):
+		args=[]
+		if len(s)>0:
+			if s[0]==":":
+				s=s[2:]
+				en  = NameNode()
+				en  . bind(self.parent)
+				while True:
+					# clean whitespaces
+					s=cleanWhiteSpaces(s)
+					print("---WS CLEANED---")
+					print(s)
+					print("---END WS CLEANED---")
+					if len(s)<=0:
+						Exceptions.EOFException().throw()
+					char=s[0]
+					if char in right_bracket:
+						s=s[1:]
+						break
+					if char==",":
+						s=s[1:]
+						continue
+					vld=en.valid(s)
+					if not vld:
+							Exceptions.exception(message="Invalid Args Declaration Element",stack=[Exceptions.stack(line=self.parent.line,column=self.parent.column,code=s)]).throw()
+					end=en.process(s)
+					s=end.restStr
+					args.append(end.value)
+		print("restStr=",s)
+		return ArgsDeclNodeData(args,s)
 class FuncDeclNode(Node):
 	'''
 	Usage:
-		function name(arg1,arg2,arg3,...){do sth}
+		function name:(arg1,arg2,arg3,...){do sth}
 	'''
 	def valid(self,s):
 		cct=""
@@ -786,30 +856,12 @@ class FuncDeclNode(Node):
 		# clean whitespaces again
 		s   = cleanWhiteSpaces(s)
 		# now read argument declaration
-		args=[]
-		if len(s)>0:
-			if s[0]==":":
-				s=s[2:]
-				en  = NameNode()
-				en  . bind(self.parent)
-				for char in copy.deepcopy(s):
-					# clean whitespaces
-					s=cleanWhiteSpaces(s)
-					print("---WS CLEANED---")
-					print(s)
-					print("---END WS CLEANED---")
-					if char in right_bracket:
-						s=s[1:]
-						break
-					if char==",":
-						s=s[1:]
-						continue
-					vld=en.valid(s)
-					if not vld:
-							Exceptions.exception(message="Invalid Args Declaration Element",stack=[Exceptions.stack(line=self.parent.line,column=self.parent.column,code=s)]).throw()
-					end=en.process(s)
-					s=end.restStr
-					args.append(end.value)
+		adn=ArgsDeclNode()
+		adn.bind(self.parent)
+		argsd=adn.process(s)
+		args=argsd.value
+		s=argsd.restStr
+		s=cleanWhiteSpaces(s)
 		# process the 'do' part
 		do=None
 		don = CodeBlockNode()
@@ -821,9 +873,59 @@ class FuncDeclNode(Node):
 			do=dod
 			
 		return FuncDeclNodeData(name=name,args=args,do=do)
-
+class ClassDeclNode(Node):
+	'''
+	Class Declaration Usage:
+		class [Name classname] [Args extends] [CodeBlock do]
+	'''
+	def valid(self,s):
+		cct=""
+		for c in s:
+			if c.isspace() or c in left_bracket or c==":":
+				if cct=="class":
+					return True
+				return False
+			if c not in ["c","l","a","s"]:
+				return False
+			cct+=c
+			
+	def process(self,s):
+		s=s[5:]# length of 'function' is 8
+		# first,clean whitespaces
+		s   = cleanWhiteSpaces(s)
+		# second,read the function name
+		nn  = NameNode()
+		nn  . bind(self.parent)
+		name= None
+		# class name will be anonymous if not valid
+		if nn.valid(s):
+			nnd=nn.process(s)
+			s=nnd.restStr
+			name=nnd.value
+		# clean whitespaces again
+		s   = cleanWhiteSpaces(s)
+		# now read extends declaration
+		adn=ArgsDeclNode()
+		adn.bind(self.parent)
+		argsd=adn.process(s)
+		extends=argsd.value
+		s=argsd.restStr
+		s=cleanWhiteSpaces(s)
+		# process the 'do' part
+		do=None
+		don = CodeBlockNode()
+		don.setExprs(class_do_exprs)
+		don.bind(self.parent)
+		# if not valid just skip
+		if don.valid(s):
+			dod=don.process(s)
+			s=dod.restStr
+			do=dod
+			
+		return ClassDeclNodeData(name=name,extends=extends,do=do)
 exprs=[
 	FuncDeclNode,
+	ClassDeclNode,
 	ArrayNode,
 	BinaryOpNode,
 	UnaryOpNode,
@@ -842,7 +944,15 @@ exprs=[
 dot_exprs=[
 	FuncCallNode,
 	NameNode
-]	
+]
+class_do_exprs=[
+	ClassDeclNode,
+	FuncDeclNode,
+	VarNode,
+	SplitNode,
+	CodeBlockNode,
+	WhitespaceNode
+]
 class ExprNode(Node):
 	nodes=exprs
 	
@@ -857,6 +967,7 @@ class ExprNode(Node):
 				return n
 		return False
 	def process(self,s):
+		s=cleanWhiteSpaces(s)
 		for n in self.nodes:
 			ins=n()
 			if ins.valid(s):
@@ -867,6 +978,7 @@ class ExprNode(Node):
 					print("---CURRENT :",hex(id(self.parent.current)),"---")
 					printf(self.parent.current)
 					print('---END CURRENT---')
+				s=cleanWhiteSpaces(s)
 				return nr
 			
 		Exceptions.exception(message="Unknown Syntax",stack=[Exceptions.stack(self.parent.line,self.parent.column,s)]).throw()
@@ -882,6 +994,8 @@ class Processor:
 		self.column=1
 		self.coden=0
 		self.en.parent=self
+	def setExprs(self,exprs):
+		self.en.nodes=exprs
 	def process(self,inp):
 		length=len(inp)
 		while len(inp)>0:
