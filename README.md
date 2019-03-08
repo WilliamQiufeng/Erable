@@ -21,9 +21,8 @@ And then, Typing LeafLang Code and `enter` ,you will get the parsed NodeData
 > - [x] Signal and Emit
 > - [x] Basic instances (integer,string,array)
 > - [x] Function Declaration
+> - [x] Class Definition
 > - [ ] Import Expression
-> - [ ] Class Definition
-
 ### Compiler
 Nothing yet...  
 ### Executer
