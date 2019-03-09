@@ -14,6 +14,7 @@ And then, Typing LeafLang Code and `enter` ,you will get the parsed NodeData
 > - [x] Variable Declaration
 > - [x] Binary and Unary Operations
 > - [x] If Expression
+> - [x] Label Expression
 > - [x] Function Call
 > - [x] CodeBlock
 > - [x] Loop Expression
@@ -22,9 +23,9 @@ And then, Typing LeafLang Code and `enter` ,you will get the parsed NodeData
 > - [x] Basic instances (integer,string,array)
 > - [x] Function Declaration
 > - [x] Class Definition
-> - [ ] Import Expression
+> - [x] Import Expression
 ### Compiler
-Nothing yet...  
+I am working on it!  
 ### Executer
 Nothing yet too...  
 
