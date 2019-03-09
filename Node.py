@@ -18,7 +18,23 @@ def matchStart(arr,s):
 			if arrToStr(s).startswith(b):
 				return True
 	return False
+def findInBasicOp(s):
+	'''
+	check if operation is in basic oprations list.
+	if do,return the operation
+	else ,return False.
+	'''
+	stringified=arrToStr(s)
+	for it in basic_operations:
+		itmo=it[:-1] # IT Minus One
+		if stringified.startswith(itmo):
+			return itmo
+	return False
 def cleanWhiteSpaces(s):
+	'''
+	a tool function to help clean whitespaces.
+	it helps with time
+	'''
 	wsn = WhitespaceNode()
 	wsnd= wsn.process(s)
 	return wsnd.restStr
@@ -33,7 +49,7 @@ nddata={
 '''Identifiers used for variable declaration'''
 var_identifiers=["let","const","var","ref","obj","changable"]
 '''Identifiers in if statement but not need to be connected'''
-no_need_if_identifiers=["if","with","while","signal","foreach","protect"]
+no_need_if_identifiers=["if","with","while","signal","protect"]
 '''Identifiers used for if statement'''
 if_identifiers=[*no_need_if_identifiers,"elif","else"]
 
@@ -49,13 +65,15 @@ basic_operations=[
 	"return ",
 	"delete ",
 	"emit "  ,
-	"import "
+	"import ",
+	"async " ,
+	"await " 
 ]
 '''
 zero operations
 '''
 zero_operations=[
-	"break"
+	"break",
 	"continue"
 ]
 
@@ -220,7 +238,22 @@ class IfNodeData(ExprNodeData):
 class ArgsDeclNodeData(ExprNodeData):
 	def __init__(self,args=[],restStr=""):
 		ExprNodeData.__init__(self,value=args,cls="args",restStr=restStr)
-		
+class ForEachNodeData(ExprNodeData):
+	def __init__(self,var=[],iterator=[],do=None,restStr=""):
+		ExprNodeData.__init__(self,None,cls="foreach",restStr=restStr)
+		self.var=var
+		self.iterator=iterator
+		self.do=do
+anonymous_lable_id=0
+class LabelNodeData(ExprNodeData):
+	def __init__(self,name=None,do=None,restStr=""):
+		global anonymous_label_id
+		ExprNodeData.__init__(self,value=do,cls="label",restStr=restStr)
+		if name==None:
+			name="anonymous_label%d"%(anonymous_label_id)
+			anonymous_label_id+=1
+		self.name=name
+
 anonymous_func_id=0
 class FuncDeclNodeData(ExprNodeData):
 	def __init__(self,name=None,args=[],do=None,restStr=""):
@@ -340,40 +373,51 @@ class NumNode(Node):
 	'''
 		Processes Numbers
 		radix changed when using:
-			char | radix
-			t    |     2
-			o    |     8
-			p    |    10
-			x    |    16
+			number + 'r'
+			like:16rabcd
 	'''
 	def valid(self,s):
 		if len(s)>0:
-			if s[0].isdigit():
-				return True
+			return s[0].isdigit()
 		return False
 	def process(self,s):
-		orig=copy.deepcopy(s)
+		orig=""
 		res=0
+		currentDigit=1
 		radix=10
+		isFloat=False
+		floatP=0
 		if len(s)>0:
 			for c in copy.deepcopy(s):
+				orig+=c
 				if c=='r':
-					radix=res
-					res=0
-					print("radix changed to:%d"%(radix))
+					if isFloat:
+						radix=floatP*currentDigit
+						currentDigit=1
+						floatP=0
+					else:
+						radix=res
+						res=0
+					printf("radix changed to:%d"%(radix))
+				elif c==".":
+					isFloat=not isFloat
 				else:
 					if c in nums:
-						print("found %s in nums"%(c))
+						printf("found %s in nums"%(c))
 						if nums.index(c)<radix:
-							res*=radix
-							res+=nums.index(c)
+							if isFloat:
+								currentDigit*=radix
+								floatP+=nums.index(c)/currentDigit
+							else:
+								res*=radix
+								res+=nums.index(c)
 						else:
-							Exceptions.exception(message="Number '%d' is not in radix '%d'"%(nums.index(c),radix),stack=[Exceptions.stack(self.
+							Exceptions.exception(message="Number '%s' is not in radix '%d'"%(c,radix),stack=[Exceptions.stack(self.
 							parent.line,self.parent.column,orig)]).throw()
 					else:
 						break
 				s.remove(s[0])
-		return NumNodeData(res,restStr=s)
+		return NumNodeData(res+floatP,restStr=s)
 
 class StringNode(Node):		
 	'''Processes Strings'''
@@ -446,9 +490,9 @@ class CodeBlockNode(Node):
 						cbk+=c
 					continue
 				cbk+=c
-			print("---CODE BLOCK---")
-			print(cbk)
-			print("---END CODE BLOCK---")
+			printf("---CODE BLOCK---")
+			printf(cbk)
+			printf("---END CODE BLOCK---")
 			blk=[[]]
 			pcs=Processor()
 			pcs.setExprs(self.nodes)
@@ -482,7 +526,7 @@ class VarNode(Node):
 		while globn.valid(s):
 			globnd=globn.process(s)
 			s=globnd.restStr
-			s=wn.process(s).restStr
+			s=cleanWhiteSpaces(s)
 			ids.append(globnd.value)
 		changable= "const" in ids
 		glob= "var" in ids
@@ -589,7 +633,7 @@ class FuncCallNode(Node):
 				return 	ExprNodeData(value=funcName,cls="funccall",restStr=s,arguments=[])
 			if isInArgs:
 				Exceptions.exception(message="Unterminated argument value passing.",stack=[Exceptions.stack(line=self.parent.line,column=self.parent.column,code=cct)]).throw()
-			print("FINAL ARGS:",args)
+			printf("FINAL ARGS:",args)
 					
 		return NodeData(value=None,type="expr",cls="funccall",restStr=s,arguments=aargs,funcName=funcName)
 		
@@ -634,9 +678,9 @@ class BinaryOpNode(Node):
 		currenta=self.parent.current
 		if currenta==None:
 			Exceptions.exception(name="SyntaxError",message="using binary operation after nothing",stack=[Exceptions.stack(line=self.parent.line,column=self.parent.column,code=s)]).throw()
-		print("---BINARY OPCODE CURRENT---")
-		print(currenta)
-		print("---END BINARY OPCODE CURRENT---")
+		printf("---BINARY OPCODE CURRENT---")
+		printf(currenta)
+		printf("---END BINARY OPCODE CURRENT---")
 		current=None
 		types=[]
 		en=ExprNode()
@@ -654,20 +698,20 @@ class BinaryOpNode(Node):
 			current=currenta
 		ccp=current
 		if op in ["*","/","%"] and current.type=="operation":
-			print("CHANGING ORDER OF OPERATION...")
+			printf("CHANGING ORDER OF OPERATION...Class=%s"%(current.cls))
 			if current.cls in binary_operations:
 				current=current.data['field']
-			elif current.cls in unary_operations:
+			elif current.cls in unary_operations or findInBasicOp(current.cls):
 				current=current.data["target"]
-			else:
-				Exceptions.exception(name="OperationNotFoundError",message="unknown operation for matching.",stack=[Exceptions.stack(line=self.parent.line,column=self.parent.column,code=s)]).throw()
+			#else:
+			#	Exceptions.exception(name="OperationNotFoundError",message="unknown operation for matching.",stack=[Exceptions.stack(line=self.parent.line,column=self.parent.column,code=s)]).throw()
 		cpy=copy.deepcopy(current)
 		current.value=None
 		current.type="operation"
 		current.cls=op
-		print("---processing field after binary operator '%s'....---"%(op))
+		printf("---processing field after binary operator '%s'....---"%(op))
 		end=en.process(s)
-		print("---DOT EXPR PROCESSED---\n")
+		printf("---DOT EXPR PROCESSED---\n")
 		s=end.restStr
 		ccp.restStr=s
 		current.data["field"]=end
@@ -696,13 +740,35 @@ class UnaryOpNode(Node):
 		s=s[len(op):]
 		if op in basic_operations:
 			op=op[:-1]
-		print("---processing field after unary operator '%s'....---"%(op))
+		printf("---processing field after unary operator '%s'....---"%(op))
 		end=en.process(s)
-		print("---DOT EXPR PROCESSED---\n")
+		printf("---DOT EXPR PROCESSED---\n")
 		s=end.restStr
 		current=UnaryOperation(op,end,s)
 		return current
-		
+
+class ZeroOpNode(Node):
+	def valid(self,s):
+		cct=""
+		for c in s:
+			if c.isdigit() or c.isalpha():
+				cct+=c
+			else:
+				break
+		return cct in zero_operations
+	def process(self,s):
+		cct=""
+		for c in copy.copy(s):
+			if c.isalpha() or c.isdigit():
+				cct+=c
+				s=s[1:]
+			else:
+				break
+		if cct in zero_operations:
+			op=cct
+			return ZeroOperation(op,s)
+		Exceptions.exception(message="Invalid Zero Operation",stack=[Exceptions.stack(line=self.parent.line,column=self.parent.column,code=cct)]).throw()
+
 class ArrayNode(Node):
 	def valid(self,s):
 		if len(s)>0:
@@ -728,21 +794,17 @@ class ArrayNode(Node):
 			s=end.restStr
 			if end.needsAdd:
 				elements.append(end)
-			print("---ARR CURRENT---")
-			print(self.parent.current)
-			print("---END ARR CURRENT---")
+			printf("---ARR CURRENT---")
+			printf(self.parent.current)
+			printf("---END ARR CURRENT---")
 		return ArrayNodeData(elements,restStr=s)
-
 class IfNode(Node):
 	'''TODO:all stuff related to if statement'''
 	def valid(self,s):
 		cct=""
 		for c in s:
-			if c.isspace() or c in left_bracket:
-				if cct in if_identifiers:
-					return True
-			elif not (c.isalpha()):
-				return False
+			if not c.isalpha():
+				return cct in if_identifiers
 			cct+=c
 		return False
 		# for i in if_identifiers:
@@ -756,11 +818,9 @@ class IfNode(Node):
 				cls=i
 		if cls=="null":
 			Exceptions.exception(message="Not a valid if statement",stack=[Exceptions.stack(line=self.parent.line,column=self.parent.column,code=s)]).throw()
-		print("IF STATE MENT '%s' FOUND"%(cls))
-		s=s[len(cls):]
-		wsn = WhitespaceNode()
-		wsnd=   wsn.process(s)
-		s	=     wsnd.restStr
+		printf("IF STATE MENT '%s' FOUND"%(cls))
+		s   =  s[len(cls):]
+		s   =  cleanWhiteSpaces(s)
 		cbn =  CodeBlockNode()
 		# cbn.bind(self.parent)
 		cond=None
@@ -787,6 +847,41 @@ class IfNode(Node):
 				Exceptions.exception(message="Undefined Behavior").throw()
 		Exceptions.exception(message="unknown").throw()
 
+class ForEachNode(Node):
+	def valid(self,s):
+		cct=""
+		for c in s:
+			if not c.isalpha():
+				return cct=="foreach"
+			if c not in "foreach":
+				break
+			cct+=c
+		return False
+	def process(self,s):
+		cct=""
+		s=s[7:] # length of 'foreach' is 7, so substr [7:]
+		s=cleanWhiteSpaces(s)
+		adn=ArgsDeclNode()
+		adn.bind(self.parent)
+		cbn=CodeBlockNode()
+		cbn.bind(self.parent)
+		var=[]
+		iterator=[]
+		if adn.valid(s):
+			adnd=adn.process(s)
+			s=adnd.restStr
+			var=adnd.value
+		s=cleanWhiteSpaces(s)
+		if adn.valid(s):
+			adnd=adn.process(s)
+			s=adnd.restStr
+			iterator=adnd.value
+		s=cleanWhiteSpaces(s)
+		if cbn.valid(s):
+			cbnd=cbn.process(s)
+			s=cbnd.restStr
+			do=cbnd.value
+		return ForEachNodeData(var=var,iterator=iterator,do=do,restStr=s)
 class ArgsDeclNode(Node):
 	'''
 	this node is used by Class Declaration and Function Declaration.
@@ -805,9 +900,9 @@ class ArgsDeclNode(Node):
 				while True:
 					# clean whitespaces
 					s=cleanWhiteSpaces(s)
-					print("---WS CLEANED---")
-					print(s)
-					print("---END WS CLEANED---")
+					printf("---WS CLEANED---")
+					printf(s)
+					printf("---END WS CLEANED---")
 					if len(s)<=0:
 						Exceptions.EOFException().throw()
 					char=s[0]
@@ -823,8 +918,36 @@ class ArgsDeclNode(Node):
 					end=en.process(s)
 					s=end.restStr
 					args.append(end.value)
-		print("restStr=",s)
+		printf("restStr=",s)
 		return ArgsDeclNodeData(args,s)
+		
+class LabelNode(Node):
+	def valid(self,s):
+		cct=""
+		for c in s:
+			if not c.isalpha():
+				return cct=="label"
+			if c not in ["l","a","b","e"]:
+				return False
+			cct+=c
+	def process(self,s):
+		s=s[5:] # length of 'label' is 5
+		s=cleanWhiteSpaces(s)
+		nn=NameNode()
+		name=None
+		if nn.valid(s):
+			nnd=nn.process(s)
+			s=nnd.restStr
+			name=nnd.value
+		s=cleanWhiteSpaces(s)
+		en=ExprNode()
+		en.bind(self.parent)
+		do=None
+		if en.valid(s):
+			end=en.process(s)
+			s=end.restStr
+			do=end
+		return LabelNodeData(name=name,do=do,restStr=s)
 class FuncDeclNode(Node):
 	'''
 	Usage:
@@ -833,10 +956,8 @@ class FuncDeclNode(Node):
 	def valid(self,s):
 		cct=""
 		for c in s:
-			if c.isspace() or c in left_bracket or c==":":
-				if cct=="function":
-					return True
-				return False
+			if not c.isalpha():
+				return cct=="function"
 			if c not in ["f","u","n","c","t","i","o"]:
 				return False
 			cct+=c
@@ -881,10 +1002,8 @@ class ClassDeclNode(Node):
 	def valid(self,s):
 		cct=""
 		for c in s:
-			if c.isspace() or c in left_bracket or c==":":
-				if cct=="class":
-					return True
-				return False
+			if not c.isalpha():
+				return  cct=="class"
 			if c not in ["c","l","a","s"]:
 				return False
 			cct+=c
@@ -926,9 +1045,12 @@ class ClassDeclNode(Node):
 exprs=[
 	FuncDeclNode,
 	ClassDeclNode,
+	ForEachNode,
+	LabelNode,
 	ArrayNode,
 	BinaryOpNode,
 	UnaryOpNode,
+	ZeroOpNode,
 	CodeBlockNode,
 	VarNode,
 	IfNode,
@@ -963,7 +1085,7 @@ class ExprNode(Node):
 	def valid(self,s):
 		for n in self.nodes:
 			if n().valid(s):
-				print("%s is valid with %s"%(n,str(s)))
+				printf("%s is valid with %s"%(n,str(s)))
 				return n
 		return False
 	def process(self,s):
@@ -975,9 +1097,9 @@ class ExprNode(Node):
 				nr=ins.process(s)
 				if nr.needsAdd:
 					self.parent.current=nr
-					print("---CURRENT :",hex(id(self.parent.current)),"---")
+					printf("---CURRENT :",hex(id(self.parent.current)),"---")
 					printf(self.parent.current)
-					print('---END CURRENT---')
+					printf('---END CURRENT---')
 				s=cleanWhiteSpaces(s)
 				return nr
 			
@@ -1001,44 +1123,58 @@ class Processor:
 		while len(inp)>0:
 			vld=self.en.valid(inp)
 			if vld:
-				print("VALID:",vld.__name__)
+				printf("VALID:",vld.__name__)
 			else:
-				print("NO VALID EXPR!")
+				printf("NO VALID EXPR!")
 			end=self.en.process(list(inp))
-			print("---NEW CURRENT---")
-			print(self.current)
-			print("---END NEW CURRENT---")
+			printf("---NEW CURRENT---")
+			printf(self.current)
+			printf("---END NEW CURRENT---")
 			inp=end.restStr
 			self.column+=length-len(inp)
 			length=len(inp)
 			if not end.needsAdd:
-				print(end.cls,": ")
+				printf(end.cls,": ")
 				printf(self.current)
-				print("")
+				printf("")
 				continue
 			elif end.cls in ["split","comma","whitespace"]:
-				print(end.cls,"MET")
+				printf(end.cls,"MET")
 				continue
 			self.codebuf[self.coden].append(end)
 			
 			printf(end)
-			print("one code ended")
+			printf("one code ended")
 		self.line+=1
 		self.column=1
 		return self.codebuf
 		
 		
 		
-def printf(s):
-	print(s)
-print("LeafLang Testing")
-inp=input('>')
-proc=Processor()
-while inp is not 'quit()':
-	res=proc.process(list(inp))
-	for i in res:
-		print('[')
-		for j in i:
-			print('      ',j.__str__())
-		print(']')
+def printf(*args):
+	return False
+	print(*args)
+	
+def test():
+	import time
+	milli = lambda: int(time.time() * 1000)
+	print("LeafLang Syntax Parser Testing")
 	inp=input('>')
+	global proc
+	proc=Processor()
+	while inp != 'quit()':
+		ms=milli()
+		res=proc.process(list(inp))
+		ma=milli()
+		# print(ma)
+		md=ma-ms
+		for i in res:
+			print('[')
+			for j in i:
+				print('      ',j.__str__())
+			print(']')
+		print("used %d ms"%(md))
+		inp=input('>')
+
+if __name__=="__main__":
+	test()
