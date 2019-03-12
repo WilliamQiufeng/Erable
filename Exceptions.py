@@ -1,4 +1,5 @@
 exception_list=[]
+state="Syntax Parser"
 class stack:
 	def __init__(self,line=-1,column=-1,code="Unknown Code"):
 		self.line   = line
@@ -28,7 +29,7 @@ class exception(Exception):
 	@classmethod
 	def throw(self):
 		print(self.__str__())
-		print("Syntax Parser terminated due to an error")
+		print("%s terminated due to an error"%(state))
 		exit()
 	@classmethod
 	def tostring(self):

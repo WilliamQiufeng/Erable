@@ -546,6 +546,7 @@ class VarNode(Node):
 		else:
 			finalIdentifiers.append("obj")
 		fnd=ExprNodeData(None,cls="var",identifiers=finalIdentifiers)
+		fnd.value=None
 		varname='unknown_variable'
 		if len(ids)>0:
 			if ids[len(ids)-1] in var_identifiers:
@@ -570,7 +571,7 @@ class VarNode(Node):
 						Exceptions.exception(message="Syntax error:expression not valid").throw()
 				else:
 					Exceptions.exception("Syntax error:expression not valid").throw()
-		fnd.data["key"]=varname
+		fnd.data["key"]=ExprNodeData(varname,cls="name",length=len(varname),isValid=True,restStr=s)
 		fnd.restStr=s
 		return fnd
 
@@ -1108,14 +1109,7 @@ class ExprNode(Node):
 class Processor:
 	
 	def __init__(self):
-		self.codebuf=[[]]
-		self.isInArgs=False
-		self.current=None
-		self.en=ExprNode()
-		self.line=1
-		self.column=1
-		self.coden=0
-		self.en.parent=self
+		self.clearbuf()
 	def setExprs(self,exprs):
 		self.en.nodes=exprs
 	def process(self,inp):
@@ -1148,7 +1142,15 @@ class Processor:
 		self.line+=1
 		self.column=1
 		return self.codebuf
-		
+	def clearbuf(self):
+		self.codebuf=[[]]
+		self.isInArgs=False
+		self.current=None
+		self.en=ExprNode()
+		self.line=1
+		self.column=1
+		self.coden=0
+		self.en.parent=self
 		
 		
 def printf(*args):
