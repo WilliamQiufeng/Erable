@@ -1,4 +1,4 @@
-# LeafLang-compiler
+# Erable
 This is a programming language which is created by myself.  
 Note that this language is still under development.  
 ## How to Use  
