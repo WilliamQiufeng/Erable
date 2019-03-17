@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.qiufeng.erable.AppTest" time="0.073" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.qiufeng.erable.AppTest" time="0.092" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="gopherProxySet" value="false"/>
     <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="CN"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/williamye/program/antlr/erable/target/surefire/surefirebooter380573756646875763.jar /williamye/program/antlr/erable/target/surefire 2019-03-17T12-44-24_576-jvmRun1 surefire826133471917387556tmp surefire_011458682885853519117tmp"/>
+    <property name="sun.java.command" value="/williamye/program/antlr/erable/target/surefire/surefirebooter985004024207154231.jar /williamye/program/antlr/erable/target/surefire 2019-03-17T12-52-09_261-jvmRun1 surefire3177213005514604638tmp surefire_01737531367149435528tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/williamye/program/antlr/erable/target/test-classes:/williamye/program/antlr/erable/target/classes:/Users/jessiezhang/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/jessiezhang/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/jessiezhang/.m2/repository/org/antlr/antlr4-runtime/4.7.2/antlr4-runtime-4.7.2.jar:"/>
@@ -33,7 +33,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="/williamye/program/antlr/erable/target/surefire/surefirebooter380573756646875763.jar"/>
+    <property name="surefire.real.class.path" value="/williamye/program/antlr/erable/target/surefire/surefirebooter985004024207154231.jar"/>
     <property name="user.script" value="Hans"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
@@ -62,5 +62,5 @@
     <property name="java.class.version" value="55.0"/>
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
   </properties>
-  <testcase name="shouldAnswerWithTrue" classname="com.qiufeng.erable.AppTest" time="0.004"/>
+  <testcase name="shouldAnswerWithTrue" classname="com.qiufeng.erable.AppTest" time="0.003"/>
 </testsuite>
