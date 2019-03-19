@@ -41,14 +41,22 @@
 	<plugin>
         <groupId>org.antlr</groupId>
         <artifactId>antlr4-maven-plugin</artifactId>
-        <version>4.3</version>
+        <version>4.7.2</version>
         <executions>
           <execution>
             <id>antlr</id>
             <goals>
               <goal>antlr4</goal>
             </goals>
-          </execution>
+    </execution>
+    <execution>
+            <configuration>
+                <goals>
+                    <goal>antlr4</goal>
+                </goals>
+		<libDirectory>src/main/java/com/qiufeng/erable/ast</libDirectory>
+            </configuration>
+        </execution>
         </executions>
       </plugin>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
