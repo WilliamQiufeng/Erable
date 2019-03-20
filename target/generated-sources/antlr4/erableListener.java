@@ -177,6 +177,36 @@ public interface erableListener extends ParseTreeListener {
 	 */
 	void exitVar(erableParser.VarContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link erableParser#var_kv}.
+	 * @param ctx the parse tree
+	 */
+	void enterVar_kv(erableParser.Var_kvContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link erableParser#var_kv}.
+	 * @param ctx the parse tree
+	 */
+	void exitVar_kv(erableParser.Var_kvContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link erableParser#var_pair}.
+	 * @param ctx the parse tree
+	 */
+	void enterVar_pair(erableParser.Var_pairContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link erableParser#var_pair}.
+	 * @param ctx the parse tree
+	 */
+	void exitVar_pair(erableParser.Var_pairContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link erableParser#var_ids}.
+	 * @param ctx the parse tree
+	 */
+	void enterVar_ids(erableParser.Var_idsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link erableParser#var_ids}.
+	 * @param ctx the parse tree
+	 */
+	void exitVar_ids(erableParser.Var_idsContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link erableParser#funccall}.
 	 * @param ctx the parse tree
 	 */
@@ -186,6 +216,36 @@ public interface erableListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunccall(erableParser.FunccallContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link erableParser#args}.
+	 * @param ctx the parse tree
+	 */
+	void enterArgs(erableParser.ArgsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link erableParser#args}.
+	 * @param ctx the parse tree
+	 */
+	void exitArgs(erableParser.ArgsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link erableParser#codeblock}.
+	 * @param ctx the parse tree
+	 */
+	void enterCodeblock(erableParser.CodeblockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link erableParser#codeblock}.
+	 * @param ctx the parse tree
+	 */
+	void exitCodeblock(erableParser.CodeblockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link erableParser#funcdecl}.
+	 * @param ctx the parse tree
+	 */
+	void enterFuncdecl(erableParser.FuncdeclContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link erableParser#funcdecl}.
+	 * @param ctx the parse tree
+	 */
+	void exitFuncdecl(erableParser.FuncdeclContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link erableParser#name}.
 	 * @param ctx the parse tree

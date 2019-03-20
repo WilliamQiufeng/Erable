@@ -1,10 +1,12 @@
 grammar erable;
 prog
-  : (progo SPLIT)* EOF
+  : (progo SPLIT)* 
   ;
 progo
-  : ops
+  : funcdecl
+  | ops
   | var
+  | codeblock
   ;
 exprs
   : field_and_types
@@ -58,13 +60,29 @@ unsigned_float
   : INT DOT INT
   ;
 var
-  : (modifiers+=(VAR_SC|VAR_CG|VAR_TP))+? (var_name=NAME (EQU val=progo)?)+?
+  : modifiers=var_ids decls=var_kv
   ;
-
+var_kv
+  : var_pair+
+  ;
+var_pair
+  : key=NAME (EQU val=progo)?
+  ;
+var_ids
+  : VAR_ID+
+  ;
 funccall
-  : NAME LPA args+=progo*? RPA
+  : NAME LPA arguments+=progo*? RPA
   ;
-
+args
+  : COLON LPA NAME* RPA
+  ;
+codeblock
+  : LCB prog? RCB
+  ;
+funcdecl
+  : FUNC NAME args codeblock
+  ;
 name
   : NAME
   ;
@@ -72,24 +90,35 @@ ADD      : '+'                             ;
 SUB      : '-'                             ;
 MUL      : '*'                             ;
 DIV      : '/'                             ;
+//not used:POW
 POW      : '**'                            ;
 EQU      : '='                             ;
+COLON    : ':'                             ;
 SPLIT    : ';'                             ;
 DOT      : '.'                             ;
 COMMA    : ','                             ;
+//Parenthesis
 LPA      : '('                             ;
 RPA      : ')'                             ;
+//CodeBlock tokens
+LCB      : '{'                             ;
+RCB      : '}'                             ;
+fragment VAR_SC   : 'var'|'let'            ;
+fragment VAR_CG   : 'const'|'changeable'   ;
+fragment VAR_TP   : 'obj'|'ref'            ;
+VAR_ID   : VAR_SC|VAR_CG|VAR_TP            ;
+//function first
+FUNC     : 'function'                      ;
+//name then
+NAME     : LETT (LETT|DIGITS)*             ;
+fragment LETT     : [a-zA-Z_$]             ;
+STRING   : '"' (ESC|.)*? '"'               ;
+fragment DIGITS   : [0-9]                  ;
+//integers behind to prevent conflict
 INT      : [0-9]+                          ;
 BIN      : [01]+                           ;
 OCT      : [0-8]+                          ;
 HEX      : [0-9a-fA-F]+                    ;
-VAR_SC   : 'var'|'let'                     ;
-VAR_CG   : 'const'|'changeable'            ;
-VAR_TP   : 'obj'|'ref'                     ;
-VAR_IDS  : (VAR_SC|VAR_CG|VAR_TP)+         ;
-LETT     : [a-zA-Z_$]                      ;
-NAME     : LETT (LETT|INT)*                ;
-STRING   : '"' (ESC|.)*? '"'               ;
 fragment ESC : '\\' ([\\bfnrt"]|UNICODE)   ;
 UNICODE  : [uU] HEX HEX HEX HEX            ;
 WS       : [ \t\n\r]+ -> skip              ;
