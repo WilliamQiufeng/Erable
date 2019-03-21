@@ -24,7 +24,8 @@ field_and_types
   | types
   ;
 types
-  : string
+  : array
+  | string
   | atom
   ;
 field
@@ -36,7 +37,7 @@ ops
   | unary_op
   ;
 binary_op
-  : minus_plus ((AND|OR|XOR|BAND|BOR|BXOR||NEQ|EQ|LTE|RTE||ULS|URS|LS|RS|LT|GT) minus_plus)*
+  : minus_plus (operation=(AND|OR|XOR|BAND|BOR|BXOR|NEQ|EQ|LTE|GTE|ULS|URS|LS|RS|LT|GT) minus_plus)*
   ;
 minus_plus
   : mul_div ((ADD|SUB) mul_div)*
@@ -57,6 +58,9 @@ atom
 string
   : STRING
   ;
+array
+  : ALPA progo* ARPA
+  ;
 unsigned_num
   : unsigned_int 
   | unsigned_float
@@ -71,7 +75,7 @@ unsigned_float
   : INT DOT INT
   ;
 unary_op
-  : (BNOT|RETURN) progo
+  : operation=(BNOT|RETURN) progo
   ;
 
 var
@@ -145,6 +149,9 @@ RPA      : ')'                             ;
 //CodeBlock tokens
 LCB      : '{'                             ;
 RCB      : '}'                             ;
+//Array Parenthesis
+ALPA     : '['                             ;
+ARPA     : ']'                             ;
 fragment VAR_SC   : 'var'|'let'            ;
 fragment VAR_CG   : 'const'|'changeable'   ;
 fragment VAR_TP   : 'obj'|'ref'            ;

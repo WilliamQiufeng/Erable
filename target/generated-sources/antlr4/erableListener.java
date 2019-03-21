@@ -167,6 +167,16 @@ public interface erableListener extends ParseTreeListener {
 	 */
 	void exitString(erableParser.StringContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link erableParser#array}.
+	 * @param ctx the parse tree
+	 */
+	void enterArray(erableParser.ArrayContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link erableParser#array}.
+	 * @param ctx the parse tree
+	 */
+	void exitArray(erableParser.ArrayContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link erableParser#unsigned_num}.
 	 * @param ctx the parse tree
 	 */
