@@ -37,6 +37,26 @@ public interface erableListener extends ParseTreeListener {
 	 */
 	void exitExprs(erableParser.ExprsContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link erableParser#decls}.
+	 * @param ctx the parse tree
+	 */
+	void enterDecls(erableParser.DeclsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link erableParser#decls}.
+	 * @param ctx the parse tree
+	 */
+	void exitDecls(erableParser.DeclsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link erableParser#condexprs}.
+	 * @param ctx the parse tree
+	 */
+	void enterCondexprs(erableParser.CondexprsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link erableParser#condexprs}.
+	 * @param ctx the parse tree
+	 */
+	void exitCondexprs(erableParser.CondexprsContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link erableParser#field_and_types}.
 	 * @param ctx the parse tree
 	 */
@@ -76,6 +96,16 @@ public interface erableListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitOps(erableParser.OpsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link erableParser#binary_op}.
+	 * @param ctx the parse tree
+	 */
+	void enterBinary_op(erableParser.Binary_opContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link erableParser#binary_op}.
+	 * @param ctx the parse tree
+	 */
+	void exitBinary_op(erableParser.Binary_opContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link erableParser#minus_plus}.
 	 * @param ctx the parse tree
@@ -167,6 +197,16 @@ public interface erableListener extends ParseTreeListener {
 	 */
 	void exitUnsigned_float(erableParser.Unsigned_floatContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link erableParser#unary_op}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnary_op(erableParser.Unary_opContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link erableParser#unary_op}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnary_op(erableParser.Unary_opContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link erableParser#var}.
 	 * @param ctx the parse tree
 	 */
@@ -246,6 +286,26 @@ public interface erableListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFuncdecl(erableParser.FuncdeclContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link erableParser#ifcond}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfcond(erableParser.IfcondContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link erableParser#ifcond}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfcond(erableParser.IfcondContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link erableParser#whilecond}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhilecond(erableParser.WhilecondContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link erableParser#whilecond}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhilecond(erableParser.WhilecondContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link erableParser#name}.
 	 * @param ctx the parse tree

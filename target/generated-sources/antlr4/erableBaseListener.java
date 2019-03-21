@@ -51,6 +51,30 @@ public class erableBaseListener implements erableListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDecls(erableParser.DeclsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDecls(erableParser.DeclsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCondexprs(erableParser.CondexprsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCondexprs(erableParser.CondexprsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterField_and_types(erableParser.Field_and_typesContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -94,6 +118,18 @@ public class erableBaseListener implements erableListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitOps(erableParser.OpsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBinary_op(erableParser.Binary_opContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBinary_op(erableParser.Binary_opContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -207,6 +243,18 @@ public class erableBaseListener implements erableListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterUnary_op(erableParser.Unary_opContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUnary_op(erableParser.Unary_opContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterVar(erableParser.VarContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -298,6 +346,30 @@ public class erableBaseListener implements erableListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFuncdecl(erableParser.FuncdeclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIfcond(erableParser.IfcondContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIfcond(erableParser.IfcondContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterWhilecond(erableParser.WhilecondContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitWhilecond(erableParser.WhilecondContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

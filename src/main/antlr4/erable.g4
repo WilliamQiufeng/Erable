@@ -3,13 +3,21 @@ prog
   : (progo SPLIT)* 
   ;
 progo
-  : funcdecl
+  : decls
+  | condexprs
   | ops
-  | var
   | codeblock
   ;
 exprs
   : field_and_types
+  ;
+decls
+  : funcdecl
+  | var
+  ;
+condexprs
+  : ifcond
+  | whilecond
   ;
 field_and_types
   : field
@@ -24,7 +32,11 @@ field
   | name
   ;
 ops
-  : minus_plus
+  : binary_op
+  | unary_op
+  ;
+binary_op
+  : minus_plus ((AND|OR|XOR|BAND|BOR|BXOR||NEQ|EQ|LTE|RTE||ULS|URS|LS|RS|LT|GT) minus_plus)*
   ;
 minus_plus
   : mul_div ((ADD|SUB) mul_div)*
@@ -35,7 +47,6 @@ mul_div
 change
   : dot (EQU dot)*
   ;
-
 dot
   : field_and_types (DOT field)*
   ;
@@ -59,8 +70,12 @@ unsigned_int
 unsigned_float
   : INT DOT INT
   ;
+unary_op
+  : (BNOT|RETURN) progo
+  ;
+
 var
-  : modifiers=var_ids decls=var_kv
+  : modifiers=var_ids declarations=var_kv
   ;
 var_kv
   : var_pair+
@@ -72,16 +87,24 @@ var_ids
   : VAR_ID+
   ;
 funccall
-  : NAME LPA arguments+=progo*? RPA
+  : funcname=NAME LPA arguments+=progo*? RPA
   ;
 args
   : COLON LPA NAME* RPA
   ;
 codeblock
-  : LCB prog? RCB
+  : LCB block=prog? RCB
   ;
 funcdecl
-  : FUNC NAME args codeblock
+  : FUNC funcname=NAME arguments=args block=progo
+  ;
+ifcond
+  : IF LPA progo? RPA progo
+    (ELIF LPA progo? RPA progo)*
+    (ELSE progo)?
+  ;
+whilecond
+  : WHILE LPA progo? RPA progo
   ;
 name
   : NAME
@@ -92,11 +115,30 @@ MUL      : '*'                             ;
 DIV      : '/'                             ;
 //not used:POW
 POW      : '**'                            ;
+EQ       : '=='                            ;
+NEQ      : '!='                            ;
 EQU      : '='                             ;
+//Less/Greater than(or Equal to), (unsigned) Left/Right Shift
+ULS      : '<<<'                           ;
+URS      : '>>>'                           ;
+LTE      : '<='                            ;
+GTE      : '>='                            ;
+LS       : '<<'                            ;
+RS       : '>>'                            ;
+AND      : '&&'                            ;
+OR       : '||'                            ;
+XOR      : '^^'                            ;
+LT       : '<'                             ;
+GT       : '>'                             ;
 COLON    : ':'                             ;
 SPLIT    : ';'                             ;
 DOT      : '.'                             ;
 COMMA    : ','                             ;
+//Bit Operation
+BAND     : '&'                             ;
+BOR      : '|'                             ;
+BXOR     : '^'                             ;
+BNOT     : '!'                             ;
 //Parenthesis
 LPA      : '('                             ;
 RPA      : ')'                             ;
@@ -107,8 +149,14 @@ fragment VAR_SC   : 'var'|'let'            ;
 fragment VAR_CG   : 'const'|'changeable'   ;
 fragment VAR_TP   : 'obj'|'ref'            ;
 VAR_ID   : VAR_SC|VAR_CG|VAR_TP            ;
-//function first
+//identifiers first
 FUNC     : 'function'                      ;
+WHILE    : 'while'                         ;
+IF       : 'if'                            ;
+ELIF     : 'elif'                          ;
+ELSE     : 'else'                          ;
+RETURN   : 'return'                        ;
+BREAK    : 'break'                         ;
 //name then
 NAME     : LETT (LETT|DIGITS)*             ;
 fragment LETT     : [a-zA-Z_$]             ;
