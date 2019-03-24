@@ -1,6 +1,18 @@
 grammar erable;
+@header{
+  import java.util.*;
+  import com.qiufeng.erable.*;
+  import com.qiufeng.erable.ast.*;
+}
+@members{
+  Scope root=new Scope(null,Scope.Type.CODEBLOCK);
+  Scope current=root;
+}
 prog
-  : (progo SPLIT)* 
+  : (progo SPLIT)*
+  {
+    root.printTree();
+  } 
   ;
 progo
   : decls
@@ -37,23 +49,36 @@ ops
   | unary_op
   ;
 binary_op
-  : minus_plus (operation=(AND|OR|XOR|BAND|BOR|BXOR|NEQ|EQ|LTE|GTE|ULS|URS|LS|RS|LT|GT) minus_plus)*
+  : binary_op DOT field
+  | binary_op ALPA progo ARPA
+  | binary_op EQU binary_op
+  | <assoc=right> binary_op POW binary_op
+  | binary_op MOD binary_op
+  | binary_op DIV binary_op
+  | binary_op MUL binary_op
+  | binary_op SUB binary_op
+  | binary_op ADD binary_op
+  | binary_op 
+	operation=(AND|OR|XOR|BAND|BOR|BXOR|ADDEQ|SUBEQ|MULEQ|DIVEQ|MODEQ|NEQ|EQ|SWITCH|ULS|URS|LTE|GTE|LS|RS|LT|GT) binary_op
+  | field_and_types
   ;
-minus_plus
-  : mul_div ((ADD|SUB) mul_div)*
-  ;
-mul_div
-  : change ((MUL|DIV) change)*
-  ;
-change
-  : dot (EQU dot)*
-  ;
-dot
-  : field_and_types (DOT field)*
-  ;
+
 atom
+  returns [int retid]
   : LPA progo? RPA
-  | (ADD|SUB)? unsigned_num
+  | num=pos_neg_num
+  {
+     int idr=-1;
+     String text=$num.text;
+     double number=Double.parseDouble(text);
+     idr=current.addObject(number);
+     $retid=idr;
+     System.out.println("------ID for number'"+number+"' is:"+idr+"------");
+  }
+
+  ;
+pos_neg_num
+  : (ADD|SUB)? unsigned_num
   ;
 string
   : STRING
@@ -64,6 +89,7 @@ array
 unsigned_num
   : unsigned_int 
   | unsigned_float
+  
   ;
 unsigned_int
   : '0x' HEX
@@ -85,22 +111,32 @@ var_kv
   : var_pair+
   ;
 var_pair
-  : key=NAME (EQU val=progo)?
+  : key=name {current=current.createChild(Scope.Type.VARIABLE);} (EQU val=progo)?
+  {
+    current.getParent().declareVariable($key.retid,current);
+    current=current.getParent();
+    System.out.println("------variable declared:"+$key.text);
+  }
   ;
 var_ids
   : VAR_ID+
   ;
 funccall
-  : funcname=NAME LPA arguments+=progo*? RPA
+  : funcname=name LPA arguments+=progo*? RPA
   ;
 args
-  : COLON LPA NAME* RPA
+  : COLON LPA name* RPA
   ;
 codeblock
-  : LCB block=prog? RCB
+  : LCB block=prog RCB
   ;
 funcdecl
-  : FUNC funcname=NAME arguments=args block=progo
+  : FUNC funcname=name arguments=args {current=current.createChild(Scope.Type.FUNCTION);} block=progo
+  {
+    current.getParent().declareFunction($funcname.retid,current);
+    current=current.getParent();
+    System.out.println("------function declared:"+$funcname.text);
+  }
   ;
 ifcond
   : IF LPA progo? RPA progo
@@ -111,20 +147,24 @@ whilecond
   : WHILE LPA progo? RPA progo
   ;
 name
+  returns [int retid]
   : NAME
+  {
+     int idr=-1;
+     idr=current.addObject($NAME.text);
+     $retid=idr;
+     System.out.println("------ID for name'"+$NAME.text+"' is:"+idr+"------");
+  }
+
   ;
-ADD      : '+'                             ;
-SUB      : '-'                             ;
-MUL      : '*'                             ;
-DIV      : '/'                             ;
+
 //not used:POW
 POW      : '**'                            ;
-EQ       : '=='                            ;
-NEQ      : '!='                            ;
-EQU      : '='                             ;
+
 //Less/Greater than(or Equal to), (unsigned) Left/Right Shift
 ULS      : '<<<'                           ;
 URS      : '>>>'                           ;
+SWITCH   : '<=>'                           ;
 LTE      : '<='                            ;
 GTE      : '>='                            ;
 LS       : '<<'                            ;
@@ -132,30 +172,50 @@ RS       : '>>'                            ;
 AND      : '&&'                            ;
 OR       : '||'                            ;
 XOR      : '^^'                            ;
+ADDEQ    : '+='                            ;
+SUBEQ    : '-='                            ;
+MULEQ    : '*='                            ;
+DIVEQ    : '/='                            ;
+MODEQ    : '%='                            ;
+EQ       : '=='                            ;
+NEQ      : '!='                            ;
+EQU      : '='                             ;
 LT       : '<'                             ;
 GT       : '>'                             ;
 COLON    : ':'                             ;
 SPLIT    : ';'                             ;
 DOT      : '.'                             ;
 COMMA    : ','                             ;
+ADD      : '+'                             ;
+SUB      : '-'                             ;
+MUL      : '*'                             ;
+DIV      : '/'                             ;
+MOD      : '%'                             ;
+
 //Bit Operation
 BAND     : '&'                             ;
 BOR      : '|'                             ;
 BXOR     : '^'                             ;
 BNOT     : '!'                             ;
+
 //Parenthesis
 LPA      : '('                             ;
 RPA      : ')'                             ;
+
 //CodeBlock tokens
 LCB      : '{'                             ;
 RCB      : '}'                             ;
+
 //Array Parenthesis
 ALPA     : '['                             ;
 ARPA     : ']'                             ;
+
+//Variable Identifiers
 fragment VAR_SC   : 'var'|'let'            ;
 fragment VAR_CG   : 'const'|'changeable'   ;
 fragment VAR_TP   : 'obj'|'ref'            ;
 VAR_ID   : VAR_SC|VAR_CG|VAR_TP            ;
+
 //identifiers first
 FUNC     : 'function'                      ;
 WHILE    : 'while'                         ;
@@ -164,11 +224,13 @@ ELIF     : 'elif'                          ;
 ELSE     : 'else'                          ;
 RETURN   : 'return'                        ;
 BREAK    : 'break'                         ;
+
 //name then
 NAME     : LETT (LETT|DIGITS)*             ;
 fragment LETT     : [a-zA-Z_$]             ;
 STRING   : '"' (ESC|.)*? '"'               ;
 fragment DIGITS   : [0-9]                  ;
+
 //integers behind to prevent conflict
 INT      : [0-9]+                          ;
 BIN      : [01]+                           ;

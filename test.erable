@@ -1,0 +1,16 @@
+function mul:(a b){
+  return a*b;
+};
+function quad:(a b c x){
+  return a**2+b*x+c;
+};
+function makeSquare:(width height){
+  return [width height mul(width height)];
+};
+function switchWH:(square){
+  square[0]<=>square[1];
+  return mid;
+};
+var obj square=makeSquare(15 20);
+square=switchWH(square);
+println(square);
