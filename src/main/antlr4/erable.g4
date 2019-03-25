@@ -9,58 +9,156 @@ grammar erable;
   Scope current=root;
 }
 prog
+  returns [int retid]
   : (progo SPLIT)*
   {
     root.printTree();
+    $retid=-1;
   } 
   ;
 progo
+  returns [int retid]
   : decls
+  {
+    $retid=$decls.retid;
+  }
+
   | condexprs
+  {
+    $retid=$condexprs.retid;
+  }
+
   | ops
+  {
+    $retid=$ops.retid;
+  }
+
   | codeblock
+  {
+    $retid=$codeblock.retid;
+  }
+
   ;
 exprs
-  : field_and_types
+  returns [int retid]
+  : fat=field_and_types
+    {
+      $retid=$fat.retid;
+    }
   ;
 decls
-  : funcdecl
-  | var
+  returns [int retid]
+  : fd=funcdecl
+    {
+      $retid=$fd.retid;
+    }
+  | v=var
+    {
+      $retid=$v.retid;
+    }
   ;
 condexprs
+  returns [int retid]
   : ifcond
   | whilecond
   ;
 field_and_types
-  : field
-  | types
+  returns [int retid]
+  : val=field
+  {
+    $retid=$val.retid;
+  }
+  | tps=types
+  {
+    $retid=$tps.retid;
+  }
   ;
 types
-  : array
-  | string
-  | atom
+  returns [int retid]
+  : arr=array
+  {
+    $retid=$arr.retid;
+  }
+  | str=string
+  {
+    $retid=$str.retid;
+  }
+  | ato=atom
+  {
+    $retid=$ato.retid;
+  }
   ;
 field
-  : funccall
-  | name
+  returns [int retid]
+  : fc=funccall
+  {
+    $retid=$fc.retid;
+  }
+  | val=name
+  {
+    $retid=$val.retid;
+  }
   ;
 ops
-  : binary_op
-  | unary_op
+  returns [int retid]
+  : bo=binary_op
+    {
+      $retid=$bo.retid;
+    }
+  | uo=unary_op
+    {
+      $retid=$uo.retid;
+    }
   ;
+var
+  returns [int retid]
+  : modifiers=var_ids declarations=var_kv
+    {
+      $retid=-1;
+    }
+  ;
+var_kv
+  : var_pair+
+  ;
+var_pair
+  @init {boolean hasVal=true;}
+  : key=name (EQU val=progo {hasVal=true;})? {if(!hasVal)$val.retid=-1;}
+  {
+    current.declareVariable($key.retid,$val.retid);
+    System.out.println("------variable declared:"+$key.text);
+  }
+  ;
+
 binary_op
-  : binary_op DOT field
-  | binary_op ALPA progo ARPA
-  | binary_op EQU binary_op
-  | <assoc=right> binary_op POW binary_op
-  | binary_op MOD binary_op
-  | binary_op DIV binary_op
-  | binary_op MUL binary_op
-  | binary_op SUB binary_op
-  | binary_op ADD binary_op
-  | binary_op 
-	operation=(AND|OR|XOR|BAND|BOR|BXOR|ADDEQ|SUBEQ|MULEQ|DIVEQ|MODEQ|NEQ|EQ|SWITCH|ULS|URS|LTE|GTE|LS|RS|LT|GT) binary_op
-  | field_and_types
+  returns [int retid]
+  : l=binary_op DOT f=field
+    {
+      DotCode dc=new DotCode($l.retid,$f.retid);
+      $retid=dc.id;
+      current.addCode(dc);
+    }
+  | l=binary_op ALPA pdo=progo ARPA
+    {
+      ArrayElementCode aec=new ArrayElementCode($l.retid,$pdo.retid);
+      $retid=aec.id;
+      current.addCode(aec);
+    }
+  | <assoc=right> l=binary_op POW r=binary_op
+    {
+      BinaryOpCode boc=new BinaryOpCode($operation.text,$l.retid,$r.retid);
+      current.addCode(boc);
+      $retid=boc.id;
+    }
+  | l=binary_op operation=(BINOPS|EQU) r=binary_op
+    {
+      BinaryOpCode boc=new BinaryOpCode($operation.text,$l.retid,$r.retid);
+      current.addCode(boc);
+      $retid=boc.id;
+    }
+  | value=field_and_types
+    {
+      $retid=$value.retid;
+    }
   ;
 
 atom
@@ -78,13 +176,34 @@ atom
 
   ;
 pos_neg_num
+  
   : (ADD|SUB)? unsigned_num
   ;
 string
-  : STRING
+  returns [int retid]
+  : '"' str=anymatch '"'
+    {
+      int idr=-1;
+      idr=current.addObject($str.text);
+      $retid=current.temp(idr);
+      System.out.println("------ID for name'"+$str.text+"' is:"+idr+"------");
+    }
+  ;
+anymatch
+  : (ESC|.)*?
   ;
 array
-  : ALPA progo* ARPA
+  returns [int retid]
+  : ALPA elements+=progo* ARPA
+    {
+      int[] retids={};
+      for(ProgoContext tk : $elements){
+        retids=ArrayUtils.push(retids,tk.retid);
+      }
+      ArrayCode ac=new ArrayCode(retids);
+      current.addCode(ac);
+      $retid=ac.id;
+    }
   ;
 unsigned_num
   : unsigned_int 
@@ -101,39 +220,60 @@ unsigned_float
   : INT DOT INT
   ;
 unary_op
-  : operation=(BNOT|RETURN) progo
+  returns [int retid]
+  : operation=(BNOT|RETURN|BREAK) pdo=progo?
+    {
+      UnaryOpCode uoc=new UnaryOpCode($operation.text,$pdo.retid);
+      current.addCode(uoc);
+      $retid=uoc.id;
+    }
   ;
 
-var
-  : modifiers=var_ids declarations=var_kv
-  ;
-var_kv
-  : var_pair+
-  ;
-var_pair
-  : key=name {current=current.createChild(Scope.Type.VARIABLE);} (EQU val=progo)?
-  {
-    current.getParent().declareVariable($key.retid,current);
-    current=current.getParent();
-    System.out.println("------variable declared:"+$key.text);
-  }
-  ;
 var_ids
   : VAR_ID+
   ;
 funccall
+  returns [int retid]
   : funcname=name LPA arguments+=progo*? RPA
+  {
+    int[] retids={};
+    for(ProgoContext tk : $arguments){
+      retids=ArrayUtils.push(retids,tk.retid);
+    }
+    FuncCallCode fc=new FuncCallCode($funcname.retid,retids);
+    current.addCode(fc);
+    $retid=fc.id;
+  }
   ;
 args
-  : COLON LPA name* RPA
+  returns [int[] argids]
+  : COLON LPA argss+=name* RPA
+    {
+      int[] retids={};
+      for(NameContext tk : $argss){
+        retids=ArrayUtils.push(retids,tk.retid);
+      }
+      $argids=retids;
+    }
   ;
 codeblock
-  : LCB block=prog RCB
+  returns [int retid]
+  : LCB {current=current.createChild(Scope.Type.CODEBLOCK);} block=prog RCB
+  {
+    BlockCode bc=new BlockCode(current);
+    $retid=bc.id;
+    current.getParent().addCode(bc);
+    current=current.getParent();
+  }
   ;
 funcdecl
+  returns [int retid]
   : FUNC funcname=name arguments=args {current=current.createChild(Scope.Type.FUNCTION);} block=progo
   {
-    current.getParent().declareFunction($funcname.retid,current);
+    $retid=current.getParent().declareFunction(
+      $funcname.retid,
+      $arguments.argids,
+      current);
     current=current.getParent();
     System.out.println("------function declared:"+$funcname.text);
   }
@@ -152,51 +292,58 @@ name
   {
      int idr=-1;
      idr=current.addObject($NAME.text);
-     $retid=idr;
+     $retid=current.temp(idr);
      System.out.println("------ID for name'"+$NAME.text+"' is:"+idr+"------");
   }
 
   ;
 
-//not used:POW
-POW      : '**'                            ;
+
+
+EQU               : '='                             ;
+//BINOPS
+BINOPS   : DOT|POW|MOD|DIV|MUL|SUB|ADD|AND|OR|XOR|BAND|BOR|BXOR|ADDEQ|SUBEQ|MULEQ|DIVEQ|MODEQ|NEQ|EQ|SWITCH|ULS|URS|LTE|GTE|LS|RS|LT|GT   ;
+fragment POW      : '**'                   ;
 
 //Less/Greater than(or Equal to), (unsigned) Left/Right Shift
-ULS      : '<<<'                           ;
-URS      : '>>>'                           ;
-SWITCH   : '<=>'                           ;
-LTE      : '<='                            ;
-GTE      : '>='                            ;
-LS       : '<<'                            ;
-RS       : '>>'                            ;
-AND      : '&&'                            ;
-OR       : '||'                            ;
-XOR      : '^^'                            ;
-ADDEQ    : '+='                            ;
-SUBEQ    : '-='                            ;
-MULEQ    : '*='                            ;
-DIVEQ    : '/='                            ;
-MODEQ    : '%='                            ;
-EQ       : '=='                            ;
-NEQ      : '!='                            ;
-EQU      : '='                             ;
-LT       : '<'                             ;
-GT       : '>'                             ;
+fragment ULS      : '<<<'                           ;
+fragment URS      : '>>>'                           ;
+fragment SWITCH   : '<=>'                           ;
+fragment LTE      : '<='                            ;
+fragment GTE      : '>='                            ;
+fragment LS       : '<<'                            ;
+fragment RS       : '>>'                            ;
+fragment AND      : '&&'                            ;
+fragment OR       : '||'                            ;
+fragment XOR      : '^^'                            ;
+fragment ADDEQ    : '+='                            ;
+fragment SUBEQ    : '-='                            ;
+fragment MULEQ    : '*='                            ;
+fragment DIVEQ    : '/='                            ;
+fragment MODEQ    : '%='                            ;
+fragment EQ       : '=='                            ;
+fragment NEQ      : '!='                            ;
+fragment LT       : '<'                             ;
+fragment GT       : '>'                             ;
 COLON    : ':'                             ;
 SPLIT    : ';'                             ;
-DOT      : '.'                             ;
+fragment DOT      : '.'                             ;
 COMMA    : ','                             ;
-ADD      : '+'                             ;
-SUB      : '-'                             ;
-MUL      : '*'                             ;
-DIV      : '/'                             ;
-MOD      : '%'                             ;
+fragment ADD      : '+'                             ;
+fragment SUB      : '-'                             ;
+fragment MUL      : '*'                             ;
+fragment DIV      : '/'                             ;
+fragment MOD      : '%'                             ;
+
 
 //Bit Operation
-BAND     : '&'                             ;
-BOR      : '|'                             ;
-BXOR     : '^'                             ;
-BNOT     : '!'                             ;
+fragment BAND     : '&'                             ;
+fragment BOR      : '|'                             ;
+fragment BXOR     : '^'                             ;
+fragment BNOT     : '!'                             ;
+
+
+
 
 //Parenthesis
 LPA      : '('                             ;
@@ -228,7 +375,6 @@ BREAK    : 'break'                         ;
 //name then
 NAME     : LETT (LETT|DIGITS)*             ;
 fragment LETT     : [a-zA-Z_$]             ;
-STRING   : '"' (ESC|.)*? '"'               ;
 fragment DIGITS   : [0-9]                  ;
 
 //integers behind to prevent conflict
@@ -236,6 +382,6 @@ INT      : [0-9]+                          ;
 BIN      : [01]+                           ;
 OCT      : [0-8]+                          ;
 HEX      : [0-9a-fA-F]+                    ;
-fragment ESC : '\\' ([\\bfnrt"]|UNICODE)   ;
+ESC      : '\\' ([\\bfnrt"]|UNICODE)       ;
 UNICODE  : [uU] HEX HEX HEX HEX            ;
 WS       : [ \t\n\r]+ -> skip              ;

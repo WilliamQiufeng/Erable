@@ -1,7 +1,9 @@
 package com.qiufeng.erable;
 import java.util.*;
 /**
- * Hello world!
+ * @since 22 March 2019
+ * @version 1.0
+ * @author Qiufeng54321
  *
  */
 public class App 

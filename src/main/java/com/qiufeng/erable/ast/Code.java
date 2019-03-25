@@ -3,7 +3,8 @@ package com.qiufeng.erable.ast;
 public abstract class Code {
 	public static enum Type{
 		VARIABLE,
-		FUNCTION;
+		FUNCTION,
+		TEMP;
 	}
 	public Type type;
 	@Override

@@ -2,7 +2,8 @@ function mul:(a b){
   return a*b;
 };
 function quad:(a b c x){
-  return a**2+b*x+c;
+  let power=a**2;
+  return power+b*x+c;
 };
 function makeSquare:(width height){
   return [width height mul(width height)];

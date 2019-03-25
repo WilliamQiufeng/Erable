@@ -1,6 +1,12 @@
 package com.qiufeng.erable.ast;
 import java.util.*;
 
+/**
+ * @since 23 March 2019
+ * @version 1.0
+ * @author Qiufeng54321
+ *
+ */
 public class Scope {
 	public static HashSet<IDElement> idTable=new HashSet<>();
 	ArrayList<Code> codes=new ArrayList<>();
@@ -15,6 +21,8 @@ public class Scope {
 	public Scope(Scope p,Type t) {
 		parent=p;
 		type=t;
+		//System.out.println("current depth:"+cdepth);
+		
 	}
 	public Scope getParent() {
 		return parent;
@@ -29,22 +37,30 @@ public class Scope {
 	public Scope createChild(Type t) {
 		return new Scope(this,t);
 	}
-	public void declareFunction(int id,Scope s) {
-		s.type=Type.FUNCTION;
-		VFCode c=new VFCode(id,s,Code.Type.FUNCTION);
+	public int declareFunction(int name,int[] args,Scope code) {
+		FuncDeclCode fdc=new FuncDeclCode(name,args,code);
+		addCode(fdc);
+		return fdc.id;
+	}
+	public int declareVariable(int id,int value) {
+		VarCode c=new VarCode(id,value);
+		addCode(c);
+		return c.id;
+	}
+	public void addCode(Code c) {
 		codes.add(c);
 	}
-	public void declareVariable(int id,Scope s) {
-		s.type=Type.VARIABLE;
-		VFCode c=new VFCode(id,s,Code.Type.VARIABLE);
-		codes.add(c);
+	public int temp(int id) {
+		TempCode tc=new TempCode(id);
+		addCode(tc);
+		return tc.id;
 	}
 	public Scope findFunction(int id) {
 		for(Code me : codes) {
 			if(me.type!=Code.Type.FUNCTION)continue;
-			VFCode trans=(VFCode)me;
+			FuncDeclCode trans=(FuncDeclCode)me;
 			if(trans.id==id) {
-				return trans.scope;
+				return trans.pdo;
 			}
 		}
 		if(parent!=null) {
@@ -52,24 +68,31 @@ public class Scope {
 		}
 		return null;
 	}
-	public Scope findVariable(int id) {
+	public int findVariable(int id) {
 		for(Code me : codes) {
-			if(me.type!=Code.Type.VARIABLE)continue;
-			VFCode trans=(VFCode)me;
+			if(!(me instanceof VarCode))continue;
+			VarCode trans=(VarCode)me;
 			if(trans.id==id) {
-				return trans.scope;
+				return trans.id;
 			}
 		}
 		if(parent!=null) {
 			return parent.findVariable(id);
 		}
-		return null;
+		return -1;
 	}
+	/**
+	 * @deprecated Now It is not compatible.
+	 * @param id
+	 * @return
+	 */
 	public Scope find(int id) {
-		Scope ret=findFunction(id);
-		if(ret==null)
-			return findVariable(id);
-		return ret;
+		/*Scope ret=findFunction(id);
+		  if(ret==null)
+		  	return findVariable(id);
+		  return ret;
+		*/
+		return null;
 	}
 	public int addObject(Object o) {
 		for(IDElement me : idTable) {

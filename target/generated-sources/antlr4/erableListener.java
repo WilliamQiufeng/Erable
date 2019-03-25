@@ -102,6 +102,36 @@ public interface erableListener extends ParseTreeListener {
 	 */
 	void exitOps(erableParser.OpsContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link erableParser#var}.
+	 * @param ctx the parse tree
+	 */
+	void enterVar(erableParser.VarContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link erableParser#var}.
+	 * @param ctx the parse tree
+	 */
+	void exitVar(erableParser.VarContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link erableParser#var_kv}.
+	 * @param ctx the parse tree
+	 */
+	void enterVar_kv(erableParser.Var_kvContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link erableParser#var_kv}.
+	 * @param ctx the parse tree
+	 */
+	void exitVar_kv(erableParser.Var_kvContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link erableParser#var_pair}.
+	 * @param ctx the parse tree
+	 */
+	void enterVar_pair(erableParser.Var_pairContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link erableParser#var_pair}.
+	 * @param ctx the parse tree
+	 */
+	void exitVar_pair(erableParser.Var_pairContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link erableParser#binary_op}.
 	 * @param ctx the parse tree
 	 */
@@ -141,6 +171,16 @@ public interface erableListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitString(erableParser.StringContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link erableParser#anymatch}.
+	 * @param ctx the parse tree
+	 */
+	void enterAnymatch(erableParser.AnymatchContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link erableParser#anymatch}.
+	 * @param ctx the parse tree
+	 */
+	void exitAnymatch(erableParser.AnymatchContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link erableParser#array}.
 	 * @param ctx the parse tree
@@ -191,36 +231,6 @@ public interface erableListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitUnary_op(erableParser.Unary_opContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link erableParser#var}.
-	 * @param ctx the parse tree
-	 */
-	void enterVar(erableParser.VarContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link erableParser#var}.
-	 * @param ctx the parse tree
-	 */
-	void exitVar(erableParser.VarContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link erableParser#var_kv}.
-	 * @param ctx the parse tree
-	 */
-	void enterVar_kv(erableParser.Var_kvContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link erableParser#var_kv}.
-	 * @param ctx the parse tree
-	 */
-	void exitVar_kv(erableParser.Var_kvContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link erableParser#var_pair}.
-	 * @param ctx the parse tree
-	 */
-	void enterVar_pair(erableParser.Var_pairContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link erableParser#var_pair}.
-	 * @param ctx the parse tree
-	 */
-	void exitVar_pair(erableParser.Var_pairContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link erableParser#var_ids}.
 	 * @param ctx the parse tree
