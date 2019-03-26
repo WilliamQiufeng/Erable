@@ -50,49 +50,112 @@ public class Scope {
 	public void addCode(Code c) {
 		codes.add(c);
 	}
+	public int findConstByTemp(int tempid) {
+		System.out.println("Finding const by temp: "+tempid);
+		
+		for(Code me : codes) {
+			if(me instanceof TempCode) {
+				TempCode tc=(TempCode)me;
+				System.out.println("Iterating reference ids:"+tc.refid+", tmp id:"+tc.id);
+				if(tempid==tc.id) {
+					System.out.println("Found id:"+tc.refid);
+					return tc.refid;
+				}
+			}
+		}
+		if(parent!=null) {
+			return parent.findConstByTemp(tempid);
+		}
+		return -1;
+	}
+	public int findTempByConst(int constid) {
+		System.out.println("Finding temp by const: "+constid);
+		
+		for(Code me : codes) {
+			if(me instanceof TempCode) {
+				TempCode tc=(TempCode)me;
+				System.out.println("Iterating reference ids:"+tc.refid+", tmp id:"+tc.id);
+				if(constid==tc.refid) {
+					System.out.println("Found id:"+tc.id);
+					return tc.id;
+				}
+			}
+		}
+		if(parent!=null) {
+			return parent.findTempByConst(constid);
+		}
+		return -1;
+	}
+	public int findTempExists(int id) {
+		System.out.println("Finding temp exists: "+id);
+		
+		for(Code me : codes) {
+			if(me instanceof VarCode) {
+				VarCode tc=(VarCode)me;
+				int cid=this.findConstByTemp(tc.refid);
+				System.out.println("Iterating var reference ids:"+tc.refid+", tmp id:"+tc.id);
+				if(id==cid) {
+					System.out.println("Found var id:"+tc.id);
+					return tc.id;
+				}
+			}else if(me instanceof FuncDeclCode) {
+				FuncDeclCode tc=(FuncDeclCode)me;
+				int cid=this.findConstByTemp(tc.refid);
+				System.out.println("Iterating funcdecl reference ids:"+tc.refid+", tmp id:"+tc.id);
+				if(id==cid) {
+					System.out.println("Found funcdecl id:"+tc.id);
+					return tc.id;
+				}
+			}
+		}
+		if(parent!=null) {
+			return parent.findTempExists(id);
+		}
+		return -1;
+	}
 	public int temp(int id) {
+		int varid=findTempExists(id);
+		if(varid!=-1)return varid;
 		TempCode tc=new TempCode(id);
 		addCode(tc);
 		return tc.id;
 	}
-	public Scope findFunction(int id) {
+	public int findFunction(int id) {
 		for(Code me : codes) {
-			if(me.type!=Code.Type.FUNCTION)continue;
+			if(! (me instanceof FuncDeclCode))continue;
 			FuncDeclCode trans=(FuncDeclCode)me;
-			if(trans.id==id) {
-				return trans.pdo;
-			}
-		}
-		if(parent!=null) {
-			return parent.findFunction(id);
-		}
-		return null;
-	}
-	public int findVariable(int id) {
-		for(Code me : codes) {
-			if(!(me instanceof VarCode))continue;
-			VarCode trans=(VarCode)me;
 			if(trans.id==id) {
 				return trans.id;
 			}
 		}
 		if(parent!=null) {
-			return parent.findVariable(id);
+			return parent.findFunction(id);
+		}
+		return -1;
+	}
+	public int findVariable(int name) {
+		for(Code me : codes) {
+			if(!(me instanceof VarCode))continue;
+			VarCode trans=(VarCode)me;
+			if(trans.id==name) {
+				return trans.id;
+			}
+		}
+		if(parent!=null) {
+			return parent.findVariable(name);
 		}
 		return -1;
 	}
 	/**
-	 * @deprecated Now It is not compatible.
 	 * @param id
-	 * @return
+	 * @return Scope
 	 */
-	public Scope find(int id) {
-		/*Scope ret=findFunction(id);
-		  if(ret==null)
-		  	return findVariable(id);
-		  return ret;
-		*/
-		return null;
+	public int find(int id) {
+		int ret=findFunction(id);
+		if(ret==-1)
+		  ret=findVariable(id);
+		System.out.println("result finding var/func id "+ id+ "="+ ret);
+		return ret;
 	}
 	public int addObject(Object o) {
 		for(IDElement me : idTable) {

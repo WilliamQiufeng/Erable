@@ -6,15 +6,15 @@ package com.qiufeng.erable.ast;
  *
  */
 public class VarCode extends TempCode {
-	public int name;
+	public int val;
 	public VarCode(int name,int refid) {
-		super(refid);
+		super(name);
 		// TODO Auto-generated constructor stub
-		this.name=name;
+		this.val=refid;
 	}
 	@Override
 	public String toString() {
-		return "VarCode [name=" + name + ", id=" + id + ", refid=" + refid + ", type=" + type + "]";
+		return "VarCode [name=" + refid + ", id=" + id + ", value=" + val+ ", type=" + type + "]";
 	}
 
 }

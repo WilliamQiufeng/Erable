@@ -13,5 +13,9 @@ public class DotCode extends TempCode {
 		// TODO Auto-generated constructor stub
 		this.targid=targid;
 	}
+	@Override
+	public String toString() {
+		return "DotCode [targid=" + targid + ", id=" + id + ", refid=" + refid + ", type=" + type + "]";
+	}
 
 }
