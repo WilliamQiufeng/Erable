@@ -1,4 +1,4 @@
-grammar erable;
+grammar Erable;
 @header{
   import java.util.*;
   import com.qiufeng.erable.*;
