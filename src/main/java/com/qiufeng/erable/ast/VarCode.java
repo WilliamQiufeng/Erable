@@ -7,10 +7,15 @@ package com.qiufeng.erable.ast;
  */
 public class VarCode extends TempCode {
 	public int val;
-	public VarCode(int name,int refid) {
+	public boolean isArgs=false;
+	public VarCode(int name,int refid,boolean isArgs) {
 		super(name);
 		// TODO Auto-generated constructor stub
 		this.val=refid;
+		this.isArgs=isArgs;
+	}
+	public VarCode(int name,int refid) {
+		this(name,refid,false);
 	}
 	@Override
 	public String toString() {

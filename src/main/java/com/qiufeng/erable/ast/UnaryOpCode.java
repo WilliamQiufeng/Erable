@@ -10,7 +10,8 @@ public class UnaryOpCode extends TempCode {
 	public static enum UnaryOp{
 		BNOT("!"),
 		RETURN("return"),
-		BREAK("break");
+		BREAK("break"),
+		POS("+"),NEG("-");
 		String sign;
 		UnaryOp(String sign){
 			this.sign=sign;

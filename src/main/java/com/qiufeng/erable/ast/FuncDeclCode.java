@@ -21,6 +21,10 @@ public class FuncDeclCode extends TempCode {
 		this.args=args;
 		this.pdo=pdo;
 	}
+	public void declareArgsVar() {
+		
+		
+	}
 	@Override
 	public String toString() {
 		return "FuncDeclCode [ args=" + Arrays.toString(args) + ", id=" + id

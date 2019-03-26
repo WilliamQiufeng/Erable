@@ -7,7 +7,6 @@ erableParser$Unsigned_intContext.class
 com/qiufeng/erable/ast/Code.class
 erableParser$WhilecondContext.class
 simperrLexer.class
-erableParser$Pos_neg_numContext.class
 com/qiufeng/erable/ast/BlockCode.class
 erableParser$IfcondContext.class
 erableParser$DeclsContext.class
@@ -15,6 +14,7 @@ simperrListener.class
 erableParser$Field_and_typesContext.class
 com/qiufeng/erable/ast/ArrayCode.class
 erableParser$Var_idsContext.class
+com/qiufeng/erable/ast/IfCode.class
 com/qiufeng/erable/ast/VFCode.class
 erableListener.class
 com/qiufeng/erable/ast/TempCode.class

@@ -12,8 +12,10 @@ prog
   returns [int retid]
   : (progo SPLIT)*
   {
-    root.printTree();
-    $retid=-1;
+    if(root==current){
+      root.printTree();
+      $retid=-1;
+    }
   } 
   ;
 progo
@@ -59,7 +61,10 @@ decls
   ;
 condexprs
   returns [int retid]
-  : ifcond
+  : ic=ifcond
+    {
+      $retid=$ic.retid;
+    }
   | whilecond
   ;
 field_and_types
@@ -101,13 +106,13 @@ field
   ;
 ops
   returns [int retid]
-  : bo=binary_op
-    {
-      $retid=$bo.retid;
-    }
-  | uo=unary_op
+  : uo=unary_op
     {
       $retid=$uo.retid;
+    }
+  | bo=binary_op
+    {
+      $retid=$bo.retid;
     }
   ;
 var
@@ -128,7 +133,15 @@ var_pair
     System.out.println("------variable declared:"+$key.text);
   }
   ;
-
+unary_op
+  returns [int retid]
+  : operation=UNARYOPS pdo=progo?
+    {
+      UnaryOpCode uoc=new UnaryOpCode($operation.text,$pdo.retid);
+      current.addCode(uoc);
+      $retid=uoc.id;
+    }
+  ;
 binary_op
   returns [int retid]
   : l=binary_op DOT f=field
@@ -163,21 +176,20 @@ binary_op
 
 atom
   returns [int retid]
-  : LPA progo? RPA
-  | num=pos_neg_num
+  : LPA p=progo RPA
+    {
+      $retid=$p.retid;
+    }
+  | num=unsigned_num
   {
      int idr=-1;
      String text=$num.text;
      double number=Double.parseDouble(text);
      idr=current.addObject(number);
-     $retid=idr;
+     $retid=current.temp(idr);
      System.out.println("------ID for number'"+number+"' is:"+idr+"------");
   }
 
-  ;
-pos_neg_num
-  
-  : (ADD|SUB)? unsigned_num
   ;
 string
   returns [int retid]
@@ -219,15 +231,7 @@ unsigned_int
 unsigned_float
   : INT DOT INT
   ;
-unary_op
-  returns [int retid]
-  : operation=(BNOT|RETURN|BREAK) pdo=progo?
-    {
-      UnaryOpCode uoc=new UnaryOpCode($operation.text,$pdo.retid);
-      current.addCode(uoc);
-      $retid=uoc.id;
-    }
-  ;
+
 
 var_ids
   : VAR_ID+
@@ -268,7 +272,13 @@ codeblock
   ;
 funcdecl
   returns [int retid]
-  : FUNC funcname=name arguments=args {current=current.createChild(Scope.Type.FUNCTION);} block=progo
+  : FUNC funcname=name arguments=args {
+      current=current.createChild(Scope.Type.FUNCTION);
+      int nul=current.temp(current.findId("null"));
+      for(int ids : $arguments.argids){
+	current.declareVariable(ids,nul,true);
+      }
+    } block=progo
   {
     $retid=current.getParent().declareFunction(
       $funcname.retid,
@@ -279,9 +289,23 @@ funcdecl
   }
   ;
 ifcond
-  : IF LPA progo? RPA progo
-    (ELIF LPA progo? RPA progo)*
-    (ELSE progo)?
+  returns [int retid]
+  @init {
+    Scope sif;
+    Scope[] elses={};
+  }
+  : IF LPA cond=progo RPA {current=current.createChild(Scope.Type.IF);} ido=progo {
+      sif=current;current=current.getParent();
+    }
+    (ELSE {current=current.createChild(Scope.Type.IF);} edo=progo {
+      elses=ArrayUtils.push(elses,current);
+      current=current.getParent();
+    })*
+    {
+      IfCode ic=new IfCode($cond.retid,sif,elses);
+      current.addCode(ic);
+      $retid=ic.id;
+    } 
   ;
 whilecond
   : WHILE LPA progo? RPA progo
@@ -301,9 +325,11 @@ name
 
 
 EQU               : '='                             ;
+UNARYOPS : BNOT|RETURN|BREAK|ADD|SUB                ;
 //BINOPS
 BINOPS   : DOT|POW|MOD|DIV|MUL|SUB|ADD|AND|OR|XOR|BAND|BOR|BXOR|ADDEQ|SUBEQ|MULEQ|DIVEQ|MODEQ|NEQ|EQ|SWITCH|ULS|URS|LTE|GTE|LS|RS|LT|GT   ;
-fragment POW      : '**'                   ;
+
+POW               : '**'                   ;
 
 //Less/Greater than(or Equal to), (unsigned) Left/Right Shift
 fragment ULS      : '<<<'                           ;
@@ -325,12 +351,12 @@ fragment EQ       : '=='                            ;
 fragment NEQ      : '!='                            ;
 fragment LT       : '<'                             ;
 fragment GT       : '>'                             ;
-COLON    : ':'                             ;
-SPLIT    : ';'                             ;
-fragment DOT      : '.'                             ;
-COMMA    : ','                             ;
-fragment ADD      : '+'                             ;
-fragment SUB      : '-'                             ;
+COLON             : ':'                             ;
+SPLIT             : ';'                             ;
+DOT               : '.'                             ;
+COMMA             : ','                             ;
+ADD               : '+'                             ;
+SUB               : '-'                             ;
 fragment MUL      : '*'                             ;
 fragment DIV      : '/'                             ;
 fragment MOD      : '%'                             ;
@@ -340,7 +366,7 @@ fragment MOD      : '%'                             ;
 fragment BAND     : '&'                             ;
 fragment BOR      : '|'                             ;
 fragment BXOR     : '^'                             ;
-fragment BNOT     : '!'                             ;
+BNOT              : '!'                             ;
 
 
 

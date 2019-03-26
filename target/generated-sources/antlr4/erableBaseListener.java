@@ -164,6 +164,18 @@ public class erableBaseListener implements erableListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterUnary_op(erableParser.Unary_opContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUnary_op(erableParser.Unary_opContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBinary_op(erableParser.Binary_opContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -183,18 +195,6 @@ public class erableBaseListener implements erableListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAtom(erableParser.AtomContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPos_neg_num(erableParser.Pos_neg_numContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPos_neg_num(erableParser.Pos_neg_numContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -267,18 +267,6 @@ public class erableBaseListener implements erableListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitUnsigned_float(erableParser.Unsigned_floatContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterUnary_op(erableParser.Unary_opContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitUnary_op(erableParser.Unary_opContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

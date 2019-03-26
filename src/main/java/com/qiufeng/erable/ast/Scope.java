@@ -8,15 +8,20 @@ import java.util.*;
  *
  */
 public class Scope {
-	public static HashSet<IDElement> idTable=new HashSet<>();
+	public static HashSet<Object> idTable=new HashSet<>();
+	static {
+		Scope.addObject("null");
+		Scope.addObject("true");
+		Scope.addObject("false");
+	}
 	ArrayList<Code> codes=new ArrayList<>();
 	Scope parent;
 	public static enum Type{
 		FUNCTION,
 		VARIABLE,
-		CODEBLOCK;
+		CODEBLOCK,
+		IF;
 	}
-	public static int currentId=0;
 	public Type type;
 	public Scope(Scope p,Type t) {
 		parent=p;
@@ -42,10 +47,13 @@ public class Scope {
 		addCode(fdc);
 		return fdc.id;
 	}
-	public int declareVariable(int id,int value) {
-		VarCode c=new VarCode(id,value);
+	public int declareVariable(int id,int value,boolean isArgs) {
+		VarCode c=new VarCode(id,value,isArgs);
 		addCode(c);
 		return c.id;
+	}
+	public int declareVariable(int id,int value) {
+		return this.declareVariable(id, value,false);
 	}
 	public void addCode(Code c) {
 		codes.add(c);
@@ -56,7 +64,7 @@ public class Scope {
 		for(Code me : codes) {
 			if(me instanceof TempCode) {
 				TempCode tc=(TempCode)me;
-				System.out.println("Iterating reference ids:"+tc.refid+", tmp id:"+tc.id);
+				//System.out.println("Iterating reference ids:"+tc.refid+", tmp id:"+tc.id);
 				if(tempid==tc.id) {
 					System.out.println("Found id:"+tc.refid);
 					return tc.refid;
@@ -74,7 +82,7 @@ public class Scope {
 		for(Code me : codes) {
 			if(me instanceof TempCode) {
 				TempCode tc=(TempCode)me;
-				System.out.println("Iterating reference ids:"+tc.refid+", tmp id:"+tc.id);
+				//System.out.println("Iterating reference ids:"+tc.refid+", tmp id:"+tc.id);
 				if(constid==tc.refid) {
 					System.out.println("Found id:"+tc.id);
 					return tc.id;
@@ -103,7 +111,7 @@ public class Scope {
 			if(me instanceof VarCode) {
 				VarCode tc=(VarCode)me;
 				int cid=this.findConstByTemp(tc.refid);
-				System.out.println("Iterating var reference ids:"+tc.refid+", tmp id:"+tc.id);
+				//System.out.println("Iterating var reference ids:"+tc.refid+", tmp id:"+tc.id);
 				if(id==cid) {
 					System.out.println("Found var id:"+tc.id);
 					return tc.id;
@@ -111,7 +119,7 @@ public class Scope {
 			}else if(me instanceof FuncDeclCode) {
 				FuncDeclCode tc=(FuncDeclCode)me;
 				int cid=this.findConstByTemp(tc.refid);
-				System.out.println("Iterating funcdecl reference ids:"+tc.refid+", tmp id:"+tc.id);
+				//System.out.println("Iterating funcdecl reference ids:"+tc.refid+", tmp id:"+tc.id);
 				if(id==cid) {
 					System.out.println("Found funcdecl id:"+tc.id);
 					return tc.id;
@@ -173,44 +181,36 @@ public class Scope {
 		System.out.println("result finding var/func id "+ id+ "="+ ret);
 		return ret;
 	}
-	public int addObject(Object o) {
-		for(IDElement me : idTable) {
-			if(me.obj.equals(o)) {
-				return me.id;
-			}
-		}
-		idTable.add(new IDElement(o, currentId));
-		return currentId++;
+	public static int addObject(Object o) {
+		Scope.idTable.add(o);
+		return findId(o);
 	}
 	/**
 	 * Find the object stored in constant pool.
 	 * @param id constant pool id.
 	 * @return {@link Object} the object found in constant pool.If not found, return <code>null</code>.
 	 */
-	public Object findObject(int id) {
-		for(IDElement me : idTable) {
-			if(me.id==id) {
-				return me.obj;
-			}
-		}
-		if(parent!=null) {
-			return parent.findObject(id);
-		}
-		return null;
+	public static Object findObject(int id) {
+		Object idb=null;
+		Iterator<?> it=Scope.idTable.iterator();
+		for(int i=0;i<id;idb=it.next());
+		return idb;
 	}
 	/**
 	 * Find id of the object in constant pool.
 	 * @param obj value from constant pool.
 	 * @return {@link Integer} the constant pool id found.If not found, return <code>-1</code>.
 	 */
-	public int findId(Object obj) {
-		for(IDElement me : idTable) {
-			if(me.obj==obj) {
-				return me.id;
-			}
+	public static int findId(Object obj) {
+		try {
+			Object idb;
+		Iterator<?> it=Scope.idTable.iterator();
+		for(int i=0;i<Scope.idTable.size();i++) {
+			idb=it.next();
+			if(idb.equals(obj))return i;
 		}
-		if(parent!=null) {
-			return parent.findId(obj);
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 		return -1;
 	}
@@ -221,13 +221,15 @@ public class Scope {
 	public String tree() {
 		String res="-----------ID Table-----------\n";
 		String prefix="->";
-		for(IDElement me : idTable) {
+		int cid=0;
+		for(Object me : idTable) {
 			String out=prefix;
-			out+=me.obj;
+			out+=me;
 			out+="        ID:";
-			out+=me.id;
+			out+=cid;
 			out+="\n";
 			res+=out;
+			cid++;
 		}
 		res+=treeVF(1);
 		return res;

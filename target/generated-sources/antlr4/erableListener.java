@@ -132,6 +132,16 @@ public interface erableListener extends ParseTreeListener {
 	 */
 	void exitVar_pair(erableParser.Var_pairContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link erableParser#unary_op}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnary_op(erableParser.Unary_opContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link erableParser#unary_op}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnary_op(erableParser.Unary_opContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link erableParser#binary_op}.
 	 * @param ctx the parse tree
 	 */
@@ -151,16 +161,6 @@ public interface erableListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAtom(erableParser.AtomContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link erableParser#pos_neg_num}.
-	 * @param ctx the parse tree
-	 */
-	void enterPos_neg_num(erableParser.Pos_neg_numContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link erableParser#pos_neg_num}.
-	 * @param ctx the parse tree
-	 */
-	void exitPos_neg_num(erableParser.Pos_neg_numContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link erableParser#string}.
 	 * @param ctx the parse tree
@@ -221,16 +221,6 @@ public interface erableListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitUnsigned_float(erableParser.Unsigned_floatContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link erableParser#unary_op}.
-	 * @param ctx the parse tree
-	 */
-	void enterUnary_op(erableParser.Unary_opContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link erableParser#unary_op}.
-	 * @param ctx the parse tree
-	 */
-	void exitUnary_op(erableParser.Unary_opContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link erableParser#var_ids}.
 	 * @param ctx the parse tree
