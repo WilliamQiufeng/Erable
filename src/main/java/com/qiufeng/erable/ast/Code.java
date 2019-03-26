@@ -7,6 +7,9 @@ public abstract class Code {
 		TEMP;
 	}
 	public Type type;
+	/**
+	 * Basically other classes will override this method for debug and diagnostics.
+	 */
 	@Override
 	public String toString() {
 		return type.name();

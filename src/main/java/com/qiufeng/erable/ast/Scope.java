@@ -86,10 +86,20 @@ public class Scope {
 		}
 		return -1;
 	}
+	/**
+	 * Find variable/function id for the given name id(temp id).<br/>
+	 * If <strong>Not Found</strong>,return -1;
+	 * @param id temp id of the name
+	 * @return the variable/function id
+	 */
 	public int findTempExists(int id) {
 		System.out.println("Finding temp exists: "+id);
 		
 		for(Code me : codes) {
+			/**
+			 * Can only copy the code twice because <code>VarCode</code> and <code>FuncDeclCode</code>
+			 * are different.
+			 */
 			if(me instanceof VarCode) {
 				VarCode tc=(VarCode)me;
 				int cid=this.findConstByTemp(tc.refid);
@@ -113,6 +123,12 @@ public class Scope {
 		}
 		return -1;
 	}
+	/**
+	 * Create a temp for <em>constant value</em>(Buffer).</br>
+	 * If the value is a <strong>value/function</strong>,return an existed <strong>variable/function</strong> id pointer.
+	 * @param id constant id
+	 * @return {@link Integer}: temp id created.
+	 */
 	public int temp(int id) {
 		int varid=findTempExists(id);
 		if(varid!=-1)return varid;
@@ -166,6 +182,11 @@ public class Scope {
 		idTable.add(new IDElement(o, currentId));
 		return currentId++;
 	}
+	/**
+	 * Find the object stored in constant pool.
+	 * @param id constant pool id.
+	 * @return {@link Object} the object found in constant pool.If not found, return <code>null</code>.
+	 */
 	public Object findObject(int id) {
 		for(IDElement me : idTable) {
 			if(me.id==id) {
@@ -177,6 +198,11 @@ public class Scope {
 		}
 		return null;
 	}
+	/**
+	 * Find id of the object in constant pool.
+	 * @param obj value from constant pool.
+	 * @return {@link Integer} the constant pool id found.If not found, return <code>-1</code>.
+	 */
 	public int findId(Object obj) {
 		for(IDElement me : idTable) {
 			if(me.obj==obj) {
@@ -188,6 +214,10 @@ public class Scope {
 		}
 		return -1;
 	}
+	/**
+	 * For diagnostic and debug.
+	 * @return {@link String}: tree structure parsed.
+	 */
 	public String tree() {
 		String res="-----------ID Table-----------\n";
 		String prefix="->";
@@ -202,9 +232,19 @@ public class Scope {
 		res+=treeVF(1);
 		return res;
 	}
+	/**
+	 * A simple wrapper for <code>System.out.println(tree());</code>
+	 */
 	public void printTree() {
 		System.out.println(tree());
 	}
+	/**
+	 * tree-ify the current scope.<br/>
+	 * calls {@link com.qiufeng.erable.ast.Code#toString()}.<br/>
+	 * returns the codes declared.
+	 * @param depth
+	 * @return {@link String}: the string which contains stringified codes.
+	 */
 	String treeVF(int depth) {
 		String prefix="-".repeat(depth)+">";
 		String res="";
