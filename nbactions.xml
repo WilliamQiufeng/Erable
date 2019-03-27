@@ -12,16 +12,19 @@
         </action>
         <action>
             <actionName>build</actionName>
+            <preAction>build-with-dependencies</preAction>
             <packagings>
                 <packaging>*</packaging>
             </packagings>
             <goals>
                 <goal>antlr4:antlr4</goal>
                 <goal>install</goal>
+                <goal>shade:shade</goal>
             </goals>
         </action>
         <action>
             <actionName>run</actionName>
+            <preAction>build-with-dependencies</preAction>
             <packagings>
                 <packaging>jar</packaging>
             </packagings>
@@ -29,11 +32,13 @@
                 <goal>antlr4:antlr4</goal>
                 <goal>process-classes</goal>
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.5.0:exec</goal>
+                
             </goals>
             <properties>
                 <exec.args>-classpath %classpath com.qiufeng.erable.Main</exec.args>
                 <exec.executable>java</exec.executable>
                 <exec.workingdir>/williamye/program/antlr/erable</exec.workingdir>
+                <jshell.run.enable>true</jshell.run.enable>
             </properties>
         </action>
         <action>
@@ -50,6 +55,7 @@
                 <exec.executable>java</exec.executable>
                 <jpda.listen>true</jpda.listen>
                 <exec.workingdir>/williamye/program/antlr/erable</exec.workingdir>
+                <jshell.run.enable>true</jshell.run.enable>
             </properties>
         </action>
         <action>
@@ -69,6 +75,7 @@
         </action>
         <action>
             <actionName>rebuild</actionName>
+            <preAction>build-with-dependencies</preAction>
             <packagings>
                 <packaging>*</packaging>
             </packagings>
@@ -76,6 +83,7 @@
                 <goal>clean</goal>
                 <goal>antlr4:antlr4</goal>
                 <goal>install</goal>
+                <goal>shade:shade</goal>
             </goals>
         </action>
         <action>
@@ -87,6 +95,7 @@
             <goals>
                 <goal>antlr4:antlr4</goal>
                 <goal>install</goal>
+                <goal>shade:shade</goal>
             </goals>
         </action>
     </actions>

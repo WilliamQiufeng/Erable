@@ -8,5 +8,6 @@ Remember this project is still under development.However, you can still check ou
 It parses the file and gives the java-object-lized output as diagnostics and debuggings.  
 ```shell
 cd Erable
-./erable test.erable #replace test.erable or don't to see the result.
+chmod +x ./erable.sh # just to ensure you have the permission.
+./erable.sh test.erable #replace test.erable or don't to see the result.
 ```

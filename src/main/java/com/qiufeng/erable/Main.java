@@ -42,6 +42,7 @@ public class Main
 	    CommonTokenStream cts=new CommonTokenStream(lexer);
 	    ErableParser parser=new ErableParser(cts);
 	    ParseTree pt=parser.prog();
+	    
 	    System.out.println(pt.toStringTree());
 	}catch(Throwable e){
 	    e.printStackTrace();

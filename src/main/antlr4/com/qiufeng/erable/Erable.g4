@@ -35,7 +35,7 @@ progo
     $retid=$ops.retid;
   }
 
-  | codeblock
+  | codeblock[new int[]{}]
   {
     $retid=$codeblock.retid;
   }
@@ -65,7 +65,10 @@ condexprs
     {
       $retid=$ic.retid;
     }
-  | whilecond
+  | wc=whilecond
+    {
+      $retid=$wc.retid;
+    }
   ;
 field_and_types
   returns [int retid]
@@ -260,9 +263,15 @@ args
       $argids=retids;
     }
   ;
-codeblock
+codeblock[int[] argids]
   returns [int retid]
-  : LCB {current=current.createChild(Scope.Type.CODEBLOCK);} block=prog RCB
+  : LCB {
+            current=current.createChild(Scope.Type.CODEBLOCK);
+            int nul=current.temp(current.findId("null"));
+            for(int ids : $argids){
+               current.declareVariable(ids,nul,true);
+            }
+        } block=prog RCB
   {
     BlockCode bc=new BlockCode(current);
     $retid=bc.id;
@@ -274,11 +283,8 @@ funcdecl
   returns [int retid]
   : FUNC funcname=name arguments=args {
       current=current.createChild(Scope.Type.FUNCTION);
-      int nul=current.temp(current.findId("null"));
-      for(int ids : $arguments.argids){
-	current.declareVariable(ids,nul,true);
-      }
-    } block=progo
+      
+    } block=codeblock[$arguments.argids]
   {
     $retid=current.getParent().declareFunction(
       $funcname.retid,
@@ -308,7 +314,14 @@ ifcond
     } 
   ;
 whilecond
-  : WHILE LPA progo? RPA progo
+  returns [int retid]
+  : WHILE LPA {current=current.createChild(Scope.Type.WHILE);} cond=progo RPA pdo=progo
+    {
+        WhileCode wc=new WhileCode($cond.retid,current);
+        current=current.getParent();
+        current.addCode(wc);
+        $retid=wc.id;
+    }
   ;
 name
   returns [int retid]
