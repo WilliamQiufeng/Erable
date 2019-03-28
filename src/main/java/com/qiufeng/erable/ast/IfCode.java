@@ -11,7 +11,7 @@ public class IfCode extends TempCode {
 	public Scope[] elses;
 	public Scope ido;
 	/**
-	 * @param refid
+	 * @param cond
 	 * @since 2019年3月26日
 	 * @author Qiufeng54321
 	 */

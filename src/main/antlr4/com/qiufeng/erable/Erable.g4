@@ -71,18 +71,20 @@ condexprs
     }
   ;
 field_and_types
-  returns [int retid]
+  returns [int retid,int cid]
   : val=field
   {
     $retid=$val.retid;
+    $cid=$val.cid;
   }
   | tps=types
   {
     $retid=$tps.retid;
+    $cid=$tps.cid;
   }
   ;
 types
-  returns [int retid]
+  returns [int retid,int cid]
   : arr=array
   {
     $retid=$arr.retid;
@@ -90,21 +92,25 @@ types
   | str=string
   {
     $retid=$str.retid;
+    $cid=$str.cid;
   }
   | ato=atom
   {
     $retid=$ato.retid;
+    $cid=$ato.cid;
   }
   ;
 field
-  returns [int retid]
+  returns [int retid,int cid]
   : fc=funccall
   {
     $retid=$fc.retid;
+    $cid=$fc.cid;
   }
   | val=name
   {
     $retid=$val.retid;
+    $cid=$val.cid;
   }
   ;
 ops
@@ -165,7 +171,13 @@ binary_op
       current.addCode(boc);
       $retid=boc.id;
     }
-  | l=binary_op operation=(BINOPS|EQU) r=binary_op
+  | l=binary_op EQU r=binary_op
+    {
+      BinaryOpCode boc=new BinaryOpCode("=",$l.retid,$r.retid);
+      current.addCode(boc);
+      $retid=boc.id;
+    }
+  | l=binary_op operation=BINOPS r=binary_op
     {
       BinaryOpCode boc=new BinaryOpCode($operation.text,$l.retid,$r.retid);
       current.addCode(boc);
@@ -178,7 +190,7 @@ binary_op
   ;
 
 atom
-  returns [int retid]
+  returns [int retid,int cid]
   : LPA p=progo RPA
     {
       $retid=$p.retid;
@@ -188,18 +200,20 @@ atom
      int idr=-1;
      String text=$num.text;
      double number=Double.parseDouble(text);
-     idr=current.addObject(number);
+     idr=current.addObject(number); 
+     $cid=idr;
      $retid=current.temp(idr);
      System.out.println("------ID for number'"+number+"' is:"+idr+"------");
   }
 
   ;
 string
-  returns [int retid]
+  returns [int retid,int cid]
   : '"' str=anymatch '"'
     {
       int idr=-1;
       idr=current.addObject($str.text);
+      $cid=idr;
       $retid=current.temp(idr);
       System.out.println("------ID for name'"+$str.text+"' is:"+idr+"------");
     }
@@ -240,9 +254,16 @@ var_ids
   : VAR_ID+
   ;
 funccall
-  returns [int retid]
+  returns [int retid,int cid]
   : funcname=name LPA arguments+=progo*? RPA
   {
+    int fid=current.findTempExists($funcname.cid);
+    $cid=$funcname.cid;
+    if(fid==-1){
+        System.err.println("[ERROR]function "+$funcname.text+" is not defined!");
+        System.err.println("    at #"+$name.ctx.NAME().getSymbol().getLine()+" column "+$name.ctx.NAME().getSymbol().getCharPositionInLine());
+        System.exit(0);
+    }
     int[] retids={};
     for(ProgoContext tk : $arguments){
       retids=ArrayUtils.push(retids,tk.retid);
@@ -324,11 +345,12 @@ whilecond
     }
   ;
 name
-  returns [int retid]
+  returns [int retid, int cid]
   : NAME
   {
      int idr=-1;
      idr=current.addObject($NAME.text);
+     $cid=idr;
      $retid=current.temp(idr);
      System.out.println("------ID for name'"+$NAME.text+"' is:"+idr+"------");
   }

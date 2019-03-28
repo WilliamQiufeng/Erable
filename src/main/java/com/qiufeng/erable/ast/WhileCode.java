@@ -17,8 +17,8 @@
 package com.qiufeng.erable.ast;
 
 /**
- *
- * @author Qiufeng54321 <Qiufeng54321 at qiufeng54321.github.io>
+ * @since 27 March 2019
+ * @author Qiufeng54321
  */
 public class WhileCode extends TempCode {
     public Scope pdo;

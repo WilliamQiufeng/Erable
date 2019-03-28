@@ -8,14 +8,28 @@ import java.util.*;
  *
  */
 public class Scope {
+        /**
+         * The global constant pool.
+         */
 	public static ArrayList<Object> idTable=new ArrayList<>();
+        public String name="";
+        public int currentIndex=0;
 	static {
                 Scope.idTable.add("null");
                 Scope.idTable.add("true");
                 Scope.idTable.add("false");
 	}
+        /**
+         * The codes in the scope.
+         */
 	ArrayList<Code> codes=new ArrayList<>();
+        /**
+         * Shows its parent.
+         */
 	Scope parent;
+        /**
+         * Types the Scope could have.
+         */
 	public static enum Type{
 		FUNCTION,
 		VARIABLE,
@@ -23,10 +37,21 @@ public class Scope {
 		IF,
                 WHILE;
 	}
+        /**
+         * shows the type.
+         */
 	public Type type;
+        /**
+         * Construct a new scope with parent <code>p</code> and type <code>t</code>
+         * @param p
+         * @param t 
+         */
 	public Scope(Scope p,Type t) {
 		parent=p;
 		type=t;
+                if(p!=null){
+                    name=parent.name+"#"+parent.currentIndex++;
+                }
 		//System.out.println("current depth:"+cdepth);
 		
 	}
@@ -34,12 +59,12 @@ public class Scope {
 		return parent;
 	}
         /**
-         * @deprecated Not in use.
-         * Gets the root Scope.<br/>
-         * How it works:<br/>
-         * Scope root=current scope.<br/>
-         * while <code>root</code>'sparent is not null:<br/>
-         *      set <code>root</code> to its parent<br/>
+         * @deprecated Not in use.<br>
+         * Gets the root Scope.<br>
+         * How it works:<br>
+         * Scope root=current scope.<br>
+         * while <code>root</code>'s parent is not null:<br>
+         * &emsp;&emsp;set <code>root</code> to its parent<br>
          * return the root.
          * @return the absolute root scope
          */
@@ -54,7 +79,7 @@ public class Scope {
 		return new Scope(this,t);
 	}
         /**
-         * Declares a function.<br/>
+         * Declares a function.<br>
          * Will create a temp id which points to the function once declared.
          * @param name name of the function
          * @param args arguments(name temp id)
@@ -67,7 +92,7 @@ public class Scope {
 		return fdc.id;
 	}
         /**
-         * Declares a variable.<br/>
+         * Declares a variable.<br>
          * Temp id is created once declared.
          * @param id name id(temp id)
          * @param value value id(temp id)
@@ -96,7 +121,6 @@ public class Scope {
 		codes.add(c);
 	}
         /**
-         * @deprecated Not in use.
          * @param tempid
          * @return 
          */
@@ -142,7 +166,7 @@ public class Scope {
 		return -1;
 	}
 	/**
-	 * Find variable/function id for the given name id(temp id).<br/>
+	 * Find variable/function id for the given name id(temp id).<br>
 	 * If <strong>Not Found</strong>,return -1;
 	 * @param id temp id of the name
 	 * @return the variable/function id
@@ -179,7 +203,7 @@ public class Scope {
 		return -1;
 	}
 	/**
-	 * Create a temp for <em>constant value</em>(Buffer).</br>
+	 * Create a temp for <em>constant value</em>(Buffer).<br>
 	 * If the value is a <strong>value/function</strong>,return an existed <strong>variable/function</strong> id pointer.
 	 * @param id constant id
 	 * @return {@link Integer}: temp id created.
@@ -295,8 +319,8 @@ public class Scope {
 		System.out.println(tree());
 	}
 	/**
-	 * tree-ify the current scope.<br/>
-	 * calls {@link com.qiufeng.erable.ast.Code#toString()}.<br/>
+	 * tree-ify the current scope.<br>
+	 * calls {@link com.qiufeng.erable.ast.Code#toString()}.<br>
 	 * returns the codes declared.
 	 * @param depth
 	 * @return {@link String}: the string which contains stringified codes.
