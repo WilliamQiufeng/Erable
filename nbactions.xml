@@ -12,7 +12,6 @@
         </action>
         <action>
             <actionName>build</actionName>
-            <preAction>build-with-dependencies</preAction>
             <packagings>
                 <packaging>*</packaging>
             </packagings>
@@ -24,7 +23,6 @@
         </action>
         <action>
             <actionName>run</actionName>
-            <preAction>build-with-dependencies</preAction>
             <packagings>
                 <packaging>jar</packaging>
             </packagings>
@@ -38,7 +36,7 @@
                 <exec.args>-classpath %classpath com.qiufeng.erable.Main</exec.args>
                 <exec.executable>java</exec.executable>
                 <exec.workingdir>/williamye/program/antlr/erable</exec.workingdir>
-                <jshell.run.enable>true</jshell.run.enable>
+                
             </properties>
         </action>
         <action>
@@ -75,7 +73,6 @@
         </action>
         <action>
             <actionName>rebuild</actionName>
-            <preAction>build-with-dependencies</preAction>
             <packagings>
                 <packaging>*</packaging>
             </packagings>

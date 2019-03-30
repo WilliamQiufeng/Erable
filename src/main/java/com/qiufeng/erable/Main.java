@@ -44,6 +44,7 @@ public class Main
 	    ParseTree pt=parser.prog();
 	    
 	    System.out.println(pt.toStringTree());
+            System.out.println(pt.toString());
 	}catch(Throwable e){
 	    e.printStackTrace();
 	}
