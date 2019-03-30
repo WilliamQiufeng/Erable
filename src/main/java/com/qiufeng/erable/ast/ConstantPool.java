@@ -19,6 +19,7 @@ package com.qiufeng.erable.ast;
 import com.qiufeng.util.ArrayUtils;
 import com.qiufeng.util.BitUtils;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -87,7 +88,8 @@ public class ConstantPool {
 	header=ArrayUtils.push(header, ConstantPool.TAG);
 	BitUtils.putInt(length,0, len);
 	for(var element : this.elements){
-	    elementsSerialised=ArrayUtils.push(elementsSerialised, element.serialise());
+	    var serialised=element.serialise();
+	    elementsSerialised=ArrayUtils.push(elementsSerialised, serialised);
 	}
 	result=ArrayUtils.push(result, header);
 	result=ArrayUtils.push(result, length);

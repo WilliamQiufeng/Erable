@@ -39,4 +39,12 @@ public class ArrayUtils {
 	public static byte[] join(byte[] arr,String str){
 	    return ArrayUtils.push(arr, str.getBytes());
 	}
+	public static <T> T[] cut(T[] arr,int from,int to){
+	    Arrays.copyOfRange(arr, from, to);
+	    return arr;
+	}
+	public static byte[] cut(byte[] arr,int from,int to){
+	    Arrays.copyOfRange(arr, from, to);
+	    return arr;
+	}
 }
