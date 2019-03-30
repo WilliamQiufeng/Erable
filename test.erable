@@ -1,0 +1,34 @@
+function mul:(a b){
+  return a*b;
+};
+function quad:(a b c x){
+  let power=a**2;
+  return power+b*x+c;
+};
+function makeSquare:(width height){
+  return [width height mul(width height)];
+};
+function switchWH:(square){
+  if(square[0]==square[1])return square
+  else if(square[0]==0|square[1]==0)return square;
+  square[0]<=>square[1];
+  return mid;
+};
+function isNegative:(number){
+  if((-number)==number){
+    return true;
+  }else{
+    return false;
+  };
+};
+function loop:(from to step){
+  let a=from;
+  let count=0;
+  while(a<to){
+    a+=step;
+  };
+  return count;
+};
+var obj square=makeSquare(15 20);
+square=switchWH(square);
+println(square);

@@ -1,31 +1,13 @@
 # Erable
-This is a programming language which is created by myself.  
-Note that this language is still under development.  
-## How to Use  
-Currently only Syntax Parser is available.  
-Run Syntax Parser:  
+Hi!Welcome to erable!
+## What is it?
+A programming language created by Qiufeng54321.  
+Java version(this branch) has a lot more features than Python version(master branch).However, it is still under development.  
+## How to use?
+Remember this project is still under development.However, you can still check out the parser feature.  
+It parses the file and gives the java-object-lized output as diagnostics and debuggings.  
 ```shell
-cd LeafLang-compiler
-python3 Node.py
+cd Erable
+chmod +x ./erable.sh # just to ensure you have the permission.
+./erable.sh test.erable #replace test.erable or don't to see the result.
 ```
-And then, Typing LeafLang Code and `enter` ,you will get the parsed NodeData
-## Current Progress
-### Syntax Parser
-> - [x] Variable Declaration
-> - [x] Binary and Unary Operations
-> - [x] If Expression
-> - [x] Label Expression
-> - [x] Function Call
-> - [x] CodeBlock
-> - [x] Loop Expression
-> - [x] With Expression
-> - [x] Signal and Emit
-> - [x] Basic instances (integer,string,array)
-> - [x] Function Declaration
-> - [x] Class Definition
-> - [x] Import Expression
-### Compiler
-I am working on it!  
-### Executer
-Nothing yet too...  
-
