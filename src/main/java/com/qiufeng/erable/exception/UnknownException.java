@@ -14,22 +14,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.qiufeng.erable.ast;
+package com.qiufeng.erable.exception;
 
 /**
  *
  * @author Qiufeng54321
  */
-public class TempCode extends Code {
-    public String sign="@";
-    public TempCode(int cid, Code parent) {
-	super("temp", parent);
-	this.tag+=this.id+"_"+cid;
-    }
+public class UnknownException extends BaseException {
 
-    @Override
-    public String write() {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public UnknownException(ErrorType type, String message, String what,int line, int column, int errno) {
+	super(type, "Unknown Exception", message,what, line, column, errno);
     }
     
 }

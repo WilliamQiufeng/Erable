@@ -16,6 +16,7 @@
  */
 package com.qiufeng.erable.ast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ import java.util.List;
  * An abstract Code.
  * @author Qiufeng54321
  */
-public abstract class Code {
+public abstract class Code implements Comparable{
     /**
      * Constant Pool
      */
@@ -52,6 +53,10 @@ public abstract class Code {
      * The code's id
      */
     public        int           id = Code.currentId++;
+    /**
+     * The file for output.
+     */
+    public        File        file ;
     
     /**
      * Creates a code.
@@ -80,6 +85,13 @@ public abstract class Code {
      */
     public void bind(Code code){
         this.parent=code;
+    }
+    /**
+     * Set file for output.
+     * @param file output file.
+     */
+    public void setFile(File file){
+	this.file=file;
     }
     /**
      * find a code with the tag.<br>
@@ -172,6 +184,14 @@ public abstract class Code {
         ts+=sign;
         ts+=tag;
         return ts;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+	if(!(o instanceof Code)){
+	    return -1;
+	}
+	return this.id-((Code)o).id;
     }
     
 }

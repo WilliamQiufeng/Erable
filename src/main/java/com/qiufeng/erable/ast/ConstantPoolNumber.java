@@ -16,8 +16,8 @@
  */
 package com.qiufeng.erable.ast;
 
-import com.qiufeng.util.ArrayUtils;
-import com.qiufeng.util.BitUtils;
+import com.qiufeng.erable.util.ArrayUtils;
+import com.qiufeng.erable.util.BitUtils;
 
 /**
  * A type of constant pool element which stores numbers(stored as {@link Double})

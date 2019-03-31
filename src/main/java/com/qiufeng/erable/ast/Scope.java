@@ -21,9 +21,10 @@ package com.qiufeng.erable.ast;
  * @author Qiufeng54321
  */
 public class Scope extends Code {
+    public String sign="#";
     public Scope(Code parent){
 	super("scope",parent);
-	this.tag+=id;
+	this.tag=id+"";
     }
     @Override
     public String write() {

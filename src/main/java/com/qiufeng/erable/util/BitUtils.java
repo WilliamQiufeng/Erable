@@ -23,7 +23,7 @@
  *
  */
 
-package com.qiufeng.util;
+package com.qiufeng.erable.util;
 /**
  */
 /**

@@ -1,4 +1,4 @@
-package com.qiufeng.util;
+package com.qiufeng.erable.util;
 
 import java.util.Arrays;
 /**

@@ -15,9 +15,9 @@ import org.kohsuke.args4j.*;
 public class Main 
 {
     @Option(name="-f",usage="Choose the file to parse")
-    public String file;
+    public String file=null;
     @Argument
-    private List<String> arguments=new ArrayList<String>();
+    List<String> arguments=new ArrayList<String>();
     public static void main( String[] args )
     {
         new Main().nmain(args);
@@ -31,11 +31,12 @@ public class Main
 	    clp.printUsage(System.err);
 	    return;
 	}
-	if(arguments.isEmpty()){
+	if(file==null){
 	    file="test.erable";
 	    System.out.println("File not specified.Using default:"+file);
 	}
 	try{
+	    long start=System.currentTimeMillis();
 	    FileInputStream fis=new FileInputStream(file);
 	    ANTLRInputStream ais=new ANTLRInputStream(fis);
 	    ErableLexer lexer=new ErableLexer(ais);
@@ -43,8 +44,11 @@ public class Main
 	    ErableParser parser=new ErableParser(cts);
 	    ParseTree pt=parser.prog();
 	    
-	    System.out.println(pt.toStringTree());
-            System.out.println(pt.toString());
+	    long end=System.currentTimeMillis();
+	    long duration=end-start;
+	    //System.out.println(pt.toStringTree());
+            //System.out.println(pt.toString());
+	    System.out.println("Program finished.Total time:"+duration+" ms.");
 	}catch(Throwable e){
 	    e.printStackTrace();
 	}
