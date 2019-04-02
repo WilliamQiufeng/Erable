@@ -1,9 +1,11 @@
 package com.qiufeng.erable;
+import com.qiufeng.erable.ast.EListener;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeListener;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.kohsuke.args4j.*;
 /**
@@ -43,7 +45,15 @@ public class Main
 	    CommonTokenStream cts=new CommonTokenStream(lexer);
 	    ErableParser parser=new ErableParser(cts);
 	    ParseTree pt=parser.prog();
-	    
+	    System.out.println("Parsed file "+file);
+	    ParseTreeWalker ptw=new ParseTreeWalker();
+	    EListener el=new EListener(parser);
+	    ptw.walk(el, pt);
+	    for(var element : el.pool.elements){
+		System.out.println(element.toString());
+	    }
+	    System.out.println(el.root.tree(0));
+	    System.out.println("Walked file "+file);
 	    long end=System.currentTimeMillis();
 	    long duration=end-start;
 	    //System.out.println(pt.toStringTree());

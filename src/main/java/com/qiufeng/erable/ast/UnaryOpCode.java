@@ -22,21 +22,10 @@ import com.qiufeng.erable.OpCode;
  *
  * @author Qiufeng54321
  */
-public class TempCode extends Code {
-    public int cid;
-    public TempCode(int cid,OpCode op, Code parent) {
-	super("temp",op, parent);
-	this.tag+=this.id+"_"+cid;
-	this.cid=cid;
-	this.sign=Code.TEMP;
-    }
-    public TempCode(int cid,Code parent){
-	this(cid,OpCode.LOADC,parent);
-    }
+public class UnaryOpCode extends TempCode {
 
-    @Override
-    public String write() {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public UnaryOpCode(int tid, OpCode op, Code parent) {
+	super(tid, op, parent);
     }
     
 }

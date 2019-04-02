@@ -17,26 +17,29 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
+import java.util.List;
 
 /**
  *
  * @author Qiufeng54321
  */
-public class TempCode extends Code {
-    public int cid;
-    public TempCode(int cid,OpCode op, Code parent) {
-	super("temp",op, parent);
-	this.tag+=this.id+"_"+cid;
-	this.cid=cid;
-	this.sign=Code.TEMP;
+public class FuncCallCode extends TempCode {
+    public List<Integer> args;
+    public String name;
+    public FuncCallCode(String name,List<Integer> args,int refid, Code parent) {
+	super(refid, OpCode.CALL_PREPARE,parent);
+	this.sign=Code.VAR;
+	this.name=name;
+	this.args=args;
     }
-    public TempCode(int cid,Code parent){
-	this(cid,OpCode.LOADC,parent);
+
+    @Override
+    public String toString() {
+	return super.toString() + "  name=" + this.name + ", nameid=" + this.cid + ", args=" + args.toString();
     }
 
     @Override
     public String write() {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	throw new UnsupportedOperationException("Not supported yet.");
     }
-    
 }

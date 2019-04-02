@@ -16,6 +16,7 @@
  */
 package com.qiufeng.erable.ast;
 
+import com.qiufeng.erable.OpCode;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,17 +27,18 @@ import java.util.List;
  */
 public abstract class Code implements Comparable{
     /**
-     * Constant Pool
-     */
-    public static ConstantPool pool= new ConstantPool();
-    /**
      * Current id
      */
     public static int    currentId = 0;
+    
+    public static String     SCOPE = "#";
+    public static String       VAR = "%";
+    public static String      TEMP = "@";
+    public static String      CODE = "|";
     /**
      * Sign of the code
      */
-    public        String      sign = "|";
+    public        String      sign = Code.CODE;
     /**
      * Codes inside
      */
@@ -51,20 +53,27 @@ public abstract class Code implements Comparable{
     public        Code      parent = null;
     /**
      * The code's id
+     * 所有Code的id都是独立的
+     * All Code has a unique id.
      */
     public        int           id = Code.currentId++;
     /**
      * The file for output.
      */
     public        File        file ;
+    /**
+     * OpCode
+     */
+    public        OpCode        op ;
     
     /**
      * Creates a code.
      * @param tag tag name
      * @param parent its parent
      */
-    public Code(String tag,Code parent){
+    public Code(String tag,OpCode op,Code parent){
         this.tag=tag;
+	this.op=op;
         this.bind(parent);
     }
     /**
@@ -72,7 +81,7 @@ public abstract class Code implements Comparable{
      * @param tag tag name
      */
     public Code(String tag){
-        this(tag,null);
+        this(tag,null,null);
     }
     /**
      * write method
@@ -172,18 +181,54 @@ public abstract class Code implements Comparable{
         return parent;
     }
     /**
+     * Find variable/function by the given name.
+     * @param name the name to try to find
+     * @return the id found.
+     */
+    public int findVar(String name){
+	for(var code : codes){
+	    System.out.println("finding:"+code);
+	    if(code.tag.equals(name)&&code.sign.equals(Code.VAR)){
+		System.out.println("ID:"+code);
+		return code.id;
+	    }
+	}
+	if(this.getParent()!=null){
+	    return this.getParent().findVar(name);
+	}
+	System.out.println("ID NOT FOUND:"+name);
+	return -1;
+    }
+    public int findCid(int id){
+	var temp=(TempCode)this.find(id);
+	return temp.cid;
+    }
+    /**
      * Generates the full name.
      * @return the full name.
      */
-    @Override
-    public String toString() {
-        String ts="";
+    public String getAbsoluteName(){
+	String ts="";
         if(parent!=null){
-            ts=parent.toString();
+            ts=parent.getAbsoluteName();
         }
         ts+=sign;
         ts+=tag;
         return ts;
+    }
+    public String tree(int depth){
+	String ret="-".repeat(depth)+">";
+	ret+=this.toString();
+	ret+="\n";
+	for(var code : this.codes){
+	    ret+=code.tree(depth+1);
+	    ret+="\n";
+	}
+	return ret;
+    }
+    @Override
+    public String toString() {
+        return this.getAbsoluteName();
     }
 
     @Override

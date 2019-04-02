@@ -88,6 +88,10 @@ public class ConstantPool {
 	header=ArrayUtils.push(header, ConstantPool.TAG);
 	BitUtils.putInt(length,0, len);
 	for(var element : this.elements){
+	    if(element instanceof ConstantPoolName){
+		elementsSerialised=ArrayUtils.push(elementsSerialised,new byte[]{3});
+		continue;
+	    }
 	    var serialised=element.serialise();
 	    elementsSerialised=ArrayUtils.push(elementsSerialised, serialised);
 	}

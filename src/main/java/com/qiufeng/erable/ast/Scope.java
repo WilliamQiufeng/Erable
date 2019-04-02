@@ -16,19 +16,20 @@
  */
 package com.qiufeng.erable.ast;
 
+import com.qiufeng.erable.OpCode;
+
 /**
  *
  * @author Qiufeng54321
  */
 public class Scope extends Code {
-    public String sign="#";
     public Scope(Code parent){
-	super("scope",parent);
+	super("scope",OpCode.PUSH_SCOPE,parent);
 	this.tag=id+"";
+	this.sign=Code.SCOPE;
     }
     @Override
     public String write() {
 	throw new UnsupportedOperationException("Not supported yet.");
     }
-    
 }

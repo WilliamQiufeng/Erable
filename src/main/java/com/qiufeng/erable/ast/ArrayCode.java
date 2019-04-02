@@ -17,26 +17,23 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
  * @author Qiufeng54321
  */
-public class TempCode extends Code {
-    public int cid;
-    public TempCode(int cid,OpCode op, Code parent) {
-	super("temp",op, parent);
-	this.tag+=this.id+"_"+cid;
-	this.cid=cid;
-	this.sign=Code.TEMP;
-    }
-    public TempCode(int cid,Code parent){
-	this(cid,OpCode.LOADC,parent);
+public class ArrayCode extends TempCode {
+    public List<Integer> arr;
+    public ArrayCode(List<Integer> arr, Code parent) {
+	super(-1, OpCode.ARRAY, parent);
+	this.arr=arr;
     }
 
     @Override
-    public String write() {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String toString() {
+	return super.toString() + "  arr=" + arr.toString();
     }
     
 }

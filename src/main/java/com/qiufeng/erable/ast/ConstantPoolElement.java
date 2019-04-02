@@ -16,7 +16,6 @@
  */
 package com.qiufeng.erable.ast;
 
-import java.util.BitSet;
 
 /**
  * JavaBean-liked class.<br>

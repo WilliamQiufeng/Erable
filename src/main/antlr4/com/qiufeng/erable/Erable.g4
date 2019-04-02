@@ -1,130 +1,122 @@
 grammar Erable;
 @header{
   import java.util.*;
-  //import com.qiufeng.erable.*;
-  //import com.qiufeng.erable.ast.*;
+  import com.qiufeng.erable.*;
+  import com.qiufeng.erable.ast.*;
 }
 @members{
     
 }
 prog
-  : (progo SPLIT)* EOF?
+  : (ops SPLIT)* EOF?
   ;
-progo
-  : decls
-  | condexprs
-  | ops
-  | codeblock
-  ;
+
 exprs
+  returns [Object obj,int id]
   : fat=field_and_types
   ;
 decls
+  returns [Object obj,int id]
   : fd=funcdecl
   | v=var
   ;
 condexprs
+  returns [Object obj,int id]
   : ic=ifcond
   | wc=whilecond
   ;
 field_and_types
+  returns [Object obj,int id]
   : val=field
   | tps=types
   ;
 types
+  returns [Object obj,int id]
   : arr=array
   | str=string
-  | ato=atom
+  | ato=num
   ;
 field
+  returns [Object obj,int id]
   : fc=funccall
   | val=name
   ;
 var
-  : modifiers=var_ids declarations=var_kv
+  returns [Object obj,int id,short mod]
+  : modifiers+=VAR_ID+ declarations+=kvs
   ;
-var_kv
-  : var_pair+
+kvs
+  :  (key=NAME (EQU val=ops)?)+
   ;
-var_pair
-  : key=name (EQU val=progo)?
-  ;
-
 ops
-  : l=ops DOT f=field
-  | l=ops ALPA pdo=progo ARPA
-  | <assoc=right> l=ops POW r=ops
-  | l=ops EQU r=ops
-  | l=ops MOD r=ops
-  | l=ops DIV r=ops
-  | l=ops MUL r=ops
-  | l=ops SUB r=ops
-  | l=ops ADD r=ops
-  | l=ops operation=BINOPS r=ops
-  | operation=(UNARYOPS|ADD|SUB) r=ops
-  | field_and_types
-  ;
-atom
-  : LPA p=progo RPA
-  | num=unsigned_num
+  returns [Object obj,int id,String type]
+  : //l=ops DOT (funccall|NAME)                    {$type="dot";}
+    l=ops ALPA pdo=ops ARPA                      {$type="element";}
+  | <assoc=right> l=ops operation=POW r=ops                {$type="pow";}
+  | l=ops operation=(EQU|ADDEQ|SUBEQ|MULEQ|DIVEQ|MODEQ) r=ops                              {$type="change";}
+  | l=ops operation=(MOD|DIV|MUL|SUB|ADD|BINOPS) r=ops                 {$type="binop";}
+  | operation=(UNARYOPS|ADD|SUB) r=ops           {$type="unary";}
+  | LPA p=ops RPA                                {$type="bracket";}
+  | field_and_types                              {$type="instance";}
+  | decls                                        {$type="decls";}
+  | condexprs                                    {$type="conds";}
+  | codeblock                                    {$type="block";}
   ;
 string
+  returns [Object obj,int id]
   : '"' str=anymatch '"'
   ;
 anymatch
+  returns [Object obj,int id]
   : (ESC|.)*?
   ;
 array
-  : ALPA elements+=progo* ARPA
+  returns [Object obj,int id,List<Integer> arr]
+  : ALPA elements+=ops* ARPA
   ;
-unsigned_num
-  : unsigned_int 
-  | unsigned_float
-  
-  ;
-unsigned_int
+num
+  returns [Object obj,int id]
   : '0x' HEX
   | '0b' BIN
   | '0o' OCT
-  | INT
-  ;
-unsigned_float
-  : INT DOT INT
+  | INT (DOT INT)?
   ;
 
-
-var_ids
-  : VAR_ID+
-  ;
 funccall
-  : funcname=name LPA arguments+=progo*? RPA
+  returns [Object obj,int id]
+  : funcname=name LPA arguments+=ops*? RPA
   ;
 args
-  : COLON LPA argss+=name* RPA
+  returns [ArrayList<FPADCode> arguments]
+  : COLON LPA argss+=NAME* RPA
   ;
 codeblock
+  returns [Object obj,int id]
   : LCB block=prog RCB
   ;
 funcdecl
-  : FUNC funcname=name arguments=args block=codeblock
+  returns [Object obj,int id]
+  : FUNC funcname=NAME arguments=args block=codeblock
   ;
 ifcond
-  : IF LPA cond=progo RPA ido=progo
-    (ELSE edo=progo)*
+  returns [Object obj,int id]
+  : IF LPA cond=ops RPA ido=ops
+    (ELSE edo=ops)*
   ;
 whilecond
-  : WHILE LPA cond=progo RPA pdo=progo
+  returns [Object obj,int id]
+  : WHILE LPA cond=ops RPA pdo=ops
   ;
 name
+  returns [Object obj,int id]
   : NAME
   ;
 
 
 
-EQU               : '='                             ;
 UNARYOPS : BNOT|RETURN|BREAK                        ;
 //BINOPS
-BINOPS   : OR|XOR|BAND|BOR|BXOR|ADDEQ|SUBEQ|MULEQ|DIVEQ|MODEQ|NEQ|EQ|SWITCH|ULS|URS|LTE|GTE|LS|RS|LT|GT   ;
+BINOPS   : BAND|BOR|BXOR|NEQ|EQ|SWITCH|ULS|URS|LTE|GTE|LS|RS|LT|GT   ;
 
 POW               : '**'                   ;
 
@@ -136,14 +128,11 @@ fragment LTE      : '<='                            ;
 fragment GTE      : '>='                            ;
 fragment LS       : '<<'                            ;
 fragment RS       : '>>'                            ;
-fragment AND      : '&&'                            ;
-fragment OR       : '||'                            ;
-fragment XOR      : '^^'                            ;
-fragment ADDEQ    : '+='                            ;
-fragment SUBEQ    : '-='                            ;
-fragment MULEQ    : '*='                            ;
-fragment DIVEQ    : '/='                            ;
-fragment MODEQ    : '%='                            ;
+ADDEQ    : '+='                            ;
+SUBEQ    : '-='                            ;
+MULEQ    : '*='                            ;
+DIVEQ    : '/='                            ;
+MODEQ    : '%='                            ;
 fragment EQ       : '=='                            ;
 fragment NEQ      : '!='                            ;
 fragment LT       : '<'                             ;
@@ -157,6 +146,7 @@ SUB               : '-'                             ;
 MUL               : '*'                             ;
 DIV               : '/'                             ;
 MOD               : '%'                             ;
+EQU               : '='                             ;
 
 
 //Bit Operation

@@ -16,27 +16,29 @@
  */
 package com.qiufeng.erable.ast;
 
-import com.qiufeng.erable.OpCode;
+import com.qiufeng.erable.util.ArrayUtils;
 
 /**
  *
  * @author Qiufeng54321
  */
-public class TempCode extends Code {
-    public int cid;
-    public TempCode(int cid,OpCode op, Code parent) {
-	super("temp",op, parent);
-	this.tag+=this.id+"_"+cid;
-	this.cid=cid;
-	this.sign=Code.TEMP;
-    }
-    public TempCode(int cid,Code parent){
-	this(cid,OpCode.LOADC,parent);
+public class ConstantPoolName extends ConstantPoolElement {
+    public static byte TAG=2;
+    @Override
+    public byte[] serialise() {
+	var header=this.generateHeader();
+	header=ArrayUtils.join(header, (String)obj);
+	return header;
     }
 
     @Override
-    public String write() {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public byte[] generateHeader() {
+	var header=new byte[]{ConstantPoolName.TAG};
+	return header;
+    }
+
+    public ConstantPoolName(String obj) {
+	super(obj);
     }
     
 }

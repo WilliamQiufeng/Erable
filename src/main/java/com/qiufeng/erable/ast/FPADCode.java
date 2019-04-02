@@ -16,27 +16,21 @@
  */
 package com.qiufeng.erable.ast;
 
-import com.qiufeng.erable.OpCode;
-
 /**
- *
+ * FUNCTION_PUSH_ARGS_DECL.
  * @author Qiufeng54321
  */
-public class TempCode extends Code {
-    public int cid;
-    public TempCode(int cid,OpCode op, Code parent) {
-	super("temp",op, parent);
-	this.tag+=this.id+"_"+cid;
-	this.cid=cid;
-	this.sign=Code.TEMP;
-    }
-    public TempCode(int cid,Code parent){
-	this(cid,OpCode.LOADC,parent);
+public class FPADCode extends TempCode {
+    public String name;
+    public FPADCode(String name, Code parent) {
+	super(-1, parent);
+	this.name=name;
+	this.sign=Code.VAR;
     }
 
     @Override
-    public String write() {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String toString() {
+	return "id=" + this.id + " name=" + name;
     }
     
 }

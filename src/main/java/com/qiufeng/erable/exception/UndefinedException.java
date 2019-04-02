@@ -14,29 +14,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.qiufeng.erable.ast;
-
-import com.qiufeng.erable.OpCode;
+package com.qiufeng.erable.exception;
 
 /**
  *
  * @author Qiufeng54321
  */
-public class TempCode extends Code {
-    public int cid;
-    public TempCode(int cid,OpCode op, Code parent) {
-	super("temp",op, parent);
-	this.tag+=this.id+"_"+cid;
-	this.cid=cid;
-	this.sign=Code.TEMP;
-    }
-    public TempCode(int cid,Code parent){
-	this(cid,OpCode.LOADC,parent);
-    }
+public class UndefinedException extends BaseException {
 
-    @Override
-    public String write() {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public UndefinedException(String what, int line, int column) {
+	super(ErrorType.COMPILATION, "Undefined Variable", "unknown variable", what, line, column, 3);
     }
     
 }
