@@ -33,7 +33,7 @@ public class ArrayCode extends TempCode {
 
     @Override
     public String toString() {
-	return super.toString() + "  arr=" + arr.toString();
+	return super.toString() + "  Array " + arr.toString() + " ->"+ this.id;
     }
     
 }

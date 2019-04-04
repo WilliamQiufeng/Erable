@@ -17,36 +17,27 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
+import java.util.ArrayList;
 
 /**
- *
+ * 这个更特殊，
+ * 因为甚至不知道进入的语句是不是判断语句。
+ * @see WhileCode
  * @author Qiufeng54321
  */
-public class TempCode extends Code {
-    public int cid;
-    public TempCode(int cid,OpCode op, Code parent) {
-	super("",op, parent);
-	this.tag="(" + this.id+"<-"+cid + ")";
-	this.cid=cid;
-	this.sign=Code.TEMP;
+public class IfCode extends TempCode {
+    public ArrayList<ElseCode> elses;
+    public IfCode(Code parent) {
+	super(-1, OpCode.IF, parent);
+	this.sign="^";
     }
-    public TempCode(int cid,Code parent){
-	this(cid,OpCode.LOADC,parent);
+    public void process(){
+	this.codes.add(this.codes.size()-1, new MachineCode(OpCode.BREAKIF,this.codes.get(this.codes.size()-2).id,this));
     }
 
     @Override
     public String toString() {
-	var ret=super.toString();
-	if(this.getClass().getSimpleName().equals("TempCode")){
-	    ret+="  buffer " + this.cid;
-	    ret+=" to @"+this.id;
-	}
-	return ret;
-    }
-
-    @Override
-    public String write() {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	return super.toString() + "  if ->" + this.id;
     }
     
 }

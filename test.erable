@@ -1,3 +1,4 @@
+var prefix="hi";
 function mul:(a b){
   return a*b;
 };
@@ -10,9 +11,10 @@ function makeSquare:(width height){
 };
 function switchWH:(square){
   if(square[0]==square[1])return square
-  else if(square[0]==0|square[1]==0)return square;
+  else if(square[0]==0|square[1]==0)return square
+  else println("qualified!");
   square[0]<=>square[1];
-  return mid;
+  return square;
 };
 function isNegative:(number){
   if((-number)==number){
@@ -28,6 +30,16 @@ function loop:(from to step){
     a+=step;
   };
   return count;
+};
+function say:(something){
+  return prefix+something;
+};
+function newCat:(name age){
+  return :
+    "name"=name
+    "age" =age
+    "habits"=2
+  :;
 };
 var obj square=makeSquare(15 20);
 square=switchWH(square);

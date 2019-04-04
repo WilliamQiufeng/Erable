@@ -19,34 +19,33 @@ package com.qiufeng.erable.ast;
 import com.qiufeng.erable.OpCode;
 
 /**
- *
+ * 这个句式，与if,else一样有点特殊，
+ * 因为遍历condition之前已经调用了enterWhilecond，也就是说已经进入了这个Scope，
+ * 这个时候，condition会被加入这个while语句的codes中，
+ * 虽然达到了动态效果，但需要处理，
+ * 这时候，因为知道：
+ * 条件永远都在code[0]处，
+ * 所以，写出时，可以把condition直接分离。
  * @author Qiufeng54321
  */
-public class TempCode extends Code {
-    public int cid;
-    public TempCode(int cid,OpCode op, Code parent) {
-	super("",op, parent);
-	this.tag="(" + this.id+"<-"+cid + ")";
-	this.cid=cid;
-	this.sign=Code.TEMP;
+public class WhileCode extends TempCode {
+    public WhileCode(Code parent) {
+	super(-1,OpCode.WHILE, parent);
+	this.sign="^";
     }
-    public TempCode(int cid,Code parent){
-	this(cid,OpCode.LOADC,parent);
+    /*public void process(){
+	this.codes.add(this.codes.size()-1, new MachineCode(OpCode.BREAKIF,this.codes.get(this.codes.size()-2).id,this));
     }
-
+    */
     @Override
-    public String toString() {
-	var ret=super.toString();
-	if(this.getClass().getSimpleName().equals("TempCode")){
-	    ret+="  buffer " + this.cid;
-	    ret+=" to @"+this.id;
-	}
+    public boolean addCode(Code code) {
+	boolean ret=super.addCode(code);
 	return ret;
     }
-
+    
     @Override
-    public String write() {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String toString() {
+	return super.toString() + "  while ->" + this.id + " :";
     }
     
 }

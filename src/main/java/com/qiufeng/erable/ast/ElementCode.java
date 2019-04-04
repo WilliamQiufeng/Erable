@@ -28,5 +28,4 @@ public class ElementCode extends BinaryOpCode{
 	super(ltid, rtid, OpCode.ELEMENT, parent);
     }
     
-    
 }

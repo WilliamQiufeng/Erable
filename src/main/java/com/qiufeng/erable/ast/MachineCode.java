@@ -22,31 +22,23 @@ import com.qiufeng.erable.OpCode;
  *
  * @author Qiufeng54321
  */
-public class TempCode extends Code {
-    public int cid;
-    public TempCode(int cid,OpCode op, Code parent) {
-	super("",op, parent);
-	this.tag="(" + this.id+"<-"+cid + ")";
-	this.cid=cid;
-	this.sign=Code.TEMP;
-    }
-    public TempCode(int cid,Code parent){
-	this(cid,OpCode.LOADC,parent);
-    }
-
-    @Override
-    public String toString() {
-	var ret=super.toString();
-	if(this.getClass().getSimpleName().equals("TempCode")){
-	    ret+="  buffer " + this.cid;
-	    ret+=" to @"+this.id;
-	}
-	return ret;
+public class MachineCode extends Code {
+    public int refid;
+    public MachineCode(OpCode op,int refid,Code parent) {
+	super("",op,parent);
+	this.tag=this.id+"";
+	this.sign=Code.FLAG;
+	this.refid=refid;
     }
 
     @Override
     public String write() {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String toString() {
+	return super.toString() + "  Flag " + this.op + " " + (this.refid==-1?"":this.refid);
     }
     
 }

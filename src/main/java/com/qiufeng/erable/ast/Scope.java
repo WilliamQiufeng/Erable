@@ -32,4 +32,10 @@ public class Scope extends Code {
     public String write() {
 	throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public String toString() {
+	return super.toString() + " :";
+    }
+    
 }

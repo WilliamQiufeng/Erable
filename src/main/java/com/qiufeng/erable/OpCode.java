@@ -30,12 +30,18 @@ public enum OpCode {
     BNOT("!"),BAND("&"),BOR("|"),BXOR("^"),
     ADDEQ("+="),SUBEQ("-="),MULEQ("*="),DIVEQ("/="),MODEQ("%="),
     PUSH_SCOPE,POP_SCOPE,
+    REF("@"),GREF("#"),
     RETURN("return"),BREAK("break"),
     VAR,
     LOADC,
     FUNCTION,PUSH_ARGDECL,
     ARRAY,PUSH_ELEMENT,
-    CALL_PREPARE,PUSH_ARG,CALL
+    CALL_PREPARE,PUSH_ARG,CALL,
+    IF,ELSE,
+    WHILE,
+    BLOCK,
+    BREAKIF,
+    OBJECT,DECIDE_COUNT,START_PAIR,KEY,VALUE,END_PAIR
     ;
     String sign;
     OpCode(String sign){

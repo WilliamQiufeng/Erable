@@ -11,10 +11,6 @@ prog
   : (ops SPLIT)* EOF?
   ;
 
-exprs
-  returns [Object obj,int id]
-  : fat=field_and_types
-  ;
 decls
   returns [Object obj,int id]
   : fd=funcdecl
@@ -27,14 +23,15 @@ condexprs
   ;
 field_and_types
   returns [Object obj,int id]
-  : val=field
-  | tps=types
+  : tps=types
+  | val=field
   ;
 types
   returns [Object obj,int id]
   : arr=array
   | str=string
   | ato=num
+  | objv=object
   ;
 field
   returns [Object obj,int id]
@@ -47,6 +44,10 @@ var
   ;
 kvs
   :  (key=NAME (EQU val=ops)?)+
+  ;
+string
+  returns [Object obj,int id]
+  : ANYMATCH
   ;
 ops
   returns [Object obj,int id,String type]
@@ -62,13 +63,15 @@ ops
   | condexprs                                    {$type="conds";}
   | codeblock                                    {$type="block";}
   ;
-string
-  returns [Object obj,int id]
-  : '"' str=anymatch '"'
+sblock
+  : codeblock
   ;
-anymatch
-  returns [Object obj,int id]
-  : (ESC|.)*?
+sops
+  : ops
+  ;
+oops
+  returns [int id]
+  : ops
   ;
 array
   returns [Object obj,int id,List<Integer> arr]
@@ -81,7 +84,16 @@ num
   | '0o' OCT
   | INT (DOT INT)?
   ;
-
+object
+  returns [Object obj, int id]
+  : COLON pairs COLON
+  ;
+pairs
+  : pair*
+  ;
+pair
+  : key=oops EQU val=oops
+  ;
 funccall
   returns [Object obj,int id]
   : funcname=name LPA arguments+=ops*? RPA
@@ -90,6 +102,7 @@ args
   returns [ArrayList<FPADCode> arguments]
   : COLON LPA argss+=NAME* RPA
   ;
+
 codeblock
   returns [Object obj,int id]
   : LCB block=prog RCB
@@ -100,12 +113,15 @@ funcdecl
   ;
 ifcond
   returns [Object obj,int id]
-  : IF LPA cond=ops RPA ido=ops
-    (ELSE edo=ops)*
+  : IF LPA cond=ops RPA ido=sops
+    elses+=elsecond*
+  ;
+elsecond
+  : ELSE edo=ops
   ;
 whilecond
   returns [Object obj,int id]
-  : WHILE LPA cond=ops RPA pdo=ops
+  : WHILE LPA cond=ops RPA pdo=sblock
   ;
 name
   returns [Object obj,int id]
@@ -114,11 +130,13 @@ name
 
 
 
-UNARYOPS : BNOT|RETURN|BREAK                        ;
+ANYMATCH : '"' (ESC|.)*? '"'            ;
+UNARYOPS : REF|GREF|BNOT|RETURN|BREAK               ;
 //BINOPS
 BINOPS   : BAND|BOR|BXOR|NEQ|EQ|SWITCH|ULS|URS|LTE|GTE|LS|RS|LT|GT   ;
 
 POW               : '**'                   ;
+
 
 //Less/Greater than(or Equal to), (unsigned) Left/Right Shift
 fragment ULS      : '<<<'                           ;
@@ -155,7 +173,9 @@ fragment BOR      : '|'                             ;
 fragment BXOR     : '^'                             ;
 BNOT              : '!'                             ;
 
-
+//Variable Operation
+fragment REF      : '@'                             ;
+fragment GREF     : '#'                             ;
 
 
 //Parenthesis
@@ -180,7 +200,6 @@ VAR_ID   : VAR_SC|VAR_CG|VAR_TP            ;
 FUNC     : 'function'                      ;
 WHILE    : 'while'                         ;
 IF       : 'if'                            ;
-ELIF     : 'elif'                          ;
 ELSE     : 'else'                          ;
 RETURN   : 'return'                        ;
 BREAK    : 'break'                         ;
@@ -198,4 +217,5 @@ HEX      : [0-9a-fA-F]+                    ;
 HEXD     : [0-9a-fA-F]                    ;
 ESC      : '\\' ([\\bfnrt"]|UNICODE)       ;
 UNICODE  : [uU] HEXD HEXD HEXD HEXD            ;
+
 WS       : [ \t\n\r]+ -> skip              ;

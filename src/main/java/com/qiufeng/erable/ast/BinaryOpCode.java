@@ -33,7 +33,7 @@ public class BinaryOpCode extends TempCode{
 
     @Override
     public String toString() {
-	return super.toString()+"  ltid=" + this.cid + ", rtid=" + rtid + ", op=" + op;
+	return super.toString()+"  @" + this.cid + " " + this.op + " @" + this.rtid + " ->" + this.id;
     }
     
 }

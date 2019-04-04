@@ -25,6 +25,7 @@ import java.util.List;
  */
 public class FuncDeclCode extends Code {
     public List<FPADCode> args;
+    public int retType;
     /**
      * 把所有的FPADCode装入this.args<br>
      * @param name
@@ -72,7 +73,7 @@ public class FuncDeclCode extends Code {
 
     @Override
     public String toString() {
-	return this.getAbsoluteName() + " args=" + args;
+	return super.toString() + " : function " + this.tag + args + " ->" + this.id + " :";
     }
     
 }

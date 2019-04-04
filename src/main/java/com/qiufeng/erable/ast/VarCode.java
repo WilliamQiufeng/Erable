@@ -33,7 +33,7 @@ public class VarCode extends TempCode {
 
     @Override
     public String toString() {
-	return super.toString() + "  name=" + this.tag + ", modifiers=" + modifiers;
+	return super.toString() + " : variable `" + modifiers + "` "+ this.tag + " = @" + this.cid + " ->" + this.id;
     }
 
     @Override

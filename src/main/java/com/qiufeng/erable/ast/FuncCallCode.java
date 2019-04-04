@@ -35,7 +35,7 @@ public class FuncCallCode extends TempCode {
 
     @Override
     public String toString() {
-	return super.toString() + "  name=" + this.name + ", nameid=" + this.cid + ", args=" + args.toString();
+	return super.toString() + "  " + this.name + "@" + this.cid + args.toString() + " ->" + this.id;
     }
 
     @Override

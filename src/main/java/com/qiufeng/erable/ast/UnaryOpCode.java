@@ -27,5 +27,10 @@ public class UnaryOpCode extends TempCode {
     public UnaryOpCode(int tid, OpCode op, Code parent) {
 	super(tid, op, parent);
     }
+
+    @Override
+    public String toString() {
+	return super.toString() + "  "+op + " @" + this.cid + " ->" + this.id;
+    }
     
 }

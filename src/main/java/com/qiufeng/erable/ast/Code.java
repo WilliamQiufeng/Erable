@@ -35,6 +35,7 @@ public abstract class Code implements Comparable{
     public static String       VAR = "%";
     public static String      TEMP = "@";
     public static String      CODE = "|";
+    public static String      FLAG = "!";
     /**
      * Sign of the code
      */
@@ -187,16 +188,16 @@ public abstract class Code implements Comparable{
      */
     public int findVar(String name){
 	for(var code : codes){
-	    System.out.println("finding:"+code);
+	    //System.out.println("finding:"+code);
 	    if(code.tag.equals(name)&&code.sign.equals(Code.VAR)){
-		System.out.println("ID:"+code);
+		//System.out.println("ID:"+code);
 		return code.id;
 	    }
 	}
 	if(this.getParent()!=null){
 	    return this.getParent().findVar(name);
 	}
-	System.out.println("ID NOT FOUND:"+name);
+	//System.out.println("ID NOT FOUND:"+name);
 	return -1;
     }
     public int findCid(int id){
@@ -212,23 +213,25 @@ public abstract class Code implements Comparable{
         if(parent!=null){
             ts=parent.getAbsoluteName();
         }
-        ts+=sign;
-        ts+=tag;
+        ts+=this.getName();
         return ts;
+    }
+    public String getName(){
+	return sign+tag;
     }
     public String tree(int depth){
 	String ret="-".repeat(depth)+">";
 	ret+=this.toString();
 	ret+="\n";
 	for(var code : this.codes){
-	    ret+=code.tree(depth+1);
+	    ret+=code.tree(depth+2);
 	    ret+="\n";
 	}
 	return ret;
     }
     @Override
     public String toString() {
-        return this.getAbsoluteName();
+        return this.getName();
     }
 
     @Override

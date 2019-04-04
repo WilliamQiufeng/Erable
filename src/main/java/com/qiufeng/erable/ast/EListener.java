@@ -37,6 +37,7 @@ public class EListener extends ErableBaseListener {
     public Code root;
     public Code current;
     
+    
     /**
      * Constant Pool
      */
@@ -87,6 +88,29 @@ public class EListener extends ErableBaseListener {
 	this.parser=p;
 	this.root=new Scope(null);
 	this.current=this.root;
+	pool.addElement(new ConstantPoolNumber(0d));
+	pool.addElement(new ConstantPoolNumber(1d));
+	var TTemp=new TempCode(pool.findElementId(1d),current);
+	var True=new VarCode("true",(short)0,TTemp.id,current);
+	this.current.addCode(TTemp);
+	this.current.addCode(True);
+	var FTemp=new TempCode(pool.findElementId(0d),current);
+	var False=new VarCode("false",(short)0,FTemp.id,current);
+	this.current.addCode(FTemp);
+	this.current.addCode(False);
+    }
+
+    @Override
+    public void exitElsecond(ErableParser.ElsecondContext ctx) {
+	super.exitElsecond(ctx);
+	this.current.getParent().addCode(this.current);
+	this.current=this.current.getParent();
+    }
+
+    @Override
+    public void enterElsecond(ErableParser.ElsecondContext ctx) {
+	super.enterElsecond(ctx);
+	this.current=new ElseCode(this.current);
     }
     @Override
     public void visitErrorNode(ErrorNode node) {
@@ -128,21 +152,42 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitWhilecond(ErableParser.WhilecondContext ctx) {
 	super.exitWhilecond(ctx);
+	this.current.getParent().addCode(current);
+	current=current.getParent();
+    }
+
+    @Override
+    public void exitSops(ErableParser.SopsContext ctx) {
+	super.exitSops(ctx);
+    }
+
+    @Override
+    public void enterSops(ErableParser.SopsContext ctx) {
+	super.enterSops(ctx);
+	this.current.addCode(new MachineCode(OpCode.BREAKIF,this.current.codes.get(this.current.codes.size()-1).id,this.current));
+	
     }
 
     @Override
     public void enterWhilecond(ErableParser.WhilecondContext ctx) {
 	super.enterWhilecond(ctx);
+	current=new WhileCode(current);
     }
 
     @Override
     public void exitIfcond(ErableParser.IfcondContext ctx) {
 	super.exitIfcond(ctx);
+	//Quit Scope1 to Scope0
+	current.getParent().addCode(this.current);
+	current=current.getParent();
     }
 
     @Override
     public void enterIfcond(ErableParser.IfcondContext ctx) {
 	super.enterIfcond(ctx);
+	//Enter Scope1 from Scope0
+	current=new IfCode(current);
+	
     }
 
     @Override
@@ -176,9 +221,19 @@ public class EListener extends ErableBaseListener {
     }
 
     @Override
+    public void exitSblock(ErableParser.SblockContext ctx) {
+	super.exitSblock(ctx);
+    }
+
+    @Override
+    public void enterSblock(ErableParser.SblockContext ctx) {
+	super.enterSblock(ctx);
+	this.current.addCode(new MachineCode(OpCode.BREAKIF,this.current.codes.get(this.current.codes.size()-1).id,this.current));
+    }
+
+    @Override
     public void exitArgs(ErableParser.ArgsContext ctx) {
 	super.exitArgs(ctx);
-	
 	for(var t : ctx.argss){
 	    ctx.arguments.add(new FPADCode(t.getText(),current));
 	}
@@ -229,19 +284,10 @@ public class EListener extends ErableBaseListener {
     }
 
     @Override
-    public void exitAnymatch(ErableParser.AnymatchContext ctx) {
-	super.exitAnymatch(ctx);
-    }
-
-    @Override
-    public void enterAnymatch(ErableParser.AnymatchContext ctx) {
-	super.enterAnymatch(ctx);
-    }
-
-    @Override
     public void exitString(ErableParser.StringContext ctx) {
 	super.exitString(ctx);
-	var text=ctx.anymatch().getText();
+	var text=ctx.ANYMATCH().getText();
+	text=text.substring(1, text.length()-1);
 	var string=new ConstantPoolString(text);
 	ctx.obj=text;
 	var id=this.pool.addElement(string);
@@ -269,6 +315,57 @@ public class EListener extends ErableBaseListener {
     @Override
     public void enterNum(ErableParser.NumContext ctx) {
 	super.enterNum(ctx);
+    }
+
+    @Override
+    public void exitPair(ErableParser.PairContext ctx) {
+	super.exitPair(ctx);
+	current.addCode(new MachineCode(OpCode.END_PAIR,-1,this.current));
+    }
+
+    @Override
+    public void enterPair(ErableParser.PairContext ctx) {
+	super.enterPair(ctx);
+	current.addCode(new MachineCode(OpCode.START_PAIR,-1,this.current));
+    }
+
+    @Override
+    public void exitPairs(ErableParser.PairsContext ctx) {
+	super.exitPairs(ctx);
+    }
+
+    @Override
+    public void enterPairs(ErableParser.PairsContext ctx) {
+	super.enterPairs(ctx);
+    }
+
+    @Override
+    public void exitObject(ErableParser.ObjectContext ctx) {
+	super.exitObject(ctx);
+	current.getParent().addCode(current);
+	ctx.id=current.id;
+	current=this.current.getParent();
+    }
+
+    @Override
+    public void enterObject(ErableParser.ObjectContext ctx) {
+	super.enterObject(ctx);
+	current=new ObjectCode(current);
+    }
+
+    @Override
+    public void exitOops(ErableParser.OopsContext ctx) {
+	super.exitOops(ctx);
+	var cur=(ObjectCode)current;
+	OpCode type=(cur.isKey?OpCode.KEY:OpCode.VALUE);
+	((ObjectCode)current).isKey=!((ObjectCode)current).isKey;
+	current.addCode(new MachineCode(type,/*current.codes.get(current.codes.size()-1)*/ctx.ops().id,current));
+	ctx.id=ctx.ops().id;
+    }
+
+    @Override
+    public void enterOops(ErableParser.OopsContext ctx) {
+	super.enterOops(ctx);
     }
 
 
@@ -362,8 +459,10 @@ public class EListener extends ErableBaseListener {
 	ctx.id=-1;
 	if(ctx.val!=null)
 	    ctx.id=ctx.val.id;
-	else
+	else if(ctx.funccall()!=null)
 	    ctx.id=ctx.funccall().id;
+	else
+	    ctx.id=-1;
     }
 
     @Override
@@ -379,8 +478,10 @@ public class EListener extends ErableBaseListener {
 	    ctx.id=ctx.arr.id;
 	else if(ctx.ato!=null)
 	    ctx.id=ctx.ato.id;
-	else
+	else if(ctx.str!=null)
 	    ctx.id=ctx.str.id;
+	else
+	    ctx.id=ctx.objv.id;
     }
 
     @Override
@@ -417,21 +518,16 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitDecls(ErableParser.DeclsContext ctx) {
 	super.exitDecls(ctx);
+	if(ctx.fd!=null){
+	    ctx.id=ctx.fd.id;
+	}else{
+	    ctx.id=ctx.v.id;
+	}
     }
 
     @Override
     public void enterDecls(ErableParser.DeclsContext ctx) {
 	super.enterDecls(ctx);
-    }
-
-    @Override
-    public void exitExprs(ErableParser.ExprsContext ctx) {
-	super.exitExprs(ctx);
-    }
-
-    @Override
-    public void enterExprs(ErableParser.ExprsContext ctx) {
-	super.enterExprs(ctx);
     }
 
     @Override

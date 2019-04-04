@@ -25,10 +25,15 @@
 /williamye/program/antlr/erable/target/generated-sources/antlr4/simperrListener.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/BinaryOpCode.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/ConstantPoolName.java
+/williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/MachineCode.java
+/williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/WhileCode.java
+/williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/IfCode.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/ConstantPool.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/FuncCallCode.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/Code.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/EListener.java
+/williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/ObjectCode.java
+/williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/ElseCode.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/Scope.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/util/BitUtils.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/ArrayCode.java
