@@ -115,7 +115,7 @@ funcdecl
   ;
 native_funcdecl
   returns [Object obj, int id]
-  : NATIVE FUNC funcname=NAME arguments=args
+  : NATIVE FUNC funcname=NAME arguments=args USING string
   ;
 try_expr
   returns [Object obj,int id]
@@ -226,6 +226,7 @@ FINALLY  : 'finally'                       ;
 THROW    : 'throw'                         ;
 NATIVE   : 'native'                        ;
 USE      : 'use'                           ;
+USING    : 'using'                         ;
 
 //name then
 NAME     : LETT (LETT|DIGITS)*             ;

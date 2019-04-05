@@ -21,6 +21,7 @@ import com.qiufeng.erable.ErableParser;
 import com.qiufeng.erable.OpCode;
 import com.qiufeng.erable.VarModifiers;
 import com.qiufeng.erable.exception.BaseException;
+import com.qiufeng.erable.exception.RedefinitionException;
 import com.qiufeng.erable.exception.UndefinedException;
 import com.qiufeng.erable.exception.UnknownException;
 import java.util.ArrayList;
@@ -115,7 +116,7 @@ public class EListener extends ErableBaseListener {
     @Override
     public void visitErrorNode(ErrorNode node) {
 	super.visitErrorNode(node);
-	var what=node.getText();
+	var what=node.getSymbol().getText();
 	var line=node.getSymbol().getLine();
 	var column=node.getSymbol().getCharPositionInLine();
 	new UnknownException(BaseException.ErrorType.PARSING,"",what,line,column,1).throwException();
@@ -193,6 +194,11 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitFuncdecl(ErableParser.FuncdeclContext ctx) {
 	super.exitFuncdecl(ctx);
+	var funcname=ctx.funcname.getText();
+	var funcid=this.current.findFunction(funcname, ctx.arguments.arguments.size());
+	if(funcid!=-1){
+	    new RedefinitionException("Redefinition of function '"+funcname+"' with same argument length of "+ctx.arguments.arguments.size(),funcname,ctx.funcname.getLine(),ctx.funcname.getCharPositionInLine()).throwException();
+	}
 	//QUIT FUNCDECL
 	this.current.getParent().addCode(this.current);
 	this.current=this.current.getParent();
@@ -201,8 +207,10 @@ public class EListener extends ErableBaseListener {
     @Override
     public void enterFuncdecl(ErableParser.FuncdeclContext ctx) {
 	super.enterFuncdecl(ctx);
+	var funcname=ctx.funcname.getText();
 	//Enter FUNCDECL
-	this.current=new FuncDeclCode(ctx.funcname.getText(),null,this.current);
+	this.current=new FuncDeclCode(funcname,null,this.current);
+	
 	//Enter CODEBLOCK ('''block=codeblock''' in Erable.g4),will invoke #enterCodeblock and #exitCodeblock after.
     }
 
@@ -250,7 +258,7 @@ public class EListener extends ErableBaseListener {
     public void exitFunccall(ErableParser.FunccallContext ctx) {
 	super.exitFunccall(ctx);
 	var name=ctx.funcname.getText();
-	var nameid=ctx.funcname.id;
+	var nameid=this.current.findFunction(name, ctx.arguments.size());
 	var args=new ArrayList<Integer>();
 	for(var ele : ctx.arguments){
 	    args.add(ele.id);

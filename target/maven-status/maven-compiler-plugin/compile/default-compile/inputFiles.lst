@@ -13,6 +13,7 @@
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/DotCode.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/TempCode.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/ElementCode.java
+/williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/TryCatchCode.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/exception/UndefinedException.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/UnaryOpCode.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/exception/BaseException.java

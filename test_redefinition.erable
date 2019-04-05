@@ -1,0 +1,6 @@
+function origin:(a b c){
+  return a*b**c;
+};
+function origin:(d e f){
+  return d-e*f;
+};

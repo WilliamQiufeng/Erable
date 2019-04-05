@@ -46,6 +46,16 @@ function newCat:(name age){
     "habits"=2
   :;
 };
+//Function Reloading test
+function testOverload:(a b){
+  return "hi~"+a+b;
+};
+function testOverload:(c d b){
+  return c*b*d;
+};
+function testOverload:(x){
+  return x**2;
+};
 //Try-Catch test
 function testTryCatch:(a b){
   try{
@@ -59,3 +69,7 @@ function testTryCatch:(a b){
 var obj square=makeSquare(15 20);
 square=switchWH(square);
 println(square);
+testOverload(2 3 5);
+testOverload(1 4);
+testOverload(9);
+testOverload(5 2 3);

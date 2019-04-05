@@ -200,6 +200,22 @@ public abstract class Code implements Comparable{
 	//System.out.println("ID NOT FOUND:"+name);
 	return -1;
     }
+    public int findFunction(String name,int argc){
+	for(var code : codes){
+	    //System.out.println("finding:"+code);
+	    if(code.tag.equals(name)&&code instanceof FuncDeclCode){
+		//System.out.println("ID:"+code);
+		var func=(FuncDeclCode)code;
+		if(func.args.size()==argc)
+		    return func.id;
+	    }
+	}
+	if(this.getParent()!=null){
+	    return this.getParent().findFunction(name,argc);
+	}
+	//System.out.println("ID NOT FOUND:"+name);
+	return -1;
+    }
     public int findCid(int id){
 	var temp=(TempCode)this.find(id);
 	return temp.cid;
