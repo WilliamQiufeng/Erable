@@ -75,16 +75,6 @@ public class EListener extends ErableBaseListener {
     public void setPool(ConstantPool pool) {
 	this.pool = pool;
     }
-    public int findVar(int tempid){
-	var cid=this.current.findCid(tempid);
-	var nameobj=this.pool.findElement(cid);
-	var name=(String)nameobj.obj;
-	var variable=this.current.findVar(name);
-	if(variable==-1){
-	    new UndefinedException(name,-1,-1).throwException();
-	}
-	return variable;
-    }
     public EListener(ErableParser p){
 	this.parser=p;
 	this.root=new Scope(null);
@@ -495,6 +485,10 @@ public class EListener extends ErableBaseListener {
 	    var val=-1;
 	    if(kv.val!=null){
 		val=kv.val.id;
+	    }
+	    var exists=this.current.variableExistsInCurrentScope(key);
+	    if(exists){
+		new RedefinitionException("Redefinition of variable with the same name '"+key+"'.",key,kv.key.getLine(),kv.key.getCharPositionInLine()).throwException();
 	    }
 	    var variable=new VarCode(key,ctx.mod,val,current);
 	    current.addCode(variable);

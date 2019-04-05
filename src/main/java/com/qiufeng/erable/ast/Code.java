@@ -200,6 +200,13 @@ public abstract class Code implements Comparable{
 	//System.out.println("ID NOT FOUND:"+name);
 	return -1;
     }
+    /**
+     * Finds the function.<br>
+     * Supports function overloading.
+     * @param name
+     * @param argc
+     * @return 
+     */
     public int findFunction(String name,int argc){
 	for(var code : codes){
 	    //System.out.println("finding:"+code);
@@ -215,6 +222,30 @@ public abstract class Code implements Comparable{
 	}
 	//System.out.println("ID NOT FOUND:"+name);
 	return -1;
+    }
+    public boolean functionExistsInCurrentScope(String name,int argc){
+	for(var code : codes){
+	    //System.out.println("finding:"+code);
+	    if(code.tag.equals(name)&&code instanceof FuncDeclCode){
+		//System.out.println("ID:"+code);
+		var func=(FuncDeclCode)code;
+		if(func.args.size()==argc)
+		    return true;
+	    }
+	}
+	//System.out.println("ID NOT FOUND:"+name);
+	return false;
+    }
+    public boolean variableExistsInCurrentScope(String name){
+	for(var code : codes){
+	    //System.out.println("finding:"+code);
+	    if(code.tag.equals(name)&&code.sign.equals(Code.VAR)){
+		//System.out.println("ID:"+code);
+		return true;
+	    }
+	}
+	//System.out.println("ID NOT FOUND:"+name);
+	return false;
     }
     public int findCid(int id){
 	var temp=(TempCode)this.find(id);

@@ -13,6 +13,7 @@ function quad:(a b c x){
 function makeSquare:(width height){
   return [width height mul(width height)];
 };
+//One Special Test: Variable declaration in different scope with same name
 function switchWH:(square){
   if(square[0]==square[1])return square
   else if(square[0]==0|square[1]==0)return square
