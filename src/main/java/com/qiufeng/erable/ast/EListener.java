@@ -412,6 +412,58 @@ public class EListener extends ErableBaseListener {
     }
 
     @Override
+    public void exitImp_module(ErableParser.Imp_moduleContext ctx) {
+	super.exitImp_module(ctx);
+    }
+
+    @Override
+    public void enterImp_module(ErableParser.Imp_moduleContext ctx) {
+	super.enterImp_module(ctx);
+    }
+
+    @Override
+    public void exitCatch_expr(ErableParser.Catch_exprContext ctx) {
+	super.exitCatch_expr(ctx);
+	this.current.addCode(new MachineCode(OpCode.CATCH_END,-1,this.current));
+	this.current.addCode(new MachineCode(OpCode.FINALLY,-1,this.current));
+    }
+
+    @Override
+    public void enterCatch_expr(ErableParser.Catch_exprContext ctx) {
+	super.enterCatch_expr(ctx);
+	this.current.addCode(new MachineCode(OpCode.TRY_END,-1,this.current));
+	var fpad=new FPADCode(ctx.cn.getText(),this.current);
+	((TryCatchCode)this.current).mCatch=fpad;
+	this.current.addCode(new MachineCode(OpCode.CATCH_ID,fpad.id,this.current));
+	this.current.addCode(new MachineCode(OpCode.CATCH_START,-1,this.current));
+    }
+
+    @Override
+    public void exitTry_expr(ErableParser.Try_exprContext ctx) {
+	super.exitTry_expr(ctx);
+	this.current.getParent().addCode(this.current);
+	this.current=this.current.getParent();
+    }
+
+    @Override
+    public void enterTry_expr(ErableParser.Try_exprContext ctx) {
+	super.enterTry_expr(ctx);
+	this.current=new TryCatchCode(this.current);
+	this.current.addCode(new MachineCode(OpCode.TRY_START,-1,this.current));
+    }
+
+
+    @Override
+    public void exitNative_funcdecl(ErableParser.Native_funcdeclContext ctx) {
+	super.exitNative_funcdecl(ctx);
+    }
+
+    @Override
+    public void enterNative_funcdecl(ErableParser.Native_funcdeclContext ctx) {
+	super.enterNative_funcdecl(ctx);
+    }
+
+    @Override
     public void enterOps(ErableParser.OpsContext ctx) {
 	super.enterOps(ctx);
     }
@@ -508,6 +560,13 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitCondexprs(ErableParser.CondexprsContext ctx) {
 	super.exitCondexprs(ctx);
+	if(ctx.ic!=null){
+	    ctx.id=ctx.ic.id;
+	}else if(ctx.wc!=null){
+	    ctx.id=ctx.wc.id;
+	}else if(ctx.te!=null){
+	    ctx.id=ctx.te.id;
+	}
     }
 
     @Override

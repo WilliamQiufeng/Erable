@@ -19,7 +19,8 @@ decls
 condexprs
   returns [Object obj,int id]
   : ic=ifcond
-  | wc=whilecond
+  | wc=whilecond 
+  | te=try_expr
   ;
 field_and_types
   returns [Object obj,int id]
@@ -94,6 +95,7 @@ pairs
 pair
   : key=oops EQU val=oops
   ;
+
 funccall
   returns [Object obj,int id]
   : funcname=name LPA arguments+=ops*? RPA
@@ -110,6 +112,21 @@ codeblock
 funcdecl
   returns [Object obj,int id]
   : FUNC funcname=NAME arguments=args block=codeblock
+  ;
+native_funcdecl
+  returns [Object obj, int id]
+  : NATIVE FUNC funcname=NAME arguments=args
+  ;
+try_expr
+  returns [Object obj,int id]
+  : TRY tdo=ops catch_expr (FINALLY fin=ops)?
+  ;
+catch_expr
+  : CATCH cn=NAME cdo=ops
+  ;
+imp_module
+  returns [Object obj,int id]
+  : USE mod=ops
   ;
 ifcond
   returns [Object obj,int id]
@@ -129,14 +146,14 @@ name
   ;
 
 
-
 ANYMATCH : '"' (ESC|.)*? '"'            ;
-UNARYOPS : REF|GREF|BNOT|RETURN|BREAK               ;
+UNARYOPS : REF|GREF|BNOT|RETURN|BREAK|THROW               ;
 //BINOPS
 BINOPS   : BAND|BOR|BXOR|NEQ|EQ|SWITCH|ULS|URS|LTE|GTE|LS|RS|LT|GT   ;
 
 POW               : '**'                   ;
-
+LINE_COMMENT      : '//' .*? '\n' -> channel(HIDDEN);
+MULTILINE_COMMENT : '/*' .*? '*/' -> channel(HIDDEN);
 
 //Less/Greater than(or Equal to), (unsigned) Left/Right Shift
 fragment ULS      : '<<<'                           ;
@@ -203,6 +220,12 @@ IF       : 'if'                            ;
 ELSE     : 'else'                          ;
 RETURN   : 'return'                        ;
 BREAK    : 'break'                         ;
+TRY      : 'try'                           ;
+CATCH    : 'catch'                         ;
+FINALLY  : 'finally'                       ;
+THROW    : 'throw'                         ;
+NATIVE   : 'native'                        ;
+USE      : 'use'                           ;
 
 //name then
 NAME     : LETT (LETT|DIGITS)*             ;

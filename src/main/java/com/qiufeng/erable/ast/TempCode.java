@@ -26,7 +26,7 @@ public class TempCode extends Code {
     public int cid;
     public TempCode(int cid,OpCode op, Code parent) {
 	super("",op, parent);
-	this.tag="(" + this.id+"<-"+cid + ")";
+	this.tag=this.id+"";
 	this.cid=cid;
 	this.sign=Code.TEMP;
     }

@@ -1,3 +1,7 @@
+/*
+  Test Erable Source File made by Qiufeng54321.
+  Finished Comment on April 5th,2019
+*/
 var prefix="hi";
 function mul:(a b){
   return a*b;
@@ -34,12 +38,23 @@ function loop:(from to step){
 function say:(something){
   return prefix+something;
 };
+//Generates a new cat.
 function newCat:(name age){
   return :
     "name"=name
     "age" =age
     "habits"=2
   :;
+};
+//Try-Catch test
+function testTryCatch:(a b){
+  try{
+    return a/b;
+  }catch e{
+    println(e);
+  }finally{
+    println("divide ended.");
+  };
 };
 var obj square=makeSquare(15 20);
 square=switchWH(square);

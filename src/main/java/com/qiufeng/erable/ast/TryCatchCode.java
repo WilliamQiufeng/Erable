@@ -17,28 +17,37 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
-import java.util.List;
 
 /**
  *
  * @author Qiufeng54321
  */
-public class FuncCallCode extends TempCode {
-    public List<Integer> args;
-    public String name;
-    public FuncCallCode(String name,List<Integer> args,int refid, Code parent) {
-	super(refid, OpCode.CALL_PREPARE,parent);
-	this.name=name;
-	this.args=args;
+public class TryCatchCode extends TempCode {
+    public FPADCode mCatch;
+    public TryCatchCode(Code parent) {
+	super(-1,OpCode.TRY_START, parent);
+	this.sign="^";
+    }
+
+    public FPADCode getmCatch() {
+	return mCatch;
+    }
+
+    public void setmCatch(FPADCode mCatch) {
+	this.mCatch = mCatch;
+    }
+
+    @Override
+    public int findVar(String name) {
+	if(this.mCatch!=null&&name.equals(mCatch.name)){
+	    return mCatch.id;
+	}
+	return super.findVar(name);
     }
 
     @Override
     public String toString() {
-	return super.toString() + "  " + this.name + "@" + this.cid + args.toString() + " ->" + this.id;
+	return super.toString() + "  try ->" + this.id + " :";
     }
-
-    @Override
-    public String write() {
-	throw new UnsupportedOperationException("Not supported yet.");
-    }
+    
 }
