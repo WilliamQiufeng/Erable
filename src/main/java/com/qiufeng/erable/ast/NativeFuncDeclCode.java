@@ -17,27 +17,23 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
- * 这个更特殊，
- * 因为甚至不知道进入的语句是不是判断语句。
- * @see WhileCode
+ *
  * @author Qiufeng54321
  */
-public class IfCode extends TempCode {
-    public ArrayList<ElseCode> elses;
-    public IfCode(Code parent) {
-	super(-1, OpCode.IF, parent);
-	this.sign="^";
-    }
-    public void process(){
-	this.codes.add(this.codes.size()-1, new MachineCode(OpCode.BREAKIF,this.codes.get(this.codes.size()-2).id,this));
+public class NativeFuncDeclCode extends FuncDeclCode {
+    public int nativeCall;
+    public NativeFuncDeclCode(String name,int nativeCall, List<FPADCode> args, Code parent) {
+	super(name, args, parent);
+	this.nativeCall=nativeCall;
+	this.op=OpCode.NATIVE;
     }
 
     @Override
     public String toString() {
-	return super.toString() + "  if ->" + this.id; 
+	return super.toString() + " native " + nativeCall;
     }
     
 }

@@ -1,4 +1,6 @@
 package com.qiufeng.erable;
+import com.qiufeng.erable.ast.Code;
+import com.qiufeng.erable.ast.ConstantPool;
 import com.qiufeng.erable.ast.EListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -57,35 +59,10 @@ public class Main
 		e.printStackTrace();
 	    }
 	}
-	try{
-	    long start=System.currentTimeMillis();
-	    FileInputStream fis=new FileInputStream(file);
-	    ANTLRInputStream ais=new ANTLRInputStream(fis);
-	    ErableLexer lexer=new ErableLexer(ais);
-	    CommonTokenStream cts=new CommonTokenStream(lexer);
-	    ErableParser parser=new ErableParser(cts);
-	    ParseTree pt=parser.prog();
-	    
-	    System.out.println("Parsed file "+file);
-	    ParseTreeWalker ptw=new ParseTreeWalker();
-	    EListener el=new EListener(parser);
-	    
-	    ptw.walk(el, pt);
-	    for(var element : el.pool.elements){
-		println(element.toString());
-	    }
-	    var tree=el.root.tree(0);
-	    if(showTree)
-		println(tree);
-	    println("Walked file "+file);
-	    long end=System.currentTimeMillis();
-	    long duration=end-start;
-	    //System.out.println(pt.toStringTree());
-            //System.out.println(pt.toString());
-	    println("Program finished.Total time:"+duration+" ms.");
-	}catch(Throwable e){
-	    e.printStackTrace();
-	}
+	var compiler=new ErableCompiler();
+	var el=compiler.compile(file,null);
+	this.printConstantPool(el.getPool());
+	this.printTree(el.root);
     }
     public void println(String sth){
 	if(!this.quiet){
@@ -98,5 +75,19 @@ public class Main
 		Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	}
+    }
+    public void println(String sth,boolean showTree){
+	if(showTree)
+	    println(sth);
+    }
+    
+    public void printConstantPool(ConstantPool cp){
+	cp.elements.forEach((element) -> {
+	    println(element.toString());
+	});
+    }
+    public void printTree(Code root){
+	var tree=root.tree(0);
+	println(tree,showTree);
     }
 }

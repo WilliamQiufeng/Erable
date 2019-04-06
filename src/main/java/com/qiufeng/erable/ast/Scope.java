@@ -28,6 +28,14 @@ public class Scope extends Code {
 	this.tag=id+"";
 	this.sign=Code.SCOPE;
     }
+
+    @Override
+    public Code getMeaningfulParent() {
+	if(this.getParent() instanceof FuncDeclCode)
+	    return this.getParent().getParent();
+	return super.getMeaningfulParent();
+    }
+    
     @Override
     public String write() {
 	throw new UnsupportedOperationException("Not supported yet.");

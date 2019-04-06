@@ -14,7 +14,7 @@ Here is a list of things in tutorial :
 
 #### Chapter One: What's up?
 
-+ [Hello World!]()
++ [Hello World!](Chapter 1/HelloWorld)
 + [Basic **Literals**]()
 + [**Operations**]()
 + [**Function**]()
@@ -42,11 +42,12 @@ Here is a list of things in tutorial :
 #### Chapter Four: Pro?
 
 + [**Native** Functions]()
-+ [Using **OpCode**]()
++ [Using **Java Libraries**]()
 
 #### Chapter Five: You doomed us all!
 
 + [How the **Compiler** Works]()
++ [Using **OpCode**]()
 + [Ending]()
 
 

@@ -33,11 +33,18 @@ types
   | str=string
   | ato=num
   | objv=object
+  | thi=this_expression
+  | par=parent_expression
   ;
 field
   returns [Object obj,int id]
   : fc=funccall
   | val=name
+  ;
+exprs
+  : imp_module
+  | load_native
+  | native_funcdecl
   ;
 var
   returns [Object obj,int id,short mod]
@@ -63,6 +70,7 @@ ops
   | decls                                        {$type="decls";}
   | condexprs                                    {$type="conds";}
   | codeblock                                    {$type="block";}
+  | exprs                                        {$type="exprs";}
   ;
 sblock
   : codeblock
@@ -94,8 +102,17 @@ pairs
   ;
 pair
   : key=oops EQU val=oops
+  | funcdecl
+  | native_funcdecl
   ;
-
+this_expression
+  returns [Object obj,int id]
+  : THIS
+  ;
+parent_expression
+  returns [Object obj,int id]
+  : PARENT
+  ;
 funccall
   returns [Object obj,int id]
   : funcname=name LPA arguments+=ops*? RPA
@@ -113,9 +130,18 @@ funcdecl
   returns [Object obj,int id]
   : FUNC funcname=NAME arguments=args block=codeblock
   ;
+/*
+   sLoad a native lib (.jar or .dex) for native functions
+*/
+load_native
+  : LOAD lib=string
+  ;
+//Load a function from native library(.jar or .dex)
+//for example:
+//  native function println(obj) using "java.lang.System#out#println" in std/ios 
 native_funcdecl
   returns [Object obj, int id]
-  : NATIVE FUNC funcname=NAME arguments=args USING string
+  : NATIVE FUNC funcname=NAME arguments=args USING method=string
   ;
 try_expr
   returns [Object obj,int id]
@@ -126,7 +152,7 @@ catch_expr
   ;
 imp_module
   returns [Object obj,int id]
-  : USE mod=ops
+  : USE mod=string
   ;
 ifcond
   returns [Object obj,int id]
@@ -227,6 +253,9 @@ THROW    : 'throw'                         ;
 NATIVE   : 'native'                        ;
 USE      : 'use'                           ;
 USING    : 'using'                         ;
+LOAD     : 'load'                          ;
+THIS     : 'this'                          ;
+PARENT   : 'parent'                        ;
 
 //name then
 NAME     : LETT (LETT|DIGITS)*             ;

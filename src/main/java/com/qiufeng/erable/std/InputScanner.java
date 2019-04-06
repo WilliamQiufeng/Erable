@@ -14,30 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.qiufeng.erable.ast;
+package com.qiufeng.erable.std;
 
-import com.qiufeng.erable.OpCode;
-import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
- * 这个更特殊，
- * 因为甚至不知道进入的语句是不是判断语句。
- * @see WhileCode
+ *
  * @author Qiufeng54321
  */
-public class IfCode extends TempCode {
-    public ArrayList<ElseCode> elses;
-    public IfCode(Code parent) {
-	super(-1, OpCode.IF, parent);
-	this.sign="^";
+public class InputScanner {
+    public static Scanner scanner=new Scanner(System.in);
+    public static String input(){
+	return scanner.nextLine();
     }
-    public void process(){
-	this.codes.add(this.codes.size()-1, new MachineCode(OpCode.BREAKIF,this.codes.get(this.codes.size()-2).id,this));
-    }
-
-    @Override
-    public String toString() {
-	return super.toString() + "  if ->" + this.id; 
-    }
-    
 }

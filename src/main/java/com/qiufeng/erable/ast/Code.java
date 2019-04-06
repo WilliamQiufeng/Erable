@@ -182,6 +182,13 @@ public abstract class Code implements Comparable{
         return parent;
     }
     /**
+     * For the use of identifier 'parent' in the grammar of Erable
+     * @return meaningful parent
+     */
+    public Code getMeaningfulParent() {
+	return getParent();
+    }
+    /**
      * Find variable/function by the given name.
      * @param name the name to try to find
      * @return the id found.

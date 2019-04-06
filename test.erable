@@ -2,6 +2,11 @@
   Test Erable Source File made by Qiufeng54321.
   Finished Comment on April 5th,2019
 */
+//Test import module
+use "std/ios";
+//Test conflict of imported module.
+use "std/ios.erable";
+use "std/java";
 var prefix="hi";
 function mul:(a b){
   return a*b;
@@ -11,9 +16,11 @@ function quad:(a b c x){
   return power+b*x+c;
 };
 function makeSquare:(width height){
+  //Test array
   return [width height mul(width height)];
 };
 //One Special Test: Variable declaration in different scope with same name
+//argument 'square' should not be conflicting with variable square.
 function switchWH:(square){
   if(square[0]==square[1])return square
   else if(square[0]==0|square[1]==0)return square
@@ -41,10 +48,14 @@ function say:(something){
 };
 //Generates a new cat.
 function newCat:(name age){
+  //Test Object
   return :
     "name"=name
     "age" =age
     "habits"=2
+    function meow:(){
+      println(parent["name"] + "says:MEOWWWWWW");
+    }
   :;
 };
 //Function Reloading test
@@ -67,6 +78,7 @@ function testTryCatch:(a b){
     println("divide ended.");
   };
 };
+//Main test
 var obj square=makeSquare(15 20);
 square=switchWH(square);
 println(square);

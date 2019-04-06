@@ -15,7 +15,7 @@ This language is made by pure java.
 + **Clone this repository**
 + No more thing
 
-## Run a file
+## Compile an erable file
 
 ```bash
 cd Erable

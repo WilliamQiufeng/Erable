@@ -17,14 +17,15 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.ErableBaseListener;
+import com.qiufeng.erable.ErableCompiler;
 import com.qiufeng.erable.ErableParser;
 import com.qiufeng.erable.OpCode;
 import com.qiufeng.erable.VarModifiers;
 import com.qiufeng.erable.exception.BaseException;
 import com.qiufeng.erable.exception.RedefinitionException;
-import com.qiufeng.erable.exception.UndefinedException;
 import com.qiufeng.erable.exception.UnknownException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -37,6 +38,7 @@ public class EListener extends ErableBaseListener {
     public ErableParser parser;
     public Code root;
     public Code current;
+    public HashSet<String> importedModules;
     
     
     /**
@@ -75,7 +77,15 @@ public class EListener extends ErableBaseListener {
     public void setPool(ConstantPool pool) {
 	this.pool = pool;
     }
+    public EListener(ErableParser p,EListener current){
+	this.importedModules = current.importedModules;
+	this.parser=p;
+	this.root=current.current;
+	this.current=this.root;
+	this.pool=current.pool;
+    }
     public EListener(ErableParser p){
+	this.importedModules = new HashSet<>();
 	this.parser=p;
 	this.root=new Scope(null);
 	this.current=this.root;
@@ -190,6 +200,7 @@ public class EListener extends ErableBaseListener {
 	    new RedefinitionException("Redefinition of function '"+funcname+"' with same argument length of "+ctx.arguments.arguments.size(),funcname,ctx.funcname.getLine(),ctx.funcname.getCharPositionInLine()).throwException();
 	}
 	//QUIT FUNCDECL
+	ctx.id=this.current.id;
 	this.current.getParent().addCode(this.current);
 	this.current=this.current.getParent();
     }
@@ -235,7 +246,8 @@ public class EListener extends ErableBaseListener {
 	for(var t : ctx.argss){
 	    ctx.arguments.add(new FPADCode(t.getText(),current));
 	}
-	((FuncDeclCode)current).args=ctx.arguments;
+	if(!(current instanceof Scope))
+	    ((FuncDeclCode)current).args=ctx.arguments;
     }
 
     @Override
@@ -318,6 +330,26 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitPair(ErableParser.PairContext ctx) {
 	super.exitPair(ctx);
+	boolean isFuncDecl=true;
+	int key=0,value=0;
+	ConstantPoolString ks=null;
+	if(ctx.funcdecl()!=null){
+	    ks=new ConstantPoolString(ctx.funcdecl().funcname.getText());
+	    value=ctx.funcdecl().id;
+	}else if(ctx.native_funcdecl()!=null){
+	    ks=new ConstantPoolString(ctx.native_funcdecl().funcname.getText());
+	    value=ctx.native_funcdecl().id;
+	}else{
+	    isFuncDecl=false;
+	}
+	if(isFuncDecl){
+	    this.pool.addElement(ks);
+	    var tmp=new TempCode(ks.id,this.current);
+	    this.current.addCode(tmp);
+	    key=tmp.id;
+	    current.addCode(new MachineCode(OpCode.KEY,/*current.codes.get(current.codes.size()-1)*/key,current));
+	    current.addCode(new MachineCode(OpCode.VALUE,/*current.codes.get(current.codes.size()-1)*/value,current));
+	}
 	current.addCode(new MachineCode(OpCode.END_PAIR,-1,this.current));
     }
 
@@ -338,6 +370,14 @@ public class EListener extends ErableBaseListener {
     }
 
     @Override
+    public void exitParent_expression(ErableParser.Parent_expressionContext ctx) {
+	super.exitParent_expression(ctx);
+	if(this.current.getMeaningfulParent()==null)
+	    new UnknownException(BaseException.ErrorType.COMPILATION,"Already at the root scope",ctx.getText(),ctx.getStart().getLine(),ctx.getStart().getCharPositionInLine(),5).throwException();
+	ctx.id=this.current.getMeaningfulParent().id;
+    }
+
+    @Override
     public void exitObject(ErableParser.ObjectContext ctx) {
 	super.exitObject(ctx);
 	current.getParent().addCode(current);
@@ -349,6 +389,12 @@ public class EListener extends ErableBaseListener {
     public void enterObject(ErableParser.ObjectContext ctx) {
 	super.enterObject(ctx);
 	current=new ObjectCode(current);
+    }
+
+    @Override
+    public void exitThis_expression(ErableParser.This_expressionContext ctx) {
+	super.exitThis_expression(ctx);
+	ctx.id=this.current.id;
     }
 
     @Override
@@ -403,6 +449,8 @@ public class EListener extends ErableBaseListener {
 	    case "block":
 		ctx.id=ctx.codeblock().id;
 		break;
+	    case "exprs":
+		break;
 	    default:
 		new UnknownException(BaseException.ErrorType.COMPILATION,"Unknown Operation type("+ctx.type+")",ctx.getText(),ctx.start.getLine(),ctx.start.getCharPositionInLine(),4).throwException();
 		
@@ -410,8 +458,39 @@ public class EListener extends ErableBaseListener {
     }
 
     @Override
+    public void exitLoad_native(ErableParser.Load_nativeContext ctx) {
+	super.exitLoad_native(ctx);
+	var lc=new LoadCode(ctx.lib.id,this.current);
+	this.current.addCode(lc);
+    }
+
+    @Override
+    public void enterLoad_native(ErableParser.Load_nativeContext ctx) {
+	super.enterLoad_native(ctx);
+    }
+
+    @Override
+    public void exitExprs(ErableParser.ExprsContext ctx) {
+	super.exitExprs(ctx);
+    }
+
+    @Override
+    public void enterExprs(ErableParser.ExprsContext ctx) {
+	super.enterExprs(ctx);
+    }
+
+    @Override
     public void exitImp_module(ErableParser.Imp_moduleContext ctx) {
 	super.exitImp_module(ctx);
+	var compiler=new ErableCompiler();
+	var mod=(String)ctx.mod.obj;
+	if(!mod.endsWith(".erable")){
+	    mod+=".erable";
+	}
+	if(!this.importedModules.contains(mod)){
+	    compiler.compile(mod, this);
+	    this.importedModules.add(mod);
+	}
     }
 
     @Override
@@ -454,11 +533,22 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitNative_funcdecl(ErableParser.Native_funcdeclContext ctx) {
 	super.exitNative_funcdecl(ctx);
+	var funcname=ctx.funcname.getText();
+	var funcid=this.current.findFunction(funcname, ctx.arguments.arguments.size());
+	var nativeCall=ctx.method.id;
+	if(funcid!=-1){
+	    new RedefinitionException("Redefinition of function '"+funcname+"' with same argument length of "+ctx.arguments.arguments.size(),funcname,ctx.funcname.getLine(),ctx.funcname.getCharPositionInLine()).throwException();
+	}
+	var nfdc=new NativeFuncDeclCode(funcname,nativeCall,ctx.arguments.arguments,this.current);
+	ctx.id=nfdc.id;
+	this.current.addCode(nfdc);
+	
     }
 
     @Override
     public void enterNative_funcdecl(ErableParser.Native_funcdeclContext ctx) {
 	super.enterNative_funcdecl(ctx);
+	
     }
 
     @Override
@@ -534,6 +624,10 @@ public class EListener extends ErableBaseListener {
 	    ctx.id=ctx.ato.id;
 	else if(ctx.str!=null)
 	    ctx.id=ctx.str.id;
+	else if(ctx.thi!=null)
+	    ctx.id=ctx.thi.id;
+	else if(ctx.par!=null)
+	    ctx.id=ctx.par.id;
 	else
 	    ctx.id=ctx.objv.id;
     }

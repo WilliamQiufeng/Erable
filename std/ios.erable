@@ -1,0 +1,9 @@
+//Input and output stream facing console.
+//Author:QiuFeng54321
+//Under GNU General Public Licence 3
+
+
+//Console OutputStream
+native function println:(object) using "java.lang.System#out#println";
+//Console InputStream
+native function input:() using "com.qiufeng.erable.std.InputScanner#input";
