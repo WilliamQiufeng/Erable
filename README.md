@@ -9,5 +9,5 @@ It parses the file and gives the java-object-lized output as diagnostics and deb
 ```shell
 cd Erable
 chmod +x ./erable.sh # just to ensure you have the permission.
-./erable.sh test.erable #replace test.erable or don't to see the result.
+./erable.sh -f test.erable #replace test.erable or don't to see the result.
 ```

@@ -3,10 +3,10 @@
   Finished Comment on April 5th,2019
 */
 //Test import module
-use "std/ios";
+use "stdlib/ios";
 //Test conflict of imported module.
-use "std/ios.erable";
-use "std/java";
+use "stdlib/ios.erable";
+use "stdlib/java";
 var prefix="hi";
 function mul:(a b){
   return a*b;

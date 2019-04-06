@@ -1,19 +1,16 @@
 package com.qiufeng.erable;
+import com.qiufeng.erable.compiler.ErableCompiler;
 import com.qiufeng.erable.ast.Code;
 import com.qiufeng.erable.ast.ConstantPool;
-import com.qiufeng.erable.ast.EListener;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.kohsuke.args4j.*;
 /**
  * @since 22 March 2019
@@ -37,6 +34,10 @@ public class Main
     public static void main( String[] args )
     {
         new Main().nmain(args);
+	new Main().test();
+    }
+    public void test(){
+	
     }
     public void nmain(String[] args){
 	CmdLineParser clp=new CmdLineParser(this);
@@ -54,6 +55,10 @@ public class Main
 	if(this.debugPath!=null){
 	    try{
 		this.dp=new FileOutputStream(this.debugPath);
+		PrintStream ps=System.out;
+		PrintStream dps=new PrintStream(this.dp);
+		MultiplePrintStream mps=new MultiplePrintStream(new PrintStream[]{dps},ps);
+		System.setOut(mps);
 	    }catch(FileNotFoundException e){
 		System.err.println("[ERROR]File not found.");
 		e.printStackTrace();
@@ -67,13 +72,6 @@ public class Main
     public void println(String sth){
 	if(!this.quiet){
 	    System.out.println(sth);
-	}
-	if(this.dp!=null){
-	    try {
-		this.dp.write(sth.getBytes());
-	    } catch (IOException ex) {
-		Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-	    }
 	}
     }
     public void println(String sth,boolean showTree){

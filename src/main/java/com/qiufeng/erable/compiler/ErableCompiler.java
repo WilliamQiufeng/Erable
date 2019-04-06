@@ -14,12 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.qiufeng.erable;
+package com.qiufeng.erable.compiler;
 
+import com.qiufeng.erable.ErableLexer;
+import com.qiufeng.erable.ErableParser;
 import com.qiufeng.erable.ast.EListener;
 import java.io.FileInputStream;
 import java.io.IOException;
 import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
@@ -43,14 +46,14 @@ public class ErableCompiler {
             //System.out.println(pt.toString());
 	    System.out.println("File "+file+" finished.Total time:"+duration+" ms.");
 	    return el;
-	}catch(Throwable e){
+	}catch(IOException e){
 	    e.printStackTrace();
 	}
 	return null;
     }
     public ErableParser parse(String file) throws IOException{
 	FileInputStream fis=new FileInputStream(file);
-	ANTLRInputStream ais=new ANTLRInputStream(fis);
+	var ais=CharStreams.fromStream(fis);
 	ErableLexer lexer=new ErableLexer(ais);
 	CommonTokenStream cts=new CommonTokenStream(lexer);
 	ErableParser parser=new ErableParser(cts);

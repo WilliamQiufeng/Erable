@@ -1,0 +1,404 @@
+Parsed file test.erable
+Parsed file stdlib/ios.erable
+File stdlib/ios.erable finished.Total time:6 ms.
+Parsed file stdlib/java.erable
+File stdlib/java.erable finished.Total time:2 ms.
+File test.erable finished.Total time:769 ms.
+ConstantPoolElement{id=0, obj=0.0}
+ConstantPoolElement{id=1, obj=1.0}
+ConstantPoolElement{id=2, obj=stdlib/ios}
+ConstantPoolElement{id=3, obj=java.lang.System#out#println}
+ConstantPoolElement{id=4, obj=com.qiufeng.erable.std.InputScanner#input}
+ConstantPoolElement{id=5, obj=stdlib/ios.erable}
+ConstantPoolElement{id=6, obj=stdlib/java}
+ConstantPoolElement{id=7, obj=com.qiufeng.erable.std.Reflector#newInstance}
+ConstantPoolElement{id=8, obj=com.qiufeng.erable.std.Reflector#call}
+ConstantPoolElement{id=9, obj=com.qiufeng.erable.std.Reflector#callStatic}
+ConstantPoolElement{id=10, obj=com.qiufeng.erable.std.Reflector#get}
+ConstantPoolElement{id=11, obj=com.qiufeng.erable.std.Reflector#getStatic}
+ConstantPoolElement{id=12, obj=hi}
+ConstantPoolElement{id=13, obj=2.0}
+ConstantPoolElement{id=14, obj=qualified!}
+ConstantPoolElement{id=15, obj=name}
+ConstantPoolElement{id=16, obj=age}
+ConstantPoolElement{id=17, obj=habits}
+ConstantPoolElement{id=18, obj=says:MEOWWWWWW}
+ConstantPoolElement{id=19, obj=meow}
+ConstantPoolElement{id=20, obj=hi~}
+ConstantPoolElement{id=21, obj=divide ended.}
+ConstantPoolElement{id=22, obj=15.0}
+ConstantPoolElement{id=23, obj=20.0}
+ConstantPoolElement{id=24, obj=3.0}
+ConstantPoolElement{id=25, obj=5.0}
+ConstantPoolElement{id=26, obj=4.0}
+ConstantPoolElement{id=27, obj=9.0}
+>#0 :
+-->@1  buffer 1 to @1
+
+-->%true : variable `0` true = @1 ->2
+
+-->@3  buffer 0 to @3
+
+-->%false : variable `0` false = @3 ->4
+
+-->@5  buffer 2 to @5
+
+-->@7  buffer 3 to @7
+
+-->%println : function println[id=6 name=object] ->8 : native 7
+
+-->@9  buffer 4 to @9
+
+-->%input : function input[] ->10 : native 9
+
+-->@11  buffer 5 to @11
+
+-->@12  buffer 6 to @12
+
+-->@15  buffer 7 to @15
+
+-->%java_new : function java_new[id=13 name=className, id=14 name=args] ->16 : native 15
+
+-->@20  buffer 8 to @20
+
+-->%java_call : function java_call[id=17 name=object, id=18 name=methodName, id=19 name=args] ->21 : native 20
+
+-->@25  buffer 9 to @25
+
+-->%java_call_static : function java_call_static[id=22 name=className, id=23 name=methodName, id=24 name=args] ->26 : native 25
+
+-->@29  buffer 10 to @29
+
+-->%java_get : function java_get[id=27 name=object, id=28 name=field] ->30 : native 29
+
+-->@33  buffer 11 to @33
+
+-->%java_get_static : function java_get_static[id=31 name=className, id=32 name=field] ->34 : native 33
+
+-->@35  buffer 12 to @35
+
+-->%prefix : variable `0` prefix = @35 ->36
+
+-->%mul : function mul[id=38 name=a, id=39 name=b] ->37 :
+---->#40 :
+------>@41  @38 MUL @39 ->41
+
+------>@42  RETURN @41 ->42
+
+
+
+-->%quad : function quad[id=44 name=a, id=45 name=b, id=46 name=c, id=47 name=x] ->43 :
+---->#48 :
+------>@49  buffer 13 to @49
+
+------>@50  @44 POW @49 ->50
+
+------>%power : variable `1` power = @50 ->51
+
+------>@52  @51 ADD @45 ->52
+
+------>@53  @52 MUL @47 ->53
+
+------>@54  @53 ADD @46 ->54
+
+------>@55  RETURN @54 ->55
+
+
+
+-->%makeSquare : function makeSquare[id=57 name=width, id=58 name=height] ->56 :
+---->#59 :
+------>@60  mul@37[57, 58] ->60
+
+------>@61  Array [57, 58, 60] ->61
+
+------>@62  RETURN @61 ->62
+
+
+
+-->%switchWH : function switchWH[id=64 name=square] ->63 :
+---->#65 :
+------>^66  if ->66
+-------->@67  buffer 0 to @67
+
+-------->@68  @64 ELEMENT @67 ->68
+
+-------->@69  buffer 1 to @69
+
+-------->@70  @64 ELEMENT @69 ->70
+
+-------->@71  @68 EQ @70 ->71
+
+-------->!72  Flag BREAKIF 71
+
+-------->@73  RETURN @64 ->73
+
+-------->^74  else ->74
+---------->^75  if ->75
+------------>@76  buffer 0 to @76
+
+------------>@77  @64 ELEMENT @76 ->77
+
+------------>@78  buffer 0 to @78
+
+------------>@79  @77 EQ @78 ->79
+
+------------>@80  buffer 1 to @80
+
+------------>@81  @64 ELEMENT @80 ->81
+
+------------>@82  @79 BOR @81 ->82
+
+------------>@83  buffer 0 to @83
+
+------------>@84  @82 EQ @83 ->84
+
+------------>!85  Flag BREAKIF 84
+
+------------>@86  RETURN @64 ->86
+
+------------>^87  else ->87
+-------------->@88  buffer 14 to @88
+
+-------------->@89  println@8[88] ->89
+
+
+
+
+
+------>@90  buffer 0 to @90
+
+------>@91  @64 ELEMENT @90 ->91
+
+------>@92  buffer 1 to @92
+
+------>@93  @64 ELEMENT @92 ->93
+
+------>@94  @91 SWITCH @93 ->94
+
+------>@95  RETURN @64 ->95
+
+
+
+-->%isNegative : function isNegative[id=97 name=number] ->96 :
+---->#98 :
+------>^99  if ->99
+-------->@100  SUB @97 ->100
+
+-------->@101  @100 EQ @97 ->101
+
+-------->!102  Flag BREAKIF 101
+
+-------->#103 :
+---------->@104  RETURN @2 ->104
+
+
+-------->^105  else ->105
+---------->#106 :
+------------>@107  RETURN @4 ->107
+
+
+
+
+
+
+-->%loop : function loop[id=109 name=from, id=110 name=to, id=111 name=step] ->108 :
+---->#112 :
+------>%a : variable `1` a = @109 ->113
+
+------>@114  buffer 0 to @114
+
+------>%count : variable `1` count = @114 ->115
+
+------>^116  while ->116 :
+-------->@117  @113 LT @110 ->117
+
+-------->!118  Flag BREAKIF 117
+
+-------->#119 :
+---------->@120  @113 ADDEQ @111 ->120
+
+
+
+------>@121  RETURN @115 ->121
+
+
+
+-->%say : function say[id=123 name=something] ->122 :
+---->#124 :
+------>@125  @36 ADD @123 ->125
+
+------>@126  RETURN @125 ->126
+
+
+
+-->%newCat : function newCat[id=128 name=name, id=129 name=age] ->127 :
+---->#130 :
+------>@131  object ->131 :
+-------->!132  Flag START_PAIR 
+
+-------->@133  buffer 15 to @133
+
+-------->!134  Flag KEY 133
+
+-------->!135  Flag VALUE 128
+
+-------->!136  Flag END_PAIR 
+
+-------->!137  Flag START_PAIR 
+
+-------->@138  buffer 16 to @138
+
+-------->!139  Flag KEY 138
+
+-------->!140  Flag VALUE 129
+
+-------->!141  Flag END_PAIR 
+
+-------->!142  Flag START_PAIR 
+
+-------->@143  buffer 17 to @143
+
+-------->!144  Flag KEY 143
+
+-------->@145  buffer 13 to @145
+
+-------->!146  Flag VALUE 145
+
+-------->!147  Flag END_PAIR 
+
+-------->!148  Flag START_PAIR 
+
+-------->%meow : function meow[] ->149 :
+---------->#150 :
+------------>@151  buffer 15 to @151
+
+------------>@152  @131 ELEMENT @151 ->152
+
+------------>@153  buffer 18 to @153
+
+------------>@154  @152 ADD @153 ->154
+
+------------>@155  println@8[154] ->155
+
+
+
+-------->@156  buffer 19 to @156
+
+-------->!157  Flag KEY 156
+
+-------->!158  Flag VALUE 149
+
+-------->!159  Flag END_PAIR 
+
+
+------>@160  RETURN @131 ->160
+
+
+
+-->%testOverload : function testOverload[id=162 name=a, id=163 name=b] ->161 :
+---->#164 :
+------>@165  buffer 20 to @165
+
+------>@166  @165 ADD @162 ->166
+
+------>@167  @166 ADD @163 ->167
+
+------>@168  RETURN @167 ->168
+
+
+
+-->%testOverload : function testOverload[id=170 name=c, id=171 name=d, id=172 name=b] ->169 :
+---->#173 :
+------>@174  @170 MUL @172 ->174
+
+------>@175  @174 MUL @171 ->175
+
+------>@176  RETURN @175 ->176
+
+
+
+-->%testOverload : function testOverload[id=178 name=x] ->177 :
+---->#179 :
+------>@180  buffer 13 to @180
+
+------>@181  @178 POW @180 ->181
+
+------>@182  RETURN @181 ->182
+
+
+
+-->%testTryCatch : function testTryCatch[id=184 name=a, id=185 name=b] ->183 :
+---->#186 :
+------>^187  try ->187 :
+-------->!188  Flag TRY_START 
+
+-------->#189 :
+---------->@190  @184 DIV @185 ->190
+
+---------->@191  RETURN @190 ->191
+
+
+-------->!192  Flag TRY_END 
+
+-------->!194  Flag CATCH_ID 193
+
+-------->!195  Flag CATCH_START 
+
+-------->#196 :
+---------->@197  println@8[193] ->197
+
+
+-------->!198  Flag CATCH_END 
+
+-------->!199  Flag FINALLY 
+
+-------->#200 :
+---------->@201  buffer 21 to @201
+
+---------->@202  println@8[201] ->202
+
+
+
+
+
+-->@203  buffer 22 to @203
+
+-->@204  buffer 23 to @204
+
+-->@205  makeSquare@56[203, 204] ->205
+
+-->%square : variable `0` square = @205 ->206
+
+-->@207  switchWH@63[206] ->207
+
+-->@208  @206 EQU @207 ->208
+
+-->@209  println@8[206] ->209
+
+-->@210  buffer 13 to @210
+
+-->@211  buffer 24 to @211
+
+-->@212  buffer 25 to @212
+
+-->@213  testOverload@169[210, 211, 212] ->213
+
+-->@214  buffer 1 to @214
+
+-->@215  buffer 26 to @215
+
+-->@216  testOverload@161[214, 215] ->216
+
+-->@217  buffer 27 to @217
+
+-->@218  testOverload@177[217] ->218
+
+-->@219  buffer 25 to @219
+
+-->@220  buffer 13 to @220
+
+-->@221  buffer 24 to @221
+
+-->@222  testOverload@169[219, 220, 221] ->222
+
+

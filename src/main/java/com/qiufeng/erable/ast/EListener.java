@@ -17,7 +17,7 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.ErableBaseListener;
-import com.qiufeng.erable.ErableCompiler;
+import com.qiufeng.erable.compiler.ErableCompiler;
 import com.qiufeng.erable.ErableParser;
 import com.qiufeng.erable.OpCode;
 import com.qiufeng.erable.VarModifiers;
