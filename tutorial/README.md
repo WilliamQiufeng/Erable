@@ -10,7 +10,7 @@ Here is a list of things in tutorial :
 
 #### Chapter Zero: Who are you?
 
-+ [Starting](Chapter 0/Starting.md)
++ <a href="Chapter 0/Starting.md">Starting</a>
 
 #### Chapter One: What's up?
 

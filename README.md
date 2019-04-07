@@ -12,7 +12,7 @@ Hi!Welcome to erable!
 
 ## What is it?
 A programming language created by Qiufeng54321.  
-Java version(this branch) has a lot more features than Python version(master branch).However, it is still under development.  
+It is still under development.  
 
 ## How to use?
 Remember this project is still under development.However, you can still check out the parser feature.  
