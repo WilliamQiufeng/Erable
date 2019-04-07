@@ -1,9 +1,9 @@
 Parsed file test.erable
 Parsed file stdlib/ios.erable
-File stdlib/ios.erable finished.Total time:6 ms.
+File stdlib/ios.erable finished.Total time:10 ms.
 Parsed file stdlib/java.erable
-File stdlib/java.erable finished.Total time:2 ms.
-File test.erable finished.Total time:769 ms.
+File stdlib/java.erable finished.Total time:3 ms.
+File test.erable finished.Total time:839 ms.
 ConstantPoolElement{id=0, obj=0.0}
 ConstantPoolElement{id=1, obj=1.0}
 ConstantPoolElement{id=2, obj=stdlib/ios}

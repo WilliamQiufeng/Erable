@@ -1,4 +1,7 @@
 # Erable
+
+[![Gitter](https://badges.gitter.im/Erable-Lang/community.svg)](https://gitter.im/Erable-Lang/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) ![](https://img.shields.io/github/license/QiuFeng54321/Erable.svg)
+
 Hi!Welcome to erable!
 ## What is it?
 A programming language created by Qiufeng54321.  
