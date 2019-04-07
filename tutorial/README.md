@@ -14,7 +14,7 @@ Here is a list of things in tutorial :
 
 #### Chapter One: What's up?
 
-+ [Hello World!](Chapter 1/HelloWorld)
++ [Hello World!](Chapter&emsp;1/HelloWorld)
 + [Basic **Literals**]()
 + [**Operations**]()
 + [**Function**]()

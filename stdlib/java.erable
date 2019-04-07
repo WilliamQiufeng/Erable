@@ -4,12 +4,12 @@
 //Most of the functions below uses com.qiufeng.erable.std.Reflector for reflection of java
 
 //new Instance of class
-native function java_new:(className args) using "com.qiufeng.erable.std.Reflector#newInstance";
+native function java_new:(className args) using "com.qiufeng.erable.stdlib.Reflector#newInstance";
 //call function
-native function java_call:(object methodName args) using "com.qiufeng.erable.std.Reflector#call";
+native function java_call:(object methodName args) using "com.qiufeng.erable.stdlib.Reflector#call";
 //call static function
-native function java_call_static:(className methodName args) using "com.qiufeng.erable.std.Reflector#callStatic";
+native function java_call_static:(className methodName args) using "com.qiufeng.erable.stdlib.Reflector#callStatic";
 //get field
-native function java_get:(object field) using "com.qiufeng.erable.std.Reflector#get";
+native function java_get:(object field) using "com.qiufeng.erable.stdlib.Reflector#get";
 //get static field
-native function java_get_static:(className field) using "com.qiufeng.erable.std.Reflector#getStatic";
+native function java_get_static:(className field) using "com.qiufeng.erable.stdlib.Reflector#getStatic";

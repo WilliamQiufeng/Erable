@@ -53,7 +53,8 @@ public class ErableCompiler {
     }
     public ErableParser parse(String file) throws IOException{
 	FileInputStream fis=new FileInputStream(file);
-	var ais=CharStreams.fromStream(fis);
+	var ais=new ANTLRInputStream(fis);
+	//var ais=CharStreams.fromStream(fis);
 	ErableLexer lexer=new ErableLexer(ais);
 	CommonTokenStream cts=new CommonTokenStream(lexer);
 	ErableParser parser=new ErableParser(cts);
