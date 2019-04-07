@@ -43,7 +43,6 @@ com/qiufeng/erable/ErableParser$FuncdeclContext.class
 com/qiufeng/erable/Main.class
 com/qiufeng/erable/ErableParser$ElsecondContext.class
 com/qiufeng/erable/ast/DotCode.class
-com/qiufeng/erable/ErableCompiler.class
 com/qiufeng/erable/ErableParser$Try_exprContext.class
 com/qiufeng/erable/ErableParser$ProgContext.class
 com/qiufeng/erable/ErableParser$FunccallContext.class
