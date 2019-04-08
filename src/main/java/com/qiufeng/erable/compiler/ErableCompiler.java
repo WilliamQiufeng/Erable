@@ -16,13 +16,17 @@
  */
 package com.qiufeng.erable.compiler;
 
+import com.qiufeng.erable.Const;
 import com.qiufeng.erable.ErableLexer;
 import com.qiufeng.erable.ErableParser;
+import com.qiufeng.erable.ast.Code;
 import com.qiufeng.erable.ast.EListener;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
@@ -32,6 +36,17 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
  * @author Qiufeng54321
  */
 public class ErableCompiler {
+    public void output(OutputStream os,EListener el){
+	try {
+	    os.write(Const.MAGIC);
+	    os.write(el.pool.generate());
+	    el.root.setFile(os);
+	    el.root.write();
+	}
+	catch (IOException ex) {
+	    Logger.getLogger(ErableCompiler.class.getName()).log(Level.SEVERE, null, ex);
+	}
+    }
     public EListener compile(String file,EListener parent){
 	try{
 	    long start=System.currentTimeMillis();

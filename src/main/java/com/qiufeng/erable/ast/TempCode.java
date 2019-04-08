@@ -16,7 +16,11 @@
  */
 package com.qiufeng.erable.ast;
 
+import static com.qiufeng.erable.Const.ID_LENGTH;
 import com.qiufeng.erable.OpCode;
+import com.qiufeng.erable.util.BitUtils;
+import java.io.IOException;
+import java.util.Arrays;
 
 /**
  *
@@ -43,10 +47,21 @@ public class TempCode extends Code {
 	}
 	return ret;
     }
-
+    /**
+     * LOADC [cid (4B)] [id (4B)]<br>
+     * [0 tag] [1 2 3 4 cid] [5 6 7 8 id]<br>
+     * Total: 9B
+     * @throws java.io.IOException
+     */
     @Override
-    public String write() {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void write() throws IOException{
+	var bts=new byte[9];
+	bts[0]=this.op.getByte();
+	BitUtils.putInt(bts, 1, this.cid);
+	BitUtils.putInt(bts,1+ID_LENGTH,this.id);
+	System.out.println("__TEMP "+this+"____");
+	System.out.println(Arrays.toString(bts));
+	this.file.write(bts);
     }
     
 }

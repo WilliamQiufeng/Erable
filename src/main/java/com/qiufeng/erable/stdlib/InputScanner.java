@@ -27,4 +27,7 @@ public class InputScanner {
     public static String input(){
 	return scanner.nextLine();
     }
+    public static void refresh(){
+	scanner=new Scanner(System.in);
+    }
 }

@@ -14,19 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.qiufeng.erable.ast;
-
-import com.qiufeng.erable.OpCode;
+package com.qiufeng.erable;
 
 /**
  *
  * @author Qiufeng54321
  */
-public class DotCode extends BinaryOpCode {
-
-    public DotCode(int ltid, int rtid,  Code parent) {
-	super(ltid, rtid, OpCode.DOT, parent);
-    }
-
-    
+public class Const {
+    public static byte    MAJOR=0;
+    public static byte    MINOR=1;
+    public static int ID_LENGTH=4;
+    public static byte[]  MAGIC={(byte)0xe4,(byte)0xab,MAJOR,MINOR};
 }

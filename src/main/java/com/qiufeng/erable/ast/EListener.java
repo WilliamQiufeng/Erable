@@ -160,12 +160,14 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitSops(ErableParser.SopsContext ctx) {
 	super.exitSops(ctx);
+	this.current.addCode(new MachineCode(OpCode.END,-1,this.current));
     }
 
     @Override
     public void enterSops(ErableParser.SopsContext ctx) {
 	super.enterSops(ctx);
 	this.current.addCode(new MachineCode(OpCode.BREAKIF,this.current.codes.get(this.current.codes.size()-1).id,this.current));
+	this.current.addCode(new MachineCode(OpCode.START,-1,this.current));
 	
     }
 

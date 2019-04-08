@@ -17,6 +17,10 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
+import static com.qiufeng.erable.Const.ID_LENGTH;
+import com.qiufeng.erable.util.BitUtils;
+import java.io.IOException;
+import java.util.Arrays;
 
 /**
  *
@@ -34,6 +38,21 @@ public class BinaryOpCode extends TempCode{
     @Override
     public String toString() {
 	return super.toString()+"  @" + this.cid + " " + this.op + " @" + this.rtid + " ->" + this.id;
+    }
+    /**
+     * [OP 1B] [LEFT ID 4B] [RIGHT ID 4B] [ID 4B]
+     * @throws IOException 
+     */
+    @Override
+    public void write() throws IOException {
+	byte[] bts=new byte[1+3*ID_LENGTH];
+	bts[0]=this.op.getByte();
+	BitUtils.putInt(bts, 1, this.cid);            //Left
+	System.out.println(this);
+	BitUtils.putInt(bts, 1+ID_LENGTH, this.rtid); //Right
+	BitUtils.putInt(bts, 1+2*ID_LENGTH, this.id); //Self ID
+	System.out.println(Arrays.toString(bts));
+	this.file.write(bts);
     }
     
 }

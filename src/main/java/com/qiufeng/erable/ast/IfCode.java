@@ -17,6 +17,8 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
+import com.qiufeng.erable.util.BitUtils;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -38,6 +40,22 @@ public class IfCode extends TempCode {
     @Override
     public String toString() {
 	return super.toString() + "  if ->" + this.id; 
+    }
+    /**
+     * [TAG 1B] [ID 4B] [CODES (unknown Bytes)] [END]
+     * @throws IOException 
+     */
+    @Override
+    public void write() throws IOException {
+	byte[] bts=new byte[5];
+	bts[0]=this.op.getByte();
+	BitUtils.putInt(bts, 1, id);
+	this.file.write(bts);
+	this.writeCodes();
+	byte[] end=new byte[5];
+	end[0]=OpCode.END.getByte();
+	BitUtils.putInt(end, 1, id);
+	this.file.write(end);
     }
     
 }

@@ -16,6 +16,7 @@
  */
 package com.qiufeng.erable.ast;
 
+import com.qiufeng.erable.OpCode;
 import com.qiufeng.erable.util.ArrayUtils;
 import com.qiufeng.erable.util.BitUtils;
 
@@ -24,7 +25,7 @@ import com.qiufeng.erable.util.BitUtils;
  * @author Qiufeng54321
  */
 public class ConstantPoolString extends ConstantPoolElement {
-    public static byte TAG=0;
+    public static byte TAG=(byte)OpCode.CP_STR.ordinal();
     public ConstantPoolString(String obj) {
 	super(obj);
     }

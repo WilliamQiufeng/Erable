@@ -17,6 +17,10 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
+import static com.qiufeng.erable.Const.ID_LENGTH;
+import com.qiufeng.erable.util.BitUtils;
+import java.io.IOException;
+import java.util.Arrays;
 
 /**
  *
@@ -36,9 +40,20 @@ public class VarCode extends TempCode {
 	return super.toString() + " : variable `" + modifiers + "` "+ this.tag + " = @" + this.cid + " ->" + this.id;
     }
 
+    /**
+     * [TAG 1B] [VALUE ID 4B] [ID 4B]
+     * @throws IOException 
+     */
     @Override
-    public String write() {
-	throw new UnsupportedOperationException("Not supported yet.");
+    public void write() throws IOException {
+	byte[] bts=new byte[9];
+	bts[0]=OpCode.VAR.getByte();
+	BitUtils.putInt(bts, 1, this.cid);
+	BitUtils.putInt(bts, 1+ID_LENGTH,this.id);
+	System.out.println(this);
+	System.out.println(Arrays.toString(bts));
+	this.file.write(bts);
     }
+    
     
 }

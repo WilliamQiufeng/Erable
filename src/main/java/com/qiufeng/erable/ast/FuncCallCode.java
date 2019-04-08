@@ -17,6 +17,9 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
+import com.qiufeng.erable.util.BitUtils;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -36,9 +39,30 @@ public class FuncCallCode extends TempCode {
     public String toString() {
 	return super.toString() + "  " + this.name + "@" + this.cid + args.toString() + " ->" + this.id;
     }
-
+    /**
+     * [CALL_PREPARE 1B] [[PUSH_ARG 1B] [ID 4B]]* [[CALL 1B] [FUNCTION ID 4B] [ID 4B]]
+     * @throws IOException 
+     */
     @Override
-    public String write() {
-	throw new UnsupportedOperationException("Not supported yet.");
+    public void write() throws IOException {
+	this.file.write(this.op.getByte());
+	System.out.println("__CALL_PREPARE "+this+"__");
+	for(int aid : args){
+	    byte[] arg=new byte[5];
+	    arg[0]=OpCode.PUSH_ARG.getByte();
+	    BitUtils.putInt(arg, 1, aid);
+	    this.file.write(arg);
+	    System.out.println("____PUSH_ARG "+aid+"____");
+	    System.out.println(Arrays.toString(arg));
+	}
+	var call=new byte[9];
+	call[0]=OpCode.CALL.getByte();
+	BitUtils.putInt(call, 1, this.cid);
+	BitUtils.putInt(call, 5, this.id);
+	System.out.println("__CALL "+this+"__");
+	System.out.println(Arrays.toString(call));
+	this.file.write(call);
     }
+
+    
 }

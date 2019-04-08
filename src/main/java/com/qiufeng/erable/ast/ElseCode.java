@@ -17,6 +17,8 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
+import com.qiufeng.erable.util.BitUtils;
+import java.io.IOException;
 
 /**
  *
@@ -31,6 +33,17 @@ public class ElseCode extends TempCode {
     @Override
     public String toString() {
 	return super.toString() + "  else ->" + this.id;
+    }
+    /**
+     * [TAG 1B] [IFC 4B]
+     * @throws IOException 
+     */
+    @Override
+    public void write() throws IOException {
+	byte[] bts=new byte[5];
+	bts[0]=this.op.getByte();
+	BitUtils.putInt(bts, 1, this.getParent().id);
+	this.writeCodes();
     }
     
 }

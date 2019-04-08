@@ -17,6 +17,9 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
+import com.qiufeng.erable.util.BitUtils;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -56,6 +59,16 @@ public class FuncDeclCode extends Code {
 	}
 	return super.findVar(name);
     }
+    public void writeArgs() throws IOException{
+	for(FPADCode f : this.args){
+	    byte[] arg=new byte[5];
+	    arg[0]=OpCode.PUSH_ARGDECL.getByte();
+	    BitUtils.putInt(arg, 1, f.id);
+	    System.out.println("___ARG_PUSH___"+f);
+	    System.out.println(Arrays.toString(arg));;
+	    this.file.write(arg);
+	}
+    }
     /**
      * 
      * 写出的时候:<br>
@@ -63,12 +76,20 @@ public class FuncDeclCode extends Code {
      * 2、一个个按照this.args写入FUNCTION_PUSH_ARGS_DECL<br>
      * 3、写入PUSH_SCOPE<br>
      * 4、写入codes<br>
-     * 5、写入POP_SCOPE
+     * 5、写入POP_SCOPE<br>
+     * [FUNCTION 1B] [ID 4B] [[PUSH_ARGDECL 1B] [ID 4B]]* [START_DO 1B] [CODES (unknown bytes)] [END_FUNCDECL 1B]
      * @return 
      */
     @Override
-    public String write() {
-	throw new UnsupportedOperationException("Not supported yet.");
+    public void write() throws IOException {
+	byte[] header=new byte[5];
+	header[0]=this.op.getByte();
+	BitUtils.putInt(header, 1, id);
+	System.out.println("___FUNCDECL___" + this);
+	System.out.println(Arrays.toString(header));
+	this.writeArgs();
+	this.writeCodes();
+	System.out.println("___END "+this+" ___");
     }
 
     @Override

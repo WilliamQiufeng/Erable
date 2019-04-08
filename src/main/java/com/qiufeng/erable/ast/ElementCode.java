@@ -16,7 +16,10 @@
  */
 package com.qiufeng.erable.ast;
 
+import static com.qiufeng.erable.Const.ID_LENGTH;
 import com.qiufeng.erable.OpCode;
+import com.qiufeng.erable.util.BitUtils;
+import java.io.IOException;
 
 /**
  *
@@ -27,5 +30,12 @@ public class ElementCode extends BinaryOpCode{
     public ElementCode(int ltid, int rtid, Code parent) {
 	super(ltid, rtid, OpCode.ELEMENT, parent);
     }
-    
+    /**
+     * [OP 1B] [LEFT ID 4B] [RIGHT ID 4B] [ID 4B]
+     * @throws IOException 
+     */
+    @Override
+    public void write() throws IOException {
+	super.write();
+    }
 }

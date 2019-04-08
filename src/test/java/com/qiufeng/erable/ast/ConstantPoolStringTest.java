@@ -56,7 +56,7 @@ public class ConstantPoolStringTest {
     public void testSerialise() {
 	System.out.println("----------Testing ConstantPoolString#serialise");
 	ConstantPoolString instance = new ConstantPoolString("hello world!你好世界！");
-	byte[] expResult = {0, 0, 0, 0, 17, 104, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 33, -28, -67, -96, -27, -91, -67, -28, -72, -106, -25, -107, -116, -17, -68, -127};
+	byte[] expResult = {2, 0, 0, 0, 17, 104, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 33, -28, -67, -96, -27, -91, -67, -28, -72, -106, -25, -107, -116, -17, -68, -127};
 	byte[] result = instance.serialise();
 	System.out.println("result:"+new String(result));
 	System.out.println("exp:'"+Arrays.toString(expResult)+"',res="+Arrays.toString(result));
@@ -70,7 +70,7 @@ public class ConstantPoolStringTest {
     public void testGenerateHeader() {
 	System.out.println("----------Testing ConstantPoolString#generateHeader");
 	ConstantPoolString instance = new ConstantPoolString("hello world!你好世界！");
-	byte[] expResult = {0,0,0,0,17};
+	byte[] expResult = {2,0,0,0,17};
 	byte[] result = instance.generateHeader();
 	System.out.println("exp:'"+Arrays.toString(expResult)+"',res="+Arrays.toString(result));
 	assertArrayEquals(expResult, result);

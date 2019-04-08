@@ -1,5 +1,4 @@
 com/qiufeng/erable/ErableParser$PairsContext.class
-com/qiufeng/erable/std/InputScanner.class
 com/qiufeng/erable/ErableParser$ArgsContext.class
 simperrParser.class
 com/qiufeng/erable/ast/FuncDeclCode.class
@@ -27,6 +26,8 @@ simperrListener.class
 com/qiufeng/erable/ast/ArrayCode.class
 com/qiufeng/erable/ast/ConstantPoolElement.class
 com/qiufeng/erable/ErableParser$StringContext.class
+com/qiufeng/erable/ErableParser$Parent_expressionContext.class
+com/qiufeng/erable/MultiplePrintStream.class
 com/qiufeng/erable/ErableParser$SblockContext.class
 com/qiufeng/erable/ErableParser$CondexprsContext.class
 com/qiufeng/erable/ast/IfCode.class
@@ -36,15 +37,16 @@ com/qiufeng/erable/ast/FPADCode.class
 com/qiufeng/erable/exception/UnknownException.class
 com/qiufeng/erable/ast/UnaryOpCode.class
 com/qiufeng/erable/exception/UndefinedException.class
+com/qiufeng/erable/stdlib/Reflector.class
 com/qiufeng/erable/ErableParser$PairContext.class
 simperrParser$VarContext.class
 com/qiufeng/erable/ast/VarCode.class
 com/qiufeng/erable/ErableParser$FuncdeclContext.class
 com/qiufeng/erable/Main.class
 com/qiufeng/erable/ErableParser$ElsecondContext.class
-com/qiufeng/erable/ast/DotCode.class
 com/qiufeng/erable/ErableParser$Try_exprContext.class
 com/qiufeng/erable/ErableParser$ProgContext.class
+com/qiufeng/erable/stdlib/InputScanner.class
 com/qiufeng/erable/ErableParser$FunccallContext.class
 com/qiufeng/erable/ErableParser$SopsContext.class
 com/qiufeng/erable/ast/MachineCode.class
@@ -62,6 +64,7 @@ com/qiufeng/erable/ErableParser$TypesContext.class
 com/qiufeng/erable/ast/ElseCode.class
 com/qiufeng/erable/ErableParser$This_expressionContext.class
 com/qiufeng/erable/ErableParser$NameContext.class
+com/qiufeng/erable/compiler/ErableCompiler.class
 simperrBaseListener.class
 com/qiufeng/erable/ast/BinaryOpCode.class
 com/qiufeng/erable/ast/FuncCallCode.class
@@ -74,7 +77,7 @@ com/qiufeng/erable/ErableParser$KvsContext.class
 com/qiufeng/erable/ErableParser$IfcondContext.class
 com/qiufeng/erable/ast/ConstantPool.class
 com/qiufeng/erable/ast/ObjectCode.class
+com/qiufeng/erable/Const.class
 com/qiufeng/erable/OpCode.class
-com/qiufeng/erable/std/Reflector.class
 com/qiufeng/erable/VarModifiers.class
 com/qiufeng/erable/ast/ElementCode.class

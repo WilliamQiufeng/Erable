@@ -25,16 +25,24 @@ public class ArrayUtils {
 		return arr;
 	}
 	public static <T> T[] push(T[] arr,T[] arr2){
-	    for(T t : arr2){
-		arr=ArrayUtils.push(arr, t);
-	    }
+	    var offset=arr.length;
+	    arr=Arrays.copyOf(arr, arr.length+arr2.length);
+	    System.arraycopy(arr2, 0, arr, offset, arr2.length);
 	    return arr;
 	}
 	public static byte[] push(byte[] arr,byte[] arr2){
-	    for(byte t : arr2){
-		arr=ArrayUtils.push(arr, t);
-	    }
+	    var offset=arr.length;
+	    arr=Arrays.copyOf(arr, arr.length+arr2.length);
+	    System.arraycopy(arr2, 0, arr, offset, arr2.length);
 	    return arr;
+	}
+	public static<T> T[] push(T[]... arrs){
+	    if(arrs.length<2)
+		throw new UnsupportedOperationException("Length under 2");
+	    for(int i=1;i<arrs.length;i++){
+		arrs[0]=ArrayUtils.push(arrs[0],arrs[i]);
+	    }
+	    return arrs[0];
 	}
 	public static byte[] join(byte[] arr,String str){
 	    return ArrayUtils.push(arr, str.getBytes());

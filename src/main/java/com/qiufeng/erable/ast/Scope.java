@@ -17,6 +17,7 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
+import java.io.IOException;
 
 /**
  *
@@ -35,10 +36,15 @@ public class Scope extends Code {
 	    return this.getParent().getParent();
 	return super.getMeaningfulParent();
     }
-    
+    /**
+     * [PUSH_SCOPE 1B] [CODES (unknown bytes)] [POP_SCOPE 1B]
+     * @throws IOException 
+     */
     @Override
-    public String write() {
-	throw new UnsupportedOperationException("Not supported yet.");
+    public void write() throws IOException{
+	this.file.write(OpCode.PUSH_SCOPE.getByte());
+	this.writeCodes();
+	this.file.write(OpCode.POP_SCOPE.getByte());
     }
 
     @Override

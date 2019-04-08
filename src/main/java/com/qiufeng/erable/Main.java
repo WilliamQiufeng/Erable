@@ -29,6 +29,8 @@ public class Main
     public OutputStream dp;
     @Option(name="-q",usage="Quiet.No Outputs")
     public boolean quiet=false;
+    @Option(name="-o",usage="specifies the output compiled file")
+    public String output=null;
     @Argument
     List<String> arguments=new ArrayList<String>();
     public static void main( String[] args )
@@ -68,6 +70,14 @@ public class Main
 	var el=compiler.compile(file,null);
 	this.printConstantPool(el.getPool());
 	this.printTree(el.root);
+	System.out.println("Starting Compiler...");
+	try {
+	    FileOutputStream fos=new FileOutputStream(this.output);
+	    compiler.output(fos, el);
+	}
+	catch (FileNotFoundException ex) {
+	    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+	}
     }
     public void println(String sth){
 	if(!this.quiet){

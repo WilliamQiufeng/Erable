@@ -17,6 +17,7 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
+import java.io.IOException;
 
 /**
  * 这个句式，与if,else一样有点特殊，
@@ -41,6 +42,18 @@ public class WhileCode extends TempCode {
     public boolean addCode(Code code) {
 	boolean ret=super.addCode(code);
 	return ret;
+    }
+    /**
+     * [WHILE 1B] [CODES] [END 1B]
+     * @throws IOException 
+     */
+    @Override
+    public void write() throws IOException {
+	this.file.write(OpCode.WHILE.getByte());
+	System.out.println("__WHILE "+this+"___");
+	this.writeCodes();
+	this.file.write(OpCode.END.getByte());
+	System.out.println("__END "+this+"__");
     }
     
     @Override

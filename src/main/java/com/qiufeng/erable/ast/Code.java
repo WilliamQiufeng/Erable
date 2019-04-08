@@ -17,7 +17,8 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
-import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +62,7 @@ public abstract class Code implements Comparable{
     /**
      * The file for output.
      */
-    public        File        file ;
+    public        OutputStream        file ;
     /**
      * OpCode
      */
@@ -86,9 +87,14 @@ public abstract class Code implements Comparable{
     }
     /**
      * write method
-     * @return the serialised string including the codes it has
+     * @throws java.io.IOException
      */
-    public abstract String write();
+    public abstract void write() throws IOException;
+    public void writeCodes() throws IOException{
+	for(Code c : this.codes){
+	    c.write();
+	}
+    }
     /**
      * bind a parent
      * @param code specify its parent
@@ -100,9 +106,20 @@ public abstract class Code implements Comparable{
      * Set file for output.
      * @param file output file.
      */
-    public void setFile(File file){
+    public void setFile(OutputStream file){
 	this.file=file;
+	for(Code c : this.codes){
+	    c.setFile(file);
+	}
     }
+    /**
+     * Gets the output stream.
+     * @return the output stream.
+     */
+    public OutputStream getFile() {
+	return file;
+    }
+    
     /**
      * find a code with the tag.<br>
      * usually used to find a variable or function.

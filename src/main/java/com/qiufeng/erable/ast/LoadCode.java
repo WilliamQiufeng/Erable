@@ -17,6 +17,8 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
+import com.qiufeng.erable.util.BitUtils;
+import java.io.IOException;
 
 /**
  *
@@ -26,6 +28,21 @@ public class LoadCode extends TempCode {
 
     public LoadCode(int lib, Code parent) {
 	super(lib,OpCode.LOAD_LIB, parent);
+    }
+    /**
+     * [TAG 1B] [LIB ID 4B]
+     * @throws IOException 
+     */
+    @Override
+    public void write() throws IOException {
+	byte[] bts=new byte[5];
+	bts[0]=this.op.getByte();
+	BitUtils.putInt(bts, 1, this.cid);
+    }
+
+    @Override
+    public String toString() {
+	return super.toString() + "  load " + this.cid;
     }
     
 }

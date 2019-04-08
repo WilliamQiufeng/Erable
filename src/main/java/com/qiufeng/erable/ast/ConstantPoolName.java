@@ -19,9 +19,10 @@ package com.qiufeng.erable.ast;
 import com.qiufeng.erable.util.ArrayUtils;
 
 /**
- *
+ * @deprecated Names will be translated into ids now.
  * @author Qiufeng54321
  */
+@Deprecated
 public class ConstantPoolName extends ConstantPoolElement {
     public static byte TAG=2;
     @Override

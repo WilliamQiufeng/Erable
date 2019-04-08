@@ -17,6 +17,9 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
+import com.qiufeng.erable.util.BitUtils;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,7 +31,19 @@ public class NativeFuncDeclCode extends FuncDeclCode {
     public NativeFuncDeclCode(String name,int nativeCall, List<FPADCode> args, Code parent) {
 	super(name, args, parent);
 	this.nativeCall=nativeCall;
-	this.op=OpCode.NATIVE;
+	this.op=OpCode.NATIVE_FUNCDECL;
+    }
+
+    @Override
+    public void write() throws IOException {
+	byte[] header=new byte[9];
+	header[0]=this.op.getByte();
+	BitUtils.putInt(header, 1, id);
+	BitUtils.putInt(header, 5, this.nativeCall);
+	System.out.println("___NATIVE_FUNCDECL___" + this);
+	System.out.println(Arrays.toString(header));
+	this.writeArgs();
+	System.out.println("___END "+this+" ___");
     }
 
     @Override

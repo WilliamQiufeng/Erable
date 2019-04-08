@@ -16,6 +16,7 @@
  */
 package com.qiufeng.erable.ast;
 
+import com.qiufeng.erable.OpCode;
 import com.qiufeng.erable.util.ArrayUtils;
 import com.qiufeng.erable.util.BitUtils;
 import java.util.ArrayList;
@@ -26,7 +27,6 @@ import java.util.Arrays;
  * @author Qiufeng54321
  */
 public class ConstantPool {
-    public static byte TAG=127;
     public ArrayList<ConstantPoolElement> elements;
     public int currentId=0;
     public ConstantPool(){
@@ -85,7 +85,7 @@ public class ConstantPool {
 	var length=new byte[4];
 	var elementsSerialised=new byte[0];
 	var result=new byte[0];
-	header=ArrayUtils.push(header, ConstantPool.TAG);
+	header=ArrayUtils.push(header, (byte)OpCode.CONSTANT_POOL.ordinal());
 	BitUtils.putInt(length,0, len);
 	for(var element : this.elements){
 	    if(element instanceof ConstantPoolName){

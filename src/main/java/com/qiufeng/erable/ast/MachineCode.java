@@ -17,6 +17,8 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
+import com.qiufeng.erable.util.BitUtils;
+import java.io.IOException;
 
 /**
  *
@@ -30,10 +32,19 @@ public class MachineCode extends Code {
 	this.sign=Code.FLAG;
 	this.refid=refid;
     }
-
+    /**
+     * [OP 1B] [TARGET ID 4B]?
+     * @throws IOException 
+     */
     @Override
-    public String write() {
-	throw new UnsupportedOperationException("Not supported yet.");
+    public void write() throws IOException {
+	this.file.write(this.op.getByte());
+	System.out.println("__FLAG "+this);
+	if(this.refid!=-1){
+	    byte[] bts=new byte[4];
+	    BitUtils.putInt(bts, 0, this.refid);
+	    this.file.write(bts);
+	}
     }
 
     @Override

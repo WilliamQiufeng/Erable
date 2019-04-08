@@ -17,6 +17,9 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
+import com.qiufeng.erable.util.BitUtils;
+import java.io.IOException;
+import java.util.Arrays;
 
 /**
  *
@@ -25,7 +28,7 @@ import com.qiufeng.erable.OpCode;
 public class TryCatchCode extends TempCode {
     public FPADCode mCatch;
     public TryCatchCode(Code parent) {
-	super(-1,OpCode.TRY_START, parent);
+	super(-1,OpCode.TRY, parent);
 	this.sign="^";
     }
 
@@ -43,6 +46,22 @@ public class TryCatchCode extends TempCode {
 	    return mCatch.id;
 	}
 	return super.findVar(name);
+    }
+    /**
+     * [[TRY 1B] [ID 4B]] [TRY_START 1B] [CODES] [TRY_END 1B] [CATCH_ID 4B] [CATCH_START 1B] [CODES] [CATCH_END 1B] [[FINALLY 1B] [CODES]]? [END]  
+     * @throws IOException 
+     */
+    @Override
+    public void write() throws IOException {
+	var header=new byte[5];
+	header[0]=this.op.getByte();
+	BitUtils.putInt(header, 1, id);
+	System.out.println("___TRY "+this+"___");
+	System.out.println(Arrays.toString(header));
+	this.file.write(header);
+	this.writeCodes();
+	this.file.write(OpCode.END.getByte());
+	System.out.println("__END TRY "+this+"__");
     }
 
     @Override

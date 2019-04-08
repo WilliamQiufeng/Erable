@@ -17,6 +17,7 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
+import java.io.IOException;
 
 /**
  *
@@ -26,6 +27,18 @@ public class ObjectCode extends TempCode {
     public boolean isKey=true;
     public ObjectCode(Code parent) {
 	super(-1,OpCode.OBJECT, parent);
+    }
+    /**
+     * [OBJECT 1B] [[START_PAIR 1B] [CODE(KEY)] [KEY 4B] [CODE(VALUE)] [VALUE 4B] [END_PAIR 1B]]* [END 1B]
+     * @throws IOException 
+     */
+    @Override
+    public void write() throws IOException {
+	this.file.write(OpCode.OBJECT.getByte());
+	System.out.println("__START OBJECT "+this+"__");
+	this.writeCodes();
+	this.file.write(OpCode.END.getByte());
+	System.out.println("__END OBJECT "+this+"__");
     }
 
     @Override

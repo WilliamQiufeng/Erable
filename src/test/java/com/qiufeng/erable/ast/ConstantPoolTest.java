@@ -112,7 +112,7 @@ public class ConstantPoolTest {
     @Test
     public void testGenerate() {
 	System.out.println("----------Testing ConstantPool#generate");
-	byte[] expResult = {127, 0, 0, 0, 7, 0, 0, 0, 0, 1, 97, 0, 0, 0, 0, 1, 98, 0, 0, 0, 0, 1, 99, 0, 0, 0, 0, 1, 100, 1, 64, -2, 36, 12, -97, -53, 12, 2, 1, 65, 21, 25, 59, -102, -35, 21, -16, 1, 65, 33, 84, -92, 63, 53, -97, -11};
+	byte[] expResult = {0, 0, 0, 0, 7, 2, 0, 0, 0, 1, 97, 2, 0, 0, 0, 1, 98, 2, 0, 0, 0, 1, 99, 2, 0, 0, 0, 1, 100, 1, 64, -2, 36, 12, -97, -53, 12, 2, 1, 65, 21, 25, 59, -102, -35, 21, -16, 1, 65, 33, 84, -92, 63, 53, -97, -11};
 	byte[] result = instance.generate();
 	System.out.println("Generated Constant Pool:"+new String(result));
 	System.out.println("--As bytes:"+Arrays.toString(result));
