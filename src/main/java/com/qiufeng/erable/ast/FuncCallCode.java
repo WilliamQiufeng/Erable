@@ -45,23 +45,19 @@ public class FuncCallCode extends TempCode {
      */
     @Override
     public void write() throws IOException {
-	this.file.write(this.op.getByte());
+	this.writeOpCode(this.op);
+	this.writeId(this.id);
 	System.out.println("__CALL_PREPARE "+this+"__");
 	for(int aid : args){
-	    byte[] arg=new byte[5];
-	    arg[0]=OpCode.PUSH_ARG.getByte();
-	    BitUtils.putInt(arg, 1, aid);
-	    this.file.write(arg);
+	    this.writeOpCode(OpCode.PUSH_ARG);
+	    this.writeId(aid);
+	    this.writeId(this.id);
 	    System.out.println("____PUSH_ARG "+aid+"____");
-	    System.out.println(Arrays.toString(arg));
 	}
-	var call=new byte[9];
-	call[0]=OpCode.CALL.getByte();
-	BitUtils.putInt(call, 1, this.cid);
-	BitUtils.putInt(call, 5, this.id);
+	this.writeOpCode(OpCode.CALL);
+	this.writeId(this.cid);
+	this.writeId(this.id);
 	System.out.println("__CALL "+this+"__");
-	System.out.println(Arrays.toString(call));
-	this.file.write(call);
     }
 
     

@@ -14,32 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.qiufeng.erable.ast;
 
-import com.qiufeng.erable.util.ArrayUtils;
+package com.qiufeng.erable.vm;
 
 /**
- * @deprecated Names will be translated into ids now.
+ * @since 2019年4月9日
  * @author Qiufeng54321
  */
-@Deprecated
-public class ConstantPoolName extends ConstantPoolElement {
-    public static byte TAG=2;
-    @Override
-    public byte[] serialise() {
-	var header=this.generateHeader();
-	header=ArrayUtils.join(header, (String)obj);
-	return header;
-    }
+public class ErableVM {
 
-    @Override
-    public byte[] generateHeader() {
-	var header=new byte[]{ConstantPoolName.TAG};
-	return header;
-    }
-
-    public ConstantPoolName(String obj) {
-	super(obj);
-    }
-    
 }

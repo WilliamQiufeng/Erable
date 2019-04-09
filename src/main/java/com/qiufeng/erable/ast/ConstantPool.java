@@ -16,20 +16,23 @@
  */
 package com.qiufeng.erable.ast;
 
+import com.qiufeng.erable.Const;
 import com.qiufeng.erable.OpCode;
 import com.qiufeng.erable.util.ArrayUtils;
 import com.qiufeng.erable.util.BitUtils;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  *
  * @author Qiufeng54321
  */
-public class ConstantPool {
+public class ConstantPool extends Code {
     public ArrayList<ConstantPoolElement> elements;
     public int currentId=0;
-    public ConstantPool(){
+    public ConstantPool(Code parent){
+	super("ConstantPool",OpCode.CONSTANT_POOL,parent);
 	elements=new ArrayList<>();
     }
     /**
@@ -44,6 +47,10 @@ public class ConstantPool {
 	//Set the id
 	cpe.id=this.currentId++;
 	elements.add(cpe);
+	if(currentId>Byte.MAX_VALUE)
+	    Const.setCidLen(2);
+	if(currentId>Short.MAX_VALUE)
+	    Const.setCidLen(4);
 	return cpe.id;
     }
     /**
@@ -70,6 +77,15 @@ public class ConstantPool {
 	}
 	return -1;
     }
+
+    @Override
+    public void setFile(OutputStream file) {
+	super.setFile(file);
+	for(var cpe : this.elements){
+	    cpe.setFile(file);
+	}
+    }
+    
     /**
      * Generate the whole ConstantPool.<br>
      * Structure:<br>
@@ -79,25 +95,13 @@ public class ConstantPool {
      * @see ConstantPoolElement,ConstantPoolString,ConstantPoolNumber
      * @return 
      */
-    public byte[] generate(){
+    @Override
+    public void write()throws IOException {
 	var len=this.elements.size();
-	var header=new byte[0];
-	var length=new byte[4];
-	var elementsSerialised=new byte[0];
-	var result=new byte[0];
-	header=ArrayUtils.push(header, (byte)OpCode.CONSTANT_POOL.ordinal());
-	BitUtils.putInt(length,0, len);
+	this.writeOpCode(this.op);
+	this.writeCid(len);
 	for(var element : this.elements){
-	    if(element instanceof ConstantPoolName){
-		elementsSerialised=ArrayUtils.push(elementsSerialised,new byte[]{3});
-		continue;
-	    }
-	    var serialised=element.serialise();
-	    elementsSerialised=ArrayUtils.push(elementsSerialised, serialised);
+	    element.write();
 	}
-	result=ArrayUtils.push(result, header);
-	result=ArrayUtils.push(result, length);
-	result=ArrayUtils.push(result, elementsSerialised);
-	return result;
     }
 }

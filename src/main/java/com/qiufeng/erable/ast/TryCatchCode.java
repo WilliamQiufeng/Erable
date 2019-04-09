@@ -53,14 +53,12 @@ public class TryCatchCode extends TempCode {
      */
     @Override
     public void write() throws IOException {
-	var header=new byte[5];
-	header[0]=this.op.getByte();
-	BitUtils.putInt(header, 1, id);
+	this.writeOpCode(this.op);
+	this.writeId(this.id);
 	System.out.println("___TRY "+this+"___");
-	System.out.println(Arrays.toString(header));
-	this.file.write(header);
 	this.writeCodes();
-	this.file.write(OpCode.END.getByte());
+	this.writeOpCode(OpCode.END);
+	this.writeId(this.id);
 	System.out.println("__END TRY "+this+"__");
     }
 

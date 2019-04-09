@@ -30,6 +30,11 @@ public class UnaryOpCode extends TempCode {
 
     public UnaryOpCode(int tid, OpCode op, Code parent) {
 	super(tid, op, parent);
+	if(op==OpCode.ADD){
+	    this.op=OpCode.POS;
+	}else if(op==OpCode.SUB){
+	    this.op=OpCode.NEG;
+	}
     }
 
     @Override
@@ -44,13 +49,11 @@ public class UnaryOpCode extends TempCode {
      */
     @Override
     public void write() throws IOException {
-	byte[] bts=new byte[1+ID_LENGTH*2];
 	System.out.println(this);
-	bts[0]=this.op.getByte();
-	BitUtils.putInt(bts, 1, this.cid);
-	BitUtils.putInt(bts, 1+ID_LENGTH, this.id);
-	System.out.println(Arrays.toString(bts));;
-	this.file.write(bts);
+	this.writeOpCode(this.op);
+	this.writeId(this.cid);
+	this.writeId(this.id);
+	System.out.println("__END "+this+"___");
     }
     
 }

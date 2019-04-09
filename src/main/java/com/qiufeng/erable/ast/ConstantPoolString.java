@@ -19,6 +19,7 @@ package com.qiufeng.erable.ast;
 import com.qiufeng.erable.OpCode;
 import com.qiufeng.erable.util.ArrayUtils;
 import com.qiufeng.erable.util.BitUtils;
+import java.io.IOException;
 
 /**
  *
@@ -36,10 +37,9 @@ public class ConstantPoolString extends ConstantPoolElement {
      * @return The serialised code.
      */
     @Override
-    public byte[] serialise() {
-	byte[] header=this.generateHeader();
-	header=ArrayUtils.join(header, (String)obj);
-	return header;
+    public void write() throws IOException{
+	this.generateHeader();
+	this.file.write(((String)obj).getBytes());
     }
     /**
      * Generates the header.<br>
@@ -48,17 +48,13 @@ public class ConstantPoolString extends ConstantPoolElement {
      * Finally,It joins the tag and length to make byte[5] and returns it.<br>
      * For example we create an instance: <code>new ConstantPoolString("hello world!你好世界！")</code><br>
      * And then we get the header: new byte[]{0,    0,0,0,17}<br>
-     * @return new byte[]{TAG,length(4 bytes)}
      */
-    @Override
-    public byte[] generateHeader() {
+    public void generateHeader() throws IOException {
 	String str=(String)obj;
-	byte[] header=new byte[0];
-	header=ArrayUtils.push(header, ConstantPoolString.TAG);
+	this.writeOpCode(OpCode.CP_STR);
 	byte[] length=new byte[4];
 	BitUtils.putInt(length, 0, str.length());
-	header=ArrayUtils.push(header, length);
-	return header;
+	this.file.write(length);
     }
     
 }

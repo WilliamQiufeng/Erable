@@ -18,4 +18,9 @@ Any value defined here will override the pom.xml file value but is only applicab
         <org-netbeans-modules-javascript2-requirejs.enabled>true</org-netbeans-modules-javascript2-requirejs.enabled>
         <org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.expand-tabs>false</org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.expand-tabs>
     </properties>
+    <config-data xmlns="http://www.netbeans.org/ns/maven-config-data/1">
+        <configurations>
+            <configuration id="ErableDump" profiles=""/>
+        </configurations>
+    </config-data>
 </project-shared-configuration>

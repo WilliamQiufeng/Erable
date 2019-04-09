@@ -16,7 +16,10 @@
  */
 package com.qiufeng.erable.ast;
 
+import static com.qiufeng.erable.Const.CID_LENGTH;
+import static com.qiufeng.erable.Const.ID_LENGTH;
 import com.qiufeng.erable.OpCode;
+import com.qiufeng.erable.util.BitUtils;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -94,6 +97,33 @@ public abstract class Code implements Comparable{
 	for(Code c : this.codes){
 	    c.write();
 	}
+    }
+    public void writeCid(int i)throws IOException{
+	byte[] bts=new byte[CID_LENGTH];
+	if(CID_LENGTH>2){
+	    BitUtils.putInt(bts, 0, i);
+	    this.file.write(bts);
+	}else if(CID_LENGTH==2){
+	    BitUtils.putShort(bts, 0, (short)i);
+	    this.file.write(bts);
+	}else if(CID_LENGTH==1){
+	    this.file.write((byte)i);
+	}
+    }
+    public void writeId(int i)throws IOException{
+	byte[] bts=new byte[ID_LENGTH];
+	if(ID_LENGTH>2){
+	    BitUtils.putInt(bts, 0, i);
+	    this.file.write(bts);
+	}else if(ID_LENGTH==2){
+	    BitUtils.putShort(bts, 0, (short)i);
+	    this.file.write(bts);
+	}else if(ID_LENGTH==1){
+	    this.file.write((byte)i);
+	}
+    }
+    public void writeOpCode(OpCode op)throws IOException{
+	this.file.write(op.ordinal());
     }
     /**
      * bind a parent

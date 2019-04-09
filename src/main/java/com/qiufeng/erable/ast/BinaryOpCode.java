@@ -45,14 +45,11 @@ public class BinaryOpCode extends TempCode{
      */
     @Override
     public void write() throws IOException {
-	byte[] bts=new byte[1+3*ID_LENGTH];
-	bts[0]=this.op.getByte();
-	BitUtils.putInt(bts, 1, this.cid);            //Left
+	this.writeOpCode(this.op);
+	this.writeId(this.cid);            //Left
 	System.out.println(this);
-	BitUtils.putInt(bts, 1+ID_LENGTH, this.rtid); //Right
-	BitUtils.putInt(bts, 1+2*ID_LENGTH, this.id); //Self ID
-	System.out.println(Arrays.toString(bts));
-	this.file.write(bts);
+	this.writeId(this.rtid); //Right
+	this.writeId(this.id); //Self ID
     }
     
 }

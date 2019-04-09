@@ -4,7 +4,6 @@ import com.qiufeng.erable.ast.Code;
 import com.qiufeng.erable.ast.ConstantPool;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -31,6 +30,8 @@ public class Main
     public boolean quiet=false;
     @Option(name="-o",usage="specifies the output compiled file")
     public String output=null;
+    @Option(name="-f4",usage="Force using 4-bytes long id")
+    public boolean use4=false;
     @Argument
     List<String> arguments=new ArrayList<String>();
     public static void main( String[] args )
@@ -50,9 +51,21 @@ public class Main
 	    clp.printUsage(System.err);
 	    return;
 	}
+	if(use4){
+	    Const.setCidLen(4);
+	    Const.setIdLen(4);
+	}
 	if(file==null){
 	    file="test.erable";
 	    System.out.println("File not specified.Using default:"+file);
+	}
+	if(this.quiet){
+	    try {
+		System.setOut(new PrintStream("null.log"));
+	    }
+	    catch (FileNotFoundException ex) {
+		Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+	    }
 	}
 	if(this.debugPath!=null){
 	    try{
@@ -70,6 +83,12 @@ public class Main
 	var el=compiler.compile(file,null);
 	this.printConstantPool(el.getPool());
 	this.printTree(el.root);
+	if(el.root.currentId>Byte.MAX_VALUE){
+	    Const.setIdLen(2);
+	}
+	if(el.root.currentId>Short.MAX_VALUE){
+	    Const.setIdLen(4);
+	}
 	System.out.println("Starting Compiler...");
 	try {
 	    FileOutputStream fos=new FileOutputStream(this.output);
@@ -80,9 +99,7 @@ public class Main
 	}
     }
     public void println(String sth){
-	if(!this.quiet){
-	    System.out.println(sth);
-	}
+	System.out.println(sth);
     }
     public void println(String sth,boolean showTree){
 	if(showTree)
@@ -95,6 +112,7 @@ public class Main
 	});
     }
     public void printTree(Code root){
+	if(!showTree)return;
 	var tree=root.tree(0);
 	println(tree,showTree);
     }

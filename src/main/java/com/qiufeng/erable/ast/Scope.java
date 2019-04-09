@@ -42,9 +42,11 @@ public class Scope extends Code {
      */
     @Override
     public void write() throws IOException{
-	this.file.write(OpCode.PUSH_SCOPE.getByte());
+	this.writeOpCode(this.op);
+	this.writeId(id);
 	this.writeCodes();
-	this.file.write(OpCode.POP_SCOPE.getByte());
+	this.writeOpCode(OpCode.POP_SCOPE);
+	this.writeId(id);
     }
 
     @Override

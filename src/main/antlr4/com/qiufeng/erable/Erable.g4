@@ -164,7 +164,7 @@ elsecond
   ;
 whilecond
   returns [Object obj,int id]
-  : WHILE LPA cond=ops RPA pdo=sblock
+  : WHILE LPA cond=ops RPA pdo=sops
   ;
 name
   returns [Object obj,int id]

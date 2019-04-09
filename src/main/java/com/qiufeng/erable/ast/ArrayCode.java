@@ -17,6 +17,7 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,6 +30,18 @@ public class ArrayCode extends TempCode {
     public ArrayCode(List<Integer> arr, Code parent) {
 	super(-1, OpCode.ARRAY, parent);
 	this.arr=arr;
+    }
+
+    @Override
+    public void write() throws IOException {
+	this.writeOpCode(this.op);
+	this.writeId(this.id);
+	for(int i : this.arr){
+	    this.file.write(OpCode.PUSH_ELEMENT.getByte());
+	    this.writeId(i);
+	}
+	this.file.write(OpCode.END.getByte());
+	this.writeId(this.id);
     }
 
     @Override

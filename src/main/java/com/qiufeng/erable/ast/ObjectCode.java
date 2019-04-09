@@ -34,10 +34,12 @@ public class ObjectCode extends TempCode {
      */
     @Override
     public void write() throws IOException {
-	this.file.write(OpCode.OBJECT.getByte());
+	this.writeOpCode(this.op);
+	this.writeId(id);
 	System.out.println("__START OBJECT "+this+"__");
 	this.writeCodes();
-	this.file.write(OpCode.END.getByte());
+	this.writeOpCode(OpCode.END);
+	this.writeId(id);
 	System.out.println("__END OBJECT "+this+"__");
     }
 

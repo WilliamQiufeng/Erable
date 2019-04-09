@@ -38,8 +38,7 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 public class ErableCompiler {
     public void output(OutputStream os,EListener el){
 	try {
-	    os.write(Const.MAGIC);
-	    os.write(el.pool.generate());
+	    os.write(Const.HEADER);
 	    el.root.setFile(os);
 	    el.root.write();
 	}

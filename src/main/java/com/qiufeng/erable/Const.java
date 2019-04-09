@@ -17,12 +17,25 @@
 package com.qiufeng.erable;
 
 /**
- *
+ * 
  * @author Qiufeng54321
  */
 public class Const {
     public static byte    MAJOR=0;
     public static byte    MINOR=1;
-    public static int ID_LENGTH=4;
-    public static byte[]  MAGIC={(byte)0xe4,(byte)0xab,MAJOR,MINOR};
+    public static byte ID_LENGTH=1;
+    public static byte CID_LENGTH=1;
+    public static byte[]   MAGIC={(byte)0xe4,(byte)0xab};
+    public static byte[]  HEADER={MAGIC[0],MAGIC[1],MAJOR,MINOR,(byte)((ID_LENGTH<<4)|CID_LENGTH)};
+    public static void setIdLen(int len){
+	Const.ID_LENGTH=(byte)len;
+	refreshLen();
+    }
+    public static void setCidLen(int len){
+	Const.CID_LENGTH=(byte)len;
+	refreshLen();
+    }
+    public static void refreshLen(){
+	HEADER[4]=(byte)((ID_LENGTH<<4)|CID_LENGTH);
+    }
 }

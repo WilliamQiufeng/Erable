@@ -46,13 +46,10 @@ public class VarCode extends TempCode {
      */
     @Override
     public void write() throws IOException {
-	byte[] bts=new byte[9];
-	bts[0]=OpCode.VAR.getByte();
-	BitUtils.putInt(bts, 1, this.cid);
-	BitUtils.putInt(bts, 1+ID_LENGTH,this.id);
+	this.writeOpCode(this.op);
+	this.writeId(this.cid);
+	this.writeId(this.id);
 	System.out.println(this);
-	System.out.println(Arrays.toString(bts));
-	this.file.write(bts);
     }
     
     

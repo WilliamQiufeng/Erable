@@ -19,6 +19,7 @@ package com.qiufeng.erable.ast;
 import com.qiufeng.erable.OpCode;
 import com.qiufeng.erable.util.ArrayUtils;
 import com.qiufeng.erable.util.BitUtils;
+import java.io.IOException;
 
 /**
  * A type of constant pool element which stores numbers(stored as {@link Double})
@@ -35,23 +36,17 @@ public class ConstantPoolNumber extends ConstantPoolElement {
      * @see ConstantPoolString
      * @return the result of joining
      */
-    @Override
-    public byte[] serialise() {
-	byte[] header=this.generateHeader();
+    public void write() throws IOException {
+	this.generateHeader();
 	byte[] doub=new byte[8];
 	BitUtils.putDouble(doub,0,(double)obj);
-	header=ArrayUtils.push(header, doub);
-	return header;
+	this.file.write(doub);
     }
     /**
      * Generated the header
-     * @return new byte[]{TAG}
      */
-    @Override
-    public byte[] generateHeader() {
-	byte[] header=new byte[0];
-	header=ArrayUtils.push(header, ConstantPoolNumber.TAG);
-	return header;
+    public void generateHeader()throws IOException {
+	this.writeOpCode(OpCode.CP_NUM);
     }
     
 }

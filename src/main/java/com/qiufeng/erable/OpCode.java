@@ -23,6 +23,7 @@ package com.qiufeng.erable;
 public enum OpCode {
     CONSTANT_POOL,CP_NUM,CP_STR,
     ADD("+",3),SUB("-",3),MUL("*",3),DIV("/",3),MOD("%",3),POW("**",3),
+    POS(2),NEG(2),
     ELEMENT(3),
     LS("<<",3),RS(">>",3),ULS("<<<",3),URS(">>>",3),
     LT("<",3),GT(">",3),LTE("<=",3),GTE(">=",3),EQ("==",3),NEQ("!=",3),
@@ -34,10 +35,10 @@ public enum OpCode {
     RETURN("return",2),BREAK("break",2),
     VAR(2),
     LOADC(2),
-    FUNCTION(1),PUSH_ARGDECL(2),START_DO,END_FUNCDECL(1),
-    ARRAY(1),PUSH_ELEMENT(1),END_ARRAY(1),
+    FUNCTION(1),PUSH_ARGDECL(1),START_DO,END_FUNCDECL(1),
+    ARRAY(1),PUSH_ELEMENT(1),
     CALL_PREPARE(1),PUSH_ARG(2),CALL(2),
-    IF(1),ELSE(1),
+    IF(1),ELSE(2),
     WHILE(1),
     START(1),END(1),
     BLOCK(1),END_BLOCK(1),
@@ -46,8 +47,8 @@ public enum OpCode {
     TRY(1),TRY_START,TRY_END,CATCH_ID(1),CATCH_START,CATCH_END,FINALLY(1),
     NATIVE_FUNCDECL(2),LOAD_LIB(1),
     ;
-    String sign;
-    int argc;
+    public String sign;
+    public int argc;
     OpCode(String sign,int argc){
 	this.sign=sign;
 	this.argc=argc;

@@ -23,11 +23,7 @@ package com.qiufeng.erable.ast;
  * It will be as an abstract class.
  * @author Qiufeng54321
  */
-public abstract class ConstantPoolElement implements Comparable {
-    /**
-     * The ID it has to identify itself.
-     */
-    public int id;
+public abstract class ConstantPoolElement extends Code implements Comparable {
     /**
      * The object it stores.
      */
@@ -37,23 +33,10 @@ public abstract class ConstantPoolElement implements Comparable {
      * @param id The ID given.
      * @param obj The value it stores.
      */
-    public ConstantPoolElement(int id, Object obj) {
-	this.id = id;
+    public ConstantPoolElement(Object obj) {
+	super(null);
 	this.obj = obj;
     }
-    public ConstantPoolElement(Object obj){
-	this(-1,obj);
-    }
-    /**
-     * Serialise the element for compilation.
-     * @return The serialised element.
-     */
-    public abstract byte[] serialise();
-    /**
-     * Generated header for serialised data
-     * @return header.
-     */
-    public abstract byte[] generateHeader();
     /**
      * Check if the two elements are equal or not.
      * @param cpe another {@link ConstantPoolElement}.

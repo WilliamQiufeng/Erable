@@ -36,12 +36,10 @@ public class NativeFuncDeclCode extends FuncDeclCode {
 
     @Override
     public void write() throws IOException {
-	byte[] header=new byte[9];
-	header[0]=this.op.getByte();
-	BitUtils.putInt(header, 1, id);
-	BitUtils.putInt(header, 5, this.nativeCall);
+	this.writeOpCode(this.op);
+	this.writeId(id);
+	this.writeId(this.nativeCall);
 	System.out.println("___NATIVE_FUNCDECL___" + this);
-	System.out.println(Arrays.toString(header));
 	this.writeArgs();
 	System.out.println("___END "+this+" ___");
     }

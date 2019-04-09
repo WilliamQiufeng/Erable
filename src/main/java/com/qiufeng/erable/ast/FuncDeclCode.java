@@ -61,12 +61,9 @@ public class FuncDeclCode extends Code {
     }
     public void writeArgs() throws IOException{
 	for(FPADCode f : this.args){
-	    byte[] arg=new byte[5];
-	    arg[0]=OpCode.PUSH_ARGDECL.getByte();
-	    BitUtils.putInt(arg, 1, f.id);
+	    this.writeOpCode(OpCode.PUSH_ARGDECL);
+	    this.writeId(f.id);
 	    System.out.println("___ARG_PUSH___"+f);
-	    System.out.println(Arrays.toString(arg));;
-	    this.file.write(arg);
 	}
     }
     /**
@@ -82,11 +79,9 @@ public class FuncDeclCode extends Code {
      */
     @Override
     public void write() throws IOException {
-	byte[] header=new byte[5];
-	header[0]=this.op.getByte();
-	BitUtils.putInt(header, 1, id);
+	this.writeOpCode(this.op);
+	this.writeId(id);
 	System.out.println("___FUNCDECL___" + this);
-	System.out.println(Arrays.toString(header));
 	this.writeArgs();
 	this.writeCodes();
 	System.out.println("___END "+this+" ___");

@@ -14,38 +14,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.qiufeng.erable.ast;
 
-import com.qiufeng.erable.OpCode;
-import com.qiufeng.erable.util.BitUtils;
-import java.io.IOException;
+package com.qiufeng.erable.vm;
+
+import java.io.InputStream;
 
 /**
- *
+ * @since 2019年4月9日
  * @author Qiufeng54321
  */
-public class ElseCode extends TempCode {
-    public ElseCode(Code parent){
-	super(-1, OpCode.ELSE, parent);
-	this.sign="^";
-    }
-
-    @Override
-    public String toString() {
-	return super.toString() + "  else ->" + this.id;
-    }
-    /**
-     * [TAG 1B] [IFC 4B]
-     * @throws IOException 
-     */
-    @Override
-    public void write() throws IOException {
-	this.writeOpCode(this.op);
-	this.writeId(this.getParent().id);
-	this.writeId(this.id);
-	this.writeCodes();
-	this.writeOpCode(OpCode.END);
-	this.writeId(this.id);
-    }
+public class ErableDescriptor {
+    public InputStream input;
     
 }

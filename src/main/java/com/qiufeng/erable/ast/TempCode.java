@@ -55,13 +55,10 @@ public class TempCode extends Code {
      */
     @Override
     public void write() throws IOException{
-	var bts=new byte[9];
-	bts[0]=this.op.getByte();
-	BitUtils.putInt(bts, 1, this.cid);
-	BitUtils.putInt(bts,1+ID_LENGTH,this.id);
+	this.writeOpCode(this.op);
+	this.writeCid(this.cid);
+	this.writeId(id);
 	System.out.println("__TEMP "+this+"____");
-	System.out.println(Arrays.toString(bts));
-	this.file.write(bts);
     }
     
 }

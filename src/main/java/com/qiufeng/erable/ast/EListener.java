@@ -44,7 +44,7 @@ public class EListener extends ErableBaseListener {
     /**
      * Constant Pool
      */
-    public ConstantPool pool = new ConstantPool();
+    public ConstantPool pool;
 
     public ErableParser getParser() {
 	return parser;
@@ -89,6 +89,8 @@ public class EListener extends ErableBaseListener {
 	this.parser=p;
 	this.root=new Scope(null);
 	this.current=this.root;
+	this.pool=new ConstantPool(this.root);
+	this.root.addCode(pool);
 	pool.addElement(new ConstantPoolNumber(0d));
 	pool.addElement(new ConstantPoolNumber(1d));
 	var TTemp=new TempCode(pool.findElementId(1d),current);
@@ -160,14 +162,13 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitSops(ErableParser.SopsContext ctx) {
 	super.exitSops(ctx);
-	this.current.addCode(new MachineCode(OpCode.END,-1,this.current));
+	this.current.addCode(new MachineCode(OpCode.END,current.getParent().id,this.current));
     }
 
     @Override
     public void enterSops(ErableParser.SopsContext ctx) {
 	super.enterSops(ctx);
 	this.current.addCode(new MachineCode(OpCode.BREAKIF,this.current.codes.get(this.current.codes.size()-1).id,this.current));
-	this.current.addCode(new MachineCode(OpCode.START,-1,this.current));
 	
     }
 
@@ -504,7 +505,7 @@ public class EListener extends ErableBaseListener {
     public void exitCatch_expr(ErableParser.Catch_exprContext ctx) {
 	super.exitCatch_expr(ctx);
 	this.current.addCode(new MachineCode(OpCode.CATCH_END,-1,this.current));
-	this.current.addCode(new MachineCode(OpCode.FINALLY,-1,this.current));
+	this.current.addCode(new MachineCode(OpCode.FINALLY,this.current.id,this.current));
     }
 
     @Override

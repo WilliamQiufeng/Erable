@@ -35,9 +35,8 @@ public class LoadCode extends TempCode {
      */
     @Override
     public void write() throws IOException {
-	byte[] bts=new byte[5];
-	bts[0]=this.op.getByte();
-	BitUtils.putInt(bts, 1, this.cid);
+	this.writeOpCode(this.op);
+	this.writeId(this.id);
     }
 
     @Override

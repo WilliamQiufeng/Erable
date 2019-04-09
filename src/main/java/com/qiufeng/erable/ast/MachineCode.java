@@ -38,12 +38,10 @@ public class MachineCode extends Code {
      */
     @Override
     public void write() throws IOException {
-	this.file.write(this.op.getByte());
+	this.writeOpCode(this.op);
 	System.out.println("__FLAG "+this);
 	if(this.refid!=-1){
-	    byte[] bts=new byte[4];
-	    BitUtils.putInt(bts, 0, this.refid);
-	    this.file.write(bts);
+	    this.writeId(this.refid);
 	}
     }
 
