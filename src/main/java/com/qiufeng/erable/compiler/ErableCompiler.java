@@ -21,9 +21,12 @@ import com.qiufeng.erable.ErableLexer;
 import com.qiufeng.erable.ErableParser;
 import com.qiufeng.erable.ast.Code;
 import com.qiufeng.erable.ast.EListener;
+import com.qiufeng.erable.ast.FuncDeclCode;
+import com.qiufeng.erable.ast.VarCode;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.antlr.v4.runtime.ANTLRInputStream;
@@ -45,6 +48,15 @@ public class ErableCompiler {
 	catch (IOException ex) {
 	    Logger.getLogger(ErableCompiler.class.getName()).log(Level.SEVERE, null, ex);
 	}
+    }
+    public void writeDyn(OutputStream os,Code root) throws IOException{
+	Properties p=new Properties();
+	for(Code c : root.codes){
+	    if(c instanceof VarCode || c instanceof FuncDeclCode){
+		p.put(c.tag, String.valueOf(c.id));
+	    }
+	}
+	p.store(os, "Erable Dynamic Lib");
     }
     public EListener compile(String file,EListener parent){
 	try{

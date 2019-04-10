@@ -25,6 +25,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
+import java.util.Map;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -70,6 +72,16 @@ public class ErableDumper {
 	this.dumpConstantPool();
 	this.dumpCodes();
     }
+    public void dumpDynLib(InputStream is)throws IOException{
+	System.out.println("Dumping dynamic lib name table");
+	var prop=new Properties();
+	prop.load(is);
+	for(Map.Entry me : prop.entrySet()){
+	    String key=(String)me.getKey();
+	    int id=Integer.parseInt((String)me.getValue());
+	    System.out.println("Name \"" + key + "\" with ID " + id);
+	}
+    }
     public void dumpCodes() throws IOException{
 	for(int i=0;(i=this.input.read())!=-1;){
 	    System.out.print(this.depthHeader());
@@ -113,18 +125,6 @@ public class ErableDumper {
     }
     public int readId(int len) throws IOException{
 	byte[] bs=this.input.readNBytes(len);
-	return getId(bs,0,len);
-    }
-    public static int getId(byte[] bts,int off,int len){
-	switch (len) {
-	    case 4:
-		return BitUtils.getInt(bts, off);
-	    case 2:
-		return BitUtils.getShort(bts, off);
-	    case 1:
-		return bts[off];
-	    default:
-		return -1;
-	}
+	return Const.getId(bs,0,len);
     }
 }

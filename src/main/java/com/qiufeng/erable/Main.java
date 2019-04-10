@@ -4,6 +4,7 @@ import com.qiufeng.erable.ast.Code;
 import com.qiufeng.erable.ast.ConstantPool;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -19,8 +20,6 @@ import org.kohsuke.args4j.*;
  */
 public class Main 
 {
-    @Option(name="-f",usage="Choose the file to parse")
-    public String file=null;
     @Option(name="-s",usage="Show the tree generated")
     public boolean showTree=false;
     @Option(name="-d",usage="Write debug information to file")
@@ -32,8 +31,10 @@ public class Main
     public String output=null;
     @Option(name="-f4",usage="Force using 4-bytes long id")
     public boolean use4=false;
+    @Option(name="-dyn",usage="output a name prop")
+    public boolean dyn=false;
     @Argument
-    List<String> arguments=new ArrayList<String>();
+    List<String> files=new ArrayList<String>();
     public static void main( String[] args )
     {
         new Main().nmain(args);
@@ -51,13 +52,14 @@ public class Main
 	    clp.printUsage(System.err);
 	    return;
 	}
+	System.out.println(this.files);
 	if(use4){
 	    Const.setCidLen(4);
 	    Const.setIdLen(4);
 	}
-	if(file==null){
-	    file="test.erable";
-	    System.out.println("File not specified.Using default:"+file);
+	if(files.isEmpty()){
+	    files.add("test.erable");
+	    System.out.println("File not specified.Using default:"+files);
 	}
 	if(this.quiet){
 	    try {
@@ -79,6 +81,11 @@ public class Main
 		e.printStackTrace();
 	    }
 	}
+	for(String s : files)
+	    compile(s);
+    }
+    public void compile(String file){
+	output=file.replace(".erable", "").concat(".ec");
 	var compiler=new ErableCompiler();
 	var el=compiler.compile(file,null);
 	this.printConstantPool(el.getPool());
@@ -93,8 +100,13 @@ public class Main
 	try {
 	    FileOutputStream fos=new FileOutputStream(this.output);
 	    compiler.output(fos, el);
+	    if(this.dyn){
+		String dyn=file.replace(".erable","").concat(".dynec");
+		var dos=new FileOutputStream(dyn);
+		compiler.writeDyn(dos, el.root);
+	    }
 	}
-	catch (FileNotFoundException ex) {
+	catch (IOException ex) {
 	    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
 	}
     }

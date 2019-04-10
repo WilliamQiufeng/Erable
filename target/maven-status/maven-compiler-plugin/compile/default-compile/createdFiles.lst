@@ -15,9 +15,11 @@ com/qiufeng/erable/ErableLexer.class
 simperrLexer.class
 com/qiufeng/erable/ErableParser$Imp_moduleContext.class
 com/qiufeng/erable/ast/ConstantPoolNumber.class
+com/qiufeng/erable/vm/ErableVM.class
 com/qiufeng/erable/ErableBaseListener.class
 com/qiufeng/erable/util/ArrayUtils.class
 com/qiufeng/erable/ErableParser$OpsContext.class
+com/qiufeng/erable/dump/Dump.class
 com/qiufeng/erable/ErableParser$ObjectContext.class
 com/qiufeng/erable/ErableParser$ExprsContext.class
 com/qiufeng/erable/ast/WhileCode.class
@@ -32,6 +34,7 @@ com/qiufeng/erable/ErableParser$SblockContext.class
 com/qiufeng/erable/ErableParser$CondexprsContext.class
 com/qiufeng/erable/ast/IfCode.class
 com/qiufeng/erable/ErableParser$Load_nativeContext.class
+com/qiufeng/erable/dump/ErableDumper.class
 com/qiufeng/erable/ast/TempCode.class
 com/qiufeng/erable/ast/FPADCode.class
 com/qiufeng/erable/exception/UnknownException.class
@@ -54,7 +57,7 @@ com/qiufeng/erable/util/BitUtils.class
 com/qiufeng/erable/ErableParser$Field_and_typesContext.class
 com/qiufeng/erable/ErableParser.class
 com/qiufeng/erable/ErableParser$VarContext.class
-com/qiufeng/erable/ast/ConstantPoolName.class
+com/qiufeng/erable/vm/ErableDescriptor.class
 com/qiufeng/erable/ErableParser$FieldContext.class
 com/qiufeng/erable/ast/Scope.class
 com/qiufeng/erable/ErableParser$CodeblockContext.class

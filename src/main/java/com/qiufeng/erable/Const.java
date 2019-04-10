@@ -16,6 +16,8 @@
  */
 package com.qiufeng.erable;
 
+import com.qiufeng.erable.util.BitUtils;
+
 /**
  * 
  * @author Qiufeng54321
@@ -37,5 +39,18 @@ public class Const {
     }
     public static void refreshLen(){
 	HEADER[4]=(byte)((ID_LENGTH<<4)|CID_LENGTH);
+    }
+
+    public static int getId(byte[] bts, int off, int len) {
+	switch (len) {
+	    case 4:
+		return BitUtils.getInt(bts, off);
+	    case 2:
+		return BitUtils.getShort(bts, off);
+	    case 1:
+		return bts[off];
+	    default:
+		return -1;
+	}
     }
 }

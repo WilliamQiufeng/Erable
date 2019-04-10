@@ -17,6 +17,7 @@
 
 package com.qiufeng.erable.dump;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -53,6 +54,11 @@ public class Dump {
 	    ErableDumper ed=new ErableDumper(fis);
 	    var os=new FileOutputStream(out);
 	    ed.dump(os);
+	    String dyn=this.file.replace(".ec", ".dynec");
+	    if(new File(dyn).exists()){
+		FileInputStream dis=new FileInputStream(dyn);
+		ed.dumpDynLib(dis);
+	    }
 	}
 	catch (IOException ex) {
 	    Logger.getLogger(Dump.class.getName()).log(Level.SEVERE, null, ex);
