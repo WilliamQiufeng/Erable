@@ -52,13 +52,13 @@ public class Dump {
 	try {
 	    FileInputStream fis=new FileInputStream(this.file);
 	    ErableDumper ed=new ErableDumper(fis);
-	    var os=new FileOutputStream(out);
-	    ed.dump(os);
 	    String dyn=this.file.replace(".ec", ".dynec");
 	    if(new File(dyn).exists()){
 		FileInputStream dis=new FileInputStream(dyn);
 		ed.dumpDynLib(dis);
 	    }
+	    var os=new FileOutputStream(out);
+	    ed.dump(os);
 	}
 	catch (IOException ex) {
 	    Logger.getLogger(Dump.class.getName()).log(Level.SEVERE, null, ex);

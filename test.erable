@@ -6,7 +6,7 @@
 use "stdlib/ios";
 //Test conflict of imported module.
 use "stdlib/ios.erable";
-use "stdlib/java";
+dynload "stdlib/java.ec" with "stdlib/java.dynec" as java;
 var prefix="hi";
 function mul:(a b){
   return a*b;
@@ -17,7 +17,7 @@ function quad:(a b c x){
 };
 function makeSquare:(width height){
   //Test array
-  return [width height mul(width height)];
+  return [width,height,mul(width,height)];
 };
 //One Special Test: Variable declaration in different scope with same name
 //argument 'square' should not be conflicting with variable square.
@@ -79,10 +79,11 @@ function testTryCatch:(a b){
   };
 };
 //Main test
-var obj square=makeSquare(15 20);
+var obj square=makeSquare(15,20);
 square=switchWH(square);
 println(square);
-testOverload(2 3 5);
-testOverload(1 4);
+testOverload(2,3,5);
+testOverload(1,4);
 testOverload(9);
-testOverload(5 2 3);
+testOverload(5,2,3);
+java->java_new("java.lang.String",["abc"]);

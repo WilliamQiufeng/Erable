@@ -51,6 +51,7 @@ public class ErableCompiler {
     }
     public void writeDyn(OutputStream os,Code root) throws IOException{
 	Properties p=new Properties();
+	p.put("@maxid", String.valueOf(Code.currentId));
 	for(Code c : root.codes){
 	    if(c instanceof VarCode || c instanceof FuncDeclCode){
 		p.put(c.tag, String.valueOf(c.id));

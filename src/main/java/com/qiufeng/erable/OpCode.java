@@ -46,6 +46,7 @@ public enum OpCode {
     OBJECT(1),START_PAIR,KEY(1),VALUE(1),END_PAIR,
     TRY(1),TRY_START,TRY_END,CATCH_ID(1),CATCH_START,CATCH_END,FINALLY(1),
     NATIVE_FUNCDECL(2),LOAD_LIB(1),
+    DYN_LOAD(3),DYNCALL(2),
     ;
     public String sign;
     public int argc;

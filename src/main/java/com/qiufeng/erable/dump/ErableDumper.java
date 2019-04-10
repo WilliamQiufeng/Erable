@@ -91,6 +91,10 @@ public class ErableDumper {
 		int cid=this.readId(cid_len);
 		int id =this.readId(id_len);
 		System.out.println("Buffer "+cid+" to @"+id);
+	    }else if(code==OpCode.DYNCALL){
+		int mid=this.readId(id_len);
+		int nid =this.readId(4);
+		System.out.println("Access @"+nid+" from Module @"+mid);
 	    }else{
 		System.out.print(code.name());
 		for(int j=0;j<code.argc;j++){

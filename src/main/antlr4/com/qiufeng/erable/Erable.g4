@@ -38,8 +38,7 @@ types
   ;
 field
   returns [Object obj,int id]
-  : fc=funccall
-  | val=name
+  : val=name
   ;
 exprs
   : imp_module
@@ -65,12 +64,15 @@ ops
   | l=ops operation=(EQU|ADDEQ|SUBEQ|MULEQ|DIVEQ|MODEQ) r=ops                              {$type="change";}
   | l=ops operation=(MOD|DIV|MUL|SUB|ADD|BINOPS) r=ops                 {$type="binop";}
   | operation=(UNARYOPS|ADD|SUB) r=ops           {$type="unary";}
+  | funcname=ops LPA arguments=sep_ops RPA     {$type="funccall";}
   | LPA p=ops RPA                                {$type="bracket";}
+  | modacc                                       {$type="modacc";}                    
   | field_and_types                              {$type="instance";}
   | decls                                        {$type="decls";}
   | condexprs                                    {$type="conds";}
   | codeblock                                    {$type="block";}
   | exprs                                        {$type="exprs";}
+  | dynload                                      {$type="dynload";}
   ;
 sblock
   : codeblock
@@ -82,9 +84,14 @@ oops
   returns [int id]
   : ops
   ;
+modacc
+  returns [Object obj, int id]
+  : mod=NAME MOD_ACC tar=NAME
+  ;
+
 array
   returns [Object obj,int id,List<Integer> arr]
-  : ALPA elements+=ops* ARPA
+  : ALPA elements=sep_ops ARPA
   ;
 num
   returns [Object obj,int id]
@@ -113,10 +120,6 @@ parent_expression
   returns [Object obj,int id]
   : PARENT
   ;
-funccall
-  returns [Object obj,int id]
-  : funcname=name LPA arguments+=ops*? RPA
-  ;
 args
   returns [ArrayList<FPADCode> arguments]
   : COLON LPA argss+=NAME* RPA
@@ -130,8 +133,11 @@ funcdecl
   returns [Object obj,int id]
   : FUNC funcname=NAME arguments=args block=codeblock
   ;
+dynload
+  : DYN_LOAD dyn=string WITH table=string AS mod=NAME
+  ;
 /*
-   sLoad a native lib (.jar or .dex) for native functions
+   Load a native lib (.jar or .dex) for native functions
 */
 load_native
   : LOAD lib=string
@@ -170,7 +176,9 @@ name
   returns [Object obj,int id]
   : NAME
   ;
-
+sep_ops
+  : ops? (COMMA ops)*
+  ;
 
 ANYMATCH : '"' (ESC|.)*? '"'            ;
 UNARYOPS : REF|GREF|BNOT|RETURN|BREAK|THROW               ;
@@ -194,6 +202,7 @@ SUBEQ    : '-='                            ;
 MULEQ    : '*='                            ;
 DIVEQ    : '/='                            ;
 MODEQ    : '%='                            ;
+MOD_ACC  : '->'                            ;
 fragment EQ       : '=='                            ;
 fragment NEQ      : '!='                            ;
 fragment LT       : '<'                             ;
@@ -254,6 +263,9 @@ NATIVE   : 'native'                        ;
 USE      : 'use'                           ;
 USING    : 'using'                         ;
 LOAD     : 'load'                          ;
+DYN_LOAD : 'dynload'                       ;
+AS       : 'as'                            ;
+WITH     : 'with'                          ;
 THIS     : 'this'                          ;
 PARENT   : 'parent'                        ;
 

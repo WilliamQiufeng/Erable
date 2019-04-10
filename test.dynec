@@ -1,23 +1,19 @@
 #Erable Dynamic Lib
-#Wed Apr 10 10:05:55 CST 2019
-java_get=42
-isNegative=122
-java_call_static=37
-testOverload=214
-mul=51
-prefix=50
+#Wed Apr 10 18:14:44 CST 2019
+isNegative=98
+testOverload=190
+mul=27
+prefix=26
 false=7
-testTryCatch=221
-say=151
-java_call=31
-newCat=156
-switchWH=78
+testTryCatch=197
+say=127
+newCat=132
+switchWH=54
 input=16
-square=247
+square=223
 println=13
-quad=57
-loop=135
+quad=33
+loop=111
 true=5
-java_new=25
-java_get_static=47
-makeSquare=71
+@maxid=256
+makeSquare=47

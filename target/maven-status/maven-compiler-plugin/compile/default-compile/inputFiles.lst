@@ -13,6 +13,7 @@
 /williamye/program/antlr/erable/target/generated-sources/antlr4/com/qiufeng/erable/ErableLexer.java
 /williamye/program/antlr/erable/target/generated-sources/antlr4/simperrBaseListener.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/stdlib/InputScanner.java
+/williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/DynLoadCode.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/ConstantPool.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/FuncCallCode.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/vm/ErableDescriptor.java
@@ -40,6 +41,7 @@
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/VarModifiers.java
 /williamye/program/antlr/erable/target/generated-sources/antlr4/com/qiufeng/erable/ErableBaseListener.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/OpCode.java
+/williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/ModuleAccessCode.java
 /williamye/program/antlr/erable/target/generated-sources/antlr4/simperrListener.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/BinaryOpCode.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/MachineCode.java

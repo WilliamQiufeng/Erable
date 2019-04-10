@@ -61,7 +61,7 @@ public abstract class Code implements Comparable{
      * 所有Code的id都是独立的
      * All Code has a unique id.
      */
-    public        int           id = Code.currentId++;
+    public        int           id;
     /**
      * The file for output.
      */
@@ -80,6 +80,7 @@ public abstract class Code implements Comparable{
         this.tag=tag;
 	this.op=op;
         this.bind(parent);
+	this.updateId();
     }
     /**
      * A simple wrapper for {@link Code#Code(java.lang.String, com.qiufeng.erable.ast.Code)}
@@ -87,6 +88,9 @@ public abstract class Code implements Comparable{
      */
     public Code(String tag){
         this(tag,null,null);
+    }
+    public void updateId(){
+	this.id = Code.currentId++;
     }
     /**
      * write method
@@ -253,6 +257,21 @@ public abstract class Code implements Comparable{
 	}
 	//System.out.println("ID NOT FOUND:"+name);
 	return -1;
+    }
+    public DynLoadCode findModule(String name){
+	for(var code : codes){
+	    //System.out.println("finding:"+code);
+	    if(code instanceof DynLoadCode){
+		System.out.println("ID:"+code.tag);
+		if(code.tag.equals(name))
+		    return (DynLoadCode)code;
+	    }
+	}
+	if(this.getParent()!=null){
+	    return this.getParent().findModule(name);
+	}
+	//System.out.println("ID NOT FOUND:"+name);
+	return null;
     }
     /**
      * Finds the function.<br>

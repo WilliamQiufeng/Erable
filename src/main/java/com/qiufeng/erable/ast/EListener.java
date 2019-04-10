@@ -259,31 +259,23 @@ public class EListener extends ErableBaseListener {
 	ctx.arguments=new ArrayList<>();
     }
 
-    @Override
+    /*@Override
     public void exitFunccall(ErableParser.FunccallContext ctx) {
 	super.exitFunccall(ctx);
-	var name=ctx.funcname.getText();
-	var nameid=this.current.findFunction(name, ctx.arguments.size());
-	var args=new ArrayList<Integer>();
-	for(var ele : ctx.arguments){
-	    args.add(ele.id);
-	}
-	var call=new FuncCallCode(name,args,nameid,current);
-	current.addCode(call);
-	ctx.id=call.id;
+	
     }
 
     @Override
     public void enterFunccall(ErableParser.FunccallContext ctx) {
 	super.enterFunccall(ctx);
-    }
+    }*/
 
 
     @Override
     public void exitArray(ErableParser.ArrayContext ctx) {
 	super.exitArray(ctx);
 	ctx.arr=new ArrayList<Integer>();
-	for(var ele : ctx.elements){
+	for(var ele : ctx.elements.ops()){
 	    ctx.arr.add(ele.id);
 	}
 	var array=new ArrayCode(ctx.arr,current);
@@ -437,6 +429,17 @@ public class EListener extends ErableBaseListener {
 		current.addCode(unaryop);
 		ctx.id=unaryop.id;
 		break;
+	    case "funccall":
+		var name=ctx.funcname.getText();
+		var nameid=ctx.funcname.id;
+		var args=new ArrayList<Integer>();
+		for(var arg : ctx.arguments.ops()){
+		    args.add(arg.id);
+		}
+		var call=new FuncCallCode(name,args,nameid,current);
+		current.addCode(call);
+		ctx.id=call.id;
+		break;
 	    case "bracket":
 		ctx.id=ctx.p.id;
 		break;
@@ -452,7 +455,10 @@ public class EListener extends ErableBaseListener {
 	    case "block":
 		ctx.id=ctx.codeblock().id;
 		break;
+	    case "modacc":
+		ctx.id=ctx.modacc().id;
 	    case "exprs":
+	    case "dynload":
 		break;
 	    default:
 		new UnknownException(BaseException.ErrorType.COMPILATION,"Unknown Operation type("+ctx.type+")",ctx.getText(),ctx.start.getLine(),ctx.start.getCharPositionInLine(),4).throwException();
@@ -606,8 +612,6 @@ public class EListener extends ErableBaseListener {
 	ctx.id=-1;
 	if(ctx.val!=null)
 	    ctx.id=ctx.val.id;
-	else if(ctx.funccall()!=null)
-	    ctx.id=ctx.funccall().id;
 	else
 	    ctx.id=-1;
     }
@@ -681,6 +685,33 @@ public class EListener extends ErableBaseListener {
 	}else{
 	    ctx.id=ctx.v.id;
 	}
+    }
+
+    @Override
+    public void exitDynload(ErableParser.DynloadContext ctx) {
+	super.exitDynload(ctx);
+	var dlc=new DynLoadCode(ctx.mod.getText(),(String)ctx.dyn.obj,ctx.dyn.id,(String)ctx.table.obj,ctx.table.id,this.current);
+	dlc.loadProps();
+	this.current.addCode(dlc);
+    }
+
+    @Override
+    public void enterDynload(ErableParser.DynloadContext ctx) {
+	super.enterDynload(ctx);
+	
+    }
+
+    @Override
+    public void exitModacc(ErableParser.ModaccContext ctx) {
+	super.exitModacc(ctx);
+	var mac=new ModuleAccessCode(this.current.findModule(ctx.mod.getText()),ctx.tar.getText(),this.current);
+	ctx.id=mac.id;
+	this.current.addCode(mac);
+    }
+
+    @Override
+    public void enterModacc(ErableParser.ModaccContext ctx) {
+	super.enterModacc(ctx);
     }
 
     @Override
