@@ -20,6 +20,7 @@ package com.qiufeng.erable.dump;
 import com.qiufeng.erable.Const;
 import com.qiufeng.erable.OpCode;
 import com.qiufeng.erable.util.BitUtils;
+import com.qiufeng.erable.util.StringUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -68,8 +69,8 @@ public class ErableDumper {
 	id_len=len>>4;
 	cid_len=len&0x01;
 	System.out.println("ID Length: "+id_len+", CID Length: "+cid_len);
-	this.input.readNBytes(4);
-	this.dumpConstantPool();
+	//this.input.readNBytes(4);
+	//this.dumpConstantPool();
 	this.dumpCodes();
     }
     public void dumpDynLib(InputStream is)throws IOException{
@@ -88,30 +89,38 @@ public class ErableDumper {
 	    
 	    OpCode code=OpCode.values()[i];
 	    //System.out.println(code);
-	    if(code==OpCode.LOADC){
-		int cid=this.readId(cid_len);
-		int id =this.readId(id_len);
-		System.out.println("Buffer          "+cid+" to @"+id);
-	    }else if(code==OpCode.DYNCALL){
-		int mid=this.readId(id_len);
-		int nid =this.readId(4);
-		int id  =this.readId(id_len);
-		System.out.println("Access          @"+nid+" from Module @"+mid+" and buffer to @"+id);
-	    }else{
-		String name=code.name();
-		while(name.length()<15)
-		    name=name.concat(" ");
-		System.out.print(name);
-		for(int j=0;j<code.argc;j++){
-		    int id=this.readId(id_len);
-		    System.out.print(" @"+id);
-		}
-		System.out.println();
-		if(code==OpCode.PUSH_SCOPE||code==OpCode.IF||code==OpCode.ELSE||code==OpCode.WHILE||code==OpCode.OBJECT||code==OpCode.FUNCTION
-			||code==OpCode.TRY)
-		    this.depth+=2;
-		if(code==OpCode.POP_SCOPE||code==OpCode.END)
-		    this.depth-=2;
+	    
+	    switch (code) {
+	    	case LOADC:
+		    {
+			int cid=this.readId(cid_len);
+			int id =this.readId(id_len);
+			System.out.println("Buffer          "+cid+" to @"+id);
+			break;
+		    }
+	    	case DYNCALL:
+		    {
+			int mid=this.readId(id_len);
+			int nid =this.readId(4);
+			int id  =this.readId(id_len);
+			System.out.println("Access          @"+nid+" from Module @"+mid+" and buffer to @"+id);
+			break;
+		    }
+		case CONSTANT_POOL:
+		    this.dumpConstantPool();
+	    	default:
+		    var name=StringUtils.std(code.name(),15);
+		    System.out.print(name);
+		    for(int j=0;j<code.argc;j++){
+			int id=this.readId(id_len);
+			System.out.print(" @"+id);
+		    }   System.out.println();
+		    if(code==OpCode.PUSH_SCOPE||code==OpCode.IF||code==OpCode.ELSE||code==OpCode.WHILE||code==OpCode.OBJECT||code==OpCode.FUNCTION
+			    ||code==OpCode.TRY)
+			this.depth+=2;
+		    if(code==OpCode.POP_SCOPE||code==OpCode.END)
+			this.depth-=2;
+		    break;
 	    }
 	    
 	}
@@ -120,15 +129,16 @@ public class ErableDumper {
 	int len=this.readId(cid_len);
 	System.out.println("Constant Pool: Length="+len);
 	for(int i=0;i<len;i++){
+	    System.out.print(this.depthHeader());
 	    OpCode code=OpCode.values()[this.input.read()];
 	    if(code==OpCode.CP_NUM){
 		byte[] doubb=this.input.readNBytes(8);
 		double doub=BitUtils.getDouble(doubb, 0);
-		System.out.println("Constant Pool Number: ID="+i+", Value="+doub);
+		System.out.println("Number: ID="+StringUtils.std(String.valueOf(i), 8)+", Value="+doub);
 	    }else if(code==OpCode.CP_STR){
 		int strlen=this.readId(4);
 		String str=new String(this.input.readNBytes(strlen));
-		System.out.println("Constant Pool String: ID="+i+", Value=\""+str+"\"");
+		System.out.println("String: ID="+StringUtils.std(String.valueOf(i), 8)+", Value=\""+str+"\"");
 	    }
 	}
     }

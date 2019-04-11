@@ -1,8 +1,8 @@
 Parsed file test.erable
 Parsed file stdlib/ios.erable
-File stdlib/ios.erable finished.Total time:4 ms.
+File stdlib/ios.erable finished.Total time:3 ms.
 ID:java
-File test.erable finished.Total time:609 ms.
+File test.erable finished.Total time:492 ms.
 ConstantPoolElement{id=0, obj=0.0}
 ConstantPoolElement{id=1, obj=1.0}
 ConstantPoolElement{id=2, obj=stdlib/ios}
@@ -19,16 +19,11 @@ ConstantPoolElement{id=12, obj=age}
 ConstantPoolElement{id=13, obj=habits}
 ConstantPoolElement{id=14, obj=says:MEOWWWWWW}
 ConstantPoolElement{id=15, obj=meow}
-ConstantPoolElement{id=16, obj=hi~}
-ConstantPoolElement{id=17, obj=divide ended.}
-ConstantPoolElement{id=18, obj=15.0}
-ConstantPoolElement{id=19, obj=20.0}
-ConstantPoolElement{id=20, obj=3.0}
-ConstantPoolElement{id=21, obj=5.0}
-ConstantPoolElement{id=22, obj=4.0}
-ConstantPoolElement{id=23, obj=9.0}
-ConstantPoolElement{id=24, obj=java.lang.String}
-ConstantPoolElement{id=25, obj=abc}
+ConstantPoolElement{id=16, obj=divide ended.}
+ConstantPoolElement{id=17, obj=15.0}
+ConstantPoolElement{id=18, obj=20.0}
+ConstantPoolElement{id=19, obj=java.lang.String}
+ConstantPoolElement{id=20, obj=abc}
 00000000    >#0 :
 00000001    -->|ConstantPool
 
@@ -288,117 +283,59 @@ ConstantPoolElement{id=25, obj=abc}
 
 
 
-00000174    -->%testOverload : function testOverload[id=175 name=a, id=176 name=b] ->174 :
+00000174    -->%testTryCatch : function testTryCatch[id=175 name=a, id=176 name=b] ->174 :
 00000177    ---->#177 :
-00000179    ------>@179  buffer 16 to @179
+00000178    ------>%e : variable `0` e = @7 ->178
 
-00000180    ------>@180  @179 ADD(3) @175 ->180
+00000179    ------>^179  try ->179 :
 
-00000181    ------>@181  @180 ADD(3) @176 ->181
+00000180    -------->#180 :
+00000181    ---------->#181 :
+00000182    ------------>@182  @175 DIV(6) @176 ->182
 
-00000182    ------>@182  RETURN(37) @181 ->182
-
-
-
-00000183    -->%testOverload : function testOverload[id=184 name=c, id=185 name=d, id=186 name=b] ->183 :
-00000187    ---->#187 :
-00000188    ------>@188  @184 MUL(5) @186 ->188
-
-00000189    ------>@189  @188 MUL(5) @185 ->189
-
-00000190    ------>@190  RETURN(37) @189 ->190
+00000183    ------------>@183  RETURN(37) @182 ->183
 
 
 
-00000191    -->%testOverload : function testOverload[id=192 name=x] ->191 :
-00000193    ---->#193 :
-00000195    ------>@195  buffer 9 to @195
-
-00000196    ------>@196  @192 POW(8) @195 ->196
-
-00000197    ------>@197  RETURN(37) @196 ->197
+00000184    -------->#184 :
+00000185    ---------->#185 :
+00000186    ------------>@186  println@13[178] ->186
 
 
 
-00000198    -->%testTryCatch : function testTryCatch[id=199 name=a, id=200 name=b] ->198 :
-00000201    ---->#201 :
-00000202    ------>%e : variable `0` e = @7 ->202
+00000187    -------->#187 :
+00000188    ---------->#188 :
+00000190    ------------>@190  buffer 16 to @190
 
-00000203    ------>^203  try ->203 :
-
-00000204    -------->#204 :
-00000205    ---------->#205 :
-00000206    ------------>@206  @199 DIV(6) @200 ->206
-
-00000207    ------------>@207  RETURN(37) @206 ->207
-
-
-
-00000208    -------->#208 :
-00000209    ---------->#209 :
-00000210    ------------>@210  println@13[202] ->210
-
-
-
-00000211    -------->#211 :
-00000212    ---------->#212 :
-00000214    ------------>@214  buffer 17 to @214
-
-00000215    ------------>@215  println@13[214] ->215
+00000191    ------------>@191  println@13[190] ->191
 
 
 
 
 
-00000217    -->@217  buffer 18 to @217
+00000193    -->@193  buffer 17 to @193
 
-00000219    -->@219  buffer 19 to @219
+00000195    -->@195  buffer 18 to @195
 
-00000220    -->@220  makeSquare@47[217, 219] ->220
+00000196    -->@196  makeSquare@47[193, 195] ->196
 
-00000221    -->%square : variable `0` square = @220 ->221
+00000197    -->%square : variable `0` square = @196 ->197
 
-00000222    -->@222  @221 EQU(22) @54 ->222
+00000198    -->@198  @197 EQU(22) @54 ->198
 
-00000223    -->@223  square=switchWH@222[221] ->223
+00000199    -->@199  square=switchWH@198[197] ->199
 
-00000224    -->@224  println@13[221] ->224
+00000200    -->@200  println@13[197] ->200
 
-00000226    -->@226  buffer 9 to @226
+00000201    -->@201  Module @23 Accessing: @12 to ID 201
 
-00000228    -->@228  buffer 20 to @228
+00000203    -->@203  buffer 19 to @203
 
-00000230    -->@230  buffer 21 to @230
+00000205    -->@205  buffer 20 to @205
 
-00000231    -->@231  testOverload@174[226, 228, 230] ->231
+00000206    -->@206  Array [205] ->206
 
-00000233    -->@233  buffer 1 to @233
-
-00000235    -->@235  buffer 22 to @235
-
-00000236    -->@236  testOverload@174[233, 235] ->236
-
-00000238    -->@238  buffer 23 to @238
-
-00000239    -->@239  testOverload@174[238] ->239
-
-00000241    -->@241  buffer 21 to @241
-
-00000243    -->@243  buffer 9 to @243
-
-00000245    -->@245  buffer 20 to @245
-
-00000246    -->@246  testOverload@174[241, 243, 245] ->246
-
-00000247    -->@247  Module @23 Accessing: @12 to ID 247
-
-00000249    -->@249  buffer 24 to @249
-
-00000251    -->@251  buffer 25 to @251
-
-00000252    -->@252  Array [251] ->252
-
-00000253    -->@253  java->java_new@247[249, 252] ->253
+00000207    -->@207  java->java_new@201[203, 206] ->207
 
 
 Starting Compiler...
@@ -518,78 +455,35 @@ __FLAG !172  Flag END_PAIR(59) []
 __END OBJECT @137  object ->137 :__
 __END @173  RETURN(37) @137 ->173___
 ___END %newCat : function newCat[id=134 name=name, id=135 name=age] ->133 : ___
-___FUNCDECL___%testOverload : function testOverload[id=175 name=a, id=176 name=b] ->174 :
+___FUNCDECL___%testTryCatch : function testTryCatch[id=175 name=a, id=176 name=b] ->174 :
 ___ARG_PUSH___id=175 name=a
 ___ARG_PUSH___id=176 name=b
-__TEMP @179  buffer 16 to @179____
-__END @182  RETURN(37) @181 ->182___
-___END %testOverload : function testOverload[id=175 name=a, id=176 name=b] ->174 : ___
-___FUNCDECL___%testOverload : function testOverload[id=184 name=c, id=185 name=d, id=186 name=b] ->183 :
-___ARG_PUSH___id=184 name=c
-___ARG_PUSH___id=185 name=d
-___ARG_PUSH___id=186 name=b
-__END @190  RETURN(37) @189 ->190___
-___END %testOverload : function testOverload[id=184 name=c, id=185 name=d, id=186 name=b] ->183 : ___
-___FUNCDECL___%testOverload : function testOverload[id=192 name=x] ->191 :
-___ARG_PUSH___id=192 name=x
-__TEMP @195  buffer 9 to @195____
-__END @197  RETURN(37) @196 ->197___
-___END %testOverload : function testOverload[id=192 name=x] ->191 : ___
-___FUNCDECL___%testTryCatch : function testTryCatch[id=199 name=a, id=200 name=b] ->198 :
-___ARG_PUSH___id=199 name=a
-___ARG_PUSH___id=200 name=b
-___TRY ^203  try ->203 :___
-__END @207  RETURN(37) @206 ->207___
-__CALL_PREPARE @210  println@13[202] ->210__
-____PUSH_ARG 202____
-__CALL @210  println@13[202] ->210__
-__TEMP @214  buffer 17 to @214____
-__CALL_PREPARE @215  println@13[214] ->215__
-____PUSH_ARG 214____
-__CALL @215  println@13[214] ->215__
-__END TRY ^203  try ->203 :__
-___END %testTryCatch : function testTryCatch[id=199 name=a, id=200 name=b] ->198 : ___
-__TEMP @217  buffer 18 to @217____
-__TEMP @219  buffer 19 to @219____
-__CALL_PREPARE @220  makeSquare@47[217, 219] ->220__
-____PUSH_ARG 217____
-____PUSH_ARG 219____
-__CALL @220  makeSquare@47[217, 219] ->220__
-__CALL_PREPARE @223  square=switchWH@222[221] ->223__
-____PUSH_ARG 221____
-__CALL @223  square=switchWH@222[221] ->223__
-__CALL_PREPARE @224  println@13[221] ->224__
-____PUSH_ARG 221____
-__CALL @224  println@13[221] ->224__
-__TEMP @226  buffer 9 to @226____
-__TEMP @228  buffer 20 to @228____
-__TEMP @230  buffer 21 to @230____
-__CALL_PREPARE @231  testOverload@174[226, 228, 230] ->231__
-____PUSH_ARG 226____
-____PUSH_ARG 228____
-____PUSH_ARG 230____
-__CALL @231  testOverload@174[226, 228, 230] ->231__
-__TEMP @233  buffer 1 to @233____
-__TEMP @235  buffer 22 to @235____
-__CALL_PREPARE @236  testOverload@174[233, 235] ->236__
-____PUSH_ARG 233____
-____PUSH_ARG 235____
-__CALL @236  testOverload@174[233, 235] ->236__
-__TEMP @238  buffer 23 to @238____
-__CALL_PREPARE @239  testOverload@174[238] ->239__
-____PUSH_ARG 238____
-__CALL @239  testOverload@174[238] ->239__
-__TEMP @241  buffer 21 to @241____
-__TEMP @243  buffer 9 to @243____
-__TEMP @245  buffer 20 to @245____
-__CALL_PREPARE @246  testOverload@174[241, 243, 245] ->246__
-____PUSH_ARG 241____
-____PUSH_ARG 243____
-____PUSH_ARG 245____
-__CALL @246  testOverload@174[241, 243, 245] ->246__
-__TEMP @249  buffer 24 to @249____
-__TEMP @251  buffer 25 to @251____
-__CALL_PREPARE @253  java->java_new@247[249, 252] ->253__
-____PUSH_ARG 249____
-____PUSH_ARG 252____
-__CALL @253  java->java_new@247[249, 252] ->253__
+___TRY ^179  try ->179 :___
+__END @183  RETURN(37) @182 ->183___
+__CALL_PREPARE @186  println@13[178] ->186__
+____PUSH_ARG 178____
+__CALL @186  println@13[178] ->186__
+__TEMP @190  buffer 16 to @190____
+__CALL_PREPARE @191  println@13[190] ->191__
+____PUSH_ARG 190____
+__CALL @191  println@13[190] ->191__
+__END TRY ^179  try ->179 :__
+___END %testTryCatch : function testTryCatch[id=175 name=a, id=176 name=b] ->174 : ___
+__TEMP @193  buffer 17 to @193____
+__TEMP @195  buffer 18 to @195____
+__CALL_PREPARE @196  makeSquare@47[193, 195] ->196__
+____PUSH_ARG 193____
+____PUSH_ARG 195____
+__CALL @196  makeSquare@47[193, 195] ->196__
+__CALL_PREPARE @199  square=switchWH@198[197] ->199__
+____PUSH_ARG 197____
+__CALL @199  square=switchWH@198[197] ->199__
+__CALL_PREPARE @200  println@13[197] ->200__
+____PUSH_ARG 197____
+__CALL @200  println@13[197] ->200__
+__TEMP @203  buffer 19 to @203____
+__TEMP @205  buffer 20 to @205____
+__CALL_PREPARE @207  java->java_new@201[203, 206] ->207__
+____PUSH_ARG 203____
+____PUSH_ARG 206____
+__CALL @207  java->java_new@201[203, 206] ->207__
