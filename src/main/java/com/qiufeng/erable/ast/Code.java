@@ -245,7 +245,7 @@ public abstract class Code implements Comparable{
      * @return the id found.
      */
     public int findVar(String name){
-	for(var code : codes){
+	for(Code code : codes){
 	    //System.out.println("finding:"+code);
 	    if(code.tag.equals(name)&&code.sign.equals(Code.VAR)){
 		//System.out.println("ID:"+code);
@@ -259,7 +259,7 @@ public abstract class Code implements Comparable{
 	return -1;
     }
     public DynLoadCode findModule(String name){
-	for(var code : codes){
+	for(Code code : codes){
 	    //System.out.println("finding:"+code);
 	    if(code instanceof DynLoadCode){
 		System.out.println("ID:"+code.tag);
@@ -281,11 +281,11 @@ public abstract class Code implements Comparable{
      * @return 
      */
     public int findFunction(String name,int argc){
-	for(var code : codes){
+	for(Code code : codes){
 	    //System.out.println("finding:"+code);
 	    if(code.tag.equals(name)&&code instanceof FuncDeclCode){
 		//System.out.println("ID:"+code);
-		var func=(FuncDeclCode)code;
+		FuncDeclCode func=(FuncDeclCode)code;
 		if(func.args.size()==argc)
 		    return func.id;
 	    }
@@ -297,11 +297,11 @@ public abstract class Code implements Comparable{
 	return -1;
     }
     public boolean functionExistsInCurrentScope(String name,int argc){
-	for(var code : codes){
+	for(Code code : codes){
 	    //System.out.println("finding:"+code);
 	    if(code.tag.equals(name)&&code instanceof FuncDeclCode){
 		//System.out.println("ID:"+code);
-		var func=(FuncDeclCode)code;
+		FuncDeclCode func=(FuncDeclCode)code;
 		if(func.args.size()==argc)
 		    return true;
 	    }
@@ -310,7 +310,7 @@ public abstract class Code implements Comparable{
 	return false;
     }
     public boolean variableExistsInCurrentScope(String name){
-	for(var code : codes){
+	for(Code code : codes){
 	    //System.out.println("finding:"+code);
 	    if(code.tag.equals(name)&&code.sign.equals(Code.VAR)){
 		//System.out.println("ID:"+code);
@@ -321,7 +321,7 @@ public abstract class Code implements Comparable{
 	return false;
     }
     public int findCid(int id){
-	var temp=(TempCode)this.find(id);
+	TempCode temp=(TempCode)this.find(id);
 	return temp.cid;
     }
     /**
@@ -347,7 +347,7 @@ public abstract class Code implements Comparable{
 	String ret=ids + "    " + "-".repeat(depth)+">";
 	ret+=this.toString();
 	ret+="\n";
-	for(var code : this.codes){
+	for(Code code : this.codes){
 	    ret+=code.tree(depth+2);
 	    ret+="\n";
 	}

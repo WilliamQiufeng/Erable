@@ -25,13 +25,13 @@ public class ArrayUtils {
 		return arr;
 	}
 	public static <T> T[] push(T[] arr,T[] arr2){
-	    var offset=arr.length;
+	    int offset=arr.length;
 	    arr=Arrays.copyOf(arr, arr.length+arr2.length);
 	    System.arraycopy(arr2, 0, arr, offset, arr2.length);
 	    return arr;
 	}
 	public static byte[] push(byte[] arr,byte[] arr2){
-	    var offset=arr.length;
+	    int offset=arr.length;
 	    arr=Arrays.copyOf(arr, arr.length+arr2.length);
 	    System.arraycopy(arr2, 0, arr, offset, arr2.length);
 	    return arr;

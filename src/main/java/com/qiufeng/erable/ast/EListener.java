@@ -27,6 +27,7 @@ import com.qiufeng.erable.exception.UnknownException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -93,12 +94,12 @@ public class EListener extends ErableBaseListener {
 	this.root.addCode(pool);
 	pool.addElement(new ConstantPoolNumber(0d));
 	pool.addElement(new ConstantPoolNumber(1d));
-	var TTemp=new TempCode(pool.findElementId(1d),current);
-	var True=new VarCode("true",(short)0,TTemp.id,current);
+	TempCode TTemp=new TempCode(pool.findElementId(1d),current);
+	VarCode True=new VarCode("true",(short)0,TTemp.id,current);
 	this.current.addCode(TTemp);
 	this.current.addCode(True);
-	var FTemp=new TempCode(pool.findElementId(0d),current);
-	var False=new VarCode("false",(short)0,FTemp.id,current);
+	TempCode FTemp=new TempCode(pool.findElementId(0d),current);
+	VarCode False=new VarCode("false",(short)0,FTemp.id,current);
 	this.current.addCode(FTemp);
 	this.current.addCode(False);
     }
@@ -118,9 +119,9 @@ public class EListener extends ErableBaseListener {
     @Override
     public void visitErrorNode(ErrorNode node) {
 	super.visitErrorNode(node);
-	var what=node.getSymbol().getText();
-	var line=node.getSymbol().getLine();
-	var column=node.getSymbol().getCharPositionInLine();
+	String what=node.getSymbol().getText();
+	int line=node.getSymbol().getLine();
+	int column=node.getSymbol().getCharPositionInLine();
 	new UnknownException(BaseException.ErrorType.PARSING,"",what,line,column,1).throwException();
     }
 
@@ -143,7 +144,7 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitName(ErableParser.NameContext ctx) {
 	super.exitName(ctx);
-	var id=this.current.findVar(ctx.getText());
+	int id=this.current.findVar(ctx.getText());
 	ctx.id=id;
     }
 
@@ -198,8 +199,8 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitFuncdecl(ErableParser.FuncdeclContext ctx) {
 	super.exitFuncdecl(ctx);
-	var funcname=ctx.funcname.getText();
-	var funcid=this.current.findFunction(funcname, ctx.arguments.arguments.size());
+	String funcname=ctx.funcname.getText();
+	int funcid=this.current.findFunction(funcname, ctx.arguments.arguments.size());
 	if(funcid!=-1){
 	    new RedefinitionException("Redefinition of function '"+funcname+"' with same argument length of "+ctx.arguments.arguments.size(),funcname,ctx.funcname.getLine(),ctx.funcname.getCharPositionInLine()).throwException();
 	}
@@ -212,7 +213,7 @@ public class EListener extends ErableBaseListener {
     @Override
     public void enterFuncdecl(ErableParser.FuncdeclContext ctx) {
 	super.enterFuncdecl(ctx);
-	var funcname=ctx.funcname.getText();
+	String funcname=ctx.funcname.getText();
 	//Enter FUNCDECL
 	this.current=new FuncDeclCode(funcname,null,this.current);
 	
@@ -237,7 +238,7 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitArgs(ErableParser.ArgsContext ctx) {
 	super.exitArgs(ctx);
-	for(var t : ctx.argss){
+	for(Token t : ctx.argss){
 	    ctx.arguments.add(new FPADCode(t.getText(),current));
 	}
 	if(!(current instanceof Scope))
@@ -266,10 +267,10 @@ public class EListener extends ErableBaseListener {
     public void exitArray(ErableParser.ArrayContext ctx) {
 	super.exitArray(ctx);
 	ctx.arr=new ArrayList<Integer>();
-	for(var ele : ctx.elements.ops()){
+	for(ErableParser.OpsContext ele : ctx.elements.ops()){
 	    ctx.arr.add(ele.id);
 	}
-	var array=new ArrayCode(ctx.arr,current);
+	ArrayCode array=new ArrayCode(ctx.arr,current);
 	current.addCode(array);
 	ctx.id=array.id;
     }
@@ -282,12 +283,12 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitString(ErableParser.StringContext ctx) {
 	super.exitString(ctx);
-	var text=ctx.ANYMATCH().getText();
+	String text=ctx.ANYMATCH().getText();
 	text=text.substring(1, text.length()-1);
-	var string=new ConstantPoolString(text);
+	ConstantPoolString string=new ConstantPoolString(text);
 	ctx.obj=text;
-	var id=this.pool.addElement(string);
-	var temp=new TempCode(id,current);
+	int id=this.pool.addElement(string);
+	TempCode temp=new TempCode(id,current);
 	current.addCode(temp);
 	ctx.id=temp.id;
     }
@@ -300,10 +301,10 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitNum(ErableParser.NumContext ctx) {
 	super.exitNum(ctx);
-	var number=Double.parseDouble(ctx.getText());
+	double number=Double.parseDouble(ctx.getText());
 	ctx.obj=number;
-	var id=this.pool.addElement(new ConstantPoolNumber(number));
-	var temp=new TempCode(id,current);
+	int id=this.pool.addElement(new ConstantPoolNumber(number));
+	TempCode temp=new TempCode(id,current);
 	current.addCode(temp);
 	ctx.id=temp.id;
     }
@@ -330,7 +331,7 @@ public class EListener extends ErableBaseListener {
 	}
 	if(isFuncDecl){
 	    this.pool.addElement(ks);
-	    var tmp=new TempCode(ks.id,this.current);
+	    TempCode tmp=new TempCode(ks.id,this.current);
 	    this.current.addCode(tmp);
 	    key=tmp.id;
 	    current.addCode(new MachineCode(OpCode.KEY,/*current.codes.get(current.codes.size()-1)*/new int[]{key},current));
@@ -386,7 +387,7 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitOops(ErableParser.OopsContext ctx) {
 	super.exitOops(ctx);
-	var cur=(ObjectCode)current;
+	ObjectCode cur=(ObjectCode)current;
 	OpCode type=(cur.isKey?OpCode.KEY:OpCode.VALUE);
 	((ObjectCode)current).isKey=!((ObjectCode)current).isKey;
 	current.addCode(new MachineCode(type,/*current.codes.get(current.codes.size()-1)*/new int[]{ctx.ops().id},current));
@@ -404,35 +405,39 @@ public class EListener extends ErableBaseListener {
 	super.exitOps(ctx);
 	switch(ctx.type){
 	    case "element":
-		var element=new ElementCode(ctx.l.id,ctx.pdo.id,current);
+		ElementCode element=new ElementCode(ctx.l.id,ctx.pdo.id,current);
 		current.addCode(element);
 		ctx.id=element.id;
 		break;
+
 	    case "pow":
 	    case "change":
 		ctx.id=expand(OpCode.findOp(ctx.operation.getText()),ctx.l.id,ctx.r.id);
 		break;
 	    case "binop":
-		var binop=new BinaryOpCode(ctx.l.id,ctx.r.id,OpCode.findOp(ctx.operation.getText()),current);
+		BinaryOpCode binop=new BinaryOpCode(ctx.l.id,ctx.r.id,OpCode.findOp(ctx.operation.getText()),current);
 		current.addCode(binop);
 		ctx.id=binop.id;
 		break;
+
 	    case "unary":
-		var unaryop=new UnaryOpCode(ctx.r.id,OpCode.findOp(ctx.operation.getText()),current);
+		UnaryOpCode unaryop=new UnaryOpCode(ctx.r.id,OpCode.findOp(ctx.operation.getText()),current);
 		current.addCode(unaryop);
 		ctx.id=unaryop.id;
 		break;
+
 	    case "funccall":
-		var name=ctx.funcname.getText();
-		var nameid=ctx.funcname.id;
-		var args=new ArrayList<Integer>();
-		for(var arg : ctx.arguments.ops()){
+		String name=ctx.funcname.getText();
+		int nameid=ctx.funcname.id;
+		ArrayList<Integer> args=new ArrayList<Integer>();
+		for(ErableParser.OpsContext arg : ctx.arguments.ops()){
 		    args.add(arg.id);
 		}
-		var call=new FuncCallCode(name,args,nameid,current);
+		FuncCallCode call=new FuncCallCode(name,args,nameid,current);
 		current.addCode(call);
 		ctx.id=call.id;
 		break;
+
 	    case "bracket":
 		ctx.id=ctx.p.id;
 		break;
@@ -471,14 +476,15 @@ public class EListener extends ErableBaseListener {
 	    case MODEQ:
 		return xeq(OpCode.MOD,id,rid);
 	    default:
-		var eoc=new BinaryOpCode(id,rid,op,this.current);
+		BinaryOpCode eoc=new BinaryOpCode(id,rid,op,this.current);
 		this.current.addCode(eoc);
 		return eoc.id;
+
 	}
     }
     public int xeq(OpCode op,int id,int rid){
-	var boc=new BinaryOpCode(id,rid,op,this.current);
-	var eoc=new BinaryOpCode(id,boc.id,OpCode.EQU,this.current);
+	BinaryOpCode boc=new BinaryOpCode(id,rid,op,this.current);
+	BinaryOpCode eoc=new BinaryOpCode(id,boc.id,OpCode.EQU,this.current);
 	this.current.addCode(boc);
 	this.current.addCode(eoc);
 	return eoc.id;
@@ -486,7 +492,7 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitLoad_native(ErableParser.Load_nativeContext ctx) {
 	super.exitLoad_native(ctx);
-	var lc=new LoadCode(ctx.lib.id,this.current);
+	LoadCode lc=new LoadCode(ctx.lib.id,this.current);
 	this.current.addCode(lc);
     }
 
@@ -508,8 +514,8 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitImp_module(ErableParser.Imp_moduleContext ctx) {
 	super.exitImp_module(ctx);
-	var compiler=new ErableCompiler();
-	var mod=(String)ctx.mod.obj;
+	ErableCompiler compiler=new ErableCompiler();
+	String mod=(String)ctx.mod.obj;
 	if(!mod.endsWith(".erable")){
 	    mod+=".erable";
 	}
@@ -530,7 +536,7 @@ public class EListener extends ErableBaseListener {
 	this.current=this.current.getParent();
 	var tcc=(TryCatchCode)this.current;
 	tcc.finid=ctx.ops().id;*/
-	var tcc=(TryCatchCode)current.getParent();
+	TryCatchCode tcc=(TryCatchCode)current.getParent();
 	tcc.f=(Scope)current;
 	this.current=this.current.getParent();
     }
@@ -545,7 +551,7 @@ public class EListener extends ErableBaseListener {
 	super.exitCatch_expr(ctx);
 	//this.current.addCode(new MachineCode(OpCode.CATCH_END,-1,this.current));
 	//this.current.addCode(new MachineCode(OpCode.FINALLY,this.current.id,this.current));
-	var tcc=(TryCatchCode)current.getParent();
+	TryCatchCode tcc=(TryCatchCode)current.getParent();
 	tcc.c=(Scope)current;
 	this.current=this.current.getParent();
     }
@@ -564,7 +570,7 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitTry_e(ErableParser.Try_eContext ctx) {
 	super.exitTry_e(ctx);
-	var tcc=(TryCatchCode)current.getParent();
+	TryCatchCode tcc=(TryCatchCode)current.getParent();
 	tcc.t=(Scope)current;
 	this.current=this.current.getParent();
     }
@@ -585,9 +591,9 @@ public class EListener extends ErableBaseListener {
     @Override
     public void enterTry_expr(ErableParser.Try_exprContext ctx) {
 	super.enterTry_expr(ctx);
-	var cn=new VarCode(ctx.catch_expr().cn.getText(),(short)0,root.findVar("false"),current);
+	VarCode cn=new VarCode(ctx.catch_expr().cn.getText(),(short)0,root.findVar("false"),current);
 	current.addCode(cn);
-	var tcc=new TryCatchCode(this.current);
+	TryCatchCode tcc=new TryCatchCode(this.current);
 	tcc.C=cn.id;
 	this.current=tcc;
 	
@@ -597,13 +603,13 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitNative_funcdecl(ErableParser.Native_funcdeclContext ctx) {
 	super.exitNative_funcdecl(ctx);
-	var funcname=ctx.funcname.getText();
-	var funcid=this.current.findFunction(funcname, ctx.arguments.arguments.size());
-	var nativeCall=ctx.method.id;
+	String funcname=ctx.funcname.getText();
+	int funcid=this.current.findFunction(funcname, ctx.arguments.arguments.size());
+	int nativeCall=ctx.method.id;
 	if(funcid!=-1){
 	    new RedefinitionException("Redefinition of function '"+funcname+"' with same argument length of "+ctx.arguments.arguments.size(),funcname,ctx.funcname.getLine(),ctx.funcname.getCharPositionInLine()).throwException();
 	}
-	var nfdc=new NativeFuncDeclCode(funcname,nativeCall,ctx.arguments.arguments,this.current);
+	NativeFuncDeclCode nfdc=new NativeFuncDeclCode(funcname,nativeCall,ctx.arguments.arguments,this.current);
 	ctx.id=nfdc.id;
 	this.current.addCode(nfdc);
 	
@@ -634,17 +640,17 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitVar(ErableParser.VarContext ctx) {
 	super.exitVar(ctx);
-	for(var kv : ctx.declarations){
-	    var key=kv.key.getText();
-	    var val=-1;
+	for(ErableParser.KvsContext kv : ctx.declarations){
+	    String key=kv.key.getText();
+	    int val=-1;
 	    if(kv.val!=null){
 		val=kv.val.id;
 	    }
-	    var exists=this.current.variableExistsInCurrentScope(key);
+	    boolean exists=this.current.variableExistsInCurrentScope(key);
 	    if(exists){
 		new RedefinitionException("Redefinition of variable with the same name '"+key+"'.",key,kv.key.getLine(),kv.key.getCharPositionInLine()).throwException();
 	    }
-	    var variable=new VarCode(key,ctx.mod,val,current);
+	    VarCode variable=new VarCode(key,ctx.mod,val,current);
 	    current.addCode(variable);
 	    ctx.id=variable.id;
 	}
@@ -655,7 +661,7 @@ public class EListener extends ErableBaseListener {
     public void enterVar(ErableParser.VarContext ctx) {
 	super.enterVar(ctx);
 	short modifiers=0;
-	for(var token : ctx.modifiers){
+	for(Token token : ctx.modifiers){
 	    modifiers=VarModifiers.add(modifiers, VarModifiers.valueOf(token.getText().toUpperCase()).mod);
 	}
 	ctx.mod=modifiers;
@@ -745,7 +751,7 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitDynload(ErableParser.DynloadContext ctx) {
 	super.exitDynload(ctx);
-	var dlc=new DynLoadCode(ctx.mod.getText(),(String)ctx.dyn.obj,ctx.dyn.id,(String)ctx.table.obj,ctx.table.id,this.current);
+	DynLoadCode dlc=new DynLoadCode(ctx.mod.getText(),(String)ctx.dyn.obj,ctx.dyn.id,(String)ctx.table.obj,ctx.table.id,this.current);
 	dlc.loadProps();
 	this.current.addCode(dlc);
     }
@@ -759,7 +765,7 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitModacc(ErableParser.ModaccContext ctx) {
 	super.exitModacc(ctx);
-	var mac=new ModuleAccessCode(this.current.findModule(ctx.mod.getText()),ctx.tar.getText(),this.current);
+	ModuleAccessCode mac=new ModuleAccessCode(this.current.findModule(ctx.mod.getText()),ctx.tar.getText(),this.current);
 	ctx.id=mac.id;
 	this.current.addCode(mac);
     }

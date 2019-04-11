@@ -57,7 +57,7 @@ public class Dump {
 		FileInputStream dis=new FileInputStream(dyn);
 		ed.dumpDynLib(dis);
 	    }
-	    var os=new FileOutputStream(out);
+	    FileOutputStream os=new FileOutputStream(out);
 	    ed.dump(os);
 	}
 	catch (IOException ex) {

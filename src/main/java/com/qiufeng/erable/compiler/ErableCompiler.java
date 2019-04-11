@@ -62,11 +62,11 @@ public class ErableCompiler {
     public EListener compile(String file,EListener parent){
 	try{
 	    long start=System.currentTimeMillis();
-	    var parser=this.parse(file);
-	    var pt=this.tree(parser);
+	    ErableParser parser=this.parse(file);
+	    ParseTree pt=this.tree(parser);
 	    
 	    System.out.println("Parsed file "+file);
-	    var el=this.walk(pt,parser,parent);
+	    EListener el=this.walk(pt,parser,parent);
 	    long end=System.currentTimeMillis();
 	    long duration=end-start;
 	    //System.out.println(pt.toStringTree());
@@ -80,7 +80,7 @@ public class ErableCompiler {
     }
     public ErableParser parse(String file) throws IOException{
 	FileInputStream fis=new FileInputStream(file);
-	var ais=new ANTLRInputStream(fis);
+	ANTLRInputStream ais=new ANTLRInputStream(fis);
 	//var ais=CharStreams.fromStream(fis);
 	ErableLexer lexer=new ErableLexer(ais);
 	CommonTokenStream cts=new CommonTokenStream(lexer);

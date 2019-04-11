@@ -2,6 +2,7 @@ package com.qiufeng.erable;
 import com.qiufeng.erable.compiler.ErableCompiler;
 import com.qiufeng.erable.ast.Code;
 import com.qiufeng.erable.ast.ConstantPool;
+import com.qiufeng.erable.ast.EListener;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -86,8 +87,8 @@ public class Main
     }
     public void compile(String file){
 	output=file.replace(".erable", "").concat(".ec");
-	var compiler=new ErableCompiler();
-	var el=compiler.compile(file,null);
+	ErableCompiler compiler=new ErableCompiler();
+	EListener el=compiler.compile(file,null);
 	this.printConstantPool(el.getPool());
 	this.printTree(el.root);
 	if(el.root.currentId>Byte.MAX_VALUE){
@@ -102,7 +103,7 @@ public class Main
 	    compiler.output(fos, el);
 	    if(this.dyn){
 		String dyn=file.replace(".erable","").concat(".dynec");
-		var dos=new FileOutputStream(dyn);
+		FileOutputStream dos=new FileOutputStream(dyn);
 		compiler.writeDyn(dos, el.root);
 	    }
 	}
@@ -125,7 +126,7 @@ public class Main
     }
     public void printTree(Code root){
 	if(!showTree)return;
-	var tree=root.tree(0);
+	String tree=root.tree(0);
 	println(tree,showTree);
     }
 }

@@ -84,7 +84,7 @@ public class MultiplePrintStream extends PrintStream {
     @Override
     public void println(String x) {
 	super.println(x);
-	for(var ps : this.streams){
+	for(PrintStream ps : this.streams){
 	    ps.println(x);
 	}
     }

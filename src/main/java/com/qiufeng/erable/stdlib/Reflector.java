@@ -26,7 +26,7 @@ import java.lang.reflect.Method;
  */
 public class Reflector {
     public static Object newInstance(String className,Object[] args) throws Exception{
-	var clazz=Class.forName(className);
+	Class<?> clazz=Class.forName(className);
 	Class<?>[] classes=new Class<?>[args.length];
 	for(int i=0;i<args.length;i++){
 	    classes[i]=args[i].getClass();
@@ -35,7 +35,7 @@ public class Reflector {
 	return constructor.newInstance(args);
     }
     public static Object call(Object obj,String methodName,Object[] args)throws Exception{
-	var clazz=obj.getClass();
+	Class<?> clazz=obj.getClass();
 	Class<?>[] classes=new Class<?>[args.length];
 	for(int i=0;i<args.length;i++){
 	    classes[i]=args[i].getClass();
@@ -44,7 +44,7 @@ public class Reflector {
 	return constructor.invoke(obj, args);
     }
     public static Object callStatic(String className,String methodName,Object[] args)throws Exception{
-	var clazz=Class.forName(className);
+	Class<?> clazz=Class.forName(className);
 	Class<?>[] classes=new Class<?>[args.length];
 	for(int i=0;i<args.length;i++){
 	    classes[i]=args[i].getClass();
@@ -53,13 +53,13 @@ public class Reflector {
 	return constructor.invoke(null, args);
     }
     public static Object get(Object obj,String field)throws Exception{
-	var clazz=obj.getClass();
+	Class<?> clazz=obj.getClass();
 	Field f=clazz.getField(field);
 	f.setAccessible(true);
 	return f.get(obj);
     }
     public static Object getStatic(String className,String field)throws Exception{
-	var clazz=Class.forName(className);
+	Class<?> clazz=Class.forName(className);
 	Field f=clazz.getField(field);
 	f.setAccessible(true);
 	return f.get(null);

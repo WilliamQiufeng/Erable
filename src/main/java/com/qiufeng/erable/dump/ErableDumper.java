@@ -75,7 +75,7 @@ public class ErableDumper {
     }
     public void dumpDynLib(InputStream is)throws IOException{
 	System.out.println("Dumping dynamic lib name table");
-	var prop=new Properties();
+	Properties prop=new Properties();
 	prop.load(is);
 	for(Map.Entry me : prop.entrySet()){
 	    String key=(String)me.getKey();
@@ -109,7 +109,7 @@ public class ErableDumper {
 		case CONSTANT_POOL:
 		    this.dumpConstantPool();
 	    	default:
-		    var name=StringUtils.std(code.name(),15);
+		    String name=StringUtils.std(code.name(),15);
 		    System.out.print(name);
 		    for(int j=0;j<code.argc;j++){
 			int id=this.readId(id_len);
@@ -121,6 +121,7 @@ public class ErableDumper {
 		    if(code==OpCode.POP_SCOPE||code==OpCode.END)
 			this.depth-=2;
 		    break;
+
 	    }
 	    
 	}

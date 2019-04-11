@@ -52,7 +52,7 @@ public class FuncDeclCode extends Code {
      */
     @Override
     public int findVar(String name) {
-	for(var f : args){
+	for(FPADCode f : args){
 	    if(f.name.equals(name)){
 		return f.id;
 	    }

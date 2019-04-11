@@ -77,7 +77,7 @@ public enum OpCode {
 	return (byte)this.ordinal();
     }
     public static OpCode find(String code){
-	for(var op : OpCode.values()){
+	for(OpCode op : OpCode.values()){
 	    if(op.name().equals(code)){
 		return op;
 	    }
@@ -85,7 +85,7 @@ public enum OpCode {
 	return null;
     }
     public static OpCode findOp(String sign){
-	for(var op : OpCode.values()){
+	for(OpCode op : OpCode.values()){
 	    if(sign.equals(op.sign)){
 		return op;
 	    }

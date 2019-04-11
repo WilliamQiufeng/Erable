@@ -81,7 +81,7 @@ public class ConstantPool extends Code {
     @Override
     public void setFile(OutputStream file) {
 	super.setFile(file);
-	for(var cpe : this.elements){
+	for(ConstantPoolElement cpe : this.elements){
 	    cpe.setFile(file);
 	}
     }
@@ -97,10 +97,10 @@ public class ConstantPool extends Code {
      */
     @Override
     public void write()throws IOException {
-	var len=this.elements.size();
+	int len=this.elements.size();
 	this.writeOpCode(this.op);
 	this.writeCid(len);
-	for(var element : this.elements){
+	for(ConstantPoolElement element : this.elements){
 	    element.write();
 	}
     }

@@ -40,7 +40,7 @@ public class TempCode extends Code {
 
     @Override
     public String toString() {
-	var ret=super.toString();
+	String ret=super.toString();
 	if(this.getClass().getSimpleName().equals("TempCode")){
 	    ret+="  buffer " + this.cid;
 	    ret+=" to @"+this.id;
