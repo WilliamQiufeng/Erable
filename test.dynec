@@ -1,19 +1,19 @@
 #Erable Dynamic Lib
-#Wed Apr 10 18:14:44 CST 2019
+#Thu Apr 11 17:11:55 CST 2019
 isNegative=98
-testOverload=190
+testOverload=191
 mul=27
 prefix=26
 false=7
-testTryCatch=197
-say=127
-newCat=132
+testTryCatch=198
+say=128
+newCat=133
 switchWH=54
 input=16
-square=223
+square=221
 println=13
 quad=33
 loop=111
 true=5
-@maxid=256
+@maxid=254
 makeSquare=47

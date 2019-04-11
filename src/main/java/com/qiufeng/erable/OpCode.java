@@ -22,8 +22,11 @@ package com.qiufeng.erable;
  */
 public enum OpCode {
     CONSTANT_POOL,CP_NUM,CP_STR,
+    //1 op 2 ->ID 3
     ADD("+",3),SUB("-",3),MUL("*",3),DIV("/",3),MOD("%",3),POW("**",3),
+    //op 1 -> ID 2
     POS(2),NEG(2),
+    //1[2] -> ID 3
     ELEMENT(3),
     LS("<<",3),RS(">>",3),ULS("<<<",3),URS(">>>",3),
     LT("<",3),GT(">",3),LTE("<=",3),GTE(">=",3),EQ("==",3),NEQ("!=",3),
@@ -35,18 +38,20 @@ public enum OpCode {
     RETURN("return",2),BREAK("break",2),
     VAR(2),
     LOADC(2),
-    FUNCTION(1),PUSH_ARGDECL(1),START_DO,END_FUNCDECL(1),
-    ARRAY(1),PUSH_ELEMENT(1),
+    FUNCTION(1),PUSH_ARGDECL(1),START_DO,
+    ARRAY(1),PUSH_ELEMENT(2),
     CALL_PREPARE(1),PUSH_ARG(2),CALL(2),
     IF(1),ELSE(2),
     WHILE(1),
-    START(1),END(1),
-    BLOCK(1),END_BLOCK(1),
+    END(1),
+    //if 1 break
     BREAKIF(1),
+    //If 1 jump 2
+    JUMPIF(2),
     OBJECT(1),START_PAIR,KEY(1),VALUE(1),END_PAIR,
-    TRY(1),TRY_START,TRY_END,CATCH_ID(1),CATCH_START,CATCH_END,FINALLY(1),
+    TRY(2),
     NATIVE_FUNCDECL(2),LOAD_LIB(1),
-    DYN_LOAD(3),DYNCALL(2),
+    DYN_LOAD(3),DYNCALL(3),
     ;
     public String sign;
     public int argc;
@@ -63,7 +68,6 @@ public enum OpCode {
     OpCode(){
 	this(null);
     }
-
     @Override
     public String toString() {
 	return super.toString() + "(" + this.getByte() + ")";

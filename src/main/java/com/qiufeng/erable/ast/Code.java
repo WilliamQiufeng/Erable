@@ -337,10 +337,14 @@ public abstract class Code implements Comparable{
         return ts;
     }
     public String getName(){
+	
 	return sign+tag;
     }
     public String tree(int depth){
-	String ret="-".repeat(depth)+">";
+	String ids=Integer.toString(id);
+	while(ids.length()<8)
+	    ids="0".concat(ids);
+	String ret=ids + "    " + "-".repeat(depth)+">";
 	ret+=this.toString();
 	ret+="\n";
 	for(var code : this.codes){

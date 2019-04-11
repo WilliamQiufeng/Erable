@@ -39,9 +39,8 @@ public class ArrayCode extends TempCode {
 	for(int i : this.arr){
 	    this.file.write(OpCode.PUSH_ELEMENT.getByte());
 	    this.writeId(i);
+	    this.writeId(this.id);
 	}
-	this.file.write(OpCode.END.getByte());
-	this.writeId(this.id);
     }
 
     @Override

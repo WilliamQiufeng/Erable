@@ -19,14 +19,15 @@ package com.qiufeng.erable.ast;
 import com.qiufeng.erable.OpCode;
 import com.qiufeng.erable.util.BitUtils;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  *
  * @author Qiufeng54321
  */
 public class MachineCode extends Code {
-    public int refid;
-    public MachineCode(OpCode op,int refid,Code parent) {
+    public int[] refid;
+    public MachineCode(OpCode op,int[] refid,Code parent) {
 	super("",op,parent);
 	this.tag=this.id+"";
 	this.sign=Code.FLAG;
@@ -40,14 +41,14 @@ public class MachineCode extends Code {
     public void write() throws IOException {
 	this.writeOpCode(this.op);
 	System.out.println("__FLAG "+this);
-	if(this.refid!=-1){
-	    this.writeId(this.refid);
+	for(int rid : refid){
+	    this.writeId(rid);
 	}
     }
 
     @Override
     public String toString() {
-	return super.toString() + "  Flag " + this.op + " " + (this.refid==-1?"":this.refid);
+	return super.toString() + "  Flag " + this.op + " " + Arrays.toString(refid);
     }
     
 }

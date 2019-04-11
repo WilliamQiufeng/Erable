@@ -34,7 +34,7 @@ public class IfCode extends TempCode {
 	this.sign="^";
     }
     public void process(){
-	this.codes.add(this.codes.size()-1, new MachineCode(OpCode.BREAKIF,this.codes.get(this.codes.size()-2).id,this));
+	this.codes.add(this.codes.size()-1, new MachineCode(OpCode.BREAKIF,new int[]{this.codes.get(this.codes.size()-2).id},this));
     }
 
     @Override

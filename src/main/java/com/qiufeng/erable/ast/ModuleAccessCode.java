@@ -44,11 +44,12 @@ public class ModuleAccessCode extends TempCode {
 	byte[] nid=new byte[4];
 	BitUtils.putInt(nid, 0, cid);
 	this.file.write(nid);
+	this.writeId(this.id);
     }
 
     @Override
     public String toString() {
-	return super.toString() + "  Module @" + this.dlc.id + " Accessing: @" + cid ;
+	return super.toString() + "  Module @" + this.dlc.id + " Accessing: @" + cid + " to ID " + this.id ;
     }
     
 }

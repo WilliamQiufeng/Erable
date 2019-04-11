@@ -74,9 +74,6 @@ ops
   | exprs                                        {$type="exprs";}
   | dynload                                      {$type="dynload";}
   ;
-sblock
-  : codeblock
-  ;
 sops
   : ops
   ;
@@ -151,10 +148,16 @@ native_funcdecl
   ;
 try_expr
   returns [Object obj,int id]
-  : TRY tdo=ops catch_expr (FINALLY fin=ops)?
+  : try_e catch_expr fin_expr
+  ;
+try_e
+  : TRY tdo=ops
   ;
 catch_expr
   : CATCH cn=NAME cdo=ops
+  ;
+fin_expr
+  : FINALLY fin=ops
   ;
 imp_module
   returns [Object obj,int id]

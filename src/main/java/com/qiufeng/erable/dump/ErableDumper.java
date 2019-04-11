@@ -85,27 +85,32 @@ public class ErableDumper {
     public void dumpCodes() throws IOException{
 	for(int i=0;(i=this.input.read())!=-1;){
 	    System.out.print(this.depthHeader());
+	    
 	    OpCode code=OpCode.values()[i];
 	    //System.out.println(code);
 	    if(code==OpCode.LOADC){
 		int cid=this.readId(cid_len);
 		int id =this.readId(id_len);
-		System.out.println("Buffer "+cid+" to @"+id);
+		System.out.println("Buffer          "+cid+" to @"+id);
 	    }else if(code==OpCode.DYNCALL){
 		int mid=this.readId(id_len);
 		int nid =this.readId(4);
-		System.out.println("Access @"+nid+" from Module @"+mid);
+		int id  =this.readId(id_len);
+		System.out.println("Access          @"+nid+" from Module @"+mid+" and buffer to @"+id);
 	    }else{
-		System.out.print(code.name());
+		String name=code.name();
+		while(name.length()<15)
+		    name=name.concat(" ");
+		System.out.print(name);
 		for(int j=0;j<code.argc;j++){
 		    int id=this.readId(id_len);
 		    System.out.print(" @"+id);
 		}
 		System.out.println();
-		if(code==OpCode.PUSH_SCOPE||code==OpCode.IF||code==OpCode.ELSE||code==OpCode.WHILE||code==OpCode.ARRAY||code==OpCode.TRY_START
-			||code==OpCode.CATCH_START||code==OpCode.FINALLY||code==OpCode.OBJECT)
+		if(code==OpCode.PUSH_SCOPE||code==OpCode.IF||code==OpCode.ELSE||code==OpCode.WHILE||code==OpCode.OBJECT||code==OpCode.FUNCTION
+			||code==OpCode.TRY)
 		    this.depth+=2;
-		if(code==OpCode.POP_SCOPE||code==OpCode.END||code==OpCode.TRY_END||code==OpCode.CATCH_END)
+		if(code==OpCode.POP_SCOPE||code==OpCode.END)
 		    this.depth-=2;
 	    }
 	    

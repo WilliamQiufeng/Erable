@@ -84,6 +84,8 @@ public class FuncDeclCode extends Code {
 	System.out.println("___FUNCDECL___" + this);
 	this.writeArgs();
 	this.writeCodes();
+	this.writeOpCode(OpCode.END);
+	this.writeId(this.id);
 	System.out.println("___END "+this+" ___");
     }
 

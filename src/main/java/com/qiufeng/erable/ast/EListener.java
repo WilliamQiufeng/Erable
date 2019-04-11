@@ -162,13 +162,14 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitSops(ErableParser.SopsContext ctx) {
 	super.exitSops(ctx);
-	this.current.addCode(new MachineCode(OpCode.END,current.getParent().id,this.current));
+	this.current.addCode(new MachineCode(OpCode.END,new int[]{current.getParent().id},this.current));
     }
 
     @Override
     public void enterSops(ErableParser.SopsContext ctx) {
 	super.enterSops(ctx);
-	this.current.addCode(new MachineCode(OpCode.BREAKIF,this.current.codes.get(this.current.codes.size()-1).id,this.current));
+	int cond=this.current.codes.get(this.current.codes.size()-1).id;
+	this.current.addCode(new MachineCode(OpCode.BREAKIF,new int[]{cond},this.current));
 	
     }
 
@@ -232,16 +233,6 @@ public class EListener extends ErableBaseListener {
 	this.current=new Scope(this.current);
     }
 
-    @Override
-    public void exitSblock(ErableParser.SblockContext ctx) {
-	super.exitSblock(ctx);
-    }
-
-    @Override
-    public void enterSblock(ErableParser.SblockContext ctx) {
-	super.enterSblock(ctx);
-	this.current.addCode(new MachineCode(OpCode.BREAKIF,this.current.codes.get(this.current.codes.size()-1).id,this.current));
-    }
 
     @Override
     public void exitArgs(ErableParser.ArgsContext ctx) {
@@ -342,16 +333,16 @@ public class EListener extends ErableBaseListener {
 	    var tmp=new TempCode(ks.id,this.current);
 	    this.current.addCode(tmp);
 	    key=tmp.id;
-	    current.addCode(new MachineCode(OpCode.KEY,/*current.codes.get(current.codes.size()-1)*/key,current));
-	    current.addCode(new MachineCode(OpCode.VALUE,/*current.codes.get(current.codes.size()-1)*/value,current));
+	    current.addCode(new MachineCode(OpCode.KEY,/*current.codes.get(current.codes.size()-1)*/new int[]{key},current));
+	    current.addCode(new MachineCode(OpCode.VALUE,/*current.codes.get(current.codes.size()-1)*/new int[]{value},current));
 	}
-	current.addCode(new MachineCode(OpCode.END_PAIR,-1,this.current));
+	current.addCode(new MachineCode(OpCode.END_PAIR,new int[]{},this.current));
     }
 
     @Override
     public void enterPair(ErableParser.PairContext ctx) {
 	super.enterPair(ctx);
-	current.addCode(new MachineCode(OpCode.START_PAIR,-1,this.current));
+	current.addCode(new MachineCode(OpCode.START_PAIR,new int[]{},this.current));
     }
 
     @Override
@@ -398,7 +389,7 @@ public class EListener extends ErableBaseListener {
 	var cur=(ObjectCode)current;
 	OpCode type=(cur.isKey?OpCode.KEY:OpCode.VALUE);
 	((ObjectCode)current).isKey=!((ObjectCode)current).isKey;
-	current.addCode(new MachineCode(type,/*current.codes.get(current.codes.size()-1)*/ctx.ops().id,current));
+	current.addCode(new MachineCode(type,/*current.codes.get(current.codes.size()-1)*/new int[]{ctx.ops().id},current));
 	ctx.id=ctx.ops().id;
     }
 
@@ -419,6 +410,8 @@ public class EListener extends ErableBaseListener {
 		break;
 	    case "pow":
 	    case "change":
+		ctx.id=expand(OpCode.findOp(ctx.operation.getText()),ctx.l.id,ctx.r.id);
+		break;
 	    case "binop":
 		var binop=new BinaryOpCode(ctx.l.id,ctx.r.id,OpCode.findOp(ctx.operation.getText()),current);
 		current.addCode(binop);
@@ -465,7 +458,31 @@ public class EListener extends ErableBaseListener {
 		
 	}
     }
-
+    public int expand(OpCode op,int id,int rid){
+	switch(op){
+	    case ADDEQ:
+		return xeq(OpCode.ADD,id,rid);
+	    case SUBEQ:
+		return xeq(OpCode.SUB,id,rid);
+	    case MULEQ:
+		return xeq(OpCode.MUL,id,rid);
+	    case DIVEQ:
+		return xeq(OpCode.DIV,id,rid);
+	    case MODEQ:
+		return xeq(OpCode.MOD,id,rid);
+	    default:
+		var eoc=new BinaryOpCode(id,rid,op,this.current);
+		this.current.addCode(eoc);
+		return eoc.id;
+	}
+    }
+    public int xeq(OpCode op,int id,int rid){
+	var boc=new BinaryOpCode(id,rid,op,this.current);
+	var eoc=new BinaryOpCode(id,boc.id,OpCode.EQU,this.current);
+	this.current.addCode(boc);
+	this.current.addCode(eoc);
+	return eoc.id;
+    }
     @Override
     public void exitLoad_native(ErableParser.Load_nativeContext ctx) {
 	super.exitLoad_native(ctx);
@@ -508,20 +525,54 @@ public class EListener extends ErableBaseListener {
     }
 
     @Override
+    public void exitFin_expr(ErableParser.Fin_exprContext ctx) {
+	/*this.current.getParent().addCode(this.current);
+	this.current=this.current.getParent();
+	var tcc=(TryCatchCode)this.current;
+	tcc.finid=ctx.ops().id;*/
+	var tcc=(TryCatchCode)current.getParent();
+	tcc.f=(Scope)current;
+	this.current=this.current.getParent();
+    }
+
+    @Override
+    public void enterFin_expr(ErableParser.Fin_exprContext ctx) {
+	this.current=new Scope(this.current);
+    }
+
+    @Override
     public void exitCatch_expr(ErableParser.Catch_exprContext ctx) {
 	super.exitCatch_expr(ctx);
-	this.current.addCode(new MachineCode(OpCode.CATCH_END,-1,this.current));
-	this.current.addCode(new MachineCode(OpCode.FINALLY,this.current.id,this.current));
+	//this.current.addCode(new MachineCode(OpCode.CATCH_END,-1,this.current));
+	//this.current.addCode(new MachineCode(OpCode.FINALLY,this.current.id,this.current));
+	var tcc=(TryCatchCode)current.getParent();
+	tcc.c=(Scope)current;
+	this.current=this.current.getParent();
     }
 
     @Override
     public void enterCatch_expr(ErableParser.Catch_exprContext ctx) {
 	super.enterCatch_expr(ctx);
-	this.current.addCode(new MachineCode(OpCode.TRY_END,-1,this.current));
+	/*this.current.addCode(new MachineCode(OpCode.BREAKIF,this.root.findVar("true"),this.current));
 	var fpad=new FPADCode(ctx.cn.getText(),this.current);
 	((TryCatchCode)this.current).mCatch=fpad;
 	this.current.addCode(new MachineCode(OpCode.CATCH_ID,fpad.id,this.current));
-	this.current.addCode(new MachineCode(OpCode.CATCH_START,-1,this.current));
+	this.current.addCode(new MachineCode(OpCode.CATCH_START,-1,this.current));*/
+	this.current=new Scope(this.current);
+    }
+
+    @Override
+    public void exitTry_e(ErableParser.Try_eContext ctx) {
+	super.exitTry_e(ctx);
+	var tcc=(TryCatchCode)current.getParent();
+	tcc.t=(Scope)current;
+	this.current=this.current.getParent();
+    }
+
+    @Override
+    public void enterTry_e(ErableParser.Try_eContext ctx) {
+	super.enterTry_e(ctx);
+	this.current=new Scope(this.current);
     }
 
     @Override
@@ -534,8 +585,12 @@ public class EListener extends ErableBaseListener {
     @Override
     public void enterTry_expr(ErableParser.Try_exprContext ctx) {
 	super.enterTry_expr(ctx);
-	this.current=new TryCatchCode(this.current);
-	this.current.addCode(new MachineCode(OpCode.TRY_START,-1,this.current));
+	var cn=new VarCode(ctx.catch_expr().cn.getText(),(short)0,root.findVar("false"),current);
+	current.addCode(cn);
+	var tcc=new TryCatchCode(this.current);
+	tcc.C=cn.id;
+	this.current=tcc;
+	
     }
 
 
