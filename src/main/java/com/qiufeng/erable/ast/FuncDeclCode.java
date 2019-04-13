@@ -33,7 +33,6 @@ public class FuncDeclCode extends Code {
      * 把所有的FPADCode装入this.args<br>
      * @param name
      * @param args
-     * @param pdo
      * @param parent 
      */
     public FuncDeclCode(String name,List<FPADCode> args, Code parent) {
@@ -63,7 +62,7 @@ public class FuncDeclCode extends Code {
 	for(FPADCode f : this.args){
 	    this.writeOpCode(OpCode.PUSH_ARGDECL);
 	    this.writeId(f.id);
-	    System.out.println("___ARG_PUSH___"+f);
+	    //System.out.println("___ARG_PUSH___"+f);
 	}
     }
     /**
@@ -81,12 +80,12 @@ public class FuncDeclCode extends Code {
     public void write() throws IOException {
 	this.writeOpCode(this.op);
 	this.writeId(id);
-	System.out.println("___FUNCDECL___" + this);
+	//System.out.println("___FUNCDECL___" + this);
 	this.writeArgs();
 	this.writeCodes();
 	this.writeOpCode(OpCode.END);
 	this.writeId(this.id);
-	System.out.println("___END "+this+" ___");
+	//System.out.println("___END "+this+" ___");
     }
 
     @Override

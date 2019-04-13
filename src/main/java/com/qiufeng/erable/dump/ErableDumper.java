@@ -41,6 +41,7 @@ public class ErableDumper {
     public int depth=0;
     public int id_len=1;
     public int cid_len=1;
+    public int line=0;
 
     public InputStream getInput() {
 	return input;
@@ -85,6 +86,7 @@ public class ErableDumper {
     }
     public void dumpCodes() throws IOException{
 	for(int i=0;(i=this.input.read())!=-1;){
+	    System.out.print("#"+StringUtils.std(String.valueOf(line++), 8));
 	    System.out.print(this.depthHeader());
 	    
 	    OpCode code=OpCode.values()[i];
@@ -95,7 +97,7 @@ public class ErableDumper {
 		    {
 			int cid=this.readId(cid_len);
 			int id =this.readId(id_len);
-			System.out.println("Buffer          "+cid+" to @"+id);
+			System.out.println("Buffer                    "+cid+" to @"+id);
 			break;
 		    }
 	    	case DYNCALL:
@@ -103,13 +105,14 @@ public class ErableDumper {
 			int mid=this.readId(id_len);
 			int nid =this.readId(4);
 			int id  =this.readId(id_len);
-			System.out.println("Access          @"+nid+" from Module @"+mid+" and buffer to @"+id);
+			System.out.println("Access                    @"+nid+" from Module @"+mid+" to @"+id);
 			break;
 		    }
 		case CONSTANT_POOL:
 		    this.dumpConstantPool();
+		    break;
 	    	default:
-		    String name=StringUtils.std(code.name(),15);
+		    String name=StringUtils.std(code.toString(),25);
 		    System.out.print(name);
 		    for(int j=0;j<code.argc;j++){
 			int id=this.readId(id_len);
@@ -124,12 +127,15 @@ public class ErableDumper {
 
 	    }
 	    
+	    
 	}
     }
     public void dumpConstantPool()throws IOException{
 	int len=this.readId(cid_len);
 	System.out.println("Constant Pool: Length="+len);
+	this.depth+=2;
 	for(int i=0;i<len;i++){
+	    System.out.print("$"+StringUtils.std(String.valueOf(line++), 8));
 	    System.out.print(this.depthHeader());
 	    OpCode code=OpCode.values()[this.input.read()];
 	    if(code==OpCode.CP_NUM){
@@ -142,6 +148,7 @@ public class ErableDumper {
 		System.out.println("String: ID="+StringUtils.std(String.valueOf(i), 8)+", Value=\""+str+"\"");
 	    }
 	}
+	this.depth-=2;
     }
     public int readId(int len) throws IOException{
 	byte[] bs=this.input.readNBytes(len);

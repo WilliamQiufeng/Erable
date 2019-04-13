@@ -33,7 +33,6 @@ com/qiufeng/erable/ast/ConstantPoolElement.class
 com/qiufeng/erable/ErableParser$StringContext.class
 com/qiufeng/erable/ErableParser$Parent_expressionContext.class
 com/qiufeng/erable/MultiplePrintStream.class
-com/qiufeng/erable/ErableParser$SblockContext.class
 com/qiufeng/erable/ErableParser$CondexprsContext.class
 com/qiufeng/erable/ast/IfCode.class
 com/qiufeng/erable/ErableParser$Load_nativeContext.class
@@ -55,6 +54,7 @@ com/qiufeng/erable/Main.class
 com/qiufeng/erable/ErableParser$ElsecondContext.class
 com/qiufeng/erable/ErableParser$Try_exprContext.class
 com/qiufeng/erable/ErableParser$ProgContext.class
+com/qiufeng/erable/util/StringUtils.class
 com/qiufeng/erable/stdlib/InputScanner.class
 com/qiufeng/erable/ErableParser$SopsContext.class
 com/qiufeng/erable/ast/MachineCode.class
@@ -91,3 +91,4 @@ com/qiufeng/erable/Const.class
 com/qiufeng/erable/OpCode.class
 com/qiufeng/erable/VarModifiers.class
 com/qiufeng/erable/ast/ElementCode.class
+com/qiufeng/erable/dump/ErableDumper$1.class

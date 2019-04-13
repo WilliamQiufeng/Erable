@@ -40,7 +40,7 @@ public class MachineCode extends Code {
     @Override
     public void write() throws IOException {
 	this.writeOpCode(this.op);
-	System.out.println("__FLAG "+this);
+	//System.out.println("__FLAG "+this);
 	for(int rid : refid){
 	    this.writeId(rid);
 	}

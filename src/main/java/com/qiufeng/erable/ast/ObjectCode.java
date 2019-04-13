@@ -36,11 +36,11 @@ public class ObjectCode extends TempCode {
     public void write() throws IOException {
 	this.writeOpCode(this.op);
 	this.writeId(id);
-	System.out.println("__START OBJECT "+this+"__");
+	//System.out.println("__START OBJECT "+this+"__");
 	this.writeCodes();
 	this.writeOpCode(OpCode.END);
 	this.writeId(id);
-	System.out.println("__END OBJECT "+this+"__");
+	//System.out.println("__END OBJECT "+this+"__");
     }
 
     @Override

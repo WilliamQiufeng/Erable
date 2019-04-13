@@ -55,7 +55,7 @@ public class TryCatchCode extends TempCode {
      */
     @Override
     public void write() throws IOException {
-	System.out.println("___TRY "+this+"___");
+	//System.out.println("___TRY "+this+"___");
 	this.writeOpCode(this.op);
 	this.writeId(this.C);
 	this.writeId(id);
@@ -70,7 +70,7 @@ public class TryCatchCode extends TempCode {
 	this.f.write();
 	this.writeOpCode(OpCode.END);
 	this.writeId(id);
-	System.out.println("__END TRY "+this+"__");
+	//System.out.println("__END TRY "+this+"__");
     }
 
     @Override

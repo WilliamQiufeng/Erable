@@ -47,7 +47,7 @@ public class BinaryOpCode extends TempCode{
     public void write() throws IOException {
 	this.writeOpCode(this.op);
 	this.writeId(this.cid);            //Left
-	System.out.println(this);
+	//System.out.println(this);
 	this.writeId(this.rtid); //Right
 	this.writeId(this.id); //Self ID
     }

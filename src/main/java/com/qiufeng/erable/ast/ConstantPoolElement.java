@@ -36,6 +36,7 @@ public abstract class ConstantPoolElement extends Code implements Comparable {
     public ConstantPoolElement(Object obj) {
 	super(null);
 	this.obj = obj;
+	currentId--;
     }
     /**
      * Check if the two elements are equal or not.

@@ -1,7 +1,7 @@
 #Erable Dynamic Lib
-#Thu Apr 11 18:32:00 CST 2019
-input=49
-println=46
-true=40
-false=42
-@maxid=50
+#Sat Apr 13 13:38:57 CST 2019
+input=10
+println=8
+true=3
+false=5
+@maxid=11

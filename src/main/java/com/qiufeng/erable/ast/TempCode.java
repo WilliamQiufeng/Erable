@@ -58,7 +58,7 @@ public class TempCode extends Code {
 	this.writeOpCode(this.op);
 	this.writeCid(this.cid);
 	this.writeId(id);
-	System.out.println("__TEMP "+this+"____");
+	//System.out.println("__TEMP "+this+"____");
     }
     
 }

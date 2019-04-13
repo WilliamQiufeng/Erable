@@ -34,7 +34,6 @@ public class ConstantPoolNumber extends ConstantPoolElement {
     /**
      * Join the header and double together.
      * @see ConstantPoolString
-     * @return the result of joining
      */
     public void write() throws IOException {
 	this.generateHeader();

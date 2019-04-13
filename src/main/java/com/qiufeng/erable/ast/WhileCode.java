@@ -51,11 +51,11 @@ public class WhileCode extends TempCode {
     public void write() throws IOException {
 	this.writeOpCode(this.op);
 	this.writeId(this.id);
-	System.out.println("__WHILE "+this+"___");
+	//System.out.println("__WHILE "+this+"___");
 	this.writeCodes();
 	//this.writeOpCode(OpCode.END);
 	//this.writeId(this.id);
-	System.out.println("__END "+this+"__");
+	//System.out.println("__END "+this+"__");
     }
     
     @Override

@@ -1,4 +1,4 @@
-<img src="https://img.shields.io/badge/Erable-The%20lightweight%20language%20created%20by%20myself-brightgreen.svg?style=for-the-badge" width=85% height=100% alt="Erable" align=center/>
+<center><img src="https://img.shields.io/badge/Erable-The%20lightweight%20language%20created%20by%20myself-brightgreen.svg?style=for-the-badge" width=85% height=100% alt="Erable" align=center/></center>
 
 -------
 

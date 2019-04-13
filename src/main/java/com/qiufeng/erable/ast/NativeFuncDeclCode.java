@@ -39,9 +39,9 @@ public class NativeFuncDeclCode extends FuncDeclCode {
 	this.writeOpCode(this.op);
 	this.writeId(id);
 	this.writeId(this.nativeCall);
-	System.out.println("___NATIVE_FUNCDECL___" + this);
+	//System.out.println("___NATIVE_FUNCDECL___" + this);
 	this.writeArgs();
-	System.out.println("___END "+this+" ___");
+	//System.out.println("___END "+this+" ___");
     }
 
     @Override

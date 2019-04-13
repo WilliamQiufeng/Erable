@@ -59,8 +59,14 @@ public class ErableCompiler {
 	}
 	p.store(os, "Erable Dynamic Lib");
     }
+    public void reset(){
+	Code.currentId=0;
+	Const.setIdLen(1);
+	Const.setCidLen(1);
+    }
     public EListener compile(String file,EListener parent){
 	try{
+	    reset();
 	    long start=System.currentTimeMillis();
 	    ErableParser parser=this.parse(file);
 	    ParseTree pt=this.tree(parser);

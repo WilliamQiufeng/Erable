@@ -28,6 +28,7 @@
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/LoadCode.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/FuncDeclCode.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/dump/Dump.java
+/williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/util/StringUtils.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/Const.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/ast/ConstantPoolString.java
 /williamye/program/antlr/erable/src/main/java/com/qiufeng/erable/MultiplePrintStream.java

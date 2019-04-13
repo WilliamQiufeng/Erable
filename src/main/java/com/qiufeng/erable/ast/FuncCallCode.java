@@ -47,17 +47,17 @@ public class FuncCallCode extends TempCode {
     public void write() throws IOException {
 	this.writeOpCode(this.op);
 	this.writeId(this.id);
-	System.out.println("__CALL_PREPARE "+this+"__");
+	//System.out.println("__CALL_PREPARE "+this+"__");
 	for(int aid : args){
 	    this.writeOpCode(OpCode.PUSH_ARG);
 	    this.writeId(aid);
 	    this.writeId(this.id);
-	    System.out.println("____PUSH_ARG "+aid+"____");
+	    //System.out.println("____PUSH_ARG "+aid+"____");
 	}
 	this.writeOpCode(OpCode.CALL);
 	this.writeId(this.cid);
 	this.writeId(this.id);
-	System.out.println("__CALL "+this+"__");
+	//System.out.println("__CALL "+this+"__");
     }
 
     

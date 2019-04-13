@@ -49,11 +49,11 @@ public class UnaryOpCode extends TempCode {
      */
     @Override
     public void write() throws IOException {
-	System.out.println(this);
+	//System.out.println(this);
 	this.writeOpCode(this.op);
 	this.writeId(this.cid);
 	this.writeId(this.id);
-	System.out.println("__END "+this+"___");
+	//System.out.println("__END "+this+"___");
     }
     
 }

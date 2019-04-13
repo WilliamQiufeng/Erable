@@ -49,7 +49,7 @@ public class VarCode extends TempCode {
 	this.writeOpCode(this.op);
 	this.writeId(this.cid);
 	this.writeId(this.id);
-	System.out.println(this);
+	//System.out.println(this);
     }
     
     
