@@ -81,6 +81,7 @@
                 <goal>antlr4:antlr4</goal>
                 <goal>install</goal>
                 <goal>shade:shade</goal>
+                
             </goals>
         </action>
         <action>

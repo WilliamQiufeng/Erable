@@ -88,6 +88,7 @@ com/qiufeng/erable/ErableParser$Fin_exprContext.class
 com/qiufeng/erable/ast/ConstantPool.class
 com/qiufeng/erable/ast/ObjectCode.class
 com/qiufeng/erable/Const.class
+com/qiufeng/erable/vm/handler/ByteCodeHandler.class
 com/qiufeng/erable/OpCode.class
 com/qiufeng/erable/VarModifiers.class
 com/qiufeng/erable/ast/ElementCode.class

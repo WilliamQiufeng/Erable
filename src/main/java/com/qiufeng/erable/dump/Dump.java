@@ -33,7 +33,7 @@ import org.kohsuke.args4j.Option;
  */
 public class Dump {
     @Option(name="-f",usage="specify the file to dump")
-    public String file="test.ec";
+    public String file="test/test.ec";
     @Option(name="-o",usage="...")
     public String useless;
     public String out="dump.log";

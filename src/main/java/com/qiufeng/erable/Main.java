@@ -60,7 +60,7 @@ public class Main
 	    Const.setIdLen(4);
 	}
 	if(files.isEmpty()){
-	    files.add("test.erable");
+	    files.add("test/test.erable");
 	    System.out.println("File not specified.Using default:"+files);
 	}
 	if(this.quiet){
@@ -98,7 +98,7 @@ public class Main
 	if(el.root.currentId>Short.MAX_VALUE){
 	    Const.setIdLen(4);
 	}
-	System.out.println("Starting Compiler...");
+	System.out.println("Compilation started...");
 	try {
 	    FileOutputStream fos=new FileOutputStream(this.output);
 	    compiler.output(fos, el);
