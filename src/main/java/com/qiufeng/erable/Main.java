@@ -89,13 +89,13 @@ public class Main
     public void compile(String file){
 	output=file.replace(".erable", "").concat(".ec");
 	ErableCompiler compiler=new ErableCompiler();
+	compiler.reset();
 	EListener el=compiler.compile(file,null);
 	this.printConstantPool(el.getPool());
 	this.printTree(el.root);
 	
 	System.out.println("Compilation started...");
 	try {
-	    compiler.reset();
 	    FileOutputStream fos=new FileOutputStream(this.output);
 	    compiler.output(fos, el);
 	    if(this.dyn){

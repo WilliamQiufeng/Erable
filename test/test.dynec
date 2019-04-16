@@ -1,5 +1,5 @@
 #Erable Dynamic Lib
-#Tue Apr 16 19:00:03 CST 2019
+#Tue Apr 16 19:24:19 CST 2019
 isNegative=91
 mul=20
 prefix=19
@@ -14,5 +14,5 @@ println=7
 quad=28
 loop=107
 true=3
-@maxid=0
+@maxid=200
 makeSquare=43
