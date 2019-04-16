@@ -16,6 +16,8 @@
  */
 package com.qiufeng.erable.ast;
 
+import com.qiufeng.erable.vm.types.ErableInstance;
+
 
 /**
  * JavaBean-liked class.<br>
@@ -38,6 +40,7 @@ public abstract class ConstantPoolElement extends Code implements Comparable {
 	this.obj = obj;
 	currentId--;
     }
+    public abstract ErableInstance getInstance();
     /**
      * Check if the two elements are equal or not.
      * @param cpe another {@link ConstantPoolElement}.

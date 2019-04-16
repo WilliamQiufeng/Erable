@@ -19,6 +19,7 @@ package com.qiufeng.erable.compiler;
 import com.qiufeng.erable.Const;
 import com.qiufeng.erable.ErableLexer;
 import com.qiufeng.erable.ErableParser;
+import com.qiufeng.erable.OpCode;
 import com.qiufeng.erable.ast.Code;
 import com.qiufeng.erable.ast.EListener;
 import com.qiufeng.erable.ast.FuncDeclCode;
@@ -44,6 +45,7 @@ public class ErableCompiler {
 	    os.write(Const.HEADER);
 	    el.root.setFile(os);
 	    el.root.write();
+	    el.root.writeOpCode(OpCode.EXIT);
 	}
 	catch (IOException ex) {
 	    Logger.getLogger(ErableCompiler.class.getName()).log(Level.SEVERE, null, ex);
@@ -66,7 +68,7 @@ public class ErableCompiler {
     }
     public EListener compile(String file,EListener parent){
 	try{
-	    reset();
+	    //reset();
 	    long start=System.currentTimeMillis();
 	    ErableParser parser=this.parse(file);
 	    ParseTree pt=this.tree(parser);
@@ -77,6 +79,12 @@ public class ErableCompiler {
 	    long duration=end-start;
 	    //System.out.println(pt.toStringTree());
             //System.out.println(pt.toString());
+	    if(Code.currentId>Byte.MAX_VALUE){
+		Const.setIdLen(2);
+	    }
+	    if(Code.currentId>Short.MAX_VALUE){
+		Const.setIdLen(4);
+	    }
 	    System.out.println("File "+file+" finished.Total time:"+duration+" ms.");
 	    return el;
 	}catch(IOException e){

@@ -91,11 +91,16 @@ array
   : ALPA elements=sep_ops ARPA
   ;
 num
-  returns [Object obj,int id]
+  returns [Object obj,int id,boolean isDouble]
   : '0x' HEX
   | '0b' BIN
   | '0o' OCT
-  | INT (DOT INT)?
+  | doub
+  | INT
+  ;
+doub
+  returns [Object obj,int id]
+  : INT DOT INT
   ;
 object
   returns [Object obj, int id]
@@ -118,7 +123,7 @@ parent_expression
   : PARENT
   ;
 args
-  returns [ArrayList<FPADCode> arguments]
+  returns [ArrayList<FPADCode> arguments, int ret]
   : COLON LPA argss+=NAME* RPA
   ;
 
@@ -143,7 +148,7 @@ load_native
 //for example:
 //  native function println(obj) using "java.lang.System#out#println" in std/ios 
 native_funcdecl
-  returns [Object obj, int id]
+  returns [Object obj, int id, ArrayList<FPADCode> argss]
   : NATIVE FUNC funcname=NAME arguments=args USING method=string
   ;
 try_expr

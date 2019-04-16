@@ -21,7 +21,7 @@ package com.qiufeng.erable;
  * @author Qiufeng54321
  */
 public enum OpCode {
-    CONSTANT_POOL,CP_NUM,CP_STR,
+    CONSTANT_POOL,CP_NUM,CP_INT,CP_STR,
     //1 op 2 ->ID 3
     ADD("+",3),SUB("-",3),MUL("*",3),DIV("/",3),MOD("%",3),POW("**",3),
     //op 1 -> ID 2
@@ -38,7 +38,7 @@ public enum OpCode {
     RETURN("return",2),BREAK("break",2),
     VAR(2),
     LOADC(2),
-    FUNCTION(1),PUSH_ARGDECL(1),START_DO,
+    FUNCTION(2),//REG_ARG(2),
     ARRAY(1),PUSH_ELEMENT(2),
     CALL_PREPARE(1),PUSH_ARG(2),CALL(2),
     IF(1),ELSE(2),
@@ -50,8 +50,9 @@ public enum OpCode {
     JUMPIF(2),
     OBJECT(1),START_PAIR,KEY(1),VALUE(1),END_PAIR,
     TRY(2),
-    NATIVE_FUNCDECL(2),LOAD_LIB(1),
+    NATIVE_FUNCDECL(3),LOAD_LIB(1),
     DYN_LOAD(3),DYNCALL(3),
+    EXIT
     ;
     public String sign;
     public int argc;

@@ -92,14 +92,10 @@ public class Main
 	EListener el=compiler.compile(file,null);
 	this.printConstantPool(el.getPool());
 	this.printTree(el.root);
-	if(el.root.currentId>Byte.MAX_VALUE){
-	    Const.setIdLen(2);
-	}
-	if(el.root.currentId>Short.MAX_VALUE){
-	    Const.setIdLen(4);
-	}
+	
 	System.out.println("Compilation started...");
 	try {
+	    compiler.reset();
 	    FileOutputStream fos=new FileOutputStream(this.output);
 	    compiler.output(fos, el);
 	    if(this.dyn){

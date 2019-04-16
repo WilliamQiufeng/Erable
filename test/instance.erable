@@ -1,0 +1,15 @@
+use "stdlib/ios";
+"a";
+2;
+1.2345;
+
+var a="java";
+true;
+var b=#a;
+var c=@@b;
+var d=@9;
+var e=@@b;
+
+function testfunc1:(f g h i){
+  "abcd";
+};

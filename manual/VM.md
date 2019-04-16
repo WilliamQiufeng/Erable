@@ -14,11 +14,13 @@ skip=>operation: set skip
 in->inb
 inb->cps
 cps(yes)->in_cpele
-cps(no)->scopes
-scopes(yes,right)->inb
-scopes(no)->func
+cps(no,left)->scopes
+scopes(yes)->inb
+scopes(no,right)->func
 func(yes)->skip
 skip->inb
+func(no,left)->inb
+
 ```
 
 

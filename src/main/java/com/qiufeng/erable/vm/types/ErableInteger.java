@@ -15,24 +15,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.qiufeng.erable.vm.handler;
+package com.qiufeng.erable.vm.types;
 
-import java.io.InputStream;
-import java.util.HashMap;
+import com.qiufeng.erable.vm.ErableDescriptor;
 
 /**
- * @since 2019年4月14日
+ * @since 2019年4月16日
  * @author Qiufeng54321
  */
-public class ByteCodeHandler {
-    public InputStream input;
-    public ByteCodeHandler parent;
-    public HashMap<Integer, Object> buffer;
+public class ErableInteger extends ErableInstance<Integer> {
 
-    public ByteCodeHandler(InputStream input, ByteCodeHandler parent) {
-	this.input = input;
-	this.parent = parent;
-	this.buffer=new HashMap<>();
+    public ErableInteger(Integer value, int id, ErableDescriptor descriptor) {
+	super(value, id, descriptor);
     }
 
+    public ErableInteger(Integer value, int id) {
+	super(value, id);
+    }
+    
 }

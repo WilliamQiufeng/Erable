@@ -100,6 +100,7 @@ public class ConstantPool extends Code {
 	int len=this.elements.size();
 	this.writeOpCode(this.op);
 	this.writeCid(len);
+	
 	for(ConstantPoolElement element : this.elements){
 	    element.write();
 	}

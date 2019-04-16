@@ -27,28 +27,19 @@ import java.lang.reflect.Method;
 public class Reflector {
     public static Object newInstance(String className,Object[] args) throws Exception{
 	Class<?> clazz=Class.forName(className);
-	Class<?>[] classes=new Class<?>[args.length];
-	for(int i=0;i<args.length;i++){
-	    classes[i]=args[i].getClass();
-	}
+	Class<?>[] classes=getArgsClasses(args);
 	Constructor constructor=clazz.getConstructor(classes);
 	return constructor.newInstance(args);
     }
     public static Object call(Object obj,String methodName,Object[] args)throws Exception{
 	Class<?> clazz=obj.getClass();
-	Class<?>[] classes=new Class<?>[args.length];
-	for(int i=0;i<args.length;i++){
-	    classes[i]=args[i].getClass();
-	}
+	Class<?>[] classes=getArgsClasses(args);
 	Method constructor=clazz.getMethod(methodName,classes);
 	return constructor.invoke(obj, args);
     }
     public static Object callStatic(String className,String methodName,Object[] args)throws Exception{
 	Class<?> clazz=Class.forName(className);
-	Class<?>[] classes=new Class<?>[args.length];
-	for(int i=0;i<args.length;i++){
-	    classes[i]=args[i].getClass();
-	}
+	Class<?>[] classes=getArgsClasses(args);
 	Method constructor=clazz.getMethod(methodName,classes);
 	return constructor.invoke(null, args);
     }
@@ -63,5 +54,12 @@ public class Reflector {
 	Field f=clazz.getField(field);
 	f.setAccessible(true);
 	return f.get(null);
+    }
+    public static Class<?>[] getArgsClasses(Object[] args){
+	Class<?>[] classes=new Class<?>[args.length];
+	for(int i=0;i<args.length;i++){
+	    classes[i]=args[i].getClass();
+	}
+	return classes;
     }
 }

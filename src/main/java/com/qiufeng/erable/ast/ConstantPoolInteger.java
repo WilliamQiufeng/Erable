@@ -14,45 +14,43 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
-import com.qiufeng.erable.util.ArrayUtils;
 import com.qiufeng.erable.util.BitUtils;
 import com.qiufeng.erable.vm.types.ErableInstance;
-import com.qiufeng.erable.vm.types.ErableNumber;
+import com.qiufeng.erable.vm.types.ErableInteger;
 import java.io.IOException;
 
 /**
- * A type of constant pool element which stores numbers(stored as {@link Double})
+ * @since 2019年4月16日
  * @author Qiufeng54321
  */
-public class ConstantPoolNumber extends ConstantPoolElement {
-    public static byte TAG=(byte)OpCode.CP_NUM.ordinal();
-    public ConstantPoolNumber(Double obj) {
+public class ConstantPoolInteger extends ConstantPoolElement{
+
+    public ConstantPoolInteger(Integer obj) {
 	super(obj);
-	
     }
-    /**
-     * Join the header and double together.
-     * @see ConstantPoolString
-     */
-    public void write() throws IOException {
-	this.generateHeader();
-	byte[] doub=new byte[8];
-	BitUtils.putDouble(doub,0,(double)obj);
-	this.file.write(doub);
+
+    @Override
+    public ErableInstance getInstance() {
+	return new ErableInteger((Integer)obj, -1);
     }
+
     /**
      * Generated the header
      */
     public void generateHeader()throws IOException {
-	this.writeOpCode(OpCode.CP_NUM);
+	this.writeOpCode(OpCode.CP_INT);
     }
 
     @Override
-    public ErableNumber getInstance() {
-	return new ErableNumber((Double)obj, -1);
+    public void write() throws IOException {
+	this.generateHeader();
+	byte[] doub=new byte[4];
+	BitUtils.putInt(doub,0,(int)obj);
+	this.file.write(doub);
     }
-    
+
 }

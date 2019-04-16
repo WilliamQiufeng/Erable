@@ -17,10 +17,43 @@
 
 package com.qiufeng.erable.vm;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.kohsuke.args4j.CmdLineException;
+import org.kohsuke.args4j.CmdLineParser;
+import org.kohsuke.args4j.Option;
+
 /**
  * @since 2019年4月9日
  * @author Qiufeng54321
  */
 public class ErableVM {
-
+    @Option(required = true, usage = "Chooses the file to execute.", name = "-f")
+    public String file="test/test.ec";
+    
+    public static void main(String[] args) {
+	new ErableVM().nmain(args);
+    }
+    public void nmain(String[] args) {
+	CmdLineParser clp=new CmdLineParser(this);
+	try{
+	    clp.parseArgument(args);
+	}catch(CmdLineException e){
+	    System.err.println("[ERROR]"+e.getMessage());
+	    clp.printUsage(System.err);
+	    return;
+	}
+	InputStream in;
+	try {
+	    in = new FileInputStream(file);
+	    ErableDescriptor descriptor=new ErableDescriptor(in);
+	    descriptor.doAll();
+	}
+	catch (Exception ex) {
+	    Logger.getLogger(ErableVM.class.getName()).log(Level.SEVERE, null, ex);
+	}
+    }
 }

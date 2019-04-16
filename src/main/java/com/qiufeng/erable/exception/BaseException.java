@@ -28,7 +28,8 @@ public class BaseException {
     public static enum ErrorType{
 	COMPILATION("Compilation"),
 	PARSING("Parsing"),
-	OPTIMISIZATION("Optimization");
+	OPTIMISIZATION("Optimization"),
+	RUNTIME("Runtime");
 	public String name;
 	ErrorType(String name){
 	    this.name=name;
@@ -49,7 +50,7 @@ public class BaseException {
 	System.err.println(title + "  :");
 	System.err.println("\t"+this.message);
 	System.err.println("\t\t at #" + line + ", column " + column + "(With Text '" + what + "')");
-	System.err.println("-------Erable Compiler Terminated-------");
+	System.err.println("-------Erable "+ type.name + " Terminated-------");
 	System.exit(this.errno);
     }
 }

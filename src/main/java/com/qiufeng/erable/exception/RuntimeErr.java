@@ -15,24 +15,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.qiufeng.erable.vm.handler;
-
-import java.io.InputStream;
-import java.util.HashMap;
+package com.qiufeng.erable.exception;
 
 /**
- * @since 2019年4月14日
+ * @since 2019年4月15日
  * @author Qiufeng54321
  */
-public class ByteCodeHandler {
-    public InputStream input;
-    public ByteCodeHandler parent;
-    public HashMap<Integer, Object> buffer;
+public class RuntimeErr extends BaseException{
 
-    public ByteCodeHandler(InputStream input, ByteCodeHandler parent) {
-	this.input = input;
-	this.parent = parent;
-	this.buffer=new HashMap<>();
+    public RuntimeErr(String title, String message) {
+	super(ErrorType.RUNTIME, title, message, "", -1, -1, -1);
+    }
+    @Override
+    public void throwException(){
+	System.err.println("-------------RUNTIME ERROR-------------");
+	System.err.println(title + "  :");
+	System.err.println("\t"+this.message);
+	System.err.println("-------Erable Runtime Terminated-------");
+	System.exit(this.errno);
     }
 
 }

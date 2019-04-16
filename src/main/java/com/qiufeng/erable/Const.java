@@ -42,6 +42,7 @@ public class Const {
     }
 
     public static int getId(byte[] bts, int off, int len) {
+	//System.out.println("LEN:"+len);
 	switch (len) {
 	    case 4:
 		return BitUtils.getInt(bts, off);

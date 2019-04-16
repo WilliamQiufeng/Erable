@@ -138,14 +138,26 @@ public class ErableDumper {
 	    System.out.print("$"+StringUtils.std(String.valueOf(line++), 8));
 	    System.out.print(this.depthHeader());
 	    OpCode code=OpCode.values()[this.input.read()];
-	    if(code==OpCode.CP_NUM){
-		byte[] doubb=this.input.readNBytes(8);
-		double doub=BitUtils.getDouble(doubb, 0);
-		System.out.println("Number: ID="+StringUtils.std(String.valueOf(i), 8)+", Value="+doub);
-	    }else if(code==OpCode.CP_STR){
-		int strlen=this.readId(4);
-		String str=new String(this.input.readNBytes(strlen));
-		System.out.println("String: ID="+StringUtils.std(String.valueOf(i), 8)+", Value=\""+str+"\"");
+	    if(null!=code)switch (code) {
+	    	case CP_NUM:{
+		    byte[] doubb=this.input.readNBytes(8);
+		    double doub=BitUtils.getDouble(doubb, 0);
+		    System.out.println("Number : ID="+StringUtils.std(String.valueOf(i), 8)+", Value="+doub);
+			break;
+		    }
+	    	case CP_INT:{
+		    byte[] doubb=this.input.readNBytes(4);
+		    int doub=BitUtils.getInt(doubb, 0);
+		    System.out.println("Integer: ID="+StringUtils.std(String.valueOf(i), 8)+", Value="+doub);
+			break;
+		    }
+	    	case CP_STR:
+		    int strlen=this.readId(4);
+		    String str=new String(this.input.readNBytes(strlen));
+		    System.out.println("String : ID="+StringUtils.std(String.valueOf(i), 8)+", Value=\""+str+"\"");
+		    break;
+	    	default:
+		    break;
 	    }
 	}
 	this.depth-=2;

@@ -17,6 +17,7 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
+import com.qiufeng.erable.util.ArrayUtils;
 import com.qiufeng.erable.util.BitUtils;
 import java.io.IOException;
 import java.util.Arrays;
@@ -32,6 +33,10 @@ public class MachineCode extends Code {
 	this.tag=this.id+"";
 	this.sign=Code.FLAG;
 	this.refid=refid;
+    }
+    public MachineCode(OpCode op,int [] refid, Code parent, boolean whatever){
+	this(op,refid, parent);
+	this.refid=ArrayUtils.push(refid, this.id);
     }
     /**
      * [OP 1B] [TARGET ID 4B]?

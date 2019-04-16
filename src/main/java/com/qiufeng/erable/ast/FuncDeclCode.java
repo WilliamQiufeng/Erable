@@ -17,9 +17,8 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
-import com.qiufeng.erable.util.BitUtils;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +27,7 @@ import java.util.List;
  */
 public class FuncDeclCode extends Code {
     public List<FPADCode> args;
-    public int retType;
+    public int ret;
     /**
      * 把所有的FPADCode装入this.args<br>
      * @param name
@@ -44,6 +43,7 @@ public class FuncDeclCode extends Code {
     public void addScope(Scope scope){
 	this.addCode(scope);
     }
+    
     /**
      * 查找变量需要包含传入参数，故重载
      * @param name
@@ -59,11 +59,13 @@ public class FuncDeclCode extends Code {
 	return super.findVar(name);
     }
     public void writeArgs() throws IOException{
+	/*
 	for(FPADCode f : this.args){
-	    this.writeOpCode(OpCode.PUSH_ARGDECL);
+	    this.writeOpCode(OpCode.REG_ARG);
 	    this.writeId(f.id);
 	    //System.out.println("___ARG_PUSH___"+f);
 	}
+	*/
     }
     /**
      * 
@@ -79,6 +81,7 @@ public class FuncDeclCode extends Code {
     @Override
     public void write() throws IOException {
 	this.writeOpCode(this.op);
+	this.writeId(ret);
 	this.writeId(id);
 	//System.out.println("___FUNCDECL___" + this);
 	this.writeArgs();
@@ -90,7 +93,7 @@ public class FuncDeclCode extends Code {
 
     @Override
     public String toString() {
-	return super.toString() + " : function " + this.tag + args + " ->" + this.id + " :";
+	return super.toString() + " : function " + this.tag + args + " returns " + ret + " ->" + this.id + " :";
     }
     
 }

@@ -232,6 +232,12 @@ public abstract class Code implements Comparable{
     public Code getParent() {
         return parent;
     }
+    public Code getRootCode() {
+	Code rt=this;
+	while(rt.getParent()!=null)
+	    rt=rt.getParent();
+	return rt;
+    }
     /**
      * For the use of identifier 'parent' in the grammar of Erable
      * @return meaningful parent
@@ -239,6 +245,22 @@ public abstract class Code implements Comparable{
     public Code getMeaningfulParent() {
 	return getParent();
     }
+    /*
+    public void finishFunc(){
+	for(Code md : this.codes){
+	    for(Code c : md.codes)
+		c.finishFunc();
+	    if(!(md instanceof MachineCode))continue;
+	    MachineCode mc=(MachineCode)md;
+	    if(mc.op!=OpCode.RETURN)continue;
+	    int orig=mc.refid[0];
+	    mc.op=OpCode.EQU;
+	    mc.refid=new int[]{currentId,orig};
+	}
+	currentId++;
+    }
+    */
+	
     /**
      * Find variable/function by the given name.
      * @param name the name to try to find
@@ -295,6 +317,17 @@ public abstract class Code implements Comparable{
 	}
 	//System.out.println("ID NOT FOUND:"+name);
 	return -1;
+    }
+    public FuncDeclCode findNearestFunction(){
+	Code c=this;
+	do{
+	    if(c instanceof FuncDeclCode){
+		return (FuncDeclCode)c;
+	    }
+	    if(c.getParent()!=null)
+		c=c.getParent();
+	}while(c.getParent()!=null);
+	return null;
     }
     public boolean functionExistsInCurrentScope(String name,int argc){
 	for(Code code : codes){
