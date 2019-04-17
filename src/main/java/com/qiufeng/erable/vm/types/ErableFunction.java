@@ -42,6 +42,81 @@ public class ErableFunction extends ErableInstance<ErableFunction> implements Fu
 	this.retid=retid;
 	this.argc=this.retid-this.id-1;
     }
+
+    @Override
+    public ErableInstance<?> add(ErableInstance<?> other, int toid) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ErableInstance<?> sub(ErableInstance<?> other, int toid) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ErableInstance<?> mul(ErableInstance<?> other, int toid) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ErableInstance<?> div(ErableInstance<?> other, int toid) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ErableInstance<?> mod(ErableInstance<?> other, int toid) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ErableInstance<?> ls(ErableInstance<?> other, int toid) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ErableInstance<?> rs(ErableInstance<?> other, int toid) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ErableInteger eq(ErableInstance<?> other, int toid) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ErableInstance<?> urs(ErableInstance<?> other, int toid) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ErableInstance<?> ref(int toid) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ErableInteger gref(int toid) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ErableInstance<?> and(ErableInstance<?> other, int toid) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ErableInstance<?> or(ErableInstance<?> other, int toid) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ErableInstance<?> xor(ErableInstance<?> other, int toid) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ErableInstance<?> not(int toid) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
     
     @Override
     public Object apply(Arguments args) {

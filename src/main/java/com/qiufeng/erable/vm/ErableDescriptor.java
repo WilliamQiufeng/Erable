@@ -25,12 +25,7 @@ import com.qiufeng.erable.ast.ConstantPoolString;
 import com.qiufeng.erable.exception.ValidateErr;
 import com.qiufeng.erable.util.BitUtils;
 import com.qiufeng.erable.util.StringUtils;
-import com.qiufeng.erable.vm.types.ErableFunction;
-import com.qiufeng.erable.vm.types.ErableInstance;
-import com.qiufeng.erable.vm.types.ErableInteger;
-import com.qiufeng.erable.vm.types.ErableString;
-import com.qiufeng.erable.vm.types.ErableVariable;
-import com.qiufeng.erable.vm.types.NativeErableFunction;
+import com.qiufeng.erable.vm.types.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -48,6 +43,7 @@ public class ErableDescriptor {
 
     InputStream input;
     OpCodeIns skip;
+    public List<OpCodeIns> codes;
     public HashMap<Integer, ErableInstance> buffer;
     ConstantPool pool;
     int major, minor;
@@ -63,6 +59,7 @@ public class ErableDescriptor {
 	this.buffer = new HashMap<>();
 	this.pool = new ConstantPool(null);
 	this.parent=parent;
+	this.codes=new ArrayList<>();
 	if(parent!=null){
 	    this.buffer=parent.buffer;
 	    this.pool=parent.pool;
@@ -71,6 +68,7 @@ public class ErableDescriptor {
 	    this.magic=parent.magic;
 	    this.idlen=parent.idlen;
 	    this.cidlen=parent.cidlen;
+	    this.codes=parent.codes;
 	}
     }
 
@@ -92,31 +90,125 @@ public class ErableDescriptor {
 		this.readConstantPool();
 		break;
 	    case ADD:
+	    {
+		int lid=oci.args.get(0);
+		int rid=oci.args.get(1);
+		int bto=oci.args.get(2);
+		ErableInstance l1=buffer.get(lid);
+		ErableInstance r2=buffer.get(rid);
+		ErableInstance bres=l1.add(r2, bto);
+		buffer.put(bto, bres);
 		break;
+	    }
 	    case SUB:
+	    {
+		int lid=oci.args.get(0);
+		int rid=oci.args.get(1);
+		int bto=oci.args.get(2);
+		ErableInstance l1=buffer.get(lid);
+		ErableInstance r2=buffer.get(rid);
+		ErableInstance bres=l1.sub(r2, bto);
+		buffer.put(bto, bres);
 		break;
+	    }
 	    case MUL:
+	    {
+		int lid=oci.args.get(0);
+		int rid=oci.args.get(1);
+		int bto=oci.args.get(2);
+		ErableInstance l1=buffer.get(lid);
+		ErableInstance r2=buffer.get(rid);
+		ErableInstance bres=l1.mul(r2, bto);
+		buffer.put(bto, bres);
 		break;
+	    }
 	    case DIV:
+	    {
+		int lid=oci.args.get(0);
+		int rid=oci.args.get(1);
+		int bto=oci.args.get(2);
+		ErableInstance l1=buffer.get(lid);
+		ErableInstance r2=buffer.get(rid);
+		ErableInstance bres=l1.div(r2, bto);
+		buffer.put(bto, bres);
 		break;
+	    }
 	    case MOD:
+	    {
+		int lid=oci.args.get(0);
+		int rid=oci.args.get(1);
+		int bto=oci.args.get(2);
+		ErableInstance l1=buffer.get(lid);
+		ErableInstance r2=buffer.get(rid);
+		ErableInstance bres=l1.mod(r2, bto);
+		buffer.put(bto, bres);
 		break;
+	    }
 	    case POW:
+	    {
+		int lid=oci.args.get(0);
+		int rid=oci.args.get(1);
+		int bto=oci.args.get(2);
+		ErableInstance l1=buffer.get(lid);
+		ErableInstance r2=buffer.get(rid);
+		ErableInstance bres=l1.pow(r2, bto);
+		buffer.put(bto, bres);
 		break;
+	    }
 	    case POS:
+	    {
+		int lid=oci.args.get(0);
+		int bto=oci.args.get(1);
+		ErableInstance l1=buffer.get(lid);
+		ErableInstance bres=l1;
+		buffer.put(bto, bres);
 		break;
+	    }
 	    case NEG:
+	    {
+		int lid=oci.args.get(0);
+		int bto=oci.args.get(1);
+		ErableInstance l1=buffer.get(lid);
+		ErableInteger  zero=new ErableInteger(0, -1);
+		ErableInstance bres=zero.sub(l1, bto);
+		buffer.put(bto, bres);
 		break;
+	    }
 	    case ELEMENT:
 		break;
 	    case LS:
+	    {
+		int lid=oci.args.get(0);
+		int rid=oci.args.get(1);
+		int bto=oci.args.get(2);
+		ErableInstance l1=buffer.get(lid);
+		ErableInstance r2=buffer.get(rid);
+		ErableInstance bres=l1.ls(r2, bto);
+		buffer.put(bto, bres);
 		break;
+	    }
 	    case RS:
+	    {
+		int lid=oci.args.get(0);
+		int rid=oci.args.get(1);
+		int bto=oci.args.get(2);
+		ErableInstance l1=buffer.get(lid);
+		ErableInstance r2=buffer.get(rid);
+		ErableInstance bres=l1.rs(r2, bto);
+		buffer.put(bto, bres);
 		break;
-	    case ULS:
-		break;
+	    }
 	    case URS:
+	    {
+		int lid=oci.args.get(0);
+		int rid=oci.args.get(1);
+		int bto=oci.args.get(2);
+		ErableInstance l1=buffer.get(lid);
+		ErableInstance r2=buffer.get(rid);
+		ErableInstance bres=l1.urs(r2, bto);
+		buffer.put(bto, bres);
 		break;
+	    }
 	    case LT:
 		break;
 	    case GT:
@@ -126,21 +218,72 @@ public class ErableDescriptor {
 	    case GTE:
 		break;
 	    case EQ:
+	    {
+		int lid=oci.args.get(0);
+		int rid=oci.args.get(1);
+		int bto=oci.args.get(2);
+		ErableInstance l1=buffer.get(lid);
+		ErableInstance r2=buffer.get(rid);
+		ErableInstance bres=l1.eq(r2, bto);
+		buffer.put(bto, bres);
 		break;
+	    }
 	    case NEQ:
 		break;
 	    case EQU:
+	    {
+		int lid=oci.args.get(0);
+		int rid=oci.args.get(1);
+		int bto=oci.args.get(2);
+		ErableInstance l1=buffer.get(lid);
+		ErableInstance r2=buffer.get(rid);
+		l1.setValue(r2);
 		break;
+	    }
 	    case SWITCH:
 		break;
 	    case BNOT:
+	    {
+		int lid=oci.args.get(0);
+		int bto=oci.args.get(1);
+		ErableInstance l1=buffer.get(lid);
+		ErableInstance bres=l1.not(bto);
+		buffer.put(bto, bres);
 		break;
+	    }
 	    case BAND:
+	    {
+		int lid=oci.args.get(0);
+		int rid=oci.args.get(1);
+		int bto=oci.args.get(2);
+		ErableInstance l1=buffer.get(lid);
+		ErableInstance r2=buffer.get(rid);
+		ErableInstance bres=l1.and(r2, bto);
+		buffer.put(bto, bres);
 		break;
+	    }
 	    case BOR:
+	    {
+		int lid=oci.args.get(0);
+		int rid=oci.args.get(1);
+		int bto=oci.args.get(2);
+		ErableInstance l1=buffer.get(lid);
+		ErableInstance r2=buffer.get(rid);
+		ErableInstance bres=l1.or(r2, bto);
+		buffer.put(bto, bres);
 		break;
+	    }
 	    case BXOR:
+	    {
+		int lid=oci.args.get(0);
+		int rid=oci.args.get(1);
+		int bto=oci.args.get(2);
+		ErableInstance l1=buffer.get(lid);
+		ErableInstance r2=buffer.get(rid);
+		ErableInstance bres=l1.xor(r2, bto);
+		buffer.put(bto, bres);
 		break;
+	    }
 	    case ADDEQ:
 		break;
 	    case SUBEQ:
@@ -281,7 +424,9 @@ public class ErableDescriptor {
 	    execute(oci);
 	}
     }
-
+    public void gc() {
+	buffer.clear();
+    }
     public void readAll(OpCodeIns until, Consumer<List<OpCodeIns>> function) throws IOException {
 	List<OpCodeIns> l = new ArrayList<>();
 	OpCodeIns oci = null;
@@ -310,6 +455,7 @@ public class ErableDescriptor {
 		break;
 	}
 	OpCodeIns oci = new OpCodeIns(op, args);
+	this.codes.add(oci);
 	//System.out.println(oci);
 	return oci;
     }

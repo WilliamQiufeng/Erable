@@ -17,13 +17,14 @@
 
 package com.qiufeng.erable.vm.types;
 
+import com.qiufeng.erable.exception.UnsupportedOperationErr;
 import com.qiufeng.erable.vm.ErableDescriptor;
 
 /**
  * @since 2019年4月15日
  * @author Qiufeng54321
  */
-public class ErableInstance<T> {
+public abstract class ErableInstance<T> {
     public T value;
     public int id ;
     public ErableDescriptor descriptor;
@@ -61,7 +62,35 @@ public class ErableInstance<T> {
     public void setDescriptor(ErableDescriptor descriptor) {
 	this.descriptor = descriptor;
     }
-
+    public abstract ErableInstance<?> add(ErableInstance<?> other, int toid);
+    public abstract ErableInstance<?> sub(ErableInstance<?> other, int toid);
+    public abstract ErableInstance<?> mul(ErableInstance<?> other, int toid);
+    public abstract ErableInstance<?> div(ErableInstance<?> other, int toid);
+    public abstract ErableInstance<?> mod(ErableInstance<?> other, int toid);
+    
+    public abstract ErableInstance<?> ls(ErableInstance<?> other, int toid);
+    public abstract ErableInstance<?> rs(ErableInstance<?> other, int toid);
+    public abstract ErableInteger eq(ErableInstance<?> other, int toid);
+    public abstract ErableInstance<?> urs(ErableInstance<?> other, int toid);
+    public abstract ErableInstance<?> ref(int toid);
+    public abstract ErableInteger gref(int toid);
+    public abstract ErableInstance<?> and(ErableInstance<?> other, int toid);
+    public abstract ErableInstance<?> or(ErableInstance<?> other, int toid);
+    public abstract ErableInstance<?> xor(ErableInstance<?> other, int toid);
+    public abstract ErableInstance<?> not(int toid);
+    
+    public ErableInstance<?> pow(ErableInstance<?> other, int toid){
+	if(other instanceof ErableInteger){
+	    ErableInstance ei=this;
+	    for(int i=0;i<(Integer)other.getValue();i++){
+		ei=ei.mul(ei, toid);
+	    }
+	    return ei;
+	}
+	new UnsupportedOperationErr("**", "Operation between "+this+" and "+other).throwException();
+	return null;
+    }
+    
     @Override
     public String toString() {
 	return getClass().getSimpleName() + "{" + "id=" + id + ", value=" + value + '}';

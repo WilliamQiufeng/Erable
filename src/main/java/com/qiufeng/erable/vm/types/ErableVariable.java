@@ -31,6 +31,11 @@ public class ErableVariable extends ErableInstance<ErableInstance<?>> {
     public ErableVariable(Integer value, int id, ErableDescriptor descriptor) {
 	super(descriptor.buffer.get(value), id, descriptor);
     }
+
+    @Override
+    public ErableInstance<?> getValue() {
+	return super.getValue();
+    }
     
     
     public int getRef(){
@@ -38,8 +43,83 @@ public class ErableVariable extends ErableInstance<ErableInstance<?>> {
     }
 
     @Override
+    public ErableInstance<?> add(ErableInstance<?> other, int toid) {
+	return value.add(other, toid);
+    }
+
+    @Override
+    public ErableInstance<?> sub(ErableInstance<?> other, int toid) {
+	return value.sub(other, toid);
+    }
+
+    @Override
+    public ErableInstance<?> mul(ErableInstance<?> other, int toid) {
+	return value.mul(other, toid);
+    }
+
+    @Override
+    public ErableInstance<?> div(ErableInstance<?> other, int toid) {
+	return value.div(other, toid);
+    }
+
+    @Override
+    public ErableInstance<?> mod(ErableInstance<?> other, int toid) {
+	return value.mod(other, toid);
+    }
+
+    @Override
+    public ErableInstance<?> ls(ErableInstance<?> other, int toid) {
+	return value.ls(other, toid);
+    }
+
+    @Override
+    public ErableInstance<?> rs(ErableInstance<?> other, int toid) {
+	return value.rs(other, toid);
+    }
+
+    @Override
+    public ErableInteger eq(ErableInstance<?> other, int toid) {
+	return value.eq(other, toid);
+    }
+
+    @Override
+    public ErableInstance<?> urs(ErableInstance<?> other, int toid) {
+	return value.urs(other, toid);
+    }
+
+    @Override
+    public ErableInstance<?> ref(int toid) {
+	return value.ref(toid);
+    }
+
+    @Override
+    public ErableInteger gref(int toid) {
+	return value.gref(toid);
+    }
+
+    @Override
+    public ErableInstance<?> and(ErableInstance<?> other, int toid) {
+	return value.and(other, toid);
+    }
+
+    @Override
+    public ErableInstance<?> or(ErableInstance<?> other, int toid) {
+	return value.or(other, toid);
+    }
+
+    @Override
+    public ErableInstance<?> xor(ErableInstance<?> other, int toid) {
+	return value.xor(other, toid);
+    }
+
+    @Override
+    public ErableInstance<?> not(int toid) {
+	return value.not(toid);
+    }
+
+    @Override
     public String toString() {
-	return "ErableVariable{id=" + id + ", value=" + this.value + ", refid=" + getRef() + '}';
+	return "ErableVariable{id=" + id + ", value=" + this.getValue() + ", refid=" + getRef() + '}';
     }
     
 }
