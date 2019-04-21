@@ -46,6 +46,7 @@ public class FuncCallCode extends TempCode {
     @Override
     public void write() throws IOException {
 	this.writeOpCode(this.op);
+	this.writeId(this.cid);
 	this.writeId(this.id);
 	//System.out.println("__CALL_PREPARE "+this+"__");
 	for(int aid : args){

@@ -400,8 +400,8 @@ public class ErableDescriptor {
 	    case EXIT:
 		System.out.println("Program exit.");
 		state=STATE_EXIT;
-		for(Map.Entry<Integer,ErableInstance> ei : this.buffer.entrySet()){
-		    System.out.println(StringUtils.std(ei.getKey()+"", 8)+" = "+ei.getValue());
+		for(ErableInstance ei : this.getDeclaredErableInstances()){
+		    System.out.println(StringUtils.std(ei.id+"", 8)+" = "+ei.getValue());
 		}
 		break;
 	    default:
@@ -526,5 +526,14 @@ public class ErableDescriptor {
 	int id=Const.getId(bs, 0, len);
 	//System.out.println(id);
 	return id;
+    }
+    public List<ErableInstance<?>> getDeclaredErableInstances(){
+	List<ErableInstance<?>> instances=new ArrayList<>();
+	for(Map.Entry<Integer, ErableInstance> me : this.buffer.entrySet()){
+	    if((me.getValue() instanceof ErableVariable) || (me.getValue() instanceof ErableFunction)){
+		instances.add(me.getValue());
+	    }
+	}
+	return instances;
     }
 }

@@ -2,3 +2,7 @@
 /bin/
 /nbproject/
 \.DS_Store
+/ErableVM/build/
+/ErableVM/dist/
+/CppIssue/build/
+/CppIssue/dist/

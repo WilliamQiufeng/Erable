@@ -25,6 +25,7 @@ Any value defined here will override the pom.xml file value but is only applicab
             <configuration id="ErableCompileTests" profiles=""/>
             <configuration id="ErableDump" profiles=""/>
             <configuration id="ErableRunTest" profiles=""/>
+            <configuration id="OpCodeToCpp" profiles=""/>
         </configurations>
     </config-data>
 </project-shared-configuration>

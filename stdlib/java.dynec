@@ -1,10 +1,10 @@
 #Erable Dynamic Lib
-#Tue Apr 16 18:59:54 CST 2019
+#Wed Apr 17 15:59:45 CST 2019
 java_get=23
 java_call_static=17
 true=3
 false=5
-@maxid=0
+@maxid=33
 java_new=6
 java_get_static=28
 java_call=11
