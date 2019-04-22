@@ -16,12 +16,92 @@
 #include "sth.hpp"
 
 using namespace std;
+#include<iostream>
+using namespace std;
 
-/*
- * 
- */
-int main(int argc, char** argv) {
+class Base {
+public:
 
+    Base(int x = 3) {
+        cout << "Cout from Base::Base" << endl;
+        cout << x << endl;
+        this->x = x;
+        cout << "Base x=" << this->x << endl;
+    }
+    int x;
+};
+
+class Derived : Base {
+public:
+
+    Derived(int x = 0) {
+        cout << "Cout from Derived::Derived" << endl;
+        cout << x << endl;
+        cout << "Finished" << endl;
+        //this->x=x;
+        cout << "Derived x=" << this->x << endl;
+    }
+    int x;
+private:
+    Base val = Base(2);
+};
+
+template <typename C>
+class TBase {
+public:
+    C a;
+
+    TBase(C a) :
+    a(a) {
+    }
+
+    inline virtual void dosth(TBase* t, int i) {
+        cout << "hi " << static_cast<int> (a) << ":" << i << endl;
+
+    }
+};
+
+class TImpl : public TBase<int> {
+public:
+
+    TImpl(int a) :
+    TBase<int>(a) {
+    }
+    //using TBase::dosth;
+    //template <>
+
+    void dosth(TBase<int>* t, int i) override {
+        cout << "Impl " << this->a << ":" << i << endl;
+    }
+
+};
+
+class TImpl2 : public TBase<int> {
+public:
+
+    TImpl2(int a) :
+    TBase(a) {
+    }
+    //using TBase::dosth;
+    //template <>
+
+    void dosth(TBase<int>* t, int i) override {
+        cout << "Impl2 " << a << ":" << i << endl;
+    }
+
+};
+
+int main() {
+    Derived d(1);
+    TBase<int>* a = new TImpl(1);
+    TBase<int>* c = new TImpl2(7);
+    TBase<int>* b = new TBase<int>(2);
+    a->dosth(a, 3);
+    b->dosth(b, 4);
+    b->dosth(a, 5);
+    a->dosth(b, 6);
+    c->dosth(a, 8);
     return 0;
 }
+
 
