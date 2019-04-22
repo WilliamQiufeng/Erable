@@ -16,29 +16,20 @@
  */
 
 /* 
- * File:   Types.hpp
+ * File:   GlobalMacros.hpp
  * Author: Qiufeng54321
  *
- * Created on 2019年4月20日, 下午1:17
+ * Created on 2019年4月21日, 下午7:41
  */
 
-#ifndef TYPES_HPP
-#define TYPES_HPP
+#ifndef GLOBALMACROS_HPP
+#define GLOBALMACROS_HPP
 
-#include "Descriptor.hpp"
-#include "GlobalMacros.hpp"
+#define TEMPT template<typename type, typename R>
+#define TTTTT template<typename T>
+#define FTEMP template<typename D, typename E, typename F>
+#define ISEQU(sth, type) typeid (sth->getValue()) == typeid (type)
+#define ISNUM(sth) ISEQU(sth, int) or ISEQU(sth, double)
 
-
-namespace Erable {
-    namespace Types {
-        TEMPT class Instance;
-        TTTTT class Double;
-        TTTTT class Integer;
-        //template<typename type=std::string>
-        TTTTT class String;
-        TEMPT class Function;
-    }
-}
-
-#endif /* TYPES_HPP */
+#endif /* GLOBALMACROS_HPP */
 

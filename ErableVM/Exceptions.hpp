@@ -16,29 +16,36 @@
  */
 
 /* 
- * File:   Types.hpp
+ * File:   Exceptions.hpp
  * Author: Qiufeng54321
  *
- * Created on 2019年4月20日, 下午1:17
+ * Created on 2019年4月21日, 上午11:06
  */
 
-#ifndef TYPES_HPP
-#define TYPES_HPP
+#ifndef EXCEPTIONS_HPP
+#define EXCEPTIONS_HPP
 
-#include "Descriptor.hpp"
-#include "GlobalMacros.hpp"
-
+#include <stdexcept>
+#include <string>
 
 namespace Erable {
-    namespace Types {
-        TEMPT class Instance;
-        TTTTT class Double;
-        TTTTT class Integer;
-        //template<typename type=std::string>
-        TTTTT class String;
-        TEMPT class Function;
+    namespace Exceptions {
+
+        class Exception : std::runtime_error {
+        public:
+
+            explicit Exception(const std::string &title, const std::string& s) : std::runtime_error(title + ":" + s) {
+            };
+        };
+
+        class UnsupportedOpException : Exception {
+        public:
+
+            explicit UnsupportedOpException(const std::string& s) : Exception("Unsupported Operation", s) {
+            };
+        };
     }
 }
 
-#endif /* TYPES_HPP */
+#endif /* EXCEPTIONS_HPP */
 

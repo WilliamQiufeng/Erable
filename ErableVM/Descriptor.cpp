@@ -19,9 +19,10 @@
 #include "Types.hpp"
 #include <map>
 
-namespace Erable{
+namespace Erable {
+
     class Descriptor {
     public:
-        std::map<int, Erable::Types::Instance<void*>> idmap;
+        std::map<int, Erable::Types::Instance<void, void>> idmap;
     };
 }
