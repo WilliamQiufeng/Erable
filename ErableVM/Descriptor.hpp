@@ -26,11 +26,12 @@
 #define DESCRIPTOR_HPP
 
 //#include <map>
+#include "InputStream.hpp"
 #include "Types.hpp"
 
 
 namespace Erable {
-
+    class Code;
     class Descriptor;
     
 }

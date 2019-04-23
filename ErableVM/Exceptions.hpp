@@ -44,6 +44,13 @@ namespace Erable {
             explicit UnsupportedOpException(const std::string& s) : Exception("Unsupported Operation", s) {
             };
         };
+
+        class IOException : Exception {
+        public:
+
+            explicit IOException(const std::string& s) : Exception("IO Exception", s) {
+            };
+        };
     }
 }
 

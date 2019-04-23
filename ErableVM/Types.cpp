@@ -20,6 +20,9 @@
 #include <string>
 #include <cmath>
 #include <complex>
+#include <boost/any.hpp>
+#include <boost/type_index.hpp>
+#include <malloc/_malloc.h>
 
 
 
@@ -29,22 +32,23 @@ namespace Erable {
     namespace Types {
         //using namespace std;
 
-        TEMPT class Instance {
+        class Instance {
         public:
-            type value;
+
+            boost::any* value;
             int id;
             Descriptor* parent;
 
-            Instance(type value, int id, Descriptor* parent = nullptr) :
-            value(value), id(id), parent(parent) {
+            TEMPT Instance(type value, int id, Descriptor* parent = nullptr) :
+            value(new boost::any(value)), id(id), parent(parent) {
             }
 
-            void setValue(type value) {
-                this->value = value;
-            }
-
-            type getValue() {
+            boost::any* getValue() const {
                 return this->value;
+            }
+
+            TTTTT T getAValue() {
+                return *(boost::any_cast<T>(this->getValue()));
             }
 
             int getId() const {
@@ -63,19 +67,25 @@ namespace Erable {
                 this->parent = parent;
             }
 
-            virtual Instance* add(Instance* other, int toid);
-            virtual Instance* sub(Instance* other, int toid);
-            virtual Instance* mul(Instance* other, int toid);
-            virtual Instance* div(Instance* other, int toid);
-            virtual Instance* mod(Instance* other, int toid);
-            virtual Instance* pow(Instance* other, int toid);
+            DECLARE_INSTANCE_VIRTUAL(add, +);
+            
+            DECLARE_INSTANCE_VIRTUAL(sub, -);
+
+            DECLARE_INSTANCE_VIRTUAL(mul, *);
+
+            DECLARE_INSTANCE_VIRTUAL(div, /);
+
+            DECLARE_INSTANCE_VIRTUAL(mod, %);
+
+            DECLARE_INSTANCE_VIRTUAL(pow, **);
 
         };
 
-        TTTTT class Integer : Instance<int, int> {
+        class Integer : public Instance {
+        public:
 
             Integer(int value, int id, Descriptor* parent = nullptr) :
-            Instance<int, int>(value, id, parent) {
+            Instance(value, id, parent) {
 
             }
 
@@ -86,83 +96,66 @@ namespace Erable {
              * ∆: execute other->add(this, toid);
              * this won't make any difference when exchanging lvalue and rvalue
              */
-            Integer<T>* add(Integer<T>* other, int toid) override {
-                if (ISEQU(other, int)) {
-                    Integer* i = new Integer(this->getValue() + other->getValue(), toid, this->getParent());
-                    return i;
-                }
+            OVERRIDE_INSTANCE_FUNC(add) {
                 return other->add(this, toid);
             }
 
-            Integer<T>* sub(Integer<T>* other, int toid) override {
-                if (ISNUM(other)) {
-                    Integer* i = new Integer(this->getValue() - other->getValue(), toid, this->getParent());
-                    return i;
-                }
-                throw Exceptions::UnsupportedOpException("Operation '-' between Integer and non-Number literal");
+            OVERRIDE_INSTANCE_FUNC(mul) {
+                return other->mul(other, toid);
             };
-            Integer<T>* pow(Integer<T>* other, int toid) override;
+
+            OVERRIDE_INSTANCE_FUNC(sub);
+            OVERRIDE_INSTANCE_FUNC(div);
+            OVERRIDE_INSTANCE_FUNC(pow);
         };
 
-        TTTTT class Double : public Instance<double, double> {
+        class Double : public Instance {
         public:
 
             Double(double value, int id, Descriptor* parent = nullptr) :
-            Instance<double, double>(value, id, parent) {
+            Instance(value, id, parent) {
             }
 
-            Double<T>* add(Double<T>* other, int toid) override {
-                if (ISNUM(other)) {
-                    Double<T>* i = new Double(this->getValue() + other->getValue(), toid, this->getParent());
-                    return i;
-                }
-                return other->add(this, toid);
-            }
+            OVERRIDE_OP_NUM(add, +);
 
-            Double<T>* sub(Double<T>* other, int toid) override {
-                if (ISNUM(other)) {
-                    Double<T>* i = new Double(this->getValue() - other->getValue(), toid, this->getParent());
-                    return i;
-                }
-                throw Exceptions::UnsupportedOpException("Operation '-' between Double and non-Number literal");
-            }
-            Double<T>* pow(Double<T>* other, int toid) override;
+            OVERRIDE_OP_NUM(sub, -);
+
+            OVERRIDE_OP_NUM(mul, *);
+
+            OVERRIDE_OP_NUM(div, /);
+
+            OVERRIDE_INSTANCE_FUNC(pow);
         };
         //Integer* Integer::sub(Integer* other, int toid) override
 
-        TTTTT Integer<T>* Integer<T>::pow(Integer<T>* other, int toid) {
-            Integer<T>* i = nullptr;
-            if (ISNUM(other)) {
-                i = new Integer<T>(std::pow(this->getValue(), other->getValue()), toid, this->getParent());
-                return i;
-            }
-            throw Exceptions::UnsupportedOpException("Operation '**' between Integer and non-Number literal");
-        }
+        /*
+         * Implementations of operations
+         */
+        OUTER_OVERRIDE_OP_NUM(Integer::sub, -);
 
-        TTTTT Double<T>* Double<T>::pow(Double<T>* other, int toid) {
-            Double<T>* i = nullptr;
-            if (ISNUM(other)) {
-                i = new Double(std::pow(this->getValue(), other->getValue()), toid, this->getParent());
-                return i;
-            }
-            throw Exceptions::UnsupportedOpException("Operation '**' between Double and non-Number literal");
-        }
+        OUTER_OVERRIDE_OP_NUM(Integer::div, /);
 
-        TTTTT class String : Instance<std::string, std::string> {
+        OUTER_OVERRIDE_OP_NUM_FUNC(Integer::pow, std::pow);
+
+        OUTER_OVERRIDE_OP_NUM_FUNC(Double::pow, std::pow);
+
+        class String : Instance {
             //string value="";
 
             //using Instance<string>::Instance;
+        public:
 
             String(std::string value, int id, Descriptor* parent = nullptr) :
-            Instance<std::string, std::string>(value, id, parent) {
+            Instance(value, id, parent) {
             }
 
-            String<T>* add(String<T>* other, int toid) {
-                std::string cpy(this->getValue());
+            OVERRIDE_INSTANCE_FUNC(add) {
+                std::string cpy(this->getAValue<std::string>());
                 if (ISEQU(other, std::string)) {
-                    cpy.append(other->getValue());
+                    cpy += other->getAValue<std::string>();
                 } else if (ISNUM(other)) {
-                    cpy.append(other->getValue());
+                    GET_NUM(this, a);
+                    cpy += a;
                 }
                 String* s = new String(cpy, toid, this->getParent());
                 return s;
@@ -171,18 +164,33 @@ namespace Erable {
             /*
              * This is not appropriate for String to use "-" operator
              */
-            String<T>* sub(String<T>* other, int toid) {
+            OVERRIDE_INSTANCE_FUNC(sub) {
                 throw Erable::Exceptions::UnsupportedOpException("Unsupported substraction of String");
             };
+
+            OVERRIDE_INSTANCE_FUNC(mul) {
+                std::string cpy(this->getAValue<std::string>());
+                std::string res(cpy);
+                if (ISEQU(other, int)) {
+                    int times = other->getAValue<int>();
+
+                    REPEAT_TIMES(times) {
+                        res += cpy;
+                    }
+                }
+                return new String(res, toid, this->getParent());
+            }
         };
 
-        TEMPT class Function : Instance<std::function<Instance<type, R> * >, std::function<Instance<type, R> * > > {
+        class Function : Instance {
+        public:
+            //typename std::function<Instance*>
 
-            Function(std::function<Instance<type, R>*> value, int id, Descriptor* parent) :
-            Instance<std::function<Instance<type, R>*>, std::function<Instance<type, R> * > >(value, id, parent) {
+            Function(std::vector<Code*> value, int id, Descriptor* parent) :
+            Instance(value, id, parent) {
 
             }
-
+            
         };
     }
 }

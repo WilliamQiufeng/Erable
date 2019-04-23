@@ -26,17 +26,17 @@
 #define TYPES_HPP
 
 #include "Descriptor.hpp"
-#include "GlobalMacros.hpp"
+#include "Global.hpp"
 
 
 namespace Erable {
     namespace Types {
-        TEMPT class Instance;
-        TTTTT class Double;
-        TTTTT class Integer;
+        class Instance;
+        class Double;
+        class Integer;
         //template<typename type=std::string>
-        TTTTT class String;
-        TEMPT class Function;
+        class String;
+        class Function;
     }
 }
 

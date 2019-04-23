@@ -4,7 +4,8 @@
     <logicalFolder name="HeaderFiles" displayName="头文件" projectFiles="true">
       <itemPath>Descriptor.hpp</itemPath>
       <itemPath>Exceptions.hpp</itemPath>
-      <itemPath>GlobalMacros.hpp</itemPath>
+      <itemPath>Global.hpp</itemPath>
+      <itemPath>InputStream.hpp</itemPath>
       <itemPath>OpCode.hpp</itemPath>
       <itemPath>Types.hpp</itemPath>
       <itemPath>/williamye/program/antlr/erable/ErableVM/Utils.h</itemPath>
@@ -44,7 +45,7 @@
       </toolsSet>
       <compileType>
         <ccTool>
-          <standard>11</standard>
+          <commandLine>-std=c++17</commandLine>
         </ccTool>
       </compileType>
       <item path="/williamye/program/antlr/erable/ErableVM/Utils.h"
@@ -58,7 +59,9 @@
       </item>
       <item path="Exceptions.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="GlobalMacros.hpp" ex="false" tool="3" flavor2="0">
+      <item path="Global.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="InputStream.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="OpCode.hpp" ex="false" tool="3" flavor2="0">
       </item>
@@ -117,7 +120,9 @@
       </item>
       <item path="Exceptions.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="GlobalMacros.hpp" ex="false" tool="3" flavor2="0">
+      <item path="Global.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="InputStream.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="OpCode.hpp" ex="false" tool="3" flavor2="0">
       </item>

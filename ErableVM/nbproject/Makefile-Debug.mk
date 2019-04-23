@@ -54,8 +54,8 @@ TESTOBJECTFILES= \
 CFLAGS=
 
 # CC Compiler Flags
-CCFLAGS=
-CXXFLAGS=
+CCFLAGS=-std=c++17
+CXXFLAGS=-std=c++17
 
 # Fortran Compiler Flags
 FFLAGS=
@@ -77,17 +77,17 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/erablevm: ${OBJECTFILES}
 ${OBJECTDIR}/Descriptor.o: Descriptor.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Descriptor.o Descriptor.cpp
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Descriptor.o Descriptor.cpp
 
 ${OBJECTDIR}/Types.o: Types.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Types.o Types.cpp
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Types.o Types.cpp
 
 ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
 # Subprojects
 .build-subprojects:
@@ -104,7 +104,7 @@ ${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/OpCodeTTest.o ${OBJECTFILES:%.o=%_noma
 ${TESTDIR}/tests/OpCodeTTest.o: tests/OpCodeTTest.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I. -std=c++14 -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/OpCodeTTest.o tests/OpCodeTTest.cpp
+	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/OpCodeTTest.o tests/OpCodeTTest.cpp
 
 
 ${OBJECTDIR}/Descriptor_nomain.o: ${OBJECTDIR}/Descriptor.o Descriptor.cpp 
@@ -115,7 +115,7 @@ ${OBJECTDIR}/Descriptor_nomain.o: ${OBJECTDIR}/Descriptor.o Descriptor.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Descriptor_nomain.o Descriptor.cpp;\
+	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Descriptor_nomain.o Descriptor.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/Descriptor.o ${OBJECTDIR}/Descriptor_nomain.o;\
 	fi
@@ -128,7 +128,7 @@ ${OBJECTDIR}/Types_nomain.o: ${OBJECTDIR}/Types.o Types.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Types_nomain.o Types.cpp;\
+	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Types_nomain.o Types.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/Types.o ${OBJECTDIR}/Types_nomain.o;\
 	fi
@@ -141,7 +141,7 @@ ${OBJECTDIR}/main_nomain.o: ${OBJECTDIR}/main.o main.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -std=c++14 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main_nomain.o main.cpp;\
+	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main_nomain.o main.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/main.o ${OBJECTDIR}/main_nomain.o;\
 	fi

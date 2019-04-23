@@ -101,6 +101,7 @@ int main() {
     b->dosth(a, 5);
     a->dosth(b, 6);
     c->dosth(a, 8);
+    cout<<endl<<typeid(double).name()<<endl;
     return 0;
 }
 
