@@ -20,11 +20,12 @@
 #include <map>
 
 namespace Erable {
+
     class Code {
-        
     };
+
     class Descriptor {
-    public:
-        std::map<int, Erable::Types::Instance*> idmap;
+      public:
+	std::map<int, Erable::Types::Instance*> idmap;
     };
 }

@@ -25,8 +25,8 @@
 #ifndef TYPES_HPP
 #define TYPES_HPP
 
-#include "Descriptor.hpp"
-#include "Global.hpp"
+//#include "Descriptor.hpp"
+//#include "Global.hpp"
 
 
 namespace Erable {

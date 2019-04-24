@@ -4,9 +4,11 @@
 
 
 
+
+
 [![Gitter](https://badges.gitter.im/Erable-Lang/community.svg)](https://gitter.im/Erable-Lang/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)![](https://img.shields.io/github/license/QiuFeng54321/Erable.svg?label=GNU&logo=GNU)![](https://img.shields.io/github/last-commit/Qiufeng54321/Erable.svg?logo=java)![](https://img.shields.io/github/stars/Qiufeng54321/Erable.svg?style=flat)
 
-
+[![BCH compliance](https://bettercodehub.com/edge/badge/QiuFeng54321/Erable?branch=master)](https://bettercodehub.com/)
 
 Hi!Welcome to erable!
 

@@ -37,8 +37,10 @@
 #include "Global.hpp"
 
 
+
 namespace Erable {
     namespace IO {
+        //using char;
         /*
          * Implementation of java.io.File from java
          * Not full implemented
@@ -89,17 +91,20 @@ namespace Erable {
             }
 
             void open(File f) {
-                this->in.open(f.getPath().generic_string(), std::ios::in | std::ios::binary);
+                std::string path(boost::filesystem::absolute(f.getPath()).string());
+                this->in=std::ifstream(path, std::ios::in | std::ios::binary);
+                //this->in.get();
+                std::cout<<"Opened:"<<path<<std::endl;
+                if(in.fail()){
+                    std::cout<<"Open Failed!!Message:"<<strerror(errno)<<std::endl;
+                }
                 begin = std::istreambuf_iterator<char> (this->in);
                 end = std::istreambuf_iterator<char>();
             }
 
             char read() {
-                if (begin == end) {
-                    return EOF;
-                }
                 char c = *begin;
-                begin++;
+                ++begin;
                 return c;
             }
 
@@ -107,13 +112,15 @@ namespace Erable {
                 std::vector<char> bts;
 
                 REPEAT_TIMES(n) {
-                    bts.push_back(read());
+                    char c=this->read();
+                    //std::cout<<(int)c<<std::endl;
+                    bts.push_back(c);
                 }
                 return bts;
             }
 
             std::vector<char> readAllBytes() {
-                std::vector<char> bts = std::vector<char>();
+                std::vector<char> bts=std::vector<char>();
                 std::copy(begin, end, std::back_inserter(bts));
                 return bts;
             }

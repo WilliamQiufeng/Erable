@@ -9,11 +9,15 @@
         <group name="Qiufeng54321-Projects">
             <file>file:/williamye/program/antlr/erable/ErableVM/main.cpp</file>
             <file>file:/williamye/program/antlr/erable/ErableVM/Exceptions.hpp</file>
+            <file>file:/williamye/program/antlr/erable/ErableVM/InputStream.hpp</file>
+            <file>file:/williamye/program/antlr/erable/ErableVM/tests/OpCodeTTest.cpp</file>
             <file>file:/williamye/program/antlr/erable/ErableVM/Types.cpp</file>
             <file>file:/williamye/program/antlr/erable/ErableVM/Descriptor.cpp</file>
+            <file>file:/williamye/program/antlr/erable/ErableVM/Global.hpp</file>
             <file>file:/williamye/program/antlr/erable/ErableVM/Utils.h</file>
-            <file>file:/williamye/program/antlr/erable/ErableVM/GlobalMacros.hpp</file>
             <file>file:/williamye/program/antlr/erable/ErableVM/Types.hpp</file>
+            <file>file:/williamye/program/antlr/erable/ErableVM/Descriptor.hpp</file>
+            <file>file:/williamye/program/antlr/erable/ErableVM/Metadata.hpp</file>
         </group>
     </open-files>
 </project-private>

@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/Descriptor.o \
+	${OBJECTDIR}/Metadata.o \
 	${OBJECTDIR}/Types.o \
 	${OBJECTDIR}/main.o
 
@@ -72,12 +73,17 @@ LDLIBSOPTIONS=
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/erablevm: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/erablevm ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/erablevm ${OBJECTFILES} ${LDLIBSOPTIONS} -lboost_filesystem -lboost_system
 
 ${OBJECTDIR}/Descriptor.o: Descriptor.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Descriptor.o Descriptor.cpp
+
+${OBJECTDIR}/Metadata.o: Metadata.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Metadata.o Metadata.cpp
 
 ${OBJECTDIR}/Types.o: Types.cpp
 	${MKDIR} -p ${OBJECTDIR}
@@ -118,6 +124,19 @@ ${OBJECTDIR}/Descriptor_nomain.o: ${OBJECTDIR}/Descriptor.o Descriptor.cpp
 	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Descriptor_nomain.o Descriptor.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/Descriptor.o ${OBJECTDIR}/Descriptor_nomain.o;\
+	fi
+
+${OBJECTDIR}/Metadata_nomain.o: ${OBJECTDIR}/Metadata.o Metadata.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/Metadata.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Metadata_nomain.o Metadata.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/Metadata.o ${OBJECTDIR}/Metadata_nomain.o;\
 	fi
 
 ${OBJECTDIR}/Types_nomain.o: ${OBJECTDIR}/Types.o Types.cpp 

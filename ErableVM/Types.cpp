@@ -15,8 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "Types.hpp"
+#include "Descriptor.hpp"
 #include "Exceptions.hpp"
-//#include "Descriptor.hpp"
+#include "Global.hpp"
 #include <string>
 #include <cmath>
 #include <complex>
@@ -30,168 +31,167 @@
 
 namespace Erable {
     namespace Types {
-        //using namespace std;
+	//using namespace std;
 
-        class Instance {
-        public:
+	class Instance {
+	  public:
 
-            boost::any* value;
-            int id;
-            Descriptor* parent;
+	    boost::any* value;
+	    int id;
+	    Descriptor* parent;
 
-            TEMPT Instance(type value, int id, Descriptor* parent = nullptr) :
-            value(new boost::any(value)), id(id), parent(parent) {
-            }
+	    TEMPT Instance(type value, int id, Descriptor* parent = nullptr) :
+	    value(new boost::any(value)), id(id), parent(parent) {
+	    }
 
-            boost::any* getValue() const {
-                return this->value;
-            }
+	    boost::any* getValue() const {
+		return this->value;
+	    }
 
-            TTTTT T getAValue() {
-                return *(boost::any_cast<T>(this->getValue()));
-            }
+	    TTTTT T getAValue() {
+		return *(boost::any_cast<T>(this->getValue()));
+	    }
 
-            int getId() const {
-                return id;
-            }
+	    int getId() const {
+		return id;
+	    }
 
-            void setId(int id) {
-                this->id = id;
-            }
+	    void setId(int id) {
+		this->id = id;
+	    }
 
-            Descriptor* getParent() const {
-                return parent;
-            }
+	    Descriptor* getParent() const {
+		return parent;
+	    }
 
-            void setParent(Descriptor* parent) {
-                this->parent = parent;
-            }
+	    void setParent(Descriptor* parent) {
+		this->parent = parent;
+	    }
 
-            DECLARE_INSTANCE_VIRTUAL(add, +);
-            
-            DECLARE_INSTANCE_VIRTUAL(sub, -);
+	    DECLARE_INSTANCE_VIRTUAL(add, +);
 
-            DECLARE_INSTANCE_VIRTUAL(mul, *);
+	    DECLARE_INSTANCE_VIRTUAL(sub, -);
 
-            DECLARE_INSTANCE_VIRTUAL(div, /);
+	    DECLARE_INSTANCE_VIRTUAL(mul, *);
 
-            DECLARE_INSTANCE_VIRTUAL(mod, %);
+	    DECLARE_INSTANCE_VIRTUAL(div, /);
 
-            DECLARE_INSTANCE_VIRTUAL(pow, **);
+	    DECLARE_INSTANCE_VIRTUAL(mod, %);
 
-        };
+	    DECLARE_INSTANCE_VIRTUAL(pow, **);
 
-        class Integer : public Instance {
-        public:
+	};
 
-            Integer(int value, int id, Descriptor* parent = nullptr) :
-            Instance(value, id, parent) {
+	class Integer : public Instance {
+	  public:
 
-            }
+	    Integer(int value, int id, Descriptor* parent = nullptr) :
+	    Instance(value, id, parent) {
 
-            /*
-             * 递归下降，如果不是integer就让other来执行operation,如果other也不支持就抛出Exceptions::UnsupportedOpException错误
-             * Does other store an integer?
-             * √: add and return
-             * ∆: execute other->add(this, toid);
-             * this won't make any difference when exchanging lvalue and rvalue
-             */
-            OVERRIDE_INSTANCE_FUNC(add) {
-                return other->add(this, toid);
-            }
+	    }
 
-            OVERRIDE_INSTANCE_FUNC(mul) {
-                return other->mul(other, toid);
-            };
+	    /*
+	     * 递归下降，如果不是integer就让other来执行operation,如果other也不支持就抛出Exceptions::UnsupportedOpException错误
+	     * Does other store an integer?
+	     * √: add and return
+	     * ∆: execute other->add(this, toid);
+	     * this won't make any difference when exchanging lvalue and rvalue
+	     */
+	    OVERRIDE_INSTANCE_FUNC(add) {
+		return other->add(this, toid);
+	    }
 
-            OVERRIDE_INSTANCE_FUNC(sub);
-            OVERRIDE_INSTANCE_FUNC(div);
-            OVERRIDE_INSTANCE_FUNC(pow);
-        };
+	    OVERRIDE_INSTANCE_FUNC(mul) {
+		return other->mul(other, toid);
+	    };
 
-        class Double : public Instance {
-        public:
+	    OVERRIDE_INSTANCE_FUNC(sub);
+	    OVERRIDE_INSTANCE_FUNC(div);
+	    OVERRIDE_INSTANCE_FUNC(pow);
+	};
 
-            Double(double value, int id, Descriptor* parent = nullptr) :
-            Instance(value, id, parent) {
-            }
+	class Double : public Instance {
+	  public:
 
-            OVERRIDE_OP_NUM(add, +);
+	    Double(double value, int id, Descriptor* parent = nullptr) :
+	    Instance(value, id, parent) {
+	    }
 
-            OVERRIDE_OP_NUM(sub, -);
+	    OVERRIDE_OP_NUM(add, +);
 
-            OVERRIDE_OP_NUM(mul, *);
+	    OVERRIDE_OP_NUM(sub, -);
 
-            OVERRIDE_OP_NUM(div, /);
+	    OVERRIDE_OP_NUM(mul, *);
 
-            OVERRIDE_INSTANCE_FUNC(pow);
-        };
-        //Integer* Integer::sub(Integer* other, int toid) override
+	    OVERRIDE_OP_NUM(div, /);
 
-        /*
-         * Implementations of operations
-         */
-        OUTER_OVERRIDE_OP_NUM(Integer::sub, -);
+	    OVERRIDE_INSTANCE_FUNC(pow);
+	};
+	//Integer* Integer::sub(Integer* other, int toid) override
 
-        OUTER_OVERRIDE_OP_NUM(Integer::div, /);
+	/*
+	 * Implementations of operations
+	 */
+	OUTER_OVERRIDE_OP_NUM(Integer::sub, -);
 
-        OUTER_OVERRIDE_OP_NUM_FUNC(Integer::pow, std::pow);
+	OUTER_OVERRIDE_OP_NUM(Integer::div, /);
 
-        OUTER_OVERRIDE_OP_NUM_FUNC(Double::pow, std::pow);
+	OUTER_OVERRIDE_OP_NUM_FUNC(Integer::pow, std::pow);
 
-        class String : Instance {
-            //string value="";
+	OUTER_OVERRIDE_OP_NUM_FUNC(Double::pow, std::pow);
 
-            //using Instance<string>::Instance;
-        public:
+	class String : Instance {
+	    //string value="";
 
-            String(std::string value, int id, Descriptor* parent = nullptr) :
-            Instance(value, id, parent) {
-            }
+	    //using Instance<string>::Instance;
+	  public:
 
-            OVERRIDE_INSTANCE_FUNC(add) {
-                std::string cpy(this->getAValue<std::string>());
-                if (ISEQU(other, std::string)) {
-                    cpy += other->getAValue<std::string>();
-                } else if (ISNUM(other)) {
-                    GET_NUM(this, a);
-                    cpy += a;
-                }
-                String* s = new String(cpy, toid, this->getParent());
-                return s;
-            }
+	    String(std::string value, int id, Descriptor* parent = nullptr) :
+	    Instance(value, id, parent) {
+	    }
 
-            /*
-             * This is not appropriate for String to use "-" operator
-             */
-            OVERRIDE_INSTANCE_FUNC(sub) {
-                throw Erable::Exceptions::UnsupportedOpException("Unsupported substraction of String");
-            };
+	    OVERRIDE_INSTANCE_FUNC(add) {
+		std::string cpy(this->getAValue<std::string>());
+		if (ISEQU(other, std::string)) {
+		    cpy += other->getAValue<std::string>();
+		} else if (ISNUM(other)) {
+		    GET_NUM(this, a);
+		    cpy += a;
+		}
+		String* s = new String(cpy, toid, this->getParent());
+		return s;
+	    }
 
-            OVERRIDE_INSTANCE_FUNC(mul) {
-                std::string cpy(this->getAValue<std::string>());
-                std::string res(cpy);
-                if (ISEQU(other, int)) {
-                    int times = other->getAValue<int>();
+	    /*
+	     * This is not appropriate for String to use "-" operator
+	     */
+	    OVERRIDE_INSTANCE_FUNC(sub) {
+		throw Erable::Exceptions::UnsupportedOpException("Unsupported substraction of String");
+	    };
 
-                    REPEAT_TIMES(times) {
-                        res += cpy;
-                    }
-                }
-                return new String(res, toid, this->getParent());
-            }
-        };
+	    OVERRIDE_INSTANCE_FUNC(mul) {
+		std::string cpy(this->getAValue<std::string>());
+		std::string res(cpy);
+		if (ISEQU(other, int)) {
+		    int times = other->getAValue<int>();
 
-        class Function : Instance {
-        public:
-            //typename std::function<Instance*>
+		    REPEAT_TIMES(times) {
+			res += cpy;
+		    }
+		}
+		return new String(res, toid, this->getParent());
+	    }
+	};
 
-            Function(std::vector<Code*> value, int id, Descriptor* parent) :
-            Instance(value, id, parent) {
+	class Function : Instance {
+	  public:
 
-            }
-            
-        };
+	    Function(std::vector<Code*> value, int id, Descriptor* parent) :
+	    Instance(value, id, parent) {
+
+	    }
+
+	};
     }
 }
 

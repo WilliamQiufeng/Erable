@@ -51,6 +51,12 @@ namespace Erable {
             explicit IOException(const std::string& s) : Exception("IO Exception", s) {
             };
         };
+        class ValidateException : Exception {
+        public:
+
+            explicit ValidateException(const std::string& s) : Exception("Validate Exception", s) {
+            };
+        };
     }
 }
 

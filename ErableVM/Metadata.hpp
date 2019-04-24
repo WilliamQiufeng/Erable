@@ -16,26 +16,51 @@
  */
 
 /* 
- * File:   Descriptor.hpp
+ * File:   Metadata.hpp
  * Author: Qiufeng54321
  *
- * Created on 2019年4月20日, 下午1:20
+ * Created on 2019年4月24日, 上午7:09
  */
 
-#ifndef DESCRIPTOR_HPP
-#define DESCRIPTOR_HPP
+#ifndef METADATA_HPP
+#define METADATA_HPP
 
-//#include <map>
-//#include "InputStream.hpp"
-//#include "Types.hpp"
-#include "Metadata.hpp"
-
+//#include <vector>
+#include <iostream>
+#include "InputStream.hpp"
+//#include "Utils.h"
 
 namespace Erable {
-    class Code;
-    class Descriptor;
-    
+
+    namespace Meta {
+
+        struct VersionMeta {
+	    char major;
+	    char minor;
+	};
+
+	struct IDLengthMeta {
+	    int id;
+	    int cid;
+	};
+
+        class Metadata{
+	    IO::InputStream* in;
+            VersionMeta ver;
+            IDLengthMeta idlen;
+	  public:
+
+	    Metadata(IO::InputStream* in) :
+	    in(in) {
+	    }
+
+	    void readMagic();
+            void readVersion();
+            void readIDLength();
+            void readHeader();
+	};
+    }
 }
 
-#endif /* DESCRIPTOR_HPP */
+#endif /* METADATA_HPP */
 
