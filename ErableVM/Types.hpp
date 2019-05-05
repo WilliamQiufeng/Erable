@@ -22,16 +22,68 @@
  * Created on 2019年4月20日, 下午1:17
  */
 
+#pragma once
 #ifndef TYPES_HPP
 #define TYPES_HPP
 
-//#include "Descriptor.hpp"
+#include <boost/any.hpp>
+
+#include "Global.hpp"
+#include "Exceptions.hpp"
+#include "Descriptor.hpp"
 //#include "Global.hpp"
 
 
 namespace Erable {
     namespace Types {
-        class Instance;
+        class Instance {
+	  public:
+
+	    boost::any* value;
+	    int id;
+	    Descriptor* parent;
+
+	    TEMPT Instance(type value, int id, Descriptor* parent = nullptr) :
+	    value(new boost::any(value)), id(id), parent(parent) {
+	    }
+
+	    boost::any* getValue() const {
+		return this->value;
+	    }
+
+	    TTTTT T getAValue() {
+		return *(boost::any_cast<T>(this->getValue()));
+	    }
+
+	    int getId() const {
+		return id;
+	    }
+
+	    void setId(int id) {
+		this->id = id;
+	    }
+
+	    Descriptor* getParent() const {
+		return parent;
+	    }
+
+	    void setParent(Descriptor* parent) {
+		this->parent = parent;
+	    }
+
+	    DECLARE_INSTANCE_VIRTUAL(add, +);
+
+	    DECLARE_INSTANCE_VIRTUAL(sub, -);
+
+	    DECLARE_INSTANCE_VIRTUAL(mul, *);
+
+	    DECLARE_INSTANCE_VIRTUAL(div, /);
+
+	    DECLARE_INSTANCE_VIRTUAL(mod, %);
+
+	    DECLARE_INSTANCE_VIRTUAL(pow, **);
+
+	};
         class Double;
         class Integer;
         //template<typename type=std::string>

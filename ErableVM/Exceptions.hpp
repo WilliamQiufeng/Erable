@@ -21,7 +21,7 @@
  *
  * Created on 2019年4月21日, 上午11:06
  */
-
+#pragma once
 #ifndef EXCEPTIONS_HPP
 #define EXCEPTIONS_HPP
 

@@ -23,24 +23,24 @@ package com.qiufeng.erable;
 public enum OpCode {
     CONSTANT_POOL,CP_NUM,CP_INT,CP_STR,
     //1 op 2 ->ID 3
-    ADD("+",3),SUB("-",3),MUL("*",3),DIV("/",3),MOD("%",3),POW("**",3),
+    ADD("+",3,2),SUB("-",3,2),MUL("*",3,2),DIV("/",3,2),MOD("%",3,2),POW("**",3,2),
     //op 1 -> ID 2
-    POS(2),NEG(2),
+    POS(2,1),NEG(2,1),
     //1[2] -> ID 3
-    ELEMENT(3),
-    LS("<<",3),RS(">>",3),URS(">>>",3),
-    LT("<",3),GT(">",3),LTE("<=",3),GTE(">=",3),EQ("==",3),NEQ("!=",3),
-    EQU("=",3),SWITCH("<=>",3),
-    BNOT("!",3),BAND("&",3),BOR("|",3),BXOR("^",3),
-    ADDEQ("+=",3),SUBEQ("-=",3),MULEQ("*=",3),DIVEQ("/=",3),MODEQ("%=",3),
-    PUSH_SCOPE(1),POP_SCOPE(1),
-    REF("@",2),GREF("#",2),
-    RETURN("return",2),BREAK("break",2),
-    VAR(2),
-    LOADC(2),
-    FUNCTION(2),//REG_ARG(2),
-    ARRAY(1),PUSH_ELEMENT(2),
-    CALL_PREPARE(2),PUSH_ARG(2),CALL(2),
+    ELEMENT(3,2),
+    LS("<<",3,2),RS(">>",3,2),URS(">>>",3,2),
+    LT("<",3,2),GT(">",3,2),LTE("<=",3,2),GTE(">=",3,2),EQ("==",3,2),NEQ("!=",3,2),
+    EQU("=",3,2),SWITCH("<=>",3,2),
+    BNOT("!",3,2),BAND("&",3,2),BOR("|",3,2),BXOR("^",3,2),
+    ADDEQ("+=",3,2),SUBEQ("-=",3,2),MULEQ("*=",3,2),DIVEQ("/=",3,2),MODEQ("%=",3,2),
+    PUSH_SCOPE(1,0),POP_SCOPE(1,0),
+    REF("@",2,1),GREF("#",2,1),
+    RETURN("return",2,1),BREAK("break",2,1),
+    COPY(2),
+    LOADC(2,1),
+    FUNCTION(2,1),//REG_ARG(2),
+    ARRAY(1,0),PUSH_ELEMENT(2),
+    CALL_PREPARE(2,1),PUSH_ARG(2,1),CALL(2,1),
     IF(1),ELSE(2),
     WHILE(1),
     END(1),
@@ -56,16 +56,29 @@ public enum OpCode {
     ;
     public String sign;
     public int argc;
+    public int idIndex;
+
+    private OpCode(String sign, int argc, int idIndex) {
+	this.sign = sign;
+	this.argc = argc;
+	this.idIndex = idIndex;
+    }
+    
     OpCode(String sign,int argc){
-	this.sign=sign;
-	this.argc=argc;
+	this(sign, argc, -1);
     }
     OpCode(String sign){
 	this(sign,0);
     }
-    OpCode(int argc){
-	this(null,argc);
+
+    OpCode(int argc, int idIndex) {
+	this(null, argc, idIndex);
     }
+    
+    OpCode(int argc){
+	this(argc, -1);
+    }
+    
     OpCode(){
 	this(null);
     }

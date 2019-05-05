@@ -15,9 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "Types.hpp"
-#include "Descriptor.hpp"
-#include "Exceptions.hpp"
-#include "Global.hpp"
+#include "IO.hpp"
 #include <string>
 #include <cmath>
 #include <complex>
@@ -32,55 +30,6 @@
 namespace Erable {
     namespace Types {
 	//using namespace std;
-
-	class Instance {
-	  public:
-
-	    boost::any* value;
-	    int id;
-	    Descriptor* parent;
-
-	    TEMPT Instance(type value, int id, Descriptor* parent = nullptr) :
-	    value(new boost::any(value)), id(id), parent(parent) {
-	    }
-
-	    boost::any* getValue() const {
-		return this->value;
-	    }
-
-	    TTTTT T getAValue() {
-		return *(boost::any_cast<T>(this->getValue()));
-	    }
-
-	    int getId() const {
-		return id;
-	    }
-
-	    void setId(int id) {
-		this->id = id;
-	    }
-
-	    Descriptor* getParent() const {
-		return parent;
-	    }
-
-	    void setParent(Descriptor* parent) {
-		this->parent = parent;
-	    }
-
-	    DECLARE_INSTANCE_VIRTUAL(add, +);
-
-	    DECLARE_INSTANCE_VIRTUAL(sub, -);
-
-	    DECLARE_INSTANCE_VIRTUAL(mul, *);
-
-	    DECLARE_INSTANCE_VIRTUAL(div, /);
-
-	    DECLARE_INSTANCE_VIRTUAL(mod, %);
-
-	    DECLARE_INSTANCE_VIRTUAL(pow, **);
-
-	};
 
 	class Integer : public Instance {
 	  public:

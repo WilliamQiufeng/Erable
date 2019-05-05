@@ -19,12 +19,16 @@ package com.qiufeng.erable.vm.types;
 
 import com.qiufeng.erable.exception.UnsupportedOperationErr;
 import com.qiufeng.erable.vm.ErableDescriptor;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @since 2019年4月15日
  * @author Qiufeng54321
  */
-public abstract class ErableInstance<T> {
+public abstract class ErableInstance<T> implements Cloneable {
     public T value;
     public int id ;
     public ErableDescriptor descriptor;
@@ -95,5 +99,21 @@ public abstract class ErableInstance<T> {
     public String toString() {
 	return getClass().getSimpleName() + "{" + "id=" + id + ", value=" + value + '}';
     }
+
+    @Override
+    public ErableInstance clone()  {
+	try {
+	    Class cls=this.getClass();
+	    Constructor con=cls.getConstructor(this.value.getClass(), int.class, ErableDescriptor.class);
+	    ErableInstance cloned=(ErableInstance)con.newInstance(this.value, this.id, this.getDescriptor());
+	    return cloned;
+	    
+	}
+	catch (Exception ex) {
+	    Logger.getLogger(ErableInstance.class.getName()).log(Level.SEVERE, null, ex);
+	}
+	return null;
+    }
+    
     
 }

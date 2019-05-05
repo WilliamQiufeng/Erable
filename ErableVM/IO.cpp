@@ -14,28 +14,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include "IO.hpp"
 
-/* 
- * File:   Descriptor.hpp
- * Author: Qiufeng54321
- *
- * Created on 2019年4月20日, 下午1:20
- */
 
-#pragma once
-#ifndef DESCRIPTOR_HPP
-#define DESCRIPTOR_HPP
 
-//#include <map>
-//#include "InputStream.hpp"
-//#include "Types.hpp"
 
+#include "Exceptions.hpp"
+#include "Global.hpp"
+//#include "Utils.h"
 
 namespace Erable {
-    class Code;
-    class Descriptor;
-    
-}
+    namespace IO {
 
-#endif /* DESCRIPTOR_HPP */
+
+    }
+}
 

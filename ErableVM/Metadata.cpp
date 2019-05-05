@@ -15,9 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+//#include "IO.hpp"
 #include "Metadata.hpp"
 #include "Utils.h"
-
+#include "Exceptions.hpp"
 
 namespace Erable {
 
@@ -57,6 +58,22 @@ namespace Erable {
 	    this->readMagic();
 	    this->readVersion();
 	    this->readIDLength();
+	}
+
+	std::string Metadata::toString() {
+	    std::stringstream ss;
+	    ss << "Metadata{"
+		    << "Major: "
+		    << this->ver.major
+		    << ", Minor: "
+		    << this->ver.minor
+		    << ", ID length: "
+		    << this->idlen.id
+		    << ", CID length: "
+		    << this->idlen.cid
+		    << "}"
+		    ;
+	    return ss.str();
 	}
     }
 }

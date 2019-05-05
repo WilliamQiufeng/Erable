@@ -16,7 +16,8 @@
  */
 
 #include "Descriptor.hpp"
-#include "Types.hpp"
+//#include "Metadata.hpp"
+#include "ConstantPool.hpp"
 #include <map>
 
 namespace Erable {
@@ -25,7 +26,62 @@ namespace Erable {
     };
 
     class Descriptor {
+	//Fields
+	std::map<int, Erable::Types::Instance*>* idmap;
+	ConstantPool* constant_pool;
+	Descriptor* parent;
+
       public:
-	std::map<int, Erable::Types::Instance*> idmap;
+	//Constructors
+
+	Descriptor() {
+	    this->init();
+	}
+
+	Descriptor(std::map<int, Erable::Types::Instance*>* idmap) :
+	idmap(idmap) {
+	}
+
+	Descriptor(std::map<int, Erable::Types::Instance*>* idmap, ConstantPool* constant_pool) :
+	idmap(idmap), constant_pool(constant_pool) {
+	}
+
+	Descriptor(Descriptor* other) :
+	idmap(other->getIdmap()), constant_pool(other->getConstantPool()), parent(other) {
+	}
+
+	//Initialisation
+
+	void init() {
+	    this->idmap = new std::map<int, Erable::Types::Instance*>;
+	    this->constant_pool = new ConstantPool;
+	}
+
+	//Getters and Setters
+
+	std::map<int, Erable::Types::Instance*>* getIdmap() const {
+	    return idmap;
+	}
+
+	void setIdmap(std::map<int, Erable::Types::Instance*>* idmap) {
+	    this->idmap = idmap;
+	}
+
+	ConstantPool* getConstantPool() const {
+	    return constant_pool;
+	}
+
+	void setConstantPool(ConstantPool* constant_pool) {
+	    this->constant_pool = constant_pool;
+	}
+
+	Descriptor* getParent() const {
+	    return parent;
+	}
+
+	void setParent(Descriptor* parent) {
+	    this->parent = parent;
+	}
+
     };
 }

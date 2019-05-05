@@ -21,26 +21,31 @@
  *
  * Created on 2019年4月22日, 下午6:39
  */
-
+#pragma once
 #ifndef INPUTSTREAM_HPP
 #define INPUTSTREAM_HPP
+
 
 #include <fstream>
 #include <vector>
 #include <iterator>
 #include <algorithm>
 #include <boost/filesystem.hpp>
+#include <iostream>
 
 
 
 #include "Exceptions.hpp"
 #include "Global.hpp"
+//#include "Utils.h"
 
+//#include "Metadata.hpp"
 
 
 namespace Erable {
     namespace IO {
         //using char;
+
         /*
          * Implementation of java.io.File from java
          * Not full implemented
@@ -61,22 +66,25 @@ namespace Erable {
             boost::filesystem::path getPath() {
                 return this->path;
             }
-            void mkdir(){
+
+            void mkdir() {
                 boost::filesystem::create_directory(this->path);
                 //::access(this->path, 6);
             }
-            std::vector<boost::filesystem::path> listFiles(){
+
+            std::vector<boost::filesystem::path> listFiles() {
                 boost::filesystem::directory_iterator d(this->path);
-                boost::filesystem::directory_iterator e=boost::filesystem::end(d);
+                boost::filesystem::directory_iterator e = boost::filesystem::end(d);
                 std::vector<boost::filesystem::path> v;
-                while(d!=e){
+                while (d != e) {
                     v.push_back(*d);
                     d++;
                 }
                 return v;
             }
-            
+
         };
+
         /*
          * Implementation of java.io.InputStream from java
          */
@@ -89,14 +97,19 @@ namespace Erable {
             InputStream(File f) {
                 this->open(f);
             }
-
+	    InputStream(std::string f){
+		this->open(f);
+	    }
+	    void open(std::string f){
+		this->open(File(f));
+	    }
             void open(File f) {
                 std::string path(boost::filesystem::absolute(f.getPath()).string());
-                this->in=std::ifstream(path, std::ios::in | std::ios::binary);
+                this->in = std::ifstream(path, std::ios::in | std::ios::binary);
                 //this->in.get();
-                std::cout<<"Opened:"<<path<<std::endl;
-                if(in.fail()){
-                    std::cout<<"Open Failed!!Message:"<<strerror(errno)<<std::endl;
+                std::cout << "Opened:" << path << std::endl;
+                if (in.fail()) {
+                    std::cout << "Open Failed!!Message:" << strerror(errno) << std::endl;
                 }
                 begin = std::istreambuf_iterator<char> (this->in);
                 end = std::istreambuf_iterator<char>();
@@ -112,7 +125,7 @@ namespace Erable {
                 std::vector<char> bts;
 
                 REPEAT_TIMES(n) {
-                    char c=this->read();
+                    char c = this->read();
                     //std::cout<<(int)c<<std::endl;
                     bts.push_back(c);
                 }
@@ -120,7 +133,7 @@ namespace Erable {
             }
 
             std::vector<char> readAllBytes() {
-                std::vector<char> bts=std::vector<char>();
+                std::vector<char> bts = std::vector<char>();
                 std::copy(begin, end, std::back_inserter(bts));
                 return bts;
             }
@@ -128,11 +141,11 @@ namespace Erable {
             void skip(long long n) {
                 this->in.ignore(n, EOF);
             }
-            void close(){
+
+            void close() {
                 this->in.close();
             }
         };
-        
     }
 }
 

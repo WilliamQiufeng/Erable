@@ -324,11 +324,12 @@ public class ErableDescriptor {
 		break;
 	    case BREAK:
 		break;
-	    case VAR:
+	    case COPY:
 		int varval=oci.args.get(0);
 		int varid =oci.args.get(1);
-		ErableVariable variable=new ErableVariable(varval, varid, this);
-		this.buffer.put(varid, variable);
+		ErableInstance copyFrom=buffer.get(varval).clone();
+		copyFrom.id=varid;
+		this.buffer.put(varid, copyFrom);
 		break;
 	    case LOADC:
 		int cid=oci.args.get(0);

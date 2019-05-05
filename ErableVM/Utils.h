@@ -10,7 +10,7 @@
  *
  * Created on 2019年4月18日, 下午7:47
  */
-
+#pragma once
 #ifndef UTILS_H
 #define UTILS_H
 
@@ -20,7 +20,6 @@
 #include <sstream>
 
 namespace Erable {
-    using namespace std;
     namespace Utils {
 
         /*                  *\
@@ -33,11 +32,11 @@ namespace Erable {
          \*                 */
         template <class ValueType>
         struct EnumElement {
-            string name;
+            std::string name;
             ValueType value;
         public:
 
-            EnumElement<ValueType>(string name, ValueType value) {
+            EnumElement<ValueType>(std::string name, ValueType value) {
                 this->name = name;
                 this->value = value;
             }
@@ -46,21 +45,21 @@ namespace Erable {
         template <class ValueType>
         class Enum {
         public:
-            vector<EnumElement<ValueType>*> elements;
+            std::vector<EnumElement<ValueType>*> elements;
 
             Enum<ValueType>() {
             }
 
-            void addEnum(string name, ValueType value) {
+            void addEnum(std::string name, ValueType value) {
                 EnumElement<ValueType>* ele = new EnumElement(name, value);
                 this->addEnum(name, ele);
             };
 
-            void addEnum(string name, EnumElement<ValueType>* value) {
+            void addEnum(std::string name, EnumElement<ValueType>* value) {
                 this->elements.push_back(value);
             };
 
-            void removeEnum(string name) {
+            void removeEnum(std::string name) {
                 int index = 0;
                 for (EnumElement<ValueType>* element : this->elements) {
                     if (element[0] == name) {
@@ -75,7 +74,7 @@ namespace Erable {
                 this->elements.erase(index);
             };
 
-            EnumElement<ValueType>* find(string name) {
+            EnumElement<ValueType>* find(std::string name) {
                 for (EnumElement<ValueType>* element : this->elements) {
                     if (element->name == name) {
                         return element;
@@ -101,7 +100,7 @@ namespace Erable {
          *                  *|
          \*                 */
         class BitUtils_t {
-
+	public:
             /*
              * Methods for unpacking primitive values from char arrays starting at
              * given offsets.

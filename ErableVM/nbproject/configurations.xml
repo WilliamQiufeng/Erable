@@ -2,17 +2,20 @@
 <configurationDescriptor version="100">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="HeaderFiles" displayName="头文件" projectFiles="true">
+      <itemPath>ConstantPool.hpp</itemPath>
       <itemPath>Descriptor.hpp</itemPath>
       <itemPath>Exceptions.hpp</itemPath>
       <itemPath>Global.hpp</itemPath>
-      <itemPath>InputStream.hpp</itemPath>
+      <itemPath>IO.hpp</itemPath>
       <itemPath>Metadata.hpp</itemPath>
       <itemPath>OpCode.hpp</itemPath>
       <itemPath>Types.hpp</itemPath>
       <itemPath>/williamye/program/antlr/erable/ErableVM/Utils.h</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles" displayName="源文件" projectFiles="true">
+      <itemPath>ConstantPool.cpp</itemPath>
       <itemPath>Descriptor.cpp</itemPath>
+      <itemPath>IO.cpp</itemPath>
       <itemPath>Metadata.cpp</itemPath>
       <itemPath>Types.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
@@ -58,6 +61,10 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="ConstantPool.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ConstantPool.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Descriptor.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Descriptor.hpp" ex="false" tool="3" flavor2="0">
@@ -66,7 +73,9 @@
       </item>
       <item path="Global.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="InputStream.hpp" ex="false" tool="3" flavor2="0">
+      <item path="IO.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="IO.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Metadata.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -123,6 +132,10 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="ConstantPool.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ConstantPool.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Descriptor.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Descriptor.hpp" ex="false" tool="3" flavor2="0">
@@ -131,7 +144,9 @@
       </item>
       <item path="Global.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="InputStream.hpp" ex="false" tool="3" flavor2="0">
+      <item path="IO.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="IO.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Metadata.cpp" ex="false" tool="1" flavor2="0">
       </item>

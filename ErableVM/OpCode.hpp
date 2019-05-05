@@ -21,21 +21,24 @@
  *
  * Created on 2019年4月20日, 上午10:07
  */
-
+#pragma once
 #ifndef OPCODE_HPP
 #define OPCODE_HPP
 
-#include "Utils.h"
+//#include "Utils.h"
 
 namespace Erable {
-    class OpCodeElement{
+
+    class OpCodeElement {
     public:
         int argc;
-        OpCodeElement(int argc){
-            this->argc=argc;
+
+        OpCodeElement(int argc) {
+            this->argc = argc;
         }
-        
+
     };
+
     class OpCode_t {
     public:
 
@@ -79,7 +82,7 @@ namespace Erable {
             this->addEnum("GREF", 2);
             this->addEnum("RETURN", 2);
             this->addEnum("BREAK", 2);
-            this->addEnum("VAR", 2);
+            this->addEnum("COPY", 2);
             this->addEnum("LOADC", 2);
             this->addEnum("FUNCTION", 2);
             this->addEnum("ARRAY", 1);
@@ -117,8 +120,9 @@ namespace Erable {
         void addEnum(string name, int element) {
             this->vals.addEnum(name, element);
         }
-        char getByte(string name){
-            return static_cast<char>(values().find(name)->value);
+
+        char getByte(string name) {
+            return static_cast<char> (values().find(name)->value);
         }
     };
 

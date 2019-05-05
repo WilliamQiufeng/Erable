@@ -17,10 +17,7 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
-import static com.qiufeng.erable.Const.ID_LENGTH;
-import com.qiufeng.erable.util.BitUtils;
 import java.io.IOException;
-import java.util.Arrays;
 
 /**
  *
@@ -29,7 +26,7 @@ import java.util.Arrays;
 public class VarCode extends TempCode {
     public short modifiers;
     public VarCode(String name,short modifiers,int refid, Code parent) {
-	super(refid, OpCode.VAR,parent);
+	super(refid, OpCode.COPY,parent);
 	this.modifiers=modifiers;
 	this.sign=Code.VAR;
 	this.tag=name;

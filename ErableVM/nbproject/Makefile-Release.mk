@@ -35,7 +35,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/ConstantPool.o \
 	${OBJECTDIR}/Descriptor.o \
+	${OBJECTDIR}/IO.o \
 	${OBJECTDIR}/Metadata.o \
 	${OBJECTDIR}/Types.o \
 	${OBJECTDIR}/main.o
@@ -75,10 +77,20 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/erablevm: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/erablevm ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/ConstantPool.o: ConstantPool.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ConstantPool.o ConstantPool.cpp
+
 ${OBJECTDIR}/Descriptor.o: Descriptor.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Descriptor.o Descriptor.cpp
+
+${OBJECTDIR}/IO.o: IO.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/IO.o IO.cpp
 
 ${OBJECTDIR}/Metadata.o: Metadata.cpp
 	${MKDIR} -p ${OBJECTDIR}
@@ -113,6 +125,19 @@ ${TESTDIR}/tests/OpCodeTTest.o: tests/OpCodeTTest.cpp
 	$(COMPILE.cc) -O2 -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/OpCodeTTest.o tests/OpCodeTTest.cpp
 
 
+${OBJECTDIR}/ConstantPool_nomain.o: ${OBJECTDIR}/ConstantPool.o ConstantPool.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ConstantPool.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ConstantPool_nomain.o ConstantPool.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ConstantPool.o ${OBJECTDIR}/ConstantPool_nomain.o;\
+	fi
+
 ${OBJECTDIR}/Descriptor_nomain.o: ${OBJECTDIR}/Descriptor.o Descriptor.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/Descriptor.o`; \
@@ -124,6 +149,19 @@ ${OBJECTDIR}/Descriptor_nomain.o: ${OBJECTDIR}/Descriptor.o Descriptor.cpp
 	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Descriptor_nomain.o Descriptor.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/Descriptor.o ${OBJECTDIR}/Descriptor_nomain.o;\
+	fi
+
+${OBJECTDIR}/IO_nomain.o: ${OBJECTDIR}/IO.o IO.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/IO.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/IO_nomain.o IO.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/IO.o ${OBJECTDIR}/IO_nomain.o;\
 	fi
 
 ${OBJECTDIR}/Metadata_nomain.o: ${OBJECTDIR}/Metadata.o Metadata.cpp 

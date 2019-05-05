@@ -22,12 +22,17 @@
  * Created on 2019年4月24日, 上午7:09
  */
 
+#pragma once
+
 #ifndef METADATA_HPP
 #define METADATA_HPP
 
 //#include <vector>
+//#include "Metadata.hpp"
 #include <iostream>
-#include "InputStream.hpp"
+
+#include "IO.hpp"
+//#include "IO.hpp"
 //#include "Utils.h"
 
 namespace Erable {
@@ -35,8 +40,8 @@ namespace Erable {
     namespace Meta {
 
         struct VersionMeta {
-	    char major;
-	    char minor;
+	    int major;
+	    int minor;
 	};
 
 	struct IDLengthMeta {
@@ -58,6 +63,7 @@ namespace Erable {
             void readVersion();
             void readIDLength();
             void readHeader();
+            std::string toString();
 	};
     }
 }

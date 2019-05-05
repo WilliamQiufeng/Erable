@@ -22,6 +22,7 @@
  * Created on 2019年4月21日, 下午7:41
  */
 
+#pragma once
 #ifndef GLOBALMACROS_HPP
 #define GLOBALMACROS_HPP
 
