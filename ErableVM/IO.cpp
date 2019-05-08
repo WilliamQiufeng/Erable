@@ -26,6 +26,83 @@
 namespace Erable {
     namespace IO {
 
+	template <typename T>
+
+	std::ostream& operator<<(std::ostream& os, const std::vector<T>& obj) {
+	    os << "[";
+	    for (int i = 0; i < obj.size(); inc i) {
+		os << (int) obj[i];
+		if (i < obj.size() - 1)os << ",";
+	    }
+	    os << "]";
+	    return os;
+	}
+
+	void File::mkdir() {
+	    boost::filesystem::create_directory(this->path);
+	    //::access(this->path, 6);
+	}
+
+	std::vector<boost::filesystem::path> File::listFiles() {
+	    boost::filesystem::directory_iterator d(this->path);
+	    boost::filesystem::directory_iterator e = boost::filesystem::end(d);
+	    std::vector<boost::filesystem::path> v;
+	    while (d != e) {
+		v.push_back(*d);
+		d++;
+	    }
+	    return v;
+	}
+
+	void InputStream::open(File f) {
+	    std::string path(boost::filesystem::absolute(f.getPath()).string());
+	    this->in = new std::ifstream(path, std::ios::in | std::ios::binary);
+	    //this->in->get();
+	    std::cout << "Opened:" << path << std::endl;
+	    if (in->fail()) {
+		std::cout << "Open Failed!!Message:" << strerror(errno) << std::endl;
+	    }
+	    begin = std::istreambuf_iterator<char> (*(this->in));
+	    end = std::istreambuf_iterator<char>();
+	}
+
+	char InputStream::read() {
+
+	    char c = *begin;
+	    ++begin;
+	    int curpos = this->in->tellg();
+	    //std::cout << "Current Cursor Position: " << curpos << ", read: " << (int) c << std::endl;
+	    if (c == EOF) throw Exceptions::IOException("EOF");
+	    return c;
+	}
+
+	std::vector<char> InputStream::readNBytes(long long n) {
+	    std::vector<char> bts;
+
+	    REPEAT_TIMES(n) {
+		char c = this->read();
+		//std::cout << (int) c << std::endl;
+		bts.push_back(c);
+	    }
+	    //std::cout << bts << std::endl;
+	    return bts;
+	}
+
+	std::vector<char> InputStream::readAllBytes() {
+	    std::vector<char> bts = std::vector<char>();
+	    std::copy(begin, end, std::back_inserter(bts));
+	    return bts;
+	}
+
+	void InputStream::skip(long long n) {
+	    this->in->ignore(n, EOF);
+	}
+
+	void InputStream::close() {
+	    this->in->close();
+	}
+
+
 
     }
 }

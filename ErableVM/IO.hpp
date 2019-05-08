@@ -44,11 +44,9 @@
 
 namespace Erable {
     namespace IO {
-        //using char;
-
         /*
          * Implementation of java.io.File from java
-         * Not full implemented
+         * Not fully implemented
          */
         class File {
             boost::filesystem::path path;
@@ -67,21 +65,9 @@ namespace Erable {
                 return this->path;
             }
 
-            void mkdir() {
-                boost::filesystem::create_directory(this->path);
-                //::access(this->path, 6);
-            }
+            void mkdir();
 
-            std::vector<boost::filesystem::path> listFiles() {
-                boost::filesystem::directory_iterator d(this->path);
-                boost::filesystem::directory_iterator e = boost::filesystem::end(d);
-                std::vector<boost::filesystem::path> v;
-                while (d != e) {
-                    v.push_back(*d);
-                    d++;
-                }
-                return v;
-            }
+            std::vector<boost::filesystem::path> listFiles();
 
         };
 
@@ -89,7 +75,7 @@ namespace Erable {
          * Implementation of java.io.InputStream from java
          */
         class InputStream {
-            std::ifstream in;
+            std::ifstream* in;
             std::istreambuf_iterator<char> begin;
             std::istreambuf_iterator<char> end;
         public:
@@ -100,51 +86,45 @@ namespace Erable {
 	    InputStream(std::string f){
 		this->open(f);
 	    }
+
 	    void open(std::string f){
 		this->open(File(f));
 	    }
-            void open(File f) {
-                std::string path(boost::filesystem::absolute(f.getPath()).string());
-                this->in = std::ifstream(path, std::ios::in | std::ios::binary);
-                //this->in.get();
-                std::cout << "Opened:" << path << std::endl;
-                if (in.fail()) {
-                    std::cout << "Open Failed!!Message:" << strerror(errno) << std::endl;
-                }
-                begin = std::istreambuf_iterator<char> (this->in);
-                end = std::istreambuf_iterator<char>();
-            }
+            void open(File f);
 
-            char read() {
-                char c = *begin;
-                ++begin;
-                return c;
-            }
+            char read();
 
-            std::vector<char> readNBytes(long long n) {
-                std::vector<char> bts;
+	    std::istreambuf_iterator<char> getBegin() const {
+		return begin;
+	    }
 
-                REPEAT_TIMES(n) {
-                    char c = this->read();
-                    //std::cout<<(int)c<<std::endl;
-                    bts.push_back(c);
-                }
-                return bts;
-            }
+	    void setBegin(std::istreambuf_iterator<char> begin) {
+		this->begin = begin;
+	    }
 
-            std::vector<char> readAllBytes() {
-                std::vector<char> bts = std::vector<char>();
-                std::copy(begin, end, std::back_inserter(bts));
-                return bts;
-            }
+	    std::istreambuf_iterator<char> getEnd() const {
+		return end;
+	    }
 
-            void skip(long long n) {
-                this->in.ignore(n, EOF);
-            }
+	    void setEnd(std::istreambuf_iterator<char> end) {
+		this->end = end;
+	    }
 
-            void close() {
-                this->in.close();
-            }
+	    std::ifstream* getIn() const {
+		return this->in;
+	    }
+
+	    void setIn(std::ifstream* in) {
+		this->in = in;
+	    }
+
+            std::vector<char> readNBytes(long long n);
+
+            std::vector<char> readAllBytes();
+
+            void skip(long long n);
+
+            void close();
         };
     }
 }

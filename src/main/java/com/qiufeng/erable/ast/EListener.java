@@ -203,7 +203,7 @@ public class EListener extends ErableBaseListener {
     public void exitFuncdecl(ErableParser.FuncdeclContext ctx) {
 	super.exitFuncdecl(ctx);
 	FuncDeclCode fdc = (FuncDeclCode) current;
-	fdc.ret=ctx.arguments.ret;
+	//fdc.ret=ctx.arguments.ret;
 	String funcname = ctx.funcname.getText();
 	int funcid = this.current.findFunction(funcname, ctx.arguments.arguments.size());
 
@@ -222,11 +222,14 @@ public class EListener extends ErableBaseListener {
 	String funcname = ctx.funcname.getText();
 	//Enter FUNCDECL
 	FuncDeclCode fdc = new FuncDeclCode(funcname, null, this.current);
+	fdc.ret=fdc.id + ctx.arguments.argss.size() + 1;
+	//fdc.ret=ctx.arguments.ret;
 	this.current = fdc;
 	fdc.args = new ArrayList<>();
 	for (Token t : ctx.arguments.argss) {
 	    fdc.args.add(new FPADCode(t.getText(), current));
 	}
+	
 
 	//Enter CODEBLOCK ('''block=codeblock''' in Erable.g4),will invoke #enterCodeblock and #exitCodeblock after.
     }

@@ -39,6 +39,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Descriptor.o \
 	${OBJECTDIR}/IO.o \
 	${OBJECTDIR}/Metadata.o \
+	${OBJECTDIR}/Program.o \
 	${OBJECTDIR}/Types.o \
 	${OBJECTDIR}/main.o
 
@@ -57,8 +58,8 @@ TESTOBJECTFILES= \
 CFLAGS=
 
 # CC Compiler Flags
-CCFLAGS=-std=c++17
-CXXFLAGS=-std=c++17
+CCFLAGS=-std=c++17 -mmacosx-version-min=10.14
+CXXFLAGS=-std=c++17 -mmacosx-version-min=10.14
 
 # Fortran Compiler Flags
 FFLAGS=
@@ -96,6 +97,11 @@ ${OBJECTDIR}/Metadata.o: Metadata.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Metadata.o Metadata.cpp
+
+${OBJECTDIR}/Program.o: Program.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Program.o Program.cpp
 
 ${OBJECTDIR}/Types.o: Types.cpp
 	${MKDIR} -p ${OBJECTDIR}
@@ -175,6 +181,19 @@ ${OBJECTDIR}/Metadata_nomain.o: ${OBJECTDIR}/Metadata.o Metadata.cpp
 	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Metadata_nomain.o Metadata.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/Metadata.o ${OBJECTDIR}/Metadata_nomain.o;\
+	fi
+
+${OBJECTDIR}/Program_nomain.o: ${OBJECTDIR}/Program.o Program.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/Program.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Program_nomain.o Program.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/Program.o ${OBJECTDIR}/Program_nomain.o;\
 	fi
 
 ${OBJECTDIR}/Types_nomain.o: ${OBJECTDIR}/Types.o Types.cpp 

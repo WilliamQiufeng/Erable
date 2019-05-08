@@ -17,71 +17,51 @@
 
 #include "Descriptor.hpp"
 //#include "Metadata.hpp"
-#include "ConstantPool.hpp"
-#include <map>
 
 namespace Erable {
 
     class Code {
     };
 
-    class Descriptor {
-	//Fields
-	std::map<int, Erable::Types::Instance*>* idmap;
-	ConstantPool* constant_pool;
-	Descriptor* parent;
+    void Descriptor::readHeader() {
+	this->getInput()->readMeta();
+    }
 
-      public:
-	//Constructors
+    Program::Op Descriptor::record() {
+	return this->input->readOp();
+    }
 
-	Descriptor() {
-	    this->init();
+    std::vector<Program::Op> Descriptor::recordAll(Program::Op until) {
+
+    }
+
+    void Descriptor::execute(Program::Op op) {
+	std::cout << op << std::endl;
+	if (op.op.op is "CONSTANT_POOL") {
+	    std::cout << "Recording Constant Pool...." << std::endl;
+	    this->getInput()->readConstantPool();
 	}
+    }
 
-	Descriptor(std::map<int, Erable::Types::Instance*>* idmap) :
-	idmap(idmap) {
+    void Descriptor::executeAll(Program::Op until) {
+	Program::Op current = Program::UNKNOWN;
+	while (not(until is current)) {
+	    current = this->record();
+	    this->execute(current);
 	}
+    }
 
-	Descriptor(std::map<int, Erable::Types::Instance*>* idmap, ConstantPool* constant_pool) :
-	idmap(idmap), constant_pool(constant_pool) {
+    void Descriptor::executeAll(std::vector<Program::Op> code) {
+	for (Program::Op op : code) {
+	    this->execute(op);
 	}
+    }
 
-	Descriptor(Descriptor* other) :
-	idmap(other->getIdmap()), constant_pool(other->getConstantPool()), parent(other) {
-	}
+    void Descriptor::doAll() {
+	this->readHeader();
+	std::cout << this->getInput()->getData()->meta->toString() << std::endl;
+	this->executeAll(Program::END);
+    }
 
-	//Initialisation
-
-	void init() {
-	    this->idmap = new std::map<int, Erable::Types::Instance*>;
-	    this->constant_pool = new ConstantPool;
-	}
-
-	//Getters and Setters
-
-	std::map<int, Erable::Types::Instance*>* getIdmap() const {
-	    return idmap;
-	}
-
-	void setIdmap(std::map<int, Erable::Types::Instance*>* idmap) {
-	    this->idmap = idmap;
-	}
-
-	ConstantPool* getConstantPool() const {
-	    return constant_pool;
-	}
-
-	void setConstantPool(ConstantPool* constant_pool) {
-	    this->constant_pool = constant_pool;
-	}
-
-	Descriptor* getParent() const {
-	    return parent;
-	}
-
-	void setParent(Descriptor* parent) {
-	    this->parent = parent;
-	}
-
-    };
+    //class Descriptor
 }

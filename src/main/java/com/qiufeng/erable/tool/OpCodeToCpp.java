@@ -26,7 +26,7 @@ import com.qiufeng.erable.OpCode;
 public class OpCodeToCpp {
     public static void main(String[] args) {
 	for(OpCode oc : OpCode.values()){
-	    System.out.println("this->addEnum(\"" + oc.name() + "\", " + oc.argc + ");");
+	    System.out.println("this->addEnum(\"" + oc.name() + "\", " + oc.argc + ", " + oc.idIndex + ");	    // Index " + oc.ordinal());
 	}
     }
 }

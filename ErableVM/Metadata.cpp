@@ -15,6 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+
 //#include "IO.hpp"
 #include "Metadata.hpp"
 #include "Utils.h"
@@ -26,9 +27,13 @@ namespace Erable {
 	std::vector<char> magic{(char) (unsigned char) 0xe4, (char) (unsigned char) 0xab};
 	//std::vector<unsigned char> magic{0xe4, 0xab};
 
+	void Metadata::setIn(Program::ProgramInputStream* in) {
+	    this->in = in;
+	}
+
 	void Metadata::readMagic() {
 	    std::vector<char> bts = this->in->readNBytes(2);
-	    if (magic != bts) {
+	    if (magic isnt bts) {
 		std::cout << "Assertion Error: VM is expecting magic number "
 			<< Utils::ArrayUtils.toString(magic)
 			<< ", but got "
@@ -50,7 +55,7 @@ namespace Erable {
 	void Metadata::readIDLength() {
 	    char len = this->in->read();
 	    int id_len = len >> 4;
-	    int cid_len = len & 0b00001111;
+	    int cid_len = len bitand 0b00001111;
 	    this->idlen = IDLengthMeta{id_len, cid_len};
 	}
 
@@ -58,6 +63,7 @@ namespace Erable {
 	    this->readMagic();
 	    this->readVersion();
 	    this->readIDLength();
+	    //std::cout << toString() << std::endl;
 	}
 
 	std::string Metadata::toString() {

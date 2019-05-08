@@ -27,6 +27,7 @@
 
 #include <stdexcept>
 #include <string>
+#include <iostream>
 
 namespace Erable {
     namespace Exceptions {
@@ -35,7 +36,9 @@ namespace Erable {
         public:
 
             explicit Exception(const std::string &title, const std::string& s) : std::runtime_error(title + ":" + s) {
+		std::cout<<s<<std::endl;
             };
+	    
         };
 
         class UnsupportedOpException : Exception {

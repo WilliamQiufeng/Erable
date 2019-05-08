@@ -14,6 +14,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+//#pragma comment("UTIL_START")
 #include <vector>
 #include <string>
 #include <ostream>
@@ -21,6 +22,17 @@
 
 namespace Erable {
     namespace Utils {
+	template <typename T>
+
+	std::ostream& operator<<(std::ostream& os, const std::vector<T>& obj) {
+	    os << "[";
+	    for (int i = 0; i < obj.size(); inc i) {
+		os << (int)obj[i];
+		if (i < obj.size() - 1)os << ",";
+	    }
+	    os << "]";
+	    return os;
+	}
 
         /*                  *\
          *                  *|
@@ -36,10 +48,10 @@ namespace Erable {
             ValueType value;
         public:
 
-            EnumElement<ValueType>(std::string name, ValueType value) {
-                this->name = name;
-                this->value = value;
-            }
+	    EnumElement(std::string name, ValueType value) :
+	    name(name), value(value) {
+	    }
+
         };
 
         template <class ValueType>
@@ -50,41 +62,50 @@ namespace Erable {
             Enum<ValueType>() {
             }
 
-            void addEnum(std::string name, ValueType value) {
+            inline void addEnum(std::string name, ValueType value) {
                 EnumElement<ValueType>* ele = new EnumElement(name, value);
                 this->addEnum(name, ele);
             };
 
-            void addEnum(std::string name, EnumElement<ValueType>* value) {
+            inline void addEnum(std::string name, EnumElement<ValueType>* value) {
                 this->elements.push_back(value);
             };
 
-            void removeEnum(std::string name) {
+            inline void removeEnum(std::string name) {
                 int index = 0;
                 for (EnumElement<ValueType>* element : this->elements) {
-                    if (element[0] == name) {
+                    if (element[0] is name) {
                         break;
                     }
-                    index++;
+                    inc index;
                 }
                 this->removeEnum(index);
             };
 
-            void removeEnum(int index) {
+            inline void removeEnum(int index) {
                 this->elements.erase(index);
             };
 
-            EnumElement<ValueType>* find(std::string name) {
+            inline EnumElement<ValueType>* find(std::string name) {
                 for (EnumElement<ValueType>* element : this->elements) {
-                    if (element->name == name) {
+                    if (element->name is name) {
                         return element;
                     }
                 }
                 return nullptr;
-            }
-            ;
+            };
+	    inline int findIndex(std::string name) {
+		int ind=0;
+		for (EnumElement<ValueType>* element : this->elements) {
+                    if (element->name is name) {
+                        return ind;
+                    }
+		    inc ind;
+                }
+                return -1;
+            };
 
-            EnumElement<ValueType>* find(int index) {
+            inline EnumElement<ValueType>* find(int index) {
                 return this->elements[index];
             };
         };
@@ -101,51 +122,65 @@ namespace Erable {
          \*                 */
         class BitUtils_t {
 	public:
-            /*
-             * Methods for unpacking primitive values from char arrays starting at
-             * given offsets.
-             */
-
-            bool getBoolean(char* b, int off) {
+	    template<typename R>
+	    inline R get(std::vector<char> b, int off, int size){
+		R r=0;
+		int bit=0;
+		//std::cout<<"Doing BitUtils::get: " << b <<std::endl;
+		for(int i=size-1;i>-1;dec i,bit+=8){
+		    int bitr=(int)b[i];
+		    //std::cout<<"BitR: " <<bitr << ", Offset: " << (off + i) <<std::endl;
+		    if(i!=0)bitr&=0xFF;
+		    //std::cout<<"BitR bitand 0xFF: "<<bitr<<std::endl;
+		    r+=(bitr lshift bit);
+		    //std::cout<<"Shift: "<<bit<<" to " << r<< " with " << bitr << std::endl;
+		}
+		return r;
+	    }
+            inline bool getBoolean(std::vector<char> b, int off) {
                 return b[off] != 0;
             }
 
-            char getChar(char* b, int off) {
-                return (char) ((b[off + 1] & 0xFF) +
-                        (b[off] << 8));
+            inline char getChar(std::vector<char> b, int off) {
+//                return (char) ((b[off + 1] & 0xFF) +
+//                        (b[off] << 8));
+		return get<char>(b,off,2);
             }
 
-            short getShort(char* b, int off) {
-                return (short) ((b[off + 1] & 0xFF) +
-                        (b[off] << 8));
+            inline short getShort(std::vector<char> b, int off) {
+//                return (short) ((b[off + 1] & 0xFF) +
+//                        (b[off] << 8));
+		return get<short>(b,off,2);
             }
 
-            int getInt(char* b, int off) {
-                return ((b[off + 3] & 0xFF)) +
-                        ((b[off + 2] & 0xFF) << 8) +
-                        ((b[off + 1] & 0xFF) << 16) +
-                        ((b[off ]) << 24);
+            inline int getInt(std::vector<char> b, int off) {
+//                return ((b[off + 3] & 0xFF)) +
+//                        ((b[off + 2] & 0xFF) << 8) +
+//                        ((b[off + 1] & 0xFF) << 16) +
+//                        ((b[off ]) << 24);
+		return get<int>(b,off,4);
             }
 
-            long getLong(char* b, int off) {
-                return ((b[off + 7] & 0xFFL)) +
-                        ((b[off + 6] & 0xFFL) << 8) +
-                        ((b[off + 5] & 0xFFL) << 16) +
-                        ((b[off + 4] & 0xFFL) << 24) +
-                        ((b[off + 3] & 0xFFL) << 32) +
-                        ((b[off + 2] & 0xFFL) << 40) +
-                        ((b[off + 1] & 0xFFL) << 48) +
-                        (((long) b[off]) << 56);
+            inline long getLong(std::vector<char> b, int off) {
+//                return ((b[off + 7] & 0xFFL)) +
+//                        ((b[off + 6] & 0xFFL) << 8) +
+//                        ((b[off + 5] & 0xFFL) << 16) +
+//                        ((b[off + 4] & 0xFFL) << 24) +
+//                        ((b[off + 3] & 0xFFL) << 32) +
+//                        ((b[off + 2] & 0xFFL) << 40) +
+//                        ((b[off + 1] & 0xFFL) << 48) +
+//                        (((long) b[off]) << 56);
+		return get<long>(b,off,8);
             }
 
-            double getDouble(char* b, int off) {
+            inline double getDouble(std::vector<char> b, int off) {
                 long l = getLong(b, off);
                 return reinterpret_cast<double&> (l);
             }
 
 
         };
-        BitUtils_t BitUtils;
+        inline BitUtils_t BitUtils;
 
         /*                  *\
          *                  *|
@@ -159,7 +194,7 @@ namespace Erable {
         public:
 
             template <typename ori, typename type>
-            std::vector<type> transformType(std::vector<ori> t) {
+            inline std::vector<type> transformType(std::vector<ori> t) {
                 std::vector<type> res;
                 for (ori ele : t) {
                     res.push_back((type) ele);
@@ -168,29 +203,30 @@ namespace Erable {
             }
 
             template <typename type>
-            std::string toString(std::vector<type> t) {
+            inline std::string toString(std::vector<type> t) {
                 std::stringstream ss;
                 int i=0;
-                if(!t.empty()){
+                if(not t.empty()){
                     for(type ty : t){
                         if(i>0)
-                            ss<<",";
-                        if(typeid(ty) == typeid(char) or typeid(ty) == typeid(unsigned char)){
-                            ss<<(int)ty;
+                            ss puts ",";
+                        if(typeid(ty) is typeid(char) or typeid(ty) is typeid(unsigned char)){
+                            ss puts (int)ty;
                         }else{
-                            ss<<ty;
+                            ss puts ty;
                         }
-                        i++;
+                        inc i;
                     }
                 }
                 return ss.str();
             }
         };
-        ArrayUtils_t ArrayUtils;
+        inline ArrayUtils_t ArrayUtils;
 
     }
 }
 
+//#pragma comment("UTIL_END")
 
 #endif /* UTILS_H */
 

@@ -26,15 +26,27 @@
 #ifndef GLOBALMACROS_HPP
 #define GLOBALMACROS_HPP
 
+#define is ==
+#define are ==
+#define inc ++
+#define dec --
+#define isnt !=
+#define gets >>
+#define puts <<
+#define arent !=
+#define self this
+#define lshift <<
+#define rshift >>
+#define panic throw
 
 #define TEMPT template<typename type>
 #define TTTTT template<typename T>
 #define FTEMP template<typename D, typename E, typename F>
-#define ISEQU(sth, t) sth->getValue()->type() == typeid (t)
-#define ISNUM(sth) ISEQU(sth, int) or ISEQU(sth, double)
-#define REPEAT(v, t) for(long long v=0;v<t;v++)
-#define REPEAT_TIMES(t) for(long long _=0;_<t;_++)
-#define THROW_UOE(op) throw Exceptions::UnsupportedOpException("Operation '" #op "'")
+#define TYPE_IS_EQU(sth, t) sth->getValue()->type() is typeid (t)
+#define ISNUM(sth) TYPE_IS_EQU(sth, int) or TYPE_IS_EQU(sth, double)
+#define REPEAT(v, t) for(long long v=0;v<t;inc v)
+#define REPEAT_TIMES(t) REPEAT(_,t)
+#define THROW_UOE(op) panic Exceptions::UnsupportedOpException("Operation '" #op "'")
 
 
 
@@ -42,16 +54,16 @@
 
 //-----Virtual OpFunction Declare-----//
 
-#define DECLARE_INSTANCE_VIRTUAL(name, op)              \
+#define DECLARE_INSTANCE_VIRTUAL(name, op)  \
     virtual Instance* name(Instance* other, int toid) {  \
         THROW_UOE(op);                                   \
     };
 
 #define GET_NUM(ptr, v)             \
     double v;                       \
-    if(ISEQU(ptr, int)){            \
+    if(TYPE_IS_EQU(ptr, int)){            \
         v=ptr->getAValue<int>();    \
-    }else if(ISEQU(ptr, double)){   \
+    }else if(TYPE_IS_EQU(ptr, double)){   \
         v=ptr->getAValue<double>(); \
     }
 #define ERABLE_INSTANCE_OP_DOUB(a, b, op, toid) new Double (a op b, toid, this->getParent())
@@ -59,7 +71,7 @@
     GET_NUM(a, numa);                           \
     GET_NUM(b, numb);                           \
     Instance* to;                               \
-    if(ISEQU(a, int) && ISEQU(b, int))          \
+    if(TYPE_IS_EQU(a, int) and TYPE_IS_EQU(b, int))         \
         to = new Integer(numa op numb, toid, this->getParent());\
     else                                        \
         to = ERABLE_INSTANCE_OP_DOUB(numa, numb, op, toid);
@@ -67,7 +79,7 @@
     GET_NUM(a, numa);                           \
     GET_NUM(b, numb);                           \
     Instance* to;                               \
-    if(ISEQU(a, int) && ISEQU(b, int))          \
+    if(TYPE_IS_EQU(a, int) and TYPE_IS_EQU(b, int))         \
         to = new Integer(op(numa, numb), toid, this->getParent());\
     else                                        \
         to = new Double (op(numa, numb), toid, this->getParent());
@@ -104,6 +116,11 @@
     DECLARE_INSTANCE_FUNC(name){                    \
         ERABLE_DO_OP_NUM_FUNC(this, other, op, toid);    \
     }
+#define INSTANCE_CONSTRUCTOR(cls, type) cls(type value, int id, Descriptor* parent = nullptr) : Instance(value, id, parent) {}
 //-----------End Instance Use------------//
+
+namespace Erable {
+    inline int UNKNOWN = -1;
+}
 #endif /* GLOBALMACROS_HPP */
 

@@ -29,55 +29,6 @@
 
 namespace Erable {
     namespace Types {
-	//using namespace std;
-
-	class Integer : public Instance {
-	  public:
-
-	    Integer(int value, int id, Descriptor* parent = nullptr) :
-	    Instance(value, id, parent) {
-
-	    }
-
-	    /*
-	     * 递归下降，如果不是integer就让other来执行operation,如果other也不支持就抛出Exceptions::UnsupportedOpException错误
-	     * Does other store an integer?
-	     * √: add and return
-	     * ∆: execute other->add(this, toid);
-	     * this won't make any difference when exchanging lvalue and rvalue
-	     */
-	    OVERRIDE_INSTANCE_FUNC(add) {
-		return other->add(this, toid);
-	    }
-
-	    OVERRIDE_INSTANCE_FUNC(mul) {
-		return other->mul(other, toid);
-	    };
-
-	    OVERRIDE_INSTANCE_FUNC(sub);
-	    OVERRIDE_INSTANCE_FUNC(div);
-	    OVERRIDE_INSTANCE_FUNC(pow);
-	};
-
-	class Double : public Instance {
-	  public:
-
-	    Double(double value, int id, Descriptor* parent = nullptr) :
-	    Instance(value, id, parent) {
-	    }
-
-	    OVERRIDE_OP_NUM(add, +);
-
-	    OVERRIDE_OP_NUM(sub, -);
-
-	    OVERRIDE_OP_NUM(mul, *);
-
-	    OVERRIDE_OP_NUM(div, /);
-
-	    OVERRIDE_INSTANCE_FUNC(pow);
-	};
-	//Integer* Integer::sub(Integer* other, int toid) override
-
 	/*
 	 * Implementations of operations
 	 */
@@ -85,62 +36,66 @@ namespace Erable {
 
 	OUTER_OVERRIDE_OP_NUM(Integer::div, /);
 
+	OUTER_OVERRIDE_OP_NUM(Double::add, +);
+
+	OUTER_OVERRIDE_OP_NUM(Double::sub, -);
+
+	OUTER_OVERRIDE_OP_NUM(Double::mul, *);
+
+	OUTER_OVERRIDE_OP_NUM(Double::div, /);
+
 	OUTER_OVERRIDE_OP_NUM_FUNC(Integer::pow, std::pow);
 
 	OUTER_OVERRIDE_OP_NUM_FUNC(Double::pow, std::pow);
 
-	class String : Instance {
-	    //string value="";
+	/*
+	 * 递归下降，如果不是integer就让other来执行operation,如果other也不支持就抛出Exceptions::UnsupportedOpException错误
+	 * Does other store an integer?
+	 * √: add and return
+	 * ∆: execute other->add(this, toid);
+	 * this won't make any difference when exchanging lvalue and rvalue
+	 */
+	DECLARE_INSTANCE_FUNC(Integer::add) {
+	    return other->add(this, toid);
+	}
 
-	    //using Instance<string>::Instance;
-	  public:
-
-	    String(std::string value, int id, Descriptor* parent = nullptr) :
-	    Instance(value, id, parent) {
-	    }
-
-	    OVERRIDE_INSTANCE_FUNC(add) {
-		std::string cpy(this->getAValue<std::string>());
-		if (ISEQU(other, std::string)) {
-		    cpy += other->getAValue<std::string>();
-		} else if (ISNUM(other)) {
-		    GET_NUM(this, a);
-		    cpy += a;
-		}
-		String* s = new String(cpy, toid, this->getParent());
-		return s;
-	    }
-
-	    /*
-	     * This is not appropriate for String to use "-" operator
-	     */
-	    OVERRIDE_INSTANCE_FUNC(sub) {
-		throw Erable::Exceptions::UnsupportedOpException("Unsupported substraction of String");
-	    };
-
-	    OVERRIDE_INSTANCE_FUNC(mul) {
-		std::string cpy(this->getAValue<std::string>());
-		std::string res(cpy);
-		if (ISEQU(other, int)) {
-		    int times = other->getAValue<int>();
-
-		    REPEAT_TIMES(times) {
-			res += cpy;
-		    }
-		}
-		return new String(res, toid, this->getParent());
-	    }
+	DECLARE_INSTANCE_FUNC(Integer::mul) {
+	    return other->mul(other, toid);
 	};
 
-	class Function : Instance {
-	  public:
-
-	    Function(std::vector<Code*> value, int id, Descriptor* parent) :
-	    Instance(value, id, parent) {
-
+	DECLARE_INSTANCE_FUNC(String::add) {
+	    std::string cpy(this->getAValue<std::string>());
+	    if (TYPE_IS_EQU(other, std::string)) {
+		cpy += other->getAValue<std::string>();
+	    } else if (ISNUM(other)) {
+		GET_NUM(this, a);
+		cpy += a;
 	    }
+	    String* s = new String(cpy, toid, this->getParent());
+	    return s;
+	}
 
+	/*
+	 * This is not appropriate for String to use "-" operator
+	 */
+	DECLARE_INSTANCE_FUNC(String::sub) {
+	    throw Erable::Exceptions::UnsupportedOpException("Unsupported substraction of String");
 	};
+
+	DECLARE_INSTANCE_FUNC(String::mul) {
+	    std::string cpy(this->getAValue<std::string>());
+	    std::string res(cpy);
+	    if (TYPE_IS_EQU(other, int)) {
+		int times = other->getAValue<int>();
+
+		REPEAT_TIMES(times) {
+		    res += cpy;
+		}
+	    }
+	    return new String(res, toid, this->getParent());
+	};
+
+
     }
 }
 

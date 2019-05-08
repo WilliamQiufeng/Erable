@@ -31,7 +31,14 @@
 //#include "Metadata.hpp"
 #include <iostream>
 
-#include "IO.hpp"
+namespace Erable{
+    namespace Meta{
+	struct VersionMeta;
+	struct IDLengthMeta;
+	class Metadata;
+    }
+}
+#include "Program.hpp"
 //#include "IO.hpp"
 //#include "Utils.h"
 
@@ -50,13 +57,34 @@ namespace Erable {
 	};
 
         class Metadata{
-	    IO::InputStream* in;
+	    Program::ProgramInputStream* in;
             VersionMeta ver;
             IDLengthMeta idlen;
 	  public:
 
-	    Metadata(IO::InputStream* in) :
+	    Metadata(Program::ProgramInputStream* in) :
 	    in(in) {
+	    }
+	    inline IDLengthMeta getIdlen() const {
+		return idlen;
+	    }
+
+	    inline void setIdlen(IDLengthMeta idlen) {
+		this->idlen = idlen;
+	    }
+
+	    inline Program::ProgramInputStream* getIn() const {
+		return in;
+	    }
+
+	    void setIn(Program::ProgramInputStream* in);
+
+	    VersionMeta getVer() const {
+		return ver;
+	    }
+
+	    void setVer(VersionMeta ver) {
+		this->ver = ver;
 	    }
 
 	    void readMagic();

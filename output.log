@@ -1,8 +1,8 @@
 Parsed file test/test.erable
 Parsed file stdlib/ios.erable
-File stdlib/ios.erable finished.Total time:7 ms.
+File stdlib/ios.erable finished.Total time:5 ms.
 ID:java
-File test/test.erable finished.Total time:765 ms.
+File test/test.erable finished.Total time:570 ms.
 ConstantPoolElement{id=0, obj=0}
 ConstantPoolElement{id=1, obj=1}
 ConstantPoolElement{id=2, obj=stdlib/ios}
@@ -20,8 +20,8 @@ ConstantPoolElement{id=13, obj=habits}
 ConstantPoolElement{id=14, obj=says:MEOWWWWWW}
 ConstantPoolElement{id=15, obj=meow}
 ConstantPoolElement{id=16, obj=divide ended.}
-ConstantPoolElement{id=17, obj=15}
-ConstantPoolElement{id=18, obj=20}
+ConstantPoolElement{id=17, obj=1.5}
+ConstantPoolElement{id=18, obj=2.0}
 ConstantPoolElement{id=19, obj=java.lang.String}
 ConstantPoolElement{id=20, obj=abc}
 00000000    >#0 :
@@ -61,7 +61,7 @@ ConstantPoolElement{id=20, obj=abc}
 00000024    ---->#24 :
 00000025    ------>@25  @21 MUL(6) @22 ->25
 
-00000027    ------>@27  @0 EQU(22) @25 ->27
+00000027    ------>@27  @23 EQU(22) @25 ->27
 
 
 
@@ -79,7 +79,7 @@ ConstantPoolElement{id=20, obj=abc}
 
 00000040    ------>@40  @39 ADD(4) @31 ->40
 
-00000042    ------>@42  @0 EQU(22) @40 ->42
+00000042    ------>@42  @33 EQU(22) @40 ->42
 
 
 
@@ -89,7 +89,7 @@ ConstantPoolElement{id=20, obj=abc}
 
 00000049    ------>@49  Array [44, 45, 48] ->49
 
-00000051    ------>@51  @0 EQU(22) @49 ->51
+00000051    ------>@51  @46 EQU(22) @49 ->51
 
 
 
@@ -108,7 +108,7 @@ ConstantPoolElement{id=20, obj=abc}
 
 00000062    -------->!62  Flag BREAKIF(51) [61]
 
-00000064    -------->@64  @0 EQU(22) @53 ->64
+00000064    -------->@64  @54 EQU(22) @53 ->64
 
 00000065    -------->!65  Flag END(50) [55]
 
@@ -134,7 +134,7 @@ ConstantPoolElement{id=20, obj=abc}
 
 00000077    ------------>!77  Flag BREAKIF(51) [76]
 
-00000079    ------------>@79  @0 EQU(22) @53 ->79
+00000079    ------------>@79  @54 EQU(22) @53 ->79
 
 00000080    ------------>!80  Flag END(50) [66]
 
@@ -157,7 +157,7 @@ ConstantPoolElement{id=20, obj=abc}
 
 00000088    ------>@88  @85 SWITCH(23) @87 ->88
 
-00000090    ------>@90  @0 EQU(22) @53 ->90
+00000090    ------>@90  @54 EQU(22) @53 ->90
 
 
 
@@ -171,14 +171,14 @@ ConstantPoolElement{id=20, obj=abc}
 00000098    -------->!98  Flag BREAKIF(51) [97]
 
 00000099    -------->#99 :
-00000101    ---------->@101  @0 EQU(22) @3 ->101
+00000101    ---------->@101  @93 EQU(22) @3 ->101
 
 
 00000102    -------->!102  Flag END(50) [94]
 
 00000103    -------->^103  else ->103
 00000104    ---------->#104 :
-00000106    ------------>@106  @0 EQU(22) @5 ->106
+00000106    ------------>@106  @93 EQU(22) @5 ->106
 
 
 
@@ -207,7 +207,7 @@ ConstantPoolElement{id=20, obj=abc}
 00000122    -------->!122  Flag END(50) [112]
 
 
-00000124    ------>@124  @0 EQU(22) @115 ->124
+00000124    ------>@124  @111 EQU(22) @115 ->124
 
 
 
@@ -215,7 +215,7 @@ ConstantPoolElement{id=20, obj=abc}
 00000128    ---->#128 :
 00000129    ------>@129  @19 ADD(4) @126 ->129
 
-00000131    ------>@131  @0 EQU(22) @129 ->131
+00000131    ------>@131  @127 EQU(22) @129 ->131
 
 
 
@@ -279,7 +279,7 @@ ConstantPoolElement{id=20, obj=abc}
 00000166    -------->!166  Flag END_PAIR(57) []
 
 
-00000168    ------>@168  @0 EQU(22) @137 ->168
+00000168    ------>@168  @135 EQU(22) @137 ->168
 
 
 
@@ -293,7 +293,7 @@ ConstantPoolElement{id=20, obj=abc}
 00000177    ---------->#177 :
 00000178    ------------>@178  @170 DIV(7) @171 ->178
 
-00000180    ------------>@180  @0 EQU(22) @178 ->180
+00000180    ------------>@180  @172 EQU(22) @178 ->180
 
 
 
@@ -336,6 +336,100 @@ ConstantPoolElement{id=20, obj=abc}
 00000198    -->@198  Array [197] ->198
 
 00000199    -->@199  java->java_new@195[196, 198] ->199
+
+
+Compilation started...
+Parsed file test/instance.erable
+Parsed file stdlib/ios.erable
+File stdlib/ios.erable finished.Total time:1 ms.
+File test/instance.erable finished.Total time:26 ms.
+ConstantPoolElement{id=0, obj=0}
+ConstantPoolElement{id=1, obj=1}
+ConstantPoolElement{id=2, obj=stdlib/ios}
+ConstantPoolElement{id=3, obj=java.lang.System#out#println}
+ConstantPoolElement{id=4, obj=com.qiufeng.erable.stdlib.InputScanner#input}
+ConstantPoolElement{id=5, obj=a}
+ConstantPoolElement{id=6, obj=2}
+ConstantPoolElement{id=7, obj=1.2345}
+ConstantPoolElement{id=8, obj=java}
+ConstantPoolElement{id=9, obj=9}
+ConstantPoolElement{id=10, obj=129}
+ConstantPoolElement{id=11, obj=123}
+ConstantPoolElement{id=12, obj=abcd}
+00000000    >#0 :
+00000001    -->|ConstantPool
+
+00000002    -->@2  buffer 1 to @2
+
+00000003    -->%true : variable `0` true = @2 ->3
+
+00000004    -->@4  buffer 0 to @4
+
+00000005    -->%false : variable `0` false = @4 ->5
+
+00000006    -->@6  buffer 2 to @6
+
+00000007    -->%println : function println[id=8 name=object] returns 9 ->7 : native 10
+00000010    ---->@10  buffer 3 to @10
+
+
+00000011    -->%input : function input[] returns 12 ->11 : native 13
+00000013    ---->@13  buffer 4 to @13
+
+
+00000014    -->@14  buffer 5 to @14
+
+00000015    -->@15  buffer 6 to @15
+
+00000016    -->@16  buffer 7 to @16
+
+00000017    -->@17  buffer 8 to @17
+
+00000018    -->%a : variable `0` a = @17 ->18
+
+00000019    -->@19  GREF(36) @18 ->19
+
+00000020    -->%b : variable `0` b = @19 ->20
+
+00000021    -->@21  REF(35) @20 ->21
+
+00000022    -->@22  REF(35) @21 ->22
+
+00000023    -->%c : variable `0` c = @22 ->23
+
+00000024    -->@24  buffer 9 to @24
+
+00000025    -->@25  REF(35) @24 ->25
+
+00000026    -->%d : variable `0` d = @25 ->26
+
+00000027    -->@27  REF(35) @20 ->27
+
+00000028    -->@28  REF(35) @27 ->28
+
+00000029    -->%e : variable `0` e = @28 ->29
+
+00000030    -->@30  buffer 10 to @30
+
+00000031    -->%num : variable `0` num = @30 ->31
+
+00000032    -->@32  buffer 11 to @32
+
+00000033    -->@33  @31 ADD(4) @32 ->33
+
+00000034    -->@34  @31 EQU(22) @33 ->34
+
+00000035    -->@35  buffer 6 to @35
+
+00000036    -->@36  @31 DIV(7) @35 ->36
+
+00000037    -->@37  @31 EQU(22) @36 ->37
+
+00000038    -->%testfunc1 : function testfunc1[id=39 name=f, id=40 name=g, id=41 name=h, id=42 name=i] returns 43 ->38 :
+00000044    ---->#44 :
+00000045    ------>@45  buffer 12 to @45
+
+
 
 
 Compilation started...

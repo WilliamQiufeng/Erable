@@ -69,7 +69,7 @@ function testTryCatch:(a b){
   };
 };
 //Main test
-var obj square=makeSquare(15,20);
+var obj square=makeSquare(1.5,2.0);
 square=switchWH(square);
 println(square);
 java->java_new("java.lang.String",["abc"]);

@@ -25,108 +25,116 @@
 #ifndef OPCODE_HPP
 #define OPCODE_HPP
 
-//#include "Utils.h"
+#include "Utils.h"
+
 
 namespace Erable {
-
+    inline std::string OPCODE_WHATEVER="WHATEVER";
     class OpCodeElement {
     public:
-        int argc;
+	int argc;
+	int idind;
+	std::string op;
 
-        OpCodeElement(int argc) {
-            this->argc = argc;
-        }
+	OpCodeElement(std::string op, int argc, int idind) : op(op), argc(argc), idind(idind) {
+
+	}
+
+	bool operator==(const OpCodeElement& right) const {
+	    bool result = argc is right.argc and idind is right.idind and (op is right.op or op is OPCODE_WHATEVER or right.op is OPCODE_WHATEVER );
+	    return result;
+	}
 
     };
 
     class OpCode_t {
     public:
 
-        OpCode_t() {
-            this->addEnum("CONSTANT_POOL", 0);
-            this->addEnum("CP_NUM", 0);
-            this->addEnum("CP_INT", 0);
-            this->addEnum("CP_STR", 0);
-            this->addEnum("ADD", 3);
-            this->addEnum("SUB", 3);
-            this->addEnum("MUL", 3);
-            this->addEnum("DIV", 3);
-            this->addEnum("MOD", 3);
-            this->addEnum("POW", 3);
-            this->addEnum("POS", 2);
-            this->addEnum("NEG", 2);
-            this->addEnum("ELEMENT", 3);
-            this->addEnum("LS", 3);
-            this->addEnum("RS", 3);
-            this->addEnum("URS", 3);
-            this->addEnum("LT", 3);
-            this->addEnum("GT", 3);
-            this->addEnum("LTE", 3);
-            this->addEnum("GTE", 3);
-            this->addEnum("EQ", 3);
-            this->addEnum("NEQ", 3);
-            this->addEnum("EQU", 3);
-            this->addEnum("SWITCH", 3);
-            this->addEnum("BNOT", 3);
-            this->addEnum("BAND", 3);
-            this->addEnum("BOR", 3);
-            this->addEnum("BXOR", 3);
-            this->addEnum("ADDEQ", 3);
-            this->addEnum("SUBEQ", 3);
-            this->addEnum("MULEQ", 3);
-            this->addEnum("DIVEQ", 3);
-            this->addEnum("MODEQ", 3);
-            this->addEnum("PUSH_SCOPE", 1);
-            this->addEnum("POP_SCOPE", 1);
-            this->addEnum("REF", 2);
-            this->addEnum("GREF", 2);
-            this->addEnum("RETURN", 2);
-            this->addEnum("BREAK", 2);
-            this->addEnum("COPY", 2);
-            this->addEnum("LOADC", 2);
-            this->addEnum("FUNCTION", 2);
-            this->addEnum("ARRAY", 1);
-            this->addEnum("PUSH_ELEMENT", 2);
-            this->addEnum("CALL_PREPARE", 2);
-            this->addEnum("PUSH_ARG", 2);
-            this->addEnum("CALL", 2);
-            this->addEnum("IF", 1);
-            this->addEnum("ELSE", 2);
-            this->addEnum("WHILE", 1);
-            this->addEnum("END", 1);
-            this->addEnum("BREAKIF", 1);
-            this->addEnum("JUMPIF", 2);
-            this->addEnum("OBJECT", 1);
-            this->addEnum("START_PAIR", 0);
-            this->addEnum("KEY", 1);
-            this->addEnum("VALUE", 1);
-            this->addEnum("END_PAIR", 0);
-            this->addEnum("TRY", 2);
-            this->addEnum("NATIVE_FUNCDECL", 3);
-            this->addEnum("LOAD_LIB", 1);
-            this->addEnum("DYN_LOAD", 3);
-            this->addEnum("DYNCALL", 3);
-            this->addEnum("EXIT", 0);
-        }
-        /**
-         * Stores the whole enumeration
-         */
-        Utils::Enum<int> vals;
+	OpCode_t() {
+	    this->addEnum("CONSTANT_POOL", 0, -1); // Index 0
+	    this->addEnum("CP_NUM", 0, -1); // Index 1
+	    this->addEnum("CP_INT", 0, -1); // Index 2
+	    this->addEnum("CP_STR", 0, -1); // Index 3
+	    this->addEnum("ADD", 3, 2); // Index 4
+	    this->addEnum("SUB", 3, 2); // Index 5
+	    this->addEnum("MUL", 3, 2); // Index 6
+	    this->addEnum("DIV", 3, 2); // Index 7
+	    this->addEnum("MOD", 3, 2); // Index 8
+	    this->addEnum("POW", 3, 2); // Index 9
+	    this->addEnum("POS", 2, 1); // Index 10
+	    this->addEnum("NEG", 2, 1); // Index 11
+	    this->addEnum("ELEMENT", 3, 2); // Index 12
+	    this->addEnum("LS", 3, 2); // Index 13
+	    this->addEnum("RS", 3, 2); // Index 14
+	    this->addEnum("URS", 3, 2); // Index 15
+	    this->addEnum("LT", 3, 2); // Index 16
+	    this->addEnum("GT", 3, 2); // Index 17
+	    this->addEnum("LTE", 3, 2); // Index 18
+	    this->addEnum("GTE", 3, 2); // Index 19
+	    this->addEnum("EQ", 3, 2); // Index 20
+	    this->addEnum("NEQ", 3, 2); // Index 21
+	    this->addEnum("EQU", 3, 2); // Index 22
+	    this->addEnum("SWITCH", 3, 2); // Index 23
+	    this->addEnum("BNOT", 3, 2); // Index 24
+	    this->addEnum("BAND", 3, 2); // Index 25
+	    this->addEnum("BOR", 3, 2); // Index 26
+	    this->addEnum("BXOR", 3, 2); // Index 27
+	    this->addEnum("ADDEQ", 3, 2); // Index 28
+	    this->addEnum("SUBEQ", 3, 2); // Index 29
+	    this->addEnum("MULEQ", 3, 2); // Index 30
+	    this->addEnum("DIVEQ", 3, 2); // Index 31
+	    this->addEnum("MODEQ", 3, 2); // Index 32
+	    this->addEnum("PUSH_SCOPE", 1, 0); // Index 33
+	    this->addEnum("POP_SCOPE", 1, 0); // Index 34
+	    this->addEnum("REF", 2, 1); // Index 35
+	    this->addEnum("GREF", 2, 1); // Index 36
+	    this->addEnum("RETURN", 2, 1); // Index 37
+	    this->addEnum("BREAK", 2, 1); // Index 38
+	    this->addEnum("COPY", 2, -1); // Index 39
+	    this->addEnum("LOADC", 2, 1); // Index 40
+	    this->addEnum("FUNCTION", 2, 1); // Index 41
+	    this->addEnum("ARRAY", 1, 0); // Index 42
+	    this->addEnum("PUSH_ELEMENT", 2, -1); // Index 43
+	    this->addEnum("CALL_PREPARE", 2, 1); // Index 44
+	    this->addEnum("PUSH_ARG", 2, 1); // Index 45
+	    this->addEnum("CALL", 2, 1); // Index 46
+	    this->addEnum("IF", 1, -1); // Index 47
+	    this->addEnum("ELSE", 2, -1); // Index 48
+	    this->addEnum("WHILE", 1, -1); // Index 49
+	    this->addEnum("END", 1, -1); // Index 50
+	    this->addEnum("BREAKIF", 1, -1); // Index 51
+	    this->addEnum("JUMPIF", 2, -1); // Index 52
+	    this->addEnum("OBJECT", 1, -1); // Index 53
+	    this->addEnum("START_PAIR", 0, -1); // Index 54
+	    this->addEnum("KEY", 1, -1); // Index 55
+	    this->addEnum("VALUE", 1, -1); // Index 56
+	    this->addEnum("END_PAIR", 0, -1); // Index 57
+	    this->addEnum("TRY", 2, -1); // Index 58
+	    this->addEnum("NATIVE_FUNCDECL", 3, -1); // Index 59
+	    this->addEnum("LOAD_LIB", 1, -1); // Index 60
+	    this->addEnum("DYN_LOAD", 3, -1); // Index 61
+	    this->addEnum("DYNCALL", 3, -1); // Index 62
+	    this->addEnum("EXIT", 0, -1); // Index 63
+	}
+	/**
+	 * Stores the whole enumeration
+	 */
+	Utils::Enum<OpCodeElement> vals;
 
-        Utils::Enum<int> values() {
-            return vals;
-        }
+	Utils::Enum<OpCodeElement> values() {
+	    return vals;
+	}
 
-        void addEnum(string name, int element) {
-            this->vals.addEnum(name, element);
-        }
+	void addEnum(std::string name, int element, int idind) {
+	    this->vals.addEnum(name, OpCodeElement{name, element, idind});
+	}
 
-        char getByte(string name) {
-            return static_cast<char> (values().find(name)->value);
-        }
+	char getByte(std::string name) {
+	    return static_cast<char> (values().findIndex(name));
+	}
     };
 
-    Erable::OpCode_t OpCode;
+    inline Erable::OpCode_t OpCode;
 }
 
 

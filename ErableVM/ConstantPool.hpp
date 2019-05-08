@@ -25,17 +25,25 @@
 #ifndef CONSTANTPOOL_HPP
 #define CONSTANTPOOL_HPP
 
+
+
 #include <map>
 //#include "Metadata.hpp"
+namespace Erable{
+    class ConstantPool;
+}
 #include "IO.hpp"
+#include "Program.hpp"
+#include "Descriptor.hpp"
 #include "Types.hpp"
+
 
 
 namespace Erable {
 
     class ConstantPool {
 	std::map<int, Erable::Types::Instance*> elements;
-
+    public:
 	void setElement(int id, Erable::Types::Instance* element) {
 	    elements[id] = element;
 	}
@@ -57,7 +65,7 @@ namespace Erable {
 	Erable::Types::Instance* operator[](std::size_t index);
 
 	const Erable::Types::Instance* operator[](std::size_t index) const;
-	void load(IO::InputStream& in);
+	void load(Program::ProgramInputStream* in);
 
     };
 }

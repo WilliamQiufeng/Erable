@@ -29,11 +29,80 @@
 //#include <map>
 //#include "InputStream.hpp"
 //#include "Types.hpp"
+namespace Erable{
+    class Code;
+    class Descriptor;
+}
+#include "Program.hpp"
+#include "Types.hpp"
+#include <map>
 
 
 namespace Erable {
-    class Code;
-    class Descriptor;
+    class Descriptor {
+	//Fields
+	std::map<int, Erable::Types::Instance*>* idmap;
+	Program::ProgramInputStream* input;
+	Descriptor* parent;
+
+      public:
+	//Constructors
+
+	Descriptor() {
+	    this->init();
+	}
+
+	Descriptor(std::map<int, Erable::Types::Instance*>* idmap) :
+	idmap(idmap) {
+	}
+
+	Descriptor(Program::ProgramInputStream* in) :
+	input(in) {
+	}
+
+	Descriptor(Descriptor* other) :
+	input(other->input), parent(other) {
+	}
+
+	//Initialisation
+
+	void init() {
+	    this->idmap = new std::map<int, Erable::Types::Instance*>;
+	}
+
+	//Getters and Setters
+
+	std::map<int, Erable::Types::Instance*>* getIdmap() const {
+	    return idmap;
+	}
+
+	void setIdmap(std::map<int, Erable::Types::Instance*>* idmap) {
+	    this->idmap = idmap;
+	}
+
+	Program::ProgramInputStream* getInput() const {
+	    return input;
+	}
+
+	void setInput(Program::ProgramInputStream* input) {
+	    this->input = input;
+	}
+
+	Descriptor* getParent() const {
+	    return parent;
+	}
+
+	void setParent(Descriptor* parent) {
+	    this->parent = parent;
+	}
+	void readHeader();
+	void execute(Program::Op op);
+	void executeAll(Program::Op until);
+	void executeAll(std::vector<Program::Op> code);
+	std::vector<Program::Op> recordAll(Program::Op until);
+	Program::Op record();
+	void doAll();
+    };
     
 }
 

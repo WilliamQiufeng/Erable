@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 
+#include "Descriptor.hpp"
+#include "Program.hpp"
+
 /*
  * File:   main.cpp
  * Author: Qiufeng54321
@@ -11,18 +14,24 @@
  * Created on 2019年4月18日, 上午11:22
  */
 
+
+
 #include <cstdlib>
+#include <iostream>
+#include "Program.hpp"
 #include "Descriptor.hpp"
-#include "IO.hpp"
 #include "Metadata.hpp"
 
 /*
  *
  */
 int main(int argc, char** argv) {
-    Erable::Meta::Metadata md(new Erable::IO::InputStream("../test/instance.ec"));
-    md.readHeader();
-    std::cout << md.toString() << std::endl;
+    Erable::Descriptor desc;
+    std::cout << "INITIALISED" << std::endl;
+    desc.setInput(new Erable::Program::ProgramInputStream("../test/test.ec"));
+    std::cout << "EXECUTE..." << std::endl;
+    desc.doAll();
+    std::cout << "TERMINATED..." << std::endl;
     return 0;
 }
 

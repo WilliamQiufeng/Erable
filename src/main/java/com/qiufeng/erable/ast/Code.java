@@ -320,13 +320,16 @@ public abstract class Code implements Comparable{
     }
     public FuncDeclCode findNearestFunction(){
 	Code c=this;
-	do{
+	while(true){
 	    if(c instanceof FuncDeclCode){
-		return (FuncDeclCode)c;
+		FuncDeclCode fdc=(FuncDeclCode)c;
+		//System.out.println(fdc.ret);
+		return fdc;
 	    }
-	    if(c.getParent()!=null)
-		c=c.getParent();
-	}while(c.getParent()!=null);
+	    if(c.getParent()==null)
+		break;
+	    c=c.getParent();
+	}
 	return null;
     }
     public boolean functionExistsInCurrentScope(String name,int argc){

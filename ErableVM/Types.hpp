@@ -28,17 +28,26 @@
 
 #include <boost/any.hpp>
 
-#include "Global.hpp"
-#include "Exceptions.hpp"
-#include "Descriptor.hpp"
+namespace Erable{
+    namespace Types{
+	class Instance;
+        class Double;
+        class Integer;
+        //template<typename type=std::string>
+        class String;
+        class Function;
+    }
+}
 //#include "Global.hpp"
 
+#include "Descriptor.hpp"
+#include "Global.hpp"
+#include "Exceptions.hpp"
 
 namespace Erable {
     namespace Types {
         class Instance {
-	  public:
-
+	public:
 	    boost::any* value;
 	    int id;
 	    Descriptor* parent;
@@ -70,25 +79,44 @@ namespace Erable {
 	    void setParent(Descriptor* parent) {
 		this->parent = parent;
 	    }
-
 	    DECLARE_INSTANCE_VIRTUAL(add, +);
-
 	    DECLARE_INSTANCE_VIRTUAL(sub, -);
-
 	    DECLARE_INSTANCE_VIRTUAL(mul, *);
-
 	    DECLARE_INSTANCE_VIRTUAL(div, /);
-
 	    DECLARE_INSTANCE_VIRTUAL(mod, %);
-
 	    DECLARE_INSTANCE_VIRTUAL(pow, **);
 
 	};
-        class Double;
-        class Integer;
-        //template<typename type=std::string>
-        class String;
-        class Function;
+	class Integer : public Instance {
+	public:
+
+	    INSTANCE_CONSTRUCTOR(Integer, int);
+	    OVERRIDE_INSTANCE_FUNC(add);
+	    OVERRIDE_INSTANCE_FUNC(mul);
+	    OVERRIDE_INSTANCE_FUNC(sub);
+	    OVERRIDE_INSTANCE_FUNC(div);
+	    OVERRIDE_INSTANCE_FUNC(pow);
+	};
+	class Double : public Instance {
+	public:
+	    INSTANCE_CONSTRUCTOR(Double, double);
+	    OVERRIDE_INSTANCE_FUNC(add);
+	    OVERRIDE_INSTANCE_FUNC(sub);
+	    OVERRIDE_INSTANCE_FUNC(mul);
+	    OVERRIDE_INSTANCE_FUNC(div);
+	    OVERRIDE_INSTANCE_FUNC(pow);
+	};
+	class String : public Instance {
+	public:
+	    INSTANCE_CONSTRUCTOR(String, std::string);
+	    OVERRIDE_INSTANCE_FUNC(add);
+	    OVERRIDE_INSTANCE_FUNC(sub);
+	    OVERRIDE_INSTANCE_FUNC(mul);
+	};
+	class Function : public Instance {
+	public:
+	    INSTANCE_CONSTRUCTOR(Function, std::vector<Code*>);
+	};
     }
 }
 
