@@ -28,6 +28,7 @@
 
 
 #include <map>
+#include <sys/_types/_size_t.h>
 //#include "Metadata.hpp"
 namespace Erable{
     class ConstantPool;
@@ -48,8 +49,8 @@ namespace Erable {
 	    elements[id] = element;
 	}
 
-	Erable::Types::Instance* getElement(int id) {
-	    return (*this)[id];
+	Erable::Types::Instance* getElement(std::size_t id) {
+	    return this->elements[id];
 	}
 
 	std::map<int, Erable::Types::Instance*> getElements() const {
@@ -65,6 +66,8 @@ namespace Erable {
 	Erable::Types::Instance* operator[](std::size_t index);
 
 	const Erable::Types::Instance* operator[](std::size_t index) const;
+	friend std::ostream& operator<<(std::ostream& os, ConstantPool& obj);
+
 	void load(Program::ProgramInputStream* in);
 
     };

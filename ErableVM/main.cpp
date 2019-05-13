@@ -28,10 +28,12 @@
 int main(int argc, char** argv) {
     Erable::Descriptor desc;
     std::cout << "INITIALISED" << std::endl;
-    desc.setInput(new Erable::Program::ProgramInputStream("../test/test.ec"));
+    desc.setInput(new Erable::Program::ProgramInputStream("../test/instance.ec"));
     std::cout << "EXECUTE..." << std::endl;
     desc.doAll();
     std::cout << "TERMINATED..." << std::endl;
+    std::cout << "Dump >_<" << std::endl;
+    std::cout << desc << std::endl;
     return 0;
 }
 

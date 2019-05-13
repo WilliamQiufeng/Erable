@@ -29,9 +29,48 @@
 
 namespace Erable {
     namespace Types {
+
+	Instance* Instance::clone() {
+	    return new Instance(this->getValue(), this->id, this->parent);
+	}
+
+	std::string Instance::getTypeName() {
+	    return "Instance";
+	}
+
+	std::ostream& operator<<(std::ostream& os, Instance* obj) {
+	    // Write obj to stream
+	    os << obj->getTypeName()
+		    << "{ID: "
+		    << obj->id
+		    << ", Value: ";
+	    if (obj->getTypeName() == "Integer") {
+		os << obj->getAValue<int>();
+	    } else if (obj->getTypeName() == "Double") {
+		os << obj->getAValue<double>();
+	    } else if (obj->getTypeName() == "String") {
+		os << "\"";
+		os << obj->getAValue<std::string>();
+		os << "\"";
+	    } else {
+		os << "[Unknown Type \"" << obj->getTypeName() << "\"]";
+	    }
+	    os << "}";
+	    return os;
+	}
+
+	std::ostream& operator<<(std::ostream& os, std::vector<Code*> obj) {
+	    os << "Function";
+	    return os;
+	}
+
 	/*
 	 * Implementations of operations
 	 */
+	OUTER_OVERRIDE_CAGTN(Integer, int);
+	OUTER_OVERRIDE_CAGTN(Double, double);
+	OUTER_OVERRIDE_CAGTN(String, std::string);
+	OUTER_OVERRIDE_CAGTN(Function, std::vector<Code*>);
 	OUTER_OVERRIDE_OP_NUM(Integer::sub, -);
 
 	OUTER_OVERRIDE_OP_NUM(Integer::div, /);

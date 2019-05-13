@@ -27,6 +27,7 @@
 #define TYPES_HPP
 
 #include <boost/any.hpp>
+#include <boost/type_index/stl_type_index.hpp>
 
 namespace Erable{
     namespace Types{
@@ -46,17 +47,25 @@ namespace Erable{
 
 namespace Erable {
     namespace Types {
+	std::ostream& operator<<(std::ostream& os, std::vector<Code*> obj);
         class Instance {
 	public:
+	    
 	    boost::any* value;
 	    int id;
 	    Descriptor* parent;
 
+	    TEMPT Instance(boost::any* value, int id, Descriptor* parent = nullptr) :
+	    value(new boost::any(boost::any_cast<type>(value))), id(id), parent(parent) {
+		std::cout<<"ANY:"<<boost::any_cast<type>(value)<<std::endl;
+	    }
+	    
 	    TEMPT Instance(type value, int id, Descriptor* parent = nullptr) :
 	    value(new boost::any(value)), id(id), parent(parent) {
+		std::cout<<"TYPE:"<<value<<std::endl;
 	    }
 
-	    boost::any* getValue() const {
+	    boost::any* getValue() {
 		return this->value;
 	    }
 
@@ -79,6 +88,15 @@ namespace Erable {
 	    void setParent(Descriptor* parent) {
 		this->parent = parent;
 	    }
+	    inline std::string toString(){
+		std::stringstream ss;
+		ss<<this;
+		return ss.str();
+	    }
+	    friend std::ostream& operator<<(std::ostream& os, Instance* obj);
+
+	    virtual std::string getTypeName();
+	    virtual Instance* clone();
 	    DECLARE_INSTANCE_VIRTUAL(add, +);
 	    DECLARE_INSTANCE_VIRTUAL(sub, -);
 	    DECLARE_INSTANCE_VIRTUAL(mul, *);
@@ -96,6 +114,7 @@ namespace Erable {
 	    OVERRIDE_INSTANCE_FUNC(sub);
 	    OVERRIDE_INSTANCE_FUNC(div);
 	    OVERRIDE_INSTANCE_FUNC(pow);
+	    OVERRIDE_CLONE_AND_GTN;
 	};
 	class Double : public Instance {
 	public:
@@ -105,6 +124,7 @@ namespace Erable {
 	    OVERRIDE_INSTANCE_FUNC(mul);
 	    OVERRIDE_INSTANCE_FUNC(div);
 	    OVERRIDE_INSTANCE_FUNC(pow);
+	    OVERRIDE_CLONE_AND_GTN;
 	};
 	class String : public Instance {
 	public:
@@ -112,10 +132,12 @@ namespace Erable {
 	    OVERRIDE_INSTANCE_FUNC(add);
 	    OVERRIDE_INSTANCE_FUNC(sub);
 	    OVERRIDE_INSTANCE_FUNC(mul);
+	    OVERRIDE_CLONE_AND_GTN;
 	};
 	class Function : public Instance {
 	public:
 	    INSTANCE_CONSTRUCTOR(Function, std::vector<Code*>);
+	    OVERRIDE_CLONE_AND_GTN;
 	};
     }
 }

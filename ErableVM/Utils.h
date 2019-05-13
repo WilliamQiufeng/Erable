@@ -123,11 +123,26 @@ namespace Erable {
         class BitUtils_t {
 	public:
 	    template<typename R>
-	    inline R get(std::vector<char> b, int off, int size){
+	    inline R getLE(std::vector<char> b, int off, int size){
 		R r=0;
 		int bit=0;
 		//std::cout<<"Doing BitUtils::get: " << b <<std::endl;
 		for(int i=size-1;i>-1;dec i,bit+=8){
+		    int bitr=(int)b[i];
+		    //std::cout<<"BitR: " <<bitr << ", Offset: " << (off + i) <<std::endl;
+		    if(i!=0)bitr&=0xFF;
+		    //std::cout<<"BitR bitand 0xFF: "<<bitr<<std::endl;
+		    r+=(bitr lshift bit);
+		    //std::cout<<"Shift: "<<bit<<" to " << r<< " with " << bitr << std::endl;
+		}
+		return r;
+	    }
+	    template<typename R>
+	    inline R getBE(std::vector<char> b, int off, int size){
+		R r=0;
+		int bit=0;
+		//std::cout<<"Doing BitUtils::get: " << b <<std::endl;
+		for(int i=0;i<size;inc i,bit+=8){
 		    int bitr=(int)b[i];
 		    //std::cout<<"BitR: " <<bitr << ", Offset: " << (off + i) <<std::endl;
 		    if(i!=0)bitr&=0xFF;
@@ -144,13 +159,13 @@ namespace Erable {
             inline char getChar(std::vector<char> b, int off) {
 //                return (char) ((b[off + 1] & 0xFF) +
 //                        (b[off] << 8));
-		return get<char>(b,off,2);
+		return getLE<char>(b,off,2);
             }
 
             inline short getShort(std::vector<char> b, int off) {
 //                return (short) ((b[off + 1] & 0xFF) +
 //                        (b[off] << 8));
-		return get<short>(b,off,2);
+		return getLE<short>(b,off,2);
             }
 
             inline int getInt(std::vector<char> b, int off) {
@@ -158,7 +173,7 @@ namespace Erable {
 //                        ((b[off + 2] & 0xFF) << 8) +
 //                        ((b[off + 1] & 0xFF) << 16) +
 //                        ((b[off ]) << 24);
-		return get<int>(b,off,4);
+		return getLE<int>(b,off,4);
             }
 
             inline long getLong(std::vector<char> b, int off) {
@@ -170,12 +185,13 @@ namespace Erable {
 //                        ((b[off + 2] & 0xFFL) << 40) +
 //                        ((b[off + 1] & 0xFFL) << 48) +
 //                        (((long) b[off]) << 56);
-		return get<long>(b,off,8);
+		return getLE<long>(b,off,8);
             }
-
+	    inline float getFloat(std::vector<char> b, int off) {
+		return getBE<float>(b,off,8);
+	    }
             inline double getDouble(std::vector<char> b, int off) {
-                long l = getLong(b, off);
-                return reinterpret_cast<double&> (l);
+                return getBE<double>(b,off,8);
             }
 
 

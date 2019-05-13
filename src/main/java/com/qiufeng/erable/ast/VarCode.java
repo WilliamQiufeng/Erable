@@ -30,6 +30,8 @@ public class VarCode extends TempCode {
 	this.modifiers=modifiers;
 	this.sign=Code.VAR;
 	this.tag=name;
+	this.id=refid;
+	Code.currentId--;
     }
 
     @Override
@@ -43,9 +45,9 @@ public class VarCode extends TempCode {
      */
     @Override
     public void write() throws IOException {
-	this.writeOpCode(this.op);
-	this.writeId(this.cid);
-	this.writeId(this.id);
+//	this.writeOpCode(this.op);
+//	this.writeId(this.cid);
+//	this.writeId(this.id);
 	//System.out.println(this);
     }
     

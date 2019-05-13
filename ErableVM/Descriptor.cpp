@@ -20,8 +20,23 @@
 
 namespace Erable {
 
+    std::ostream& operator<<(std::ostream& os, Descriptor& obj) {
+	os << "Obj Dump:" << std::endl;
+	os << (*(obj.input->getData()->pool)) << std::endl;
+	os << "Buffer Dump:" << std::endl;
+	for (auto&[key, value] : *(obj.idmap)) {
+	    os << "\t";
+	    os << key << " = " << value << std::endl;
+	}
+	return os;
+    }
+
     class Code {
     };
+
+    void Descriptor::set(int id, Erable::Types::Instance* instance) {
+	(*(this->idmap))[id] = instance;
+    }
 
     void Descriptor::readHeader() {
 	this->getInput()->readMeta();
@@ -37,9 +52,49 @@ namespace Erable {
 
     void Descriptor::execute(Program::Op op) {
 	std::cout << op << std::endl;
-	if (op.op.op is "CONSTANT_POOL") {
+
+	CASE_OPCODE("CONSTANT_POOL") {
 	    std::cout << "Recording Constant Pool...." << std::endl;
 	    this->getInput()->readConstantPool();
+	}
+
+	ELSE_CASE_OPCODE("LOADC") {
+	    int cid = op[0];
+	    int id = op[1];
+	    Types::Instance* cpe = this->getInput()->getData()->pool->getElement(cid);
+	    //std::cout << cpe << "->" << id << std::endl;
+	    Types::Instance* ins = cpe->clone();
+	    //std::cout << "Cloned" << std::endl;
+	    ins->id = id;
+	    this->set(id, ins);
+	}
+
+	ELSE_CASE_OPCODE("COPY") {
+	    int origId = op[0];
+	    int targId = op[1];
+	    Types::Instance* orig = this->idmap->at(origId);
+	    //std::cout << cpe << "->" << id << std::endl;
+	    Types::Instance* ins = orig->clone();
+	    //std::cout << "Cloned" << std::endl;
+	    ins->id = targId;
+	    this->set(targId, ins);
+	}
+
+	ELSE_CASE_OPCODE("GREF") {
+	    int origId = op[0];
+	    int targId = op[1];
+	    Types::Instance* orig = this->idmap->at(origId);
+	    Types::Integer* integer = new Types::Integer(orig->id, targId, orig->parent);
+	    this->set(targId, integer);
+	}
+
+	ELSE_CASE_OPCODE("REF") {
+	    int origId = op[0];
+	    int targId = op[1];
+	    Types::Instance* orig = this->idmap->at(origId);
+	    int refId = orig->getAValue<int>();
+	    Types::Instance* ins = this->idmap->at(refId);
+	    this->set(targId, ins);
 	}
     }
 

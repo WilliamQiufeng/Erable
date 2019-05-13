@@ -21,6 +21,16 @@
 
 namespace Erable {
 
+    std::ostream& operator<<(std::ostream& os, ConstantPool& obj) {
+	os << "ConstantPool[" << obj.elements.size() << "] :" << std::endl;
+	for (auto&[key, value] : obj.elements) {
+	    os << "\t";
+	    os << value;
+	    os << std::endl;
+	}
+	return os;
+    }
+
     ConstantPool ConstantPool::operator+(Erable::Types::Instance* right) const {
 	ConstantPool result(*this); // 复制自身。
 	result += right; // 重用复合赋值
@@ -56,27 +66,28 @@ namespace Erable {
 	    if (type.op is "CP_NUM") {
 		std::vector<char> doubcv = in->readNBytes(8);
 		double doub = Utils::BitUtils.getDouble(doubcv, 0);
-		std::cout << "ADDED CONSTANT_POOL NUMBER : ID = " << i << ", VALUE = " << doub << std::endl;
-		instance = new Types::Double(doub, -1, nullptr);
+		//std::cout << "ADDED CONSTANT_POOL NUMBER : ID = " << i << ", VALUE = " << doub << std::endl;
+		instance = new Types::Double(doub, i, nullptr);
 	    } else if (type.op is "CP_INT") {
 		std::vector<char> intcv = in->readNBytes(4);
 		int integer = Utils::BitUtils.getInt(intcv, 0);
-		instance = new Types::Integer(integer, -1, nullptr);
-		std::cout << "ADDED CONSTANT_POOL INTEGER: ID = " << i << ", VALUE = " << integer << std::endl;
+		instance = new Types::Integer(integer, i, nullptr);
+		//std::cout << "ADDED CONSTANT_POOL INTEGER: ID = " << i << ", VALUE = " << integer << std::endl;
 	    } else if (type.op is "CP_STR") {
 		int length = in->readId(4);
 		std::vector<char> strcv = in->readNBytes(length);
 		strcv.push_back('\0');
 		char* strdata = strcv.data();
 		std::string str(strdata);
-		instance = new Types::String(str, -1, nullptr);
-		std::cout << "ADDED CONSTANT_POOL STRING : ID = " << i << ", VALUE = " << str << std::endl;
+		instance = new Types::String(str, i, nullptr);
+		//std::cout << "ADDED CONSTANT_POOL STRING : ID = " << i << ", VALUE = " << str << std::endl;
 	    } else {
 		std::stringstream ss;
 		ss << "Constant Pool Element not valid: " << type.op << std::endl;
 		std::string err(ss.str());
 		throw Exceptions::ValidateException(err);
 	    }
+	    std::cout << "Added Constant Pool Element: " << instance << std::endl;
 	    this->setElement(i, instance);
 	}
 	std::cout << "Constant Pool Ended..." << std::endl;

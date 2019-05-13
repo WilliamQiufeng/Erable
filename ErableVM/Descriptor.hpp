@@ -79,7 +79,7 @@ namespace Erable {
 	void setIdmap(std::map<int, Erable::Types::Instance*>* idmap) {
 	    this->idmap = idmap;
 	}
-
+	void set(int, Erable::Types::Instance*);
 	Program::ProgramInputStream* getInput() const {
 	    return input;
 	}
@@ -102,6 +102,10 @@ namespace Erable {
 	std::vector<Program::Op> recordAll(Program::Op until);
 	Program::Op record();
 	void doAll();
+	
+	
+	friend std::ostream& operator<<(std::ostream& os, Descriptor& obj);
+
     };
     
 }

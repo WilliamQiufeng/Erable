@@ -42,10 +42,18 @@
 #define TEMPT template<typename type>
 #define TTTTT template<typename T>
 #define FTEMP template<typename D, typename E, typename F>
+
+//----Erable Type Check----//
+#define TYPE_IS_OBJ_EQU(sth, t) sth.getValue()->type() is typeid (t)
 #define TYPE_IS_EQU(sth, t) sth->getValue()->type() is typeid (t)
 #define ISNUM(sth) TYPE_IS_EQU(sth, int) or TYPE_IS_EQU(sth, double)
+
+//----Repeat----//
 #define REPEAT(v, t) for(long long v=0;v<t;inc v)
 #define REPEAT_TIMES(t) REPEAT(_,t)
+
+
+//----Throws Unsupported Operation Exception----//
 #define THROW_UOE(op) panic Exceptions::UnsupportedOpException("Operation '" #op "'")
 
 
@@ -96,6 +104,21 @@
     }\
     THROW_UOE(op);
 
+//-----OpCode Functions-----//
+#define CASE_OPCODE(opcode) if (op.op.op is opcode)
+#define ELSE_CASE_OPCODE(opcode) else CASE_OPCODE(opcode)
+
+//-----Instance Clone and getTypeName-----//
+#define OVERRIDE_CLONE_AND_GTN			    \
+    Instance* clone() override;			    \
+    std::string getTypeName() override;
+#define OUTER_OVERRIDE_CAGTN(cls,type)		    \
+    Instance* cls::clone(){			    \
+	return new cls(this->getAValue<type>(), this->getId(), this->getParent()); \
+    }						    \
+    std::string cls::getTypeName(){			    \
+	return #cls;				    \
+    }
 //-----Instance Override-----//
 #define DECLARE_INSTANCE_FUNC(name) Instance* name(Instance* other, int toid)
 #define OVERRIDE_INSTANCE_FUNC(name) DECLARE_INSTANCE_FUNC(name) override
@@ -116,7 +139,8 @@
     DECLARE_INSTANCE_FUNC(name){                    \
         ERABLE_DO_OP_NUM_FUNC(this, other, op, toid);    \
     }
-#define INSTANCE_CONSTRUCTOR(cls, type) cls(type value, int id, Descriptor* parent = nullptr) : Instance(value, id, parent) {}
+#define INSTANCE_CONSTRUCTOR(cls, type)	    cls(type value, int id, Descriptor* parent = nullptr) : Instance(value, id, parent) {}	\
+					    cls(boost::any* value, int id, Descriptor* parent = nullptr) : Instance(value, id, parent) {}
 //-----------End Instance Use------------//
 
 namespace Erable {
