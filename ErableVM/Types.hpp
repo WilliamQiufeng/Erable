@@ -57,12 +57,12 @@ namespace Erable {
 
 	    TEMPT Instance(boost::any* value, int id, Descriptor* parent = nullptr) :
 	    value(new boost::any(boost::any_cast<type>(value))), id(id), parent(parent) {
-		std::cout<<"ANY:"<<boost::any_cast<type>(value)<<std::endl;
+		//std::cout<<"ANY:"<<boost::any_cast<type>(value)<<std::endl;
 	    }
 	    
 	    TEMPT Instance(type value, int id, Descriptor* parent = nullptr) :
 	    value(new boost::any(value)), id(id), parent(parent) {
-		std::cout<<"TYPE:"<<value<<std::endl;
+		//std::cout<<"TYPE:"<<value<<std::endl;
 	    }
 
 	    boost::any* getValue() {

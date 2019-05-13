@@ -1,8 +1,8 @@
 Parsed file test/test.erable
 Parsed file stdlib/ios.erable
-File stdlib/ios.erable finished.Total time:4 ms.
+File stdlib/ios.erable finished.Total time:6 ms.
 ID:java
-File test/test.erable finished.Total time:541 ms.
+File test/test.erable finished.Total time:449 ms.
 ConstantPoolElement{id=0, obj=0}
 ConstantPoolElement{id=1, obj=1}
 ConstantPoolElement{id=2, obj=stdlib/ios}
@@ -341,8 +341,8 @@ ConstantPoolElement{id=20, obj=abc}
 Compilation started...
 Parsed file test/instance.erable
 Parsed file stdlib/ios.erable
-File stdlib/ios.erable finished.Total time:0 ms.
-File test/instance.erable finished.Total time:23 ms.
+File stdlib/ios.erable finished.Total time:1 ms.
+File test/instance.erable finished.Total time:18 ms.
 ConstantPoolElement{id=0, obj=0}
 ConstantPoolElement{id=1, obj=1}
 ConstantPoolElement{id=2, obj=stdlib/ios}
@@ -352,7 +352,7 @@ ConstantPoolElement{id=5, obj=a}
 ConstantPoolElement{id=6, obj=2}
 ConstantPoolElement{id=7, obj=1.2345}
 ConstantPoolElement{id=8, obj=java}
-ConstantPoolElement{id=9, obj=18}
+ConstantPoolElement{id=9, obj=15}
 ConstantPoolElement{id=10, obj=129}
 ConstantPoolElement{id=11, obj=123}
 ConstantPoolElement{id=12, obj=abcd}
@@ -397,33 +397,37 @@ ConstantPoolElement{id=12, obj=abcd}
 
 00000018    -->@18  buffer 9 to @18
 
-00000019    -->@19  REF(35) @18 ->19
+00000018    -->%d : variable `0` d = @18 ->18
 
-00000019    -->%d : variable `0` d = @19 ->19
+00000019    -->@19  GREF(36) @18 ->19
 
-00000020    -->@20  REF(35) @16 ->20
+00000019    -->%e : variable `0` e = @19 ->19
 
-00000020    -->%e : variable `0` e = @20 ->20
+00000020    -->@20  REF(35) @19 ->20
 
-00000021    -->@21  buffer 10 to @21
+00000021    -->@21  REF(35) @20 ->21
 
-00000021    -->%num : variable `0` num = @21 ->21
+00000021    -->%ouch : variable `0` ouch = @21 ->21
 
-00000022    -->@22  buffer 11 to @22
+00000022    -->@22  buffer 10 to @22
 
-00000023    -->@23  @21 ADD(4) @22 ->23
+00000022    -->%num : variable `0` num = @22 ->22
 
-00000024    -->@24  @21 EQU(22) @23 ->24
+00000023    -->@23  buffer 11 to @23
 
-00000025    -->@25  buffer 6 to @25
+00000024    -->@24  @22 ADD(4) @23 ->24
 
-00000026    -->@26  @21 DIV(7) @25 ->26
+00000025    -->@25  @22 EQU(22) @24 ->25
 
-00000027    -->@27  @21 EQU(22) @26 ->27
+00000026    -->@26  buffer 6 to @26
 
-00000028    -->%testfunc1 : function testfunc1[id=29 name=f, id=30 name=g, id=31 name=h, id=32 name=i] returns 33 ->28 :
-00000034    ---->#34 :
-00000035    ------>@35  buffer 12 to @35
+00000027    -->@27  @22 DIV(7) @26 ->27
+
+00000028    -->@28  @22 EQU(22) @27 ->28
+
+00000029    -->%testfunc1 : function testfunc1[id=30 name=f, id=31 name=g, id=32 name=h, id=33 name=i] returns 34 ->29 :
+00000035    ---->#35 :
+00000036    ------>@36  buffer 12 to @36
 
 
 

@@ -38,6 +38,16 @@ namespace Erable {
 	(*(this->idmap))[id] = instance;
     }
 
+    Types::Instance* Descriptor::get(int id) {
+	Types::Instance* inst1 = this->idmap->at(id);
+	int absId = id;
+	while (absId != inst1->id) {
+	    absId = inst1->id;
+	    inst1 = this->idmap->at(absId);
+	}
+	return inst1;
+    }
+
     void Descriptor::readHeader() {
 	this->getInput()->readMeta();
     }
@@ -72,7 +82,7 @@ namespace Erable {
 	ELSE_CASE_OPCODE("COPY") {
 	    int origId = op[0];
 	    int targId = op[1];
-	    Types::Instance* orig = this->idmap->at(origId);
+	    Types::Instance* orig = this->get(origId);
 	    //std::cout << cpe << "->" << id << std::endl;
 	    Types::Instance* ins = orig->clone();
 	    //std::cout << "Cloned" << std::endl;
@@ -83,7 +93,7 @@ namespace Erable {
 	ELSE_CASE_OPCODE("GREF") {
 	    int origId = op[0];
 	    int targId = op[1];
-	    Types::Instance* orig = this->idmap->at(origId);
+	    Types::Instance* orig = this->get(origId);
 	    Types::Integer* integer = new Types::Integer(orig->id, targId, orig->parent);
 	    this->set(targId, integer);
 	}
@@ -91,10 +101,9 @@ namespace Erable {
 	ELSE_CASE_OPCODE("REF") {
 	    int origId = op[0];
 	    int targId = op[1];
-	    Types::Instance* orig = this->idmap->at(origId);
-	    int refId = orig->getAValue<int>();
-	    Types::Instance* ins = this->idmap->at(refId);
-	    this->set(targId, ins);
+	    Types::Instance* ref = this->get(origId);
+	    Types::Instance* targ = this->get(ref->getAValue<int>());
+	    this->set(targId, targ);
 	}
     }
 

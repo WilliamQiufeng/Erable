@@ -80,6 +80,7 @@ namespace Erable {
 	    this->idmap = idmap;
 	}
 	void set(int, Erable::Types::Instance*);
+	Types::Instance* get(int);
 	Program::ProgramInputStream* getInput() const {
 	    return input;
 	}
