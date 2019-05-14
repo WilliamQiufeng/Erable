@@ -19,8 +19,6 @@ package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
 import com.qiufeng.erable.util.BitUtils;
-import com.qiufeng.erable.vm.types.ErableInstance;
-import com.qiufeng.erable.vm.types.ErableInteger;
 import java.io.IOException;
 
 /**
@@ -33,10 +31,6 @@ public class ConstantPoolInteger extends ConstantPoolElement{
 	super(obj);
     }
 
-    @Override
-    public ErableInstance getInstance() {
-	return new ErableInteger((Integer)obj, -1);
-    }
 
     /**
      * Generated the header

@@ -29,7 +29,8 @@
 
 
 namespace Erable {
-    inline std::string OPCODE_WHATEVER="WHATEVER";
+    inline std::string OPCODE_WHATEVER = "WHATEVER";
+
     class OpCodeElement {
     public:
 	int argc;
@@ -41,7 +42,7 @@ namespace Erable {
 	}
 
 	bool operator==(const OpCodeElement& right) const {
-	    bool result = argc is right.argc and idind is right.idind and (op is right.op or op is OPCODE_WHATEVER or right.op is OPCODE_WHATEVER );
+	    bool result = argc is right.argc and idind is right.idind and (op is right.op or op is OPCODE_WHATEVER or right.op is OPCODE_WHATEVER);
 	    return result;
 	}
 
@@ -95,26 +96,24 @@ namespace Erable {
 	    this->addEnum("FUNCTION", 2, 1); // Index 41
 	    this->addEnum("ARRAY", 1, 0); // Index 42
 	    this->addEnum("PUSH_ELEMENT", 2, -1); // Index 43
-	    this->addEnum("CALL_PREPARE", 2, 1); // Index 44
-	    this->addEnum("PUSH_ARG", 2, 1); // Index 45
-	    this->addEnum("CALL", 2, 1); // Index 46
-	    this->addEnum("IF", 1, -1); // Index 47
-	    this->addEnum("ELSE", 2, -1); // Index 48
-	    this->addEnum("WHILE", 1, -1); // Index 49
-	    this->addEnum("END", 1, -1); // Index 50
-	    this->addEnum("BREAKIF", 1, -1); // Index 51
-	    this->addEnum("JUMPIF", 2, -1); // Index 52
-	    this->addEnum("OBJECT", 1, -1); // Index 53
-	    this->addEnum("START_PAIR", 0, -1); // Index 54
-	    this->addEnum("KEY", 1, -1); // Index 55
-	    this->addEnum("VALUE", 1, -1); // Index 56
-	    this->addEnum("END_PAIR", 0, -1); // Index 57
-	    this->addEnum("TRY", 2, -1); // Index 58
-	    this->addEnum("NATIVE_FUNCDECL", 3, -1); // Index 59
-	    this->addEnum("LOAD_LIB", 1, -1); // Index 60
-	    this->addEnum("DYN_LOAD", 3, -1); // Index 61
-	    this->addEnum("DYNCALL", 3, -1); // Index 62
-	    this->addEnum("EXIT", 0, -1); // Index 63
+	    this->addEnum("CALL", 2, 1); // Index 44
+	    this->addEnum("IF", 1, -1); // Index 45
+	    this->addEnum("ELSE", 2, -1); // Index 46
+	    this->addEnum("WHILE", 1, -1); // Index 47
+	    this->addEnum("END", 1, -1); // Index 48
+	    this->addEnum("BREAKIF", 1, -1); // Index 49
+	    this->addEnum("JUMPIF", 2, -1); // Index 50
+	    this->addEnum("OBJECT", 1, -1); // Index 51
+	    this->addEnum("START_PAIR", 0, -1); // Index 52
+	    this->addEnum("KEY", 1, -1); // Index 53
+	    this->addEnum("VALUE", 1, -1); // Index 54
+	    this->addEnum("END_PAIR", 0, -1); // Index 55
+	    this->addEnum("TRY", 2, -1); // Index 56
+	    this->addEnum("NATIVE_FUNCDECL", 3, -1); // Index 57
+	    this->addEnum("LOAD_LIB", 1, -1); // Index 58
+	    this->addEnum("DYN_LOAD", 3, -1); // Index 59
+	    this->addEnum("DYNCALL", 3, -1); // Index 60
+	    this->addEnum("EXIT", 0, -1); // Index 61
 	}
 	/**
 	 * Stores the whole enumeration

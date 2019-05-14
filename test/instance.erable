@@ -13,6 +13,10 @@ var ouch=@@e;
 var num=129;
 num+=123;
 num/=2;
+var num2=15*3-20/5+6%7-3*4;
+
+var arr=[1,2,3,5,6,4,6,7,2];
+arr+=24;
 
 function testfunc1:(f g h i){
   "abcd";

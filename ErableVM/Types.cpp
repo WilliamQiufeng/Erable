@@ -38,6 +38,16 @@ namespace Erable {
 	    return "Instance";
 	}
 
+	std::ostream& operator<<(std::ostream& os, std::vector<Instance*> obj) {
+	    os << "[";
+	    for (int i = 0; i < obj.size(); inc i) {
+		os << obj[i];
+		if (i < obj.size() - 1)os << ", ";
+	    }
+	    os << "]";
+	    return os;
+	}
+
 	std::ostream& operator<<(std::ostream& os, Instance* obj) {
 	    // Write obj to stream
 	    os << obj->getTypeName()
@@ -52,15 +62,17 @@ namespace Erable {
 		os << "\"";
 		os << obj->getAValue<std::string>();
 		os << "\"";
+	    } else if (obj->getTypeName() == "Array") {
+		os << obj->getAValue<std::vector<Instance*> >();
+	    } else if (obj->getTypeName() == "Function") {
+		Function* func = (Function*) obj;
+		os << "#" << func->id
+			<< "[" << func->getArgc() << "]"
+			<< func->getAValue<std::vector<Program::Op> >();
 	    } else {
 		os << "[Unknown Type \"" << obj->getTypeName() << "\"]";
 	    }
 	    os << "}";
-	    return os;
-	}
-
-	std::ostream& operator<<(std::ostream& os, std::vector<Code*> obj) {
-	    os << "Function";
 	    return os;
 	}
 
@@ -70,8 +82,13 @@ namespace Erable {
 	OUTER_OVERRIDE_CAGTN(Integer, int);
 	OUTER_OVERRIDE_CAGTN(Double, double);
 	OUTER_OVERRIDE_CAGTN(String, std::string);
-	OUTER_OVERRIDE_CAGTN(Function, std::vector<Code*>);
+	OUTER_OVERRIDE_CAGTN(Function, std::vector<Program::Op>);
+	OUTER_OVERRIDE_CAGTN(Array, std::vector<Instance*>);
+	OUTER_OVERRIDE_CAGTN(Object, form);
+	OUTER_OVERRIDE_OP_NUM(Integer::add, +);
 	OUTER_OVERRIDE_OP_NUM(Integer::sub, -);
+	OUTER_OVERRIDE_OP_NUM(Integer::mul, *);
+
 
 	OUTER_OVERRIDE_OP_NUM(Integer::div, /);
 
@@ -87,19 +104,33 @@ namespace Erable {
 
 	OUTER_OVERRIDE_OP_NUM_FUNC(Double::pow, std::pow);
 
-	/*
-	 * 递归下降，如果不是integer就让other来执行operation,如果other也不支持就抛出Exceptions::UnsupportedOpException错误
-	 * Does other store an integer?
-	 * √: add and return
-	 * ∆: execute other->add(this, toid);
-	 * this won't make any difference when exchanging lvalue and rvalue
-	 */
-	DECLARE_INSTANCE_FUNC(Integer::add) {
-	    return other->add(this, toid);
+	//	/*
+	//	 * 递归下降，如果不是integer就让other来执行operation,如果other也不支持就抛出Exceptions::UnsupportedOpException错误
+	//	 * Does other store an integer?
+	//	 * √: add and return
+	//	 * ∆: execute other->add(this, toid);
+	//	 * this won't make any difference when exchanging lvalue and rvalue
+	//	 */
+	//	DECLARE_INSTANCE_FUNC(Integer::add) {
+	//	    std::cout << this << " + " << other << std::endl;
+	//	    return other->add(this, toid);
+	//	}
+	//
+	//	DECLARE_INSTANCE_FUNC(Integer::mul) {
+	//	    return other->mul(other, toid);
+	//	};
+
+	DECLARE_INSTANCE_FUNC(Integer::mod) {
+	    int numa = this->getAValue<int>();
+	    int numb = other->getAValue<int>();
+	    Instance* to;
+	    if (TYPE_IS_EQU(this, int) and TYPE_IS_EQU(other, int))
+		to = new Integer(numa % numb, toid, this->getParent());
+	    return to;
 	}
 
-	DECLARE_INSTANCE_FUNC(Integer::mul) {
-	    return other->mul(other, toid);
+	DECLARE_INSTANCE_FUNC(Double::mod) {
+	    throw Erable::Exceptions::UnsupportedOpException("Unsupported mod of Double");
 	};
 
 	DECLARE_INSTANCE_FUNC(String::add) {
@@ -134,7 +165,15 @@ namespace Erable {
 	    return new String(res, toid, this->getParent());
 	};
 
+	DECLARE_INSTANCE_FUNC(String::mod) {
+	    throw Erable::Exceptions::UnsupportedOpException("Unsupported mod of String");
+	};
 
+	DECLARE_INSTANCE_FUNC(Array::add) {
+	    std::vector<Instance*> cpy(this->getAValue<std::vector<Instance*> >());
+	    cpy.push_back(other);
+	    return new Array(cpy, toid, this->parent);
+	}
     }
 }
 

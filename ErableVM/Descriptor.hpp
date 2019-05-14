@@ -44,6 +44,8 @@ namespace Erable {
 	std::map<int, Erable::Types::Instance*>* idmap;
 	Program::ProgramInputStream* input;
 	Descriptor* parent;
+	Types::Instance* retVal;
+	int retId;
 
       public:
 	//Constructors
@@ -54,20 +56,28 @@ namespace Erable {
 
 	Descriptor(std::map<int, Erable::Types::Instance*>* idmap) :
 	idmap(idmap) {
+	    this->reset();
 	}
 
 	Descriptor(Program::ProgramInputStream* in) :
 	input(in) {
+	    this->reset();
 	}
 
 	Descriptor(Descriptor* other) :
-	input(other->input), parent(other) {
+	input(other->input), parent(other), idmap(other->idmap){
+	    this->reset();
 	}
 
 	//Initialisation
 
-	void init() {
+	inline void init() {
 	    this->idmap = new std::map<int, Erable::Types::Instance*>;
+	    reset();
+	}
+	inline void reset(){
+	    retVal=nullptr;
+	    retId=-1;
 	}
 
 	//Getters and Setters
@@ -96,6 +106,22 @@ namespace Erable {
 	void setParent(Descriptor* parent) {
 	    this->parent = parent;
 	}
+	int getRetId() const {
+	    return retId;
+	}
+
+	void setRetId(int retId) {
+	    this->retId = retId;
+	}
+
+	Types::Instance* getRetVal() const {
+	    return retVal;
+	}
+
+	void setRetVal(Types::Instance* retVal) {
+	    this->retVal = retVal;
+	}
+
 	void readHeader();
 	void execute(Program::Op op);
 	void executeAll(Program::Op until);

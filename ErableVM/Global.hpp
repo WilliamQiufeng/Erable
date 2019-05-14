@@ -73,7 +73,8 @@
         v=ptr->getAValue<int>();    \
     }else if(TYPE_IS_EQU(ptr, double)){   \
         v=ptr->getAValue<double>(); \
-    }
+    }				    \
+    //std::cout<<v<<std::endl;
 #define ERABLE_INSTANCE_OP_DOUB(a, b, op, toid) new Double (a op b, toid, this->getParent())
 #define ERABLE_INSTANCE_OP_NUM(a, b, op, toid, to)    \
     GET_NUM(a, numa);                           \
@@ -82,7 +83,7 @@
     if(TYPE_IS_EQU(a, int) and TYPE_IS_EQU(b, int))         \
         to = new Integer(numa op numb, toid, this->getParent());\
     else                                        \
-        to = ERABLE_INSTANCE_OP_DOUB(numa, numb, op, toid);
+        to = new Double (numa op numb, toid, this->getParent())
 #define ERABLE_INSTANCE_OP_NUM_FUNC(a, b, op, toid, to)    \
     GET_NUM(a, numa);                           \
     GET_NUM(b, numb);                           \
@@ -92,13 +93,13 @@
     else                                        \
         to = new Double (op(numa, numb), toid, this->getParent());
 #define ERABLE_DO_OP_NUM(a, b, op, toid)            \
-    if (ISNUM(other)) {                             \
-        ERABLE_INSTANCE_OP_NUM(a, b, -, toid, i);   \
+    if (ISNUM(b)) {                             \
+        ERABLE_INSTANCE_OP_NUM(a, b, op, toid, i);   \
         return i;                                   \
     }                                               \
     THROW_UOE(op);
 #define ERABLE_DO_OP_NUM_FUNC(a, b, op, toid)       \
-    if (ISNUM(other)) {                             \
+    if (ISNUM(b)) {                             \
         ERABLE_INSTANCE_OP_NUM_FUNC(this, other, op, toid, i);\
         return i;   \
     }\

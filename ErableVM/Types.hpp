@@ -36,6 +36,8 @@ namespace Erable{
         class Integer;
         //template<typename type=std::string>
         class String;
+	class Array;
+	class Object;
         class Function;
     }
 }
@@ -47,7 +49,7 @@ namespace Erable{
 
 namespace Erable {
     namespace Types {
-	std::ostream& operator<<(std::ostream& os, std::vector<Code*> obj);
+	std::ostream& operator<<(std::ostream& os, std::vector<Instance*> obj);
         class Instance {
 	public:
 	    
@@ -94,6 +96,15 @@ namespace Erable {
 		return ss.str();
 	    }
 	    friend std::ostream& operator<<(std::ostream& os, Instance* obj);
+	    bool operator<(const Instance& right) const {
+		return right > * this; // 重用大于运算符
+	    }
+
+	    bool operator>(const Instance& right) const {
+		// Do actual comparison
+		return this->id-right.id;
+	    }
+
 
 	    virtual std::string getTypeName();
 	    virtual Instance* clone();
@@ -113,6 +124,7 @@ namespace Erable {
 	    OVERRIDE_INSTANCE_FUNC(mul);
 	    OVERRIDE_INSTANCE_FUNC(sub);
 	    OVERRIDE_INSTANCE_FUNC(div);
+	    OVERRIDE_INSTANCE_FUNC(mod);
 	    OVERRIDE_INSTANCE_FUNC(pow);
 	    OVERRIDE_CLONE_AND_GTN;
 	};
@@ -123,6 +135,7 @@ namespace Erable {
 	    OVERRIDE_INSTANCE_FUNC(sub);
 	    OVERRIDE_INSTANCE_FUNC(mul);
 	    OVERRIDE_INSTANCE_FUNC(div);
+	    OVERRIDE_INSTANCE_FUNC(mod);
 	    OVERRIDE_INSTANCE_FUNC(pow);
 	    OVERRIDE_CLONE_AND_GTN;
 	};
@@ -132,12 +145,42 @@ namespace Erable {
 	    OVERRIDE_INSTANCE_FUNC(add);
 	    OVERRIDE_INSTANCE_FUNC(sub);
 	    OVERRIDE_INSTANCE_FUNC(mul);
+	    OVERRIDE_INSTANCE_FUNC(mod);
+	    OVERRIDE_CLONE_AND_GTN;
+	};
+	class Array : public Instance {
+	public:
+	    INSTANCE_CONSTRUCTOR(Array, std::vector<Instance*>);
+	    OVERRIDE_INSTANCE_FUNC(add);
+	    OVERRIDE_CLONE_AND_GTN;
+	};
+	class Object : public Instance {
+	    typedef std::map<Instance, Instance*> form;
+	public:
+	    INSTANCE_CONSTRUCTOR(Object, form);
 	    OVERRIDE_CLONE_AND_GTN;
 	};
 	class Function : public Instance {
+	    int retId,argc;
 	public:
-	    INSTANCE_CONSTRUCTOR(Function, std::vector<Code*>);
+	    INSTANCE_CONSTRUCTOR(Function, std::vector<Program::Op>);
 	    OVERRIDE_CLONE_AND_GTN;
+	    inline int getArgc() const {
+		return argc;
+	    }
+
+	    inline void setArgc(int argc) {
+		this->argc = argc;
+	    }
+
+	    inline int getRetId() const {
+		return retId;
+	    }
+
+	    inline void setRetId(int retId) {
+		this->retId = retId;
+	    }
+	    void execute();
 	};
     }
 }

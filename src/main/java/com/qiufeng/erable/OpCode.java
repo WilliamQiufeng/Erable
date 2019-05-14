@@ -40,7 +40,7 @@ public enum OpCode {
     LOADC(2,1),
     FUNCTION(2,1),//REG_ARG(2),
     ARRAY(1,0),PUSH_ELEMENT(2),
-    CALL_PREPARE(2,1),PUSH_ARG(2,1),CALL(2,1),
+    CALL(2,1),
     IF(1),ELSE(2),
     WHILE(1),
     END(1),

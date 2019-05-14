@@ -33,6 +33,17 @@ namespace Erable {
 	    return os;
 	}
 
+	std::ostream& operator<<(std::ostream& os, std::vector<Op> obj) {
+	    os << "{\n";
+	    for (Op op : obj) {
+		os << "\t\t";
+		os << op;
+		os << ";\n";
+	    }
+	    os << "\n\t}";
+	    return os;
+	}
+
 	bool Op::operator==(const Op& right) const {
 	    if (!(this->op is right.op)) return false;
 	    if (this->argv.size() isnt right.argv.size()) return false;

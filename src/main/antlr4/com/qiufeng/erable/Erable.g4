@@ -62,7 +62,10 @@ ops
     l=ops ALPA pdo=ops ARPA                      {$type="element";}
   | <assoc=right> l=ops operation=POW r=ops                {$type="pow";}
   | l=ops operation=(EQU|ADDEQ|SUBEQ|MULEQ|DIVEQ|MODEQ) r=ops                              {$type="change";}
-  | l=ops operation=(MOD|DIV|MUL|SUB|ADD|BINOPS) r=ops                 {$type="binop";}
+  | l=ops operation=BINOPS r=ops                 {$type="binop";}
+  | l=ops operation=(DIV|MUL|MOD) r=ops                 {$type="binop";}
+  | l=ops operation=SUB r=ops                 {$type="binop";}
+  | l=ops operation=ADD r=ops                 {$type="binop";}
   | operation=(UNARYOPS|ADD|SUB) r=ops           {$type="unary";}
   | funcname=ops LPA arguments=sep_ops RPA     {$type="funccall";}
   | LPA p=ops RPA                                {$type="bracket";}

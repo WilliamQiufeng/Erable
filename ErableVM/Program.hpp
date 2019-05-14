@@ -49,7 +49,7 @@ namespace Erable {
 
 namespace Erable {
     namespace Program {
-
+	std::ostream& operator<<(std::ostream& os, std::vector<Op> obj);
 	struct Data {
 	    ConstantPool* pool;
 	    Meta::Metadata* meta;

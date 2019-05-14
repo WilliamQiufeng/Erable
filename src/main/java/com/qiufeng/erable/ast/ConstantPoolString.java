@@ -19,8 +19,6 @@ package com.qiufeng.erable.ast;
 import com.qiufeng.erable.OpCode;
 import com.qiufeng.erable.util.ArrayUtils;
 import com.qiufeng.erable.util.BitUtils;
-import com.qiufeng.erable.vm.types.ErableNumber;
-import com.qiufeng.erable.vm.types.ErableString;
 import java.io.IOException;
 
 /**
@@ -59,8 +57,4 @@ public class ConstantPoolString extends ConstantPoolElement {
 	this.file.write(length);
     }
     
-    @Override
-    public ErableString getInstance() {
-	return new ErableString((String)obj, -1);
-    }
 }

@@ -30,7 +30,7 @@ public class FuncCallCode extends TempCode {
     public List<Integer> args;
     public String name;
     public FuncCallCode(String name,List<Integer> args,int refid, Code parent) {
-	super(refid, OpCode.CALL_PREPARE,parent);
+	super(refid, OpCode.ARRAY,parent);
 	this.name=name;
 	this.args=args;
     }
@@ -46,11 +46,10 @@ public class FuncCallCode extends TempCode {
     @Override
     public void write() throws IOException {
 	this.writeOpCode(this.op);
-	this.writeId(this.cid);
 	this.writeId(this.id);
 	//System.out.println("__CALL_PREPARE "+this+"__");
 	for(int aid : args){
-	    this.writeOpCode(OpCode.PUSH_ARG);
+	    this.writeOpCode(OpCode.PUSH_ELEMENT);
 	    this.writeId(aid);
 	    this.writeId(this.id);
 	    //System.out.println("____PUSH_ARG "+aid+"____");

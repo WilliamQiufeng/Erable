@@ -23,7 +23,7 @@ namespace Erable {
     std::ostream& operator<<(std::ostream& os, Descriptor& obj) {
 	os << "Obj Dump:" << std::endl;
 	os << (*(obj.input->getData()->pool)) << std::endl;
-	os << "Buffer Dump:" << std::endl;
+	os << "Buffer Dump[" << obj.idmap->size() << "]:" << std::endl;
 	for (auto&[key, value] : *(obj.idmap)) {
 	    os << "\t";
 	    os << key << " = " << value << std::endl;
@@ -35,7 +35,13 @@ namespace Erable {
     };
 
     void Descriptor::set(int id, Erable::Types::Instance* instance) {
-	(*(this->idmap))[id] = instance;
+	try {
+	    Types::Instance* abs = get(id);
+	    (*abs) = (*instance);
+	} catch (std::out_of_range e) {
+	    (*this->idmap)[id] = instance;
+	}
+
     }
 
     Types::Instance* Descriptor::get(int id) {
@@ -57,7 +63,13 @@ namespace Erable {
     }
 
     std::vector<Program::Op> Descriptor::recordAll(Program::Op until) {
-
+	std::vector<Program::Op> codes;
+	Program::Op current = Program::UNKNOWN;
+	while (not(until is current)) {
+	    current = this->record();
+	    codes.push_back(current);
+	}
+	return codes;
     }
 
     void Descriptor::execute(Program::Op op) {
@@ -105,6 +117,96 @@ namespace Erable {
 	    Types::Instance* targ = this->get(ref->getAValue<int>());
 	    this->set(targId, targ);
 	}
+
+	ELSE_CASE_OPCODE("EQU") {
+	    int origId = op[0];
+	    int targId = op[1];
+	    Types::Instance* targ = this->get(targId);
+	    if (origId == retId) {
+		retVal = targ;
+		return;
+	    }
+	    this->set(origId, targ);
+	}
+
+	ELSE_CASE_OPCODE("ADD") {
+	    int insAId = op[0];
+	    int insBId = op[1];
+	    int targId = op[2];
+	    Types::Instance* insA = this->get(insAId);
+	    Types::Instance* insB = this->get(insBId);
+	    //std::cout << insA << "+" << insB << std::endl;
+	    Types::Instance* res = insA->add(insB, targId);
+	    //std::cout << res << std::endl;
+	    this->set(targId, res);
+	}
+
+	ELSE_CASE_OPCODE("SUB") {
+	    int insAId = op[0];
+	    int insBId = op[1];
+	    int targId = op[2];
+	    Types::Instance* insA = this->get(insAId);
+	    Types::Instance* insB = this->get(insBId);
+	    Types::Instance* res = insA->sub(insB, targId);
+	    this->set(targId, res);
+	}
+
+	ELSE_CASE_OPCODE("MUL") {
+	    int insAId = op[0];
+	    int insBId = op[1];
+	    int targId = op[2];
+	    Types::Instance* insA = this->get(insAId);
+	    Types::Instance* insB = this->get(insBId);
+	    Types::Instance* res = insA->mul(insB, targId);
+	    this->set(targId, res);
+	}
+
+	ELSE_CASE_OPCODE("DIV") {
+	    int insAId = op[0];
+	    int insBId = op[1];
+	    int targId = op[2];
+	    Types::Instance* insA = this->get(insAId);
+	    Types::Instance* insB = this->get(insBId);
+	    Types::Instance* res = insA->div(insB, targId);
+	    this->set(targId, res);
+	}
+
+	ELSE_CASE_OPCODE("MOD") {
+	    int insAId = op[0];
+	    int insBId = op[1];
+	    int targId = op[2];
+	    Types::Instance* insA = this->get(insAId);
+	    Types::Instance* insB = this->get(insBId);
+	    Types::Instance* res = insA->mod(insB, targId);
+	    this->set(targId, res);
+	}
+
+	ELSE_CASE_OPCODE("ARRAY") {
+	    int targId = op[0];
+	    Types::Instance* arr = new Types::Array(std::vector<Types::Instance*>(), targId, this);
+	    this->set(targId, arr);
+	}
+
+	ELSE_CASE_OPCODE("PUSH_ELEMENT") {
+	    int eleId = op[0];
+	    int arrId = op[1];
+	    Types::Instance* arr = this->get(arrId);
+	    Types::Instance* ele = this->get(eleId);
+	    Types::Instance* res = arr->add(ele, arr->id);
+	    this->set(arrId, res);
+	}
+
+	ELSE_CASE_OPCODE("FUNCTION") {
+	    int retId = op[0];
+	    int targId = op[1];
+	    int argc = retId - targId - 1;
+	    std::vector<int> untilArgv{targId};
+	    std::vector<Program::Op> codes = this->recordAll(Program::Op(OpCode.values().find("END")->value, untilArgv));
+	    Types::Function* func = new Types::Function(codes, targId, this);
+	    func->setArgc(argc);
+	    func->setRetId(retId);
+	    this->set(targId, func);
+	}
     }
 
     void Descriptor::executeAll(Program::Op until) {
@@ -112,6 +214,9 @@ namespace Erable {
 	while (not(until is current)) {
 	    current = this->record();
 	    this->execute(current);
+	    if (retVal != nullptr) {
+		return;
+	    }
 	}
     }
 

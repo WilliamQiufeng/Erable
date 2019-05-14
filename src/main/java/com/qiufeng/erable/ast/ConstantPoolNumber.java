@@ -19,8 +19,6 @@ package com.qiufeng.erable.ast;
 import com.qiufeng.erable.OpCode;
 import com.qiufeng.erable.util.ArrayUtils;
 import com.qiufeng.erable.util.BitUtils;
-import com.qiufeng.erable.vm.types.ErableInstance;
-import com.qiufeng.erable.vm.types.ErableNumber;
 import java.io.IOException;
 
 /**
@@ -48,11 +46,6 @@ public class ConstantPoolNumber extends ConstantPoolElement {
      */
     public void generateHeader()throws IOException {
 	this.writeOpCode(OpCode.CP_NUM);
-    }
-
-    @Override
-    public ErableNumber getInstance() {
-	return new ErableNumber((Double)obj, -1);
     }
     
 }
