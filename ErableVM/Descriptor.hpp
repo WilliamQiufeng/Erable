@@ -73,6 +73,7 @@ namespace Erable {
 
 	inline void init() {
 	    this->idmap = new std::map<int, Erable::Types::Instance*>;
+	    this->parent=nullptr;
 	    reset();
 	}
 	inline void reset(){

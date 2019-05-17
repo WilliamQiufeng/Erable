@@ -26,6 +26,12 @@
 #ifndef GLOBALMACROS_HPP
 #define GLOBALMACROS_HPP
 
+
+
+
+
+
+
 #define is ==
 #define are ==
 #define inc ++
@@ -34,7 +40,6 @@
 #define gets >>
 #define puts <<
 #define arent !=
-#define self this
 #define lshift <<
 #define rshift >>
 #define panic throw
@@ -54,7 +59,14 @@
 
 
 //----Throws Unsupported Operation Exception----//
-#define THROW_UOE(op) panic Exceptions::UnsupportedOpException("Operation '" #op "'")
+#define THROW_UOE(op)	\
+    std::stringstream ss;\
+    ss<<"Operation '" #op "' between '"\
+    <<this->getTypeName()\
+    <<"' and '"\
+    <<other->getTypeName()\
+    <<"'";		\
+    panic Exceptions::UnsupportedOpException(ss.str());
 
 
 
@@ -108,6 +120,12 @@
 //-----OpCode Functions-----//
 #define CASE_OPCODE(opcode) if (op.op.op is opcode)
 #define ELSE_CASE_OPCODE(opcode) else CASE_OPCODE(opcode)
+
+//-----BuiltiIn Native Function Initialising-----//
+#define DEFINE_NATIVE_FUNCTION(name) Types::Instance* name(Descriptor* desc, Types::NativeFunction * self, Types::Array* argv)
+#define OVERRIDE_NATIVE_BUILTIN(name) DEFINE_NATIVE_FUNCTION(BuiltIn_t::name)
+#define ADD_NATIVE(name, func, obj)	Erable::Native::functype name##_FN = std::bind(&func, obj, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);\
+					this->functions[#name] = name##_FN;
 
 //-----Instance Clone and getTypeName-----//
 #define OVERRIDE_CLONE_AND_GTN			    \

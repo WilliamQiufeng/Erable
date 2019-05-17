@@ -25,6 +25,8 @@ namespace Erable {
 	os << "ConstantPool[" << obj.elements.size() << "] :" << std::endl;
 	for (auto&[key, value] : obj.elements) {
 	    os << "\t";
+	    os << key;
+	    os << " = ";
 	    os << value;
 	    os << std::endl;
 	}
@@ -57,7 +59,7 @@ namespace Erable {
     void ConstantPool::load(Program::ProgramInputStream* in) {
 	//std::cout << "Reading Size..." << std::endl;
 	int times = in->readId(in->getData()->meta->getIdlen().cid);
-	std::cout << "Constant Pool Size: " << times << std::endl;
+	//std::cout << "Constant Pool Size: " << times << std::endl;
 
 	REPEAT(i, times) {
 	    OpCodeElement type = in->readOpCode();
@@ -87,9 +89,9 @@ namespace Erable {
 		std::string err(ss.str());
 		throw Exceptions::ValidateException(err);
 	    }
-	    std::cout << "Added Constant Pool Element: " << instance << std::endl;
+	    //std::cout << "Added Constant Pool Element: " << instance << std::endl;
 	    this->setElement(i, instance);
 	}
-	std::cout << "Constant Pool Ended..." << std::endl;
+	//std::cout << "Constant Pool Ended..." << std::endl;
     }
 }

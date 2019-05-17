@@ -1,13 +1,13 @@
 Parsed file test/test.erable
 Parsed file stdlib/ios.erable
-File stdlib/ios.erable finished.Total time:6 ms.
+File stdlib/ios.erable finished.Total time:5 ms.
 ID:java
-File test/test.erable finished.Total time:959 ms.
+File test/test.erable finished.Total time:616 ms.
 ConstantPoolElement{id=0, obj=0}
 ConstantPoolElement{id=1, obj=1}
 ConstantPoolElement{id=2, obj=stdlib/ios}
-ConstantPoolElement{id=3, obj=java.lang.System#out#println}
-ConstantPoolElement{id=4, obj=com.qiufeng.erable.stdlib.InputScanner#input}
+ConstantPoolElement{id=3, obj=print}
+ConstantPoolElement{id=4, obj=scan}
 ConstantPoolElement{id=5, obj=stdlib/ios.erable}
 ConstantPoolElement{id=6, obj=stdlib/java.ec}
 ConstantPoolElement{id=7, obj=stdlib/java.dynec}
@@ -41,7 +41,7 @@ ConstantPoolElement{id=20, obj=abc}
 00000008    ---->@8  buffer 3 to @8
 
 
-00000009    -->%input : function input[] returns 10 ->9 : native 11
+00000009    -->%scan : function scan[] returns 10 ->9 : native 11
 00000011    ---->@11  buffer 4 to @11
 
 
@@ -342,12 +342,12 @@ Compilation started...
 Parsed file test/instance.erable
 Parsed file stdlib/ios.erable
 File stdlib/ios.erable finished.Total time:1 ms.
-File test/instance.erable finished.Total time:79 ms.
+File test/instance.erable finished.Total time:99 ms.
 ConstantPoolElement{id=0, obj=0}
 ConstantPoolElement{id=1, obj=1}
 ConstantPoolElement{id=2, obj=stdlib/ios}
-ConstantPoolElement{id=3, obj=java.lang.System#out#println}
-ConstantPoolElement{id=4, obj=com.qiufeng.erable.stdlib.InputScanner#input}
+ConstantPoolElement{id=3, obj=print}
+ConstantPoolElement{id=4, obj=scan}
 ConstantPoolElement{id=5, obj=a}
 ConstantPoolElement{id=6, obj=2}
 ConstantPoolElement{id=7, obj=1.2345}
@@ -362,7 +362,13 @@ ConstantPoolElement{id=15, obj=6}
 ConstantPoolElement{id=16, obj=7}
 ConstantPoolElement{id=17, obj=4}
 ConstantPoolElement{id=18, obj=24}
-ConstantPoolElement{id=19, obj=abcd}
+ConstantPoolElement{id=19, obj=Hello World!}
+ConstantPoolElement{id=20, obj=omg}
+ConstantPoolElement{id=21, obj=pa=}
+ConstantPoolElement{id=22, obj=It works!!!}
+ConstantPoolElement{id=23, obj=pa changed into :}
+ConstantPoolElement{id=24, obj=Input:}
+ConstantPoolElement{id=25, obj=Get:}
 00000000    >#0 :
 00000001    -->|ConstantPool
 
@@ -380,7 +386,7 @@ ConstantPoolElement{id=19, obj=abcd}
 00000008    ---->@8  buffer 3 to @8
 
 
-00000009    -->%input : function input[] returns 10 ->9 : native 11
+00000009    -->%scan : function scan[] returns 10 ->9 : native 11
 00000011    ---->@11  buffer 4 to @11
 
 
@@ -494,9 +500,79 @@ ConstantPoolElement{id=19, obj=abcd}
 
 00000057    -->%testfunc1 : function testfunc1[id=58 name=f, id=59 name=g, id=60 name=h, id=61 name=i] returns 62 ->57 :
 00000063    ---->#63 :
-00000064    ------>@64  buffer 19 to @64
+00000064    ------>@64  @58 ADD(4) @59 ->64
+
+00000065    ------>@65  @64 ADD(4) @60 ->65
+
+00000066    ------>@66  @65 ADD(4) @61 ->66
+
+00000068    ------>@68  @62 EQU(22) @66 ->68
 
 
+
+00000069    -->@69  buffer 6 to @69
+
+00000070    -->@70  buffer 12 to @70
+
+00000071    -->@71  buffer 17 to @71
+
+00000072    -->@72  buffer 12 to @72
+
+00000073    -->@73  testfunc1@57[69, 70, 71, 72] ->73
+
+00000073    -->%tfs : variable `0` tfs = @73 ->73
+
+00000074    -->@74  buffer 1 to @74
+
+00000075    -->@75  buffer 6 to @75
+
+00000076    -->@76  buffer 12 to @76
+
+00000077    -->@77  buffer 17 to @77
+
+00000078    -->@78  testfunc1@57[74, 75, 76, 77] ->78
+
+00000079    -->@79  @73 ADD(4) @78 ->79
+
+00000080    -->@80  @73 EQU(22) @79 ->80
+
+00000081    -->@81  buffer 19 to @81
+
+00000082    -->@82  println@5[81] ->82
+
+00000083    -->@83  buffer 20 to @83
+
+00000083    -->%pa : variable `0` pa = @83 ->83
+
+00000084    -->@84  buffer 21 to @84
+
+00000085    -->@85  @84 ADD(4) @83 ->85
+
+00000086    -->@86  println@5[85] ->86
+
+00000087    -->@87  buffer 22 to @87
+
+00000088    -->@88  @83 EQU(22) @87 ->88
+
+00000089    -->@89  buffer 23 to @89
+
+00000090    -->@90  @89 ADD(4) @83 ->90
+
+00000091    -->@91  println@5[90] ->91
+
+00000092    -->@92  buffer 24 to @92
+
+00000093    -->@93  println@5[92] ->93
+
+00000094    -->@94  scan@9[] ->94
+
+00000094    -->%inp : variable `0` inp = @94 ->94
+
+00000095    -->@95  buffer 25 to @95
+
+00000096    -->@96  @95 ADD(4) @94 ->96
+
+00000097    -->@97  println@5[96] ->97
 
 
 Compilation started...

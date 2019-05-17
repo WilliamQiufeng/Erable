@@ -39,6 +39,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Descriptor.o \
 	${OBJECTDIR}/IO.o \
 	${OBJECTDIR}/Metadata.o \
+	${OBJECTDIR}/NativeFunctions.o \
 	${OBJECTDIR}/Program.o \
 	${OBJECTDIR}/Types.o \
 	${OBJECTDIR}/main.o
@@ -97,6 +98,11 @@ ${OBJECTDIR}/Metadata.o: Metadata.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Metadata.o Metadata.cpp
+
+${OBJECTDIR}/NativeFunctions.o: NativeFunctions.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/NativeFunctions.o NativeFunctions.cpp
 
 ${OBJECTDIR}/Program.o: Program.cpp
 	${MKDIR} -p ${OBJECTDIR}
@@ -181,6 +187,19 @@ ${OBJECTDIR}/Metadata_nomain.o: ${OBJECTDIR}/Metadata.o Metadata.cpp
 	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Metadata_nomain.o Metadata.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/Metadata.o ${OBJECTDIR}/Metadata_nomain.o;\
+	fi
+
+${OBJECTDIR}/NativeFunctions_nomain.o: ${OBJECTDIR}/NativeFunctions.o NativeFunctions.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/NativeFunctions.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/NativeFunctions_nomain.o NativeFunctions.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/NativeFunctions.o ${OBJECTDIR}/NativeFunctions_nomain.o;\
 	fi
 
 ${OBJECTDIR}/Program_nomain.o: ${OBJECTDIR}/Program.o Program.cpp 

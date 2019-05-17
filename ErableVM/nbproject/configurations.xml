@@ -8,6 +8,7 @@
       <itemPath>Global.hpp</itemPath>
       <itemPath>IO.hpp</itemPath>
       <itemPath>Metadata.hpp</itemPath>
+      <itemPath>NativeFunctions.hpp</itemPath>
       <itemPath>OpCode.hpp</itemPath>
       <itemPath>Program.hpp</itemPath>
       <itemPath>Types.hpp</itemPath>
@@ -18,6 +19,7 @@
       <itemPath>Descriptor.cpp</itemPath>
       <itemPath>IO.cpp</itemPath>
       <itemPath>Metadata.cpp</itemPath>
+      <itemPath>NativeFunctions.cpp</itemPath>
       <itemPath>Program.cpp</itemPath>
       <itemPath>Types.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
@@ -82,6 +84,10 @@
       <item path="Metadata.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Metadata.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NativeFunctions.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NativeFunctions.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="OpCode.hpp" ex="false" tool="3" flavor2="0">
       </item>
@@ -157,6 +163,10 @@
       <item path="Metadata.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Metadata.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NativeFunctions.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NativeFunctions.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="OpCode.hpp" ex="false" tool="3" flavor2="0">
       </item>

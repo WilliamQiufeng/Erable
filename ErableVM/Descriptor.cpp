@@ -16,6 +16,7 @@
  */
 
 #include "Descriptor.hpp"
+#include "NativeFunctions.hpp"
 //#include "Metadata.hpp"
 
 namespace Erable {
@@ -35,10 +36,14 @@ namespace Erable {
     };
 
     void Descriptor::set(int id, Erable::Types::Instance* instance) {
+	//	if (parent != nullptr) {
+	//	    parent->set(id, instance);
+	//	    return;
+	//	}
 	try {
 	    Types::Instance* abs = get(id);
 	    (*abs) = (*instance);
-	} catch (std::out_of_range e) {
+	} catch (std::exception e) {
 	    (*this->idmap)[id] = instance;
 	}
 
@@ -73,10 +78,10 @@ namespace Erable {
     }
 
     void Descriptor::execute(Program::Op op) {
-	std::cout << op << std::endl;
+	//std::cout << op << std::endl;
 
 	CASE_OPCODE("CONSTANT_POOL") {
-	    std::cout << "Recording Constant Pool...." << std::endl;
+	    //std::cout << "Recording Constant Pool...." << std::endl;
 	    this->getInput()->readConstantPool();
 	}
 
@@ -122,9 +127,9 @@ namespace Erable {
 	    int origId = op[0];
 	    int targId = op[1];
 	    Types::Instance* targ = this->get(targId);
+	    //std::cout << targ << std::endl;
 	    if (origId == retId) {
 		retVal = targ;
-		return;
 	    }
 	    this->set(origId, targ);
 	}
@@ -207,6 +212,54 @@ namespace Erable {
 	    func->setRetId(retId);
 	    this->set(targId, func);
 	}
+
+	ELSE_CASE_OPCODE("NATIVE_FUNCDECL") {
+	    int retId = op[0];
+	    int targId = op[1];
+	    int nativeCall = op[2];
+	    int argc = retId - targId - 1;
+	    Types::Instance* nativeCI = this->get(nativeCall);
+	    std::string nativeCS = nativeCI->getAValue<std::string>();
+	    Types::NativeFunction* func = new Types::NativeFunction(nativeCS, targId, this);
+	    func->setArgc(argc);
+	    func->setRetId(retId);
+	    this->set(targId, func);
+	}
+
+	ELSE_CASE_OPCODE("CALL") {
+	    int funcId = op[0];
+	    int targId = op[1];
+	    Types::Array* argv = (Types::Array*)this->get(targId);
+	    Descriptor* desc = new Descriptor(this);
+	    Types::Instance* inst = this->get(funcId);
+	    if (inst->getTypeName() == "Function") {
+		int ind = 1;
+		for (Types::Instance* arg : argv->getAValue < Types::Array::arrtype >()) {
+		    int absId = inst->id + ind;
+		    this->set(absId, arg);
+		    inc ind;
+		}
+		Types::Function* func = (Types::Function*)inst;
+		Types::Function::codet codes = func->getAValue<Types::Function::codet>();
+		desc->executeAll(codes);
+	    } else if (inst->getTypeName() == "NativeFunction") {
+		Types::NativeFunction* func = (Types::NativeFunction*)inst;
+		std::string nativeCS = func->getAValue<std::string>();
+		Native::functype nativeFunc = Native::Functions.functions[nativeCS];
+		desc->retId = func->getRetId();
+		Types::Instance* ret = nativeFunc(this, func, argv);
+		if (ret != nullptr) {
+		    desc->retVal = ret;
+		}
+	    }
+	    if (desc->retVal != nullptr) {
+		std::cout << desc->retVal << std::endl;
+		Types::Instance* cl = desc->retVal->clone();
+		cl->setId(targId);
+		(*this->idmap)[targId] = cl;
+		std::cout << this->idmap->at(targId) << std::endl;
+	    }
+	}
     }
 
     void Descriptor::executeAll(Program::Op until) {
@@ -223,6 +276,9 @@ namespace Erable {
     void Descriptor::executeAll(std::vector<Program::Op> code) {
 	for (Program::Op op : code) {
 	    this->execute(op);
+	    if (retVal != nullptr) {
+		return;
+	    }
 	}
     }
 

@@ -38,7 +38,7 @@ namespace Erable {
 	    return "Instance";
 	}
 
-	std::ostream& operator<<(std::ostream& os, std::vector<Instance*> obj) {
+	std::ostream& operator<<(std::ostream& os, Types::Array::arrtype obj) {
 	    os << "[";
 	    for (int i = 0; i < obj.size(); inc i) {
 		os << obj[i];
@@ -50,20 +50,20 @@ namespace Erable {
 
 	std::ostream& operator<<(std::ostream& os, Instance* obj) {
 	    // Write obj to stream
-	    os << obj->getTypeName()
-		    << "{ID: "
-		    << obj->id
-		    << ", Value: ";
+	    //	    os << obj->getTypeName()
+	    //		    << "{ID: "
+	    //		    << obj->id
+	    //		    << ", Value: ";
 	    if (obj->getTypeName() == "Integer") {
 		os << obj->getAValue<int>();
 	    } else if (obj->getTypeName() == "Double") {
 		os << obj->getAValue<double>();
 	    } else if (obj->getTypeName() == "String") {
-		os << "\"";
+		//		os << "\"";
 		os << obj->getAValue<std::string>();
-		os << "\"";
+		//		os << "\"";
 	    } else if (obj->getTypeName() == "Array") {
-		os << obj->getAValue<std::vector<Instance*> >();
+		os << obj->getAValue<Types::Array::arrtype >();
 	    } else if (obj->getTypeName() == "Function") {
 		Function* func = (Function*) obj;
 		os << "#" << func->id
@@ -72,7 +72,7 @@ namespace Erable {
 	    } else {
 		os << "[Unknown Type \"" << obj->getTypeName() << "\"]";
 	    }
-	    os << "}";
+	    //	    os << "}";
 	    return os;
 	}
 
@@ -82,8 +82,9 @@ namespace Erable {
 	OUTER_OVERRIDE_CAGTN(Integer, int);
 	OUTER_OVERRIDE_CAGTN(Double, double);
 	OUTER_OVERRIDE_CAGTN(String, std::string);
-	OUTER_OVERRIDE_CAGTN(Function, std::vector<Program::Op>);
-	OUTER_OVERRIDE_CAGTN(Array, std::vector<Instance*>);
+	OUTER_OVERRIDE_CAGTN(Function, codet);
+	OUTER_OVERRIDE_CAGTN(NativeFunction, std::string);
+	OUTER_OVERRIDE_CAGTN(Array, Types::Array::arrtype);
 	OUTER_OVERRIDE_CAGTN(Object, form);
 	OUTER_OVERRIDE_OP_NUM(Integer::add, +);
 	OUTER_OVERRIDE_OP_NUM(Integer::sub, -);
@@ -170,7 +171,7 @@ namespace Erable {
 	};
 
 	DECLARE_INSTANCE_FUNC(Array::add) {
-	    std::vector<Instance*> cpy(this->getAValue<std::vector<Instance*> >());
+	    Types::Array::arrtype cpy(this->getAValue<Types::Array::arrtype >());
 	    cpy.push_back(other);
 	    return new Array(cpy, toid, this->parent);
 	}

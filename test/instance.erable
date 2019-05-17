@@ -19,5 +19,19 @@ var arr=[1,2,3,5,6,4,6,7,2];
 arr+=24;
 
 function testfunc1:(f g h i){
-  "abcd";
+  return f+g+h+i;
 };
+
+var tfs=testfunc1(2,3,4,3);
+
+tfs+=(testfunc1(1,2,3,4));
+
+println("Hello World!");
+var pa="omg";
+println("pa=" + pa);
+pa="It works!!!";
+println("pa changed into :" + pa);
+
+println("Input:");
+var inp=scan();
+println("Get:"+inp);

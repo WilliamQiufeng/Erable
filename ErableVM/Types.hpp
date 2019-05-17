@@ -39,6 +39,7 @@ namespace Erable{
 	class Array;
 	class Object;
         class Function;
+	class NativeFunction;
     }
 }
 //#include "Global.hpp"
@@ -150,20 +151,22 @@ namespace Erable {
 	};
 	class Array : public Instance {
 	public:
-	    INSTANCE_CONSTRUCTOR(Array, std::vector<Instance*>);
+	    typedef std::vector<Instance*> arrtype;
+	    INSTANCE_CONSTRUCTOR(Array, arrtype);
 	    OVERRIDE_INSTANCE_FUNC(add);
 	    OVERRIDE_CLONE_AND_GTN;
 	};
 	class Object : public Instance {
-	    typedef std::map<Instance, Instance*> form;
 	public:
+	    typedef std::map<Instance, Instance*> form;
 	    INSTANCE_CONSTRUCTOR(Object, form);
 	    OVERRIDE_CLONE_AND_GTN;
 	};
 	class Function : public Instance {
 	    int retId,argc;
 	public:
-	    INSTANCE_CONSTRUCTOR(Function, std::vector<Program::Op>);
+	    typedef std::vector<Program::Op> codet;
+	    INSTANCE_CONSTRUCTOR(Function, codet);
 	    OVERRIDE_CLONE_AND_GTN;
 	    inline int getArgc() const {
 		return argc;
@@ -180,7 +183,27 @@ namespace Erable {
 	    inline void setRetId(int retId) {
 		this->retId = retId;
 	    }
-	    void execute();
+	};
+	class NativeFunction : public Instance {
+	    int retId,argc;
+	public:
+	    INSTANCE_CONSTRUCTOR(NativeFunction, std::string);
+	    OVERRIDE_CLONE_AND_GTN;
+	    inline int getArgc() const {
+		return argc;
+	    }
+
+	    inline void setArgc(int argc) {
+		this->argc = argc;
+	    }
+
+	    inline int getRetId() const {
+		return retId;
+	    }
+
+	    inline void setRetId(int retId) {
+		this->retId = retId;
+	    }
 	};
     }
 }
