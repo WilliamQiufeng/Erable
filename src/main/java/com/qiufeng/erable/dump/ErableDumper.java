@@ -118,7 +118,7 @@ public class ErableDumper {
 			int id=this.readId(id_len);
 			System.out.print(" @"+id);
 		    }   System.out.println();
-		    if(code==OpCode.PUSH_SCOPE||code==OpCode.IF||code==OpCode.ELSE||code==OpCode.WHILE||code==OpCode.OBJECT||code==OpCode.FUNCTION
+		    if(code==OpCode.PUSH_SCOPE||code==OpCode.IF||code==OpCode.ELSE||code==OpCode.WHILE||code==OpCode.FUNCTION
 			    ||code==OpCode.TRY)
 			this.depth+=2;
 		    if(code==OpCode.POP_SCOPE||code==OpCode.END)

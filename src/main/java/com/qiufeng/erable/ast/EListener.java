@@ -222,14 +222,13 @@ public class EListener extends ErableBaseListener {
 	String funcname = ctx.funcname.getText();
 	//Enter FUNCDECL
 	FuncDeclCode fdc = new FuncDeclCode(funcname, null, this.current);
-	fdc.ret=fdc.id + ctx.arguments.argss.size() + 1;
+	fdc.ret = fdc.id + ctx.arguments.argss.size() + 1;
 	//fdc.ret=ctx.arguments.ret;
 	this.current = fdc;
 	fdc.args = new ArrayList<>();
 	for (Token t : ctx.arguments.argss) {
 	    fdc.args.add(new FPADCode(t.getText(), current));
 	}
-	
 
 	//Enter CODEBLOCK ('''block=codeblock''' in Erable.g4),will invoke #enterCodeblock and #exitCodeblock after.
     }
@@ -251,7 +250,7 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitArgs(ErableParser.ArgsContext ctx) {
 	super.exitArgs(ctx);
-	ctx.ret=Code.currentId++;
+	ctx.ret = Code.currentId++;
 	//System.out.println(current);
 	//FuncDeclCode fdc=(current instanceof FuncDeclCode?((FuncDeclCode)current):;
 	//fdc.args=ctx.arguments;
@@ -345,7 +344,7 @@ public class EListener extends ErableBaseListener {
     public void exitPair(ErableParser.PairContext ctx) {
 	super.exitPair(ctx);
 	boolean isFuncDecl = true;
-	int key = 0, value = 0;
+	int key = -1, value = -1;
 	ConstantPoolString ks = null;
 	if (ctx.funcdecl() != null) {
 	    ks = new ConstantPoolString(ctx.funcdecl().funcname.getText());
@@ -355,22 +354,21 @@ public class EListener extends ErableBaseListener {
 	    value = ctx.native_funcdecl().id;
 	} else {
 	    isFuncDecl = false;
+	    key = ctx.key.id;
+	    value = ctx.val.id;
 	}
 	if (isFuncDecl) {
 	    this.pool.addElement(ks);
 	    TempCode tmp = new TempCode(ks.id, this.current);
 	    this.current.addCode(tmp);
 	    key = tmp.id;
-	    current.addCode(new MachineCode(OpCode.KEY,/*current.codes.get(current.codes.size()-1)*/ new int[]{key}, current));
-	    current.addCode(new MachineCode(OpCode.VALUE,/*current.codes.get(current.codes.size()-1)*/ new int[]{value}, current));
 	}
-	current.addCode(new MachineCode(OpCode.END_PAIR, new int[]{}, this.current));
+	current.addCode(new MachineCode(OpCode.PAIR,/*current.codes.get(current.codes.size()-1)*/ new int[]{key, value, this.current.id}, current));
     }
 
     @Override
     public void enterPair(ErableParser.PairContext ctx) {
 	super.enterPair(ctx);
-	current.addCode(new MachineCode(OpCode.START_PAIR, new int[]{}, this.current));
     }
 
     @Override
@@ -415,10 +413,13 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitOops(ErableParser.OopsContext ctx) {
 	super.exitOops(ctx);
-	ObjectCode cur = (ObjectCode) current;
-	OpCode type = (cur.isKey ? OpCode.KEY : OpCode.VALUE);
-	((ObjectCode) current).isKey = !((ObjectCode) current).isKey;
-	current.addCode(new MachineCode(type,/*current.codes.get(current.codes.size()-1)*/ new int[]{ctx.ops().id}, current));
+//	ObjectCode cur = (ObjectCode) current;
+//	boolean isKey = cur.isKey;
+//	((ObjectCode) current).isKey = !isKey;
+//	if(isKey) {
+//	    
+//	}
+//	current.addCode(new MachineCode(type,/*current.codes.get(current.codes.size()-1)*/ new int[]{ctx.ops().id}, current));
 	ctx.id = ctx.ops().id;
     }
 
@@ -648,14 +649,14 @@ public class EListener extends ErableBaseListener {
 	}*/
 	int nativeCall = ctx.method.id;
 
-	NativeFuncDeclCode nfdc=(NativeFuncDeclCode)current;
+	NativeFuncDeclCode nfdc = (NativeFuncDeclCode) current;
 	//NativeFuncDeclCode nfdc = new NativeFuncDeclCode(funcname, nativeCall, ctx.argss, current);
-	nfdc.ret=ctx.arguments.ret;
-	nfdc.nativeCall=nativeCall;
-	nfdc.args=ctx.argss;
-	nfdc.tag=funcname;
+	nfdc.ret = ctx.arguments.ret;
+	nfdc.nativeCall = nativeCall;
+	nfdc.args = ctx.argss;
+	nfdc.tag = funcname;
 	ctx.id = nfdc.id;
-	current=current.getParent();
+	current = current.getParent();
 	this.current.addCode(nfdc);
 
     }

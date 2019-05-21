@@ -188,10 +188,10 @@ namespace Erable {
 		return getLE<long>(b,off,8);
             }
 	    inline float getFloat(std::vector<char> b, int off) {
-		return getBE<float>(b,off,8);
+		return (float)getBE<long>(b,off,8);
 	    }
             inline double getDouble(std::vector<char> b, int off) {
-                return getBE<double>(b,off,8);
+                return (double)(getBE<long>(b,off,8));
             }
 
 

@@ -26,6 +26,9 @@
 #ifndef GLOBALMACROS_HPP
 #define GLOBALMACROS_HPP
 
+#include <cstdlib>
+
+
 
 
 
@@ -67,16 +70,53 @@
     <<other->getTypeName()\
     <<"'";		\
     panic Exceptions::UnsupportedOpException(ss.str());
+#define THROW_UNARY_UOE(op)	\
+    std::stringstream ss;\
+    ss<<"Operation '" #op "' to '"\
+    <<this->getTypeName()\
+    <<"'";		\
+    panic Exceptions::UnsupportedOpException(ss.str());
 
 
 
 //---------For Instance Use-------------//
+//-----Instance Override-----//
+#define DECLARE_INSTANCE_FUNC(name) Instance* name(Instance* other, int toid)
+#define DECLARE_UNARY_INSTANCE_FUNC(name) Instance* name(int toid)
+#define OVERRIDE_INSTANCE_FUNC(name) DECLARE_INSTANCE_FUNC(name) override
+#define OVERRIDE_UNARY_INSTANCE_FUNC(name) DECLARE_UNARY_INSTANCE_FUNC(name) override
 
+#define OVERRIDE_OP_NUM(name, op)                   \
+    OVERRIDE_INSTANCE_FUNC(name){                        \
+        ERABLE_DO_OP_NUM(this, other, op, toid);    \
+    }
+#define OVERRIDE_OP_NUM_FUNC(name, op)              \
+    OVERRIDE_INSTANCE_FUNC(name){                        \
+        ERABLE_DO_OP_NUM_FUNC(this, other, op, toid);\
+    }
+#define OUTER_OVERRIDE_OP_NUM(name, op)             \
+    DECLARE_INSTANCE_FUNC(name){                    \
+        ERABLE_DO_OP_NUM(this, other, op, toid);    \
+    }
+#define OUTER_OVERRIDE_OP_NUM_FUNC(name, op)             \
+    DECLARE_INSTANCE_FUNC(name){                    \
+        ERABLE_DO_OP_NUM_FUNC(this, other, op, toid);    \
+    }
+#define INSTANCE_CONSTRUCTOR(cls, type)	    cls(type value, int id, Descriptor* parent = nullptr, Instance* parentInstance = nullptr) : Instance(value, id, parent, parentInstance) {}	\
+					    cls(boost::any* value, int id, Descriptor* parent = nullptr, Instance* parentInstance = nullptr) : Instance(value, id, parent, parentInstance) {}
+#define OVERRIDE_INSTANCE_EQU(name, type)		    \
+    DECLARE_INSTANCE_FUNC(name::equ) {			    \
+	return new Integer(this->getTypeName() == other->getTypeName() and this->getAValue<type>() == other->getAValue<type>(), toid, this->getParent()); \
+    }
 //-----Virtual OpFunction Declare-----//
 
 #define DECLARE_INSTANCE_VIRTUAL(name, op)  \
     virtual Instance* name(Instance* other, int toid) {  \
         THROW_UOE(op);                                   \
+    };
+#define DECLARE_UNARY_INSTANCE_VIRTUAL(name, op)  \
+    virtual Instance* name(int toid) {  \
+        THROW_UNARY_UOE(op);                                   \
     };
 
 #define GET_NUM(ptr, v)             \
@@ -123,9 +163,11 @@
 
 //-----BuiltiIn Native Function Initialising-----//
 #define DEFINE_NATIVE_FUNCTION(name) Types::Instance* name(Descriptor* desc, Types::NativeFunction * self, Types::Array* argv)
-#define OVERRIDE_NATIVE_BUILTIN(name) DEFINE_NATIVE_FUNCTION(BuiltIn_t::name)
-#define ADD_NATIVE(name, func, obj)	Erable::Native::functype name##_FN = std::bind(&func, obj, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);\
-					this->functions[#name] = name##_FN;
+#define OVERRIDE_NATIVE_BUILTIN(name) DEFINE_NATIVE_FUNCTION(BuiltIn::name)
+#define ADD_NATIVE(name, func)	Erable::Native::functype name##_FN = std::bind(&func, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);\
+				Erable::Native::Functions.functions[#name] = name##_FN;
+#define ADD_NATIVE_INCLASS(name, func, obj)	Erable::Native::functype name##_FN = std::bind(&func, obj, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);\
+						Erable::Native::Functions.functions[#name] = name##_FN;
 
 //-----Instance Clone and getTypeName-----//
 #define OVERRIDE_CLONE_AND_GTN			    \
@@ -137,29 +179,9 @@
     }						    \
     std::string cls::getTypeName(){			    \
 	return #cls;				    \
-    }
-//-----Instance Override-----//
-#define DECLARE_INSTANCE_FUNC(name) Instance* name(Instance* other, int toid)
-#define OVERRIDE_INSTANCE_FUNC(name) DECLARE_INSTANCE_FUNC(name) override
+    }						    \
+    OVERRIDE_INSTANCE_EQU(cls,type);
 
-#define OVERRIDE_OP_NUM(name, op)                   \
-    OVERRIDE_INSTANCE_FUNC(name){                        \
-        ERABLE_DO_OP_NUM(this, other, op, toid);    \
-    }
-#define OVERRIDE_OP_NUM_FUNC(name, op)              \
-    OVERRIDE_INSTANCE_FUNC(name){                        \
-        ERABLE_DO_OP_NUM_FUNC(this, other, op, toid);\
-    }
-#define OUTER_OVERRIDE_OP_NUM(name, op)             \
-    DECLARE_INSTANCE_FUNC(name){                    \
-        ERABLE_DO_OP_NUM(this, other, op, toid);    \
-    }
-#define OUTER_OVERRIDE_OP_NUM_FUNC(name, op)             \
-    DECLARE_INSTANCE_FUNC(name){                    \
-        ERABLE_DO_OP_NUM_FUNC(this, other, op, toid);    \
-    }
-#define INSTANCE_CONSTRUCTOR(cls, type)	    cls(type value, int id, Descriptor* parent = nullptr) : Instance(value, id, parent) {}	\
-					    cls(boost::any* value, int id, Descriptor* parent = nullptr) : Instance(value, id, parent) {}
 //-----------End Instance Use------------//
 
 namespace Erable {

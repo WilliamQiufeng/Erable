@@ -33,33 +33,41 @@ namespace Erable {
     namespace Exceptions {
 
         class Exception : std::runtime_error {
+	    std::string __msg_;
         public:
 
-            explicit Exception(const std::string &title, const std::string& s) : std::runtime_error(title + ":" + s) {
-		std::cout<<s<<std::endl;
+            explicit Exception(const std::string &title, const std::string& s) : std::runtime_error(title + ":" + s), __msg_(title + ":" + s) {
+		std::cerr<<s<<std::endl;
             };
-	    
+	    inline virtual ~Exception() throw(){};
+	    inline virtual const char* what() const throw(){return __msg_.c_str();};
+
+
         };
 
-        class UnsupportedOpException : Exception {
+        class UnsupportedOpException : public Exception {
         public:
 
             explicit UnsupportedOpException(const std::string& s) : Exception("Unsupported Operation", s) {
             };
         };
 
-        class IOException : Exception {
+        class IOException : public Exception {
         public:
 
             explicit IOException(const std::string& s) : Exception("IO Exception", s) {
             };
         };
-        class ValidateException : Exception {
+        class ValidateException : public Exception {
         public:
 
             explicit ValidateException(const std::string& s) : Exception("Validate Exception", s) {
             };
         };
+	class TypeCheckException : public Exception {
+	public:
+	    explicit TypeCheckException(const std::string& s) : Exception("Type Check Exception: ", s){};
+	};
     }
 }
 

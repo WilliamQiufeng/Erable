@@ -92,6 +92,7 @@ namespace Erable {
 	}
 	void set(int, Erable::Types::Instance*);
 	Types::Instance* get(int);
+	void del(int);
 	Program::ProgramInputStream* getInput() const {
 	    return input;
 	}

@@ -21,11 +21,16 @@
 #include "Program.hpp"
 #include "Descriptor.hpp"
 #include "Metadata.hpp"
+#include "LibLoader.hpp"
+#include "NativeFunctions.hpp"
 
 /*
  *
  */
 int main(int argc, char** argv) {
+    //    Erable::Native::Library::Loader loader;
+    //    loader.load("/williamye/program/antlr/erable/ErableVM/StdLib/dist/Debug/GNU-MacOSX/libStdLib.dylib");
+    Erable::Native::loadBuiltIn();
     Erable::Descriptor desc;
     std::cout << "INITIALISED" << std::endl;
     desc.setInput(new Erable::Program::ProgramInputStream("../test/instance.ec"));

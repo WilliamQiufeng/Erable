@@ -19,25 +19,36 @@
 
 namespace Erable {
     namespace Native {
+	namespace BuiltIn {
 
-	OVERRIDE_NATIVE_BUILTIN(print) {
-	    Types::Instance* toP = argv->getAValue<Types::Array::arrtype>().at(0);
-	    std::cout << toP << std::endl;
-	    return nullptr;
+	    DEFINE_NATIVE_FUNCTION(print) {
+		Types::Instance* toP = argv->getAValue<Types::Array::arrtype>().at(0);
+		std::cout << toP << std::endl;
+		return nullptr;
+	    };
+
+	    DEFINE_NATIVE_FUNCTION(scan) {
+		std::string get;
+		std::cin>>get;
+		Types::Instance* ret = new Types::String(get, self->getRetId(), desc);
+		return ret;
+	    };
+
+	    DEFINE_NATIVE_FUNCTION(sqrt) {
+		return nullptr;
+	    }
+
+	    DEFINE_NATIVE_FUNCTION(log) {
+		return nullptr;
+	    }
 	}
 
-	OVERRIDE_NATIVE_BUILTIN(scan) {
-	    std::string get;
-	    std::cin>>get;
-	    Types::Instance* ret = new Types::String(get, self->getRetId(), desc);
-	    return ret;
+	void loadBuiltIn() {
+	    ADD_NATIVE(print, BuiltIn::print);
+	    ADD_NATIVE(scan, BuiltIn::scan);
+	    ADD_NATIVE(sqrt, BuiltIn::sqrt);
+	    ADD_NATIVE(log, BuiltIn::log);
 	}
-
-	Functions_t::Functions_t() {
-	    ADD_NATIVE(print, BuiltIn_t::print, BuiltIn);
-	    ADD_NATIVE(scan, BuiltIn_t::scan, BuiltIn);
-	}
-
 
     }
 }

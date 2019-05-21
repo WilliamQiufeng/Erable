@@ -26,6 +26,7 @@ public enum OpCode {
     ADD("+",3,2),SUB("-",3,2),MUL("*",3,2),DIV("/",3,2),MOD("%",3,2),POW("**",3,2),
     //op 1 -> ID 2
     POS(2,1),NEG(2,1),
+    COND("?",2,1),
     //1[2] -> ID 3
     ELEMENT(3,2),
     LS("<<",3,2),RS(">>",3,2),URS(">>>",3,2),
@@ -48,7 +49,7 @@ public enum OpCode {
     BREAKIF(1),
     //If 1 jump 2
     JUMPIF(2),
-    OBJECT(1),START_PAIR,KEY(1),VALUE(1),END_PAIR,
+    OBJECT(1),PAIR(3),
     TRY(2),
     NATIVE_FUNCDECL(3),LOAD_LIB(1),
     DYN_LOAD(3),DYNCALL(3),

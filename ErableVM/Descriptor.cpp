@@ -59,6 +59,10 @@ namespace Erable {
 	return inst1;
     }
 
+    void Descriptor::del(int id) {
+	this->idmap->erase(id);
+    }
+
     void Descriptor::readHeader() {
 	this->getInput()->readMeta();
     }
@@ -120,6 +124,14 @@ namespace Erable {
 	    int targId = op[1];
 	    Types::Instance* ref = this->get(origId);
 	    Types::Instance* targ = this->get(ref->getAValue<int>());
+	    this->set(targId, targ);
+	}
+
+	ELSE_CASE_OPCODE("COND") {
+	    int origId = op[0];
+	    int targId = op[1];
+	    Types::Instance* ref = this->get(origId);
+	    Types::Instance* targ = ref->cond(targId);
 	    this->set(targId, targ);
 	}
 
@@ -192,6 +204,17 @@ namespace Erable {
 	    this->set(targId, arr);
 	}
 
+	ELSE_CASE_OPCODE("ELEMENT") {
+	    int arrId = op[0];
+	    int accId = op[1];
+	    int targId = op[2];
+	    Types::Instance* arr = this->get(arrId);
+	    Types::Instance* acc = this->get(accId);
+	    Types::Instance* ele = arr->acc(acc, targId);
+	    //	    std::cout << "Access: " << ele << std::endl;
+	    this->set(targId, ele);
+	}
+
 	ELSE_CASE_OPCODE("PUSH_ELEMENT") {
 	    int eleId = op[0];
 	    int arrId = op[1];
@@ -199,6 +222,24 @@ namespace Erable {
 	    Types::Instance* ele = this->get(eleId);
 	    Types::Instance* res = arr->add(ele, arr->id);
 	    this->set(arrId, res);
+	}
+
+	ELSE_CASE_OPCODE("OBJECT") {
+	    int targId = op[0];
+	    Types::Object* obj = new Types::Object(new Types::Object::formmap, targId, this);
+	    this->set(targId, obj);
+	    //std::cout << "New Object: " << obj << std::endl;
+	}
+
+	ELSE_CASE_OPCODE("PAIR") {
+	    int keyId = op[0];
+	    int valId = op[1];
+	    int objId = op[2];
+	    Types::Instance* key = this->get(keyId);
+	    Types::Instance* val = this->get(valId);
+	    Types::Instance* obj = this->get(objId);
+	    //std::cout << "Pair (" << key << ", " << val << ") to " << obj << std::endl;
+	    obj->getAValue<Types::Object::form>()->insert(std::pair(key, val));
 	}
 
 	ELSE_CASE_OPCODE("FUNCTION") {
@@ -232,6 +273,7 @@ namespace Erable {
 	    Types::Array* argv = (Types::Array*)this->get(targId);
 	    Descriptor* desc = new Descriptor(this);
 	    Types::Instance* inst = this->get(funcId);
+	    //	    std::cout << "Calling function " << inst << std::endl;
 	    if (inst->getTypeName() == "Function") {
 		int ind = 1;
 		for (Types::Instance* arg : argv->getAValue < Types::Array::arrtype >()) {
@@ -241,6 +283,7 @@ namespace Erable {
 		}
 		Types::Function* func = (Types::Function*)inst;
 		Types::Function::codet codes = func->getAValue<Types::Function::codet>();
+		desc->retId = func->getRetId();
 		desc->executeAll(codes);
 	    } else if (inst->getTypeName() == "NativeFunction") {
 		Types::NativeFunction* func = (Types::NativeFunction*)inst;
@@ -251,13 +294,21 @@ namespace Erable {
 		if (ret != nullptr) {
 		    desc->retVal = ret;
 		}
+	    } else {
+		std::stringstream ss;
+		ss << "Calling to ";
+		ss << inst->getTypeName();
+		throw Exceptions::TypeCheckException(ss.str());
 	    }
 	    if (desc->retVal != nullptr) {
-		std::cout << desc->retVal << std::endl;
+		//std::cout << inst << " returned " << desc->retVal << std::endl;
 		Types::Instance* cl = desc->retVal->clone();
 		cl->setId(targId);
 		(*this->idmap)[targId] = cl;
-		std::cout << this->idmap->at(targId) << std::endl;
+		//std::cout << this->idmap->at(targId) << std::endl;
+	    } else {
+		//Delete Argument Buffer, GC
+		this->del(targId);
 	    }
 	}
     }

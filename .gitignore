@@ -6,3 +6,6 @@
 /ErableVM/dist/
 /CppIssue/build/
 /CppIssue/dist/
+/ErableVM/StdLib/build/
+/ErableVM/StdLib/dist/
+/stdlib/dist/

@@ -115,6 +115,8 @@ int main() {
     ACCA acca;
     std::function<void() > accab = std::bind(ACCAA(b), acca);
     accab();
+    Dynamicro dyn;
+
     //    '__bind<Erable::Types::Instance *(Erable::Native::BuiltIn_t::*)(Erable::Descriptor *, Erable::Types::NativeFunction *, Erable::Types::Array *), Erable::Native::BuiltIn_t &>'
     //    'function<Types::Instance *(Erable::Descriptor *, Erable::Types::NativeFunction *, Erable::Types::Array *)>'
     return 0;

@@ -51,20 +51,22 @@ namespace Erable{
 namespace Erable {
     namespace Types {
 	std::ostream& operator<<(std::ostream& os, std::vector<Instance*> obj);
+	std::ostream& operator<<(std::ostream& os, Instance* obj);
         class Instance {
 	public:
 	    
 	    boost::any* value;
 	    int id;
 	    Descriptor* parent;
+	    Instance* parentInstance;
 
-	    TEMPT Instance(boost::any* value, int id, Descriptor* parent = nullptr) :
-	    value(new boost::any(boost::any_cast<type>(value))), id(id), parent(parent) {
+	    TEMPT Instance(boost::any* value, int id, Descriptor* parent = nullptr, Instance* parentInstance = nullptr) :
+	    value(new boost::any(boost::any_cast<type>(value))), id(id), parent(parent), parentInstance(parentInstance) {
 		//std::cout<<"ANY:"<<boost::any_cast<type>(value)<<std::endl;
 	    }
 	    
-	    TEMPT Instance(type value, int id, Descriptor* parent = nullptr) :
-	    value(new boost::any(value)), id(id), parent(parent) {
+	    TEMPT Instance(type value, int id, Descriptor* parent = nullptr, Instance* parentInstance = nullptr) :
+	    value(new boost::any(value)), id(id), parent(parent), parentInstance(parentInstance) {
 		//std::cout<<"TYPE:"<<value<<std::endl;
 	    }
 
@@ -91,6 +93,16 @@ namespace Erable {
 	    void setParent(Descriptor* parent) {
 		this->parent = parent;
 	    }
+	    
+	    Instance* getParentInstance() const {
+		return parentInstance;
+	    }
+
+	    void setParentInstance(Instance* parentInstance) {
+		this->parentInstance = parentInstance;
+	    }
+
+	    
 	    inline std::string toString(){
 		std::stringstream ss;
 		ss<<this;
@@ -105,6 +117,9 @@ namespace Erable {
 		// Do actual comparison
 		return this->id-right.id;
 	    }
+	    
+	    bool operator==(Instance& right) const;
+
 
 
 	    virtual std::string getTypeName();
@@ -115,6 +130,19 @@ namespace Erable {
 	    DECLARE_INSTANCE_VIRTUAL(div, /);
 	    DECLARE_INSTANCE_VIRTUAL(mod, %);
 	    DECLARE_INSTANCE_VIRTUAL(pow, **);
+	    DECLARE_INSTANCE_VIRTUAL(acc, []);
+	    DECLARE_INSTANCE_VIRTUAL(equ, ==);
+	    DECLARE_INSTANCE_VIRTUAL(less, <);
+	    DECLARE_INSTANCE_VIRTUAL(more, >);
+	    DECLARE_INSTANCE_VIRTUAL(le,  <=);
+	    DECLARE_INSTANCE_VIRTUAL(me,  >=);
+	    DECLARE_INSTANCE_VIRTUAL(band, &);
+	    DECLARE_INSTANCE_VIRTUAL(bor,  |);
+	    DECLARE_INSTANCE_VIRTUAL(bxor, ^);
+	    DECLARE_INSTANCE_VIRTUAL(ls,  <<);
+	    DECLARE_INSTANCE_VIRTUAL(rs,  >>);
+	    DECLARE_INSTANCE_VIRTUAL(urs,>>>);
+	    DECLARE_UNARY_INSTANCE_VIRTUAL(cond, ?);
 
 	};
 	class Integer : public Instance {
@@ -127,6 +155,8 @@ namespace Erable {
 	    OVERRIDE_INSTANCE_FUNC(div);
 	    OVERRIDE_INSTANCE_FUNC(mod);
 	    OVERRIDE_INSTANCE_FUNC(pow);
+	    OVERRIDE_INSTANCE_FUNC(equ);
+	    OVERRIDE_UNARY_INSTANCE_FUNC(cond);
 	    OVERRIDE_CLONE_AND_GTN;
 	};
 	class Double : public Instance {
@@ -138,6 +168,8 @@ namespace Erable {
 	    OVERRIDE_INSTANCE_FUNC(div);
 	    OVERRIDE_INSTANCE_FUNC(mod);
 	    OVERRIDE_INSTANCE_FUNC(pow);
+	    OVERRIDE_INSTANCE_FUNC(equ);
+	    OVERRIDE_UNARY_INSTANCE_FUNC(cond);
 	    OVERRIDE_CLONE_AND_GTN;
 	};
 	class String : public Instance {
@@ -147,6 +179,8 @@ namespace Erable {
 	    OVERRIDE_INSTANCE_FUNC(sub);
 	    OVERRIDE_INSTANCE_FUNC(mul);
 	    OVERRIDE_INSTANCE_FUNC(mod);
+	    OVERRIDE_INSTANCE_FUNC(equ);
+	    OVERRIDE_UNARY_INSTANCE_FUNC(cond);
 	    OVERRIDE_CLONE_AND_GTN;
 	};
 	class Array : public Instance {
@@ -154,12 +188,19 @@ namespace Erable {
 	    typedef std::vector<Instance*> arrtype;
 	    INSTANCE_CONSTRUCTOR(Array, arrtype);
 	    OVERRIDE_INSTANCE_FUNC(add);
+	    OVERRIDE_INSTANCE_FUNC(acc);
+	    OVERRIDE_INSTANCE_FUNC(equ);
+	    OVERRIDE_UNARY_INSTANCE_FUNC(cond);
 	    OVERRIDE_CLONE_AND_GTN;
 	};
 	class Object : public Instance {
 	public:
-	    typedef std::map<Instance, Instance*> form;
+	    typedef std::map<Instance*, Instance*> formmap;
+	    typedef formmap* form;
 	    INSTANCE_CONSTRUCTOR(Object, form);
+	    OVERRIDE_INSTANCE_FUNC(acc);
+	    OVERRIDE_INSTANCE_FUNC(equ);
+	    OVERRIDE_UNARY_INSTANCE_FUNC(cond);
 	    OVERRIDE_CLONE_AND_GTN;
 	};
 	class Function : public Instance {
@@ -167,6 +208,8 @@ namespace Erable {
 	public:
 	    typedef std::vector<Program::Op> codet;
 	    INSTANCE_CONSTRUCTOR(Function, codet);
+	    OVERRIDE_UNARY_INSTANCE_FUNC(cond);
+	    OVERRIDE_INSTANCE_FUNC(equ);
 	    OVERRIDE_CLONE_AND_GTN;
 	    inline int getArgc() const {
 		return argc;
@@ -188,6 +231,8 @@ namespace Erable {
 	    int retId,argc;
 	public:
 	    INSTANCE_CONSTRUCTOR(NativeFunction, std::string);
+	    OVERRIDE_UNARY_INSTANCE_FUNC(cond);
+	    OVERRIDE_INSTANCE_FUNC(equ);
 	    OVERRIDE_CLONE_AND_GTN;
 	    inline int getArgc() const {
 		return argc;
@@ -202,7 +247,7 @@ namespace Erable {
 	    }
 
 	    inline void setRetId(int retId) {
-		this->retId = retId;
+		this->retId = retId;	
 	    }
 	};
     }

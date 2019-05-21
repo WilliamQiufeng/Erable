@@ -37,11 +37,14 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/ConstantPool.o \
 	${OBJECTDIR}/Descriptor.o \
+	${OBJECTDIR}/Global.o \
 	${OBJECTDIR}/IO.o \
+	${OBJECTDIR}/LibLoader.o \
 	${OBJECTDIR}/Metadata.o \
 	${OBJECTDIR}/NativeFunctions.o \
 	${OBJECTDIR}/Program.o \
 	${OBJECTDIR}/Types.o \
+	${OBJECTDIR}/include/dynamicro.o \
 	${OBJECTDIR}/main.o
 
 # Test Directory
@@ -89,10 +92,20 @@ ${OBJECTDIR}/Descriptor.o: Descriptor.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Descriptor.o Descriptor.cpp
 
+${OBJECTDIR}/Global.o: Global.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Global.o Global.cpp
+
 ${OBJECTDIR}/IO.o: IO.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/IO.o IO.cpp
+
+${OBJECTDIR}/LibLoader.o: LibLoader.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/LibLoader.o LibLoader.cpp
 
 ${OBJECTDIR}/Metadata.o: Metadata.cpp
 	${MKDIR} -p ${OBJECTDIR}
@@ -113,6 +126,11 @@ ${OBJECTDIR}/Types.o: Types.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Types.o Types.cpp
+
+${OBJECTDIR}/include/dynamicro.o: include/dynamicro.cpp
+	${MKDIR} -p ${OBJECTDIR}/include
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/include/dynamicro.o include/dynamicro.cpp
 
 ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
@@ -163,6 +181,19 @@ ${OBJECTDIR}/Descriptor_nomain.o: ${OBJECTDIR}/Descriptor.o Descriptor.cpp
 	    ${CP} ${OBJECTDIR}/Descriptor.o ${OBJECTDIR}/Descriptor_nomain.o;\
 	fi
 
+${OBJECTDIR}/Global_nomain.o: ${OBJECTDIR}/Global.o Global.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/Global.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Global_nomain.o Global.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/Global.o ${OBJECTDIR}/Global_nomain.o;\
+	fi
+
 ${OBJECTDIR}/IO_nomain.o: ${OBJECTDIR}/IO.o IO.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/IO.o`; \
@@ -174,6 +205,19 @@ ${OBJECTDIR}/IO_nomain.o: ${OBJECTDIR}/IO.o IO.cpp
 	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/IO_nomain.o IO.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/IO.o ${OBJECTDIR}/IO_nomain.o;\
+	fi
+
+${OBJECTDIR}/LibLoader_nomain.o: ${OBJECTDIR}/LibLoader.o LibLoader.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/LibLoader.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/LibLoader_nomain.o LibLoader.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/LibLoader.o ${OBJECTDIR}/LibLoader_nomain.o;\
 	fi
 
 ${OBJECTDIR}/Metadata_nomain.o: ${OBJECTDIR}/Metadata.o Metadata.cpp 
@@ -226,6 +270,19 @@ ${OBJECTDIR}/Types_nomain.o: ${OBJECTDIR}/Types.o Types.cpp
 	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Types_nomain.o Types.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/Types.o ${OBJECTDIR}/Types_nomain.o;\
+	fi
+
+${OBJECTDIR}/include/dynamicro_nomain.o: ${OBJECTDIR}/include/dynamicro.o include/dynamicro.cpp 
+	${MKDIR} -p ${OBJECTDIR}/include
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/include/dynamicro.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/include/dynamicro_nomain.o include/dynamicro.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/include/dynamicro.o ${OBJECTDIR}/include/dynamicro_nomain.o;\
 	fi
 
 ${OBJECTDIR}/main_nomain.o: ${OBJECTDIR}/main.o main.cpp 

@@ -67,6 +67,7 @@ ops
   | l=ops operation=SUB r=ops                 {$type="binop";}
   | l=ops operation=ADD r=ops                 {$type="binop";}
   | operation=(UNARYOPS|ADD|SUB) r=ops           {$type="unary";}
+  | r=ops operation=COND                       {$type="unary";}
   | funcname=ops LPA arguments=sep_ops RPA     {$type="funccall";}
   | LPA p=ops RPA                                {$type="bracket";}
   | modacc                                       {$type="modacc";}                    
@@ -229,7 +230,8 @@ DIV               : '/'                             ;
 MOD               : '%'                             ;
 EQU               : '='                             ;
 
-
+//Operation '?': turns instances into [int 0 or 1]
+COND              : '?'                             ;
 //Bit Operation
 fragment BAND     : '&'                             ;
 fragment BOR      : '|'                             ;

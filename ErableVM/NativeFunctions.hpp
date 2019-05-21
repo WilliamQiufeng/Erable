@@ -34,18 +34,18 @@ namespace Erable{
     namespace Native{
 	typedef std::function<Types::Instance*(Erable::Descriptor*, Erable::Types::NativeFunction*, Erable::Types::Array*)> functype;
 	typedef std::map<std::string, functype> funcmap;
-	class BuiltIn_t{
-	public:
+	namespace BuiltIn{
 	    DEFINE_NATIVE_FUNCTION(print);
-	    DEFINE_NATIVE_FUNCTION(scan);
+	    DEFINE_NATIVE_FUNCTION(scan) ;
+	    DEFINE_NATIVE_FUNCTION(sqrt) ;
+	    DEFINE_NATIVE_FUNCTION(log)  ;
 	};
 	class Functions_t{
 	public:
 	    funcmap functions;
-	    Functions_t();
 	};
+	void loadBuiltIn();
 	inline Functions_t Functions;
-	inline BuiltIn_t BuiltIn;
     }
 }
 

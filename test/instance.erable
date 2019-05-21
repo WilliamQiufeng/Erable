@@ -33,5 +33,25 @@ pa="It works!!!";
 println("pa changed into :" + pa);
 
 println("Input:");
-var inp=scan();
-println("Get:"+inp);
+//var inp=scan();
+//println("Get:"+inp);
+
+function finarr:(a b c){
+    return a+b-c;
+};
+var arrf=[];
+arrf+=finarr;
+var finarr_ret = arrf[0](1,3,2);
+println("final: " + finarr_ret + ", " + (finarr_ret?));
+
+var mulDimArr=[1,[2,3],4,[5,6,[7,8,9]],0];
+println(mulDimArr[3][2][2]);
+
+var obja = :
+    "name"="William Ye"
+    "age"=12
+    function printInfo:(){
+        println("My name is " + parent["name"] + ", I am " + parent["age"] + " years old.");
+    }
+:;
+obja["printInfo"]();

@@ -9,7 +9,9 @@
             <header-extensions>h,hpp</header-extensions>
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
-            <sourceRootList/>
+            <sourceRootList>
+                <sourceRootElem>include</sourceRootElem>
+            </sourceRootList>
             <confList>
                 <confElem>
                     <name>Debug</name>
@@ -18,6 +20,14 @@
                 <confElem>
                     <name>Release</name>
                     <type>1</type>
+                </confElem>
+                <confElem>
+                    <name>Dynamic_Build</name>
+                    <type>2</type>
+                </confElem>
+                <confElem>
+                    <name>Static_Build</name>
+                    <type>3</type>
                 </confElem>
             </confList>
             <formatting>

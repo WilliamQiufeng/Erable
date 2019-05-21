@@ -1,0 +1,6 @@
+//Math algorithms
+//Author:QiuFeng54321
+//Under GNU General Public Licence 3
+
+native function sqrt:(num) using "sqrt";
+native function log:(base num) using "log";

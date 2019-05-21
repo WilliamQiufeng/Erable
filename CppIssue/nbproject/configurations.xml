@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="100">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="include" displayName="include" projectFiles="true">
+      <itemPath>/williamye/program/antlr/erable/ErableVM/include/dynamicro.cpp</itemPath>
+      <itemPath>/williamye/program/antlr/erable/ErableVM/include/dynamicro.h</itemPath>
+    </logicalFolder>
     <logicalFolder name="HeaderFiles" displayName="头文件" projectFiles="true">
+      <itemPath>DynMainA.hpp</itemPath>
       <itemPath>par.hpp</itemPath>
       <itemPath>sth.hpp</itemPath>
     </logicalFolder>
@@ -24,6 +29,9 @@
       <itemPath>Makefile</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>/williamye/program/antlr/erable/ErableVM/include</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
@@ -37,6 +45,18 @@
           <commandLine>-std=c++14</commandLine>
         </ccTool>
       </compileType>
+      <item path="/williamye/program/antlr/erable/ErableVM/include/dynamicro.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/williamye/program/antlr/erable/ErableVM/include/dynamicro.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="DynMainA.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="par.cpp" ex="false" tool="1" flavor2="0">
@@ -68,6 +88,18 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="/williamye/program/antlr/erable/ErableVM/include/dynamicro.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/williamye/program/antlr/erable/ErableVM/include/dynamicro.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="DynMainA.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="par.cpp" ex="false" tool="1" flavor2="0">

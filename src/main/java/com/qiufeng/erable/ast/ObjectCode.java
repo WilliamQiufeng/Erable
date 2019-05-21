@@ -25,6 +25,7 @@ import java.io.IOException;
  */
 public class ObjectCode extends TempCode {
     public boolean isKey=true;
+    public Code buff_left,buff_right;
     public ObjectCode(Code parent) {
 	super(-1,OpCode.OBJECT, parent);
     }
@@ -38,8 +39,6 @@ public class ObjectCode extends TempCode {
 	this.writeId(id);
 	//System.out.println("__START OBJECT "+this+"__");
 	this.writeCodes();
-	this.writeOpCode(OpCode.END);
-	this.writeId(id);
 	//System.out.println("__END OBJECT "+this+"__");
     }
 

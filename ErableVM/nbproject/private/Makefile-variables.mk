@@ -5,3 +5,5 @@
 #
 # Debug configuration
 # Release configuration
+# Dynamic_Build configuration
+# Static_Build configuration
