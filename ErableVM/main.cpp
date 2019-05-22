@@ -35,7 +35,9 @@ int main(int argc, char** argv) {
     std::cout << "INITIALISED" << std::endl;
     desc.setInput(new Erable::Program::ProgramInputStream("../test/instance.ec"));
     std::cout << "EXECUTE..." << std::endl;
+    std::cout << "------------------------------------------------" << std::endl;
     desc.doAll();
+    std::cout << "------------------------------------------------" << std::endl;
     std::cout << "TERMINATED..." << std::endl;
     std::cout << "Dump >_<" << std::endl;
     std::cout << desc << std::endl;

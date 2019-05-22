@@ -122,7 +122,7 @@ public class EListener extends ErableBaseListener {
     @Override
     public void visitErrorNode(ErrorNode node) {
 	super.visitErrorNode(node);
-	String what = node.getSymbol().getText();
+	String what = node.getText();
 	int line = node.getSymbol().getLine();
 	int column = node.getSymbol().getCharPositionInLine();
 	new UnknownException(BaseException.ErrorType.PARSING, "", what, line, column, 1).throwException();
@@ -851,7 +851,7 @@ public class EListener extends ErableBaseListener {
     @Override
     public void exitDynload(ErableParser.DynloadContext ctx) {
 	super.exitDynload(ctx);
-	DynLoadCode dlc = new DynLoadCode(ctx.mod.getText(), (String) ctx.dyn.obj, ctx.dyn.id, (String) ctx.table.obj, ctx.table.id, this.current);
+	DynLoadCode dlc = new DynLoadCode(ctx.mod.getText(), ctx.dyn.id, (String) ctx.table.obj, ctx.table.id, this.current);
 	dlc.loadProps();
 	this.current.addCode(dlc);
     }

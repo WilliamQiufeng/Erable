@@ -185,7 +185,7 @@
 //-----------End Instance Use------------//
 
 namespace Erable {
-    inline const int UNKNOWN = -1;
+    inline int UNKNOWN = -1;
 }
 #endif /* GLOBALMACROS_HPP */
 

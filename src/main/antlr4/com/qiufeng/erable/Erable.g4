@@ -140,7 +140,7 @@ funcdecl
   : FUNC funcname=NAME arguments=args block=codeblock
   ;
 dynload
-  : DYN_LOAD dyn=string WITH table=string AS mod=NAME
+  : DYN_LOAD dyn=ops WITH table=string AS mod=NAME
   ;
 /*
    Load a native lib (.jar or .dex) for native functions

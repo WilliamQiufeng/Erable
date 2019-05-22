@@ -63,7 +63,7 @@ namespace Erable {
             }
 
             inline void addEnum(std::string name, ValueType value) {
-                EnumElement<ValueType>* ele = new EnumElement(name, value);
+                EnumElement<ValueType>* ele = new EnumElement<ValueType>(name, value);
                 this->addEnum(name, ele);
             };
 

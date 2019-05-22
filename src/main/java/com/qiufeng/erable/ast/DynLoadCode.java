@@ -29,14 +29,13 @@ import java.util.logging.Logger;
  * @author Qiufeng54321
  */
 public class DynLoadCode extends TempCode {
-    String ec,dyn;
+    String dyn;
     int ecid;
     Properties props;
     int maxid;
     int before;
-    public DynLoadCode(String name,String ecpath,int ecpathid,String dynpath,int dynid, Code parent) {
+    public DynLoadCode(String name,int ecpathid,String dynpath,int dynid, Code parent) {
 	super(dynid,OpCode.DYN_LOAD, parent);
-	this.ec=ecpath;
 	this.ecid=ecpathid;
 	this.dyn=dynpath;
 	this.sign=Code.VAR;
@@ -74,7 +73,7 @@ public class DynLoadCode extends TempCode {
 
     @Override
     public String toString() {
-	return super.toString() + "  Dynamic Load Module: " + this.ec + ", Table: " + this.dyn + ", as " + this.id + " with name " + this.tag;
+	return super.toString() + "  Dynamic Load Module: " + this.ecid + ", Table: " + this.dyn + ", as " + this.id + " with name " + this.tag;
     }
     
 }
