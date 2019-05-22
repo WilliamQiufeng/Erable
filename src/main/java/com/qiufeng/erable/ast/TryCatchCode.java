@@ -17,10 +17,8 @@
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
-import com.qiufeng.erable.util.BitUtils;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Arrays;
 
 /**
  *

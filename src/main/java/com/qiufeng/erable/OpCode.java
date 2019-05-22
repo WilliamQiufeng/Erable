@@ -24,8 +24,6 @@ public enum OpCode {
     CONSTANT_POOL,CP_NUM,CP_INT,CP_STR,
     //1 op 2 ->ID 3
     ADD("+",3,2),SUB("-",3,2),MUL("*",3,2),DIV("/",3,2),MOD("%",3,2),POW("**",3,2),
-    //op 1 -> ID 2
-    POS(2,1),NEG(2,1),
     COND("?",2,1),
     //1[2] -> ID 3
     ELEMENT(3,2),

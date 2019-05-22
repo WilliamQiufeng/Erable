@@ -3,7 +3,6 @@ import com.qiufeng.erable.compiler.ErableCompiler;
 import com.qiufeng.erable.ast.Code;
 import com.qiufeng.erable.ast.ConstantPool;
 import com.qiufeng.erable.ast.EListener;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;

@@ -60,8 +60,8 @@ ops
   returns [Object obj,int id,String type]
   : //l=ops DOT (funccall|NAME)                    {$type="dot";}
     l=ops ALPA pdo=ops ARPA                      {$type="element";}
-  | <assoc=right> l=ops operation=POW r=ops                {$type="pow";}
-  | l=ops operation=(EQU|ADDEQ|SUBEQ|MULEQ|DIVEQ|MODEQ) r=ops                              {$type="change";}
+  | <assoc=right> l=ops operation=POW r=ops                {$type="binop";}
+  | l=ops operation=(SWITCH|EQU|ADDEQ|SUBEQ|MULEQ|DIVEQ|MODEQ) r=ops                              {$type="change";}
   | l=ops operation=BINOPS r=ops                 {$type="binop";}
   | l=ops operation=(DIV|MUL|MOD) r=ops                 {$type="binop";}
   | l=ops operation=SUB r=ops                 {$type="binop";}
@@ -195,7 +195,7 @@ sep_ops
 ANYMATCH : '"' (ESC|.)*? '"'            ;
 UNARYOPS : REF|GREF|BNOT|RETURN|BREAK|THROW               ;
 //BINOPS
-BINOPS   : BAND|BOR|BXOR|NEQ|EQ|SWITCH|ULS|URS|LTE|GTE|LS|RS|LT|GT   ;
+BINOPS   : BAND|BOR|BXOR|NEQ|EQ|ULS|URS|LTE|GTE|LS|RS|LT|GT   ;
 
 POW               : '**'                   ;
 LINE_COMMENT      : '//' .*? '\n' -> channel(HIDDEN);
@@ -204,7 +204,7 @@ MULTILINE_COMMENT : '/*' .*? '*/' -> channel(HIDDEN);
 //Less/Greater than(or Equal to), (unsigned) Left/Right Shift
 fragment ULS      : '<<<'                           ;
 fragment URS      : '>>>'                           ;
-fragment SWITCH   : '<=>'                           ;
+SWITCH   : '<=>'                           ;
 fragment LTE      : '<='                            ;
 fragment GTE      : '>='                            ;
 fragment LS       : '<<'                            ;

@@ -437,29 +437,16 @@ public class EListener extends ErableBaseListener {
 		current.addCode(element);
 		ctx.id = element.id;
 		break;
-
-	    case "pow":
 	    case "change":
-		ctx.id = expand(OpCode.findOp(ctx.operation.getText()), ctx.l.id, ctx.r.id);
-		break;
 	    case "binop":
-		BinaryOpCode binop = new BinaryOpCode(ctx.l.id, ctx.r.id, OpCode.findOp(ctx.operation.getText()), current);
-		current.addCode(binop);
-		ctx.id = binop.id;
+//		BinaryOpCode binop = new BinaryOpCode(ctx.l.id, ctx.r.id, OpCode.findOp(ctx.operation.getText()), current);
+//		current.addCode(binop);
+		ctx.id = expand(OpCode.findOp(ctx.operation.getText()), ctx.l.id, ctx.r.id);
 		break;
 
 	    case "unary":
 		OpCode op = OpCode.findOp(ctx.operation.getText());
-		UnaryOpCode unaryop = new UnaryOpCode(ctx.r.id, OpCode.findOp(ctx.operation.getText()), current);
-		if (op == OpCode.RETURN) {
-		    BinaryOpCode bop = new BinaryOpCode(this.current.findNearestFunction().ret, ctx.r.id, OpCode.EQU, current);
-		    current.addCode(bop);
-		    ctx.id = bop.id;
-		    break;
-		}
-		//MachineCode unaryop=new MachineCode(op, new int[]{ctx.r.id},current,true);
-		current.addCode(unaryop);
-		ctx.id = unaryop.id;
+		ctx.id = expandUnary(op, ctx.r.id);
 		break;
 
 	    case "funccall":
@@ -500,6 +487,30 @@ public class EListener extends ErableBaseListener {
 	}
     }
 
+    public int expandUnary(OpCode op, int id) {
+	switch (op) {
+	    case RETURN: {
+		BinaryOpCode bop = new BinaryOpCode(this.current.findNearestFunction().ret, id, OpCode.EQU, current);
+		current.addCode(bop);
+		return bop.id;
+	    }
+	    case ADD: {
+		var pos = new BinaryOpCode(this.current.findVar("false"), id, OpCode.ADD, current);
+		current.addCode(pos);
+		return pos.id;
+	    }
+	    case SUB: {
+		var neg = new BinaryOpCode(this.current.findVar("false"), id, OpCode.SUB, current);
+		current.addCode(neg);
+		return neg.id;
+	    }
+	    default:
+		UnaryOpCode unaryop = new UnaryOpCode(id, op, current);
+		this.current.addCode(unaryop);
+		return unaryop.id;
+	}
+    }
+
     public int expand(OpCode op, int id, int rid) {
 	switch (op) {
 	    case ADDEQ:
@@ -512,6 +523,42 @@ public class EListener extends ErableBaseListener {
 		return xeq(OpCode.DIV, id, rid);
 	    case MODEQ:
 		return xeq(OpCode.MOD, id, rid);
+	    case GT:
+		var lt = new BinaryOpCode(rid, id, OpCode.LT, current);
+		this.current.addCode(lt);
+		return lt.id;
+	    case LTE: {
+		var isl = new BinaryOpCode(id, rid, OpCode.LT, current); //is less than or greater than
+		var iseq = new BinaryOpCode(id, rid, OpCode.EQ, current); //is equal to
+		var orst = new BinaryOpCode(isl.id, iseq.id, OpCode.BOR, current);
+		this.current.addCode(isl);
+		this.current.addCode(iseq);
+		this.current.addCode(orst);
+		return orst.id;
+	    }
+	    case GTE: {
+		var isg = new BinaryOpCode(rid, id, OpCode.LT, current); //is less than or greater than
+		var iseq = new BinaryOpCode(id, rid, OpCode.EQ, current); //is equal to
+		var orst = new BinaryOpCode(isg.id, iseq.id, OpCode.BOR, current);
+		this.current.addCode(isg);
+		this.current.addCode(iseq);
+		this.current.addCode(orst);
+		return orst.id;
+	    }
+	    case SWITCH:
+		var varc = new CopyCode(id, current);				    //var c = a;
+		var changeA = new BinaryOpCode(id, rid, OpCode.EQU, current);	    //    a = b;
+		var changeB = new BinaryOpCode(rid, varc.id, OpCode.EQU, current);   //	  b = c;
+		current.addCode(varc);
+		current.addCode(changeA);
+		current.addCode(changeB);
+		return changeB.id;
+	    case NEQ:
+		var oeq = new BinaryOpCode(id, rid, OpCode.EQ, current);		    //Operation Equals
+		var one = new UnaryOpCode(oeq.id, OpCode.BNOT, current);		    //Operation Not Equals
+		current.addCode(oeq);
+		current.addCode(one);
+		return one.id;
 	    default:
 		BinaryOpCode eoc = new BinaryOpCode(id, rid, op, this.current);
 		this.current.addCode(eoc);

@@ -16,11 +16,8 @@
  */
 package com.qiufeng.erable.ast;
 
-import static com.qiufeng.erable.Const.ID_LENGTH;
 import com.qiufeng.erable.OpCode;
-import com.qiufeng.erable.util.BitUtils;
 import java.io.IOException;
-import java.util.Arrays;
 
 /**
  *
@@ -30,11 +27,6 @@ public class UnaryOpCode extends TempCode {
 
     public UnaryOpCode(int tid, OpCode op, Code parent) {
 	super(tid, op, parent);
-	if(op==OpCode.ADD){
-	    this.op=OpCode.POS;
-	}else if(op==OpCode.SUB){
-	    this.op=OpCode.NEG;
-	}
     }
 
     @Override

@@ -133,9 +133,6 @@ namespace Erable {
 	    DECLARE_INSTANCE_VIRTUAL(acc, []);
 	    DECLARE_INSTANCE_VIRTUAL(equ, ==);
 	    DECLARE_INSTANCE_VIRTUAL(less, <);
-	    DECLARE_INSTANCE_VIRTUAL(more, >);
-	    DECLARE_INSTANCE_VIRTUAL(le,  <=);
-	    DECLARE_INSTANCE_VIRTUAL(me,  >=);
 	    DECLARE_INSTANCE_VIRTUAL(band, &);
 	    DECLARE_INSTANCE_VIRTUAL(bor,  |);
 	    DECLARE_INSTANCE_VIRTUAL(bxor, ^);
@@ -143,6 +140,7 @@ namespace Erable {
 	    DECLARE_INSTANCE_VIRTUAL(rs,  >>);
 	    DECLARE_INSTANCE_VIRTUAL(urs,>>>);
 	    DECLARE_UNARY_INSTANCE_VIRTUAL(cond, ?);
+	    DECLARE_UNARY_INSTANCE_VIRTUAL(bnot, !);
 
 	};
 	class Integer : public Instance {

@@ -16,11 +16,8 @@
  */
 package com.qiufeng.erable.ast;
 
-import static com.qiufeng.erable.Const.ID_LENGTH;
 import com.qiufeng.erable.OpCode;
-import com.qiufeng.erable.util.BitUtils;
 import java.io.IOException;
-import java.util.Arrays;
 
 /**
  *

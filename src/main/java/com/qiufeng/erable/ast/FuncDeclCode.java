@@ -18,7 +18,6 @@ package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

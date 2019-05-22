@@ -1,18 +1,18 @@
 #Erable Dynamic Lib
-#Tue May 21 07:13:34 CST 2019
-isNegative=87
+#Wed May 22 12:48:08 CST 2019
+isNegative=83
 mul=17
 prefix=16
 false=3
 scan=9
-testTryCatch=151
-say=119
-newCat=126
-switchWH=48
-square=171
+testTryCatch=142
+say=112
+newCat=118
+switchWH=45
+square=161
 println=5
-quad=25
-loop=103
+quad=24
+loop=97
 true=2
-@maxid=180
-makeSquare=39
+@maxid=170
+makeSquare=37

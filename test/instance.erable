@@ -55,3 +55,10 @@ var obja = :
     }
 :;
 obja["printInfo"]();
+
+function loop_dec:(times){
+    var i=times;
+    while(i>=1){
+        println("Repeat current: " + i);
+    };
+};

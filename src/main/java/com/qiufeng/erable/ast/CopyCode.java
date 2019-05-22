@@ -14,33 +14,32 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package com.qiufeng.erable.ast;
 
 import com.qiufeng.erable.OpCode;
 import java.io.IOException;
 
 /**
- *
+ * @since 2019年5月22日
  * @author Qiufeng54321
  */
-public class LoadCode extends TempCode {
+public class CopyCode extends TempCode {
 
-    public LoadCode(int lib, Code parent) {
-	super(lib,OpCode.LOAD_LIB, parent);
+    public CopyCode(int fromId, Code parent) {
+	super(fromId,OpCode.COPY, parent);
     }
-    /**
-     * [TAG 1B] [LIB ID 4B]
-     * @throws IOException 
-     */
+
     @Override
     public void write() throws IOException {
 	this.writeOpCode(this.op);
+	this.writeId(this.cid);
 	this.writeId(this.id);
     }
 
     @Override
     public String toString() {
-	return super.toString() + "  load " + this.cid;
+	return super.toString() + "  Copy @" + this.cid + " to @" + this.id;
     }
     
 }
