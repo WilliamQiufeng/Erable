@@ -74,7 +74,7 @@ namespace Erable {
     std::vector<Program::Op> Descriptor::recordAll(Program::Op until) {
         std::vector<Program::Op> codes;
         Program::Op current = Program::UNKNOWN;
-        while (not(until is current)) {
+        while (not(until == current)) {
             current = this->record();
             codes.push_back(current);
         }
@@ -278,7 +278,7 @@ namespace Erable {
 
     void Descriptor::executeAll(Program::Op until) {
         Program::Op current = Program::UNKNOWN;
-        while (not(until is current)) {
+        while (not(until == current)) {
             current = this->record();
             this->execute(current);
             if (retVal != nullptr) {

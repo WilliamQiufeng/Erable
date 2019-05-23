@@ -44,12 +44,12 @@ namespace Erable::Program {
     }
 
     bool Op::operator==(const Op &right) const {
-        if (!(this->op is right.op)) return false;
+        if (!(this->op == right.op)) return false;
         if (this->argv.size() isnt right.argv.size()) return false;
         int ind = 0;
         for (int arg : this->argv) {
-            if (arg is -1 or right.argv[ind] is -1) continue;
-            if (arg isnt right.argv[ind]) return false;
+            if (arg == -1 or right.argv[ind] == -1) continue;
+            if (arg != right.argv[ind]) return false;
         }
         return true;
     }
@@ -95,12 +95,12 @@ namespace Erable::Program {
     Op ProgramInputStream::readOp() {
         OpCodeElement ele = this->readOpCode();
         std::vector<int> argv;
-        if (ele is OpCode.values().find("LOADC")->value) {
+        if (ele == OpCode.values().find("LOADC")->value) {
             int cid = this->readId(this->getData()->meta->getIdlen().cid);
             int id = this->readId(this->getData()->meta->getIdlen().id);
             argv.push_back(cid);
             argv.push_back(id);
-        } else if (ele.op is "DYNCALL") {
+        } else if (ele.op == "DYNCALL") {
             int mid = this->readId(this->getData()->meta->getIdlen().id);
             int aid = this->readId(4);
             int tid = this->readId(this->getData()->meta->getIdlen().id);
@@ -108,7 +108,7 @@ namespace Erable::Program {
             argv.push_back(aid);
             argv.push_back(tid);
         } else {
-            for (int i = 0; i < ele.argc; inc i) {
+            for (int i = 0; i < ele.argc; ++i) {
                 int id = this->readId(this->getData()->meta->getIdlen().id);
                 argv.push_back(id);
             }

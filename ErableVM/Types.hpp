@@ -216,6 +216,8 @@ namespace Erable {
 
             OVERRIDE_INSTANCE_FUNC(equ);
 
+            OVERRIDE_INSTANCE_FUNC(less);
+
             OVERRIDE_UNARY_INSTANCE_FUNC(cond);
 
             OVERRIDE_CLONE_AND_GTN;
@@ -235,6 +237,8 @@ namespace Erable {
 
             OVERRIDE_INSTANCE_FUNC(equ);
 
+            OVERRIDE_INSTANCE_FUNC(less);
+
             OVERRIDE_UNARY_INSTANCE_FUNC(cond);
 
             OVERRIDE_CLONE_AND_GTN;
@@ -250,6 +254,8 @@ namespace Erable {
             OVERRIDE_INSTANCE_FUNC(acc);
 
             OVERRIDE_INSTANCE_FUNC(equ);
+
+            OVERRIDE_INSTANCE_FUNC(less);
 
             OVERRIDE_UNARY_INSTANCE_FUNC(cond);
 

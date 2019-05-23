@@ -18,6 +18,7 @@
 
 #include <cstdlib>
 #include <iostream>
+#include "cmdline.h"
 #include "Program.hpp"
 #include "Descriptor.hpp"
 #include "Metadata.hpp"
@@ -28,12 +29,19 @@
  *
  */
 int main(int argc, char **argv) {
+    cmdline::parser argparse;
+    argparse.add<std::string>("file", 'f', "file to execute", false,
+                              "/williamye/program/antlr/erable/test/instance.ec");
+    argparse.parse_check(argc, argv);
+    std::string ec = argparse.get<std::string>("file");
+
+
     Erable::Native::Library::Loader loader;
-    loader.load("stdlib/cmake-build-debug/libstdlib.dylib");
+    loader.load(Erable::getLib() + "libstdlib.dylib");
     //Erable::Native::loadBuiltIn();
     Erable::Descriptor desc;
     std::cout << "INITIALISED" << std::endl;
-    desc.setInput(new Erable::Program::ProgramInputStream("../test/instance.ec"));
+    desc.setInput(new Erable::Program::ProgramInputStream(ec));
     std::cout << "EXECUTE..." << std::endl;
     std::cout << "------------------------------------------------" << std::endl;
     desc.doAll();

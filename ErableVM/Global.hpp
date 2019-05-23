@@ -27,12 +27,12 @@
 #define GLOBALMACROS_HPP
 
 #include <cstdlib>
+#include <string>
 
 
-#define is ==
 #define are ==
 #define inc ++
-#define dec --
+#define decrease --
 #define isnt !=
 #define gets >>
 #define puts <<
@@ -46,8 +46,8 @@
 #define FTEMP template<typename D, typename E, typename F>
 
 //----Erable Type Check----//
-#define TYPE_IS_OBJ_EQU(sth, t) sth.getValue()->type() is typeid (t)
-#define TYPE_IS_EQU(sth, t) sth->getValue()->type() is typeid (t)
+#define TYPE_IS_OBJ_EQU(sth, t) sth.getValue()->type()==typeid (t)
+#define TYPE_IS_EQU(sth, t) sth->getValue()->type()==typeid (t)
 #define ISNUM(sth) TYPE_IS_EQU(sth, int) or TYPE_IS_EQU(sth, double)
 
 //----Repeat----//
@@ -152,7 +152,7 @@
     THROW_UOE(op);
 
 //-----OpCode Functions-----//
-#define CASE_OPCODE(opcode) if (op.op.op is opcode)
+#define CASE_OPCODE(opcode) if (op.op.op==opcode)
 #define ELSE_CASE_OPCODE(opcode) else CASE_OPCODE(opcode)
 
 //-----BuiltiIn Native Function Initialising-----//
@@ -180,6 +180,12 @@
 
 namespace Erable {
     inline int UNKNOWN = -1;
+
+    std::string getLib();
+
+    std::string getBin();
+
+    std::string checkExists(std::string key);
 }
 #endif /* GLOBALMACROS_HPP */
 

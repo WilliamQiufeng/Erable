@@ -15,6 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <Exceptions.hpp>
 #include "dynamicro.h"
 
 bool Dynamicro::load(const std::string &dllPath) {
@@ -22,7 +23,10 @@ bool Dynamicro::load(const std::string &dllPath) {
     m_hMod = LoadLibraryA(dllPath.data());
 #elif ON_LINUX
     m_hMod = dlopen(dllPath.data(), RTLD_NOW);
-    dlerror();
+    if (!m_hMod) {
+        const char *err = dlerror();
+        Erable::Exceptions::ValidateException(std::string("Failed to load ") + dllPath + ": " + err).throwException();
+    }
 #endif // ON_OTHER
 
     if (m_hMod == nullptr) {

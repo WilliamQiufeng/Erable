@@ -44,8 +44,8 @@ namespace Erable {
         }
 
         bool operator==(const OpCodeElement &right) const {
-            bool result = argc is right.argc and idind is right.idind and
-                          (op is right.op or op is OPCODE_WHATEVER or right.op is OPCODE_WHATEVER);
+            bool result = argc == right.argc and idind == right.idind and
+                          (op == right.op or op == OPCODE_WHATEVER or right.op == OPCODE_WHATEVER);
             return result;
         }
 

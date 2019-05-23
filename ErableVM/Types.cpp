@@ -145,11 +145,6 @@ namespace Erable::Types {
     //	    return other->mul(other, toid);
     //	};
 
-    DECLARE_INSTANCE_FUNC(Integer::less) {
-        auto numa = this->getAValue<int>();
-        auto numb = other->getAValue<int>();
-        return new Integer((numa < numb ? 1 : 0), toid, this->getParent());
-    }
 
     DECLARE_INSTANCE_FUNC(Integer::mod) {
         int numa = this->getAValue<int>();
@@ -332,4 +327,28 @@ namespace Erable::Types {
         Instance *res = new Integer(found, toid, this->getParent());
         return res;
     }
+
+    DECLARE_INSTANCE_FUNC(Integer::less) {
+        auto numa = this->getAValue<int>();
+        auto numb = other->getAValue<int>();
+        return new Integer((numa < numb ? 1 : 0), toid, this->getParent());
     }
+
+    DECLARE_INSTANCE_FUNC(Double::less) {
+        auto numa = this->getAValue<double>();
+        auto numb = other->getAValue<double>();
+        return new Integer((numa < numb ? 1 : 0), toid, this->getParent());
+    }
+
+    DECLARE_INSTANCE_FUNC(String::less) {
+        auto stra = this->getAValue<std::string>();
+        auto strb = other->getAValue<std::string>();
+        return new Integer((stra.size() < strb.size() ? 1 : 0), toid, this->getParent());
+    }
+
+    DECLARE_INSTANCE_FUNC(Array::less) {
+        auto arra = this->getAValue<Array::arrtype>();
+        auto arrb = other->getAValue<Array::arrtype>();
+        return new Integer((arra.size() < arrb.size() ? 1 : 0), toid, this->getParent());
+    }
+}

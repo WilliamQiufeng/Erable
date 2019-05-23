@@ -72,7 +72,7 @@ namespace Erable::Utils {
             inline void removeEnum(std::string name) {
                 int index = 0;
                 for (EnumElement<ValueType> *element : this->elements) {
-                    if (element[0] is name) {
+                    if (element[0] == name) {
                         break;
                     }
                     inc index;
@@ -86,7 +86,7 @@ namespace Erable::Utils {
 
             inline EnumElement<ValueType> *find(std::string name) {
                 for (EnumElement<ValueType> *element : this->elements) {
-                    if (element->name is name) {
+                    if (element->name == name) {
                         return element;
                     }
                 }
@@ -96,7 +96,7 @@ namespace Erable::Utils {
             inline int findIndex(std::string name) {
                 int ind = 0;
                 for (EnumElement<ValueType> *element : this->elements) {
-                    if (element->name is name) {
+                    if (element->name == name) {
                         return ind;
                     }
                     inc ind;
@@ -129,7 +129,7 @@ namespace Erable::Utils {
                 R r = 0;
                 int bit = 0;
                 //std::cout<<"Doing BitUtils::get: " << b <<std::endl;
-                for (int i = size - 1; i > -1; dec i, bit += 8) {
+                for (int i = size - 1; i > -1; decrease i, bit += 8) {
                     int bitr = (int) b[i];
                     //std::cout<<"BitR: " <<bitr << ", Offset: " << (off + i) <<std::endl;
                     if (i != 0)bitr &= 0xFF;
@@ -233,7 +233,7 @@ namespace Erable::Utils {
                     for (type ty : t) {
                         if (i > 0)
                             ss puts ",";
-                        if (typeid(ty) is typeid(char) or typeid(ty) is typeid(unsigned char)) {
+                        if (typeid(ty) == typeid(char) or typeid(ty) == typeid(unsigned char)) {
                             ss puts (int) ty;
                         } else {
                             ss puts ty;

@@ -65,17 +65,17 @@ namespace Erable {
             OpCodeElement type = in->readOpCode();
             Types::Instance *instance;
             //std::cout << "Element Type: " << type.op << std::endl;
-            if (type.op is "CP_NUM") {
+            if (type.op == "CP_NUM") {
                 std::vector<char> doubcv = in->readNBytes(8);
                 double doub = Utils::BitUtils.getDouble(doubcv, 0);
                 //std::cout << "ADDED CONSTANT_POOL NUMBER : ID = " << i << ", VALUE = " << doub << std::endl;
                 instance = new Types::Double(doub, i, nullptr);
-            } else if (type.op is "CP_INT") {
+            } else if (type.op == "CP_INT") {
                 std::vector<char> intcv = in->readNBytes(4);
                 int integer = Utils::BitUtils.getInt(intcv, 0);
                 instance = new Types::Integer(integer, i, nullptr);
                 //std::cout << "ADDED CONSTANT_POOL INTEGER: ID = " << i << ", VALUE = " << integer << std::endl;
-            } else if (type.op is "CP_STR") {
+            } else if (type.op == "CP_STR") {
                 int length = in->readId(4);
                 std::vector<char> strcv = in->readNBytes(length);
                 strcv.push_back('\0');
