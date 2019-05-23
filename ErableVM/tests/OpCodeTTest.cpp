@@ -36,8 +36,8 @@ using namespace std;
 
 void testOpCode_t() {
     Erable::OpCode_t opCode_t;
-    for(Erable::Utils::EnumElement<int>* ele : opCode_t.values().elements){
-        cout<<ele->name<<":"<<ele->value<<endl;
+    for (Erable::Utils::EnumElement<int> *ele : opCode_t.values().elements) {
+        cout << ele->name << ":" << ele->value << endl;
     }
     /*if (true) {
         std::cout << "%TEST_FAILED% time=0 testname=testOpCode_t (OpCodeTTest) message=error message sample" << std::endl;
@@ -49,8 +49,8 @@ void testOpCode_t() {
 void testValues() {
     Erable::OpCode_t opCode_t;
     Erable::Utils::Enum<int> result = opCode_t.values();
-    Erable::Utils::EnumElement<int>* find=result.find(2);
-    if (!(find->value==0 && find->name=="CP_INT") /*check result*/) {
+    Erable::Utils::EnumElement<int> *find = result.find(2);
+    if (!(find->value == 0 && find->name == "CP_INT") /*check result*/) {
         std::cout << "%TEST_FAILED% time=0 testname=testValues (OpCodeTTest) message=error message sample" << std::endl;
     }
 }
@@ -63,15 +63,19 @@ void testAddEnum() {
     Erable::OpCode_t opCode_t;
     opCode_t.addEnum(name, element);
     if (true /*check result*/) {
-        std::cout << "%TEST_FAILED% time=0 testname=testAddEnum (OpCodeTTest) message=error message sample" << std::endl;
+        std::cout << "%TEST_FAILED% time=0 testname=testAddEnum (OpCodeTTest) message=error message sample"
+                  << std::endl;
     }
 }
-class A{
+
+class A {
     int sth;
 };
+
 A a;
-int main(int argc, char** argv) {
-    std::cout<<typeid(a).name()<<"=="<<typeid(A).name()<<std::endl;
+
+int main(int argc, char **argv) {
+    std::cout << typeid(a).name() << "==" << typeid(A).name() << std::endl;
     std::cout << "%SUITE_STARTING% OpCodeTTest" << std::endl;
     std::cout << "%SUITE_STARTED%" << std::endl;
 

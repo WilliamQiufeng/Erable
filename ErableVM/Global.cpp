@@ -16,6 +16,7 @@
  */
 
 #include "Global.hpp"
+
 namespace Erable {
     //
     //    std::string getHome() {

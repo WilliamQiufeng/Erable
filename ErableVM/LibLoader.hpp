@@ -27,17 +27,15 @@
 
 #include "include/dynamicro.h"
 
-namespace Erable{
-    namespace Native{
-	namespace Library{
-	    class Loader{
-	    public:
-		Dynamicro* dyn;
-		Loader();
-		void load(std::string path);
-	    };
-	}
-    }
+namespace Erable::Native::Library {
+    class Loader {
+    public:
+        Dynamicro *dyn;
+
+        Loader();
+
+        void load(const std::string &path);
+    };
 }
 
 #endif /* LIBLOADER_HPP */

@@ -17,19 +17,15 @@
 
 #include "LibLoader.hpp"
 
-namespace Erable {
-    namespace Native {
-	namespace Library {
+namespace Erable::Native::Library {
 
-	    Loader::Loader() {
-		this->dyn = new Dynamicro();
-	    }
-
-	    void Loader::load(std::string path) {
-		this->dyn->load(path);
-		this->dyn->exec<void()>("load");
-	    }
-
-	}
+    Loader::Loader() {
+        this->dyn = new Dynamicro();
     }
+
+    void Loader::load(const std::string &path) {
+        this->dyn->load(path);
+        this->dyn->exec<void()>("load");
+    }
+
 }

@@ -31,13 +31,15 @@
 //#include "Metadata.hpp"
 #include <iostream>
 
-namespace Erable{
-    namespace Meta{
-	struct VersionMeta;
-	struct IDLengthMeta;
-	class Metadata;
+namespace Erable {
+    namespace Meta {
+        struct VersionMeta;
+        struct IDLengthMeta;
+
+        class Metadata;
     }
 }
+
 #include "Program.hpp"
 //#include "IO.hpp"
 //#include "Utils.h"
@@ -47,52 +49,57 @@ namespace Erable {
     namespace Meta {
 
         struct VersionMeta {
-	    int major;
-	    int minor;
-	};
+            int major;
+            int minor;
+        };
 
-	struct IDLengthMeta {
-	    int id;
-	    int cid;
-	};
+        struct IDLengthMeta {
+            int id;
+            int cid;
+        };
 
-        class Metadata{
-	    Program::ProgramInputStream* in;
+        class Metadata {
+            Program::ProgramInputStream *in;
             VersionMeta ver;
             IDLengthMeta idlen;
-	  public:
+        public:
 
-	    Metadata(Program::ProgramInputStream* in) :
-	    in(in) {
-	    }
-	    inline IDLengthMeta getIdlen() const {
-		return idlen;
-	    }
+            Metadata(Program::ProgramInputStream *in) :
+                    in(in) {
+            }
 
-	    inline void setIdlen(IDLengthMeta idlen) {
-		this->idlen = idlen;
-	    }
+            inline IDLengthMeta getIdlen() const {
+                return idlen;
+            }
 
-	    inline Program::ProgramInputStream* getIn() const {
-		return in;
-	    }
+            inline void setIdlen(IDLengthMeta idlen) {
+                this->idlen = idlen;
+            }
 
-	    void setIn(Program::ProgramInputStream* in);
+            inline Program::ProgramInputStream *getIn() const {
+                return in;
+            }
 
-	    VersionMeta getVer() const {
-		return ver;
-	    }
+            void setIn(Program::ProgramInputStream *in);
 
-	    void setVer(VersionMeta ver) {
-		this->ver = ver;
-	    }
+            VersionMeta getVer() const {
+                return ver;
+            }
 
-	    void readMagic();
+            void setVer(VersionMeta ver) {
+                this->ver = ver;
+            }
+
+            void readMagic();
+
             void readVersion();
+
             void readIDLength();
+
             void readHeader();
+
             std::string toString();
-	};
+        };
     }
 }
 

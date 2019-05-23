@@ -21,65 +21,60 @@
 #include "Utils.h"
 #include "Exceptions.hpp"
 
-namespace Erable {
+namespace Erable::Meta {
+    std::vector<char> magic{(char) (unsigned char) 0xe4, (char) (unsigned char) 0xab};
+    //std::vector<unsigned char> magic{0xe4, 0xab};
 
-    namespace Meta {
-	std::vector<char> magic{(char) (unsigned char) 0xe4, (char) (unsigned char) 0xab};
-	//std::vector<unsigned char> magic{0xe4, 0xab};
-
-	void Metadata::setIn(Program::ProgramInputStream* in) {
-	    this->in = in;
-	}
-
-	void Metadata::readMagic() {
-	    std::vector<char> bts = this->in->readNBytes(2);
-	    if (magic isnt bts) {
-		std::cout << "Assertion Error: VM is expecting magic number "
-			<< Utils::ArrayUtils.toString(magic)
-			<< ", but got "
-			<< Utils::ArrayUtils.toString(bts)
-			;
-
-		throw Exceptions::ValidateException("Magic number not correct");
-	    }
-
-	    //assert magic==bts;
-	}
-
-	void Metadata::readVersion() {
-	    char major = this->in->read();
-	    char minor = this->in->read();
-	    this->ver = VersionMeta{major, minor};
-	}
-
-	void Metadata::readIDLength() {
-	    char len = this->in->read();
-	    int id_len = len >> 4;
-	    int cid_len = len bitand 0b00001111;
-	    this->idlen = IDLengthMeta{id_len, cid_len};
-	}
-
-	void Metadata::readHeader() {
-	    this->readMagic();
-	    this->readVersion();
-	    this->readIDLength();
-	    //std::cout << toString() << std::endl;
-	}
-
-	std::string Metadata::toString() {
-	    std::stringstream ss;
-	    ss << "Metadata{"
-		    << "Major: "
-		    << this->ver.major
-		    << ", Minor: "
-		    << this->ver.minor
-		    << ", ID length: "
-		    << this->idlen.id
-		    << ", CID length: "
-		    << this->idlen.cid
-		    << "}"
-		    ;
-	    return ss.str();
-	}
+    void Metadata::setIn(Program::ProgramInputStream *in) {
+        this->in = in;
     }
-}
+
+    void Metadata::readMagic() {
+        std::vector<char> bts = this->in->readNBytes(2);
+        if (magic isnt bts) {
+            std::cout << "Assertion Error: VM is expecting magic number "
+                      << Utils::ArrayUtils.toString(magic)
+                      << ", but got "
+                      << Utils::ArrayUtils.toString(bts);
+
+            Exceptions::ValidateException("Magic number not correct").throwException();
+        }
+
+        //assert magic==bts;
+    }
+
+    void Metadata::readVersion() {
+        char major = this->in->read();
+        char minor = this->in->read();
+        this->ver = VersionMeta{major, minor};
+    }
+
+    void Metadata::readIDLength() {
+        char len = this->in->read();
+        int id_len = len >> 4;
+        int cid_len = len bitand 0b00001111;
+        this->idlen = IDLengthMeta{id_len, cid_len};
+    }
+
+    void Metadata::readHeader() {
+        this->readMagic();
+        this->readVersion();
+        this->readIDLength();
+        //std::cout << toString() << std::endl;
+    }
+
+    std::string Metadata::toString() {
+        std::stringstream ss;
+        ss << "Metadata{"
+           << "Major: "
+           << this->ver.major
+           << ", Minor: "
+           << this->ver.minor
+           << ", ID length: "
+           << this->idlen.id
+           << ", CID length: "
+           << this->idlen.cid
+           << "}";
+        return ss.str();
+    }
+    }

@@ -26,49 +26,51 @@
 #define CONSTANTPOOL_HPP
 
 
-
 #include <map>
 #include <sys/_types/_size_t.h>
 //#include "Metadata.hpp"
-namespace Erable{
+namespace Erable {
     class ConstantPool;
 }
+
 #include "IO.hpp"
 #include "Program.hpp"
 #include "Descriptor.hpp"
 #include "Types.hpp"
 
 
-
 namespace Erable {
 
     class ConstantPool {
-	std::map<int, Erable::Types::Instance*> elements;
+        std::map<int, Erable::Types::Instance *> elements;
     public:
-	void setElement(int id, Erable::Types::Instance* element) {
-	    elements[id] = element;
-	}
+        void setElement(int id, Erable::Types::Instance *element) {
+            elements[id] = element;
+        }
 
-	Erable::Types::Instance* getElement(std::size_t id) {
-	    return this->elements[id];
-	}
+        Erable::Types::Instance *getElement(std::size_t id) {
+            return this->elements[id];
+        }
 
-	std::map<int, Erable::Types::Instance*> getElements() const {
-	    return elements;
-	}
+        std::map<int, Erable::Types::Instance *> getElements() const {
+            return elements;
+        }
 
-	void setElements(std::map<int, Erable::Types::Instance*> elements) {
-	    this->elements = elements;
-	}
-	ConstantPool operator+(Erable::Types::Instance* right) const;
-	ConstantPool& operator+=(Erable::Types::Instance* right) ;
+        void setElements(std::map<int, Erable::Types::Instance *> elements) {
+            this->elements = elements;
+        }
 
-	Erable::Types::Instance* operator[](std::size_t index);
+        ConstantPool operator+(Erable::Types::Instance *right) const;
 
-	const Erable::Types::Instance* operator[](std::size_t index) const;
-	friend std::ostream& operator<<(std::ostream& os, ConstantPool& obj);
+        ConstantPool &operator+=(Erable::Types::Instance *right);
 
-	void load(Program::ProgramInputStream* in);
+        Erable::Types::Instance *operator[](std::size_t index);
+
+        const Erable::Types::Instance *operator[](std::size_t index) const;
+
+        friend std::ostream &operator<<(std::ostream &os, ConstantPool &obj);
+
+        void load(Program::ProgramInputStream *in);
 
     };
 }

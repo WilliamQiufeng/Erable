@@ -17,7 +17,7 @@
 
 #include "dynamicro.h"
 
-bool Dynamicro::load(const std::string& dllPath) {
+bool Dynamicro::load(const std::string &dllPath) {
 #if ON_OTHER
     m_hMod = LoadLibraryA(dllPath.data());
 #elif ON_LINUX
@@ -26,8 +26,8 @@ bool Dynamicro::load(const std::string& dllPath) {
 #endif // ON_OTHER
 
     if (m_hMod == nullptr) {
-	printf("load library failed\n");
-	return false;
+        printf("load library failed\n");
+        return false;
     }
 
     return true;
@@ -35,7 +35,7 @@ bool Dynamicro::load(const std::string& dllPath) {
 
 bool Dynamicro::unload() {
     if (m_hMod == nullptr)
-	return true;
+        return true;
 
 #ifdef ON_OTHER
     auto b = FreeLibrary(m_hMod);
@@ -44,7 +44,7 @@ bool Dynamicro::unload() {
 #endif
 
     if (!b)
-	return false;
+        return false;
 
     m_hMod = nullptr;
     return true;

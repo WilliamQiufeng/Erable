@@ -29,12 +29,6 @@
 #include <cstdlib>
 
 
-
-
-
-
-
-
 #define is ==
 #define are ==
 #define inc ++
@@ -62,19 +56,19 @@
 
 
 //----Throws Unsupported Operation Exception----//
-#define THROW_UOE(op)	\
+#define THROW_UOE(op)    \
     std::stringstream ss;\
     ss<<"Operation '" #op "' between '"\
     <<this->getTypeName()\
     <<"' and '"\
     <<other->getTypeName()\
-    <<"'";		\
+    <<"'";        \
     panic Exceptions::UnsupportedOpException(ss.str());
-#define THROW_UNARY_UOE(op)	\
+#define THROW_UNARY_UOE(op)    \
     std::stringstream ss;\
     ss<<"Operation '" #op "' to '"\
     <<this->getTypeName()\
-    <<"'";		\
+    <<"'";        \
     panic Exceptions::UnsupportedOpException(ss.str());
 
 
@@ -102,11 +96,11 @@
     DECLARE_INSTANCE_FUNC(name){                    \
         ERABLE_DO_OP_NUM_FUNC(this, other, op, toid);    \
     }
-#define INSTANCE_CONSTRUCTOR(cls, type)	    cls(type value, int id, Descriptor* parent = nullptr, Instance* parentInstance = nullptr) : Instance(value, id, parent, parentInstance) {}	\
-					    cls(boost::any* value, int id, Descriptor* parent = nullptr, Instance* parentInstance = nullptr) : Instance(value, id, parent, parentInstance) {}
-#define OVERRIDE_INSTANCE_EQU(name, type)		    \
-    DECLARE_INSTANCE_FUNC(name::equ) {			    \
-	return new Integer(this->getTypeName() == other->getTypeName() and this->getAValue<type>() == other->getAValue<type>(), toid, this->getParent()); \
+#define INSTANCE_CONSTRUCTOR(cls, type)        cls(type value, int id, Descriptor* parent = nullptr, Instance* parentInstance = nullptr) : Instance(value, id, parent, parentInstance) {}    \
+                        cls(boost::any* value, int id, Descriptor* parent = nullptr, Instance* parentInstance = nullptr) : Instance(value, id, parent, parentInstance) {}
+#define OVERRIDE_INSTANCE_EQU(name, type)            \
+    DECLARE_INSTANCE_FUNC(name::equ) {                \
+    return new Integer(this->getTypeName() == other->getTypeName() and this->getAValue<type>() == other->getAValue<type>(), toid, this->getParent()); \
     }
 //-----Virtual OpFunction Declare-----//
 
@@ -125,7 +119,7 @@
         v=ptr->getAValue<int>();    \
     }else if(TYPE_IS_EQU(ptr, double)){   \
         v=ptr->getAValue<double>(); \
-    }				    \
+    }                    \
     //std::cout<<v<<std::endl;
 #define ERABLE_INSTANCE_OP_DOUB(a, b, op, toid) new Double (a op b, toid, this->getParent())
 #define ERABLE_INSTANCE_OP_NUM(a, b, op, toid, to)    \
@@ -164,22 +158,22 @@
 //-----BuiltiIn Native Function Initialising-----//
 #define DEFINE_NATIVE_FUNCTION(name) Types::Instance* name(Descriptor* desc, Types::NativeFunction * self, Types::Array* argv)
 #define OVERRIDE_NATIVE_BUILTIN(name) DEFINE_NATIVE_FUNCTION(BuiltIn::name)
-#define ADD_NATIVE(name, func)	Erable::Native::functype name##_FN = std::bind(&func, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);\
-				Erable::Native::Functions.functions[#name] = name##_FN;
-#define ADD_NATIVE_INCLASS(name, func, obj)	Erable::Native::functype name##_FN = std::bind(&func, obj, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);\
-						Erable::Native::Functions.functions[#name] = name##_FN;
+#define ADD_NATIVE(name, func)    Erable::Native::functype name##_FN = std::bind(&func, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);\
+                Erable::Native::Functions.functions[#name] = name##_FN;
+#define ADD_NATIVE_INCLASS(name, func, obj)    Erable::Native::functype name##_FN = std::bind(&func, obj, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);\
+                        Erable::Native::Functions.functions[#name] = name##_FN;
 
 //-----Instance Clone and getTypeName-----//
-#define OVERRIDE_CLONE_AND_GTN			    \
-    Instance* clone() override;			    \
+#define OVERRIDE_CLONE_AND_GTN                \
+    Instance* clone() override;                \
     std::string getTypeName() override;
-#define OUTER_OVERRIDE_CAGTN(cls,type)		    \
-    Instance* cls::clone(){			    \
-	return new cls(this->getAValue<type>(), this->getId(), this->getParent()); \
-    }						    \
-    std::string cls::getTypeName(){			    \
-	return #cls;				    \
-    }						    \
+#define OUTER_OVERRIDE_CAGTN(cls, type)            \
+    Instance* cls::clone(){                \
+    return new cls(this->getAValue<type>(), this->getId(), this->getParent()); \
+    }                            \
+    std::string cls::getTypeName(){                \
+    return #cls;                    \
+    }                            \
     OVERRIDE_INSTANCE_EQU(cls,type);
 
 //-----------End Instance Use------------//

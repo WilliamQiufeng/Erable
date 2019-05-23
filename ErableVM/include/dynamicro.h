@@ -20,8 +20,10 @@
 
 
 #if (BOOST_OS_UNIX || BOOST_OS_LINUX || BOOST_OS_MACOS)
+
 #include <dlfcn.h>
 #include <iostream>
+
 #elif BOOST_OS_WINDOWS
 #include <Windows.h>
 #endif
@@ -38,43 +40,43 @@ public:
     }
 
     ~Dynamicro() {
-	unload();
+        unload();
     }
 
-    bool load(const std::string& dllPath);
+    bool load(const std::string &dllPath);
 
     bool unload();
 
-    template <typename T>
-    std::function<T> get(const std::string& funcName) {
-	std::map<std::string, moduleType>::iterator it = m_map.find(funcName);
-	if (it == m_map.end()) {
+    template<typename T>
+    std::function<T> get(const std::string &funcName) {
+        std::map<std::string, moduleType>::iterator it = m_map.find(funcName);
+        if (it == m_map.end()) {
 
 #ifdef ON_OTHER
-	    auto addr = GetProcAddress(m_hMod, funcName.c_str());
+            auto addr = GetProcAddress(m_hMod, funcName.c_str());
 #elif ON_LINUX
-	    auto addr = dlsym(m_hMod, funcName.data());
+            auto addr = dlsym(m_hMod, funcName.data());
 #endif // WIN32
 
-	    if (!addr)
-		return nullptr;
-	    m_map.insert(std::make_pair(funcName, addr));
-	    it = m_map.find(funcName);
-	}
+            if (!addr)
+                return nullptr;
+            m_map.insert(std::make_pair(funcName, addr));
+            it = m_map.find(funcName);
+        }
 
-	return std::function<T>((T*) (it->second));
+        return std::function<T>((T *) (it->second));
     };
 
-    template <typename T, typename... Args>
-    typename std::result_of<std::function<T>(Args...)>::type exec(const std::string& funcName, Args&&... args) {
-	auto f = get<T>(funcName);
-	if (f == nullptr) {
-	    std::string s = "can not find this function " + funcName;
-	    std::cout<<s<<std::endl;
-	    throw std::exception();
-	}
+    template<typename T, typename... Args>
+    typename std::result_of<std::function<T>(Args...)>::type exec(const std::string &funcName, Args &&... args) {
+        auto f = get<T>(funcName);
+        if (f == nullptr) {
+            std::string s = "can not find this function " + funcName;
+            std::cout << s << std::endl;
+            throw std::exception();
+        }
 
-	return f(std::forward<Args>(args)...);
+        return f(std::forward<Args>(args)...);
     };
 
 private:
@@ -82,7 +84,7 @@ private:
 #ifdef ON_OTHER
     using moduleType = HMODULE;
 #elif ON_LINUX
-    using moduleType = void*;
+    using moduleType = void *;
 #endif // WIN32
 
     moduleType m_hMod;

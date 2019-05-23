@@ -27,7 +27,7 @@
 /*
  *
  */
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     //    Erable::Native::Library::Loader loader;
     //    loader.load("/williamye/program/antlr/erable/ErableVM/StdLib/dist/Debug/GNU-MacOSX/libStdLib.dylib");
     Erable::Native::loadBuiltIn();

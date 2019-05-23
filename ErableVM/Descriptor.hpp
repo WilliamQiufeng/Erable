@@ -29,10 +29,12 @@
 //#include <map>
 //#include "InputStream.hpp"
 //#include "Types.hpp"
-namespace Erable{
+namespace Erable {
     class Code;
+
     class Descriptor;
 }
+
 #include "Program.hpp"
 #include "Types.hpp"
 #include <map>
@@ -40,103 +42,115 @@ namespace Erable{
 
 namespace Erable {
     class Descriptor {
-	//Fields
-	std::map<int, Erable::Types::Instance*>* idmap;
-	Program::ProgramInputStream* input;
-	Descriptor* parent;
-	Types::Instance* retVal;
-	int retId;
+        //Fields
+        std::map<int, Erable::Types::Instance *> *idmap;
+        Program::ProgramInputStream *input;
+        Descriptor *parent;
+        Types::Instance *retVal;
+        int retId;
 
-      public:
-	//Constructors
+    public:
+        //Constructors
 
-	Descriptor() {
-	    this->init();
-	}
+        Descriptor() {
+            this->init();
+        }
 
-	Descriptor(std::map<int, Erable::Types::Instance*>* idmap) :
-	idmap(idmap) {
-	    this->reset();
-	}
+        Descriptor(std::map<int, Erable::Types::Instance *> *idmap) :
+                idmap(idmap) {
+            this->reset();
+        }
 
-	Descriptor(Program::ProgramInputStream* in) :
-	input(in) {
-	    this->reset();
-	}
+        Descriptor(Program::ProgramInputStream *in) :
+                input(in) {
+            this->reset();
+        }
 
-	Descriptor(Descriptor* other) :
-	input(other->input), parent(other), idmap(other->idmap){
-	    this->reset();
-	}
+        Descriptor(Descriptor *other) :
+                input(other->input), parent(other), idmap(other->idmap) {
+            this->reset();
+        }
 
-	//Initialisation
+        //Initialisation
 
-	inline void init() {
-	    this->idmap = new std::map<int, Erable::Types::Instance*>;
-	    this->parent=nullptr;
-	    reset();
-	}
-	inline void reset(){
-	    retVal=nullptr;
-	    retId=-1;
-	}
+        inline void init() {
+            this->idmap = new std::map<int, Erable::Types::Instance *>;
+            this->parent = nullptr;
+            reset();
+        }
 
-	//Getters and Setters
+        inline void reset() {
+            retVal = nullptr;
+            retId = -1;
+        }
 
-	std::map<int, Erable::Types::Instance*>* getIdmap() const {
-	    return idmap;
-	}
+        //Getters and Setters
 
-	void setIdmap(std::map<int, Erable::Types::Instance*>* idmap) {
-	    this->idmap = idmap;
-	}
-	void set(int, Erable::Types::Instance*);
-	Types::Instance* get(int);
-	void del(int);
-	Program::ProgramInputStream* getInput() const {
-	    return input;
-	}
+        std::map<int, Erable::Types::Instance *> *getIdmap() const {
+            return idmap;
+        }
 
-	void setInput(Program::ProgramInputStream* input) {
-	    this->input = input;
-	}
+        void setIdmap(std::map<int, Erable::Types::Instance *> *idmap) {
+            this->idmap = idmap;
+        }
 
-	Descriptor* getParent() const {
-	    return parent;
-	}
+        void set(int, Erable::Types::Instance *);
 
-	void setParent(Descriptor* parent) {
-	    this->parent = parent;
-	}
-	int getRetId() const {
-	    return retId;
-	}
+        Types::Instance *get(int);
 
-	void setRetId(int retId) {
-	    this->retId = retId;
-	}
+        void del(int);
 
-	Types::Instance* getRetVal() const {
-	    return retVal;
-	}
+        Program::ProgramInputStream *getInput() const {
+            return input;
+        }
 
-	void setRetVal(Types::Instance* retVal) {
-	    this->retVal = retVal;
-	}
+        void setInput(Program::ProgramInputStream *input) {
+            this->input = input;
+        }
 
-	void readHeader();
-	void execute(Program::Op op);
-	void executeAll(Program::Op until);
-	void executeAll(std::vector<Program::Op> code);
-	std::vector<Program::Op> recordAll(Program::Op until);
-	Program::Op record();
-	void doAll();
-	
-	
-	friend std::ostream& operator<<(std::ostream& os, Descriptor& obj);
+        Descriptor *getParent() const {
+            return parent;
+        }
+
+        void setParent(Descriptor *parent) {
+            this->parent = parent;
+        }
+
+        int getRetId() const {
+            return retId;
+        }
+
+        void setRetId(int retId) {
+            this->retId = retId;
+        }
+
+        Types::Instance *getRetVal() const {
+            return retVal;
+        }
+
+        void setRetVal(Types::Instance *retVal) {
+            this->retVal = retVal;
+        }
+
+        void readHeader();
+
+        void execute(Program::Op op);
+
+        void executeAll(Program::Op until);
+
+        void executeAll(std::vector<Program::Op> code);
+
+        std::vector<Program::Op> recordAll(Program::Op until);
+
+        Program::Op record();
+
+        void doAll();
+
+
+        friend std::ostream &operator<<(std::ostream &os, Descriptor &obj);
 
     };
-    
+
 }
 
 #endif /* DESCRIPTOR_HPP */

@@ -26,15 +26,14 @@
 #define PROGRAM_HPP
 
 
-namespace Erable {
-    namespace Program {
-	struct Data;
-	struct Op;
-	class ProgramInputStream;
+namespace Erable::Program {
+    struct Data;
+    struct Op;
 
-	
+    class ProgramInputStream;
+
+
     }
-}
 
 #include "ConstantPool.hpp"
 #include "Metadata.hpp"
@@ -47,64 +46,73 @@ namespace Erable {
 
 
 
-namespace Erable {
-    namespace Program {
-	std::ostream& operator<<(std::ostream& os, std::vector<Op> obj);
-	struct Data {
-	    ConstantPool* pool;
-	    Meta::Metadata* meta;
-	};
+namespace Erable::Program {
+    std::ostream &operator<<(std::ostream &os, std::vector<Op> obj);
 
-	struct Op {
-	    OpCodeElement op;
-	    std::vector<int> argv;
+    struct Data {
+        ConstantPool *pool;
+        Meta::Metadata *meta;
+    };
 
-	    Op(OpCodeElement op, std::vector<int> argv) :
-	    op(op), argv(argv) {
-	    }
+    struct Op {
+        OpCodeElement op;
+        std::vector<int> argv;
 
-	    bool operator==(const Op& right) const;
-	    int& operator[](std::size_t index);
+        Op(OpCodeElement op, std::vector<int> argv) :
+                op(op), argv(argv) {
+        }
 
-	    const int& operator[](std::size_t index) const;
-	    int& operator*();
+        bool operator==(const Op &right) const;
 
-	    const int& operator*() const;
-	    friend std::ostream& operator<<(std::ostream& os, const Op& obj);
-	};
-	inline Op END = Op(Erable::OpCode.values().find("EXIT")->value, std::vector<int>());
-	inline Op UNKNOWN = Op(Erable::OpCodeElement("", -1, -1), std::vector<int>());
+        int &operator[](std::size_t index);
 
-	class ProgramInputStream : public IO::InputStream {
-	    Data* data;
-	public:
+        const int &operator[](std::size_t index) const;
 
-	    ProgramInputStream(IO::File f) :
-	    InputStream(f) {
-		init();
-	    }
+        int &operator*();
 
-	    ProgramInputStream(std::string f) :
-	    InputStream(f) {
-		init();
-	    }
-	    void init();
+        const int &operator*() const;
 
-	    inline Data* getData() const {
-		return data;
-	    }
+        friend std::ostream &operator<<(std::ostream &os, const Op &obj);
+    };
 
-	    inline void setData(Data* data) {
-		this->data = data;
-	    }
-	    void readConstantPool();
-	    void readMeta();
-	    OpCodeElement readOpCode();
-	    Op readOp();
-	    int readId(int len);
-	};
+    inline Op END = Op(Erable::OpCode.values().find("EXIT")->value, std::vector<int>());
+    inline Op UNKNOWN = Op(Erable::OpCodeElement("", -1, -1), std::vector<int>());
+
+    class ProgramInputStream : public IO::InputStream {
+        Data *data;
+    public:
+
+        ProgramInputStream(IO::File f) :
+                InputStream(f) {
+            init();
+        }
+
+        ProgramInputStream(std::string f) :
+                InputStream(f) {
+            init();
+        }
+
+        void init();
+
+        inline Data *getData() const {
+            return data;
+        }
+
+        inline void setData(Data *data) {
+            this->data = data;
+        }
+
+        void readConstantPool();
+
+        void readMeta();
+
+        OpCodeElement readOpCode();
+
+        Op readOp();
+
+        int readId(int len);
+    };
     }
-}
 
 #endif /* PROGRAM_HPP */
 

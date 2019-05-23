@@ -34,7 +34,6 @@
 #include <iostream>
 
 
-
 #include "Exceptions.hpp"
 #include "Global.hpp"
 //#include "Utils.h"
@@ -75,7 +74,7 @@ namespace Erable {
          * Implementation of java.io.InputStream from java
          */
         class InputStream {
-            std::ifstream* in;
+            std::ifstream *in;
             std::istreambuf_iterator<char> begin;
             std::istreambuf_iterator<char> end;
         public:
@@ -83,40 +82,42 @@ namespace Erable {
             InputStream(File f) {
                 this->open(f);
             }
-	    InputStream(std::string f){
-		this->open(f);
-	    }
 
-	    void open(std::string f){
-		this->open(File(f));
-	    }
+            InputStream(std::string f) {
+                this->open(f);
+            }
+
+            void open(std::string f) {
+                this->open(File(f));
+            }
+
             void open(File f);
 
             char read();
 
-	    std::istreambuf_iterator<char> getBegin() const {
-		return begin;
-	    }
+            std::istreambuf_iterator<char> getBegin() const {
+                return begin;
+            }
 
-	    void setBegin(std::istreambuf_iterator<char> begin) {
-		this->begin = begin;
-	    }
+            void setBegin(std::istreambuf_iterator<char> begin) {
+                this->begin = begin;
+            }
 
-	    std::istreambuf_iterator<char> getEnd() const {
-		return end;
-	    }
+            std::istreambuf_iterator<char> getEnd() const {
+                return end;
+            }
 
-	    void setEnd(std::istreambuf_iterator<char> end) {
-		this->end = end;
-	    }
+            void setEnd(std::istreambuf_iterator<char> end) {
+                this->end = end;
+            }
 
-	    std::ifstream* getIn() const {
-		return this->in;
-	    }
+            std::ifstream *getIn() const {
+                return this->in;
+            }
 
-	    void setIn(std::ifstream* in) {
-		this->in = in;
-	    }
+            void setIn(std::ifstream *in) {
+                this->in = in;
+            }
 
             std::vector<char> readNBytes(long long n);
 

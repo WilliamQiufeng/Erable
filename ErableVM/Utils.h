@@ -20,19 +20,18 @@
 #include <ostream>
 #include <sstream>
 
-namespace Erable {
-    namespace Utils {
-	template <typename T>
+namespace Erable::Utils {
+    template<typename T>
 
-	std::ostream& operator<<(std::ostream& os, const std::vector<T>& obj) {
-	    os << "[";
-	    for (int i = 0; i < obj.size(); inc i) {
-		os << (int)obj[i];
-		if (i < obj.size() - 1)os << ",";
-	    }
-	    os << "]";
-	    return os;
-	}
+    std::ostream &operator<<(std::ostream &os, const std::vector<T> &obj) {
+        os << "[";
+        for (int i = 0; i < obj.size(); inc i) {
+            os << (int) obj[i];
+            if (i < obj.size() - 1)os << ",";
+        }
+        os << "]";
+        return os;
+    }
 
         /*                  *\
          *                  *|
@@ -42,38 +41,37 @@ namespace Erable {
          *                  *|
          *                  *|
          \*                 */
-        template <class ValueType>
+        template<class ValueType>
         struct EnumElement {
             std::string name;
             ValueType value;
         public:
 
-	    EnumElement(std::string name, ValueType value) :
-	    name(name), value(value) {
-	    }
+            EnumElement(std::string name, ValueType value) :
+                    name(name), value(value) {
+            }
 
         };
 
-        template <class ValueType>
+    template<class ValueType>
         class Enum {
         public:
-            std::vector<EnumElement<ValueType>*> elements;
+            std::vector<EnumElement<ValueType> *> elements;
 
-            Enum<ValueType>() {
-            }
+            Enum<ValueType>();
 
             inline void addEnum(std::string name, ValueType value) {
-                EnumElement<ValueType>* ele = new EnumElement<ValueType>(name, value);
+                auto *ele = new EnumElement<ValueType>(name, value);
                 this->addEnum(name, ele);
             };
 
-            inline void addEnum(std::string name, EnumElement<ValueType>* value) {
+            inline void addEnum(std::string name, EnumElement<ValueType> *value) {
                 this->elements.push_back(value);
             };
 
             inline void removeEnum(std::string name) {
                 int index = 0;
-                for (EnumElement<ValueType>* element : this->elements) {
+                for (EnumElement<ValueType> *element : this->elements) {
                     if (element[0] is name) {
                         break;
                     }
@@ -86,72 +84,79 @@ namespace Erable {
                 this->elements.erase(index);
             };
 
-            inline EnumElement<ValueType>* find(std::string name) {
-                for (EnumElement<ValueType>* element : this->elements) {
+            inline EnumElement<ValueType> *find(std::string name) {
+                for (EnumElement<ValueType> *element : this->elements) {
                     if (element->name is name) {
                         return element;
                     }
                 }
                 return nullptr;
             };
-	    inline int findIndex(std::string name) {
-		int ind=0;
-		for (EnumElement<ValueType>* element : this->elements) {
+
+            inline int findIndex(std::string name) {
+                int ind = 0;
+                for (EnumElement<ValueType> *element : this->elements) {
                     if (element->name is name) {
                         return ind;
                     }
-		    inc ind;
+                    inc ind;
                 }
                 return -1;
             };
 
-            inline EnumElement<ValueType>* find(int index) {
+            inline EnumElement<ValueType> *find(int index) {
                 return this->elements[index];
             };
         };
 
-        /*                  *\
-         *                  *|
-         *                  *|
-         *     BitUtils     *|
-         *  Implementation  *|
-         *     of Java      *|
-         *                  *|
-         *                  *|
-         *                  *|
-         \*                 */
+    template<class ValueType>
+    Enum<ValueType>::Enum<ValueType>() {
+    }
+
+    /*                  *\
+     *                  *|
+     *                  *|
+     *     BitUtils     *|
+     *  Implementation  *|
+     *     of Java      *|
+     *                  *|
+     *                  *|
+     *                  *|
+     \*                 */
         class BitUtils_t {
-	public:
-	    template<typename R>
-	    inline R getLE(std::vector<char> b, int off, int size){
-		R r=0;
-		int bit=0;
-		//std::cout<<"Doing BitUtils::get: " << b <<std::endl;
-		for(int i=size-1;i>-1;dec i,bit+=8){
-		    int bitr=(int)b[i];
-		    //std::cout<<"BitR: " <<bitr << ", Offset: " << (off + i) <<std::endl;
-		    if(i!=0)bitr&=0xFF;
-		    //std::cout<<"BitR bitand 0xFF: "<<bitr<<std::endl;
-		    r+=(bitr lshift bit);
-		    //std::cout<<"Shift: "<<bit<<" to " << r<< " with " << bitr << std::endl;
-		}
-		return r;
-	    }
-	    template<typename R>
-	    inline R getBE(std::vector<char> b, int off, int size){
-		R r=0;
-		int bit=0;
-		//std::cout<<"Doing BitUtils::get: " << b <<std::endl;
-		for(int i=0;i<size;inc i,bit+=8){
-		    int bitr=(int)b[i];
-		    //std::cout<<"BitR: " <<bitr << ", Offset: " << (off + i) <<std::endl;
-		    if(i!=0)bitr&=0xFF;
-		    //std::cout<<"BitR bitand 0xFF: "<<bitr<<std::endl;
-		    r+=(bitr lshift bit);
-		    //std::cout<<"Shift: "<<bit<<" to " << r<< " with " << bitr << std::endl;
-		}
-		return r;
-	    }
+        public:
+            template<typename R>
+            inline R getLE(std::vector<char> b, int off, int size) {
+                R r = 0;
+                int bit = 0;
+                //std::cout<<"Doing BitUtils::get: " << b <<std::endl;
+                for (int i = size - 1; i > -1; dec i, bit += 8) {
+                    int bitr = (int) b[i];
+                    //std::cout<<"BitR: " <<bitr << ", Offset: " << (off + i) <<std::endl;
+                    if (i != 0)bitr &= 0xFF;
+                    //std::cout<<"BitR bitand 0xFF: "<<bitr<<std::endl;
+                    r += (bitr lshift bit);
+                    //std::cout<<"Shift: "<<bit<<" to " << r<< " with " << bitr << std::endl;
+                }
+                return r;
+            }
+
+            template<typename R>
+            inline R getBE(std::vector<char> b, int off, int size) {
+                R r = 0;
+                int bit = 0;
+                //std::cout<<"Doing BitUtils::get: " << b <<std::endl;
+                for (int i = 0; i < size; inc i, bit += 8) {
+                    int bitr = (int) b[i];
+                    //std::cout<<"BitR: " <<bitr << ", Offset: " << (off + i) <<std::endl;
+                    if (i != 0)bitr &= 0xFF;
+                    //std::cout<<"BitR bitand 0xFF: "<<bitr<<std::endl;
+                    r += (bitr lshift bit);
+                    //std::cout<<"Shift: "<<bit<<" to " << r<< " with " << bitr << std::endl;
+                }
+                return r;
+            }
+
             inline bool getBoolean(std::vector<char> b, int off) {
                 return b[off] != 0;
             }
@@ -159,13 +164,13 @@ namespace Erable {
             inline char getChar(std::vector<char> b, int off) {
 //                return (char) ((b[off + 1] & 0xFF) +
 //                        (b[off] << 8));
-		return getLE<char>(b,off,2);
+                return getLE<char>(b, off, 2);
             }
 
             inline short getShort(std::vector<char> b, int off) {
 //                return (short) ((b[off + 1] & 0xFF) +
 //                        (b[off] << 8));
-		return getLE<short>(b,off,2);
+                return getLE<short>(b, off, 2);
             }
 
             inline int getInt(std::vector<char> b, int off) {
@@ -173,7 +178,7 @@ namespace Erable {
 //                        ((b[off + 2] & 0xFF) << 8) +
 //                        ((b[off + 1] & 0xFF) << 16) +
 //                        ((b[off ]) << 24);
-		return getLE<int>(b,off,4);
+                return getLE<int>(b, off, 4);
             }
 
             inline long getLong(std::vector<char> b, int off) {
@@ -185,17 +190,20 @@ namespace Erable {
 //                        ((b[off + 2] & 0xFFL) << 40) +
 //                        ((b[off + 1] & 0xFFL) << 48) +
 //                        (((long) b[off]) << 56);
-		return getLE<long>(b,off,8);
+                return getLE<long>(b, off, 8);
             }
-	    inline float getFloat(std::vector<char> b, int off) {
-		return (float)getBE<long>(b,off,8);
-	    }
+
+            inline float getFloat(std::vector<char> b, int off) {
+                return (float) getBE<long>(b, off, 8);
+            }
+
             inline double getDouble(std::vector<char> b, int off) {
-                return (double)(getBE<long>(b,off,8));
+                return (double) (getBE<long>(b, off, 8));
             }
 
 
         };
+
         inline BitUtils_t BitUtils;
 
         /*                  *\
@@ -209,7 +217,7 @@ namespace Erable {
         class ArrayUtils_t {
         public:
 
-            template <typename ori, typename type>
+            template<typename ori, typename type>
             inline std::vector<type> transformType(std::vector<ori> t) {
                 std::vector<type> res;
                 for (ori ele : t) {
@@ -218,17 +226,17 @@ namespace Erable {
                 return res;
             }
 
-            template <typename type>
+            template<typename type>
             inline std::string toString(std::vector<type> t) {
                 std::stringstream ss;
-                int i=0;
-                if(not t.empty()){
-                    for(type ty : t){
-                        if(i>0)
+                int i = 0;
+                if (not t.empty()) {
+                    for (type ty : t) {
+                        if (i > 0)
                             ss puts ",";
-                        if(typeid(ty) is typeid(char) or typeid(ty) is typeid(unsigned char)){
-                            ss puts (int)ty;
-                        }else{
+                        if (typeid(ty) is typeid(char) or typeid(ty) is typeid(unsigned char)) {
+                            ss puts (int) ty;
+                        } else {
                             ss puts ty;
                         }
                         inc i;
@@ -237,10 +245,10 @@ namespace Erable {
                 return ss.str();
             }
         };
-        inline ArrayUtils_t ArrayUtils;
+
+    inline ArrayUtils_t ArrayUtils;
 
     }
-}
 
 //#pragma comment("UTIL_END")
 

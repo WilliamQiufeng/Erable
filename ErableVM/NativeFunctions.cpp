@@ -17,38 +17,36 @@
 
 #include "NativeFunctions.hpp"
 
-namespace Erable {
-    namespace Native {
-	namespace BuiltIn {
+namespace Erable::Native {
+    namespace BuiltIn {
 
-	    DEFINE_NATIVE_FUNCTION(print) {
-		Types::Instance* toP = argv->getAValue<Types::Array::arrtype>().at(0);
-		std::cout << toP << std::endl;
-		return nullptr;
-	    };
+        DEFINE_NATIVE_FUNCTION(print) {
+            Types::Instance *toP = argv->getAValue<Types::Array::arrtype>().at(0);
+            std::cout << toP << std::endl;
+            return nullptr;
+        };
 
-	    DEFINE_NATIVE_FUNCTION(scan) {
-		std::string get;
-		std::cin>>get;
-		Types::Instance* ret = new Types::String(get, self->getRetId(), desc);
-		return ret;
-	    };
+        DEFINE_NATIVE_FUNCTION(scan) {
+            std::string get;
+            std::cin >> get;
+            Types::Instance *ret = new Types::String(get, self->getRetId(), desc);
+            return ret;
+        };
 
-	    DEFINE_NATIVE_FUNCTION(sqrt) {
-		return nullptr;
-	    }
+        DEFINE_NATIVE_FUNCTION(sqrt) {
+            return nullptr;
+        }
 
-	    DEFINE_NATIVE_FUNCTION(log) {
-		return nullptr;
-	    }
-	}
+        DEFINE_NATIVE_FUNCTION(log) {
+            return nullptr;
+        }
+    }
 
-	void loadBuiltIn() {
-	    ADD_NATIVE(print, BuiltIn::print);
-	    ADD_NATIVE(scan, BuiltIn::scan);
-	    ADD_NATIVE(sqrt, BuiltIn::sqrt);
-	    ADD_NATIVE(log, BuiltIn::log);
-	}
+    void loadBuiltIn() {
+        ADD_NATIVE(print, BuiltIn::print);
+        ADD_NATIVE(scan, BuiltIn::scan);
+        ADD_NATIVE(sqrt, BuiltIn::sqrt);
+        ADD_NATIVE(log, BuiltIn::log);
+    }
 
     }
-}
