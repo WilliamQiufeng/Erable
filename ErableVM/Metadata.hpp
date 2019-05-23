@@ -31,22 +31,18 @@
 //#include "Metadata.hpp"
 #include <iostream>
 
-namespace Erable {
-    namespace Meta {
+namespace Erable::Meta {
         struct VersionMeta;
         struct IDLengthMeta;
 
         class Metadata;
     }
-}
 
 #include "Program.hpp"
 //#include "IO.hpp"
 //#include "Utils.h"
 
-namespace Erable {
-
-    namespace Meta {
+namespace Erable::Meta {
 
         struct VersionMeta {
             int major;
@@ -64,7 +60,7 @@ namespace Erable {
             IDLengthMeta idlen;
         public:
 
-            Metadata(Program::ProgramInputStream *in) :
+            explicit Metadata(Program::ProgramInputStream *in) :
                     in(in) {
             }
 
@@ -101,7 +97,6 @@ namespace Erable {
             std::string toString();
         };
     }
-}
 
 #endif /* METADATA_HPP */
 

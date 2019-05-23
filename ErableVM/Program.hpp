@@ -47,7 +47,7 @@ namespace Erable::Program {
 
 
 namespace Erable::Program {
-    std::ostream &operator<<(std::ostream &os, std::vector<Op> obj);
+    std::ostream &operator<<(std::ostream &os, const std::vector<Op> &obj);
 
     struct Data {
         ConstantPool *pool;

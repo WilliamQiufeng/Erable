@@ -36,6 +36,7 @@ namespace Erable {
                                                 Erable::Types::Array *)> functype;
         typedef std::map<std::string, functype> funcmap;
         namespace BuiltIn {
+            /*
             DEFINE_NATIVE_FUNCTION(print);
 
             DEFINE_NATIVE_FUNCTION(scan);
@@ -43,6 +44,7 @@ namespace Erable {
             DEFINE_NATIVE_FUNCTION(sqrt);
 
             DEFINE_NATIVE_FUNCTION(log);
+             */
         };
 
         class Functions_t {

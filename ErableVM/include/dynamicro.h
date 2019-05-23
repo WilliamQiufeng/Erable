@@ -49,7 +49,7 @@ public:
 
     template<typename T>
     std::function<T> get(const std::string &funcName) {
-        std::map<std::string, moduleType>::iterator it = m_map.find(funcName);
+        auto it = m_map.find(funcName);
         if (it == m_map.end()) {
 
 #ifdef ON_OTHER
@@ -71,7 +71,7 @@ public:
     typename std::result_of<std::function<T>(Args...)>::type exec(const std::string &funcName, Args &&... args) {
         auto f = get<T>(funcName);
         if (f == nullptr) {
-            std::string s = "can not find this function " + funcName;
+            std::string s = "can not find this function :" + funcName;
             std::cout << s << std::endl;
             throw std::exception();
         }

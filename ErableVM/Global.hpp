@@ -51,7 +51,7 @@
 #define ISNUM(sth) TYPE_IS_EQU(sth, int) or TYPE_IS_EQU(sth, double)
 
 //----Repeat----//
-#define REPEAT(v, t) for(long long v=0;v<t;inc v)
+#define REPEAT(v, t) for(long long (v)=0;v<t;inc v)
 #define REPEAT_TIMES(t) REPEAT(_,t)
 
 

@@ -41,8 +41,7 @@
 //#include "Metadata.hpp"
 
 
-namespace Erable {
-    namespace IO {
+namespace Erable::IO {
         /*
          * Implementation of java.io.File from java
          * Not fully implemented
@@ -128,7 +127,6 @@ namespace Erable {
             void close();
         };
     }
-}
 
 #endif /* INPUTSTREAM_HPP */
 

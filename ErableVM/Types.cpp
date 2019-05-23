@@ -94,40 +94,40 @@ namespace Erable::Types {
      * Implementations of operations
      */
 
-    OUTER_OVERRIDE_CAGTN(Integer, int);
+    OUTER_OVERRIDE_CAGTN(Integer, int)
 
-    OUTER_OVERRIDE_CAGTN(Double, double);
+    OUTER_OVERRIDE_CAGTN(Double, double)
 
-    OUTER_OVERRIDE_CAGTN(String, std::string);
+    OUTER_OVERRIDE_CAGTN(String, std::string)
 
-    OUTER_OVERRIDE_CAGTN(Function, codet);
+    OUTER_OVERRIDE_CAGTN(Function, codet)
 
-    OUTER_OVERRIDE_CAGTN(NativeFunction, std::string);
+    OUTER_OVERRIDE_CAGTN(NativeFunction, std::string)
 
-    OUTER_OVERRIDE_CAGTN(Array, Types::Array::arrtype);
+    OUTER_OVERRIDE_CAGTN(Array, Types::Array::arrtype)
 
-    OUTER_OVERRIDE_CAGTN(Object, form);
+    OUTER_OVERRIDE_CAGTN(Object, form)
 
-    OUTER_OVERRIDE_OP_NUM(Integer::add, +);
+    OUTER_OVERRIDE_OP_NUM(Integer::add, +)
 
-    OUTER_OVERRIDE_OP_NUM(Integer::sub, -);
+    OUTER_OVERRIDE_OP_NUM(Integer::sub, -)
 
-    OUTER_OVERRIDE_OP_NUM(Integer::mul, *);
+    OUTER_OVERRIDE_OP_NUM(Integer::mul, *)
 
 
-    OUTER_OVERRIDE_OP_NUM(Integer::div, /);
+    OUTER_OVERRIDE_OP_NUM(Integer::div, /)
 
-    OUTER_OVERRIDE_OP_NUM(Double::add, +);
+    OUTER_OVERRIDE_OP_NUM(Double::add, +)
 
-    OUTER_OVERRIDE_OP_NUM(Double::sub, -);
+    OUTER_OVERRIDE_OP_NUM(Double::sub, -)
 
-    OUTER_OVERRIDE_OP_NUM(Double::mul, *);
+    OUTER_OVERRIDE_OP_NUM(Double::mul, *)
 
-    OUTER_OVERRIDE_OP_NUM(Double::div, /);
+    OUTER_OVERRIDE_OP_NUM(Double::div, /)
 
-    OUTER_OVERRIDE_OP_NUM_FUNC(Integer::pow, std::pow);
+    OUTER_OVERRIDE_OP_NUM_FUNC(Integer::pow, std::pow)
 
-    OUTER_OVERRIDE_OP_NUM_FUNC(Double::pow, std::pow);
+    OUTER_OVERRIDE_OP_NUM_FUNC(Double::pow, std::pow)
 
     //	/*
     //	 * 递归下降，如果不是integer就让other来执行operation,如果other也不支持就抛出Exceptions::UnsupportedOpException错误
@@ -162,7 +162,7 @@ namespace Erable::Types {
 
     DECLARE_INSTANCE_FUNC(Double::mod) {
         Erable::Exceptions::UnsupportedOpException("Unsupported mod of Double").throwException();
-    };
+    }
 
     /*
      * String Addition
@@ -186,7 +186,7 @@ namespace Erable::Types {
      */
     DECLARE_INSTANCE_FUNC(String::sub) {
         Erable::Exceptions::UnsupportedOpException("Unsupported substraction of String").throwException();
-    };
+    }
 
     /*
      * String Multiplication
@@ -196,7 +196,7 @@ namespace Erable::Types {
      *	"haha" * 4;//"hahahahahahahaha"
      */
     DECLARE_INSTANCE_FUNC(String::mul) {
-        std::string cpy(this->getAValue<std::string>());
+        auto cpy(this->getAValue<std::string>());
         std::string res(cpy);
         if (TYPE_IS_EQU(other, int)) {
             int times = other->getAValue<int>();
@@ -206,11 +206,11 @@ namespace Erable::Types {
             }
         }
         return new String(res, toid, this->getParent());
-    };
+    }
 
     DECLARE_INSTANCE_FUNC(String::mod) {
         Erable::Exceptions::UnsupportedOpException("Unsupported mod of String").throwException();
-    };
+    }
 
     /*
      * Array Addition
@@ -222,7 +222,7 @@ namespace Erable::Types {
      *	[0,1,2,3,4,5] + [6,7,8,9]; //[0,1,2,3,4,5,[6,7,8,9]]
      */
     DECLARE_INSTANCE_FUNC(Array::add) {
-        Types::Array::arrtype cpy(this->getAValue<Types::Array::arrtype>());
+        auto cpy(this->getAValue<Types::Array::arrtype>());
         cpy.push_back(other);
         return new Array(cpy, toid, this->parent);
     }
@@ -240,7 +240,7 @@ namespace Erable::Types {
             //Doesn't change its ID. It will allow 'arr[index] = xxx;' operand.
             return element;
         }
-        THROW_UOE([]);
+        THROW_UOE([])
     }
 
     /*
@@ -276,7 +276,7 @@ namespace Erable::Types {
     }
 
     DECLARE_UNARY_INSTANCE_FUNC(Double::cond) {
-        double val = this->getAValue<double>();
+        auto val = this->getAValue<double>();
         Instance *res = new Integer((val > 0 ? 1 : 0), toid, this->getParent());
 
         return res;
@@ -287,14 +287,14 @@ namespace Erable::Types {
      * Returns 1 if the literal is not empty, or else returns 0.
      */
     DECLARE_UNARY_INSTANCE_FUNC(String::cond) {
-        std::string str = this->getAValue<std::string>();
+        auto str = this->getAValue<std::string>();
         Instance *res = new Integer((str.empty() ? 0 : 1), toid, this->getParent());
 
         return res;
     }
 
     DECLARE_UNARY_INSTANCE_FUNC(Array::cond) {
-        Array::arrtype arr = this->getAValue<Array::arrtype>();
+        auto arr = this->getAValue<Array::arrtype>();
         Instance *res = new Integer((arr.empty() ? 0 : 1), toid, this->getParent());
 
         return res;
@@ -314,7 +314,7 @@ namespace Erable::Types {
      * Returns 1 if the amount of codes are more than 1, if not, returns 0.
      */
     DECLARE_UNARY_INSTANCE_FUNC(Function::cond) {
-        Function::codet codes = this->getAValue<Function::codet>();
+        auto codes = this->getAValue<Function::codet>();
         Instance *res = new Integer((codes.size() > 1 ? 1 : 0), toid, this->getParent());
 
         return res;
@@ -326,8 +326,8 @@ namespace Erable::Types {
      * Returns 1 if it exists, or else returns 0.
      */
     DECLARE_UNARY_INSTANCE_FUNC(NativeFunction::cond) {
-        std::string nativeCall = this->getAValue<std::string>();
-        Erable::Native::funcmap::iterator iter = Erable::Native::Functions.functions.find(nativeCall);
+        auto nativeCall = this->getAValue<std::string>();
+        auto iter = Erable::Native::Functions.functions.find(nativeCall);
         bool found = (iter == Erable::Native::Functions.functions.end());
         Instance *res = new Integer(found, toid, this->getParent());
         return res;

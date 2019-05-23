@@ -32,9 +32,9 @@ namespace Erable::Program {
         return os;
     }
 
-    std::ostream &operator<<(std::ostream &os, std::vector<Op> obj) {
+    std::ostream &operator<<(std::ostream &os, const std::vector<Op> &obj) {
         os << "{\n";
-        for (Op op : obj) {
+        for (const Op &op : obj) {
             os << "\t\t";
             os << op;
             os << ";\n";

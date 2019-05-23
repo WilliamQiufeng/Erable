@@ -110,8 +110,7 @@ namespace Erable::Utils {
         };
 
     template<class ValueType>
-    Enum<ValueType>::Enum<ValueType>() {
-    }
+    Enum<ValueType>::Enum() = default;
 
     /*                  *\
      *                  *|

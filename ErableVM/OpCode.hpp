@@ -124,12 +124,12 @@ namespace Erable {
             return vals;
         }
 
-        void addEnum(std::string name, int element, int idind) {
+        void addEnum(const std::string &name, int element, int idind) {
             this->vals.addEnum(name, OpCodeElement{name, element, idind});
         }
 
         char getByte(std::string name) {
-            return static_cast<char> (values().findIndex(name));
+            return static_cast<char> (values().findIndex(std::move(name)));
         }
     };
 

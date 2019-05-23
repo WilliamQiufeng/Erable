@@ -19,7 +19,7 @@
 
 namespace Erable::Native {
     namespace BuiltIn {
-
+/*
         DEFINE_NATIVE_FUNCTION(print) {
             Types::Instance *toP = argv->getAValue<Types::Array::arrtype>().at(0);
             std::cout << toP << std::endl;
@@ -40,13 +40,14 @@ namespace Erable::Native {
         DEFINE_NATIVE_FUNCTION(log) {
             return nullptr;
         }
+        */
     }
-
+/*
     void loadBuiltIn() {
         ADD_NATIVE(print, BuiltIn::print);
         ADD_NATIVE(scan, BuiltIn::scan);
         ADD_NATIVE(sqrt, BuiltIn::sqrt);
         ADD_NATIVE(log, BuiltIn::log);
     }
-
-    }
+*/
+}

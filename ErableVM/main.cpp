@@ -28,9 +28,9 @@
  *
  */
 int main(int argc, char **argv) {
-    //    Erable::Native::Library::Loader loader;
-    //    loader.load("/williamye/program/antlr/erable/ErableVM/StdLib/dist/Debug/GNU-MacOSX/libStdLib.dylib");
-    Erable::Native::loadBuiltIn();
+    Erable::Native::Library::Loader loader;
+    loader.load("stdlib/cmake-build-debug/libstdlib.dylib");
+    //Erable::Native::loadBuiltIn();
     Erable::Descriptor desc;
     std::cout << "INITIALISED" << std::endl;
     desc.setInput(new Erable::Program::ProgramInputStream("../test/instance.ec"));

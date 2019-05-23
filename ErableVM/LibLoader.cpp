@@ -25,7 +25,7 @@ namespace Erable::Native::Library {
 
     void Loader::load(const std::string &path) {
         this->dyn->load(path);
-        this->dyn->exec<void()>("load");
+        this->dyn->exec<void()>("loadNatives");
     }
 
 }

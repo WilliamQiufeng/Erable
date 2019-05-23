@@ -25,7 +25,7 @@
 #include <cstdlib>
 #include <string>
 #include <iostream>
-#include "OpCode.hpp"
+#include "runtime/OpCode.hpp"
 
 using namespace std;
 /*
