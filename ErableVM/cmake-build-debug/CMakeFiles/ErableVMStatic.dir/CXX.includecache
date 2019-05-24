@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/williamye/program/antlr/erable/ErableVM/Exceptions.hpp
+stdexcept
+-
+string
+-
+iostream
+-
+
+/williamye/program/antlr/erable/ErableVM/Global.cpp
+Global.hpp
+/williamye/program/antlr/erable/ErableVM/Global.hpp
+Exceptions.hpp
+/williamye/program/antlr/erable/ErableVM/Exceptions.hpp
+
+/williamye/program/antlr/erable/ErableVM/Global.hpp
+cstdlib
+-
+string
+-
+

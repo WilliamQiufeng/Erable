@@ -16,11 +16,18 @@ Hi!Welcome to erable!
 A programming language created by Qiufeng54321.  
 It is still under development.  
 
-## How to use?
-Remember this project is still under development.However, you can still check out the parser feature.  
-It parses the file and gives the java-object-lized output as diagnostics and debuggings.  
-```shell
+## Installation
+
+```bash
 cd Erable
-chmod +x ./erable.sh # just to ensure you have the permission.
-./erable.sh -f test.erable #replace test.erable or don't to see the result.
+make
+make install
 ```
+
+
+
+## How to use?  
+```shell
+ErableVM -f [filename] #execute compiled .ec file
+```
+
