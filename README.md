@@ -27,7 +27,13 @@ make install
 
 
 ## How to use?  
-```shell
-ErableVM -f [filename] #execute compiled .ec file
+```
+usage: ErableVM [options] ...
+options:
+  -f, --file         file to execute (string
+                                     [=/williamye/program/antlr/erable/test/instance.ec])
+  -d, --debug        Turn on developer debugging mode
+  -S, --no-stdlib    Don't load Default ErableStdlib on start
+  -?, --help         print this message
 ```
 
