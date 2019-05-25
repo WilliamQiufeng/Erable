@@ -5,17 +5,18 @@
  */
 
 #include "math.hpp"
+#include <cmath>
 
 namespace Erable {
     namespace Native {
 	namespace BuiltIn {
 
 	    DEFINE_NATIVE_FUNCTION(sqrt) {
-		return nullptr;
+			return nullptr;
 	    }
 
 	    DEFINE_NATIVE_FUNCTION(log) {
-		return nullptr;
+			return nullptr;
 	    }
 	}
     }

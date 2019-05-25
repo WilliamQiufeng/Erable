@@ -878,3 +878,14 @@
 | OpCode | Parameters | Result ID |
 | --- | --- | --- |
 | `EXIT` | 0 | -1 |
+
+> Description
+
+
+
+> Usage
+
+
+
+---
+

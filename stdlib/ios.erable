@@ -4,6 +4,7 @@
 
 
 //Console OutputStream
-native function println:(object) using "print";
+native function print:(object) using "print";
+native function println:(object) using "println";
 //Console InputStream
 native function scan:() using "scan";
