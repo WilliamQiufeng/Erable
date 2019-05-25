@@ -12,6 +12,8 @@ namespace Erable::Native::BuiltIn {
     DEFINE_NATIVE_FUNCTION(print);
 
     DEFINE_NATIVE_FUNCTION(scan);
+	
+	DEFINE_NATIVE_FUNCTION(println);
 }
 
 

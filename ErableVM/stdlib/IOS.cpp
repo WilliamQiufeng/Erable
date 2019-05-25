@@ -8,7 +8,7 @@ namespace Erable::Native::BuiltIn {
 
     DEFINE_NATIVE_FUNCTION(print) {
         auto *toP = argv->getAValue<Types::Array::arrtype>().at(0);
-        std::cout << toP << std::endl;
+        std::cout << toP;
         return nullptr;
     };
 
@@ -18,4 +18,10 @@ namespace Erable::Native::BuiltIn {
         Types::Instance *ret = new Types::String(get, self->getRetId(), desc);
         return ret;
     };
+	
+	DEFINE_NATIVE_FUNCTION(println) {
+		auto *toP = argv->getAValue<Types::Array::arrtype>().at(0);
+        std::cout << toP << std::endl;
+		return nullptr;
+	}
 }
