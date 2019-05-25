@@ -47,14 +47,14 @@ namespace Erable {
              */
         };
 
-        class Functions_t {
+        class Functions {
         public:
-            funcmap functions;
+            inline static funcmap functions;
+
+            static functype findFunc(std::string name);
         };
 
         void loadBuiltIn();
-
-        inline Functions_t Functions;
     }
 }
 

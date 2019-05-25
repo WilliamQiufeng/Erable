@@ -58,5 +58,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/ErableVMStatic.dir/DependInfo.cmake"
   "CMakeFiles/ErableVMDyn.dir/DependInfo.cmake"
   "CMakeFiles/ErableVM.dir/DependInfo.cmake"
-  "stdlib/CMakeFiles/stdlib.dir/DependInfo.cmake"
+  "stdlib/CMakeFiles/ErableStdlib.dir/DependInfo.cmake"
   )

@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+.././Exceptions.hpp
+stdexcept
+-
+string
+-
+iostream
+-
+
 ../include/cmdline.h
 iostream
 -
@@ -5900,6 +5908,10 @@ boost/winapi/basic_types.hpp
 boost/winapi/basic_types.hpp
 -
 
+/williamye/program/antlr/erable/ErableVM/ConstantPool.cpp
+ConstantPool.hpp
+/williamye/program/antlr/erable/ErableVM/ConstantPool.hpp
+
 /williamye/program/antlr/erable/ErableVM/ConstantPool.hpp
 map
 -
@@ -5914,6 +5926,14 @@ Descriptor.hpp
 Types.hpp
 /williamye/program/antlr/erable/ErableVM/Types.hpp
 
+/williamye/program/antlr/erable/ErableVM/Descriptor.cpp
+Descriptor.hpp
+/williamye/program/antlr/erable/ErableVM/Descriptor.hpp
+NativeFunctions.hpp
+/williamye/program/antlr/erable/ErableVM/NativeFunctions.hpp
+Global.hpp
+/williamye/program/antlr/erable/ErableVM/Global.hpp
+
 /williamye/program/antlr/erable/ErableVM/Descriptor.hpp
 Program.hpp
 /williamye/program/antlr/erable/ErableVM/Program.hpp
@@ -5921,6 +5941,10 @@ Types.hpp
 /williamye/program/antlr/erable/ErableVM/Types.hpp
 map
 -
+
+/williamye/program/antlr/erable/ErableVM/Exceptions.cpp
+Exceptions.hpp
+/williamye/program/antlr/erable/ErableVM/Exceptions.hpp
 
 /williamye/program/antlr/erable/ErableVM/Exceptions.hpp
 stdexcept
@@ -5930,11 +5954,31 @@ string
 iostream
 -
 
+/williamye/program/antlr/erable/ErableVM/Global.cpp
+Global.hpp
+/williamye/program/antlr/erable/ErableVM/Global.hpp
+Exceptions.hpp
+/williamye/program/antlr/erable/ErableVM/Exceptions.hpp
+Utils.h
+/williamye/program/antlr/erable/ErableVM/Utils.h
+
 /williamye/program/antlr/erable/ErableVM/Global.hpp
 cstdlib
 -
 string
 -
+boost/filesystem.hpp
+-
+regex
+-
+
+/williamye/program/antlr/erable/ErableVM/IO.cpp
+IO.hpp
+/williamye/program/antlr/erable/ErableVM/IO.hpp
+Exceptions.hpp
+/williamye/program/antlr/erable/ErableVM/Exceptions.hpp
+Global.hpp
+/williamye/program/antlr/erable/ErableVM/Global.hpp
 
 /williamye/program/antlr/erable/ErableVM/IO.hpp
 fstream
@@ -5958,11 +6002,23 @@ Global.hpp
 include/dynamicro.h
 /williamye/program/antlr/erable/ErableVM/include/dynamicro.h
 
+/williamye/program/antlr/erable/ErableVM/Metadata.cpp
+Metadata.hpp
+/williamye/program/antlr/erable/ErableVM/Metadata.hpp
+Utils.h
+/williamye/program/antlr/erable/ErableVM/Utils.h
+Exceptions.hpp
+/williamye/program/antlr/erable/ErableVM/Exceptions.hpp
+
 /williamye/program/antlr/erable/ErableVM/Metadata.hpp
 iostream
 -
 Program.hpp
 /williamye/program/antlr/erable/ErableVM/Program.hpp
+
+/williamye/program/antlr/erable/ErableVM/NativeFunctions.cpp
+NativeFunctions.hpp
+/williamye/program/antlr/erable/ErableVM/NativeFunctions.hpp
 
 /williamye/program/antlr/erable/ErableVM/NativeFunctions.hpp
 Descriptor.hpp
@@ -5976,6 +6032,10 @@ utility
 Utils.h
 /williamye/program/antlr/erable/ErableVM/Utils.h
 
+/williamye/program/antlr/erable/ErableVM/Program.cpp
+Program.hpp
+/williamye/program/antlr/erable/ErableVM/Program.hpp
+
 /williamye/program/antlr/erable/ErableVM/Program.hpp
 ConstantPool.hpp
 /williamye/program/antlr/erable/ErableVM/ConstantPool.hpp
@@ -5985,6 +6045,26 @@ OpCode.hpp
 /williamye/program/antlr/erable/ErableVM/OpCode.hpp
 IO.hpp
 /williamye/program/antlr/erable/ErableVM/IO.hpp
+
+/williamye/program/antlr/erable/ErableVM/Types.cpp
+Types.hpp
+/williamye/program/antlr/erable/ErableVM/Types.hpp
+IO.hpp
+/williamye/program/antlr/erable/ErableVM/IO.hpp
+NativeFunctions.hpp
+/williamye/program/antlr/erable/ErableVM/NativeFunctions.hpp
+string
+-
+cmath
+-
+complex
+-
+boost/any.hpp
+-
+boost/type_index.hpp
+-
+malloc/_malloc.h
+-
 
 /williamye/program/antlr/erable/ErableVM/Types.hpp
 boost/any.hpp
@@ -6007,6 +6087,12 @@ ostream
 -
 sstream
 -
+
+/williamye/program/antlr/erable/ErableVM/include/dynamicro.cpp
+Exceptions.hpp
+-
+dynamicro.h
+/williamye/program/antlr/erable/ErableVM/include/dynamicro.h
 
 /williamye/program/antlr/erable/ErableVM/include/dynamicro.h
 string

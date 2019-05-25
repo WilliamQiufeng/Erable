@@ -32,23 +32,32 @@ int main(int argc, char **argv) {
     cmdline::parser argparse;
     argparse.add<std::string>("file", 'f', "file to execute", false,
                               "/williamye/program/antlr/erable/test/instance.ec");
+    argparse.add("debug", 'd', "Turn on developer debugging mode");
+    argparse.add("no-stdlib", 'S', "Don't load Default ErableStdlib on start");
     argparse.parse_check(argc, argv);
     std::string ec = argparse.get<std::string>("file");
+    Erable::Config::debug = argparse.exist("debug");
+    Erable::Config::stdlib = !argparse.exist("no-stdlib");
 
-
-    Erable::Native::Library::Loader loader;
-    loader.load(Erable::getLib() + "libstdlib.dylib");
+    if (Erable::Config::stdlib) {
+        //Load the standard library.
+        Erable::Native::Library::Loader loader;
+        loader.load(Erable::findStdLib());
+    }
     //Erable::Native::loadBuiltIn();
+
+    //Execute the whole program
     Erable::Descriptor desc;
-    std::cout << "INITIALISED" << std::endl;
     desc.setInput(new Erable::Program::ProgramInputStream(ec));
-    std::cout << "EXECUTE..." << std::endl;
-    std::cout << "------------------------------------------------" << std::endl;
+    ERABLE_DEBUG std::cout << "------------------------------------------------" << std::endl;
     desc.doAll();
-    std::cout << "------------------------------------------------" << std::endl;
-    std::cout << "TERMINATED..." << std::endl;
-    std::cout << "Dump >_<" << std::endl;
-    std::cout << desc << std::endl;
+    ERABLE_DEBUG std::cout << "------------------------------------------------" << std::endl;
+
+    //Dump ConstantPool and Buffer Map on exit
+    ERABLE_DEBUG {
+        std::cout << "Dump >_<" << std::endl;
+        std::cout << desc << std::endl;
+    }
     return 0;
 }
 

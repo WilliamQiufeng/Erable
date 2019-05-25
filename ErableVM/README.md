@@ -4,4 +4,5 @@ This VM is currently under development.
 Now **ErableVM** supports the following:  
 - [x] Binary and Unary Operations
 - [x] Function Declaring and Calling
-- [x] 
+- [x] Native Functions
+- [x] StdLib

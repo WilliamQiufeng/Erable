@@ -67,14 +67,14 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/williamye/program/antlr/erable/ErableVM/cmake-build-debug/stdlib/libstdlib.dylib")
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libstdlib.dylib" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libstdlib.dylib")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/williamye/program/antlr/erable/ErableVM/cmake-build-debug/stdlib/libErableStdlib.dylib")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libErableStdlib.dylib" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libErableStdlib.dylib")
     execute_process(COMMAND /usr/bin/install_name_tool
       -delete_rpath "/usr/local/lib"
-      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libstdlib.dylib")
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libErableStdlib.dylib")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/Library/Developer/CommandLineTools/usr/bin/strip" -x "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libstdlib.dylib")
+      execute_process(COMMAND "/Library/Developer/CommandLineTools/usr/bin/strip" -x "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libErableStdlib.dylib")
     endif()
   endif()
 endif()

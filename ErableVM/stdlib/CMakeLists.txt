@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project(stdlib)
+project(ErableStdlib)
 set(CMAKE_CXX_STANDARD 17)
 find_package(Boost 1.57.0 COMPONENTS system filesystem REQUIRED)
 
@@ -24,13 +24,13 @@ include_directories(../include)
 link_libraries(${ERABLEVM})
 
 
-add_library(stdlib SHARED IOS.hpp IOS.cpp StdLib.cpp StdLib.hpp)
-set_property(TARGET stdlib PROPERTY CXX_STANDARD 17)
+add_library(ErableStdlib SHARED IOS.hpp IOS.cpp StdLib.cpp StdLib.hpp)
+set_property(TARGET ErableStdlib PROPERTY CXX_STANDARD 17)
 
 
 if (Boost_FOUND)
 
-    target_link_libraries(stdlib ${Boost_LIBRARIES})
+    target_link_libraries(ErableStdlib ${Boost_LIBRARIES})
 
 endif ()
 

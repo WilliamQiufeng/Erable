@@ -5,6 +5,7 @@
 
 namespace Erable::Exceptions {
     void Exception::throwException() {
+        std::cerr << this->__msg_ << std::endl;
         throw (*this);
     }
 }

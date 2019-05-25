@@ -32,10 +32,10 @@
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="ErableVM" targetName="ErableVMDyn" />
-      <config projectName="ErableVM" targetName="ErableVM" />
-      <config projectName="ErableVM" targetName="stdlib" />
       <config projectName="ErableVM" targetName="ErableVMStatic" />
+      <config projectName="ErableVM" targetName="ErableStdlib" />
+      <config projectName="ErableVM" targetName="ErableVM" />
+      <config projectName="ErableVM" targetName="ErableVMDyn" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -45,8 +45,98 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="843ad3e7-5740-4d46-80f4-e7c843e04bd1" name="Default Changelist" comment="Added Command-line interface. You now need to set ERABLE_LIB to ERABLE_BIN to sth like /usr/local/lib.The usage of command 'ErableVM' : ErableVM [-f file]">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Descriptor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Descriptor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exceptions.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Exceptions.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exceptions.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Exceptions.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Global.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Global.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Global.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Global.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IO.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/IO.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IO.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/IO.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NativeFunctions.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/NativeFunctions.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NativeFunctions.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/NativeFunctions.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Types.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Types.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/Utils.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/ConstantPool.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/ConstantPool.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/Descriptor.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/Descriptor.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/Exceptions.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/Exceptions.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/Global.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/Global.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/IO.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/IO.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/Metadata.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/Metadata.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/NativeFunctions.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/NativeFunctions.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/Program.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/Program.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/Types.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/Types.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/include/dynamicro.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/include/dynamicro.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/main.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVM.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/ConstantPool.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/ConstantPool.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/Descriptor.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/Descriptor.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/Exceptions.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/Exceptions.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/Global.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/Global.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/IO.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/IO.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/Metadata.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/Metadata.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/NativeFunctions.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/NativeFunctions.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/Program.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/Program.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/Types.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/Types.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/include/dynamicro.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/include/dynamicro.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMDyn.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/ConstantPool.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/ConstantPool.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/Descriptor.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/Descriptor.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/Exceptions.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/Exceptions.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/Global.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/Global.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/IO.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/IO.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/Metadata.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/Metadata.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/NativeFunctions.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/NativeFunctions.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/Program.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/Program.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/Types.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/Types.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/include/dynamicro.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/include/dynamicro.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ErableVMStatic.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/ErableVM" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/ErableVM" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/ErableVM.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/ErableVM.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/install_manifest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/install_manifest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libErableVMDyn.dylib" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/libErableVMDyn.dylib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libErableVMStatic.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/libErableVMStatic.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/stdlib/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/stdlib/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/Makefile-Debug.mk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/Makefile-Dynamic_Build.mk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/Makefile-Release.mk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/Makefile-Static_Build.mk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/Makefile-impl.mk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/Makefile-variables.mk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/Package-Debug.bash" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/Package-Dynamic_Build.bash" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/Package-Release.bash" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/Package-Static_Build.bash" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/configurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/Makefile-variables.mk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/c_standard_headers_indexer.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/configurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/cpp_standard_headers_indexer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/launcher.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stdlib/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/stdlib/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stdlib/StdLib.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/stdlib/StdLib.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/runtime/cmake-build-debug/" />
@@ -64,57 +154,31 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.cpp">
+        <entry file="file://$PROJECT_DIR$/IO.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
-              <folding>
-                <element signature="e#327#345#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OpCode.hpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="966">
-              <caret line="46" selection-start-line="46" selection-end-line="46" />
+            <state relative-caret-position="140">
+              <caret line="57" column="21" selection-start-line="57" selection-start-column="21" selection-end-line="57" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Global.cpp">
+        <entry file="file://$PROJECT_DIR$/Types.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="30" column="52" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="52" />
+            <state relative-caret-position="132">
+              <caret line="324" column="57" selection-start-line="324" selection-start-column="57" selection-end-line="324" selection-end-column="57" />
               <folding>
-                <element signature="e#692#713#0" expanded="true" />
+                <element signature="e#691#711#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Utils.h">
+        <entry file="file://$PROJECT_DIR$/stdlib/StdLib.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2751">
-              <caret line="131" selection-start-line="131" selection-end-line="131" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Program.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2310">
-              <caret line="110" column="44" selection-start-line="110" selection-start-column="44" selection-end-line="110" selection-end-column="44" />
+            <state relative-caret-position="168">
+              <caret line="8" column="83" selection-start-line="8" selection-start-column="83" selection-end-line="8" selection-end-column="83" />
             </state>
           </provider>
         </entry>
@@ -122,8 +186,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Global.hpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="693">
-              <caret line="33" column="14" selection-start-line="33" selection-start-column="14" selection-end-line="33" selection-end-column="14" />
+            <state relative-caret-position="118">
+              <caret line="37" column="15" selection-start-line="37" selection-start-column="15" selection-end-line="37" selection-end-column="15" />
               <folding>
                 <element signature="e#853#871#0" expanded="true" />
               </folding>
@@ -131,20 +195,50 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Descriptor.hpp">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/NativeFunctions.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="25" column="1" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
+            <state relative-caret-position="241">
+              <caret line="22" column="21" lean-forward="true" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../test/test.ec">
+        <entry file="file://$PROJECT_DIR$/Exceptions.hpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="8" column="96" selection-start-line="8" selection-start-column="96" selection-end-line="8" selection-end-column="96" />
+            <state relative-caret-position="77">
+              <caret line="37" column="107" selection-start-line="37" selection-start-column="107" selection-end-line="37" selection-end-column="107" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="147">
+                <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Exceptions.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="147">
+              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/NativeFunctions.hpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="52" column="55" selection-start-line="52" selection-start-column="55" selection-end-line="52" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -152,8 +246,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Descriptor.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
+            <state relative-caret-position="408">
+              <caret line="255" column="74" selection-start-line="255" selection-start-column="74" selection-end-line="255" selection-end-column="74" />
+              <folding>
+                <element signature="e#692#717#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -196,36 +293,37 @@
       <list>
         <option value="$PROJECT_DIR$/nbproject/private/cpp_standard_headers_indexer.cpp" />
         <option value="$APPLICATION_CONFIG_DIR$/clion.vmoptions" />
-        <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/Exceptions.cpp" />
-        <option value="$PROJECT_DIR$/IO.cpp" />
         <option value="$PROJECT_DIR$/Metadata.cpp" />
         <option value="$PROJECT_DIR$/Program.hpp" />
         <option value="$PROJECT_DIR$/LibLoader.hpp" />
-        <option value="$PROJECT_DIR$/Exceptions.hpp" />
         <option value="$PROJECT_DIR$/runtime/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/stdlib/IOS.cpp" />
-        <option value="$PROJECT_DIR$/stdlib/StdLib.cpp" />
         <option value="$PROJECT_DIR$/stdlib/IOS.hpp" />
         <option value="$PROJECT_DIR$/include/dynamicro.h" />
         <option value="$PROJECT_DIR$/LibLoader.cpp" />
         <option value="$PROJECT_DIR$/stdlib/StdLib.hpp" />
-        <option value="$PROJECT_DIR$/NativeFunctions.hpp" />
-        <option value="$PROJECT_DIR$/NativeFunctions.cpp" />
-        <option value="$PROJECT_DIR$/Types.cpp" />
         <option value="$PROJECT_DIR$/Types.hpp" />
-        <option value="$PROJECT_DIR$/stdlib/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/include/dynamicro.cpp" />
         <option value="$PROJECT_DIR$/ConstantPool.cpp" />
         <option value="$PROJECT_DIR$/OpCode.hpp" />
-        <option value="$PROJECT_DIR$/Descriptor.cpp" />
-        <option value="$PROJECT_DIR$/Global.hpp" />
-        <option value="$PROJECT_DIR$/Utils.h" />
         <option value="$PROJECT_DIR$/Program.cpp" />
-        <option value="$PROJECT_DIR$/Global.cpp" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/main.cpp" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/stdlib/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/Utils.h" />
+        <option value="$PROJECT_DIR$/IO.hpp" />
+        <option value="$PROJECT_DIR$/Global.cpp" />
+        <option value="$PROJECT_DIR$/main.cpp" />
+        <option value="$PROJECT_DIR$/Global.hpp" />
+        <option value="$PROJECT_DIR$/IO.cpp" />
+        <option value="$PROJECT_DIR$/NativeFunctions.hpp" />
+        <option value="$PROJECT_DIR$/Descriptor.cpp" />
+        <option value="$PROJECT_DIR$/NativeFunctions.cpp" />
+        <option value="$PROJECT_DIR$/Types.cpp" />
+        <option value="$PROJECT_DIR$/stdlib/StdLib.cpp" />
+        <option value="$PROJECT_DIR$/Exceptions.cpp" />
+        <option value="$PROJECT_DIR$/Exceptions.hpp" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -289,6 +387,11 @@
               <item name="ErableVM" type="462c0819:PsiDirectoryNode" />
               <item name="include" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="ErableVM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ErableVM" type="462c0819:PsiDirectoryNode" />
+              <item name="stdlib" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -312,7 +415,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -333,6 +436,11 @@
     </option>
   </component>
   <component name="RunManager" selected="CMake Application.ErableVM">
+    <configuration name="ErableStdlib" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableVM" TARGET_NAME="ErableStdlib" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ErableVM" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-f $PROJECT_DIR$/../test/instance.erable" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableVM" TARGET_NAME="ErableVM" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableVM" RUN_TARGET_NAME="ErableVM">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -344,11 +452,6 @@
       </method>
     </configuration>
     <configuration name="ErableVMStatic" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableVM" TARGET_NAME="ErableVMStatic" CONFIG_NAME="Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="stdlib" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableVM" TARGET_NAME="stdlib" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -369,7 +472,7 @@
       <item itemvalue="CMake Application.ErableVM" />
       <item itemvalue="CMake Application.ErableVMDyn" />
       <item itemvalue="CMake Application.ErableVMStatic" />
-      <item itemvalue="CMake Application.stdlib" />
+      <item itemvalue="CMake Application.ErableStdlib" />
       <item itemvalue="Compound.BuildErable" />
     </list>
   </component>
@@ -399,7 +502,7 @@
       <workItem from="1558595693426" duration="64000" />
       <workItem from="1558595761997" duration="12212000" />
       <workItem from="1558660647027" duration="336000" />
-      <workItem from="1558662342085" duration="344000" />
+      <workItem from="1558662342085" duration="10647000" />
     </task>
     <task id="LOCAL-00001" summary="I've changed the IDE I use">
       <created>1558567629247</created>
@@ -433,7 +536,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30976000" />
+    <option name="totallyTimeSpent" value="41279000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -477,7 +580,7 @@
       <window_info anchor="right" id="Compiler Explorer" order="7" side_tool="true" weight="0.32930514" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49756098" visible="true" weight="0.2839879" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49756098" visible="true" weight="0.29229608" />
       <window_info id="Structure" order="1" sideWeight="0.502439" side_tool="true" weight="0.25755286" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -503,7 +606,7 @@
       <window_info anchor="right" id="Cargo" order="4" weight="0.32930514" />
       <window_info anchor="right" id="Remote Host" order="5" weight="0.32930514" />
       <window_info anchor="right" id="make" order="6" weight="0.32930514" />
-      <window_info anchor="right" id="Compiler Explorer" order="7" side_tool="true" />
+      <window_info anchor="right" id="Compiler Explorer" order="7" side_tool="true" weight="0.32930514" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -564,16 +667,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="126">
-            <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../test/test.erable">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-616">
@@ -595,27 +688,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1113">
           <caret line="53" column="29" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IO.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1365">
-          <caret line="69" column="8" selection-start-line="69" selection-start-column="8" selection-end-line="69" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Exceptions.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Exceptions.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="945">
-          <caret line="45" column="35" selection-start-line="45" selection-start-column="35" selection-end-line="45" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -650,13 +722,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stdlib/StdLib.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/stdlib/StdLib.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -674,41 +739,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NativeFunctions.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="49" column="38" selection-start-line="49" selection-start-column="38" selection-end-line="49" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Types.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="348" column="45" selection-start-line="348" selection-start-column="45" selection-end-line="348" selection-end-column="45" />
-          <folding>
-            <element signature="e#691#711#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Types.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
           <caret line="257" selection-start-line="257" selection-end-line="257" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NativeFunctions.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="46" column="15" selection-start-line="46" selection-start-column="15" selection-end-line="46" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stdlib/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -743,61 +777,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
-          <folding>
-            <element signature="e#327#345#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="29" column="25" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OpCode.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="966">
-          <caret line="46" selection-start-line="46" selection-end-line="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Global.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="30" column="52" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="52" />
-          <folding>
-            <element signature="e#692#713#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Utils.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2751">
-          <caret line="131" selection-start-line="131" selection-end-line="131" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Program.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2310">
           <caret line="110" column="44" selection-start-line="110" selection-start-column="44" selection-end-line="110" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Global.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="693">
-          <caret line="33" column="14" selection-start-line="33" selection-start-column="14" selection-end-line="33" selection-end-column="14" />
-          <folding>
-            <element signature="e#853#871#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -815,15 +798,155 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Descriptor.cpp">
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
+        <state relative-caret-position="273">
+          <caret line="69" column="23" selection-start-line="69" selection-start-column="23" selection-end-line="69" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stdlib/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="32" column="33" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OpCode.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1571">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IO.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1828">
+          <caret line="128" selection-start-line="128" selection-end-line="128" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Global.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
+          <folding>
+            <element signature="e#692#713#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Utils.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="228" column="33" selection-start-line="228" selection-start-column="33" selection-end-line="228" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="55" column="46" selection-start-line="55" selection-start-column="46" selection-end-line="55" selection-end-column="46" />
+          <folding>
+            <element signature="e#327#345#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IO.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="57" column="21" selection-start-line="57" selection-start-column="21" selection-end-line="57" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Descriptor.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="255" column="74" selection-start-line="255" selection-start-column="74" selection-end-line="255" selection-end-column="74" />
+          <folding>
+            <element signature="e#692#717#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Types.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="324" column="57" selection-start-line="324" selection-start-column="57" selection-end-line="324" selection-end-column="57" />
+          <folding>
+            <element signature="e#691#711#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stdlib/StdLib.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="83" selection-start-line="8" selection-start-column="83" selection-end-line="8" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Global.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="37" column="15" selection-start-line="37" selection-start-column="15" selection-end-line="37" selection-end-column="15" />
+          <folding>
+            <element signature="e#853#871#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NativeFunctions.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="52" column="55" selection-start-line="52" selection-start-column="55" selection-end-line="52" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Exceptions.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2655" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2394" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Exceptions.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="77">
+          <caret line="37" column="107" selection-start-line="37" selection-start-column="107" selection-end-line="37" selection-end-column="107" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="147">
+            <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NativeFunctions.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="22" column="21" lean-forward="true" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+        </state>
+      </provider>
     </entry>
   </component>
   <component name="masterDetails">

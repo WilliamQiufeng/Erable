@@ -196,17 +196,17 @@ ErableVM/fast:
 .PHONY : ErableVM/fast
 
 #=============================================================================
-# Target rules for targets named stdlib
+# Target rules for targets named ErableStdlib
 
 # Build rule for target.
-stdlib: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 stdlib
-.PHONY : stdlib
+ErableStdlib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ErableStdlib
+.PHONY : ErableStdlib
 
 # fast build rule for target.
-stdlib/fast:
-	$(MAKE) -f stdlib/CMakeFiles/stdlib.dir/build.make stdlib/CMakeFiles/stdlib.dir/build
-.PHONY : stdlib/fast
+ErableStdlib/fast:
+	$(MAKE) -f stdlib/CMakeFiles/ErableStdlib.dir/build.make stdlib/CMakeFiles/ErableStdlib.dir/build
+.PHONY : ErableStdlib/fast
 
 ConstantPool.o: ConstantPool.cpp.o
 
@@ -613,7 +613,7 @@ help:
 	@echo "... install/strip"
 	@echo "... install"
 	@echo "... ErableVM"
-	@echo "... stdlib"
+	@echo "... ErableStdlib"
 	@echo "... ConstantPool.o"
 	@echo "... ConstantPool.i"
 	@echo "... ConstantPool.s"

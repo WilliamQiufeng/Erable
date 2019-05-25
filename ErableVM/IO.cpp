@@ -55,7 +55,7 @@ namespace Erable::IO {
         std::string path(boost::filesystem::absolute(f.getPath()).string());
         this->in = new std::ifstream(path, std::ios::in | std::ios::binary);
         //this->in->get();
-        std::cout << "Opened:" << path << std::endl;
+        ERABLE_DEBUG std::cout << "Opened:" << path << std::endl;
         if (in->fail()) {
             std::cout << "Open Failed!!Message:" << strerror(errno) << std::endl;
         }
@@ -97,6 +97,4 @@ namespace Erable::IO {
     void InputStream::close() {
         this->in->close();
     }
-
-
-    }
+}

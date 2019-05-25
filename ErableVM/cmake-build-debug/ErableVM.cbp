@@ -215,8 +215,8 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableVM/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="stdlib">
-				<Option output="/williamye/program/antlr/erable/ErableVM/cmake-build-debug/stdlib/libstdlib.dylib" prefix_auto="0" extension_auto="0"/>
+			<Target title="ErableStdlib">
+				<Option output="/williamye/program/antlr/erable/ErableVM/cmake-build-debug/stdlib/libErableStdlib.dylib" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/williamye/program/antlr/erable/ErableVM/cmake-build-debug/stdlib"/>
 				<Option object_output="./"/>
 				<Option type="3"/>
@@ -233,14 +233,14 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableVM/cmake-build-debug/stdlib/Makefile&quot;  VERBOSE=1 stdlib"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableVM/cmake-build-debug/stdlib/Makefile&quot;  VERBOSE=1 ErableStdlib"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableVM/cmake-build-debug/stdlib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableVM/cmake-build-debug/stdlib/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableVM/cmake-build-debug/stdlib/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="stdlib/fast">
-				<Option output="/williamye/program/antlr/erable/ErableVM/cmake-build-debug/stdlib/libstdlib.dylib" prefix_auto="0" extension_auto="0"/>
+			<Target title="ErableStdlib/fast">
+				<Option output="/williamye/program/antlr/erable/ErableVM/cmake-build-debug/stdlib/libErableStdlib.dylib" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/williamye/program/antlr/erable/ErableVM/cmake-build-debug/stdlib"/>
 				<Option object_output="./"/>
 				<Option type="3"/>
@@ -257,7 +257,7 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableVM/cmake-build-debug/stdlib/Makefile&quot;  VERBOSE=1 stdlib/fast"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableVM/cmake-build-debug/stdlib/Makefile&quot;  VERBOSE=1 ErableStdlib/fast"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableVM/cmake-build-debug/stdlib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableVM/cmake-build-debug/stdlib/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableVM/cmake-build-debug/stdlib/Makefile&quot;  VERBOSE=1 clean"/>
@@ -393,16 +393,16 @@
 			<Option target="ErableVM"/>
 		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableVM/stdlib/IOS.cpp">
-			<Option target="stdlib"/>
+			<Option target="ErableStdlib"/>
 		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableVM/stdlib/IOS.hpp">
-			<Option target="stdlib"/>
+			<Option target="ErableStdlib"/>
 		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableVM/stdlib/StdLib.cpp">
-			<Option target="stdlib"/>
+			<Option target="ErableStdlib"/>
 		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableVM/stdlib/StdLib.hpp">
-			<Option target="stdlib"/>
+			<Option target="ErableStdlib"/>
 		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableVM/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

@@ -17,6 +17,8 @@
 
 #include "Descriptor.hpp"
 #include "NativeFunctions.hpp"
+
+#include "Global.hpp"
 //#include "Metadata.hpp"
 
 namespace Erable {
@@ -251,7 +253,7 @@ namespace Erable {
             } else if (inst->getTypeName() == "NativeFunction") {
                 Types::NativeFunction *func = (Types::NativeFunction *) inst;
                 std::string nativeCS = func->getAValue<std::string>();
-                Native::functype nativeFunc = Native::Functions.functions[nativeCS];
+                Native::functype nativeFunc = Native::Functions::findFunc(nativeCS);
                 desc->retId = func->getRetId();
                 Types::Instance *ret = nativeFunc(this, func, argv);
                 if (ret != nullptr) {
@@ -298,7 +300,7 @@ namespace Erable {
 
     void Descriptor::doAll() {
         this->readHeader();
-        std::cout << this->getInput()->getData()->meta->toString() << std::endl;
+        ERABLE_DEBUG std::cout << this->getInput()->getData()->meta->toString() << std::endl;
         this->executeAll(Program::END);
     }
 

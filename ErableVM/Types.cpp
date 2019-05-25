@@ -322,8 +322,8 @@ namespace Erable::Types {
      */
     DECLARE_UNARY_INSTANCE_FUNC(NativeFunction::cond) {
         auto nativeCall = this->getAValue<std::string>();
-        auto iter = Erable::Native::Functions.functions.find(nativeCall);
-        bool found = (iter == Erable::Native::Functions.functions.end());
+        auto iter = Erable::Native::Functions::functions.find(nativeCall);
+        bool found = (iter == Erable::Native::Functions::functions.end());
         Instance *res = new Integer(found, toid, this->getParent());
         return res;
     }

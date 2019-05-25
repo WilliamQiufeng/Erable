@@ -67,4 +67,4 @@ endif ()
 
 install(TARGETS ErableVM DESTINATION bin)
 install(TARGETS ErableVMDyn DESTINATION lib)
-install(TARGETS stdlib DESTINATION lib)
+install(TARGETS ErableStdlib DESTINATION lib)

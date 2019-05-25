@@ -28,7 +28,32 @@
 
 #include <cstdlib>
 #include <string>
+#include <boost/filesystem.hpp>
+#include <regex>
 
+
+namespace Erable {
+    class Config {
+    public:
+        inline static bool debug, stdlib;
+    };
+
+    inline int UNKNOWN = -1;
+
+    std::string getLib();
+
+    std::string getBin();
+
+    std::string findStdLib();
+
+    std::string searchFile(boost::filesystem::path path, std::regex reg);
+
+    std::string findInFollowing(std::vector<std::string> paths, std::string reg);
+
+    std::string checkExists(std::string key);
+}
+
+#define ERABLE_DEBUG if(Erable::Config::debug)
 
 #define are ==
 #define inc ++
@@ -178,14 +203,6 @@
 
 //-----------End Instance Use------------//
 
-namespace Erable {
-    inline int UNKNOWN = -1;
 
-    std::string getLib();
-
-    std::string getBin();
-
-    std::string checkExists(std::string key);
-}
 #endif /* GLOBALMACROS_HPP */
 

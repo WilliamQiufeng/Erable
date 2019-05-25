@@ -5,5 +5,6 @@
 #include "StdLib.hpp"
 
 void loadNatives() {
-    Erable::Native::Functions.functions["print"] = &Erable::Native::BuiltIn::print;
+    Erable::Native::Functions::functions["print"] = &Erable::Native::BuiltIn::print;
+    Erable::Native::Functions::functions["scan"] = &Erable::Native::BuiltIn::scan;
 }

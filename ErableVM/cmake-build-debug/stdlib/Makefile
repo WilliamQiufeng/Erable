@@ -157,19 +157,19 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-stdlib/CMakeFiles/stdlib.dir/rule:
-	cd /williamye/program/antlr/erable/ErableVM/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 stdlib/CMakeFiles/stdlib.dir/rule
-.PHONY : stdlib/CMakeFiles/stdlib.dir/rule
+stdlib/CMakeFiles/ErableStdlib.dir/rule:
+	cd /williamye/program/antlr/erable/ErableVM/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 stdlib/CMakeFiles/ErableStdlib.dir/rule
+.PHONY : stdlib/CMakeFiles/ErableStdlib.dir/rule
 
 # Convenience name for target.
-stdlib: stdlib/CMakeFiles/stdlib.dir/rule
+ErableStdlib: stdlib/CMakeFiles/ErableStdlib.dir/rule
 
-.PHONY : stdlib
+.PHONY : ErableStdlib
 
 # fast build rule for target.
-stdlib/fast:
-	cd /williamye/program/antlr/erable/ErableVM/cmake-build-debug && $(MAKE) -f stdlib/CMakeFiles/stdlib.dir/build.make stdlib/CMakeFiles/stdlib.dir/build
-.PHONY : stdlib/fast
+ErableStdlib/fast:
+	cd /williamye/program/antlr/erable/ErableVM/cmake-build-debug && $(MAKE) -f stdlib/CMakeFiles/ErableStdlib.dir/build.make stdlib/CMakeFiles/ErableStdlib.dir/build
+.PHONY : ErableStdlib/fast
 
 IOS.o: IOS.cpp.o
 
@@ -177,7 +177,7 @@ IOS.o: IOS.cpp.o
 
 # target to build an object file
 IOS.cpp.o:
-	cd /williamye/program/antlr/erable/ErableVM/cmake-build-debug && $(MAKE) -f stdlib/CMakeFiles/stdlib.dir/build.make stdlib/CMakeFiles/stdlib.dir/IOS.cpp.o
+	cd /williamye/program/antlr/erable/ErableVM/cmake-build-debug && $(MAKE) -f stdlib/CMakeFiles/ErableStdlib.dir/build.make stdlib/CMakeFiles/ErableStdlib.dir/IOS.cpp.o
 .PHONY : IOS.cpp.o
 
 IOS.i: IOS.cpp.i
@@ -186,7 +186,7 @@ IOS.i: IOS.cpp.i
 
 # target to preprocess a source file
 IOS.cpp.i:
-	cd /williamye/program/antlr/erable/ErableVM/cmake-build-debug && $(MAKE) -f stdlib/CMakeFiles/stdlib.dir/build.make stdlib/CMakeFiles/stdlib.dir/IOS.cpp.i
+	cd /williamye/program/antlr/erable/ErableVM/cmake-build-debug && $(MAKE) -f stdlib/CMakeFiles/ErableStdlib.dir/build.make stdlib/CMakeFiles/ErableStdlib.dir/IOS.cpp.i
 .PHONY : IOS.cpp.i
 
 IOS.s: IOS.cpp.s
@@ -195,7 +195,7 @@ IOS.s: IOS.cpp.s
 
 # target to generate assembly for a file
 IOS.cpp.s:
-	cd /williamye/program/antlr/erable/ErableVM/cmake-build-debug && $(MAKE) -f stdlib/CMakeFiles/stdlib.dir/build.make stdlib/CMakeFiles/stdlib.dir/IOS.cpp.s
+	cd /williamye/program/antlr/erable/ErableVM/cmake-build-debug && $(MAKE) -f stdlib/CMakeFiles/ErableStdlib.dir/build.make stdlib/CMakeFiles/ErableStdlib.dir/IOS.cpp.s
 .PHONY : IOS.cpp.s
 
 StdLib.o: StdLib.cpp.o
@@ -204,7 +204,7 @@ StdLib.o: StdLib.cpp.o
 
 # target to build an object file
 StdLib.cpp.o:
-	cd /williamye/program/antlr/erable/ErableVM/cmake-build-debug && $(MAKE) -f stdlib/CMakeFiles/stdlib.dir/build.make stdlib/CMakeFiles/stdlib.dir/StdLib.cpp.o
+	cd /williamye/program/antlr/erable/ErableVM/cmake-build-debug && $(MAKE) -f stdlib/CMakeFiles/ErableStdlib.dir/build.make stdlib/CMakeFiles/ErableStdlib.dir/StdLib.cpp.o
 .PHONY : StdLib.cpp.o
 
 StdLib.i: StdLib.cpp.i
@@ -213,7 +213,7 @@ StdLib.i: StdLib.cpp.i
 
 # target to preprocess a source file
 StdLib.cpp.i:
-	cd /williamye/program/antlr/erable/ErableVM/cmake-build-debug && $(MAKE) -f stdlib/CMakeFiles/stdlib.dir/build.make stdlib/CMakeFiles/stdlib.dir/StdLib.cpp.i
+	cd /williamye/program/antlr/erable/ErableVM/cmake-build-debug && $(MAKE) -f stdlib/CMakeFiles/ErableStdlib.dir/build.make stdlib/CMakeFiles/ErableStdlib.dir/StdLib.cpp.i
 .PHONY : StdLib.cpp.i
 
 StdLib.s: StdLib.cpp.s
@@ -222,7 +222,7 @@ StdLib.s: StdLib.cpp.s
 
 # target to generate assembly for a file
 StdLib.cpp.s:
-	cd /williamye/program/antlr/erable/ErableVM/cmake-build-debug && $(MAKE) -f stdlib/CMakeFiles/stdlib.dir/build.make stdlib/CMakeFiles/stdlib.dir/StdLib.cpp.s
+	cd /williamye/program/antlr/erable/ErableVM/cmake-build-debug && $(MAKE) -f stdlib/CMakeFiles/ErableStdlib.dir/build.make stdlib/CMakeFiles/ErableStdlib.dir/StdLib.cpp.s
 .PHONY : StdLib.cpp.s
 
 # Help Target
@@ -237,7 +237,7 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... stdlib"
+	@echo "... ErableStdlib"
 	@echo "... IOS.o"
 	@echo "... IOS.i"
 	@echo "... IOS.s"
