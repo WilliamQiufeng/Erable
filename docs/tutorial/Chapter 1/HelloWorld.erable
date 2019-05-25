@@ -1,0 +1,2 @@
+use "stdlib/ios";
+println("Hello World!");
