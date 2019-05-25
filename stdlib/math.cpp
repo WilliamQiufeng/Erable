@@ -9,8 +9,7 @@
 #include <algorithm>
 
 namespace Erable {
-    namespace Native {
-	namespace BuiltIn {
+    namespace Native::BuiltIn {
 
 	    DEFINE_NATIVE_FUNCTION(sqrt) {
 			Types::Instance* val = argv->getAValue<Types::Array::arrtype>().at(0);
@@ -21,6 +20,13 @@ namespace Erable {
 			Types::Instance* val = argv->getAValue<Types::Array::arrtype>().at(0);
 			return log(atof(val));
 	    }
+		
+		DEFINE_NATIVE_FUNCTION(pow) {
+			Types::Instance* a = argv->getAValue<Types::Array::arrtype>().at(0);
+			Types::Instance* b = argv->getAValue<Types::Array::arrtype>().at(1);
+			return pow(atof(a), atof(b));
+	    }
+
+
 	}
-    }
 }

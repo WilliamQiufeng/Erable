@@ -4,3 +4,4 @@
 
 native function sqrt:(num) using "sqrt";
 native function log:(base num) using "log";
+native function pow:(base num) using "pow";

@@ -21,6 +21,7 @@ namespace Erable{
 	namespace BuiltIn{
 	    DEFINE_NATIVE_FUNCTION(sqrt);
 	    DEFINE_NATIVE_FUNCTION(log);
+		DEFINE_NATIVE_FUNCTION(pow);
 	}
     }
 }
