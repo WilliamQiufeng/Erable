@@ -11,16 +11,16 @@ namespace Erable {
 	namespace BuiltIn {
 
 	    DEFINE_NATIVE_FUNCTION(print) {
-		Types::Instance* toP = argv->getAValue<Types::Array::arrtype>().at(0);
-		std::cout << toP << std::endl;
-		return nullptr;
+			Types::Instance* toP = argv->getAValue<Types::Array::arrtype>().at(0);
+			std::cout << toP << std::endl;
+			return nullptr;
 	    };
 
 	    DEFINE_NATIVE_FUNCTION(scan) {
-		std::string get;
-		std::cin>>get;
-		Types::Instance* ret = new Types::String(get, self->getRetId(), desc);
-		return ret;
+			std::string get;
+			std::cin>>get;
+			Types::Instance* ret = new Types::String(get, self->getRetId(), desc);
+			return ret;
 	    };
 	}
     }

@@ -6,17 +6,20 @@
 
 #include "math.hpp"
 #include <cmath>
+#include <algorithm>
 
 namespace Erable {
     namespace Native {
 	namespace BuiltIn {
 
 	    DEFINE_NATIVE_FUNCTION(sqrt) {
-			return nullptr;
+			Types::Instance* val = argv->getAValue<Types::Array::arrtype>().at(0);
+			return sqrt(atof(val));
 	    }
 
 	    DEFINE_NATIVE_FUNCTION(log) {
-			return nullptr;
+			Types::Instance* val = argv->getAValue<Types::Array::arrtype>().at(0);
+			return log(atof(val));
 	    }
 	}
     }
