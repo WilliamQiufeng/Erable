@@ -13,20 +13,34 @@ namespace Erable {
 
 	    DEFINE_NATIVE_FUNCTION(sqrt) {
 			Types::Instance* val = argv->getAValue<Types::Array::arrtype>().at(0);
-			return sqrt(atof(val));
+			return sqrt(val.getAValue<double>());
 	    }
 
 	    DEFINE_NATIVE_FUNCTION(log) {
 			Types::Instance* val = argv->getAValue<Types::Array::arrtype>().at(0);
-			return log(atof(val));
+			return log(val.getAValue<double>());
 	    }
 		
 		DEFINE_NATIVE_FUNCTION(pow) {
 			Types::Instance* a = argv->getAValue<Types::Array::arrtype>().at(0);
 			Types::Instance* b = argv->getAValue<Types::Array::arrtype>().at(1);
-			return pow(atof(a), atof(b));
+			return pow(a.getAValue<double>(), b.getAValue<double>());
 	    }
-
+		
+		DEFINE_NATIVE_FUNCTION(sin) {
+			Types::Instance* val = argv->getAValue<Types::Array::arrtype>().at(0);
+			return sin(val.getAValue<double>());
+		}
+		
+		DEFINE_NATIVE_FUNCTION(cos) {
+			Types::Instance* val = argv->getAValue<Types::Array::arrtype>().at(0);
+			return cos(val.getAValue<double>());
+		}
+		
+		DEFINE_NATIVE_FUNCTION(tan) {
+			Types::Instance* val = argv->getAValue<Types::Array::arrtype>().at(0);
+			return tan(val.getAValue<double>());
+		}
 
 	}
 }
