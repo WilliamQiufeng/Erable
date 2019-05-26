@@ -1,3 +1,0 @@
-/williamye/program/antlr/erable/ErableVM/stdlib/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/williamye/program/antlr/erable/ErableVM/stdlib/cmake-build-debug/CMakeFiles/edit_cache.dir
-/williamye/program/antlr/erable/ErableVM/stdlib/cmake-build-debug/CMakeFiles/stdlib.dir

@@ -1,3 +1,0 @@
-/usr/local/bin/ErableVM
-/usr/local/lib/libErableVMDyn.dylib
-/usr/local/lib/libErableStdlib.dylib

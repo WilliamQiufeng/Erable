@@ -294,6 +294,7 @@ public class EListener extends ErableBaseListener {
     public void exitString(ErableParser.StringContext ctx) {
 	super.exitString(ctx);
 	String text = ctx.ANYMATCH().getText();
+	
 	text = text.substring(1, text.length() - 1);
 	ConstantPoolString string = new ConstantPoolString(text);
 	ctx.obj = text;
