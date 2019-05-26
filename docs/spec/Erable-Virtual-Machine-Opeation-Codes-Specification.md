@@ -1,4 +1,4 @@
-# Erable<sup>TM</sup> Virtual Machine Operation Codes Specification
+# Erable Virtual Machine Operation Codes Specification
 
 ---
 

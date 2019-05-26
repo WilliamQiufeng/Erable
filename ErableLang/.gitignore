@@ -1,4 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
+# Visual Studio Project Files
+.vs/
+
 ### C template
 # Prerequisites
 *.d
