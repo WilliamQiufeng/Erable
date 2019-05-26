@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_subdirectory(stdlib)
 add_subdirectory(VM)
+add_subdirectory(Compiler)
 
 
 install(TARGETS ErableVM DESTINATION bin)

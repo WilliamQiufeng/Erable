@@ -103,9 +103,7 @@ CTestTestfile.cmake
 _deps
 
 Compiler/.idea/
-Compiler/CMakeLists.txt
 Compiler/cmake-build-debug/Compiler.cbp
-Compiler/main.cpp
 VM/cmake-build-debug/ErableVM.cbp
 cmake-build-debug/Erable.cbp
 cmake-build-debug/ErableLang.cbp
