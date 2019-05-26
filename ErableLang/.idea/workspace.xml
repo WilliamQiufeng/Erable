@@ -45,16 +45,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="843ad3e7-5740-4d46-80f4-e7c843e04bd1" name="Default Changelist" comment="Moved math.cpp and math.hpp to ErableLang/stdlib/">
-      <change afterPath="$PROJECT_DIR$/.idea/fileTemplates/includes/C File Header.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/Compiler/Compiler.cbp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/stdlib/cmake-build-debug/ErableStdlib.cbp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ErableVM/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ErableVM/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/jessiezhang.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/jessiezhang.xml" afterDir="false" />
+    <list default="true" id="843ad3e7-5740-4d46-80f4-e7c843e04bd1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compiler/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VM/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/VM/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stdlib/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/stdlib/CMakeLists.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/runtime/cmake-build-debug/" />
@@ -74,19 +70,28 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+            <state>
+              <caret column="35" selection-start-column="35" selection-end-column="35" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/VM/CMakeLists.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="35" selection-start-column="35" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
+            <state relative-caret-position="374">
               <caret line="104" column="15" selection-start-line="104" selection-start-column="15" selection-end-line="104" selection-end-column="15" />
             </state>
           </provider>
@@ -95,32 +100,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stdlib/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="32" column="33" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
+            <state>
+              <caret column="35" selection-start-column="35" selection-end-column="35" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/stdlib/IOS.hpp">
+        <entry file="file://$PROJECT_DIR$/Compiler/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-              <folding>
-                <element signature="e#100#128#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/stdlib/Math.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
-              <folding>
-                <element signature="e#49#68#0" expanded="true" />
-              </folding>
+            <state>
+              <caret column="35" selection-start-column="35" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -226,7 +216,6 @@
         <option value="$PROJECT_DIR$/ConstantPool.cpp" />
         <option value="$PROJECT_DIR$/OpCode.hpp" />
         <option value="$PROJECT_DIR$/Program.cpp" />
-        <option value="$PROJECT_DIR$/stdlib/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/Utils.h" />
         <option value="$PROJECT_DIR$/IO.hpp" />
         <option value="$PROJECT_DIR$/Global.cpp" />
@@ -241,7 +230,6 @@
         <option value="$PROJECT_DIR$/NativeFunctions.cpp" />
         <option value="$PROJECT_DIR$/include/dynamicro.cpp" />
         <option value="$PROJECT_DIR$/Global.hpp" />
-        <option value="$PROJECT_DIR$/VM/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/Global/OpCode.hpp" />
         <option value="$PROJECT_DIR$/VM/Exceptions.cpp" />
         <option value="$PROJECT_DIR$/VM/NativeFunctions.cpp" />
@@ -254,8 +242,11 @@
         <option value="$PROJECT_DIR$/stdlib/StdLib.hpp" />
         <option value="$PROJECT_DIR$/stdlib/StdLib.cpp" />
         <option value="$PROJECT_DIR$/VM/main.cpp" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/Compiler/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/VM/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/stdlib/CMakeLists.txt" />
       </list>
     </option>
   </component>
@@ -298,6 +289,11 @@
               <item name="ErableLang" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="$PROJECT_DIR$" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="Compiler" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ErableLang" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="$PROJECT_DIR$" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="stdlib" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="ErableLang" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -435,7 +431,7 @@
       <workItem from="1558837228427" duration="447000" />
       <workItem from="1558837701019" duration="6585000" />
       <workItem from="1558855850671" duration="413000" />
-      <workItem from="1558856336321" duration="754000" />
+      <workItem from="1558856336321" duration="1059000" />
     </task>
     <task id="LOCAL-00001" summary="I've changed the IDE I use">
       <created>1558567629247</created>
@@ -493,11 +489,25 @@
       <option name="project" value="LOCAL" />
       <updated>1558843322343</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Added Compiler (Initial)">
+      <created>1558857959867</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1558857959867</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Decreased Minimum CMake Version (For tanpero)">
+      <created>1558858189105</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1558858189105</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53907000" />
+    <option name="totallyTimeSpent" value="54212000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -586,13 +596,14 @@
     <MESSAGE value="Modified License of ErableVM/include/dynamicro.cpp.Sorry for not putting the right license" />
     <MESSAGE value="Renamed ErableVM to ErableLang. Extracted cpp and hpp files for ErableVM to a unique ErableLang/VM directory." />
     <MESSAGE value="Moved math.cpp and math.hpp to ErableLang/stdlib/" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved math.cpp and math.hpp to ErableLang/stdlib/" />
+    <MESSAGE value="Added Compiler (Initial)" />
+    <MESSAGE value="Decreased Minimum CMake Version (For tanpero)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Decreased Minimum CMake Version (For tanpero)" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/nbproject/private/cpp_standard_headers_indexer.cpp" />
     <entry file="file://$PROJECT_DIR$/nbproject/private/private.xml" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/clion.vmoptions">
       <provider selected="true" editor-type-id="text-editor">
@@ -793,13 +804,6 @@
     <entry file="file://$PROJECT_DIR$/Compiler/main.cpp">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/VM/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="18" column="29" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Global/OpCode.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="873">
@@ -934,24 +938,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="104" column="15" selection-start-line="104" selection-start-column="15" selection-end-line="104" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="35" selection-start-column="35" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/stdlib/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="32" column="33" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
+        <state>
+          <caret column="35" selection-start-column="35" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VM/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="35" selection-start-column="35" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="104" column="15" selection-start-line="104" selection-start-column="15" selection-end-line="104" selection-end-column="15" />
+        <state>
+          <caret column="35" selection-start-column="35" selection-end-column="35" />
         </state>
       </provider>
     </entry>
