@@ -1,0 +1,155 @@
+﻿"Name"     = 'Erable Language'
+"Author"   = 'Qiufeng & Tanpero'
+"Version"  = '0.0.1'
+
+"Start Symbol" = <Start>
+
+! -------------------------------------------------
+! Character Sets
+! -------------------------------------------------
+
+{Whitespace}   = {&09 .. &0D, &20, &85, &A0, &1680, &180E, &2000 .. &200A, &2028, &2029, &202F, &205F, &3000}+.
+{WS}           = {Whitespace} - {CR} - {LF}
+{Letter}       = [A-Za-z]
+{Alphanumeric} = {Letter} + [0-9]
+{ID Head}      = {Letter} + [_]
+{ID Tail}      = {Alphanumeric} + [_]
+{String Chars} = {Printable} + {HT} - ["\]
+               
+{Binary Digit}  = '0' | '1'
+{Octal Digit}   = {Binary Digit} | [2-9]
+{Decimal Digit} = {Octal Digit} | '8' | '9'
+{Hexadecimal Digit} = {Decimal Digit} | [A-Fa-f]
+          
+{Binary Digit} = {Binary Digit}+
+{Octal Digit}  = {Octal Digit}+       
+{Decimal Digits} = {Decimal Digit} ( . {Decimal Digit} )? ( E [+-]? {Decimal Digit} )?
+{Hexadecimal Digit} = {Hexadecimal Digit}+
+                         
+!  After the decimal point must be followed for at least a decimal number,
+!  and then is zero or more decimal number.
+{Optional Fraction} = . {Decimal Digit} {Decimal Digits}* 
+
+! After the exponent sign must follow at least a decimal number,
+! and then is zero or more decimal number.
+{Optional Exponent} = E ( '+' | '-' ) {Decimal Digits} {Decimal Digits}* 
+
+
+! -------------------------------------------------
+! Terminals
+! -------------------------------------------------
+
+! The following defines the Whitespace terminal using the {WS}
+! set - which excludes the carriage return and line feed 
+! characters
+
+Whitespace    = {WS}+
+NewLine       = {CR}{LF} | {CR} | {LF}
+
+Identifier    = {ID Head}{ID Tail}*
+StringLiteral = '"' ( {String Chars} | '\' {Printable} )* '"'              
+NumberLiteral = '0b' {Binary Digits} | '0o' {Octal Digits} | '0x' {Hexadecimal Digits} | {Decimal Digits}
+
+
+! -------------------------------------------------
+! Keywords
+! -------------------------------------------------
+
+let      = 'let'
+const    = 'const'
+function = 'function'
+if       = 'if'
+else     = 'else'
+switch   = 'switch'
+case     = 'case'
+default  = 'default'
+while    = 'while'
+for      = 'for'
+in       = 'in'
+of       = 'of'
+return   = 'return'
+break    = 'break'
+continue = 'continue'
+throw    = 'throw'
+try      = 'try'
+catch    = 'catch'
+finally  = 'finally'
+load     = 'load'
+as       = 'as'
+with     = 'with'
+class    = 'class'
+extends  = 'extends'
+new      = 'new'
+this     = 'this'
+yield    = 'yield'
+super    = 'super' ! Visit the parent class
+native   = 'native'
+
+
+! -------------------------------------------------
+! Rules
+! -------------------------------------------------
+
+! The following rule defines a series of newline tokens.
+! Use this rule rather than the newline terminal.
+
+<nl>     ::= NewLine <nl>          !One or more
+          |  NewLine
+
+<nl Opt> ::= NewLine <nl Opt>      !Zero or more
+          |  !Empty
+
+! <nl opt> removes blank lines before first statement
+
+<Start>   ::= <nl opt> <Program>
+
+<Program> ::= <Statements>
+           
+<Statements> ::= <Expression>
+              | <nl opt>
+              
+<Expression>  ::= <Expression> '||' <LogicAnd Exp>
+               |  <LogicAnd Exp>
+               
+<LogicAnd Exp> ::= <LogicAnd Exp> '&&' <BitOr Exp>
+                | <BitOr Exp>
+                
+<BitOr Exp>  ::= <BitOr Exp> '|' <BitXor Exp>
+               |  <BitXor Exp>
+               
+<BitXor Exp>  ::= <BitAnd Exp> '^' <BitAnd Exp>
+               |  <BitAnd Exp>
+               
+<BitAnd Exp>  ::= <BitAnd Exp> '&' <Comp Exp>
+               |  <Comp Exp>
+               
+<Comp Exp>    ::= <Comp Exp> '==' <Shift Exp>  !Equal
+               |  <Comp Exp> '!=' <Shift Exp>  !Not equal
+               |  <Comp Exp> '<'  <Shift Exp>
+               |  <Comp Exp> '<=' <Shift Exp>
+               |  <Comp Exp> '>'  <Shift Exp>
+               |  <Comp Exp> '>=' <Shift Exp>
+               |  <Shift Exp>
+               
+<Shift Exp>   ::= <Shift Exp> '<<' <Add Exp>
+               | <Shift Exp> '>>' <Add Exp>
+
+<Add Exp>     ::= <Add Exp> '+' <Mult Exp>
+               |  <Add Exp> '-' <Mult Exp>
+               |  <Add Exp> '%' <Mult Exp>
+               |  <Mult Exp> 
+
+<Mult Exp>    ::= <Mult Exp> '*' <Negate Exp> 
+               |  <Mult Exp> '/' <Negate Exp> 
+               |  <Mult Exp> '**' <Negate Exp>
+               |  <Negate Exp> 
+
+<Negate Exp>  ::= '!' <Value> 
+               |  '~' <Value>
+               |  '-' <Value>
+               |  <Value> 
+
+!Add more values to the rule below - as needed
+
+<Value>       ::= Identifier
+               |  '(' <Expression> ')'
