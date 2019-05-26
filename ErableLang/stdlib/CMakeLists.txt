@@ -24,7 +24,7 @@ include_directories(../include)
 link_libraries(${ERABLEVM})
 
 
-add_library(ErableStdlib SHARED IOS.hpp IOS.cpp StdLib.cpp StdLib.hpp)
+add_library(ErableStdlib SHARED IOS.hpp IOS.cpp StdLib.cpp StdLib.hpp Math.cpp Math.hpp)
 set_property(TARGET ErableStdlib PROPERTY CXX_STANDARD 17)
 
 

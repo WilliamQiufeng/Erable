@@ -7,6 +7,7 @@
 
 #include "VM/NativeFunctions.hpp"
 #include "IOS.hpp"
+#include "Math.hpp"
 
 #ifdef __cplusplus
 extern "C" {
