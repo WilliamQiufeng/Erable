@@ -12,10 +12,15 @@ if (Boost_FOUND)
 
 endif ()
 
+include_directories(/usr/local/include)
+link_directories(/usr/local/lib)
+include_directories(.)
+include_directories(..)
 include_directories(../Global)
 include_directories(../include)
 
 add_executable(ErableCompiler main.cpp Tokens.cpp Tokens.hpp Lexer.cpp Lexer.hpp)
+
 
 if (Boost_FOUND)
 

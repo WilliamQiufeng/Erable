@@ -33,6 +33,11 @@ namespace Erable::Compiler {
         virtual void consumeOne(char);
         virtual bool consume();
         virtual void clear();
+
+        TokenElement(Lexer *lexer, const std::string &name, const std::string &match);
+
+        TokenElement(const std::string &name, const std::string &match);
+
         void setLexer(Lexer* lexer);
 
         Lexer *getLexer() const;
@@ -52,13 +57,19 @@ namespace Erable::Compiler {
     class PlainTokenElement : public TokenElement {
     public:
         bool valid() override;
-        void consumeOne(char) override;
+
+        PlainTokenElement(const std::string &name, const std::string &match);
     };
-    class Tokens {
-        Utils::Enum<TokenElement*> vals;
+
+    class Tokens_t {
     public:
+        std::vector<TokenElement *> tokens;
+
+        void generateTokenList();
         void setLexer(Lexer* lexer);
     };
+
+    inline static Tokens_t Tokens;
 }
 
 

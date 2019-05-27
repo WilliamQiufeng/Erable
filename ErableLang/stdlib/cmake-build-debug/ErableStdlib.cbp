@@ -47,6 +47,7 @@
 					<Add directory="/usr/local/include"/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/stdlib/."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/stdlib/.."/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/stdlib/../Global"/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/stdlib/../include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
@@ -71,6 +72,7 @@
 					<Add directory="/usr/local/include"/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/stdlib/."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/stdlib/.."/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/stdlib/../Global"/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/stdlib/../include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>

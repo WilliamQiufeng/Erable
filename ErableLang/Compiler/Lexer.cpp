@@ -24,9 +24,10 @@ namespace Erable::Compiler {
     }
     void Lexer::readToken() {
         if(available.size()==1) {
-            bool allValid = available[0]->consume();
-            if(available[0]->finished()) {
-                this->tokens.push_back(tk->getBuffer());
+            auto last = available[0];
+            bool allValid = last->consume();
+            if (last->finished()) {
+                this->tokens.push_back(last->getBuffer());
                 this->reset();
             }
         }else {
@@ -47,5 +48,64 @@ namespace Erable::Compiler {
         available.erase(std::remove_if(available.begin(), available.end(), [](TokenElement* x)->bool {
             return !x->allValid();
         }), available.end());
+    }
+
+    void Lexer::reset() {
+        Tokens.generateTokenList();
+        available = Tokens.tokens;
+    }
+
+    void Lexer::lex() {
+        while (forward() != EOF) {
+            readToken();
+        }
+    }
+
+    int Lexer::getLine() const {
+        return line;
+    }
+
+    void Lexer::setLine(int line) {
+        Lexer::line = line;
+    }
+
+    int Lexer::getColumn() const {
+        return column;
+    }
+
+    void Lexer::setColumn(int column) {
+        Lexer::column = column;
+    }
+
+    const std::vector<TokenElement *> &Lexer::getAvailable() const {
+        return available;
+    }
+
+    void Lexer::setAvailable(const std::vector<TokenElement *> &available) {
+        Lexer::available = available;
+    }
+
+    const std::vector<Token> &Lexer::getTokens() const {
+        return tokens;
+    }
+
+    void Lexer::setTokens(const std::vector<Token> &tokens) {
+        Lexer::tokens = tokens;
+    }
+
+    const std::vector<char> &Lexer::getForwards() const {
+        return forwards;
+    }
+
+    void Lexer::setForwards(const std::vector<char> &forwards) {
+        Lexer::forwards = forwards;
+    }
+
+    const IO::InputStream &Lexer::getIn() const {
+        return in;
+    }
+
+    void Lexer::setIn(const IO::InputStream &in) {
+        Lexer::in = in;
     }
 }

@@ -1,8 +1,13 @@
 #include <iostream>
-#include <fstream>
+#include "IO.hpp"
+#include "Lexer.hpp"
 
 int main(int argc, char* argv[]) {
-	
-    std::cout << "Hello, World!" << std::endl;
+    using namespace Erable::Compiler;
+    Lexer lexer = Lexer(Erable::IO::InputStream("/williamye/program/antlr/erable/ErableLang/tests/lex.erable"));
+    lexer.lex();
+    for (auto token : lexer.getTokens()) {
+        std::cout << "Token " << token.name << "[" << token.data << "]" << std::endl;
+    }
     return 0;
 }

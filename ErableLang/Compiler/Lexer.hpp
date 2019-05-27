@@ -26,6 +26,32 @@ namespace Erable::Compiler{
         char forward();
         void readToken();
         void reset();
+
+        void lex();
+
+        int getLine() const;
+
+        void setLine(int line);
+
+        int getColumn() const;
+
+        void setColumn(int column);
+
+        const std::vector<TokenElement *> &getAvailable() const;
+
+        void setAvailable(const std::vector<TokenElement *> &available);
+
+        const std::vector<Token> &getTokens() const;
+
+        void setTokens(const std::vector<Token> &tokens);
+
+        const std::vector<char> &getForwards() const;
+
+        void setForwards(const std::vector<char> &forwards);
+
+        const IO::InputStream &getIn() const;
+
+        void setIn(const IO::InputStream &in);
     };
 }
 
