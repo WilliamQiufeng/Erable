@@ -7,7 +7,7 @@
 #define ERABLESTDLIB_MATH_HPP
 
 #include "VM/Descriptor.hpp"
-#include <VM/Global.hpp>
+#include "VM/VMGlobal.hpp"
 
 namespace Erable::Native::BuiltIn {
     DEFINE_NATIVE_FUNCTION(sqrt);

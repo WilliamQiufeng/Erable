@@ -6,14 +6,26 @@
 #ifndef ERABLELANG_LEXER_HPP
 #define ERABLELANG_LEXER_HPP
 
+namespace Erable::Compiler {
+    class Lexer;
+}
+
 #include <IO.hpp>
+#include "Tokens.hpp"
 
 namespace Erable::Compiler{
     class Lexer{
         int line, column;
+        std::vector<TokenElement*> available;
+        std::vector<Token> tokens;
+        std::vector<char> forwards;
+        IO::InputStream in;
     public:
         Lexer(IO::InputStream);
         char read();
+        char forward();
+        void readToken();
+        void reset();
     };
 }
 

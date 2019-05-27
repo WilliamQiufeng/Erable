@@ -52,6 +52,7 @@ namespace Erable::Types {
 #include "Descriptor.hpp"
 #include "Global.hpp"
 #include "Exceptions.hpp"
+#include "VMGlobal.hpp"
 
 namespace Erable {
     namespace Types {

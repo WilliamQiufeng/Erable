@@ -77,6 +77,11 @@ namespace Erable::Exceptions {
     public:
         explicit NoDefException(const std::string &s) : Exception("No Def Exception", s) {};
     };
+
+    class UnknownTokenException : public Exception {
+    public:
+        explicit UnknownTokenException(const std::string &s) : Exception("Unknown Token Exception", s) {};
+    };
 }
 
 #endif /* EXCEPTIONS_HPP */

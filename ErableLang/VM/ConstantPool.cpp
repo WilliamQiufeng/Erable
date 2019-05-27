@@ -17,6 +17,7 @@
 
 
 #include "ConstantPool.hpp"
+#include "VMGlobal.hpp"
 
 
 namespace Erable {

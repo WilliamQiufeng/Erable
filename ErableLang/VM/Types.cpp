@@ -17,6 +17,7 @@
 #include "Types.hpp"
 #include "IO.hpp"
 #include "NativeFunctions.hpp"
+#include "VMGlobal.hpp"
 #include <string>
 #include <cmath>
 #include <complex>
@@ -37,7 +38,7 @@ namespace Erable::Types {
 
     std::ostream &operator<<(std::ostream &os, Types::Array::arrtype obj) {
         os << "[";
-        for (int i = 0; i < obj.size(); inc i) {
+        for (int i = 0; i < obj.size(); ++ i) {
             os << obj[i];
             if (i < obj.size() - 1)os << ", ";
         }

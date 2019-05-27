@@ -19,6 +19,7 @@
 #include "NativeFunctions.hpp"
 
 #include "Global.hpp"
+#include "VMGlobal.hpp"
 //#include "Metadata.hpp"
 
 namespace Erable {
@@ -244,7 +245,7 @@ namespace Erable {
                 for (Types::Instance *arg : argv->getAValue<Types::Array::arrtype>()) {
                     int absId = inst->id + ind;
                     this->set(absId, arg);
-                    inc ind;
+                    ++ ind;
                 }
                 Types::Function *func = (Types::Function *) inst;
                 Types::Function::codet codes = func->getAValue<Types::Function::codet>();

@@ -9,5 +9,6 @@ add_subdirectory(Compiler)
 
 
 install(TARGETS ErableVM DESTINATION bin)
+install(TARGETS ErableCompiler DESTINATION bin)
 install(TARGETS ErableVMDyn DESTINATION lib)
 install(TARGETS ErableStdlib DESTINATION lib)

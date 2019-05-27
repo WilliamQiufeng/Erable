@@ -30,8 +30,8 @@ set(SOURCES
         Descriptor.cpp
         Descriptor.hpp
         ../Global/Exceptions.hpp
-        Global.cpp
-        Global.hpp
+        ../Global/Global.cpp
+        ../Global/Global.hpp
         ../Global/IO.cpp
         ../Global/IO.hpp
         LibLoader.cpp
@@ -44,7 +44,7 @@ set(SOURCES
         Program.hpp
         Types.cpp
         Types.hpp
-        ../Global/Utils.h ../Global/Exceptions.cpp)
+        ../Global/Utils.h ../Global/Exceptions.cpp VMGlobal.hpp)
 set(ERABLE_MAIN main.cpp)
 set(TARGETS ErableVM ErableVMDyn ErableVMStatic)
 

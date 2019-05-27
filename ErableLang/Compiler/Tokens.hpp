@@ -6,16 +6,53 @@
 #ifndef ERABLELANG_TOKENS_HPP
 #define ERABLELANG_TOKENS_HPP
 
+namespace Erable::Compiler {
+    struct Token;
+    class TokenElement;
+    class PlainTokenElement;
+    class Tokens;
+}
 
 #include <Utils.h>
 #include "Lexer.hpp"
 
 namespace Erable::Compiler {
+    struct Token {
+        std::string name, data;
+    };
     class TokenElement{
+    protected:
         Lexer* lexer;
+        Token buffer;
+        std::string name;
+        std::string match;
     public:
-        virtual bool consume(char);
+        virtual bool valid();
+        virtual bool allValid();
+        virtual bool finished();
+        virtual void consumeOne(char);
+        virtual bool consume();
         virtual void clear();
+        void setLexer(Lexer* lexer);
+
+        Lexer *getLexer() const;
+
+        const Token &getBuffer() const;
+
+        void setBuffer(const Token &buffer);
+
+        const std::string &getName() const;
+
+        void setName(const std::string &name);
+
+        const std::string &getMatch() const;
+
+        void setMatch(const std::string &match);
+    };
+    class PlainTokenElement : public TokenElement {
+    public:
+        bool valid() override;
+        void consumeOne(char) override;
     };
     class Tokens {
         Utils::Enum<TokenElement*> vals;

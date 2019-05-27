@@ -24,7 +24,7 @@ namespace Erable::Program {
 
     std::ostream &operator<<(std::ostream &os, const std::vector<T> &obj) {
         os << "[";
-        for (int i = 0; i < obj.size(); inc i) {
+        for (int i = 0; i < obj.size(); ++ i) {
             os << (int) obj[i];
             if (i < obj.size() - 1)os << ",";
         }
@@ -45,7 +45,7 @@ namespace Erable::Program {
 
     bool Op::operator==(const Op &right) const {
         if (!(this->op == right.op)) return false;
-        if (this->argv.size() isnt right.argv.size()) return false;
+        if (this->argv.size() != right.argv.size()) return false;
         int ind = 0;
         for (int arg : this->argv) {
             if (arg == -1 or right.argv[ind] == -1) continue;

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(Compiler)
+project(ErableCompiler)
 
 set(CMAKE_CXX_STANDARD 17)
 find_package(Boost 1.57.0 COMPONENTS system filesystem REQUIRED)
@@ -15,10 +15,10 @@ endif ()
 include_directories(../Global)
 include_directories(../include)
 
-add_executable(Compiler main.cpp Tokens.cpp Tokens.hpp Lexer.cpp Lexer.hpp)
+add_executable(ErableCompiler main.cpp Tokens.cpp Tokens.hpp Lexer.cpp Lexer.hpp)
 
 if (Boost_FOUND)
 
-    target_link_libraries(Compiler ${Boost_LIBRARIES})
+    target_link_libraries(ErableCompiler ${Boost_LIBRARIES})
 
 endif ()

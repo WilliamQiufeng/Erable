@@ -18,7 +18,8 @@
 
 
 #include "Exceptions.hpp"
-#include "VM/Global.hpp"
+#include "Global.hpp"
+#include "VM/VMGlobal.hpp"
 //#include "Utils.h"
 
 namespace Erable::IO {
@@ -27,7 +28,7 @@ namespace Erable::IO {
 
     std::ostream &operator<<(std::ostream &os, const std::vector<T> &obj) {
         os << "[";
-        for (int i = 0; i < obj.size(); inc i) {
+        for (int i = 0; i < obj.size(); ++ i) {
             os << (int) obj[i];
             if (i < obj.size() - 1)os << ",";
         }

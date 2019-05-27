@@ -31,7 +31,7 @@ namespace Erable::Meta {
 
     void Metadata::readMagic() {
         std::vector<char> bts = this->in->readNBytes(2);
-        if (magic isnt bts) {
+        if (magic != bts) {
             std::cout << "Assertion Error: VM is expecting magic number "
                       << Utils::ArrayUtils.toString(magic)
                       << ", but got "
