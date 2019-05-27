@@ -1,4 +1,4 @@
-#include "lexer.hpp"
+#include "tanpero_lexer.hpp"
 
 Lexer::Lexer(std::string filename)
 {
@@ -17,19 +17,19 @@ Lexer::~Lexer()
 	file.close();
 }
 
-// ÏòÇ°¿´Ò»¸ö×Ö·û
+// ???????????
 char Lexer::lookAheadChar(Lexer* lexer)
 {
 	return *lexer->nextChar;
 }
 
-// »ñÈ¡ÏÂÒ»×Ö·û
+// ?????????
 static void getNextChar(lexer* lexer)
 {
 	lexer->currChar = *lexer->nextChar++;
 }
 
-// ÈôÏÂÒ»×Ö·ûÊÇÆÚÍûµÄ¾Í¶ÁÈ¡£¬²¢·µ»Ø true »ò false
+// ??????????????????????????? true ?? false
 static bool matchNextChar(lexer* lexer, char expectedChar)
 {
 	if (Lexer::lookAheadChar(lexer) == expectedChar)
@@ -40,7 +40,7 @@ static bool matchNextChar(lexer* lexer, char expectedChar)
 	return false;
 }
 
-// Ìø¹ı¿Õ°××Ö·û
+// ??????????
 static void skipBlanks(Lexer* lexer)
 {
 	while (isspace(lexer->currChar))
@@ -53,7 +53,7 @@ static void skipBlanks(Lexer* lexer)
 	}
 }
 
-// ½âÎö±êÊ¶·û
+// ?????????
 static void parseId(Lexer* lexer, TokenType type)
 {
 	while (isalnum(lexer->currChar) || lexer->currChar == '_')
@@ -61,7 +61,7 @@ static void parseId(Lexer* lexer, TokenType type)
 		getNextChar(lexer);
 	}
 
-	// nextCharPtr »áÖ¸ÏòµÚÒ»¸ö²»ºÏ·¨×Ö·ûµÄÏÂÒ»¸ö×Ö·û£¬Òò´ËÒª¼õÈ¥ 1
+	// nextCharPtr ???????????????????????????????????? 1
 	uint32_t length = (uint32_t)(lexer->nextCharPtr - lexer->curToken.start - 1);
 	if (type != TOKEN_UNKNOWN)
 		lexer->curToken.type = type;
@@ -77,9 +77,9 @@ static void parseUnicodeCodePoint(Lexer* lexer, ByteBuffer* buf)
 	int value = 0;
 	uint8_t digit = 0;
 
-	// »ñÈ¡Ê®Áù½øÖÆÊıÖµ£¬µ¥¸öÂëµã±íÊ¾ÈçÏÂ£º
+	// ?????????????????????????????
 	// \uxxxx
-	// È»ºó½âÎöÎªµ¥¸ö×Ö·û
+	// ??????????????
 	while (idx++ < 4)
 	{
 		getNextChar(lexer);
@@ -102,15 +102,15 @@ static void parseUnicodeCodePoint(Lexer* lexer, ByteBuffer* buf)
 		uint32_t byteNum = getByteNumOfEncodeUtf8(value);
 		ASSERT(byteNum != 0, "UTF-8 encode bytes should be between 1 and 4!");
 
-		// ÏÈĞ´Èë byteNum ¸ö 0£¬ÒÔÔ¤Áô×ã¹»¿Õ¼ä
+		// ??$B'U(B?? byteNum ?? 0????????????
 		ByteBufferFillWrite(lexer->vm, buf, 0, byteNum);
 
-		// ±àÂë²¢Ğ´Èë»º³åÇø
+		// ????$B'U(B??????
 		encodeUtf8(buf->datas + buf->count - byteNum, value);
 	}
 }
 
-// ½âÎö×Ö·û´®
+// ?????????
 static void parseString(Lexer* lexer)
 {
 	ByteBuffer str;
@@ -142,7 +142,7 @@ static void parseString(Lexer* lexer)
 		}
 		case '\\': {
 
-			// ´¦Àí×ªÒå×Ö·ûµÄÇé¿ö
+			// ???????????????
 			getNextChar(lexer);
 			switch (lexer->currChar)
 			{
@@ -182,7 +182,7 @@ static void parseString(Lexer* lexer)
 			}
 		}
 
-		// ÆÕÍ¨×Ö·û
+		// ??????
 		default:
 			ByteBufferAdd(lexer->vm, &str, lexer->currChar);
 			break;
@@ -191,7 +191,7 @@ static void parseString(Lexer* lexer)
 	ByteBufferClear(lexer->vm, &str);
 }
 
-// Ìø¹ıÒ»ĞĞ
+// ???????
 static void skipALine(Lexer* lexer)
 {
 	getNextChar(lexer);
@@ -207,16 +207,16 @@ static void skipALine(Lexer* lexer)
 	}
 	)
 
-	// Ìø¹ıĞĞ×¢ÊÍ»òÇø¿é×¢ÊÍ
+	// ?????????????????
 	static void skipComment(Lexer* lexer)
 	{
 		char nextChar = Lexer::lookAheadChar(lexer);
 
-		// µ¥ĞĞ×¢ÊÍ
+		// ???????
 		if (lexer->currChar == '/')
 			skipALine(lexer);
 
-		// Çø¿é×¢ÊÍ
+		// ???????
 		else
 		{
 			while (nextChar != '*' && nextChar != '\0')
@@ -236,6 +236,6 @@ static void skipALine(Lexer* lexer)
 				LEX_ERROR(lexer, "Expect '*/' before file end!");
 		}
 
-		// ×¢ÊÍÖ®ºó¿ÉÄÜ»áÓĞ¿Õ°××Ö·û
+		// ???????????$B'a(B?????
 		skipBlanks(lexer);
 	}

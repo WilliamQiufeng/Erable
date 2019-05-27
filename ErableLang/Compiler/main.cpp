@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include "cmdline.h"
 
 int main(int argc, char* argv[]) {
 	

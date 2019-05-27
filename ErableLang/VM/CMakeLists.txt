@@ -29,11 +29,11 @@ set(SOURCES
         ConstantPool.hpp
         Descriptor.cpp
         Descriptor.hpp
-        Exceptions.hpp
+        ../Global/Exceptions.hpp
         Global.cpp
         Global.hpp
-        IO.cpp
-        IO.hpp
+        ../Global/IO.cpp
+        ../Global/IO.hpp
         LibLoader.cpp
         LibLoader.hpp
         Metadata.cpp
@@ -44,7 +44,7 @@ set(SOURCES
         Program.hpp
         Types.cpp
         Types.hpp
-        ../Global/Utils.h Exceptions.cpp)
+        ../Global/Utils.h ../Global/Exceptions.cpp)
 set(ERABLE_MAIN main.cpp)
 set(TARGETS ErableVM ErableVMDyn ErableVMStatic)
 

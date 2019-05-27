@@ -19,6 +19,7 @@ include_directories(/usr/local/include)
 link_directories(/usr/local/lib)
 include_directories(.)
 include_directories(..)
+include_directories(../Global)
 include_directories(../include)
 
 link_libraries(${ERABLEVM})

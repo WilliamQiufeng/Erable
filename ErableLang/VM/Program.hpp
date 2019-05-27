@@ -75,7 +75,7 @@ namespace Erable::Program {
         friend std::ostream &operator<<(std::ostream &os, const Op &obj);
     };
 
-    inline Op END = Op(Erable::OpCode.values().find("EXIT")->value, std::vector<int>());
+    inline Op END = Op(Erable::OpCode.values().find("EXIT").value, std::vector<int>());
     inline Op UNKNOWN = Op(Erable::OpCodeElement("", -1, -1), std::vector<int>());
 
     class ProgramInputStream : public IO::InputStream {

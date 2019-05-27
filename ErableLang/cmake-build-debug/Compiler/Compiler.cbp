@@ -24,8 +24,10 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../Global"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
 					<Add directory="/System/Library/Frameworks"/>
@@ -45,8 +47,10 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../Global"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
 					<Add directory="/System/Library/Frameworks"/>
@@ -60,6 +64,18 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Lexer.cpp">
+			<Option target="Compiler"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Lexer.hpp">
+			<Option target="Compiler"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Tokens.cpp">
+			<Option target="Compiler"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Tokens.hpp">
+			<Option target="Compiler"/>
+		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/main.cpp">
 			<Option target="Compiler"/>
 		</Unit>

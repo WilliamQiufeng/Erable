@@ -4,7 +4,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
-#include "token.hpp"
+#include "tanpero_token.hpp"
 
 class Lexer
 {
@@ -31,8 +31,8 @@ public:
 	Token currToken;
 	Token preToken;
 
-	// ╢╕сздза╙╠М╢Ой╫ж╝жпй╠ё╛фзмШ╣дсрю╗╨ейЩа©
-	// сцсз╦Звып║ю╗╨е╤т╣дг╤лв
+	// О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫й╫ж╝О©╫О©╫й╠О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
+	// О©╫О©╫О©╫з╦О©╫О©╫О©╫п║О©╫О©╫О©╫е╤т╣О©╫г╤О©╫О©╫
 	int interpolationExpectRightParenNum;
 
 	int line;

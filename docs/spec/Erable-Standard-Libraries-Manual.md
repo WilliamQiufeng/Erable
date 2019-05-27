@@ -18,7 +18,4 @@
 
 ---
 
-
-
-
-
+**First**, this specification will probably not be very absolute and be comfirmed because the compiler and stdlib hasn't been completed yet. If there are some problems which differs from the actual product, please report this problem (by using e-mail or creating an issue for it).

@@ -9,7 +9,7 @@
  * A subproject of Tanpero Foundation Classes (TFC)
  */
 
-#include <VM/Exceptions.hpp>
+#include <Exceptions.hpp>
 #include "dynamicro.h"
 
 bool Dynamicro::load(const std::string &dllPath) {

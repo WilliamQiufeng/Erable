@@ -21,13 +21,14 @@
 #include <string>
 #include <ostream>
 #include <sstream>
+#include "Exceptions.hpp"
 
 namespace Erable::Utils {
     template<typename T>
 
     std::ostream &operator<<(std::ostream &os, const std::vector<T> &obj) {
         os << "[";
-        for (int i = 0; i < obj.size(); inc i) {
+        for (int i = 0; i < obj.size(); ++ i) {
             os << (int) obj[i];
             if (i < obj.size() - 1)os << ",";
         }
@@ -58,26 +59,26 @@ namespace Erable::Utils {
     template<class ValueType>
     class Enum {
     public:
-        std::vector<EnumElement<ValueType> *> elements;
+        std::vector<EnumElement<ValueType>> elements;
 
         Enum<ValueType>();
 
         inline void addEnum(std::string name, ValueType value) {
-            auto *ele = new EnumElement<ValueType>(name, value);
+            auto ele = EnumElement<ValueType>(name, value);
             this->addEnum(name, ele);
         };
 
-        inline void addEnum(const std::string &name, EnumElement<ValueType> *value) {
+        inline void addEnum(const std::string &name, EnumElement<ValueType> value) {
             this->elements.push_back(value);
         };
 
         inline void removeEnum(const std::string &name) {
             int index = 0;
-            for (EnumElement<ValueType> *element : this->elements) {
-                if (element[0] == name) {
+            for (EnumElement<ValueType> element : this->elements) {
+                if (element.name == name) {
                     break;
                 }
-                inc index;
+                ++index;
             }
             this->removeEnum(index);
         };
@@ -86,27 +87,27 @@ namespace Erable::Utils {
             this->elements.erase(index);
         };
 
-        inline EnumElement<ValueType> *find(std::string name) {
-            for (EnumElement<ValueType> *element : this->elements) {
-                if (element->name == name) {
+        inline EnumElement<ValueType> find(std::string name) {
+            for (EnumElement<ValueType> element : this->elements) {
+                if (element.name == name) {
                     return element;
                 }
             }
-            return nullptr;
+            Exceptions::ValidateException("No element found: '" + name + "'").throwException();
         };
 
         inline int findIndex(std::string name) {
             int ind = 0;
-            for (EnumElement<ValueType> *element : this->elements) {
-                if (element->name == name) {
+            for (EnumElement<ValueType> element : this->elements) {
+                if (element.name == name) {
                     return ind;
                 }
-                inc ind;
+                ++ ind;
             }
             return -1;
         };
 
-        inline EnumElement<ValueType> *find(int index) {
+        inline EnumElement<ValueType> find(int index) {
             return this->elements[index];
         };
     };
@@ -131,12 +132,12 @@ namespace Erable::Utils {
             R r = 0;
             int bit = 0;
             //std::cout<<"Doing BitUtils::get: " << b <<std::endl;
-            for (int i = size - 1; i > -1; decrease i, bit += 8) {
+            for (int i = size - 1; i > -1; -- i, bit += 8) {
                 int bitr = (int) b[i];
                 //std::cout<<"BitR: " <<bitr << ", Offset: " << (off + i) <<std::endl;
                 if (i != 0)bitr &= 0xFF;
                 //std::cout<<"BitR bitand 0xFF: "<<bitr<<std::endl;
-                r += (bitr lshift bit);
+                r += (bitr << bit);
                 //std::cout<<"Shift: "<<bit<<" to " << r<< " with " << bitr << std::endl;
             }
             return r;
@@ -147,12 +148,12 @@ namespace Erable::Utils {
             R r = 0;
             int bit = 0;
             //std::cout<<"Doing BitUtils::get: " << b <<std::endl;
-            for (int i = 0; i < size; inc i, bit += 8) {
+            for (int i = 0; i < size; ++ i, bit += 8) {
                 int bitr = (int) b[i];
                 //std::cout<<"BitR: " <<bitr << ", Offset: " << (off + i) <<std::endl;
                 if (i != 0)bitr &= 0xFF;
                 //std::cout<<"BitR bitand 0xFF: "<<bitr<<std::endl;
-                r += (bitr lshift bit);
+                r += (bitr << bit);
                 //std::cout<<"Shift: "<<bit<<" to " << r<< " with " << bitr << std::endl;
             }
             return r;
@@ -234,13 +235,13 @@ namespace Erable::Utils {
             if (not t.empty()) {
                 for (type ty : t) {
                     if (i > 0)
-                        ss puts ",";
+                        ss << ",";
                     if (typeid(ty) == typeid(char) or typeid(ty) == typeid(unsigned char)) {
-                        ss puts (int) ty;
+                        ss << (int) ty;
                     } else {
-                        ss puts ty;
+                        ss<< ty;
                     }
-                    inc i;
+                    ++ i;
                 }
             }
             return ss.str();

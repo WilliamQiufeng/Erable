@@ -88,14 +88,14 @@ namespace Erable::Program {
 
     OpCodeElement ProgramInputStream::readOpCode() {
         char c = this->read();
-        OpCodeElement ele = Erable::OpCode.values().find(c)->value;
+        OpCodeElement ele = Erable::OpCode.values().find(c).value;
         return ele;
     }
 
     Op ProgramInputStream::readOp() {
         OpCodeElement ele = this->readOpCode();
         std::vector<int> argv;
-        if (ele == OpCode.values().find("LOADC")->value) {
+        if (ele.op == "LOADC") {
             int cid = this->readId(this->getData()->meta->getIdlen().cid);
             int id = this->readId(this->getData()->meta->getIdlen().id);
             argv.push_back(cid);

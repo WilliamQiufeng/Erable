@@ -216,7 +216,7 @@ namespace Erable {
             int argc = retId - targId - 1;
             std::vector<int> untilArgv{targId};
             std::vector<Program::Op> codes = this->recordAll(
-                    Program::Op(OpCode.values().find("END")->value, untilArgv));
+                    Program::Op(OpCode.values().find("END").value, untilArgv));
             Types::Function *func = new Types::Function(codes, targId, this);
             func->setArgc(argc);
             func->setRetId(retId);

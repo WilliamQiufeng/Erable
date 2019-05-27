@@ -18,7 +18,7 @@
 
 
 #include "Exceptions.hpp"
-#include "Global.hpp"
+#include "VM/Global.hpp"
 //#include "Utils.h"
 
 namespace Erable::IO {
@@ -68,7 +68,7 @@ namespace Erable::IO {
         char c = *begin;
         ++begin;
         //std::cout << "Current Cursor Position: " << curpos << ", read: " << (int) c << std::endl;
-        if (c == EOF) Exceptions::IOException("EOF").throwException();
+        //if (c == EOF) Exceptions::IOException("EOF").throwException();
         return c;
     }
 
