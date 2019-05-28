@@ -4,36 +4,89 @@
 //
 
 #include <regex>
+#include <utility>
 #include "Tokens.hpp"
 
 namespace Erable::Compiler {
 
     void Tokens_t::generateTokenList() {
-        if (!tokens.empty()) {
+        if (tokens.empty()) {
             tokens.push_back(new PlainTokenElement("IF", "if"));
+            tokens.push_back(new RegexTokenElement("NAME", "[a-zA-Z_$][a-zA-Z0-9_$]*"));
+            tokens.push_back(new RegexTokenElement("INT", "[0-9]+"));
         }
     }
 
-    void Tokens_t::setLexer(Erable::Compiler::Lexer *lexer) {
+    void Tokens_t::initialise(Erable::Compiler::Lexer *lexer) {
         for (auto element : tokens) {
             element->setLexer(lexer);
+            element->clear();
         }
     }
-    void TokenElement::setLexer(Erable::Compiler::Lexer *lexer) {
-        this->lexer=lexer;
+    void TokenElement::setMatch(const std::string &match) {
+        TokenElement::match = match;
     }
-    bool TokenElement::valid() {
+
+    TokenElement::TokenElement(const std::string &name, std::string match, Lexer *lexer = nullptr) : lexer(lexer),
+                                                                                                     name(name),
+                                                                                                     match(std::move(
+                                                                                                             match)) {
+        this->buffer.name = name;
+    }
+
+    bool PlainTokenElement::check(std::string curdata) {
+        return match.find(curdata) == 0;
+    }
+
+    PlainTokenElement::PlainTokenElement(const std::string &name, const std::string &match) : TokenElement(name,
+                                                                                                           match) {}
+
+    RegexTokenElement::RegexTokenElement(const std::string &name, const std::string &match) : TokenElement(name,
+                                                                                                           "^" + match +
+                                                                                                           "$"),
+                                                                                              finish(false) {}
+
+    bool RegexTokenElement::check(std::string curdata) {
+        std::regex reg(match, std::regex_constants::ECMAScript | std::regex_constants::icase);
+        bool pass = std::regex_search(curdata, reg);
+        finish = !pass;
+        return pass;
+    }
+
+    bool RegexTokenElement::finished() {
+        //valid();//Use this twice.
+        bool ret = !(this->valid());// and !buffer.data.empty();
+        return ret;
+    }
+
+    void RegexTokenElement::clear() {
+        TokenElement::clear();
+        finish = false;
+    }
+}
+
+namespace Erable::Compiler {
+    void TokenElement::setLexer(Erable::Compiler::Lexer *lexer) {
+        this->lexer = lexer;
+    }
+
+    bool TokenElement::check(std::string) {
         return false;
     }
+
+    bool TokenElement::valid() {
+        return check(buffer.getData() + lexer->forward());
+    }
+
     bool TokenElement::consume() {
-        while(valid()) {
+        while (valid()) {
             consumeOne(lexer->read());
         }
         return allValid();
     }
 
     bool TokenElement::allValid() {
-        return match.find(buffer.data) == 0;
+        return check(buffer.getData());
     }
 
     bool TokenElement::finished() {
@@ -41,12 +94,13 @@ namespace Erable::Compiler {
     }
 
     void TokenElement::consumeOne(char c) {
-        buffer.data.push_back(c);
+        this->buffer.data.push_back(c);
     }
 
     void TokenElement::clear() {
         buffer.data.clear();
     }
+
     Lexer *TokenElement::getLexer() const {
         return lexer;
     }
@@ -70,24 +124,23 @@ namespace Erable::Compiler {
     const std::string &TokenElement::getMatch() const {
         return match;
     }
+}
 
-    void TokenElement::setMatch(const std::string &match) {
-        TokenElement::match = match;
+
+namespace Erable::Compiler {
+    const std::string &Token::getName() const {
+        return name;
     }
 
-    TokenElement::TokenElement(Lexer *lexer, const std::string &name, const std::string &match) : lexer(lexer),
-                                                                                                  name(name),
-                                                                                                  match(match) {}
-
-    TokenElement::TokenElement(const std::string &name, const std::string &match) : name(name), match(match) {}
-
-    bool PlainTokenElement::valid() {
-        char check = lexer->forward();
-        std::string curdata(buffer.data);
-        curdata+=check;
-        return match.find(curdata) == 0;
+    void Token::setName(const std::string &name) {
+        Token::name = name;
     }
 
-    PlainTokenElement::PlainTokenElement(const std::string &name, const std::string &match) : TokenElement(name,
-                                                                                                           match) {}
+    const std::string &Token::getData() const {
+        return data;
+    }
+
+    void Token::setData(const std::string &data) {
+        Token::data = data;
+    }
 }

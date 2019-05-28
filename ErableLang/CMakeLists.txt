@@ -3,7 +3,6 @@ project(ErableLang)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_subdirectory(Global)
 add_subdirectory(stdlib)
 add_subdirectory(VM)
 add_subdirectory(Compiler)

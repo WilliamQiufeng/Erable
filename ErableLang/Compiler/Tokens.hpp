@@ -19,6 +19,15 @@ namespace Erable::Compiler {
 namespace Erable::Compiler {
     struct Token {
         std::string name, data;
+
+        const std::string &getName() const;
+
+        void setName(const std::string &name);
+
+        const std::string &getData() const;
+
+        void setData(const std::string &data);
+
     };
     class TokenElement{
     protected:
@@ -27,6 +36,7 @@ namespace Erable::Compiler {
         std::string name;
         std::string match;
     public:
+        virtual bool check(std::string);
         virtual bool valid();
         virtual bool allValid();
         virtual bool finished();
@@ -34,9 +44,7 @@ namespace Erable::Compiler {
         virtual bool consume();
         virtual void clear();
 
-        TokenElement(Lexer *lexer, const std::string &name, const std::string &match);
-
-        TokenElement(const std::string &name, const std::string &match);
+        TokenElement(const std::string &name, std::string match, Lexer *lexer);
 
         void setLexer(Lexer* lexer);
 
@@ -56,9 +64,21 @@ namespace Erable::Compiler {
     };
     class PlainTokenElement : public TokenElement {
     public:
-        bool valid() override;
+        bool check(std::string) override;
 
         PlainTokenElement(const std::string &name, const std::string &match);
+    };
+
+    class RegexTokenElement : public TokenElement {
+        bool finish;
+    public:
+        bool check(std::string) override;
+
+        void clear() override;
+
+        bool finished() override;
+
+        RegexTokenElement(const std::string &name, const std::string &match);
     };
 
     class Tokens_t {
@@ -66,10 +86,11 @@ namespace Erable::Compiler {
         std::vector<TokenElement *> tokens;
 
         void generateTokenList();
-        void setLexer(Lexer* lexer);
+
+        void initialise(Lexer *lexer);
     };
 
-    inline static Tokens_t Tokens;
+    inline Tokens_t Tokens;
 }
 
 

@@ -19,7 +19,7 @@
 
 #include "Exceptions.hpp"
 #include "Global.hpp"
-#include "VM/VMGlobal.hpp"
+//#include "VM/VMGlobal.hpp"
 //#include "Utils.h"
 
 namespace Erable::IO {

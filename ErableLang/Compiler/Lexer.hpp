@@ -10,8 +10,8 @@ namespace Erable::Compiler {
     class Lexer;
 }
 
-#include <IO.hpp>
 #include "Tokens.hpp"
+#include <fstream>
 
 namespace Erable::Compiler{
     class Lexer{
@@ -19,13 +19,15 @@ namespace Erable::Compiler{
         std::vector<TokenElement*> available;
         std::vector<Token> tokens;
         std::vector<char> forwards;
-        IO::InputStream in;
+        std::ifstream in;
     public:
-        Lexer(IO::InputStream);
+        Lexer(std::string);
         char read();
         char forward();
         void readToken();
         void reset();
+
+        void clearWS();
 
         void lex();
 
@@ -48,10 +50,6 @@ namespace Erable::Compiler{
         const std::vector<char> &getForwards() const;
 
         void setForwards(const std::vector<char> &forwards);
-
-        const IO::InputStream &getIn() const;
-
-        void setIn(const IO::InputStream &in);
     };
 }
 

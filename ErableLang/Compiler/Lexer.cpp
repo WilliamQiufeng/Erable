@@ -6,11 +6,14 @@
 #include "Lexer.hpp"
 
 namespace Erable::Compiler {
-    Lexer::Lexer(Erable::IO::InputStream in) : in(in) {}
+    Lexer::Lexer(std::string in) {
+        this->in.open(in);
+        this->reset();
+    }
     char Lexer::read() {
         char final;
         if(forwards.empty()) {
-            final = in.read();
+            final = in.get();
         }else{
             final = forwards.front();
             forwards.erase(forwards.begin());
@@ -23,6 +26,8 @@ namespace Erable::Compiler {
         return final;
     }
     void Lexer::readToken() {
+        clearWS();
+        reset();
         if(available.size()==1) {
             auto last = available[0];
             bool allValid = last->consume();
@@ -31,28 +36,55 @@ namespace Erable::Compiler {
                 this->reset();
             }
         }else {
-            for (auto tk : available) {
-                if (tk->valid()) {
-                    tk->consumeOne(forward());
+            bool finished = false;
+            while (!finished) {
+                if (forward() == EOF)break;
+                for (auto st = available.begin(); st != available.end();) {
+                    auto tk = *st;
+                    if (tk->valid()) {
+                        tk->consumeOne(forward());
+                    } else if (!tk->finished()) {
+                        st = available.erase(st);
+                        continue;
+                    }
+                    ++st;
                 }
-                if (tk->finished()) {
-                    this->tokens.push_back(tk->getBuffer());
-                    this->reset();
-                    break;
+
+                //Finish read
+                read();
+                for (auto tk : available) {
+                    if (tk->finished()) {
+                        this->tokens.push_back(tk->getBuffer());
+                        this->reset();
+                        finished = true;
+                        break;
+                    }
                 }
+
+                //Remove all invalid elements.
+                available.erase(std::remove_if(available.begin(), available.end(), [](TokenElement *x) -> bool {
+                    return !x->allValid();
+                }), available.end());
             }
-            //Finish read
-            read();
         }
-        //Remove all invalid elements.
-        available.erase(std::remove_if(available.begin(), available.end(), [](TokenElement* x)->bool {
-            return !x->allValid();
-        }), available.end());
     }
 
     void Lexer::reset() {
         Tokens.generateTokenList();
-        available = Tokens.tokens;
+        Tokens.initialise(this);
+        available = std::vector<TokenElement *>(Tokens.tokens);
+    }
+
+    void Lexer::clearWS() {
+        bool finished = false;
+        while (!finished) {
+            char c = forward();
+            if (c != '\n' and c != '\r' and c != ' ') {
+                finished = true;
+                break;
+            }
+            read();
+        }
     }
 
     void Lexer::lex() {
@@ -99,13 +131,5 @@ namespace Erable::Compiler {
 
     void Lexer::setForwards(const std::vector<char> &forwards) {
         Lexer::forwards = forwards;
-    }
-
-    const IO::InputStream &Lexer::getIn() const {
-        return in;
-    }
-
-    void Lexer::setIn(const IO::InputStream &in) {
-        Lexer::in = in;
     }
 }
