@@ -87,7 +87,7 @@ namespace Erable::Compiler {
 
         void generateTokenList();
 
-        void initialise(Lexer *lexer);
+        void initialize(Lexer *lexer);
     };
 
     inline Tokens_t Tokens;

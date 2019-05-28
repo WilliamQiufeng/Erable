@@ -11,13 +11,13 @@ namespace Erable::Compiler {
 
     void Tokens_t::generateTokenList() {
         if (tokens.empty()) {
-            tokens.push_back(new PlainTokenElement("IF", "if"));
-            tokens.push_back(new RegexTokenElement("NAME", "[a-zA-Z_$][a-zA-Z0-9_$]*"));
+            // tokens.push_back(new PlainTokenElement("IF", "if"));
+            // tokens.push_back(new RegexTokenElement("NAME", "[a-zA-Z_$][a-zA-Z0-9_$]*"));
 //            tokens.push_back(new RegexTokenElement("INT", "[0-9]+"));
         }
     }
 
-    void Tokens_t::initialise(Erable::Compiler::Lexer *lexer) {
+    void Tokens_t::initialize(Erable::Compiler::Lexer *lexer) {
         for (auto element : tokens) {
             element->setLexer(lexer);
             element->clear();
