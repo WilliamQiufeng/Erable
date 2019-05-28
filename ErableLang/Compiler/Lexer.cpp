@@ -61,10 +61,10 @@ namespace Erable::Compiler {
                     }
                 }
 
-                //Remove all invalid elements.
+                /*//Remove all invalid elements.
                 available.erase(std::remove_if(available.begin(), available.end(), [](TokenElement *x) -> bool {
                     return !x->allValid();
-                }), available.end());
+                }), available.end());*/
             }
         }
     }

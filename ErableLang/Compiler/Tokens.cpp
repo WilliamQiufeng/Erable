@@ -15,8 +15,9 @@ namespace Erable::Compiler {
             tokens.push_back(new PlainTokenElement("WHILE", "while"));
             tokens.push_back(new PlainTokenElement("LEFT_BRACKET", "("));
             tokens.push_back(new PlainTokenElement("RIGHT_BRACKET", ")"));
+            tokens.push_back(new RegexTokenElement("LINE_COMMENT", "// (^.|.)* \\n"));
             tokens.push_back(new RegexTokenElement("NAME", "[a-zA-Z_$][a-zA-Z0-9_$]*"));
-//            tokens.push_back(new RegexTokenElement("INT", "[0-9]+"));
+            tokens.push_back(new RegexTokenElement("INT", "\\d"));
         }
     }
 
@@ -58,7 +59,7 @@ namespace Erable::Compiler {
 
     bool RegexTokenElement::finished() {
         //valid();//Use this twice.
-        bool ret = !(this->valid());// and !buffer.data.empty();
+        bool ret = !(this->valid()) and !this->getBuffer().getData().empty();// and !buffer.data.empty();
         return ret;
     }
 
