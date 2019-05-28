@@ -11,19 +11,19 @@ namespace Erable::Compiler {
         this->reset();
     }
     char Lexer::read() {
-        char final;
+        char finalChar;
         if(forwards.empty()) {
-            final = in.get();
+            finalChar = in.get();
         }else{
-            final = forwards.front();
+            finalChar = forwards.front();
             forwards.erase(forwards.begin());
         }
-        return final;
+        return finalChar;
     }
     char Lexer::forward() {
-        char final = read();
-        forwards.push_back(final);
-        return final;
+        char finalChar = read();
+        forwards.push_back(finalChar);
+        return finalChar;
     }
     void Lexer::readToken() {
         clearWS();
