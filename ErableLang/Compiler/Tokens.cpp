@@ -13,7 +13,7 @@ namespace Erable::Compiler {
         if (tokens.empty()) {
             tokens.push_back(new PlainTokenElement("IF", "if"));
             tokens.push_back(new RegexTokenElement("NAME", "[a-zA-Z_$][a-zA-Z0-9_$]*"));
-            tokens.push_back(new RegexTokenElement("INT", "[0-9]+"));
+//            tokens.push_back(new RegexTokenElement("INT", "[0-9]+"));
         }
     }
 
