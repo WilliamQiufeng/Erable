@@ -12,6 +12,9 @@ namespace Erable::Compiler {
     void Tokens_t::generateTokenList() {
         if (tokens.empty()) {
             tokens.push_back(new PlainTokenElement("IF", "if"));
+            tokens.push_back(new PlainTokenElement("WHILE", "while"));
+            tokens.push_back(new PlainTokenElement("LEFT_BRACKET", "("));
+            tokens.push_back(new PlainTokenElement("RIGHT_BRACKET", ")"));
             tokens.push_back(new RegexTokenElement("NAME", "[a-zA-Z_$][a-zA-Z0-9_$]*"));
 //            tokens.push_back(new RegexTokenElement("INT", "[0-9]+"));
         }

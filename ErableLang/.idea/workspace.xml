@@ -41,17 +41,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="843ad3e7-5740-4d46-80f4-e7c843e04bd1" name="Default Changelist" comment="The compiler (actually only the lexer) on this commit will produce ld error undefined symbols!!&#10;&#10;Signed-off-by: Qiufeng54321 &lt;williamcraft@163.com&gt;">
+    <list default="true" id="843ad3e7-5740-4d46-80f4-e7c843e04bd1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Lexer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Lexer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Lexer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Lexer.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler/Tokens.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Tokens.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Tokens.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Tokens.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Global/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Global/IO.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Global/IO.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/lex.erable" beforeDir="false" afterPath="$PROJECT_DIR$/tests/lex.erable" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/runtime/cmake-build-debug/" />
@@ -92,10 +84,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Compiler/Lexer.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
+            <state relative-caret-position="-221">
               <caret line="47" selection-start-line="47" selection-end-line="47" />
             </state>
           </provider>
@@ -122,11 +114,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Compiler/Tokens.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-893">
-              <caret line="16" column="9" lean-forward="true" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+            <state relative-caret-position="274">
+              <caret line="16" column="74" selection-start-line="16" selection-start-column="74" selection-end-line="16" selection-end-column="74" />
               <folding>
                 <element signature="e#100#116#0" expanded="true" />
               </folding>
@@ -138,7 +130,7 @@
         <entry file="file://$PROJECT_DIR$/tests/lex.erable">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="24" selection-start-column="24" selection-end-column="24" />
+              <caret column="21" selection-start-column="21" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -424,7 +416,7 @@
       <workItem from="1558837228427" duration="447000" />
       <workItem from="1558837701019" duration="6585000" />
       <workItem from="1558855850671" duration="413000" />
-      <workItem from="1558856336321" duration="26361000" />
+      <workItem from="1558856336321" duration="27280000" />
     </task>
     <task id="LOCAL-00001" summary="I've changed the IDE I use">
       <created>1558567629247</created>
@@ -517,11 +509,25 @@
       <option name="project" value="LOCAL" />
       <updated>1558956833249</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="The compiler (actually only the lexer) on this commit will produce error on lexing!!">
+      <created>1559039948438</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1559039948438</updated>
+    </task>
+    <task id="LOCAL-00015" summary="I've just removed INT token">
+      <created>1559040250180</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1559040250180</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79514000" />
+    <option name="totallyTimeSpent" value="80433000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -534,14 +540,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="768" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49756098" visible="true" weight="0.30966768" />
       <window_info id="Structure" order="1" sideWeight="0.502439" side_tool="true" weight="0.25755286" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32991204" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32844576" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.398827" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32844576" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.398827" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32844576" />
@@ -616,31 +623,14 @@
     <MESSAGE value="Decreased Minimum CMake Version again (For tanpero)" />
     <MESSAGE value="The compiler (actually only the lexer) on this commit will produce ld error undefined symbols!!" />
     <MESSAGE value="The compiler (actually only the lexer) on this commit will produce ld error undefined symbols!!&#10;&#10;Signed-off-by: Qiufeng54321 &lt;williamcraft@163.com&gt;" />
-    <option name="LAST_COMMIT_MESSAGE" value="The compiler (actually only the lexer) on this commit will produce ld error undefined symbols!!&#10;&#10;Signed-off-by: Qiufeng54321 &lt;williamcraft@163.com&gt;" />
+    <MESSAGE value="The compiler (actually only the lexer) on this commit will produce error on lexing!!" />
+    <MESSAGE value="I've just removed INT token" />
+    <option name="LAST_COMMIT_MESSAGE" value="I've just removed INT token" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Compiler/Lexer.cpp</url>
-          <line>42</line>
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Compiler/Lexer.cpp</url>
-          <line>44</line>
-          <option name="timeStamp" value="44" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Compiler/Lexer.cpp</url>
-          <line>47</line>
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
         <watch expression="available[0]-&gt;getBuffer().data" language="ObjectiveC" />
@@ -1012,16 +1002,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/Lexer.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-124">
-          <caret line="22" column="11" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
-          <folding>
-            <element signature="e#208#229#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Compiler/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -1046,27 +1026,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/lex.erable">
+    <entry file="file://$PROJECT_DIR$/Compiler/Lexer.hpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="24" selection-start-column="24" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/Tokens.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-893">
-          <caret line="16" column="9" lean-forward="true" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+        <state relative-caret-position="-124">
+          <caret line="22" column="11" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
           <folding>
-            <element signature="e#100#116#0" expanded="true" />
+            <element signature="e#208#229#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Compiler/Lexer.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
+        <state relative-caret-position="-221">
           <caret line="47" selection-start-line="47" selection-end-line="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lex.erable">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="21" selection-start-column="21" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/Tokens.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="16" column="74" selection-start-line="16" selection-start-column="74" selection-end-line="16" selection-end-column="74" />
+          <folding>
+            <element signature="e#100#116#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
