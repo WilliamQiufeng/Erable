@@ -71,7 +71,7 @@ namespace Erable::Compiler {
 
     void Lexer::reset() {
         Tokens.generateTokenList();
-        Tokens.initialise(this);
+        Tokens.initialize(this);
         available = std::vector<TokenElement *>(Tokens.tokens);
     }
 
@@ -79,7 +79,7 @@ namespace Erable::Compiler {
         bool finished = false;
         while (!finished) {
             char c = forward();
-            if (c != '\n' and c != '\r' and c != ' ') {
+            if (c != '\n' && c != '\r' && c != ' ') {
                 finished = true;
                 break;
             }

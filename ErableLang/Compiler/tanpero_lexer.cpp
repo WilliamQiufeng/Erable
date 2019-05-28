@@ -100,7 +100,7 @@ static void parseUnicodeCodePoint(Lexer* lexer, ByteBuffer* buf)
 		value = value * 16 | digit;
 
 		uint32_t byteNum = getByteNumOfEncodeUtf8(value);
-		ASSERT(byteNum != 0, "UTF-8 encode bytes should be between 1 and 4!");
+		ASSERT(byteNum != 0, "UTF-8 encode bytes should be between 1 && 4!");
 
 		// ??д?? byteNum ?? 0????????????
 		ByteBufferFillWrite(lexer->vm, buf, 0, byteNum);

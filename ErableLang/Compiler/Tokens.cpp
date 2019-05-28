@@ -61,7 +61,7 @@ namespace Erable::Compiler {
 
     bool RegexTokenElement::finished() {
         //valid();//Use this twice.
-        bool ret = !(this->valid()) and !this->getBuffer().getData().empty();// and !buffer.data.empty();
+        bool ret = !(this->valid()) && !this->getBuffer().getData().empty();// && !buffer.data.empty();
         return ret;
     }
 

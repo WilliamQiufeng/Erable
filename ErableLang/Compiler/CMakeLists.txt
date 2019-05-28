@@ -4,8 +4,7 @@ project(ErableCompiler)
 set(CMAKE_CXX_STANDARD 17)
 
 
-include_directories(/usr/local/include)
-link_directories(/usr/local/lib)
+
 include_directories(.)
 include_directories(..)
 include_directories(../Global)

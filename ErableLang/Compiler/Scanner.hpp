@@ -170,18 +170,6 @@ namespace Erable
 				return true;
 			}
 
-			{ Binary Digit } = { Binary Digit }+
-			{Octal Digit} = { Octal Digit }+
-			{Decimal Digits} = { Decimal Digit } (. {Decimal Digit}) ? (E[+-] ? {Decimal Digit}) ?
-			{Hexadecimal Digit} = { Hexadecimal Digit }+
-
-				!After the decimal point must be followed for at least a decimal number,
-				!and then is zero or more decimal number.
-			{Optional Fraction} = . {Decimal Digit} {Decimal Digits}*
-
-				!After the exponent sign must follow at least a decimal number,
-				!and then is zero or more decimal number.
-			{Optional Exponent} = E('+' | '-') { Decimal Digits } {Decimal Digits}*
 			
 		}
 	}
