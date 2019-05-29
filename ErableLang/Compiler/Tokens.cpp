@@ -1,3 +1,5 @@
+#include <utility>
+
 //
 // Created by Qiufeng54321 on 2019-05-27.
 // Copyright (c) Qiufeng54321 All rights reserved.
@@ -16,9 +18,15 @@ namespace Erable::Compiler {
             tokens.push_back(new PlainTokenElement("WHILE", "while"));
             tokens.push_back(new PlainTokenElement("LEFT_BRACKET", "("));
             tokens.push_back(new PlainTokenElement("RIGHT_BRACKET", ")"));
-            tokens.push_back(new RegexTokenElement("LINE_COMMENT", "// (^.|.)* \\n"));
+            tokens.push_back(new RegexTokenElement("HEX", "0x[0-9a-f]+"));
+            tokens.push_back(new RegexTokenElement("BIN", "0b[01]+"));
+            tokens.push_back(new RegexTokenElement("OCT", "0o[0-8]+"));
+            tokens.push_back(new RegexTokenElement("DOUBLE", R"(\d+\.\d+)"));
+            tokens.push_back(new RegexTokenElement("INT", "\\d+"));
+            tokens.push_back(new RegexTokenElement("STRING", R"(".*")"));
+            tokens.push_back(new RegexTokenElement("LINE_COMMENT", "/+.*"));
             tokens.push_back(new RegexTokenElement("NAME", "[a-zA-Z_$][a-zA-Z0-9_$]*"));
-            tokens.push_back(new RegexTokenElement("INT", "\\d"));
+
 
         }
     }
@@ -29,6 +37,7 @@ namespace Erable::Compiler {
             element->clear();
         }
     }
+
     void TokenElement::setMatch(const std::string &match) {
         TokenElement::match = match;
     }
@@ -47,14 +56,13 @@ namespace Erable::Compiler {
     PlainTokenElement::PlainTokenElement(const std::string &name, const std::string &match) : TokenElement(name,
                                                                                                            match) {}
 
-    RegexTokenElement::RegexTokenElement(const std::string &name, const std::string &match) : TokenElement(name,
-                                                                                                           "^" + match +
-                                                                                                           "$"),
-                                                                                              finish(false) {}
+    RegexTokenElement::RegexTokenElement(const std::string &name, const std::string &match, std::string start,
+                                         std::string end) : TokenElement(name, match), finish(false),
+                                                            start(std::move(start)), end(std::move(end)) {}
 
     bool RegexTokenElement::check(std::string curdata) {
         std::regex reg(match, std::regex_constants::ECMAScript | std::regex_constants::icase);
-        bool pass = std::regex_search(curdata, reg);
+        bool pass = std::regex_match(curdata, reg);
         finish = !pass;
         return pass;
     }

@@ -71,6 +71,7 @@ namespace Erable::Compiler {
 
     class RegexTokenElement : public TokenElement {
         bool finish;
+        std::string start, end;
     public:
         bool check(std::string) override;
 
@@ -78,7 +79,9 @@ namespace Erable::Compiler {
 
         bool finished() override;
 
-        RegexTokenElement(const std::string &name, const std::string &match);
+        RegexTokenElement(const std::string &name, const std::string &match, std::string start = "",
+                          std::string end = "");
+
     };
 
     class Tokens_t {

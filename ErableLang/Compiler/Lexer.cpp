@@ -10,62 +10,90 @@ namespace Erable::Compiler {
         this->in.open(in);
         this->reset();
     }
+
     char Lexer::read() {
         char finalChar;
-        if(forwards.empty()) {
+        if (forwards.empty()) {
             finalChar = in.get();
-        }else{
+            buffer += finalChar;
+        } else {
             finalChar = forwards.front();
             forwards.erase(forwards.begin());
         }
         return finalChar;
     }
+
     char Lexer::forward() {
         char finalChar = read();
         forwards.push_back(finalChar);
         return finalChar;
     }
+
     void Lexer::readToken() {
         clearWS();
         reset();
-        if(available.size()==1) {
-            auto last = available[0];
-            bool allValid = last->consume();
-            if (last->finished()) {
-                this->tokens.push_back(last->getBuffer());
-                this->reset();
-            }
-        }else {
-            bool finished = false;
-            while (!finished) {
-                if (forward() == EOF)break;
-                for (auto st = available.begin(); st != available.end();) {
-                    auto tk = *st;
-                    if (tk->valid()) {
-                        tk->consumeOne(forward());
-                    } else if (!tk->finished()) {
-                        st = available.erase(st);
-                        continue;
-                    }
-                    ++st;
+        std::vector<TokenElement *> finisheds;
+        while (true) {
+            if (forward() == EOF)break;
+            bool oneValid = false;//If one token is valid, set it to true
+            for (auto st = available.begin(); st != available.end();) {
+                auto tk = *st;
+                char forw = forward();
+                bool remove = false;
+                if (tk->valid() and forw != EOF) {
+                    tk->consumeOne(forw);
+                    oneValid = true;
+                } else if (!tk->finished()) {
+                    remove = true;
                 }
+                if ((tk->finished() or forw == EOF) and
+                    std::find(finisheds.begin(), finisheds.end(), tk) == finisheds.end()) {
+                    finisheds.push_back(tk);
+                    oneValid = true;
+                    remove = true;
+                }
+                if (remove) {
+                    st = available.erase(st);
+                    continue;
+                }
+                ++st;
+            }
+            //Break if no available tokens can be lexed
+            if (!oneValid) {
+                break;
+            }
 
-                //Finish read
-                read();
-                for (auto tk : available) {
-                    if (tk->finished()) {
-                        this->tokens.push_back(tk->getBuffer());
-                        this->reset();
-                        finished = true;
-                        break;
+            //Finish read
+            read();
+
+
+            /*//Remove all invalid elements.
+            available.erase(std::remove_if(available.begin(), available.end(), [](TokenElement *x) -> bool {
+                return !x->allValid();
+            }), available.end());*/
+        }
+        if (finisheds.empty()) {
+            throw std::runtime_error("The token cannot be lexed: '" + buffer + "'");
+        } else {
+            int len = 0;
+            int ind = Tokens.tokens.size() - 1;
+            for (auto *tkn : finisheds) {
+                auto iter = std::find(Tokens.tokens.begin(), Tokens.tokens.end(), tkn);
+                if (iter != Tokens.tokens.end()) {
+                    int nind = iter - Tokens.tokens.begin();
+//                    Use priority
+//                    if (nind < ind)ind = nind;
+                    //Token with the most length is matched
+                    int tknlen = tkn->getBuffer().getData().size();
+                    if (tknlen > len) {
+                        len = tknlen;
+                        ind = nind;
                     }
                 }
-
-                /*//Remove all invalid elements.
-                available.erase(std::remove_if(available.begin(), available.end(), [](TokenElement *x) -> bool {
-                    return !x->allValid();
-                }), available.end());*/
             }
+            auto *tk = Tokens.tokens[ind];
+            this->tokens.push_back(tk->getBuffer());
+            this->reset();
         }
     }
 
@@ -73,6 +101,7 @@ namespace Erable::Compiler {
         Tokens.generateTokenList();
         Tokens.initialize(this);
         available = std::vector<TokenElement *>(Tokens.tokens);
+        buffer = "";
     }
 
     void Lexer::clearWS() {

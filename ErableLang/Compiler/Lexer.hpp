@@ -19,6 +19,7 @@ namespace Erable::Compiler{
         std::vector<TokenElement*> available;
         std::vector<Token> tokens;
         std::vector<char> forwards;
+        std::string buffer;
         std::ifstream in;
     public:
         Lexer(std::string);
