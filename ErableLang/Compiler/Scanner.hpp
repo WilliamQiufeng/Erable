@@ -1,5 +1,5 @@
 #ifndef _ERABLE_SCANNER_HPP_
-#define _EERABLE_SCANNER_HPP_
+#define _ERABLE_SCANNER_HPP_
 
 #include <string>
 

@@ -8,8 +8,11 @@
 
 namespace Erable::Compiler {
     struct Token;
+
     class TokenElement;
+
     class PlainTokenElement;
+
     class Tokens;
 }
 
@@ -29,24 +32,31 @@ namespace Erable::Compiler {
         void setData(const std::string &data);
 
     };
-    class TokenElement{
+
+    class TokenElement {
     protected:
-        Lexer* lexer;
+        Lexer *lexer;
         Token buffer;
         std::string name;
         std::string match;
     public:
         virtual bool check(std::string);
+
         virtual bool valid();
+
         virtual bool allValid();
+
         virtual bool finished();
+
         virtual void consumeOne(char);
+
         virtual bool consume();
+
         virtual void clear();
 
         TokenElement(const std::string &name, std::string match, Lexer *lexer);
 
-        void setLexer(Lexer* lexer);
+        void setLexer(Lexer *lexer);
 
         Lexer *getLexer() const;
 
@@ -62,6 +72,7 @@ namespace Erable::Compiler {
 
         void setMatch(const std::string &match);
     };
+
     class PlainTokenElement : public TokenElement {
     public:
         bool check(std::string) override;
@@ -70,18 +81,26 @@ namespace Erable::Compiler {
     };
 
     class RegexTokenElement : public TokenElement {
-        bool finish;
-        std::string start, end;
     public:
         bool check(std::string) override;
 
-        void clear() override;
+        bool finished() override;
+
+        RegexTokenElement(const std::string &name, const std::string &match);
+
+    };
+
+    class MultipleRegexTokenElement : public TokenElement {
+        std::vector<std::string> regexes;
+        int ind = -1;
+    public:
+        MultipleRegexTokenElement(const std::string &name, std::vector<std::string> regexes);
+
+        bool check(std::string string) override;
 
         bool finished() override;
 
-        RegexTokenElement(const std::string &name, const std::string &match, std::string start = "",
-                          std::string end = "");
-
+        int countValid(const std::string &string);
     };
 
     class Tokens_t {

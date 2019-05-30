@@ -1,5 +1,7 @@
 #include <utility>
 
+#include <utility>
+
 //
 // Created by Qiufeng54321 on 2019-05-27.
 // Copyright (c) Qiufeng54321 All rights reserved.
@@ -18,17 +20,23 @@ namespace Erable::Compiler {
             tokens.push_back(new PlainTokenElement("WHILE", "while"));
             tokens.push_back(new PlainTokenElement("LEFT_BRACKET", "("));
             tokens.push_back(new PlainTokenElement("RIGHT_BRACKET", ")"));
-            tokens.push_back(new RegexTokenElement("HEX", "0x[0-9a-f]+"));
+            tokens.push_back(new MultipleRegexTokenElement("HEX", {"0.*", "0x.*", "0x[0-9a-f]+"}));
             tokens.push_back(new RegexTokenElement("BIN", "0b[01]+"));
             tokens.push_back(new RegexTokenElement("OCT", "0o[0-8]+"));
-            tokens.push_back(new RegexTokenElement("DOUBLE", R"(\d+\.\d+)"));
+            tokens.push_back(new MultipleRegexTokenElement("DOUBLE", {"\\d+.*", "\\d+\\..*", R"(\d+\.\d*)"}));
             tokens.push_back(new RegexTokenElement("INT", "\\d+"));
-            tokens.push_back(new RegexTokenElement("STRING", R"(".*")"));
-            tokens.push_back(new RegexTokenElement("LINE_COMMENT", "/+.*"));
+            tokens.push_back(new MultipleRegexTokenElement("STRING", {"\".*", "\".*", R"(".*")"}));
+            tokens.push_back(new MultipleRegexTokenElement("LINE_COMMENT", {"/.*", "//.*", "//.*?"}));
             tokens.push_back(new RegexTokenElement("NAME", "[a-zA-Z_$][a-zA-Z0-9_$]*"));
 
 
         }
+    }
+
+    bool regex_token_check(std::string match, const std::string &str) {
+        std::regex reg(match, std::regex_constants::ECMAScript | std::regex_constants::icase);
+        bool pass = std::regex_match(str, reg);
+        return pass;
     }
 
     void Tokens_t::initialize(Erable::Compiler::Lexer *lexer) {
@@ -56,15 +64,11 @@ namespace Erable::Compiler {
     PlainTokenElement::PlainTokenElement(const std::string &name, const std::string &match) : TokenElement(name,
                                                                                                            match) {}
 
-    RegexTokenElement::RegexTokenElement(const std::string &name, const std::string &match, std::string start,
-                                         std::string end) : TokenElement(name, match), finish(false),
-                                                            start(std::move(start)), end(std::move(end)) {}
+    RegexTokenElement::RegexTokenElement(const std::string &name, const std::string &match) : TokenElement(name,
+                                                                                                           match) {}
 
     bool RegexTokenElement::check(std::string curdata) {
-        std::regex reg(match, std::regex_constants::ECMAScript | std::regex_constants::icase);
-        bool pass = std::regex_match(curdata, reg);
-        finish = !pass;
-        return pass;
+        return regex_token_check(match, curdata);
     }
 
     bool RegexTokenElement::finished() {
@@ -73,10 +77,27 @@ namespace Erable::Compiler {
         return ret;
     }
 
-    void RegexTokenElement::clear() {
-        TokenElement::clear();
-        finish = false;
+    MultipleRegexTokenElement::MultipleRegexTokenElement(const std::string &name, std::vector<std::string> regexes)
+            : TokenElement(name, ""), regexes(std::move(regexes)) {}
+
+    int MultipleRegexTokenElement::countValid(const std::string &string) {
+        ind = -1;
+        for (const auto &reg : this->regexes) {
+            if (regex_token_check(reg, string)) {
+                ind++;
+            }
+        }
+        return ind;
     }
+
+    bool MultipleRegexTokenElement::check(std::string string) {
+        return countValid(string) > -1;
+    }
+
+    bool MultipleRegexTokenElement::finished() {
+        return !valid() and countValid(buffer.getData()) == regexes.size() - 1 and not buffer.getData().empty();
+    }
+
 }
 
 namespace Erable::Compiler {
