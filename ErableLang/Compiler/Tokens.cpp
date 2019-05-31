@@ -21,12 +21,13 @@ namespace Erable::Compiler {
             tokens.push_back(new PlainTokenElement("LEFT_BRACKET", "("));
             tokens.push_back(new PlainTokenElement("RIGHT_BRACKET", ")"));
             tokens.push_back(new MultipleRegexTokenElement("HEX", {"0.*", "0x.*", "0x[0-9a-f]+"}));
-            tokens.push_back(new RegexTokenElement("BIN", "0b[01]+"));
-            tokens.push_back(new RegexTokenElement("OCT", "0o[0-8]+"));
-            tokens.push_back(new MultipleRegexTokenElement("DOUBLE", {"\\d+.*", "\\d+\\..*", R"(\d+\.\d*)"}));
-            tokens.push_back(new RegexTokenElement("INT", "\\d+"));
-            tokens.push_back(new MultipleRegexTokenElement("STRING", {"\".*", "\".*", R"(".*")"}));
+            tokens.push_back(new MultipleRegexTokenElement("BIN", {"0.*", "0b.*", "0b[01]+"}));
+            tokens.push_back(new MultipleRegexTokenElement("OCT", {"0.*", "0o.*", "0o[0-8]+"}));
+            tokens.push_back(new MultipleRegexTokenElement("DOUBLE", {"[0-9]+.*", "[0-9]+\\..*", "[0-9]+\\.[0-9]+"}));
+            tokens.push_back(new RegexTokenElement("INT", "[0-9]+"));
+            tokens.push_back(new MultipleRegexTokenElement("STRING", {"\".*", "\".*\""}));
             tokens.push_back(new MultipleRegexTokenElement("LINE_COMMENT", {"/.*", "//.*", "//.*?"}));
+            tokens.push_back(new MultipleRegexTokenElement("BLOCK_COMMENT", {"/\\*.*", "/\\*.*\\*/"}));
             tokens.push_back(new RegexTokenElement("NAME", "[a-zA-Z_$][a-zA-Z0-9_$]*"));
 
 
@@ -84,18 +85,24 @@ namespace Erable::Compiler {
         ind = -1;
         for (const auto &reg : this->regexes) {
             if (regex_token_check(reg, string)) {
+                //std::cout<<string<<" matches regex /" << reg << "/yi" << std::endl;
                 ind++;
+            } else {
+                break;
             }
         }
+        if (ind > this->max)this->max = ind;
         return ind;
     }
 
     bool MultipleRegexTokenElement::check(std::string string) {
-        return countValid(string) > -1;
+        int count = countValid(string);
+        return count == max and count > -1;
     }
 
     bool MultipleRegexTokenElement::finished() {
-        return !valid() and countValid(buffer.getData()) == regexes.size() - 1 and not buffer.getData().empty();
+        bool fin = !valid() and countValid(buffer.getData()) == regexes.size() - 1 and not buffer.getData().empty();
+        return fin;
     }
 
 }

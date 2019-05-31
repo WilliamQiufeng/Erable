@@ -93,6 +93,7 @@ namespace Erable::Compiler {
     class MultipleRegexTokenElement : public TokenElement {
         std::vector<std::string> regexes;
         int ind = -1;
+        int max = -1;
     public:
         MultipleRegexTokenElement(const std::string &name, std::vector<std::string> regexes);
 
