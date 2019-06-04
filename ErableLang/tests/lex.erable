@@ -1,9 +1,7 @@
-laji if   if   ajif23 23.34 42 0x4f
-
-while(hi)sjo aif sd34
-ifa
-//af
-gu
-13
-/*s*/
-while
+//Erable Lexer Test by Qiufeng54321
+var a = 0;
+const b = "hello";
+var whilecond = false;
+while(whilecond){
+    a += a;
+}

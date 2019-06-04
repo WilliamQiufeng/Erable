@@ -28,7 +28,7 @@ namespace Erable::Utils {
 
     std::ostream &operator<<(std::ostream &os, const std::vector<T> &obj) {
         os << "[";
-        for (int i = 0; i < obj.size(); ++ i) {
+        for (int i = 0; i < obj.size(); ++i) {
             os << (int) obj[i];
             if (i < obj.size() - 1)os << ",";
         }
@@ -102,7 +102,7 @@ namespace Erable::Utils {
                 if (element.name == name) {
                     return ind;
                 }
-                ++ ind;
+                ++ind;
             }
             return -1;
         };
@@ -132,7 +132,7 @@ namespace Erable::Utils {
             R r = 0;
             int bit = 0;
             //std::cout<<"Doing BitUtils::get: " << b <<std::endl;
-            for (int i = size - 1; i > -1; -- i, bit += 8) {
+            for (int i = size - 1; i > -1; --i, bit += 8) {
                 int bitr = (int) b[i];
                 //std::cout<<"BitR: " <<bitr << ", Offset: " << (off + i) <<std::endl;
                 if (i != 0)bitr &= 0xFF;
@@ -148,7 +148,7 @@ namespace Erable::Utils {
             R r = 0;
             int bit = 0;
             //std::cout<<"Doing BitUtils::get: " << b <<std::endl;
-            for (int i = 0; i < size; ++ i, bit += 8) {
+            for (int i = 0; i < size; ++i, bit += 8) {
                 int bitr = (int) b[i];
                 //std::cout<<"BitR: " <<bitr << ", Offset: " << (off + i) <<std::endl;
                 if (i != 0)bitr &= 0xFF;
@@ -216,11 +216,11 @@ namespace Erable::Utils {
      *                  *|
      *                  *|
      \*                 */
-    class ArrayUtils_t {
+    class ArrayUtils {
     public:
 
         template<typename ori, typename type>
-        inline std::vector<type> transformType(std::vector<ori> t) {
+        inline static std::vector<type> transformType(std::vector<ori> t) {
             std::vector<type> res;
             for (ori ele : t) {
                 res.push_back((type) ele);
@@ -229,7 +229,7 @@ namespace Erable::Utils {
         }
 
         template<typename type>
-        inline std::string toString(std::vector<type> t) {
+        inline static std::string toString(std::vector<type> t) {
             std::stringstream ss;
             int i = 0;
             if (not t.empty()) {
@@ -239,15 +239,15 @@ namespace Erable::Utils {
                     if (typeid(ty) == typeid(char) or typeid(ty) == typeid(unsigned char)) {
                         ss << (int) ty;
                     } else {
-                        ss<< ty;
+                        ss << ty;
                     }
-                    ++ i;
+                    ++i;
                 }
             }
             return ss.str();
         }
 
-        std::vector<std::string> split(const std::string &s, const std::string &c) {
+        inline static std::vector<std::string> split(const std::string &s, const std::string &c) {
             std::string::size_type pos1, pos2;
             std::vector<std::string> v;
             pos2 = s.find(c);
@@ -262,9 +262,29 @@ namespace Erable::Utils {
                 v.push_back(s.substr(pos1));
             return v;
         }
+
+        template<typename T>
+        inline static int indexOf(std::vector<T> vector, T element) {
+            int ind = 0;
+            for (auto &ele : vector) {
+                if (element == ele) return ind;
+                ind++;
+            }
+            return -1;
+        }
     };
 
-    inline ArrayUtils_t ArrayUtils;
+
+    class StringUtils {
+    public:
+        inline static bool startsWith(std::string str, std::string start) {
+            return str.find(start) == 0;
+        }
+
+        inline static bool endsWith(std::string str, std::string end) {
+            return str.rfind(end) == str.length() - end.length();
+        }
+    };
 
 }
 

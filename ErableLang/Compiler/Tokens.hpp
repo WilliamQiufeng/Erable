@@ -54,6 +54,8 @@ namespace Erable::Compiler {
 
         virtual void clear();
 
+        virtual void finish();
+
         TokenElement(const std::string &name, std::string match, Lexer *lexer);
 
         void setLexer(Lexer *lexer);
@@ -102,6 +104,30 @@ namespace Erable::Compiler {
         bool finished() override;
 
         int countValid(const std::string &string);
+
+    };
+
+    class StringRegexTokenElement : public TokenElement {
+        bool escape = false;
+        char type = '\0';
+        int ind = 0;
+        char unicode = 0;
+        static constexpr char UNICODE = 'u';
+        static std::vector<char> hexes;
+    public:
+        StringRegexTokenElement();
+
+        bool check(std::string string) override;
+
+        void consumeOne(char i) override;
+
+        bool finished() override;
+
+        void finish() override;
+
+        void resetEscape(char c);
+
+        void resetEscapes();
     };
 
     class Tokens_t {

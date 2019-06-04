@@ -5,7 +5,7 @@
 		<Option title="ErableCompiler"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\Compiler\;CMake Files\stdlib\;CMake Files\VM\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\Compiler\;CMake Files\stdlib\;CMake Files\VM\;CMake Files\Playground\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler"/>
@@ -24,10 +24,12 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/local/include"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/."/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/.."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../Global"/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
 					<Add directory="/System/Library/Frameworks"/>
@@ -47,10 +49,12 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/local/include"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/."/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/.."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../Global"/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
 					<Add directory="/System/Library/Frameworks"/>
@@ -90,6 +94,9 @@
 		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableLang/VM/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\VM\"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Playground/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\Playground\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>

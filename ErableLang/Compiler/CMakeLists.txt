@@ -10,6 +10,6 @@ include_directories(..)
 include_directories(../Global)
 include_directories(../include)
 
-add_executable(ErableCompiler main.cpp Tokens.cpp Tokens.hpp Lexer.cpp Lexer.hpp)
+add_executable(ErableCompiler main.cpp Tokens.cpp Tokens.hpp Lexer.cpp Lexer.hpp Scanner.hpp)
 
 set_property(TARGET ErableCompiler PROPERTY CXX_STANDARD 17)

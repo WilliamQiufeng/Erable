@@ -13,26 +13,6 @@
 
 namespace Erable::Compiler {
 
-    void Tokens_t::generateTokenList() {
-        if (tokens.empty()) {
-
-            tokens.push_back(new PlainTokenElement("IF", "if"));
-            tokens.push_back(new PlainTokenElement("WHILE", "while"));
-            tokens.push_back(new PlainTokenElement("LEFT_BRACKET", "("));
-            tokens.push_back(new PlainTokenElement("RIGHT_BRACKET", ")"));
-            tokens.push_back(new MultipleRegexTokenElement("HEX", {"0.*", "0x.*", "0x[0-9a-f]+"}));
-            tokens.push_back(new MultipleRegexTokenElement("BIN", {"0.*", "0b.*", "0b[01]+"}));
-            tokens.push_back(new MultipleRegexTokenElement("OCT", {"0.*", "0o.*", "0o[0-8]+"}));
-            tokens.push_back(new MultipleRegexTokenElement("DOUBLE", {"[0-9]+.*", "[0-9]+\\..*", "[0-9]+\\.[0-9]+"}));
-            tokens.push_back(new RegexTokenElement("INT", "[0-9]+"));
-            tokens.push_back(new MultipleRegexTokenElement("STRING", {"\".*", "\".*\""}));
-            tokens.push_back(new MultipleRegexTokenElement("LINE_COMMENT", {"/.*", "//.*", "//.*?"}));
-            tokens.push_back(new MultipleRegexTokenElement("BLOCK_COMMENT", {"/\\*.*", "/\\*.*\\*/"}));
-            tokens.push_back(new RegexTokenElement("NAME", "[a-zA-Z_$][a-zA-Z0-9_$]*"));
-
-
-        }
-    }
 
     bool regex_token_check(std::string match, const std::string &str) {
         std::regex reg(match, std::regex_constants::ECMAScript | std::regex_constants::icase);
@@ -59,7 +39,7 @@ namespace Erable::Compiler {
     }
 
     bool PlainTokenElement::check(std::string curdata) {
-        return match.find(curdata) == 0;
+        return Utils::StringUtils::startsWith(match, curdata);
     }
 
     PlainTokenElement::PlainTokenElement(const std::string &name, const std::string &match) : TokenElement(name,
@@ -105,6 +85,95 @@ namespace Erable::Compiler {
         return fin;
     }
 
+    void StringRegexTokenElement::finish() {
+        auto str = getBuffer().getData();
+        this->buffer.setData(str.substr(1, str.size() - 2));
+    }
+
+    std::vector<char> StringRegexTokenElement::hexes{
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
+    };
+
+    StringRegexTokenElement::StringRegexTokenElement()
+            : TokenElement("STRING", "", nullptr) {}
+
+    bool StringRegexTokenElement::check(std::string string) {
+        return Utils::StringUtils::startsWith(string, "\"");
+    }
+
+    bool StringRegexTokenElement::finished() {
+        if (getBuffer().getData().size() > 2) {
+            bool cond = Utils::StringUtils::endsWith(getBuffer().getData(), "\"");
+            return valid() and cond;
+        }
+        return false;
+    }
+
+    void StringRegexTokenElement::consumeOne(char i) {
+        if (escape) {
+            switch (type) {
+                case UNICODE:
+                    int index = Utils::ArrayUtils::indexOf(hexes, i);
+                    unicode <<= 4;
+                    unicode |= index;
+                    ind++;
+                    if (ind > 3) {
+                        //std::cout<<unicode<<std::endl;
+                        resetEscape(unicode);
+                    }
+                    return;
+            }
+            switch (i) {
+                case 'n':
+                    resetEscape('\n');
+                    return;
+                case 'r':
+                    resetEscape('\r');
+                    return;
+                case 't':
+                    resetEscape('\t');
+                    return;
+                case 'b':
+                    resetEscape('\b');
+                    return;
+                case '\\':
+                    resetEscape('\\');
+                    return;
+                case '"':
+                    resetEscape('"');
+                    return;
+                case 'u':
+                    type = UNICODE;
+                    ind = 0;
+                    unicode = 0;
+                    escape = true;
+                    return;
+                default:
+                    std::stringstream ss;
+                    ss << "EscapeError: unknown escape code '"
+                       << i
+                       << "'";
+                    throw std::runtime_error(ss.str());
+            }
+        } else if (i == '\\') {
+            escape = true;
+            return;
+        } else {
+            TokenElement::consumeOne(i);
+        }
+    }
+
+    void StringRegexTokenElement::resetEscape(char c) {
+        this->buffer.data.push_back(c);
+        resetEscapes();
+    }
+
+    void StringRegexTokenElement::resetEscapes() {
+        ind = 0;
+        unicode = 0;
+        escape = false;
+        type = '\0';
+    }
 }
 
 namespace Erable::Compiler {
@@ -141,6 +210,9 @@ namespace Erable::Compiler {
 
     void TokenElement::clear() {
         buffer.data.clear();
+    }
+
+    void TokenElement::finish() {
     }
 
     Lexer *TokenElement::getLexer() const {
@@ -184,5 +256,56 @@ namespace Erable::Compiler {
 
     void Token::setData(const std::string &data) {
         Token::data = data;
+    }
+
+
+    //TOKENS HERE.......
+    void Tokens_t::generateTokenList() {
+        if (tokens.empty()) {
+            tokens.push_back(new PlainTokenElement("IF", "if"));
+            tokens.push_back(new PlainTokenElement("WHILE", "while"));
+            tokens.push_back(new PlainTokenElement("LEFT_PAREN", "("));
+            tokens.push_back(new PlainTokenElement("RIGHT_PAREN", ")"));
+            tokens.push_back(new PlainTokenElement("LEFT_ARR", "["));
+            tokens.push_back(new PlainTokenElement("RIGHT_ARR", "]"));
+            tokens.push_back(new PlainTokenElement("START_SCOPE", "{"));
+            tokens.push_back(new PlainTokenElement("END_SCOPE", "}"));
+            tokens.push_back(new PlainTokenElement("COLON", ":"));
+            tokens.push_back(new PlainTokenElement("SEMICOLON", ";"));
+            tokens.push_back(new PlainTokenElement("DOT", "."));
+            tokens.push_back(new PlainTokenElement("ACCESS", "::"));
+            tokens.push_back(new PlainTokenElement("SET", "="));
+            tokens.push_back(new PlainTokenElement("ADD", "+"));
+            tokens.push_back(new PlainTokenElement("SUB", "-"));
+            tokens.push_back(new PlainTokenElement("MUL", "*"));
+            tokens.push_back(new PlainTokenElement("DIV", "/"));
+            tokens.push_back(new PlainTokenElement("MOD", "%"));
+            tokens.push_back(new PlainTokenElement("BIT_AND", "&"));
+            tokens.push_back(new PlainTokenElement("BIT_OR", "|"));
+            tokens.push_back(new PlainTokenElement("BIT_NOT", "~"));
+            tokens.push_back(new PlainTokenElement("AND", "&&"));
+            tokens.push_back(new PlainTokenElement("OR", "||"));
+            tokens.push_back(new PlainTokenElement("NOT", "!"));
+            tokens.push_back(new PlainTokenElement("LEFT_SHIFT", "<<"));
+            tokens.push_back(new PlainTokenElement("RIGHT_SHIFT", ">>"));
+            tokens.push_back(new PlainTokenElement("UNSIGNED_RIGHT_SHIFT", ">>>"));
+            tokens.push_back(new PlainTokenElement("COMMA", ","));
+            tokens.push_back(new PlainTokenElement("VAR", "var"));
+            tokens.push_back(new PlainTokenElement("CONST", "const"));
+            tokens.push_back(new PlainTokenElement("FUNCTION", "function"));
+            tokens.push_back(new PlainTokenElement("CLASS", "class"));
+            tokens.push_back(new PlainTokenElement("RETURN", "return"));
+            tokens.push_back(new PlainTokenElement("CONTINUE", "continue"));
+            tokens.push_back(new PlainTokenElement("BREAK", "break"));
+            tokens.push_back(new MultipleRegexTokenElement("HEX", {"0.*", "0x.*", "0x[0-9a-f]+"}));
+            tokens.push_back(new MultipleRegexTokenElement("BIN", {"0.*", "0b.*", "0b[01]+"}));
+            tokens.push_back(new MultipleRegexTokenElement("OCT", {"0.*", "0o.*", "0o[0-8]+"}));
+            tokens.push_back(new MultipleRegexTokenElement("DOUBLE", {"[0-9]+.*", "[0-9]+\\..*", "[0-9]+\\.[0-9]+"}));
+            tokens.push_back(new RegexTokenElement("INT", "[0-9]+"));
+            tokens.push_back(new StringRegexTokenElement());
+            tokens.push_back(new MultipleRegexTokenElement("LINE_COMMENT", {"/.*", "//.*", "//.*?"}));
+            tokens.push_back(new MultipleRegexTokenElement("BLOCK_COMMENT", {"/\\*.*", "/\\*.*\\*/"}));
+            tokens.push_back(new RegexTokenElement("NAME", "[a-zA-Z_$][a-zA-Z0-9_$]*"));
+        }
     }
 }
