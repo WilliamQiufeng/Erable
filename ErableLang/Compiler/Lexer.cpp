@@ -15,6 +15,12 @@ namespace Erable::Compiler {
         char finalChar;
         if (forwards.empty()) {
             finalChar = in.get();
+            if (finalChar == '\n') {
+                line++;
+                column = 0;
+            } else {
+                column++;
+            }
             buffer += finalChar;
         } else {
             finalChar = forwards.front();
@@ -74,7 +80,14 @@ namespace Erable::Compiler {
             }), available.end());*/
         }
         if (finisheds.empty()) {
-            throw std::runtime_error("The token cannot be lexed: '" + buffer + "'");
+            std::stringstream ss;
+            ss << "The token cannot be lexed: '"
+               << buffer
+               << "' at line "
+               << line
+               << " column "
+               << column;
+            throw std::runtime_error(ss.str());
         } else {
             int len = 0;
             int ind = Tokens.tokens.size() - 1;
@@ -93,6 +106,7 @@ namespace Erable::Compiler {
                 }
             }
             auto *tk = Tokens.tokens[ind];
+            tk->finish();
             this->tokens.push_back(tk->getBuffer());
             this->reset();
         }
@@ -106,11 +120,9 @@ namespace Erable::Compiler {
     }
 
     void Lexer::clearWS() {
-        bool finished = false;
-        while (!finished) {
+        while (true) {
             char c = forward();
             if (c != '\n' && c != '\r' && c != ' ') {
-                finished = true;
                 break;
             }
             read();

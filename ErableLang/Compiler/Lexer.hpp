@@ -13,19 +13,23 @@ namespace Erable::Compiler {
 #include "Tokens.hpp"
 #include <fstream>
 
-namespace Erable::Compiler{
-    class Lexer{
-        int line, column;
-        std::vector<TokenElement*> available;
+namespace Erable::Compiler {
+    class Lexer {
+        int line = 1, column = 0;
+        std::vector<TokenElement *> available;
         std::vector<Token> tokens;
         std::vector<char> forwards;
         std::string buffer;
         std::ifstream in;
     public:
         Lexer(std::string);
+
         char read();
+
         char forward();
+
         void readToken();
+
         void reset();
 
         void clearWS();
