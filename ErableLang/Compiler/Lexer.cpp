@@ -2,11 +2,10 @@
 // Created by Qiufeng54321 on 2019-05-27.
 // Copyright (c) Qiufeng54321 All rights reserved.
 //
-
 #include "Lexer.hpp"
 
 namespace Erable::Compiler {
-    Lexer::Lexer(std::string in) {
+    Lexer::Lexer(const std::string &in) {
         this->in.open(in);
         this->reset();
     }
@@ -129,10 +128,22 @@ namespace Erable::Compiler {
         }
     }
 
+    void Lexer::cleanUp() {
+        for (auto start = tokens.begin(); start != tokens.end();) {
+            auto &name = start->getName();
+            if (name == "COMMENT") {
+                start = tokens.erase(start);
+                continue;
+            }
+            start++;
+        }
+    }
+
     void Lexer::lex() {
         while (forward() != EOF) {
             readToken();
         }
+        cleanUp();
     }
 
     int Lexer::getLine() const {

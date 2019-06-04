@@ -4,7 +4,6 @@ project(ErableVM)
 set(CMAKE_CXX_STANDARD 17)
 
 
-
 find_package(Boost 1.57.0 COMPONENTS system filesystem REQUIRED)
 
 if (Boost_FOUND)
@@ -53,6 +52,7 @@ add_library(ErableVMDyn SHARED ${SOURCES})
 add_library(ErableVMStatic STATIC ${SOURCES})
 
 set_property(TARGET ${TARGETS} PROPERTY CXX_STANDARD 17)
+
 if (Boost_FOUND)
 
     target_link_libraries(ErableVM ${Boost_LIBRARIES})

@@ -1,7 +1,3 @@
-#include <utility>
-
-#include <utility>
-
 //
 // Created by Qiufeng54321 on 2019-05-27.
 // Copyright (c) Qiufeng54321 All rights reserved.
@@ -14,7 +10,7 @@
 namespace Erable::Compiler {
 
 
-    bool regex_token_check(std::string match, const std::string &str) {
+    bool regex_token_check(const std::string &match, const std::string &str) {
         std::regex reg(match, std::regex_constants::ECMAScript | std::regex_constants::icase);
         bool pass = std::regex_match(str, reg);
         return pass;
@@ -85,23 +81,23 @@ namespace Erable::Compiler {
         return fin;
     }
 
-    void StringRegexTokenElement::finish() {
+    void StringTokenElement::finish() {
         auto str = getBuffer().getData();
         this->buffer.setData(str.substr(1, str.size() - 2));
     }
 
-    std::vector<char> StringRegexTokenElement::hexes{
+    std::vector<char> StringTokenElement::hexes{
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
     };
 
-    StringRegexTokenElement::StringRegexTokenElement()
+    StringTokenElement::StringTokenElement()
             : TokenElement("STRING", "", nullptr) {}
 
-    bool StringRegexTokenElement::check(std::string string) {
+    bool StringTokenElement::check(std::string string) {
         return Utils::StringUtils::startsWith(string, "\"");
     }
 
-    bool StringRegexTokenElement::finished() {
+    bool StringTokenElement::finished() {
         if (getBuffer().getData().size() > 2) {
             bool cond = Utils::StringUtils::endsWith(getBuffer().getData(), "\"");
             return valid() and cond;
@@ -109,7 +105,7 @@ namespace Erable::Compiler {
         return false;
     }
 
-    void StringRegexTokenElement::consumeOne(char i) {
+    void StringTokenElement::consumeOne(char i) {
         if (escape) {
             switch (type) {
                 case UNICODE:
@@ -163,17 +159,32 @@ namespace Erable::Compiler {
         }
     }
 
-    void StringRegexTokenElement::resetEscape(char c) {
+    void StringTokenElement::resetEscape(char c) {
         this->buffer.data.push_back(c);
         resetEscapes();
     }
 
-    void StringRegexTokenElement::resetEscapes() {
+    void StringTokenElement::resetEscapes() {
         ind = 0;
         unicode = 0;
         escape = false;
         type = '\0';
     }
+
+    bool BlockCommentTokenElement::check(std::string string) {
+        if (string.size() >= 2)
+            return Utils::StringUtils::startsWith(string, "/*");
+        return Utils::StringUtils::startsWith(string, "/");
+    }
+
+    bool BlockCommentTokenElement::finished() {
+        auto &str = getBuffer().getData();
+        auto size = str.size();
+        return size >= 4 and check(str) and Utils::StringUtils::endsWith(str, "*/");
+    }
+
+    BlockCommentTokenElement::BlockCommentTokenElement()
+            : TokenElement("COMMENT", "", nullptr) {}
 }
 
 namespace Erable::Compiler {
@@ -302,9 +313,9 @@ namespace Erable::Compiler {
             tokens.push_back(new MultipleRegexTokenElement("OCT", {"0.*", "0o.*", "0o[0-8]+"}));
             tokens.push_back(new MultipleRegexTokenElement("DOUBLE", {"[0-9]+.*", "[0-9]+\\..*", "[0-9]+\\.[0-9]+"}));
             tokens.push_back(new RegexTokenElement("INT", "[0-9]+"));
-            tokens.push_back(new StringRegexTokenElement());
-            tokens.push_back(new MultipleRegexTokenElement("LINE_COMMENT", {"/.*", "//.*", "//.*?"}));
-            tokens.push_back(new MultipleRegexTokenElement("BLOCK_COMMENT", {"/\\*.*", "/\\*.*\\*/"}));
+            tokens.push_back(new StringTokenElement());
+            tokens.push_back(new MultipleRegexTokenElement("COMMENT", {"/.*", "//.*", "//.*?"}));
+            tokens.push_back(new BlockCommentTokenElement());
             tokens.push_back(new RegexTokenElement("NAME", "[a-zA-Z_$][a-zA-Z0-9_$]*"));
         }
     }

@@ -1,7 +1,23 @@
 //Erable Lexer Test by Qiufeng54321
+/*
+    This is a block comment
+    Licensed by GPL v3
+*/
 var a = 0;
 const b = "hello";
+var pi = 3.14159265358979323846264338327950288419716939937510
+var magic = 0xe4ab1e
 var whilecond = false;
+/*
+    While Statement
+*/
 while(whilecond){
     a += a;
+}
+
+class A : B {
+    var a: int = 0;
+    function A(aVal:int){
+        this.a = aVal;
+    }
 }

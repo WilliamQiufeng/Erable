@@ -2,7 +2,7 @@
 // Created by Qiufeng54321 on 2019-05-27.
 // Copyright (c) Qiufeng54321 All rights reserved.
 //
-
+#pragma once
 #ifndef ERABLELANG_LEXER_HPP
 #define ERABLELANG_LEXER_HPP
 
@@ -22,7 +22,7 @@ namespace Erable::Compiler {
         std::string buffer;
         std::ifstream in;
     public:
-        Lexer(std::string);
+        explicit Lexer(const std::string &);
 
         char read();
 
@@ -33,6 +33,8 @@ namespace Erable::Compiler {
         void reset();
 
         void clearWS();
+
+        void cleanUp();
 
         void lex();
 

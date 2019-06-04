@@ -3,6 +3,7 @@
 // Copyright (c) Qiufeng54321 All rights reserved.
 //
 
+#pragma once
 #ifndef ERABLELANG_TOKENS_HPP
 #define ERABLELANG_TOKENS_HPP
 
@@ -107,7 +108,16 @@ namespace Erable::Compiler {
 
     };
 
-    class StringRegexTokenElement : public TokenElement {
+    class BlockCommentTokenElement : public TokenElement {
+    public:
+        BlockCommentTokenElement();
+
+        bool check(std::string string) override;
+
+        bool finished() override;
+    };
+
+    class StringTokenElement : public TokenElement {
         bool escape = false;
         char type = '\0';
         int ind = 0;
@@ -115,7 +125,7 @@ namespace Erable::Compiler {
         static constexpr char UNICODE = 'u';
         static std::vector<char> hexes;
     public:
-        StringRegexTokenElement();
+        StringTokenElement();
 
         bool check(std::string string) override;
 
