@@ -12,7 +12,7 @@ include_directories(../Global)
 include_directories(../include)
 #include_directories(/usr/local/Cellar/leveldb/1.22/include)
 
-add_executable(ErableCompiler main.cpp Tokens.cpp Tokens.hpp Lexer.cpp Lexer.hpp Scanner.hpp Parser.cpp Parser.hpp Symbols.cpp Symbols.hpp)
+add_executable(ErableCompiler main.cpp Tokens.cpp Tokens.hpp Lexer.cpp Lexer.hpp Scanner.hpp Parser.cpp Parser.hpp Symbols.cpp Symbols.hpp Syntax.cpp Syntax.hpp)
 
 #link_libraries(${LevelDB})
 

@@ -5,12 +5,4 @@
 
 #include "Parser.hpp"
 
-Erable::Compiler::Parser::Parser() {
-    symbols = {
-            "atomic"_Rule - "INT"_TokenSymbol
-            | "HEX"_TokenSymbol
-            | "BIN"_TokenSymbol
-            | "OCT"_TokenSymbol
-            | "DOUBLE"_TokenSymbol
-    };
-}
+Erable::Compiler::Parser::Parser() = default;

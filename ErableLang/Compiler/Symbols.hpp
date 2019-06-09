@@ -15,6 +15,10 @@ namespace Erable::Compiler::Symbols {
     class Symbol {
     public:
         virtual std::string getType() = 0;
+
+        virtual std::string getName();
+
+        virtual std::string toString();
     };
 
     typedef std::unique_ptr<Symbol> SymbolPtr;
@@ -27,6 +31,10 @@ namespace Erable::Compiler::Symbols {
         explicit TokenSymbol(std::string ruleName);
 
         std::string getType() override;
+
+        std::string getName() override;
+
+        std::string toString() override;
     };
 
     typedef std::unique_ptr<TokenSymbol> TokenSymbolPtr;
@@ -39,6 +47,10 @@ namespace Erable::Compiler::Symbols {
         explicit RuleSymbol(std::string ruleName);
 
         std::string getType() override;
+
+        std::string getName() override;
+
+        std::string toString() override;
     };
 
     typedef std::unique_ptr<RuleSymbol> RuleSymbolPtr;
@@ -51,6 +63,8 @@ namespace Erable::Compiler::Symbols {
         HandlerSymbol(SymbolPtr &&firstSymbol, SymbolPtr &&secondSymbol);
 
         std::string getType() override;
+
+        std::string toString() override;
     };
 
     typedef std::unique_ptr<HandlerSymbol> HandlerSymbolPtr;
@@ -63,6 +77,8 @@ namespace Erable::Compiler::Symbols {
         ComplexSymbol(SymbolPtr &&firstSymbol, SymbolPtr &&secondSymbol);
 
         std::string getType() override;
+
+        std::string toString() override;
     };
 
     typedef std::unique_ptr<ComplexSymbol> ComplexSymbolPtr;
@@ -73,9 +89,17 @@ namespace Erable::Compiler::Symbols {
         SymbolPtr rule;
         std::string ruleName;
 
-        explicit Rule(std::string ruleName);
+        explicit Rule(std::string ruleName, SymbolPtr rule = nullptr);
 
         std::string getType() override;
+
+        std::string getName() override;
+
+        std::string toString() override;
+
+        bool isRef();
+
+        bool isReal();
     };
 
     typedef std::unique_ptr<Rule> RulePtr;
@@ -95,5 +119,8 @@ operator+(Erable::Compiler::Symbols::SymbolPtr &&, Erable::Compiler::Symbols::Sy
 
 Erable::Compiler::Symbols::SymbolPtr
 operator-(Erable::Compiler::Symbols::RulePtr &&, Erable::Compiler::Symbols::SymbolPtr &&);
+
+Erable::Compiler::Symbols::SymbolPtr operator!(Erable::Compiler::Symbols::RulePtr &&);
+
 
 #endif //ERABLECOMPILER_SYMBOLS_HPP

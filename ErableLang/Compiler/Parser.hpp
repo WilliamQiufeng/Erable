@@ -8,13 +8,14 @@
 
 #include <vector>
 #include <string>
-#include "Symbols.hpp"
+#include "Syntax.hpp"
 
 namespace Erable::Compiler {
     class Parser {
-        std::vector<Erable::Compiler::Symbols::SymbolPtr> symbols;
     public:
         Parser();
+
+        Syntax::SyntaxList available;
     };
 }
 
