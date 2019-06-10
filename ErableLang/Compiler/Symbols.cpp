@@ -1,6 +1,7 @@
 #include <utility>
 
 #include <utility>
+#include <iostream>
 
 //
 // Created by Qiufeng54321 on 2019-06-06.
@@ -18,7 +19,7 @@ std::string RuleSymbol::getType() {
 RuleSymbol::RuleSymbol(std::string ruleName) : ruleName(std::move(ruleName)) {}
 
 std::string RuleSymbol::toString() {
-    return "<" + this->ruleName + ">";
+    return "<symbol - " + this->ruleName + ">";
 }
 
 std::string RuleSymbol::getName() {
@@ -48,7 +49,12 @@ SymbolPtr operator ""_TokenSymbol(const char *name, std::size_t) {
 }
 
 RulePtr operator ""_Rule(const char *name, std::size_t) {
-    return std::make_unique<Rule>(std::string(name));
+    auto &&ret = std::make_unique<Rule>(std::string(name));
+    return std::move(ret);
+}
+
+Erable::Compiler::Symbols::SymbolPtr operator ""_RuleRef(const char *name, std::size_t size) {
+    return operator ""_Rule(name, size);
 }
 
 SymbolPtr operator|(SymbolPtr &&self, SymbolPtr &&other) {
@@ -96,14 +102,17 @@ std::string TokenSymbol::getName() {
     return ruleName;
 }
 
-Rule::Rule(std::string ruleName, SymbolPtr rule) : ruleName(std::move(ruleName)), rule(std::move(rule)) {}
+Rule::Rule(std::string ruleName) : ruleName(std::move(ruleName)) {}
 
 std::string Rule::getType() {
     return "Rule";
 }
 
 std::string Rule::toString() {
-    return this->ruleName + ": " + this->rule->toString();
+    if (this->rule == nullptr)
+        return "<ref - " + this->ruleName + ">";
+    else
+        return this->ruleName + ": " + this->rule->toString();
 }
 
 std::string Rule::getName() {

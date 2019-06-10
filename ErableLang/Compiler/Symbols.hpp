@@ -89,7 +89,7 @@ namespace Erable::Compiler::Symbols {
         SymbolPtr rule;
         std::string ruleName;
 
-        explicit Rule(std::string ruleName, SymbolPtr rule = nullptr);
+        explicit Rule(std::string ruleName);
 
         std::string getType() override;
 
@@ -110,6 +110,8 @@ Erable::Compiler::Symbols::SymbolPtr operator "" _RuleSymbol(const char *, std::
 Erable::Compiler::Symbols::SymbolPtr operator "" _TokenSymbol(const char *, std::size_t);
 
 Erable::Compiler::Symbols::RulePtr operator "" _Rule(const char *, std::size_t);
+
+Erable::Compiler::Symbols::SymbolPtr operator "" _RuleRef(const char *, std::size_t);
 
 Erable::Compiler::Symbols::SymbolPtr
 operator|(Erable::Compiler::Symbols::SymbolPtr &&, Erable::Compiler::Symbols::SymbolPtr &&);
