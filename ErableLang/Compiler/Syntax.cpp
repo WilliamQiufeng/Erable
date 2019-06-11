@@ -29,7 +29,16 @@ void Erable::Compiler::Syntax::initSyntaxes() {
             | ("op"_RuleSymbol + ("BIT_AND"_TokenSymbol | "BIT_OR"_TokenSymbol) + "op"_RuleRef)
             | ("op"_RuleSymbol + ("AND"_TokenSymbol | "OR"_TokenSymbol) + "op"_RuleRef)
     );
-    syntaxTree.push_back(std::move(atomic));
-    syntaxTree.push_back(std::move(var));
-    syntaxTree.push_back(std::move(binaryOp));
+    auto &&unaryOp = "unaryOp"_Rule - (
+            ("RETURN"_TokenSymbol | "BIT_NOT"_TokenSymbol | "NOT"_TokenSymbol | "REF"_TokenSymbol |
+             "GET_REF"_TokenSymbol) + "op"_RuleSymbol
+    );
+
+    auto &&op = "op"_Rule - (
+            std::move(binaryOp)
+            | std::move(unaryOp)
+            | std::move(atomic)
+            | std::move(var)
+    );
+    syntaxTree.push_back(std::move(op));
 }

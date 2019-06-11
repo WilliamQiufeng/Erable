@@ -297,6 +297,8 @@ namespace Erable::Compiler {
             tokens.push_back(new PlainTokenElement("AND", "&&"));
             tokens.push_back(new PlainTokenElement("OR", "||"));
             tokens.push_back(new PlainTokenElement("NOT", "!"));
+            tokens.push_back(new PlainTokenElement("REF", "@"));
+            tokens.push_back(new PlainTokenElement("GET_REF", "#"));
             tokens.push_back(new PlainTokenElement("LEFT_SHIFT", "<<"));
             tokens.push_back(new PlainTokenElement("RIGHT_SHIFT", ">>"));
             tokens.push_back(new PlainTokenElement("UNSIGNED_RIGHT_SHIFT", ">>>"));

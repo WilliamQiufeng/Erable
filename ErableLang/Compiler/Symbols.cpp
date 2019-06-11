@@ -26,6 +26,10 @@ std::string RuleSymbol::getName() {
     return ruleName;
 }
 
+bool RuleSymbol::find(std::string string) {
+    return this->ruleName == string;
+}
+
 
 std::string HandlerSymbol::getType() {
     return "HandlerSymbol";
@@ -39,17 +43,21 @@ std::string HandlerSymbol::toString() {
     return "(" + this->firstSymbol->toString() + " | " + this->secondSymbol->toString() + ")";
 }
 
+bool HandlerSymbol::find(std::string string) {
+    return firstSymbol->find(string) or secondSymbol->find(string);
+}
+
 
 SymbolPtr operator ""_RuleSymbol(const char *name, std::size_t) {
-    return std::make_unique<RuleSymbol>(std::string(name));
+    return std::make_shared<RuleSymbol>(std::string(name));
 }
 
 SymbolPtr operator ""_TokenSymbol(const char *name, std::size_t) {
-    return std::make_unique<TokenSymbol>(std::string(name));
+    return std::make_shared<TokenSymbol>(std::string(name));
 }
 
 RulePtr operator ""_Rule(const char *name, std::size_t) {
-    auto &&ret = std::make_unique<Rule>(std::string(name));
+    auto &&ret = std::make_shared<Rule>(std::string(name));
     return std::move(ret);
 }
 
@@ -58,11 +66,11 @@ Erable::Compiler::Symbols::SymbolPtr operator ""_RuleRef(const char *name, std::
 }
 
 SymbolPtr operator|(SymbolPtr &&self, SymbolPtr &&other) {
-    return std::make_unique<HandlerSymbol>(std::move(self), std::move(other));
+    return std::make_shared<HandlerSymbol>(std::move(self), std::move(other));
 }
 
 SymbolPtr operator+(SymbolPtr &&self, SymbolPtr &&other) {
-    return std::make_unique<ComplexSymbol>(std::move(self), std::move(other));
+    return std::make_shared<ComplexSymbol>(std::move(self), std::move(other));
 }
 
 Erable::Compiler::Symbols::SymbolPtr
@@ -88,6 +96,10 @@ std::string ComplexSymbol::toString() {
     return this->firstSymbol->toString() + " " + this->secondSymbol->toString();
 }
 
+bool ComplexSymbol::find(std::string string) {
+    return false;
+}
+
 TokenSymbol::TokenSymbol(std::string ruleName) : ruleName(std::move(ruleName)) {}
 
 std::string TokenSymbol::getType() {
@@ -100,6 +112,10 @@ std::string TokenSymbol::toString() {
 
 std::string TokenSymbol::getName() {
     return ruleName;
+}
+
+bool TokenSymbol::find(std::string string) {
+    return this->ruleName == string;
 }
 
 Rule::Rule(std::string ruleName) : ruleName(std::move(ruleName)) {}
@@ -125,6 +141,14 @@ bool Rule::isRef() {
 
 bool Rule::isReal() {
     return !isRef();
+}
+
+bool Rule::find(std::string string) {
+    if (this->isRef()) {
+        return false;
+    } else {
+        return this->ruleName == string or this->rule->find(string);
+    }
 }
 
 std::string Symbol::toString() {

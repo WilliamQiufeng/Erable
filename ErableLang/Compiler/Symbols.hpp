@@ -19,9 +19,11 @@ namespace Erable::Compiler::Symbols {
         virtual std::string getName();
 
         virtual std::string toString();
+
+        virtual bool find(std::string) = 0;
     };
 
-    typedef std::unique_ptr<Symbol> SymbolPtr;
+    typedef std::shared_ptr<Symbol> SymbolPtr;
 
     //TokenSymbol stores a token name
     class TokenSymbol : public Symbol {
@@ -35,9 +37,11 @@ namespace Erable::Compiler::Symbols {
         std::string getName() override;
 
         std::string toString() override;
+
+        bool find(std::string string) override;
     };
 
-    typedef std::unique_ptr<TokenSymbol> TokenSymbolPtr;
+    typedef std::shared_ptr<TokenSymbol> TokenSymbolPtr;
 
     //RuleSymbol stores a rule name
     class RuleSymbol : public Symbol {
@@ -51,9 +55,11 @@ namespace Erable::Compiler::Symbols {
         std::string getName() override;
 
         std::string toString() override;
+
+        bool find(std::string string) override;
     };
 
-    typedef std::unique_ptr<RuleSymbol> RuleSymbolPtr;
+    typedef std::shared_ptr<RuleSymbol> RuleSymbolPtr;
 
     //HandlerSymbol stores branches of tokens to be processed.
     class HandlerSymbol : public Symbol {
@@ -65,9 +71,11 @@ namespace Erable::Compiler::Symbols {
         std::string getType() override;
 
         std::string toString() override;
+
+        bool find(std::string string) override;
     };
 
-    typedef std::unique_ptr<HandlerSymbol> HandlerSymbolPtr;
+    typedef std::shared_ptr<HandlerSymbol> HandlerSymbolPtr;
 
     //ComplexSymbol stores list of symbols
     class ComplexSymbol : public Symbol {
@@ -79,9 +87,11 @@ namespace Erable::Compiler::Symbols {
         std::string getType() override;
 
         std::string toString() override;
+
+        bool find(std::string string) override;
     };
 
-    typedef std::unique_ptr<ComplexSymbol> ComplexSymbolPtr;
+    typedef std::shared_ptr<ComplexSymbol> ComplexSymbolPtr;
 
     //A Rule defines a grammar
     class Rule : public Symbol {
@@ -100,9 +110,11 @@ namespace Erable::Compiler::Symbols {
         bool isRef();
 
         bool isReal();
+
+        bool find(std::string string) override;
     };
 
-    typedef std::unique_ptr<Rule> RulePtr;
+    typedef std::shared_ptr<Rule> RulePtr;
 }
 
 Erable::Compiler::Symbols::SymbolPtr operator "" _RuleSymbol(const char *, std::size_t);

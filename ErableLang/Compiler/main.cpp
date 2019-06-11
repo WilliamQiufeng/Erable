@@ -2,7 +2,7 @@
 #include "Lexer.hpp"
 #include "Parser.hpp"
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
     using namespace Erable::Compiler;
     Syntax::initSyntaxes();
     Lexer lexer = Lexer("/williamye/program/antlr/erable/ErableLang/tests/lex.erable");
@@ -14,5 +14,6 @@ int main(int argc, char* argv[]) {
     for (auto &i : Syntax::syntaxTree) {
         std::cout << i->toString() << std::endl;
     }
+    //std::cout << Syntax::syntaxTree[0]->find("atomic") << std::endl;
     return 0;
 }
