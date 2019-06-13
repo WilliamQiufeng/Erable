@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 #include "Syntax.hpp"
+#include "ProcessedData.hpp"
 
 namespace Erable::Compiler {
     class Parser {
@@ -17,7 +18,9 @@ namespace Erable::Compiler {
 
         Syntax::SyntaxList available;
 
+        TokenList inputTokens;
 
+        Data::DataList dataList;
     };
 }
 
