@@ -1,6 +1,8 @@
 #include <utility>
 
 #include <utility>
+
+#include <utility>
 #include <iostream>
 
 //
@@ -16,7 +18,9 @@ std::string RuleSymbol::getType() {
     return "RuleSymbol";
 }
 
-RuleSymbol::RuleSymbol(std::string ruleName) : ruleName(std::move(ruleName)) {}
+RuleSymbol::RuleSymbol(std::string ruleName) : ruleName(std::move(ruleName)) {
+    tag = this->ruleName;
+}
 
 std::string RuleSymbol::toString() {
     return "<symbol - " + this->ruleName + ">";
@@ -83,6 +87,43 @@ Erable::Compiler::Symbols::SymbolPtr operator!(Erable::Compiler::Symbols::RulePt
     return Erable::Compiler::Symbols::SymbolPtr();
 }
 
+Erable::Compiler::Symbols::SymbolPtr operator>=(Erable::Compiler::Symbols::SymbolPtr &ptr, std::string name) {
+    //std::cout<<ptr->toString() << ": " << ptr->tag << " == " << name <<std::endl;
+    if (ptr->tag == name) return ptr;
+    auto type = ptr->getType();
+    if (type == "TokenSymbol" or type == "RuleSymbol") {
+        goto name_assert;
+    } else if (type == "Rule") {
+        auto *real = (Rule *) ptr.get();
+        if (real->isRef()) {
+            goto name_assert;
+        } else {
+            return real->rule >= name;
+        }
+    } else if (type == "ComplexSymbol") {
+        auto *real = (ComplexSymbol *) ptr.get();
+        auto lptr = real->firstSymbol >= name, rptr = real->secondSymbol >= name;
+        if ((lptr) != nullptr) return lptr;
+        else if ((rptr) != nullptr) return rptr;
+        return nullptr;
+    } else if (type == "HandlerSymbol") {
+        auto *real = (HandlerSymbol *) ptr.get();
+        auto lptr = real->firstSymbol >= name, rptr = real->secondSymbol >= name;
+        if ((lptr) != nullptr) return lptr;
+        else if ((rptr) != nullptr) return rptr;
+        return nullptr;
+    }
+    name_assert:
+    {
+        return (ptr->getName() == name ? ptr : nullptr);
+    }
+}
+
+Erable::Compiler::Symbols::SymbolPtr operator<<(Erable::Compiler::Symbols::SymbolPtr &&ptr, std::string tag) {
+    ptr->tag = std::move(tag);
+    return ptr;
+}
+
 
 std::string ComplexSymbol::getType() {
     return "ComplexSymbol";
@@ -96,11 +137,13 @@ std::string ComplexSymbol::toString() {
     return this->firstSymbol->toString() + " " + this->secondSymbol->toString();
 }
 
-bool ComplexSymbol::find(std::string string) {
+bool ComplexSymbol::find(std::string) {
     return false;
 }
 
-TokenSymbol::TokenSymbol(std::string ruleName) : ruleName(std::move(ruleName)) {}
+TokenSymbol::TokenSymbol(std::string ruleName) : ruleName(std::move(ruleName)) {
+    tag = this->ruleName;
+}
 
 std::string TokenSymbol::getType() {
     return "TokenSymbol";
@@ -118,7 +161,10 @@ bool TokenSymbol::find(std::string string) {
     return this->ruleName == string;
 }
 
-Rule::Rule(std::string ruleName) : ruleName(std::move(ruleName)) {}
+Rule::Rule(std::string ruleName) : ruleName(std::move(ruleName)) {
+    tag = this->ruleName;
+}
+
 
 std::string Rule::getType() {
     return "Rule";

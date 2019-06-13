@@ -11,7 +11,7 @@
 
 namespace Erable::Compiler::Syntax {
     typedef std::vector<Erable::Compiler::Symbols::SymbolPtr> SyntaxList;
-    inline SyntaxList syntaxTree;
+    inline Symbols::SymbolPtr syntaxTree;
 
     void initSyntaxes();
 }

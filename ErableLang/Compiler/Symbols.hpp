@@ -14,6 +14,7 @@ namespace Erable::Compiler::Symbols {
     //Symbol: the base class for other symbol types
     class Symbol {
     public:
+        std::string tag;
         virtual std::string getType() = 0;
 
         virtual std::string getName();
@@ -21,6 +22,8 @@ namespace Erable::Compiler::Symbols {
         virtual std::string toString();
 
         virtual bool find(std::string) = 0;
+
+
     };
 
     typedef std::shared_ptr<Symbol> SymbolPtr;
@@ -133,6 +136,10 @@ operator+(Erable::Compiler::Symbols::SymbolPtr &&, Erable::Compiler::Symbols::Sy
 
 Erable::Compiler::Symbols::SymbolPtr
 operator-(Erable::Compiler::Symbols::RulePtr &&, Erable::Compiler::Symbols::SymbolPtr &&);
+
+Erable::Compiler::Symbols::SymbolPtr operator>=(Erable::Compiler::Symbols::SymbolPtr &, std::string name);
+
+Erable::Compiler::Symbols::SymbolPtr operator<<(Erable::Compiler::Symbols::SymbolPtr &&, std::string tag);
 
 Erable::Compiler::Symbols::SymbolPtr operator!(Erable::Compiler::Symbols::RulePtr &&);
 

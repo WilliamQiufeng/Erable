@@ -47,15 +47,12 @@ namespace Erable::Compiler {
                 bool remove = false;
                 if (tk->valid() and forw not_eq EOF) {
                     tk->consumeOne(forw);
-                    //std::cout<<"Consumed '" << tk->getBuffer().getData() << "' to " << tk->getName() << std::endl;
                     oneValid = true;
                 } else if (not tk->finished()) {
-                    //std::cout<<"Remove: '" << tk->getBuffer().getData() << "' to " << tk->getName() << std::endl;
                     remove = true;
                 }
                 if (tk->finished() or forw == EOF) {
                     if (std::find(finisheds.begin(), finisheds.end(), tk) == finisheds.end()) {
-                        //std::cout<<"Finished '" << tk->getBuffer().getData() << "' to " << tk->getName() << std::endl;
                         finisheds.push_back(tk);
                         oneValid = true;
                         remove = true;
@@ -73,10 +70,6 @@ namespace Erable::Compiler {
             }
             //Finish read
             read();
-            /*//Remove all invalid elements.
-            available.erase(std::remove_if(available.begin(), available.end(), [](TokenElement *x) -> bool {
-                return !x->allValid();
-            }), available.end());*/
         }
         if (finisheds.empty()) {
             std::stringstream ss;

@@ -7,6 +7,8 @@
 #ifndef ERABLELANG_TOKENS_HPP
 #define ERABLELANG_TOKENS_HPP
 
+#include <vector>
+
 namespace Erable::Compiler {
     struct Token;
 
@@ -15,6 +17,8 @@ namespace Erable::Compiler {
     class PlainTokenElement;
 
     class Tokens;
+
+    typedef std::vector<Token> TokenList;
 }
 
 #include <Utils.h>
@@ -150,6 +154,7 @@ namespace Erable::Compiler {
     };
 
     inline Tokens_t Tokens;
+
 }
 
 

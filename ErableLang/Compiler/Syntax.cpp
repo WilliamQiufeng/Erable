@@ -15,10 +15,10 @@ void Erable::Compiler::Syntax::initSyntaxes() {
             | "DOUBLE"_TokenSymbol
     );
     auto &&var = "var"_Rule - (
-            ("VAR"_TokenSymbol | "CONST"_TokenSymbol)
-            + "NAME"_TokenSymbol
+            (("VAR"_TokenSymbol | "CONST"_TokenSymbol) << "identifier")
+            + ("NAME"_TokenSymbol << "name")
             + "SET"_TokenSymbol
-            + "op"_RuleRef
+            + ("op"_RuleRef << "value")
     );
     auto &&binaryOp = "binaryOp"_Rule - (
             ("op"_RuleSymbol + ("ADD"_TokenSymbol | "SUB"_TokenSymbol) + "op"_RuleRef)
@@ -40,5 +40,5 @@ void Erable::Compiler::Syntax::initSyntaxes() {
             | std::move(atomic)
             | std::move(var)
     );
-    syntaxTree.push_back(std::move(op));
+    syntaxTree = std::move(op);
 }

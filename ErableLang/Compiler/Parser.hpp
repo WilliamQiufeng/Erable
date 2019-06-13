@@ -16,6 +16,8 @@ namespace Erable::Compiler {
         Parser();
 
         Syntax::SyntaxList available;
+
+
     };
 }
 

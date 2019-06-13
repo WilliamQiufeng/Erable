@@ -17,7 +17,7 @@ namespace Erable::Compiler {
     class Lexer {
         int line = 1, column = 0;
         std::vector<TokenElement *> available;
-        std::vector<Token> tokens;
+        TokenList tokens;
         std::vector<char> forwards;
         std::string buffer;
         std::ifstream in;

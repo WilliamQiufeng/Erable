@@ -11,9 +11,6 @@ int main(int argc, char *argv[]) {
         std::cout << "Token " << token.name << "[" << token.data << "]" << std::endl;
     }
     Parser parser;
-    for (auto &i : Syntax::syntaxTree) {
-        std::cout << i->toString() << std::endl;
-    }
-    //std::cout << Syntax::syntaxTree[0]->find("atomic") << std::endl;
+    std::cout << Syntax::syntaxTree->toString() << std::endl;
     return 0;
 }
