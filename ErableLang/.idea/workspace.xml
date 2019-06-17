@@ -41,18 +41,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="843ad3e7-5740-4d46-80f4-e7c843e04bd1" name="Default Changelist" comment="Found some major problems on lexing (which I haven't even mentioned before). ('*' for fixed, '+' for TO-FIXes):&#10; * When a token is processed by the lexer, the token next to it will be missed.&#10;  + when lexing '0b11' (on lex.erable), the result splits into two tokens: 'BIN[0b]', 'DEC[11]', but the expected behavior is to produce only one token: 'BIN[0b11]'. The reason why it happens has not been cleared yet so it is currently put on the highest priority of all TODOs.&#10;    (From TODO in Tokens.cpp)">
+    <list default="true" id="843ad3e7-5740-4d46-80f4-e7c843e04bd1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Lexer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Lexer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Lexer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Lexer.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Parser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Parser.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Parser.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Parser.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/ProcessedData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/ProcessedData.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/ProcessedData.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/ProcessedData.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Syntax.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Syntax.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Tokens.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Tokens.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Tokens.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Tokens.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/lex.erable" beforeDir="false" afterPath="$PROJECT_DIR$/tests/lex.erable" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -101,25 +91,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Compiler/Tokens.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="302" column="26" selection-start-line="302" selection-start-column="26" selection-end-line="302" selection-end-column="26" />
+            <state relative-caret-position="241">
+              <caret line="445" column="65" lean-forward="true" selection-start-line="445" selection-start-column="65" selection-end-line="445" selection-end-column="65" />
               <folding>
                 <element signature="e#100#116#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Global/Utils.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="280" selection-start-line="280" selection-end-line="280" />
-              <folding>
-                <element signature="e#371#388#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -143,11 +121,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/lex.erable">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+            <state relative-caret-position="390">
+              <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
             </state>
           </provider>
         </entry>
@@ -155,17 +133,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Compiler/Lexer.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="146" column="58" selection-start-line="146" selection-start-column="58" selection-end-line="146" selection-end-column="58" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/vector">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="1721" selection-start-line="1721" selection-end-line="1721" />
+            <state relative-caret-position="68">
+              <caret line="168" column="57" lean-forward="true" selection-start-line="168" selection-start-column="57" selection-end-line="168" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -177,18 +146,6 @@
               <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
               <folding>
                 <element signature="e#220#241#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Compiler/main.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -277,11 +234,11 @@
         <option value="$PROJECT_DIR$/Compiler/Syntax.cpp" />
         <option value="$PROJECT_DIR$/Compiler/main.cpp" />
         <option value="$PROJECT_DIR$/Compiler/Lexer.hpp" />
-        <option value="$PROJECT_DIR$/tests/lex.erable" />
         <option value="$PROJECT_DIR$/Compiler/Tokens.hpp" />
         <option value="$PROJECT_DIR$/Compiler/Parser.cpp" />
-        <option value="$PROJECT_DIR$/Compiler/Lexer.cpp" />
         <option value="$PROJECT_DIR$/Compiler/Tokens.cpp" />
+        <option value="$PROJECT_DIR$/Compiler/Lexer.cpp" />
+        <option value="$PROJECT_DIR$/tests/lex.erable" />
       </list>
     </option>
   </component>
@@ -367,7 +324,7 @@
     <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="terminal" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -465,7 +422,7 @@
       <workItem from="1560160564229" duration="3625000" />
       <workItem from="1560239456759" duration="251000" />
       <workItem from="1560240492341" duration="15179000" />
-      <workItem from="1560404974827" duration="25693000" />
+      <workItem from="1560404974827" duration="28656000" />
     </task>
     <task id="LOCAL-00001" summary="I've changed the IDE I use">
       <created>1558567629247</created>
@@ -670,11 +627,25 @@
       <option name="project" value="LOCAL" />
       <updated>1560417652738</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Found some major problems on lexing (which I haven't even mentioned before). ('*' for fixed, '+' for TO-FIXes):&#10; * When a token is processed by the lexer, the token next to it will be missed.&#10;  + when lexing '0b11' (on lex.erable), the result splits into two tokens: 'BIN[0b]', 'DEC[11]', but the expected behavior is to produce only one token: 'BIN[0b11]'. The reason why it happens has not been cleared yet so it is currently put on the highest priority of all TODOs.&#10;    (From TODO in Tokens.cpp)">
+      <created>1560757958919</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1560757958919</updated>
+    </task>
+    <task id="LOCAL-00031" summary="I've just remembered to fix Erable::Compiler::Token 's stream output operator.">
+      <created>1560758390663</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1560758390663</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="189654000" />
+    <option name="totallyTimeSpent" value="192617000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -694,7 +665,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32844576" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49848944" weight="0.31085044" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49848944" visible="true" weight="0.31085044" />
       <window_info anchor="bottom" x="21" y="248" width="1324" height="271" id="Debug" order="3" sideWeight="0.49924472" weight="0.3973607" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -702,7 +673,7 @@
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Profiler" order="8" weight="0.32844576" />
       <window_info anchor="bottom" id="TeamCity" order="9" weight="0.32991204" />
-      <window_info active="true" anchor="bottom" id="Messages" order="10" sideWeight="0.49924472" visible="true" weight="0.32111436" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49924472" weight="0.32111436" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3287879" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50151056" side_tool="true" weight="0.31085044" />
       <window_info anchor="bottom" id="Version Control" order="13" weight="0.32844576" />
@@ -796,8 +767,8 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="updated usage in ErableVM/README.md" />
     <MESSAGE value="Modified License of ErableVM/include/dynamicro.cpp.Sorry for not putting the right license" />
     <MESSAGE value="Renamed ErableVM to ErableLang. Extracted cpp and hpp files for ErableVM to a unique ErableLang/VM directory." />
     <MESSAGE value="Moved math.cpp and math.hpp to ErableLang/stdlib/" />
@@ -822,7 +793,8 @@
     <MESSAGE value="Added search algorithm" />
     <MESSAGE value="Preparing for Parser" />
     <MESSAGE value="Found some major problems on lexing (which I haven't even mentioned before). ('*' for fixed, '+' for TO-FIXes):&#10; * When a token is processed by the lexer, the token next to it will be missed.&#10;  + when lexing '0b11' (on lex.erable), the result splits into two tokens: 'BIN[0b]', 'DEC[11]', but the expected behavior is to produce only one token: 'BIN[0b11]'. The reason why it happens has not been cleared yet so it is currently put on the highest priority of all TODOs.&#10;    (From TODO in Tokens.cpp)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Found some major problems on lexing (which I haven't even mentioned before). ('*' for fixed, '+' for TO-FIXes):&#10; * When a token is processed by the lexer, the token next to it will be missed.&#10;  + when lexing '0b11' (on lex.erable), the result splits into two tokens: 'BIN[0b]', 'DEC[11]', but the expected behavior is to produce only one token: 'BIN[0b11]'. The reason why it happens has not been cleared yet so it is currently put on the highest priority of all TODOs.&#10;    (From TODO in Tokens.cpp)" />
+    <MESSAGE value="I've just remembered to fix Erable::Compiler::Token 's stream output operator." />
+    <option name="LAST_COMMIT_MESSAGE" value="I've just remembered to fix Erable::Compiler::Token 's stream output operator." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -891,95 +863,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/stdlib/IOS.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stdlib/Math.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-          <folding>
-            <element signature="e#128#156#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stdlib/Math.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stdlib/IOS.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
-          <folding>
-            <element signature="e#100#128#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VM/VMGlobal.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="29" column="65" selection-start-line="29" selection-start-column="65" selection-end-line="29" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VM/Program.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="77" selection-start-line="77" selection-end-line="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Global/CMakeLists.txt" />
-    <entry file="file://$PROJECT_DIR$/Global/IO.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-705">
-          <caret line="21" column="2" selection-start-line="21" selection-start-column="2" selection-end-line="21" selection-end-column="2" />
-          <folding>
-            <element signature="e#691#708#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/tanpero_lexer.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2439">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Global/Global.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="43">
-          <caret line="57" column="93" selection-start-line="57" selection-start-column="31" selection-end-line="57" selection-end-column="93" />
-          <folding>
-            <element signature="e#692#713#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Global/Exceptions.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-          <folding>
-            <element signature="e#847#867#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/cmake-build-debug/Compiler.cbp">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Playground/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1003,9 +886,6 @@
           <caret line="128" column="21" selection-start-line="128" selection-start-column="21" selection-end-line="128" selection-end-column="21" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/cmake-build-debug/CMakeFiles/ErableCompiler.dir/link.txt">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Compiler/cmake-build-debug/cmake_install.cmake">
       <provider selected="true" editor-type-id="text-editor">
@@ -1235,13 +1115,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/lex.erable">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Compiler/Tokens.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -1256,20 +1129,85 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/Lexer.cpp">
+    <entry file="file://$PROJECT_DIR$/Compiler/tanpero_lexer.hpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="146" column="58" selection-start-line="146" selection-start-column="58" selection-end-line="146" selection-end-column="58" />
+        <state relative-caret-position="-884" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/tanpero_token.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2018" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/tanpero_lexer.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Compiler/Tokens.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="302" column="26" selection-start-line="302" selection-start-column="26" selection-end-line="302" selection-end-column="26" />
+        <state relative-caret-position="241">
+          <caret line="445" column="65" lean-forward="true" selection-start-line="445" selection-start-column="65" selection-end-line="445" selection-end-column="65" />
           <folding>
             <element signature="e#100#116#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/cmake-build-debug/CMakeFiles/ErableCompiler.dir/link.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/cmake-build-debug/CMakeFiles/Makefile2">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/cmake-build-debug/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-478" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/cmake-build-debug/CMakeFiles/feature_tests.cxx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7828">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="e#464#467#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/cmake-build-debug/CMakeFiles/progress.marks">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/cmake-build-debug/CMakeFiles/TargetDirectories.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/cmake-build-debug/CMakeFiles/Makefile.cmake">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-870" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/.idea/Compiler.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/.idea/modules.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/Lexer.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="168" column="57" lean-forward="true" selection-start-line="168" selection-start-column="57" selection-end-line="168" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lex.erable">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
         </state>
       </provider>
     </entry>

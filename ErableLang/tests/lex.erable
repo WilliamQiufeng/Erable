@@ -26,18 +26,38 @@ while(whilecond){
 }
 
 class B {
-    abstract function add <type A, type B, type C = result_of <A :: operator+(B)> > (a: A, b: B) -> C {
+    abstract function add <type A, type B, type C = A + B > (a: A, b: B) -> C {
         return a + b;
     }
 }
 
 class A : B {
     var a: int = 0;
-    function A(aVal: int) -> void{
+    init(aVal: int){
         this.a = aVal;
     }
-    override add <int, int> {
+    override function add <int,int>(int a, int b) {
         return a + b;
+    }
+}
+
+class Shape {
+    private var width: double;
+    private var height: double;
+    init(width: double, height: double) {
+        this.width = width;
+        this.height = height;
+    }
+    abstract function area() -> double;
+    abstract function perimeter() -> double;
+}
+
+class Rectangle : Shape {
+    override function area() {
+        return this.width * this.height;
+    }
+    override function perimeter() {
+        return 2 * (this.width + this.height);
     }
 }
 
