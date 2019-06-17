@@ -166,7 +166,7 @@ namespace Erable::Compiler {
         while (forward() != EOF) {
             auto res = readToken();
             if (!res) break;
-            std::cout << tokens[tokens.size() - 1] << " "/* << std::endl*/;
+            std::cout << tokens[tokens.size() - 1] << " " << std::endl;
             if (tokens.size() == 146) {
 
             }

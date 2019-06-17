@@ -443,6 +443,6 @@ namespace Erable::Compiler {
 }
 
 std::ostream &Erable::Compiler::operator<<(std::ostream &os, const Erable::Compiler::Token &token) {
-    os << /*"Token [" << token.name << " = \"" << */token.data/* << "\"]"*/;
+    os << "Token [" << token.name << " = \"" << token.data << "\"]";
     return os;
 }
