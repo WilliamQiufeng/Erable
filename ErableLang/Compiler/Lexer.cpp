@@ -13,14 +13,7 @@ namespace Erable::Compiler {
     char Lexer::read() {
         char finalChar;
         if (forwards.empty()) {
-            finalChar = in.get();
-            if (finalChar == '\n') {
-                line++;
-                column = 0;
-            } else {
-                column++;
-            }
-            buffer += finalChar;
+            finalChar = forceRead();
         } else {
             finalChar = forwards.front();
             forwards.erase(forwards.begin());
@@ -28,41 +21,76 @@ namespace Erable::Compiler {
         return finalChar;
     }
 
-    char Lexer::forward() {
-        char finalChar = read();
-        forwards.push_back(finalChar);
+    char Lexer::forceRead() {
+        char finalChar = in.get();
+        if (finalChar == '\n') {
+            line++;
+            column = 0;
+        } else {
+            column++;
+        }
+        buffer += finalChar;
         return finalChar;
     }
 
-    void Lexer::readToken() {
+    char Lexer::forward() {
+        return forward(1);
+    }
+
+    char Lexer::forward(int i) {
+        int actual = i - forwards.size();
+        //input:    abcde
+        //forward:  3 => c -> a,b,c
+        //forward:  4 => d -> a,b,c,d
+        //forward:  2 => b -> a,b,c,d
+        if (actual < 0) {
+            return forwards[(-actual) - 1];
+        } else if (actual == 0) {
+            return forwards[forwards.size() - 1];
+        }
+        char finalChar = EOF;
+        for (int j = 0; j < actual; j++) {
+            finalChar = forceRead();
+            forwards.push_back(finalChar);
+        }
+        return finalChar;
+    }
+
+    bool Lexer::readToken() {
         clearWS();
         reset();
         std::vector<TokenElement *> finisheds;
         while (true) {
-            if (forward() == EOF)break;
             bool oneValid = false;//If one token is valid, set it to true
+            char forw = forward();
             for (auto st = available.begin(); st != available.end();) {
                 auto tk = *st;
-                char forw = forward();
-                bool remove = false;
+                //std::cout<<(int)forw << " '" << forw << "'"<<std::endl;\
+                //If the token is still valid and the forword token is not EOF
+                //  Consume the forword char
+                //  set oneValid to true because it is valid
+                //else if it is neither valid nor finished
+                //  remove it
                 if (tk->valid() and forw not_eq EOF) {
                     tk->consumeOne(forw);
                     oneValid = true;
-                } else if (not tk->finished()) {
-                    remove = true;
+                } else if (not tk->finished()) { //If it is neither valid nor finished
+                    goto remove;
                 }
                 if (tk->finished() or forw == EOF) {
                     if (std::find(finisheds.begin(), finisheds.end(), tk) == finisheds.end()) {
                         finisheds.push_back(tk);
-                        oneValid = true;
-                        remove = true;
+                        goto remove;
                     }
                 }
-                if (remove) {
+                ++st;
+                continue;
+
+                remove:
+                {
                     st = available.erase(st);
                     continue;
                 }
-                ++st;
             }
             //Break if no available tokens can be lexed
             if (!oneValid) {
@@ -72,6 +100,7 @@ namespace Erable::Compiler {
             read();
         }
         if (finisheds.empty()) {
+            if (forward() == EOF) return false;
             std::stringstream ss;
             ss << "The token cannot be lexed: '"
                << buffer
@@ -102,6 +131,7 @@ namespace Erable::Compiler {
             this->tokens.push_back(tk->getBuffer());
             this->reset();
         }
+        return forward() != EOF;
     }
 
     void Lexer::reset() {
@@ -114,7 +144,7 @@ namespace Erable::Compiler {
     void Lexer::clearWS() {
         while (true) {
             char c = forward();
-            if (c != '\n' && c != '\r' && c != ' ') {
+            if ((c != '\n' && c != '\r' && c != ' ') || c == EOF) {
                 break;
             }
             read();
@@ -134,7 +164,12 @@ namespace Erable::Compiler {
 
     void Lexer::lex() {
         while (forward() != EOF) {
-            readToken();
+            auto res = readToken();
+            if (!res) break;
+            std::cout << tokens[tokens.size() - 1] << " "/* << std::endl*/;
+            if (tokens.size() == 146) {
+
+            }
         }
         cleanUp();
     }

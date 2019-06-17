@@ -13,14 +13,25 @@
 
 namespace Erable::Compiler {
     class Parser {
+        Parser *parent = nullptr;
     public:
-        Parser();
+        explicit Parser(Erable::Compiler::TokenList &inputTokens);
+
+        Parser(Erable::Compiler::Parser *parent, Erable::Compiler::TokenList &inputTokens);
 
         Syntax::SyntaxList available;
 
-        TokenList inputTokens;
+        TokenList &inputTokens;
 
         Data::DataList dataList;
+
+        Data::ProcessedData forwardData;
+
+        Data::ProcessedData read();
+
+        Data::ProcessedData forward();
+
+        bool isSubparser();
     };
 }
 

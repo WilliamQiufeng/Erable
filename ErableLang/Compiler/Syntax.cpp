@@ -7,6 +7,10 @@
 #include "Syntax.hpp"
 
 void Erable::Compiler::Syntax::initSyntaxes() {
+    auto &&typeName = "typeName"_Rule - (
+            ("NAME"_TokenSymbol + ("DOT"_TokenSymbol | "ACCESS"_TokenSymbol) + "typeName"_RuleRef)
+            | "NAME"_TokenSymbol
+    );
     auto &&atomic = "atomic"_Rule - (
             "INT"_TokenSymbol
             | "HEX"_TokenSymbol
@@ -17,6 +21,7 @@ void Erable::Compiler::Syntax::initSyntaxes() {
     auto &&var = "var"_Rule - (
             (("VAR"_TokenSymbol | "CONST"_TokenSymbol) << "identifier")
             + ("NAME"_TokenSymbol << "name")
+            + "COLON"_TokenSymbol + ("typeName"_RuleRef << "type")
             + "SET"_TokenSymbol
             + ("op"_RuleRef << "value")
     );
@@ -34,11 +39,13 @@ void Erable::Compiler::Syntax::initSyntaxes() {
              "GET_REF"_TokenSymbol) + "op"_RuleSymbol
     );
 
+
     auto &&op = "op"_Rule - (
             std::move(binaryOp)
             | std::move(unaryOp)
             | std::move(atomic)
             | std::move(var)
+            | std::move(typeName)
     );
     syntaxTree = std::move(op);
 }

@@ -22,6 +22,7 @@ namespace Erable::Compiler {
 }
 
 #include <Utils.h>
+#include <ostream>
 #include "Lexer.hpp"
 
 namespace Erable::Compiler {
@@ -35,6 +36,8 @@ namespace Erable::Compiler {
         const std::string &getData() const;
 
         void setData(const std::string &data);
+
+        friend std::ostream &operator<<(std::ostream &os, const Token &token);
 
     };
 
@@ -144,6 +147,30 @@ namespace Erable::Compiler {
         void resetEscapes();
     };
 
+    /*
+     * TODO:
+     *      when lexing '0b11' (on lex.erable), the result splits into two tokens: 'BIN[0b]', 'DEC[11]',
+     *      but the expected behavior is to produce only one token: 'BIN[0b11]'.
+     *      The reason why it happens has not been cleared yet so it is currently put on the highest priority
+     *      of all TODOs.
+     */
+    class NumberTokenElement : public TokenElement {
+        int radix = 10;
+        static std::vector<char> digits;
+    public:
+        NumberTokenElement();
+
+        void clear() override;
+
+        bool check(std::string string) override;
+
+        bool finished() override;
+
+        void consumeOne(char i) override;
+
+        void finish() override;
+    };
+
     class Tokens_t {
     public:
         std::vector<TokenElement *> tokens;
@@ -157,5 +184,6 @@ namespace Erable::Compiler {
 
 }
 
+std::ostream &Erable::Compiler::operator<<(std::ostream &os, const Erable::Compiler::Token &token);
 
 #endif //ERABLELANG_TOKENS_HPP

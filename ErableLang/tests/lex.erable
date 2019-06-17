@@ -3,11 +3,21 @@
     This is a block comment
     Licensed by GPL v3
 */
-var a = 0;
-const b = "hello";
-var pi = 3.14159265358979323846264338327950288419716939937510
-var magic = 0xe4ab1e
-var whilecond = false;
+
+struct bool occupies 1; // One-bit-long boolean type
+struct uint occupies 16; //Unsigned integers occupies the whole 16 bits
+struct ulong occupies 32; // The same
+struct int occupies 1,15; //Signed integers occupies 16 bits with one bit for sign at start and 15 bits for the rest
+struct long occupies 1,31; //Signed longs occupies 32 bits with one bit for sign at start and 31 bits for the rest
+struct udouble occupies 32,32; //Unsigned doubles
+struct double occupies 1,31,32; //Signed doubles
+
+
+var a : int = 0;
+const b : String = "hello";
+var pi : udouble = 3.14159265358979323846264338327950288419716939937510;
+var magic : int = 0xe4ab1e;
+var whilecond : bool = false;
 /*
     While Statement
 */
@@ -15,9 +25,20 @@ while(whilecond){
     a += a;
 }
 
-class A : B {
-    var a: int = 0;
-    function A(aVal:int){
-        this.a = aVal;
+class B {
+    abstract function add <type A, type B, type C = result_of <A :: operator+(B)> > (a: A, b: B) -> C {
+        return a + b;
     }
 }
+
+class A : B {
+    var a: int = 0;
+    function A(aVal: int) -> void{
+        this.a = aVal;
+    }
+    override add <int, int> {
+        return a + b;
+    }
+}
+
+var state : struct occupies 2 = 0b11;

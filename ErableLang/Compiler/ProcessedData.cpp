@@ -41,3 +41,9 @@ void Erable::Compiler::Data::ProcessedData::setToken(const Erable::Compiler::Tok
 bool Erable::Compiler::Data::ProcessedData::isRule() {
     return this->type != nullptr;
 }
+
+std::string Erable::Compiler::Data::ProcessedData::getTag() {
+    return isRule() ? this->type->tag : this->token.name;
+}
+
+Erable::Compiler::Data::ProcessedData::ProcessedData() : isNull(true) {}

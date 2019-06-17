@@ -77,7 +77,8 @@ namespace Erable::Compiler {
     }
 
     bool MultipleRegexTokenElement::finished() {
-        bool fin = !valid() and countValid(buffer.getData()) == regexes.size() - 1 and not buffer.getData().empty();
+        bool fin =
+                (not valid()) and countValid(buffer.getData()) == regexes.size() - 1 and not buffer.getData().empty();
         return fin;
     }
 
@@ -87,6 +88,9 @@ namespace Erable::Compiler {
     }
 
     std::vector<char> StringTokenElement::hexes{
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
+    };
+    std::vector<char> NumberTokenElement::digits{
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
     };
 
@@ -173,18 +177,122 @@ namespace Erable::Compiler {
 
     bool BlockCommentTokenElement::check(std::string string) {
         if (string.size() >= 2)
-            return Utils::StringUtils::startsWith(string, "/*");
+            return Utils::StringUtils::startsWith(string, "/*") or Utils::StringUtils::startsWith(string, "//");
         return Utils::StringUtils::startsWith(string, "/");
     }
 
     bool BlockCommentTokenElement::finished() {
         auto &str = getBuffer().getData();
         auto size = str.size();
-        return size >= 4 and check(str) and Utils::StringUtils::endsWith(str, "*/");
+        return (size >= 4 and check(str) and Utils::StringUtils::endsWith(str, "*/")) or
+               (size > 2 and Utils::StringUtils::startsWith(str, "//") and lexer->forward() == '\n');
     }
 
     BlockCommentTokenElement::BlockCommentTokenElement()
             : TokenElement("COMMENT", "", nullptr) {}
+
+    NumberTokenElement::NumberTokenElement()
+            : TokenElement("DEC", "", nullptr) {}
+
+    bool NumberTokenElement::check(std::string string) {
+        if (string.empty())return false;
+        int ind = -1;
+        int radix = 10;
+        for (auto c : string) {
+            ind++;
+            auto dig = Utils::ArrayUtils::indexOf(digits, c);
+            auto maybeDiffRadix = (not string.empty() and string[0] == '0' and ind == 1);
+            auto isRadixSign = (c == 'x' or c == 'o' or c == 'b');
+            if (c == '.') {
+                continue;
+            } else if (maybeDiffRadix and isRadixSign) {
+                if (c == 'x') {
+                    radix = 16;
+                } else if (c == 'b') {
+                    radix = 2;
+                } else if (c == 'o') {
+                    radix = 8;
+                }
+                continue;
+            } else if (dig >= 0 and dig < radix) {
+                continue;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool NumberTokenElement::finished() {
+        return not valid() and allValid();
+    }
+
+    void NumberTokenElement::consumeOne(char i) {
+        int ind = Utils::ArrayUtils::indexOf(digits, i);
+        if (this->buffer.data.size() == 1 and this->buffer.data[0] == '0') {
+            switch (i) {
+                case 'x':
+                    radix = 16;
+                    this->name = "HEX";
+                    goto consumeChar;
+                case 'b':
+                    radix = 2;
+                    this->name = "BIN";
+                    goto consumeChar;
+                case 'o':
+                    radix = 8;
+                    this->name = "OCT";
+                    goto consumeChar;
+                default:
+                    break;
+            }
+        }
+        if (i == '.') {
+            if (radix == 10) {
+                this->name = "DOUBLE";
+                goto consumeChar;
+            } else {
+                std::stringstream ss;
+                ss << "Using a double with another radix"
+                   << " at #"
+                   << this->lexer->getLine()
+                   << " column "
+                   << this->lexer->getColumn();
+                throw std::runtime_error(ss.str());
+            }
+        }
+        if (ind >= radix or ind < 0) {
+            std::stringstream ss;
+            ss << "The number is out of radix: number "
+               << this->buffer.data
+               << " of radix "
+               << radix
+               << " with input '"
+               << i
+               << "' at #"
+               << this->lexer->getLine()
+               << " column "
+               << this->lexer->getColumn();
+            throw std::runtime_error(ss.str());
+        } else {
+            goto consumeChar;
+        }
+        consumeChar:
+        {
+            TokenElement::consumeOne(i);
+        }
+    }
+
+    void NumberTokenElement::finish() {
+        this->buffer.name = name;
+    }
+
+    void NumberTokenElement::clear() {
+        this->buffer = Token();
+        this->radix = 10;
+        this->name = "DEC";
+    }
+
 }
 
 namespace Erable::Compiler {
@@ -291,6 +399,10 @@ namespace Erable::Compiler {
             tokens.push_back(new PlainTokenElement("MUL", "*"));
             tokens.push_back(new PlainTokenElement("DIV", "/"));
             tokens.push_back(new PlainTokenElement("MOD", "%"));
+            tokens.push_back(new PlainTokenElement("LESS_THAN", "<"));
+            tokens.push_back(new PlainTokenElement("MORE_THAN", ">"));
+            tokens.push_back(new PlainTokenElement("LESS_THAN_OR_EQUAL_TO", "<="));
+            tokens.push_back(new PlainTokenElement("MORE_THAN_OR_EQUAL_TO", ">="));
             tokens.push_back(new PlainTokenElement("BIT_AND", "&"));
             tokens.push_back(new PlainTokenElement("BIT_OR", "|"));
             tokens.push_back(new PlainTokenElement("BIT_NOT", "~"));
@@ -307,18 +419,30 @@ namespace Erable::Compiler {
             tokens.push_back(new PlainTokenElement("CONST", "const"));
             tokens.push_back(new PlainTokenElement("FUNCTION", "function"));
             tokens.push_back(new PlainTokenElement("CLASS", "class"));
+            tokens.push_back(new PlainTokenElement("STRUCT", "struct"));
+            tokens.push_back(new PlainTokenElement("OCCUPIES", "occupies"));
+            tokens.push_back(new PlainTokenElement("ABSTRACT", "abstract"));
+            tokens.push_back(new PlainTokenElement("TYPE", "type"));
+            tokens.push_back(new PlainTokenElement("OVERRIDE", "override"));
+            tokens.push_back(new PlainTokenElement("NEW", "new"));
             tokens.push_back(new PlainTokenElement("RETURN", "return"));
             tokens.push_back(new PlainTokenElement("CONTINUE", "continue"));
             tokens.push_back(new PlainTokenElement("BREAK", "break"));
-            tokens.push_back(new MultipleRegexTokenElement("HEX", {"0.*", "0x.*", "0x[0-9a-f]+"}));
-            tokens.push_back(new MultipleRegexTokenElement("BIN", {"0.*", "0b.*", "0b[01]+"}));
-            tokens.push_back(new MultipleRegexTokenElement("OCT", {"0.*", "0o.*", "0o[0-8]+"}));
-            tokens.push_back(new MultipleRegexTokenElement("DOUBLE", {"[0-9]+.*", "[0-9]+\\..*", "[0-9]+\\.[0-9]+"}));
+//            tokens.push_back(new MultipleRegexTokenElement("HEX", {"0.*", "0x.*", "0x[0-9a-f]+"}));
+//            tokens.push_back(new MultipleRegexTokenElement("BIN", {"0.*", "0b.*", "0b[01]+"}));
+//            tokens.push_back(new MultipleRegexTokenElement("OCT", {"0.*", "0o.*", "0o[0-8]+"}));
+//            tokens.push_back(new MultipleRegexTokenElement("DOUBLE", {"[0-9]+.*", "[0-9]+\\..*", "[0-9]+\\.[0-9]+"}));
+            tokens.push_back(new NumberTokenElement());
             tokens.push_back(new RegexTokenElement("INT", "[0-9]+"));
             tokens.push_back(new StringTokenElement());
-            tokens.push_back(new MultipleRegexTokenElement("COMMENT", {"/.*", "//.*", "//.*?"}));
+//            tokens.push_back(new MultipleRegexTokenElement("COMMENT", {"/.*", "//.*"}));
             tokens.push_back(new BlockCommentTokenElement());
             tokens.push_back(new RegexTokenElement("NAME", "[a-zA-Z_$][a-zA-Z0-9_$]*"));
         }
     }
+}
+
+std::ostream &Erable::Compiler::operator<<(std::ostream &os, const Erable::Compiler::Token &token) {
+    os << /*"Token [" << token.name << " = \"" << */token.data/* << "\"]"*/;
+    return os;
 }

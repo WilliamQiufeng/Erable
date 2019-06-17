@@ -26,9 +26,13 @@ namespace Erable::Compiler {
 
         char read();
 
+        char forceRead();
+
         char forward();
 
-        void readToken();
+        char forward(int);
+
+        bool readToken();
 
         void reset();
 

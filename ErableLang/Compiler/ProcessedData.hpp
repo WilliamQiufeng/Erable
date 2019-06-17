@@ -18,10 +18,13 @@ namespace Erable::Compiler::Data {
         Symbols::SymbolPtr type;
         DataList dataList;
         Token token;
+        bool isNull = false;
 
         explicit ProcessedData(Token token);
 
         ProcessedData(Symbols::SymbolPtr type, DataList dataList);
+
+        ProcessedData();
 
         bool isRule();
 
@@ -36,7 +39,10 @@ namespace Erable::Compiler::Data {
         const Token &getToken() const;
 
         void setToken(const Token &token);
+
+        std::string getTag();
     };
+
 }
 
 #endif //ERABLECOMPILER_PROCESSEDDATA_HPP
