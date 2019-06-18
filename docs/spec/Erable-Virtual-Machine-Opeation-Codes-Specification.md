@@ -16,7 +16,13 @@
 >
 > Version 1.0
 
----
+------
+
+## Definitions
+
++ ***ID***s are for referencing values
++ IDs which is from other modules are called ***Module ID*** below
++ ***AID***s are **ID**s which are either ***ID***s, ***CID***s, or ***Module ID***s
 
 ### Format
 
@@ -39,6 +45,12 @@ The type has the following:
 >
 > cid
 
+The suffix can be added if:
+
+| type                              | suffix  |
+| :-------------------------------- | ------- |
+| The id/cid is from another module | -module |
+
 If the type is custom (or has different byte lengths):
 
 > [name:4 bytes] //'4 bytes' is replaceable
@@ -56,6 +68,25 @@ OpCodeName [arg1:id] [arg2:cid]
 ```
 
 ## Standard OpCode Document
+
+### Byte form of ID
+
+Every ID will be output by the following form:
+
+```
+[type:2 bytes] [id:unknown bytes]
+```
+
+The types are:
+
+| type       | type bits | id length                                                    |
+| ---------- | --------- | ------------------------------------------------------------ |
+| ID         | 0b00      | 1, 2, or 4(determined by the total number of IDs)            |
+| CID        | 0b01      | 1, 2, or 4(determined by the total number of IDs)            |
+| Module ID  | 0b10      | 8 (with 4 bytes showing the module ID and 4 bytes showing the value ID) |
+| Module CID | 0b11      | 8 (with 4 bytes showing the module ID and 4 bytes showing the value CID) |
+
+
 
 ### Constant Pool Related
 
@@ -149,31 +180,38 @@ CP_INT [length:4 bytes] ...(${length} bytes string)
 
 ### Binary Operations
 
-Binary Operations always follow the rules: The first two arguments are the two operands and the last one is the id the output redirects. The following operators are very clear to understand and the formats are the same.
+Binary Operations always follow the rules:
 
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `ADD` | 3 | 2 |
++ Always have 3 parameters and the result ID index is always 2.
++ The first two arguments are the two operands and the last one is the id the output redirects.
++ Always do operations to the two operands and outputs to the ID.
 
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `SUB` | 3 | 2 |
+The following operators are very clear to understand and the formats are the same.
 
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `MUL` | 3 | 2 |
+| OpCode | Description |
+| --- | --- |
+| `ADD` | Basic mathematical operation |
+| `SUB` | Basic mathematical operation |
+| `MUL` | Basic mathematical operation |
+| `DIV` | Basic mathematical operation |
+| `MOD` | Basic mathematical operation |
+| `ELEMENT` | Accesses an element from an object |
+| `LS` | Left shifts an object |
+| `RS` | Right shifts an object |
+| `URS` | Right shifts an object but keeps the sign not moving |
+| `LT` | Checks if the left operand is less than the right one |
+| `EQ` | Checks if the two operands are the same |
+| `EQU` | Sets the left operand's value to the right operand's value |
+| `SWITCH` | Switches two operand's value |
+| `BOR` | Does bit operation `or` |
+| `BAND` | Does bit operation `and` |
+| `BXOR` | Does bit operation `xor` |
 
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `DIV` | 3 | 2 |
+```
+OpCode [left : AID] [right : AID] [output : AID]
+```
 
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `MOD` | 3 | 2 |
 
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `POW` | 3 | 2 |
 
 ------
 
@@ -194,320 +232,7 @@ Binary Operations always follow the rules: The first two arguments are the two o
 
 ---
 
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `ELEMENT` | 3 | 2 |
 
-
-> Description
-
-
-
-> Usage
-
-
-
----
-
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `LS` | 3 | 2 |
-
-
-> Description
-
-
-
-> Usage
-
-
-
----
-
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `RS` | 3 | 2 |
-
-
-> Description
-
-
-
-> Usage
-
-
-
----
-
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `URS` | 3 | 2 |
-
-
-> Description
-
-
-
-> Usage
-
-
-
----
-
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `LT` | 3 | 2 |
-
-
-> Description
-
-
-
-> Usage
-
-
-
----
-
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `GT` | 3 | 2 |
-
-
-> Description
-
-
-
-> Usage
-
-
-
----
-
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `LTE` | 3 | 2 |
-
-
-> Description
-
-
-
-> Usage
-
-
-
----
-
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `GTE` | 3 | 2 |
-
-
-> Description
-
-
-
-> Usage
-
-
-
----
-
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `EQ` | 3 | 2 |
-
-
-> Description
-
-
-
-> Usage
-
-
-
----
-
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `NEQ` | 3 | 2 |
-
-
-> Description
-
-
-
-> Usage
-
-
-
----
-
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `EQU` | 3 | 2 |
-
-
-> Description
-
-
-
-> Usage
-
-
-
----
-
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `SWITCH` | 3 | 2 |
-
-
-> Description
-
-
-
-> Usage
-
-
-
----
-
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `BNOT` | 3 | 2 |
-
-
-> Description
-
-
-
-> Usage
-
-
-
----
-
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `BAND` | 3 | 2 |
-
-
-> Description
-
-
-
-> Usage
-
-
-
----
-
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `BOR` | 3 | 2 |
-
-
-> Description
-
-
-
-> Usage
-
-
-
----
-
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `BXOR` | 3 | 2 |
-
-
-> Description
-
-
-
-> Usage
-
-
-
----
-
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `ADDEQ` | 3 | 2 |
-
-
-> Description
-
-
-
-> Usage
-
-
-
----
-
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `SUBEQ` | 3 | 2 |
-
-
-> Description
-
-
-
-> Usage
-
-
-
----
-
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `MULEQ` | 3 | 2 |
-
-
-> Description
-
-
-
-> Usage
-
-
-
----
-
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `DIVEQ` | 3 | 2 |
-
-
-> Description
-
-
-
-> Usage
-
-
-
----
-
-| OpCode | Parameters | Result ID Index |
-| --- | --- | --- |
-| `MODEQ` | 3 | 2 |
-
-
-> Description
-
-
-
-> Usage
-
-
-
----
 
 | OpCode | Parameters | Result ID Index |
 | --- | --- | --- |
