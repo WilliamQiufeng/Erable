@@ -28,9 +28,12 @@
 
 #include <cstdlib>
 #include <string>
-#include <boost/filesystem.hpp>
+#include <filesystem>
 #include <regex>
 
+
+#define REPEAT(v, t) for(long long (v)=0;v<t;++ v)
+#define REPEAT_TIMES(t) REPEAT(_,t)
 
 namespace Erable {
     class Config {
@@ -46,7 +49,7 @@ namespace Erable {
 
     std::string findStdLib();
 
-    std::string searchFile(boost::filesystem::path path, std::regex reg);
+    std::string searchFile(std::filesystem::path path, std::regex reg);
 
     std::string findInFollowing(const std::vector<std::string> &paths, std::string reg);
 

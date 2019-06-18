@@ -30,7 +30,7 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
-#include <boost/filesystem.hpp>
+#include <filesystem>
 #include <iostream>
 
 
@@ -46,7 +46,7 @@ namespace Erable::IO {
      * Not fully implemented
      */
     class File {
-        boost::filesystem::path path;
+        std::filesystem::path path;
     public:
 
         File(std::string str) {
@@ -58,13 +58,13 @@ namespace Erable::IO {
             this->path += child;
         }
 
-        boost::filesystem::path getPath() {
+        std::filesystem::path getPath() {
             return this->path;
         }
 
         void mkdir();
 
-        std::vector<boost::filesystem::path> listFiles();
+        std::vector<std::filesystem::path> listFiles();
 
     };
 

@@ -75,22 +75,11 @@ namespace Erable::Compiler {
                     tk->consumeOne(forw);
                     oneValid = true;
                 } else if (not tk->finished()) { //If it is neither valid nor finished
-                    goto remove;
-                }
-                if (tk->finished() or forw == EOF) {
-                    if (std::find(finisheds.begin(), finisheds.end(), tk) == finisheds.end()) {
-                        finisheds.push_back(tk);
-                        goto remove;
-                    }
-                }
-                ++st;
-                continue;
-
-                remove:
-                {
                     st = available.erase(st);
                     continue;
                 }
+
+                ++st;
             }
             //Break if no available tokens can be lexed
             if (!oneValid) {
@@ -98,6 +87,19 @@ namespace Erable::Compiler {
             }
             //Finish read
             read();
+
+
+            for (auto st = available.begin(); st != available.end();) {
+                auto tk = *st;
+                if (tk->finished() or forw == EOF) {
+                    if (std::find(finisheds.begin(), finisheds.end(), tk) == finisheds.end()) {
+                        finisheds.push_back(tk);
+                        st = available.erase(st);
+                        continue;
+                    }
+                }
+                ++st;
+            }
         }
         if (finisheds.empty()) {
             if (forward() == EOF) return false;
@@ -167,7 +169,7 @@ namespace Erable::Compiler {
             auto res = readToken();
             if (!res) break;
             std::cout << tokens[tokens.size() - 1] << " " << std::endl;
-            if (tokens.size() == 146) {
+            if (tokens.size() == 298) {
 
             }
         }

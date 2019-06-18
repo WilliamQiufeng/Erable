@@ -37,14 +37,14 @@ namespace Erable::IO {
     }
 
     void File::mkdir() {
-        boost::filesystem::create_directory(this->path);
+        std::filesystem::create_directory(this->path);
         //::access(this->path, 6);
     }
 
-    std::vector<boost::filesystem::path> File::listFiles() {
-        boost::filesystem::directory_iterator d(this->path);
-        boost::filesystem::directory_iterator e = boost::filesystem::end(d);
-        std::vector<boost::filesystem::path> v;
+    std::vector<std::filesystem::path> File::listFiles() {
+        std::filesystem::directory_iterator d(this->path);
+        std::filesystem::directory_iterator e = std::filesystem::end(d);
+        std::vector<std::filesystem::path> v;
         while (d != e) {
             v.push_back(*d);
             d++;
@@ -53,7 +53,7 @@ namespace Erable::IO {
     }
 
     void InputStream::open(File f) {
-        std::string path(boost::filesystem::absolute(f.getPath()).string());
+        std::string path(std::filesystem::absolute(f.getPath()).string());
         this->in = new std::ifstream(path, std::ios::in | std::ios::binary);
         //this->in->get();
         ERABLE_DEBUG std::cout << "Opened:" << path << std::endl;

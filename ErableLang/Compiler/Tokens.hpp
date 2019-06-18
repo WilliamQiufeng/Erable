@@ -147,13 +147,6 @@ namespace Erable::Compiler {
         void resetEscapes();
     };
 
-    /*
-     * TODO:
-     *      when lexing '0b11' (on lex.erable), the result splits into two tokens: 'BIN[0b]', 'DEC[11]',
-     *      but the expected behavior is to produce only one token: 'BIN[0b11]'.
-     *      The reason why it happens has not been cleared yet so it is currently put on the highest priority
-     *      of all TODOs.
-     */
     class NumberTokenElement : public TokenElement {
         int radix = 10;
         static std::vector<char> digits;

@@ -44,7 +44,7 @@ namespace Erable {
 
     std::string findStdLib() {
         //auto startTime = std::chrono::system_clock::now();
-        std::vector<std::string> libs = Erable::Utils::ArrayUtils.split(getLib(), ":");
+        std::vector<std::string> libs = Erable::Utils::ArrayUtils::split(getLib(), ":");
         std::string stdlib = findInFollowing(libs, "(ErableStdlib)");
         if (stdlib.empty()) {
             Exceptions::ValidateException("StdLib not found.").throwException();
@@ -57,7 +57,7 @@ namespace Erable {
     std::string findInFollowing(const std::vector<std::string> &paths, std::string reg) {
         std::regex regexp(reg, std::regex_constants::ECMAScript | std::regex_constants::icase);
         for (std::string s : paths) {
-            boost::filesystem::path path(s);
+            std::filesystem::path path(s);
             std::string found = searchFile(path, regexp);
             if (!found.empty()) {
                 return found;
@@ -66,11 +66,11 @@ namespace Erable {
         return "";
     }
 
-    std::string searchFile(boost::filesystem::path path, std::regex reg) {
-        boost::filesystem::directory_iterator start(path);
-        boost::filesystem::directory_iterator end;
+    std::string searchFile(std::filesystem::path path, std::regex reg) {
+        std::filesystem::directory_iterator start(path);
+        std::filesystem::directory_iterator end;
         for (; start != end; ++start) {
-            boost::filesystem::path p = *start;
+            std::filesystem::path p = *start;
             /*if (boost::filesystem::is_directory(*start)) {
                 std::string found = searchFile(*start, reg);
                 if (!found.empty()) {
@@ -78,7 +78,7 @@ namespace Erable {
                 }
             } else {*/
             //std::cout<<p.string()<<std::endl;
-            if (std::regex_search(p.leaf().string(), reg)) {
+            if (std::regex_search(p.stem().string(), reg)) {
                 return p.string();
             }
             //}

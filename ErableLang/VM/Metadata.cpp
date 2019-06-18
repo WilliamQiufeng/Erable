@@ -33,9 +33,9 @@ namespace Erable::Meta {
         std::vector<char> bts = this->in->readNBytes(2);
         if (magic != bts) {
             std::cout << "Assertion Error: VM is expecting magic number "
-                      << Utils::ArrayUtils.toString(magic)
+                      << Utils::ArrayUtils::toString(magic)
                       << ", but got "
-                      << Utils::ArrayUtils.toString(bts);
+                      << Utils::ArrayUtils::toString(bts);
 
             Exceptions::ValidateException("Magic number not correct").throwException();
         }

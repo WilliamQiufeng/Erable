@@ -12,8 +12,6 @@
 #define TYPE_IS_OBJ_EQU(sth, t) sth.getValue()->type()==typeid (t)
 #define TYPE_IS_EQU(sth, t) sth->getValue()->type()==typeid (t)
 #define ISNUM(sth) TYPE_IS_EQU(sth, int) or TYPE_IS_EQU(sth, double)
-#define REPEAT(v, t) for(long long (v)=0;v<t;++ v)
-#define REPEAT_TIMES(t) REPEAT(_,t)
 #define THROW_UOE(op)    \
     std::stringstream ss;\
     ss<<"Operation '" #op "' between '"\

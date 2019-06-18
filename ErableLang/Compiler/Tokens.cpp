@@ -197,24 +197,22 @@ namespace Erable::Compiler {
     bool NumberTokenElement::check(std::string string) {
         if (string.empty())return false;
         int ind = -1;
-        int radix = 10;
+        int rad = 10;
         for (auto c : string) {
             ind++;
             auto dig = Utils::ArrayUtils::indexOf(digits, c);
             auto maybeDiffRadix = (not string.empty() and string[0] == '0' and ind == 1);
             auto isRadixSign = (c == 'x' or c == 'o' or c == 'b');
-            if (c == '.') {
-                continue;
-            } else if (maybeDiffRadix and isRadixSign) {
+            if (maybeDiffRadix and isRadixSign) {
                 if (c == 'x') {
-                    radix = 16;
+                    rad = 16;
                 } else if (c == 'b') {
-                    radix = 2;
+                    rad = 2;
                 } else if (c == 'o') {
-                    radix = 8;
+                    rad = 8;
                 }
                 continue;
-            } else if (dig >= 0 and dig < radix) {
+            } else if ((dig >= 0 and dig < rad) or c == '.') {
                 continue;
             } else {
                 return false;
@@ -433,7 +431,6 @@ namespace Erable::Compiler {
 //            tokens.push_back(new MultipleRegexTokenElement("OCT", {"0.*", "0o.*", "0o[0-8]+"}));
 //            tokens.push_back(new MultipleRegexTokenElement("DOUBLE", {"[0-9]+.*", "[0-9]+\\..*", "[0-9]+\\.[0-9]+"}));
             tokens.push_back(new NumberTokenElement());
-            tokens.push_back(new RegexTokenElement("INT", "[0-9]+"));
             tokens.push_back(new StringTokenElement());
 //            tokens.push_back(new MultipleRegexTokenElement("COMMENT", {"/.*", "//.*"}));
             tokens.push_back(new BlockCommentTokenElement());
