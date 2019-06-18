@@ -12,11 +12,28 @@ void Erable::Compiler::Syntax::initSyntaxes() {
             | "NAME"_TokenSymbol
     );
     auto &&atomic = "atomic"_Rule - (
-            "INT"_TokenSymbol
+            "DEC"_TokenSymbol
             | "HEX"_TokenSymbol
             | "BIN"_TokenSymbol
             | "OCT"_TokenSymbol
             | "DOUBLE"_TokenSymbol
+    );
+    auto &&string = "string"_Rule - (
+            "STRING"_TokenSymbol
+    );
+    auto &&list = "list"_Rule - (
+            "op"_RuleSymbol
+            | ("list"_RuleSymbol + "COMMA"_TokenSymbol + "op"_RuleRef)
+    );
+    auto &&array = "array"_Rule - (
+            ("LEFT_ARR"_TokenSymbol + "RIGHT_ARR"_TokenSymbol)
+            | ("LEFT_ARR"_TokenSymbol + std::move(list) + "RIGHT_ARR"_TokenSymbol)
+    );
+    auto &&literals = "literals"_Rule - (
+            std::move(typeName)
+            | std::move(atomic)
+            | std::move(string)
+            | std::move(array)
     );
     auto &&var = "var"_Rule - (
             (("VAR"_TokenSymbol | "CONST"_TokenSymbol) << "identifier")
@@ -38,14 +55,32 @@ void Erable::Compiler::Syntax::initSyntaxes() {
             ("RETURN"_TokenSymbol | "BIT_NOT"_TokenSymbol | "NOT"_TokenSymbol | "REF"_TokenSymbol |
              "GET_REF"_TokenSymbol) + "op"_RuleSymbol
     );
+    auto &&bracket = "bracket"_Rule - (
+            "LEFT_PAREN"_TokenSymbol + "op"_RuleRef + "RIGHT_PAREN"_TokenSymbol
+    );
 
-
-    auto &&op = "op"_Rule - (
+    auto &&operations = "operations"_Rule - (
             std::move(binaryOp)
             | std::move(unaryOp)
-            | std::move(atomic)
+            | std::move(bracket)
+    );
+    auto &&ifstmt = "ifstmt"_Rule - (
+            ("IF"_TokenSymbol + "LEFT_PAREN"_TokenSymbol + "op"_RuleRef + "RIGHT_PAREN"_TokenSymbol + "op"_RuleRef)
+            | "ifstmt"_RuleSymbol + "ELSE"_TokenSymbol + "op"_RuleRef
+    );
+    auto &&whilestmt = "whilestmt"_Rule - (
+            ("WHILE"_TokenSymbol + "LEFT_PAREN"_TokenSymbol + "op"_RuleRef + "RIGHT_PAREN"_TokenSymbol + "op"_RuleRef)
+    );
+    auto &&statements = "statements"_Rule - (
+            std::move(ifstmt)
+            | std::move(whilestmt)
             | std::move(var)
-            | std::move(typeName)
+    );
+
+    auto &&op = "op"_Rule - (
+            std::move(operations)
+            | std::move(statements)
+            | std::move(literals)
     );
     syntaxTree = std::move(op);
 }

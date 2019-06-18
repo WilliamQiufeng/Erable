@@ -5,27 +5,37 @@
 
 #include "Parser.hpp"
 
-Erable::Compiler::Parser::Parser(Erable::Compiler::TokenList &inputTokens) : inputTokens(inputTokens) {}
+namespace Erable::Compiler {
+    Parser::Parser(TokenList inputTokens) : inputTokens(inputTokens) {}
 
-Erable::Compiler::Parser::Parser(Erable::Compiler::Parser *parent, Erable::Compiler::TokenList &inputTokens)
-        : parent(parent), inputTokens(inputTokens) {}
+    Parser::Parser(Parser *parent, TokenList inputTokens)
+            : parent(parent), inputTokens(inputTokens) {}
 
-Erable::Compiler::Data::ProcessedData Erable::Compiler::Parser::read() {
-    if (this->forwardData.isNull) {
-        auto tkn(this->inputTokens.front());
-        this->inputTokens.erase(inputTokens.begin());
-        return Erable::Compiler::Data::ProcessedData(tkn);
-    } else {
-        auto forward(this->forwardData);
-        this->forwardData = Erable::Compiler::Data::ProcessedData();
-        return forward;
+    Data::ProcessedData Parser::read() {
+        if (this->forwardData.isNull) {
+            auto tkn(this->inputTokens.front());
+            this->inputTokens.erase(inputTokens.begin());
+            return Data::ProcessedData(tkn);
+        } else {
+            auto forward(this->forwardData);
+            this->forwardData = Data::ProcessedData();
+            return forward;
+        }
     }
-}
 
-Erable::Compiler::Data::ProcessedData Erable::Compiler::Parser::forward() {
-    return this->forwardData = read();
-}
+    Data::ProcessedData Parser::forward() {
+        return this->forwardData = read();
+    }
 
-bool Erable::Compiler::Parser::isSubparser() {
-    return parent != nullptr;
+    bool Parser::isSubparser() {
+        return parent != nullptr;
+    }
+
+    /*
+     *
+     */
+    Data::ProcessedData Parser::parseRule() {
+        Data::DataList available;
+        return Data::ProcessedData();
+    }
 }
