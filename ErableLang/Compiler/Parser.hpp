@@ -30,7 +30,7 @@ namespace Erable::Compiler {
 
         Data::ProcessedData forward();
 
-        Data::ProcessedData parseRule();
+        Data::ProcessedData parseRule(Symbols::SymbolPtr, TokenList &);
 
         bool isSubparser();
     };

@@ -3,6 +3,8 @@
 #include <utility>
 
 #include <utility>
+
+#include <utility>
 #include <iostream>
 
 //
@@ -69,25 +71,25 @@ Erable::Compiler::Symbols::SymbolPtr operator ""_RuleRef(const char *name, std::
     return operator ""_Rule(name, size);
 }
 
-SymbolPtr operator|(SymbolPtr &&self, SymbolPtr &&other) {
+SymbolPtr operator|(SymbolPtr self, SymbolPtr other) {
     return std::make_shared<HandlerSymbol>(std::move(self), std::move(other));
 }
 
-SymbolPtr operator+(SymbolPtr &&self, SymbolPtr &&other) {
+SymbolPtr operator+(SymbolPtr self, SymbolPtr other) {
     return std::make_shared<ComplexSymbol>(std::move(self), std::move(other));
 }
 
 Erable::Compiler::Symbols::SymbolPtr
-operator-(Erable::Compiler::Symbols::RulePtr &&rule, Erable::Compiler::Symbols::SymbolPtr &&symbol) {
+operator-(Erable::Compiler::Symbols::RulePtr rule, Erable::Compiler::Symbols::SymbolPtr symbol) {
     rule->rule = std::move(symbol);
-    return std::move(rule);
+    return rule;
 }
 
-Erable::Compiler::Symbols::SymbolPtr operator!(Erable::Compiler::Symbols::RulePtr &&) {
+Erable::Compiler::Symbols::SymbolPtr operator!(Erable::Compiler::Symbols::RulePtr) {
     return Erable::Compiler::Symbols::SymbolPtr();
 }
 
-Erable::Compiler::Symbols::SymbolPtr operator>=(Erable::Compiler::Symbols::SymbolPtr &ptr, std::string name) {
+Erable::Compiler::Symbols::SymbolPtr operator>=(Erable::Compiler::Symbols::SymbolPtr ptr, std::string name) {
     //std::cout<<ptr->toString() << ": " << ptr->tag << " == " << name <<std::endl;
     if (ptr->tag == name) return ptr;
     auto type = ptr->getType();
@@ -119,7 +121,7 @@ Erable::Compiler::Symbols::SymbolPtr operator>=(Erable::Compiler::Symbols::Symbo
     }
 }
 
-Erable::Compiler::Symbols::SymbolPtr operator<<(Erable::Compiler::Symbols::SymbolPtr &&ptr, std::string tag) {
+Erable::Compiler::Symbols::SymbolPtr operator<<(Erable::Compiler::Symbols::SymbolPtr ptr, std::string tag) {
     ptr->tag = std::move(tag);
     return ptr;
 }

@@ -129,19 +129,19 @@ Erable::Compiler::Symbols::RulePtr operator "" _Rule(const char *, std::size_t);
 Erable::Compiler::Symbols::SymbolPtr operator "" _RuleRef(const char *, std::size_t);
 
 Erable::Compiler::Symbols::SymbolPtr
-operator|(Erable::Compiler::Symbols::SymbolPtr &&, Erable::Compiler::Symbols::SymbolPtr &&);
+operator|(Erable::Compiler::Symbols::SymbolPtr, Erable::Compiler::Symbols::SymbolPtr);
 
 Erable::Compiler::Symbols::SymbolPtr
-operator+(Erable::Compiler::Symbols::SymbolPtr &&, Erable::Compiler::Symbols::SymbolPtr &&);
+operator+(Erable::Compiler::Symbols::SymbolPtr, Erable::Compiler::Symbols::SymbolPtr);
+
+Erable::Compiler::Symbols::SymbolPtr operator<<(Erable::Compiler::Symbols::SymbolPtr, std::string tag);
 
 Erable::Compiler::Symbols::SymbolPtr
-operator-(Erable::Compiler::Symbols::RulePtr &&, Erable::Compiler::Symbols::SymbolPtr &&);
+operator-(Erable::Compiler::Symbols::RulePtr, Erable::Compiler::Symbols::SymbolPtr);
 
-Erable::Compiler::Symbols::SymbolPtr operator>=(Erable::Compiler::Symbols::SymbolPtr &, std::string name);
+Erable::Compiler::Symbols::SymbolPtr operator>=(Erable::Compiler::Symbols::SymbolPtr, std::string name);
 
-Erable::Compiler::Symbols::SymbolPtr operator<<(Erable::Compiler::Symbols::SymbolPtr &&, std::string tag);
-
-Erable::Compiler::Symbols::SymbolPtr operator!(Erable::Compiler::Symbols::RulePtr &&);
+Erable::Compiler::Symbols::SymbolPtr operator!(Erable::Compiler::Symbols::RulePtr);
 
 
 #endif //ERABLECOMPILER_SYMBOLS_HPP

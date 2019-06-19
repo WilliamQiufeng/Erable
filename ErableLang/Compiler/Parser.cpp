@@ -34,8 +34,8 @@ namespace Erable::Compiler {
     /*
      *
      */
-    Data::ProcessedData Parser::parseRule() {
-        Data::DataList available;
+    Data::ProcessedData Parser::parseRule(Symbols::SymbolPtr root, TokenList &tokenList) {
+
         return Data::ProcessedData();
     }
 }

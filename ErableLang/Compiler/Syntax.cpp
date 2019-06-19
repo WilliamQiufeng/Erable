@@ -7,33 +7,33 @@
 #include "Syntax.hpp"
 
 void Erable::Compiler::Syntax::initSyntaxes() {
-    auto &&typeName = "typeName"_Rule - (
-            ("NAME"_TokenSymbol + ("DOT"_TokenSymbol | "ACCESS"_TokenSymbol) + "typeName"_RuleRef)
+    auto typeName = "typeName"_Rule - (
+            ("typeName"_RuleSymbol + ("DOT"_TokenSymbol | "ACCESS"_TokenSymbol) + "NAME"_TokenSymbol)
             | "NAME"_TokenSymbol
     );
-    auto &&atomic = "atomic"_Rule - (
+    auto atomic = "atomic"_Rule - (
             "DEC"_TokenSymbol
             | "HEX"_TokenSymbol
             | "BIN"_TokenSymbol
             | "OCT"_TokenSymbol
             | "DOUBLE"_TokenSymbol
     );
-    auto &&string = "string"_Rule - (
+    auto string = "string"_Rule - (
             "STRING"_TokenSymbol
     );
-    auto &&list = "list"_Rule - (
+    auto list = "list"_Rule - (
             "op"_RuleSymbol
             | ("list"_RuleSymbol + "COMMA"_TokenSymbol + "op"_RuleRef)
     );
-    auto &&array = "array"_Rule - (
+    auto array = "array"_Rule - (
             ("LEFT_ARR"_TokenSymbol + "RIGHT_ARR"_TokenSymbol)
-            | ("LEFT_ARR"_TokenSymbol + std::move(list) + "RIGHT_ARR"_TokenSymbol)
+            | ("LEFT_ARR"_TokenSymbol + list + "RIGHT_ARR"_TokenSymbol)
     );
-    auto &&literals = "literals"_Rule - (
-            std::move(typeName)
-            | std::move(atomic)
-            | std::move(string)
-            | std::move(array)
+    auto literals = "literals"_Rule - (
+            typeName
+            | atomic
+            | string
+            | array
     );
     auto &&var = "var"_Rule - (
             (("VAR"_TokenSymbol | "CONST"_TokenSymbol) << "identifier")
@@ -60,9 +60,9 @@ void Erable::Compiler::Syntax::initSyntaxes() {
     );
 
     auto &&operations = "operations"_Rule - (
-            std::move(binaryOp)
-            | std::move(unaryOp)
-            | std::move(bracket)
+            binaryOp
+            | unaryOp
+            | bracket
     );
     auto &&ifstmt = "ifstmt"_Rule - (
             ("IF"_TokenSymbol + "LEFT_PAREN"_TokenSymbol + "op"_RuleRef + "RIGHT_PAREN"_TokenSymbol + "op"_RuleRef)
@@ -72,15 +72,15 @@ void Erable::Compiler::Syntax::initSyntaxes() {
             ("WHILE"_TokenSymbol + "LEFT_PAREN"_TokenSymbol + "op"_RuleRef + "RIGHT_PAREN"_TokenSymbol + "op"_RuleRef)
     );
     auto &&statements = "statements"_Rule - (
-            std::move(ifstmt)
-            | std::move(whilestmt)
-            | std::move(var)
+            ifstmt
+            | whilestmt
+            | var
     );
 
     auto &&op = "op"_Rule - (
-            std::move(operations)
-            | std::move(statements)
-            | std::move(literals)
+            operations
+            | statements
+            | literals
     );
-    syntaxTree = std::move(op);
+    syntaxTree = op;
 }
