@@ -2,8 +2,6 @@
 
 #include <utility>
 
-#include <utility>
-
 
 //
 // Created by Qiufeng54321 on 2019-06-19.
@@ -17,13 +15,12 @@ namespace Erable::Compiler::AST {
 
     int NameTree::currentId = 0;
 
-    NameTree tree(Name({{NameType::NAMESPACE, "__default"}}), nullptr);
 
     Name::Name(std::vector<NameNode> nodes) : nodes(std::move(nodes)) {}
 
     std::ostream &operator<<(std::ostream &os, const Name &name) {
         for (auto node : name.nodes) {
-            os << ((char) node.type) << name;
+            os << node.toString();
         }
         return os;
     }
@@ -69,13 +66,20 @@ namespace Erable::Compiler::AST {
 
     NameTree::NameTree(Name name, NameTree *parent) : name(std::move(name)), parent(parent), id(currentId++) {}
 
-    void NameTree::add(NameTree *nameTree) {
+    NameTree *NameTree::add(NameTree *nameTree) {
         nameTree->setParent(this);
         tree.push_back(nameTree);
+        return nameTree;
     }
 
-    void NameTree::add(NameType type, std::string strName) {
-        this->add(new NameTree(Name(this->name.getNodes(), {type, std::move(strName)}), this));
+    NameTree *NameTree::add(NameType type, std::string strName) {
+        return this->add({type, std::move(strName)});
+    }
+
+    NameTree *NameTree::add(NameNode node) {
+        auto *resTree = new NameTree(Name(this->name.getNodes(), std::move(node)), this);
+        this->add(resTree);
+        return resTree;
     }
 
     NameTree *NameTree::find(const Name &n) {
@@ -108,6 +112,39 @@ namespace Erable::Compiler::AST {
         NameTree::parent = parent;
     }
 
+
+    int NameTree::getCurrentId() {
+        return currentId;
+    }
+
+    void NameTree::setCurrentId(int currentId) {
+        NameTree::currentId = currentId;
+    }
+
+    const std::vector<NameTree *> &NameTree::getTree() const {
+        return tree;
+    }
+
+    void NameTree::setTree(const std::vector<NameTree *> &tree) {
+        NameTree::tree = tree;
+    }
+
+    const Name &NameTree::getName() const {
+        return name;
+    }
+
+    void NameTree::setName(const Name &name) {
+        NameTree::name = name;
+    }
+
+    int NameTree::getId() const {
+        return id;
+    }
+
+    void NameTree::setId(int id) {
+        NameTree::id = id;
+    }
+
     ASTNode::ASTNode(Parser *parent) : parent(parent) {}
 
     bool NameNode::operator==(const NameNode &rhs) const {
@@ -117,5 +154,11 @@ namespace Erable::Compiler::AST {
 
     bool NameNode::operator!=(const NameNode &rhs) const {
         return !(rhs == *this);
+    }
+
+    std::string NameNode::toString() {
+        std::stringstream ss;
+        ss << (char) type << name;
+        return ss.str();
     }
 }

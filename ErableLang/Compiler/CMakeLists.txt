@@ -35,8 +35,11 @@ include_directories(../include)
 add_definitions(-DERABLE_MAJOR=1 -DERABLE_MINOR=0)
 #link_directories(${OPENMP_DIRECTORES})
 #include_directories(/usr/local/Cellar/leveldb/1.22/include)
+set(EXECUTABLES Tokens.cpp Tokens.hpp Lexer.cpp Lexer.hpp Scanner.hpp Parser.cpp Parser.hpp Symbols.cpp Symbols.hpp Syntax.cpp Syntax.hpp ProcessedData.cpp ProcessedData.hpp AST.cpp AST.hpp)
+add_executable(ErableCompiler main.cpp ${EXECUTABLES})
+add_library(ErableCompilerDyn SHARED ${EXECUTABLES})
 
-add_executable(ErableCompiler main.cpp Tokens.cpp Tokens.hpp Lexer.cpp Lexer.hpp Scanner.hpp Parser.cpp Parser.hpp Symbols.cpp Symbols.hpp Syntax.cpp Syntax.hpp ProcessedData.cpp ProcessedData.hpp AST.cpp AST.hpp)
+add_subdirectory(tests)
 
 #link_libraries(${LevelDB})
 

@@ -23,6 +23,7 @@ namespace Erable::Compiler::AST {
         NameType type;
         std::string name;
 
+        std::string toString();
         bool operator==(const NameNode &rhs) const;
 
         bool operator!=(const NameNode &rhs) const;
@@ -63,20 +64,38 @@ namespace Erable::Compiler::AST {
 
         int id;
 
+        static int getCurrentId();
+
+        static void setCurrentId(int currentId);
+
+        const std::vector<NameTree *> &getTree() const;
+
+        void setTree(const std::vector<NameTree *> &tree);
+
+        const Name &getName() const;
+
+        void setName(const Name &name);
+
+        int getId() const;
+
+        void setId(int id);
+
         NameTree(std::vector<NameTree *> tree, Name name, NameTree *parent);
 
         NameTree(Name name, NameTree *parent);
 
-        void add(NameTree *nameTree);
+        NameTree *add(NameTree *nameTree);
 
-        void add(NameType type, std::string strName);
+        NameTree *add(NameType type, std::string strName);
+
+        NameTree *add(NameNode node);
 
         NameTree *find(const Name &);
 
         NameTree *findWithScope(NameType type, std::string n);
     };
 
-    inline extern NameTree tree;
+    inline NameTree tree(Name({{NameType::NAMESPACE, "__default"}}), nullptr);
 
     class ASTNode {
         Parser *parent;
