@@ -2,6 +2,8 @@
 
 #include <utility>
 
+#include <utility>
+
 
 //
 // Created by Qiufeng54321 on 2019-06-19.
@@ -54,9 +56,13 @@ namespace Erable::Compiler::AST {
     }
 
     bool Name::matchEnd(NameType type, std::string name) {
+        return matchEnd({type, std::move(name)});
+    }
+
+    bool Name::matchEnd(NameNode nn) {
         if (not nodes.empty()) {
             auto n = nodes[nodes.size() - 1];
-            return n == NameNode{type, std::move(name)};
+            return n == nn;
         }
         return false;
     }
@@ -94,14 +100,18 @@ namespace Erable::Compiler::AST {
     }
 
     NameTree *NameTree::findWithScope(NameType type, std::string n) {
+        return findWithScope({type, std::move(n)});
+    }
+
+    NameTree *NameTree::findWithScope(const NameNode &nn) {
         if (parent == nullptr) {
-            if (name.matchEnd(type, n))return this;
+            if (name.matchEnd(nn))return this;
             for (auto *subTree : this->tree) {
-                if (subTree->name.matchEnd(type, n))return subTree;
+                if (subTree->name.matchEnd(nn))return subTree;
             }
             return nullptr;
         }
-        return parent->findWithScope(type, n);
+        return parent->findWithScope(nn);
     }
 
     NameTree *NameTree::getParent() const {
@@ -149,7 +159,7 @@ namespace Erable::Compiler::AST {
 
     bool NameNode::operator==(const NameNode &rhs) const {
         return type == rhs.type &&
-               name == rhs.name;
+                name == rhs.name;
     }
 
     bool NameNode::operator!=(const NameNode &rhs) const {

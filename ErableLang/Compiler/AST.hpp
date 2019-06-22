@@ -42,6 +42,8 @@ namespace Erable::Compiler::AST {
 
         bool matchEnd(NameType type, std::string name);
 
+        bool matchEnd(NameNode nn);
+
         friend std::ostream &operator<<(std::ostream &os, const Name &name);
 
         explicit virtual operator std::string();
@@ -93,6 +95,8 @@ namespace Erable::Compiler::AST {
         NameTree *find(const Name &);
 
         NameTree *findWithScope(NameType type, std::string n);
+
+        NameTree *findWithScope(const NameNode &nn);
     };
 
     inline NameTree tree(Name({{NameType::NAMESPACE, "__default"}}), nullptr);
