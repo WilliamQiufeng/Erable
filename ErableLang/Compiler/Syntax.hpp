@@ -7,10 +7,11 @@
 #define ERABLECOMPILER_SYNTAX_HPP
 
 #include <vector>
+
+#include "Headers.hpp"
 #include "Symbols.hpp"
 
 namespace Erable::Compiler::Syntax {
-    typedef std::vector<Erable::Compiler::Symbols::SymbolPtr> SyntaxList;
     inline Symbols::SymbolPtr syntaxTree;
 
     void initSyntaxes();

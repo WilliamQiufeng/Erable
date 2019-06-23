@@ -1,6 +1,7 @@
 project(ErableCompilerTest)
 cmake_minimum_required(VERSION 3.14)
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -g")
 find_package(Catch2 REQUIRED)
 find_library(ErableCompilerDyn ErableCompilerDyn REQUIRED)
 

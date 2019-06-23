@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include "Syntax.hpp"
+#include "Symbols.hpp"
 
 void Erable::Compiler::Syntax::initSyntaxes() {
     auto typeName = "typeName"_Rule - (

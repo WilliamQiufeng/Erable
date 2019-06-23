@@ -6,10 +6,11 @@
 #ifndef ERABLECOMPILER_PARSER_HPP
 #define ERABLECOMPILER_PARSER_HPP
 
+
+#include "Headers.hpp"
+#include "ProcessedData.hpp"
 #include <vector>
 #include <string>
-#include "Syntax.hpp"
-#include "ProcessedData.hpp"
 
 namespace Erable::Compiler {
     class Parser {
@@ -31,6 +32,8 @@ namespace Erable::Compiler {
         Data::ProcessedData forward();
 
         Data::ProcessedData parseRule(Symbols::SymbolPtr, TokenList &);
+
+		Symbols::SyntaxList scanAvailable();
 
         bool isSubparser();
     };

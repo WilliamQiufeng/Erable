@@ -6,6 +6,7 @@
 //
 
 #include "ProcessedData.hpp"
+#include "Symbols.hpp"
 
 Erable::Compiler::Data::ProcessedData::ProcessedData(Erable::Compiler::Symbols::SymbolPtr type,
                                                      Erable::Compiler::Data::DataList dataList) : type(std::move(type)),

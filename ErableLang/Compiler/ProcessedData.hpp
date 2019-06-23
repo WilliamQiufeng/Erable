@@ -2,17 +2,15 @@
 // Created by Qiufeng54321 on 2019-06-13.
 // Copyright (c) Qiufeng54321 All rights reserved.
 //
-
+#pragma once
 #ifndef ERABLECOMPILER_PROCESSEDDATA_HPP
 #define ERABLECOMPILER_PROCESSEDDATA_HPP
 
-#include "Symbols.hpp"
-#include "Tokens.hpp"
+
+#include "Headers.hpp"
 
 namespace Erable::Compiler::Data {
-    class ProcessedData;
 
-    typedef std::vector<ProcessedData> DataList;
 
     struct ProcessedData {
         Symbols::SymbolPtr type;

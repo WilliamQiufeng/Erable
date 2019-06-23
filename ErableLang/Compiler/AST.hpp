@@ -10,104 +10,101 @@
 #include <vector>
 #include <ostream>
 #include "Parser.hpp"
+#include "ID.hpp"
 
 namespace Erable::Compiler::AST {
-    enum class NameType : char {
-        NAMESPACE = ':',
-        TYPE = '-',
-        BLOCK = '>',
-        VALUE = '#'
-    };
+	enum class NameType : char {
+		NAMESPACE = ':',
+		TYPE = '-',
+		BLOCK = '>',
+		VALUE = '#'
+	};
 
-    struct NameNode {
-        NameType type;
-        std::string name;
+	struct NameNode {
+		NameType type;
+		std::string name;
 
-        std::string toString();
-        bool operator==(const NameNode &rhs) const;
+		std::string toString();
 
-        bool operator!=(const NameNode &rhs) const;
-    };
+		bool operator==(const NameNode &rhs) const;
 
-    class Name {
-        std::vector<NameNode> nodes;
-    public:
-        explicit Name(std::vector<NameNode> nodes);
+		bool operator!=(const NameNode &rhs) const;
+	};
 
-        Name(std::vector<NameNode> parent, NameNode node);
+	class Name {
+		std::vector<NameNode> nodes;
+	public:
+		explicit Name(std::vector<NameNode> nodes);
 
-        const std::vector<NameNode> &getNodes() const;
+		Name(std::vector<NameNode> parent, NameNode node);
 
-        void setNodes(const std::vector<NameNode> &nodes);
+		const std::vector<NameNode> &getNodes() const;
 
-        bool matchEnd(NameType type, std::string name);
+		void setNodes(const std::vector<NameNode> &nodes);
 
-        bool matchEnd(NameNode nn);
+		bool matchEnd(NameType type, std::string name);
 
-        friend std::ostream &operator<<(std::ostream &os, const Name &name);
+		bool matchEnd(NameNode nn);
 
-        explicit virtual operator std::string();
+		friend std::ostream &operator<<(std::ostream &os, const Name &name);
 
-        bool operator==(const Name &rhs) const;
+		explicit virtual operator std::string();
 
-        bool operator!=(const Name &rhs) const;
-    };
+		bool operator==(const Name &rhs) const;
 
-    class NameTree {
-    protected:
-        static int currentId;
-        NameTree *parent{};
-        std::vector<NameTree *> tree;
-        Name name;
-    public:
-        NameTree *getParent() const;
+		bool operator!=(const Name &rhs) const;
+	};
 
-        void setParent(NameTree *parent);
+	class NameTree {
+	protected:
+		NameTree *parent{};
+		std::vector<NameTree *> tree;
+		Name name;
+	public:
+		NameTree *getParent() const;
 
-        int id;
+		void setParent(NameTree *parent);
 
-        static int getCurrentId();
+		ID id;
 
-        static void setCurrentId(int currentId);
+		const std::vector<NameTree *> &getTree() const;
 
-        const std::vector<NameTree *> &getTree() const;
+		void setTree(const std::vector<NameTree *> &tree);
 
-        void setTree(const std::vector<NameTree *> &tree);
+		const Name &getName() const;
 
-        const Name &getName() const;
+		void setName(const Name &name);
 
-        void setName(const Name &name);
+		const ID &getId() const;
 
-        int getId() const;
+		void setId(const ID &id);
 
-        void setId(int id);
+		NameTree(std::vector<NameTree *> tree, Name name, NameTree *parent);
 
-        NameTree(std::vector<NameTree *> tree, Name name, NameTree *parent);
+		NameTree(Name name, NameTree *parent);
 
-        NameTree(Name name, NameTree *parent);
+		NameTree *add(NameTree *nameTree);
 
-        NameTree *add(NameTree *nameTree);
+		NameTree *add(NameType type, std::string strName);
 
-        NameTree *add(NameType type, std::string strName);
+		NameTree *add(NameNode node);
 
-        NameTree *add(NameNode node);
+		NameTree *find(const Name &);
 
-        NameTree *find(const Name &);
+		NameTree *findWithScope(NameType type, std::string n);
 
-        NameTree *findWithScope(NameType type, std::string n);
+		NameTree *findWithScope(const NameNode &nn);
+	};
 
-        NameTree *findWithScope(const NameNode &nn);
-    };
+	inline NameTree tree(Name({{NameType::NAMESPACE, "__default"}}), nullptr);
 
-    inline NameTree tree(Name({{NameType::NAMESPACE, "__default"}}), nullptr);
+	class ASTNode {
+		Parser *parent;
+	public:
+		explicit ASTNode(Parser *parent);
 
-    class ASTNode {
-        Parser *parent;
-    public:
-        explicit ASTNode(Parser *parent);
-
-        virtual void codegen(std::ostream) = 0;
-    };
+		virtual void codegen(std::ostream) = 0;
+	};
 }
 
 #endif //ERABLECOMPILER_AST_HPP

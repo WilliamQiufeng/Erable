@@ -7,39 +7,13 @@
 #ifndef ERABLELANG_TOKENS_HPP
 #define ERABLELANG_TOKENS_HPP
 
-#include <vector>
-
-namespace Erable::Compiler {
-    struct Token;
-
-    class TokenElement;
-
-    class PlainTokenElement;
-
-    class Tokens;
-
-    typedef std::vector<Token> TokenList;
-}
-
+#include "Headers.hpp"
 #include "Utils.h"
 #include <ostream>
 #include "Lexer.hpp"
 
 namespace Erable::Compiler {
-    struct Token {
-        std::string name, data;
 
-        const std::string &getName() const;
-
-        void setName(const std::string &name);
-
-        const std::string &getData() const;
-
-        void setData(const std::string &data);
-
-        friend std::ostream &operator<<(std::ostream &os, const Token &token);
-
-    };
 
     class TokenElement {
     protected:

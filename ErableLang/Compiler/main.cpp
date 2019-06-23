@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Lexer.hpp"
 #include "Parser.hpp"
+#include "Syntax.hpp"
 
 int main(int argc, char *argv[]) {
     using namespace Erable::Compiler;

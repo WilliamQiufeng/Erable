@@ -38,4 +38,11 @@ namespace Erable::Compiler {
 
         return Data::ProcessedData();
     }
+
+	Symbols::SyntaxList Parser::scanAvailable() {
+		if (!this->dataList.empty()) {
+
+		}
+		return Erable::Compiler::Symbols::SyntaxList();
+	}
 }
