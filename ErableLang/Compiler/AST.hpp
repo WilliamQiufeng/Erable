@@ -9,7 +9,6 @@
 #include <string>
 #include <vector>
 #include <ostream>
-#include "Parser.hpp"
 #include "ID.hpp"
 
 namespace Erable::Compiler::AST {
@@ -98,13 +97,13 @@ namespace Erable::Compiler::AST {
 
 	inline NameTree tree(Name({{NameType::NAMESPACE, "__default"}}), nullptr);
 
-	class ASTNode {
-		Parser *parent;
+	/*class ASTNode {
+		Old_Parser *parent;
 	public:
-		explicit ASTNode(Parser *parent);
+		explicit ASTNode(Old_Parser *parent);
 
 		virtual void codegen(std::ostream) = 0;
-	};
+	};*/
 }
 
 #endif //ERABLECOMPILER_AST_HPP

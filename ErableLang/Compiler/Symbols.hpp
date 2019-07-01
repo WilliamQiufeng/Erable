@@ -1,139 +1,89 @@
 //
-// Created by Qiufeng54321 on 2019-06-06.
+// Created by Qiufeng54321 on 2019-07-01.
 // Copyright (c) Qiufeng54321 All rights reserved.
 //
-#pragma once
-#ifndef ERABLECOMPILER_SYMBOLS_HPP
-#define ERABLECOMPILER_SYMBOLS_HPP
+
+#ifndef ERABLELANG_SYMBOLS_HPP
+#define ERABLELANG_SYMBOLS_HPP
 
 #include "Headers.hpp"
-#include <string>
-#include <vector>
-
 
 namespace Erable::Compiler::Symbols {
-	//Symbol: the base class for other symbol types
-	class Symbol {
-	public:
+	enum class SymbolType {
+		RULE,
+		TOKEN,
+		COMBINATION
+	};
+
+	struct Symbol {
 		std::string tag;
+		Parser::IterationNode *connectedTo;
+		int dotPosition = 0;
+		//It doesn't show the list of lookaheads, but shows all  possible lookaheads that will call reduce.
+		std::vector<TokenSymbolPtr> lookahead;
 
-		virtual std::string getType() = 0;
+		explicit Symbol(std::string tag);
 
-		virtual std::string getName();
+		virtual std::string getTag();
 
-		virtual std::string toString();
+		virtual SymbolType getType() = 0;
 
-		virtual bool find(std::string) = 0;
+		virtual SymbolPtr fullClone() = 0;
 
-		virtual bool matchesStart(Data::DataList);
+		SymbolPtr getFront(int);
 
-		virtual bool matchesAll(Data::DataList);
+		virtual SymbolPtr getFront(SymbolList &, int) = 0;
 
-		virtual bool finished(Data::DataList, Parser *parent);
+		virtual std::string toString() = 0;
+
+		static SymbolPtr getFront(SymbolList &, int, SymbolPtr exp);
 	};
 
+	struct RuleSymbol : public Symbol {
+		static int currentIndex;
+		SymbolList rules;
+		int ruleIndex = -1;
 
-	//TokenSymbol stores a token name
-	class TokenSymbol : public Symbol {
-	public:
-		std::string ruleName;
+		RuleSymbol(const std::string &tag, SymbolList combination);
 
-		explicit TokenSymbol(std::string ruleName);
+		RuleSymbol(const std::string &tag);
 
-		std::string getType() override;
+		SymbolType getType() override;
 
-		std::string getName() override;
+		SymbolPtr fullClone() override;
+
+		SymbolPtr getFront(SymbolList &, int) override;
+
+		[[deprecated]] std::string toString() override;
+	};
+
+	struct CombineSymbol : public Symbol {
+		SymbolList list;
+
+		CombineSymbol(SymbolList list);
+
+		SymbolType getType() override;
+
+		SymbolPtr fullClone() override;
+
+		SymbolPtr getFront(SymbolList &list, int i) override;
 
 		std::string toString() override;
-
-		bool find(std::string string) override;
-
-		bool isValidToken(Data::ProcessedData);
-
-		bool matchesStart(Data::DataList list) override;
-
-		bool matchesAll(Data::DataList list) override;
-
-		bool finished(Data::DataList list, Parser *parent) override;
 	};
 
+	struct TokenSymbol : public Symbol {
 
-	//RuleSymbol stores a rule name
-	class RuleSymbol : public Symbol {
-	public:
-		std::string ruleName;
+		explicit TokenSymbol(std::string tag);
 
-		explicit RuleSymbol(std::string ruleName);
+		SymbolType getType() override;
 
-		std::string getType() override;
+		SymbolPtr fullClone() override;
 
-		std::string getName() override;
+		SymbolPtr getFront(SymbolList &list, int i) override;
 
 		std::string toString() override;
-
-		bool find(std::string string) override;
-
-		bool matchesStart(Data::DataList list) override;
-
-		bool matchesAll(Data::DataList list) override;
-
-		bool finished(Data::DataList list, Parser *parent) override;
 	};
-
-
-	//HandlerSymbol stores branches of tokens to be processed.
-	class HandlerSymbol : public Symbol {
-	public:
-		SymbolPtr firstSymbol, secondSymbol;
-
-		HandlerSymbol(SymbolPtr &&firstSymbol, SymbolPtr &&secondSymbol);
-
-		std::string getType() override;
-
-		std::string toString() override;
-
-		bool find(std::string string) override;
-	};
-
-
-	//ComplexSymbol stores list of symbols
-	class ComplexSymbol : public Symbol {
-	public:
-		SymbolPtr firstSymbol, secondSymbol;
-
-		ComplexSymbol(SymbolPtr &&firstSymbol, SymbolPtr &&secondSymbol);
-
-		std::string getType() override;
-
-		std::string toString() override;
-
-		bool find(std::string string) override;
-	};
-
-
-	//A Rule defines a grammar
-	class Rule : public Symbol {
-	public:
-		SymbolPtr rule;
-		std::string ruleName;
-
-		explicit Rule(std::string ruleName);
-
-		std::string getType() override;
-
-		std::string getName() override;
-
-		std::string toString() override;
-
-		bool isRef();
-
-		bool isReal();
-
-		bool find(std::string string) override;
-	};
-
 }
 
 
-
-#endif //ERABLECOMPILER_SYMBOLS_HPP
+#endif //ERABLELANG_SYMBOLS_HPP

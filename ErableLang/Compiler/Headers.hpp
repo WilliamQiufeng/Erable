@@ -8,7 +8,7 @@
 
 #include <string>
 #include <memory>
-
+/*
 namespace Erable::Compiler::Symbols {
 	class Symbol;
 
@@ -44,7 +44,7 @@ Erable::Compiler::Symbols::SymbolPtr operator "" _TokenSymbol(const char *, std:
 
 Erable::Compiler::Symbols::RulePtr operator "" _Rule(const char *, std::size_t);
 
-Erable::Compiler::Symbols::SymbolPtr operator "" _RuleRef(const char *, std::size_t);
+//Erable::Compiler::Symbols::SymbolPtr operator "" _RuleRef(const char *, std::size_t);
 
 Erable::Compiler::Symbols::SymbolPtr
 operator|(Erable::Compiler::Symbols::SymbolPtr, Erable::Compiler::Symbols::SymbolPtr);
@@ -59,19 +59,43 @@ operator-(Erable::Compiler::Symbols::RulePtr, Erable::Compiler::Symbols::SymbolP
 
 Erable::Compiler::Symbols::SymbolPtr operator>=(Erable::Compiler::Symbols::SymbolPtr, std::string name);
 
-Erable::Compiler::Symbols::SymbolPtr operator!(Erable::Compiler::Symbols::RulePtr);
+Erable::Compiler::Symbols::SymbolPtr operator!(Erable::Compiler::Symbols::RulePtr);*/
+namespace Erable::Compiler::Symbols {
+	enum class SymbolType;
+	struct Symbol;
+	struct CombineSymbol;
+	struct RuleSymbol;
+	struct TokenSymbol;
+	typedef std::shared_ptr<Symbol> SymbolPtr;
+	typedef std::shared_ptr<CombineSymbol> CombineSymbolPtr;
+	typedef std::shared_ptr<RuleSymbol> RuleSymbolPtr;
+	typedef std::shared_ptr<TokenSymbol> TokenSymbolPtr;
+	typedef std::vector<SymbolPtr> SymbolList;
+}
 
+Erable::Compiler::Symbols::SymbolPtr operator "" _rule(const char *, std::size_t);
+
+Erable::Compiler::Symbols::SymbolPtr operator "" _token(const char *, std::size_t);
+
+Erable::Compiler::Symbols::SymbolPtr
+operator+(Erable::Compiler::Symbols::SymbolPtr, Erable::Compiler::Symbols::SymbolPtr);
+
+Erable::Compiler::Symbols::SymbolPtr
+operator|(Erable::Compiler::Symbols::SymbolPtr, Erable::Compiler::Symbols::SymbolPtr);
 
 #include <vector>
+#include <deque>
 
 namespace Erable::Compiler::Data {
 	struct ProcessedData;
 
 	typedef std::vector<ProcessedData> DataList;
+
+	typedef std::deque<ProcessedData> DataDeque;
 }
-namespace Erable::Compiler {
-	class Parser;
-}
+/*namespace Erable::Compiler {
+	class Old_Parser;
+}*/
 namespace Erable::Compiler {
 	struct Token {
 		std::string name, data;
@@ -95,5 +119,11 @@ namespace Erable::Compiler {
 	class Tokens;
 
 	typedef std::vector<Token> TokenList;
+}
+
+namespace Erable::Compiler::Parser {
+	struct IterationNode;
+
+	class ParseTable;
 }
 #endif //ERABLELANG_HEADERS_HPP

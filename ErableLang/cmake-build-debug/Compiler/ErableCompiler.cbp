@@ -246,14 +246,6 @@
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Parser.cpp">
-			<Option target="ErableCompilerDyn"/>
-			<Option target="ErableCompiler"/>
-		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Parser.hpp">
-			<Option target="ErableCompilerDyn"/>
-			<Option target="ErableCompiler"/>
-		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/ProcessedData.cpp">
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>

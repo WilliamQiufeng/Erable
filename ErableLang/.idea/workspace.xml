@@ -33,31 +33,31 @@
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
       <config projectName="ErableLang" targetName="NightlyBuild" />
-      <config projectName="ErableLang" targetName="Playground" />
       <config projectName="ErableLang" targetName="ErableVMDyn" />
+      <config projectName="ErableLang" targetName="Playground" />
       <config projectName="ErableLang" targetName="ContinuousTest" />
       <config projectName="ErableLang" targetName="NightlyMemoryCheck" />
       <config projectName="ErableLang" targetName="NightlyStart" />
       <config projectName="ErableLang" targetName="Experimental" />
       <config projectName="ErableLang" targetName="ContinuousSubmit" />
       <config projectName="ErableLang" targetName="ErableCompilerDyn" />
-      <config projectName="ErableLang" targetName="ExperimentalMemCheck" />
       <config projectName="ErableLang" targetName="ContinuousConfigure" />
+      <config projectName="ErableLang" targetName="ExperimentalMemCheck" />
       <config projectName="ErableLang" targetName="NightlySubmit" />
       <config projectName="ErableLang" targetName="Continuous" />
       <config projectName="ErableLang" targetName="ExperimentalSubmit" />
       <config projectName="ErableLang" targetName="ContinuousBuild" />
       <config projectName="ErableLang" targetName="NightlyConfigure" />
-      <config projectName="ErableLang" targetName="NightlyCoverage" />
       <config projectName="ErableLang" targetName="ContinuousUpdate" />
+      <config projectName="ErableLang" targetName="NightlyCoverage" />
       <config projectName="ErableLang" targetName="ExperimentalBuild" />
       <config projectName="ErableLang" targetName="ContinuousStart" />
-      <config projectName="ErableLang" targetName="ErableCompilerTest" />
       <config projectName="ErableLang" targetName="ErableStdlib" />
-      <config projectName="ErableLang" targetName="ContinuousCoverage" />
+      <config projectName="ErableLang" targetName="ErableCompilerTest" />
       <config projectName="ErableLang" targetName="ExperimentalStart" />
-      <config projectName="ErableLang" targetName="NightlyMemCheck" />
+      <config projectName="ErableLang" targetName="ContinuousCoverage" />
       <config projectName="ErableLang" targetName="ErableVM" />
+      <config projectName="ErableLang" targetName="NightlyMemCheck" />
       <config projectName="ErableLang" targetName="Nightly" />
       <config projectName="ErableLang" targetName="ExperimentalUpdate" />
       <config projectName="ErableLang" targetName="ExperimentalTest" />
@@ -76,29 +76,28 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="843ad3e7-5740-4d46-80f4-e7c843e04bd1" name="Default Changelist" comment=":white_check_mark: Adding tests.&#10;:art: Improving structure / format of class `Erable::Compiler::AST::Name` and `Erable::Compiler::AST::NameTree`.">
-      <change afterPath="$PROJECT_DIR$/.idea/statistic.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Compiler/Headers.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Compiler/ID.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Compiler/ID.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="843ad3e7-5740-4d46-80f4-e7c843e04bd1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Compiler/Old_Parser.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Compiler/Old_Parser.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Compiler/Old_Symbols.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Compiler/Old_Symbols.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Compiler/Old_Syntax.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Compiler/Old_Syntax.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compilerexplorer.settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compilerexplorer.settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler/AST.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/AST.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler/AST.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/AST.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Parser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Parser.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Parser.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Parser.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compiler/Headers.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Headers.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compiler/Parser.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compiler/Parser.hpp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler/ProcessedData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/ProcessedData.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler/ProcessedData.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/ProcessedData.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler/Symbols.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Symbols.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler/Symbols.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Symbols.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler/Syntax.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Syntax.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler/Syntax.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Syntax.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Tokens.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Tokens.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/tests/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/tests/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/tests/Erable_Compiler_AST_Name_Test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/tests/Erable_Compiler_AST_Name_Test.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Compiler/ErableCompiler.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Compiler/ErableCompiler.cbp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -138,76 +137,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Compiler/ProcessedData.hpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-369">
-              <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Compiler/Headers.hpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
-              <caret line="12" selection-start-line="12" selection-end-line="12" />
-              <folding>
-                <element signature="e#163#180#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Compiler/Parser.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Compiler/ProcessedData.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-605">
-              <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-              <folding>
-                <element signature="e#120#148#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="168">
+              <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Compiler/Tokens.hpp">
+        <entry file="file://$PROJECT_DIR$/Compiler/ProcessedData.hpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-271">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Compiler/Symbols.hpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
-              <folding>
-                <element signature="e#183#205#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Compiler/Parser.hpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
-              <folding>
-                <element signature="e#170#192#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="25">
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
             </state>
           </provider>
         </entry>
@@ -215,8 +157,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Compiler/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="273">
+              <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -225,13 +167,32 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Compiler/Lexer.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="132">
+              <caret line="167" selection-start-line="167" selection-end-line="167" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Compiler/Headers.hpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="126" column="21" selection-start-line="126" selection-start-column="21" selection-end-line="126" selection-end-column="21" />
+              <folding>
+                <element signature="e#163#180#0" expanded="true" />
+                <element signature="e#1762#1779#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Compiler/Syntax.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-              <folding>
-                <element signature="e#100#119#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="294">
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
             </state>
           </provider>
         </entry>
@@ -239,10 +200,28 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Compiler/Syntax.hpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+            <state relative-caret-position="189">
+              <caret line="11" column="42" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Compiler/Symbols.hpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Compiler/Symbols.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="132">
+              <caret line="156" selection-start-line="156" selection-end-line="156" />
               <folding>
-                <element signature="e#169#186#0" expanded="true" />
+                <element signature="e#120#142#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -306,7 +285,6 @@
         <option value="$PROJECT_DIR$/Global/Utils.h" />
         <option value="$PROJECT_DIR$/Compiler/Scanner.hpp" />
         <option value="$PROJECT_DIR$/VM/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/Playground/main.cpp" />
         <option value="$PROJECT_DIR$/Compiler/Lexer.hpp" />
         <option value="$PROJECT_DIR$/Global/IO.hpp" />
         <option value="$PROJECT_DIR$/Global/IO.cpp" />
@@ -317,24 +295,25 @@
         <option value="$PROJECT_DIR$/Compiler/Lexer.cpp" />
         <option value="$PROJECT_DIR$/tests/lex.erable" />
         <option value="$PROJECT_DIR$/Compiler/Tokens.cpp" />
-        <option value="$PROJECT_DIR$/Compiler/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/Compiler/tests/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/Compiler/ID.hpp" />
         <option value="$PROJECT_DIR$/Compiler/ID.cpp" />
         <option value="$PROJECT_DIR$/Compiler/tests/Erable_Compiler_AST_Name_Test.cpp" />
+        <option value="$PROJECT_DIR$/Compiler/Tokens.hpp" />
+        <option value="$PROJECT_DIR$/Playground/main.cpp" />
+        <option value="$PROJECT_DIR$/Compiler/Parser.hpp" />
+        <option value="$PROJECT_DIR$/Compiler/ProcessedData.hpp" />
+        <option value="$PROJECT_DIR$/Compiler/Parser.cpp" />
+        <option value="$PROJECT_DIR$/Compiler/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/Compiler/ProcessedData.cpp" />
         <option value="$PROJECT_DIR$/Compiler/AST.hpp" />
         <option value="$PROJECT_DIR$/Compiler/AST.cpp" />
-        <option value="$PROJECT_DIR$/Compiler/main.cpp" />
-        <option value="$PROJECT_DIR$/Compiler/Syntax.cpp" />
-        <option value="$PROJECT_DIR$/Compiler/ProcessedData.hpp" />
-        <option value="$PROJECT_DIR$/Compiler/Tokens.hpp" />
-        <option value="$PROJECT_DIR$/Compiler/Symbols.cpp" />
-        <option value="$PROJECT_DIR$/Compiler/Parser.hpp" />
-        <option value="$PROJECT_DIR$/Compiler/Headers.hpp" />
         <option value="$PROJECT_DIR$/Compiler/Syntax.hpp" />
-        <option value="$PROJECT_DIR$/Compiler/Parser.cpp" />
-        <option value="$PROJECT_DIR$/Compiler/ProcessedData.cpp" />
+        <option value="$PROJECT_DIR$/Compiler/Headers.hpp" />
+        <option value="$PROJECT_DIR$/Compiler/Symbols.cpp" />
+        <option value="$PROJECT_DIR$/Compiler/Syntax.cpp" />
+        <option value="$PROJECT_DIR$/Compiler/main.cpp" />
         <option value="$PROJECT_DIR$/Compiler/Symbols.hpp" />
       </list>
     </option>
@@ -379,6 +358,11 @@
               <item name="ErableLang" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="$PROJECT_DIR$" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="Global" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ErableLang" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="$PROJECT_DIR$" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="Playground" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="ErableLang" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -431,7 +415,7 @@
     <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.statistic.project.settings" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -442,6 +426,12 @@
     </key>
   </component>
   <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="CMakeCatchTestRunConfigurationType" />
+        <option value="CMakeRunConfiguration" />
+      </set>
+    </option>
     <option name="ruleStates">
       <list>
         <RuleState>
@@ -454,19 +444,19 @@
     </option>
   </component>
   <component name="RunManager" selected="CMake Application.ErableCompiler">
-    <configuration name="ID Test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ErableCompilerTest" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ErableCompilerTest" TEST_CLASS="[id]" TEST_METHOD="ID Test" TEST_MODE="SUITE_TEST">
+    <configuration name="CompilerTest" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ErableCompilerTest" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ErableCompilerTest" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ID Test" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ErableCompilerTest" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ErableCompilerTest" TEST_CLASS="[id]" TEST_METHOD="ID Test" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="Name Construct" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ErableCompilerTest" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ErableCompilerTest" TEST_CLASS="[name][construct]" TEST_METHOD="Name Construct" TEST_MODE="SUITE_TEST">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-        <option name="BeforeTestRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NameTest" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ErableCompilerTest" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ErableCompilerTest" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
@@ -651,22 +641,16 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BuildErable" type="CompoundRunConfigurationType">
-      <toRun name="ErableVM" type="CMakeRunConfiguration" />
-      <toRun name="ErableVMDyn" type="CMakeRunConfiguration" />
-      <toRun name="ErableVMStatic" type="CMakeRunConfiguration" />
-      <method v="2" />
-    </configuration>
     <configuration default="true" type="CompoundRunConfigurationType">
-      <toRun name="ErableVM" type="CMakeRunConfiguration" />
-      <toRun name="ErableVMDyn" type="CMakeRunConfiguration" />
-      <toRun name="ErableVMStatic" type="CMakeRunConfiguration" />
+      <toRun name="NameTest" type="CMakeCatchTestRunConfigurationType" />
+      <toRun name="ErableCompiler" type="CMakeRunConfiguration" />
+      <toRun name="ID Test" type="CMakeCatchTestRunConfigurationType" />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Catch.NameTest" />
-      <item itemvalue="Catch.Name Construct" />
+      <item itemvalue="Catch.CompilerTest" />
       <item itemvalue="Catch.ID Test" />
+      <item itemvalue="Catch.Name Construct" />
       <item itemvalue="CMake Application.ErableVM" />
       <item itemvalue="CMake Application.ErableVMDyn" />
       <item itemvalue="CMake Application.ErableVMStatic" />
@@ -702,12 +686,10 @@
       <item itemvalue="CMake Application.NightlyUpdate" />
       <item itemvalue="CMake Application.Playground" />
       <item itemvalue="CMake Application.ErableStdlib" />
-      <item itemvalue="Compound.BuildErable" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Catch.Name Construct" />
-        <item itemvalue="Catch.ID Test" />
       </list>
     </recent_temporary>
   </component>
@@ -762,7 +744,8 @@
       <workItem from="1560944868652" duration="19504000" />
       <workItem from="1561186835061" duration="61000" />
       <workItem from="1561186931189" duration="1877000" />
-      <workItem from="1561212298286" duration="7186000" />
+      <workItem from="1561212298286" duration="10066000" />
+      <workItem from="1561590345329" duration="19309000" />
     </task>
     <task id="LOCAL-00001" summary="I've changed the IDE I use">
       <created>1558567629247</created>
@@ -1037,22 +1020,17 @@
       <option name="project" value="LOCAL" />
       <updated>1561178695189</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary=":bug: Fixing a bug.&#10;:art: Improving structure / format of the code: moved all forward declaration to a single header file.&#10;:white_check_mark: Adding tests.">
+      <created>1561261774686</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1561261774686</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="NameTest - 2019.06.22 at 10h 47m 19s.xml">
-      <configuration name="NameTest" configurationId="CMakeCatchTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="NameTest - 2019.06.22 at 10h 47m 58s.xml">
-      <configuration name="NameTest" configurationId="CMakeCatchTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="NameTest - 2019.06.22 at 11h 32m 33s.xml">
-      <configuration name="NameTest" configurationId="CMakeCatchTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="NameTest - 2019.06.22 at 11h 34m 11s.xml">
-      <configuration name="NameTest" configurationId="CMakeCatchTestRunConfigurationType" />
-    </history-entry>
     <history-entry file="NameTest - 2019.06.22 at 12h 33m 12s.xml">
       <configuration name="NameTest" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
@@ -1071,9 +1049,21 @@
     <history-entry file="Name_Construct - 2019.06.23 at 10h 38m 59s.xml">
       <configuration name="Name Construct" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
+    <history-entry file="NameTest - 2019.06.23 at 11h 52m 34s.xml">
+      <configuration name="NameTest" configurationId="CMakeCatchTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ID_Test - 2019.06.23 at 11h 52m 40s.xml">
+      <configuration name="ID Test" configurationId="CMakeCatchTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="CompilerTest - 2019.06.23 at 13h 03m 28s.xml">
+      <configuration name="CompilerTest" configurationId="CMakeCatchTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="CompilerTest - 2019.06.23 at 17h 56m 50s.xml">
+      <configuration name="CompilerTest" configurationId="CMakeCatchTestRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="242011000" />
+    <option name="totallyTimeSpent" value="264200000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1088,10 +1078,9 @@
     <frame x="0" y="0" width="1366" height="768" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49344978" visible="true" weight="0.3957704" />
+      <window_info auto_hide="true" content_ui="combo" id="Project" order="0" sideWeight="0.49344978" weight="0.38897282" />
       <window_info id="Structure" order="1" sideWeight="0.5065502" side_tool="true" weight="0.35725075" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Statistic" weight="0.43255132" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32844576" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49622357" weight="0.31085044" />
@@ -1102,7 +1091,7 @@
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Profiler" order="8" weight="0.32844576" />
       <window_info anchor="bottom" id="TeamCity" order="9" weight="0.32991204" />
-      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49848944" visible="true" weight="0.32111436" />
+      <window_info active="true" anchor="bottom" id="Messages" order="10" sideWeight="0.49848944" visible="true" weight="0.32111436" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3287879" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50377643" side_tool="true" weight="0.31085044" />
       <window_info anchor="bottom" id="Version Control" order="13" sideWeight="0.49924472" weight="0.32844576" />
@@ -1110,47 +1099,50 @@
       <window_info anchor="bottom" id="Inspection Results" order="15" weight="0.32991204" />
       <window_info anchor="bottom" id="Tool Output" order="16" sideWeight="0.49924472" weight="0.32991204" />
       <window_info anchor="bottom" id="ANTLR Preview" order="17" sideWeight="0.49924472" weight="0.32991204" />
+      <window_info anchor="bottom" auto_hide="true" id="Statistic" order="18" weight="0.43255132" />
+      <window_info anchor="bottom" id="Run Dashboard" order="19" weight="0.32991204" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" weight="0.32930514" />
-      <window_info anchor="right" id="Cargo" order="4" weight="0.32930514" />
+      <window_info anchor="right" id="Cargo" order="4" sideWeight="0.4989059" weight="0.32930514" />
       <window_info anchor="right" id="Remote Host" order="5" weight="0.32930514" />
-      <window_info anchor="right" id="make" order="6" weight="0.32930514" />
-      <window_info anchor="right" id="Compiler Explorer" order="7" side_tool="true" weight="0.32930514" />
+      <window_info anchor="right" id="make" order="6" sideWeight="0.4989059" weight="0.32930514" />
+      <window_info anchor="right" id="Compiler Explorer" order="7" sideWeight="0.5010941" side_tool="true" weight="0.32930514" />
       <window_info anchor="right" id="leetcode" order="8" side_tool="true" weight="0.32930514" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49344978" visible="true" weight="0.3957704" />
+      <window_info auto_hide="true" content_ui="combo" id="Project" order="0" sideWeight="0.49344978" weight="0.38897282" />
       <window_info id="Structure" order="1" sideWeight="0.5065502" side_tool="true" weight="0.35725075" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Statistic" order="0" weight="0.43255132" />
-      <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Find" order="2" weight="0.32844576" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49622357" visible="true" weight="0.31085044" />
-      <window_info anchor="bottom" x="21" y="248" width="1324" height="271" id="Debug" order="4" sideWeight="0.49924472" weight="0.3973607" />
-      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="7" weight="0.31671554" />
-      <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Profiler" order="9" weight="0.32844576" />
-      <window_info anchor="bottom" id="TeamCity" order="10" weight="0.32991204" />
-      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49848944" weight="0.32111436" />
-      <window_info anchor="bottom" id="Terminal" order="12" weight="0.3287879" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.50377643" side_tool="true" weight="0.31085044" />
-      <window_info anchor="bottom" id="Version Control" order="14" sideWeight="0.49924472" weight="0.32844576" />
-      <window_info anchor="bottom" id="CMake" order="15" weight="0.3240469" />
-      <window_info anchor="bottom" id="Inspection Results" order="16" weight="0.32991204" />
-      <window_info anchor="bottom" id="Tool Output" order="17" sideWeight="0.49924472" weight="0.32991204" />
-      <window_info anchor="bottom" id="ANTLR Preview" order="18" sideWeight="0.49924472" weight="0.32991204" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32844576" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49622357" weight="0.31085044" />
+      <window_info anchor="bottom" x="21" y="248" width="1324" height="271" id="Debug" order="3" sideWeight="0.49924472" weight="0.3973607" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.31671554" />
+      <window_info anchor="bottom" id="Database Changes" order="7" />
+      <window_info anchor="bottom" id="Profiler" order="8" weight="0.32844576" />
+      <window_info anchor="bottom" id="TeamCity" order="9" weight="0.32991204" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49848944" weight="0.32111436" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.3287879" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50377643" side_tool="true" weight="0.31085044" />
+      <window_info anchor="bottom" id="Version Control" order="13" sideWeight="0.49924472" weight="0.32844576" />
+      <window_info anchor="bottom" id="CMake" order="14" weight="0.3240469" />
+      <window_info anchor="bottom" id="Inspection Results" order="15" weight="0.32991204" />
+      <window_info anchor="bottom" id="Tool Output" order="16" sideWeight="0.49924472" weight="0.32991204" />
+      <window_info anchor="bottom" id="ANTLR Preview" order="17" sideWeight="0.49924472" weight="0.32991204" />
+      <window_info anchor="bottom" auto_hide="true" id="Statistic" order="18" weight="0.43255132" />
+      <window_info active="true" anchor="bottom" id="Run Dashboard" order="19" visible="true" weight="0.32991204" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" weight="0.32930514" />
-      <window_info anchor="right" id="Cargo" order="4" weight="0.32930514" />
+      <window_info anchor="right" id="Cargo" order="4" sideWeight="0.4989059" weight="0.32930514" />
       <window_info anchor="right" id="Remote Host" order="5" weight="0.32930514" />
-      <window_info anchor="right" id="make" order="6" weight="0.32930514" />
-      <window_info anchor="right" id="Compiler Explorer" order="7" side_tool="true" weight="0.32930514" />
+      <window_info anchor="right" id="make" order="6" sideWeight="0.4989059" weight="0.32930514" />
+      <window_info anchor="right" id="Compiler Explorer" order="7" sideWeight="0.5010941" side_tool="true" weight="0.32930514" />
       <window_info anchor="right" id="leetcode" order="8" side_tool="true" weight="0.32930514" />
     </layout-to-restore>
   </component>
@@ -1203,8 +1195,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/Compiler/tests/googletest" />
     </ignored-roots>
-    <MESSAGE value="The compiler (actually only the lexer) on this commit will produce error on lexing!!" />
-    <MESSAGE value="I've just removed INT token" />
     <MESSAGE value="Added some tokens" />
     <MESSAGE value="Fixed RegexTokenElement's problem" />
     <MESSAGE value="Update Progress" />
@@ -1228,7 +1218,9 @@
     <MESSAGE value=":construction: Added ASTNode and Name Definitions" />
     <MESSAGE value=":heavy_plus_sign: Adding a dependency 'Catch2'.&#10;:white_check_mark: Adding tests.&#10;:art: Improving structure / format of the code.&#10;:recycle: Refactoring code." />
     <MESSAGE value=":white_check_mark: Adding tests.&#10;:art: Improving structure / format of class `Erable::Compiler::AST::Name` and `Erable::Compiler::AST::NameTree`." />
-    <option name="LAST_COMMIT_MESSAGE" value=":white_check_mark: Adding tests.&#10;:art: Improving structure / format of class `Erable::Compiler::AST::Name` and `Erable::Compiler::AST::NameTree`." />
+    <MESSAGE value=":bug: Fixing a bug.&#10;:art: Improving structure / format of the code: moved all forward declaration to a single header file.&#10;:white_check_mark: Adding tests." />
+    <MESSAGE value=":art: Improving structure / format of the code.&#10;:construction: Deleted original dumb parser, now working on CLR(1) parser." />
+    <option name="LAST_COMMIT_MESSAGE" value=":art: Improving structure / format of the code.&#10;:construction: Deleted original dumb parser, now working on CLR(1) parser." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1237,19 +1229,19 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Compiler/Lexer.cpp</url>
-          <line>172</line>
-          <option name="timeStamp" value="89" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Compiler/Tokens.cpp</url>
           <line>280</line>
           <option name="timeStamp" value="98" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Compiler/Lexer.cpp</url>
-          <line>174</line>
-          <option name="timeStamp" value="99" />
+          <url>file://$PROJECT_DIR$/Compiler/main.cpp</url>
+          <line>13</line>
+          <option name="timeStamp" value="101" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Compiler/Syntax.cpp</url>
+          <line>10</line>
+          <option name="timeStamp" value="102" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1317,33 +1309,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Compiler/cmake-build-debug/CMakeFiles/ErableCompiler.dir/link.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/cmake-build-debug/CMakeFiles/Makefile2">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/cmake-build-debug/Makefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-478" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/cmake-build-debug/CMakeFiles/feature_tests.cxx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7828">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="e#464#467#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/cmake-build-debug/CMakeFiles/progress.marks">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/cmake-build-debug/CMakeFiles/TargetDirectories.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Compiler/cmake-build-debug/CMakeFiles/Makefile.cmake">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-870" />
@@ -1436,13 +1401,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/Lexer.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="156" selection-start-line="156" selection-end-line="156" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Compiler/tests/catch.hpp" />
     <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/streambuf">
       <provider selected="true" editor-type-id="text-editor">
@@ -1469,13 +1427,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="9" column="41" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/vector">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="649" selection-start-line="649" selection-end-line="649" />
         </state>
       </provider>
     </entry>
@@ -1526,13 +1477,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="602">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Compiler/Tokens.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="9">
@@ -1557,40 +1501,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/tests/Erable_Compiler_AST_Name_Test.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="767">
-          <caret line="68" column="26" selection-start-line="68" selection-start-column="26" selection-end-line="68" selection-end-column="26" />
-          <folding>
-            <element signature="e#150#168#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/AST.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1828">
-          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-          <folding>
-            <element signature="e#163#180#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/AST.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="65" column="105" selection-start-line="65" selection-start-column="105" selection-end-line="65" selection-end-column="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/memory">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="4320" column="4" selection-start-line="4320" selection-start-column="4" selection-end-line="4320" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/ostream">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="141">
@@ -1598,55 +1508,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/Symbols.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#140#162#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/ProcessedData.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-369">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/Headers.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="e#163#180#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/Parser.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
-          <folding>
-            <element signature="e#170#192#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/Syntax.hpp">
+    <entry file="file://$PROJECT_DIR$/Compiler/Old_Syntax.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
           <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
@@ -1656,47 +1518,199 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/Parser.cpp">
+    <entry file="file://$PROJECT_DIR$/Compiler/Tokens.hpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        <state relative-caret-position="168">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/ProcessedData.cpp">
+    <entry file="file://$PROJECT_DIR$/Compiler/tests/Erable_Compiler_AST_Name_Test.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-605">
-          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+        <state relative-caret-position="1491">
+          <caret line="71" column="17" selection-start-line="71" selection-start-column="17" selection-end-line="71" selection-end-column="17" />
           <folding>
-            <element signature="e#120#148#0" expanded="true" />
+            <element signature="e#150#168#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/Syntax.cpp">
+    <entry file="file://$PROJECT_DIR$/Playground/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+        <state relative-caret-position="777">
+          <caret line="37" column="1" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/deque">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1345" column="9" selection-start-line="1345" selection-start-column="9" selection-end-line="1345" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/vector">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="295" column="1" lean-forward="true" selection-start-line="295" selection-start-column="1" selection-end-line="295" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/Old_Parser.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="68" column="49" selection-start-line="68" selection-start-column="49" selection-end-line="68" selection-end-column="49" />
+          <folding>
+            <element signature="e#120#141#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/Old_Syntax.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-104">
+          <caret line="26" column="72" selection-start-line="26" selection-start-column="72" selection-end-line="26" selection-end-column="72" />
           <folding>
             <element signature="e#100#119#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/Tokens.hpp">
+    <entry file="file://$PROJECT_DIR$/Compiler/Old_Symbols.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-271">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="97">
+          <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#140#162#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/Old_Symbols.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1365">
+          <caret line="65" column="50" selection-start-line="65" selection-start-column="50" selection-end-line="65" selection-end-column="50" />
+          <folding>
+            <element signature="e#183#205#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="36" column="60" selection-start-line="36" selection-start-column="60" selection-end-line="36" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/Old_Parser.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+          <folding>
+            <element signature="e#170#192#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/AST.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="143" column="58" selection-start-line="143" selection-start-column="58" selection-end-line="143" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/memory">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="4705" column="28" selection-start-line="4705" selection-start-column="28" selection-end-line="4705" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/ProcessedData.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/AST.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="507">
+          <caret line="106" column="1" lean-forward="true" selection-start-line="106" selection-start-column="1" selection-end-line="106" selection-end-column="1" />
+          <folding>
+            <element signature="e#163#180#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/ProcessedData.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/Headers.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="126" column="21" selection-start-line="126" selection-start-column="21" selection-end-line="126" selection-end-column="21" />
+          <folding>
+            <element signature="e#163#180#0" expanded="true" />
+            <element signature="e#1762#1779#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/Syntax.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="11" column="42" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/Lexer.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="167" selection-start-line="167" selection-end-line="167" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/Syntax.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/Symbols.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="156" selection-start-line="156" selection-end-line="156" />
+          <folding>
+            <element signature="e#120#142#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Compiler/Symbols.hpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
-          <folding>
-            <element signature="e#183#205#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="243">
+          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
         </state>
       </provider>
     </entry>

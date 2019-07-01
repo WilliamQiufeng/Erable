@@ -26,6 +26,8 @@ namespace Erable::Compiler::Data {
 
         bool isRule();
 
+		bool isExactly(const std::string &);
+
         const Symbols::SymbolPtr &getType() const;
 
         void setType(const Symbols::SymbolPtr &type);

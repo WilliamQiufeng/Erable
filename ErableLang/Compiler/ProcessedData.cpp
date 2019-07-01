@@ -48,3 +48,13 @@ std::string Erable::Compiler::Data::ProcessedData::getTag() {
 }
 
 Erable::Compiler::Data::ProcessedData::ProcessedData() : isNull(true) {}
+
+bool Erable::Compiler::Data::ProcessedData::isExactly(const std::string &tag) {
+	if (this->isRule()) {
+		if (this->getType()->tag == tag) return true;
+		if (this->getDataList().size() == 1) return this->dataList[0].isExactly(tag);
+	} else {
+		return this->getToken().getName() == tag;
+	}
+	return false;
+}

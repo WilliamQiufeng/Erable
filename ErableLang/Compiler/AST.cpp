@@ -139,7 +139,7 @@ namespace Erable::Compiler::AST {
 		NameTree::id = id;
 	}
 
-	ASTNode::ASTNode(Parser *parent) : parent(parent) {}
+//	ASTNode::ASTNode(Old_Parser *parent) : parent(parent) {}
 
 	bool NameNode::operator==(const NameNode &rhs) const {
 		return type == rhs.type &&

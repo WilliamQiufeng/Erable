@@ -1,20 +1,17 @@
 //
-// Created by Qiufeng54321 on 2019-06-09.
+// Created by Qiufeng54321 on 2019-07-01.
 // Copyright (c) Qiufeng54321 All rights reserved.
 //
 
-#ifndef ERABLECOMPILER_SYNTAX_HPP
-#define ERABLECOMPILER_SYNTAX_HPP
-
-#include <vector>
+#ifndef ERABLELANG_SYNTAX_HPP
+#define ERABLELANG_SYNTAX_HPP
 
 #include "Headers.hpp"
-#include "Symbols.hpp"
 
 namespace Erable::Compiler::Syntax {
-    inline Symbols::SymbolPtr syntaxTree;
+	inline static Symbols::SymbolPtr root;
 
-    void initSyntaxes();
+	void initSyntax();
 }
 
-#endif //ERABLECOMPILER_SYNTAX_HPP
+#endif //ERABLELANG_SYNTAX_HPP
