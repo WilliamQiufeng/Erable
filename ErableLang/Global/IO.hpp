@@ -30,7 +30,7 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
-#include <filesystem>
+#include <boost/filesystem.hpp>
 #include <iostream>
 
 
@@ -39,14 +39,14 @@
 
 //#include "Metadata.hpp"
 
-
+using namespace boost;
 namespace Erable::IO {
     /*
      * Implementation of java.io.File from java
      * Not fully implemented
      */
     class File {
-        std::filesystem::path path;
+		filesystem::path path;
     public:
 
         File(std::string str) {
@@ -58,13 +58,13 @@ namespace Erable::IO {
             this->path += child;
         }
 
-        std::filesystem::path getPath() {
+		filesystem::path getPath() {
             return this->path;
         }
 
         void mkdir();
 
-        std::vector<std::filesystem::path> listFiles();
+		std::vector<filesystem::path> listFiles();
 
     };
 

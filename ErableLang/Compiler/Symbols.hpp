@@ -12,15 +12,19 @@ namespace Erable::Compiler::Symbols {
 	enum class SymbolType {
 		RULE,
 		TOKEN,
-		COMBINATION
+		COMBINATION,
+		RULEREF,
+		CONTAINER
 	};
 
 	struct Symbol {
+	public:
 		std::string tag;
-		Parser::IterationNode *connectedTo;
+		Parser::IterationNode *connectedTo = nullptr;
+		SymbolPtr connectedToSymbol = nullptr;
 		int dotPosition = 0;
 		//It doesn't show the list of lookaheads, but shows all  possible lookaheads that will call reduce.
-		std::vector<TokenSymbolPtr> lookahead;
+		TokenSymbolList lookahead;
 
 		explicit Symbol(std::string tag);
 
@@ -30,21 +34,25 @@ namespace Erable::Compiler::Symbols {
 
 		virtual SymbolPtr fullClone() = 0;
 
-		SymbolPtr getFront(int);
+		virtual void shiftDot();
 
-		virtual SymbolPtr getFront(SymbolList &, int) = 0;
+		TokenSymbolList getFront();
+
+		virtual TokenSymbolList getFront(SymbolList &, bool &incDot) = 0;
 
 		virtual std::string toString() = 0;
 
-		static SymbolPtr getFront(SymbolList &, int, SymbolPtr exp);
+		virtual bool is(SymbolPtr that) = 0;
+
+		static TokenSymbolList getFront(SymbolList &, SymbolPtr exp, bool &incDot);
 	};
 
 	struct RuleSymbol : public Symbol {
 		static int currentIndex;
-		SymbolList rules;
+		CombineSymbolPtr combination;
 		int ruleIndex = -1;
 
-		RuleSymbol(const std::string &tag, SymbolList combination);
+		RuleSymbol(const std::string &tag, CombineSymbolPtr combination);
 
 		RuleSymbol(const std::string &tag);
 
@@ -52,9 +60,48 @@ namespace Erable::Compiler::Symbols {
 
 		SymbolPtr fullClone() override;
 
-		SymbolPtr getFront(SymbolList &, int) override;
+		TokenSymbolList getFront(SymbolList &, bool &incDot) override;
 
-		[[deprecated]] std::string toString() override;
+		std::string toString() override;
+
+		void shiftDot() override;
+
+		bool is(SymbolPtr that) override;
+	};
+
+	struct RuleRefSymbol : public Symbol {
+		SymbolPtr rule;
+
+		RuleRefSymbol(const std::string &tag, SymbolPtr rule);
+
+		SymbolType getType() override;
+
+		SymbolPtr fullClone() override;
+
+		TokenSymbolList getFront(SymbolList &list, bool &incDot) override;
+
+		std::string toString() override;
+
+		bool is(SymbolPtr that) override;
+	};
+
+	struct RuleContainer : public Symbol {
+		typedef std::vector<RuleSymbolPtr> Container;
+		Container container;
+
+		RuleContainer(const std::string &tag, const Container &container);
+
+		void shiftDot() override;
+
+		SymbolType getType() override;
+
+		SymbolPtr fullClone() override;
+
+		TokenSymbolList getFront(SymbolList &list, bool &incDot) override;
+
+		std::string toString() override;
+
+		bool is(SymbolPtr that) override;
 	};
 
 	struct CombineSymbol : public Symbol {
@@ -66,9 +113,11 @@ namespace Erable::Compiler::Symbols {
 
 		SymbolPtr fullClone() override;
 
-		SymbolPtr getFront(SymbolList &list, int i) override;
+		TokenSymbolList getFront(SymbolList &list, bool &incDot) override;
 
 		std::string toString() override;
+
+		bool is(SymbolPtr that) override;
 	};
 
 	struct TokenSymbol : public Symbol {
@@ -79,10 +128,14 @@ namespace Erable::Compiler::Symbols {
 
 		SymbolPtr fullClone() override;
 
-		SymbolPtr getFront(SymbolList &list, int i) override;
+		TokenSymbolList getFront(SymbolList &list, bool &incDot) override;
 
 		std::string toString() override;
+
+		bool is(SymbolPtr that) override;
 	};
+
+	inline TokenSymbolPtr EOT = std::make_shared<TokenSymbol>("$EOT");
 }
 
 

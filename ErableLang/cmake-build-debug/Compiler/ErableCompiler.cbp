@@ -288,6 +288,14 @@
 		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/tests/Erable_Compiler_AST_Name_Test.cpp">
 			<Option target="ErableCompilerTest"/>
 		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/ParseTable.cpp">
+			<Option target="ErableCompilerDyn"/>
+			<Option target="ErableCompiler"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/ParseTable.hpp">
+			<Option target="ErableCompilerDyn"/>
+			<Option target="ErableCompiler"/>
+		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableLang/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

@@ -22,6 +22,7 @@
 //#include "VM/VMGlobal.hpp"
 //#include "Utils.h"
 
+using namespace boost;
 namespace Erable::IO {
 
     template<typename T>
@@ -37,14 +38,14 @@ namespace Erable::IO {
     }
 
     void File::mkdir() {
-        std::filesystem::create_directory(this->path);
+		boost::filesystem::create_directory(this->path);
         //::access(this->path, 6);
     }
 
-    std::vector<std::filesystem::path> File::listFiles() {
-        std::filesystem::directory_iterator d(this->path);
-        std::filesystem::directory_iterator e = std::filesystem::end(d);
-        std::vector<std::filesystem::path> v;
+	std::vector<filesystem::path> File::listFiles() {
+		filesystem::directory_iterator d(this->path);
+		filesystem::directory_iterator e = filesystem::end(d);
+		std::vector<filesystem::path> v;
         while (d != e) {
             v.push_back(*d);
             d++;
@@ -53,7 +54,7 @@ namespace Erable::IO {
     }
 
     void InputStream::open(File f) {
-        std::string path(std::filesystem::absolute(f.getPath()).string());
+		std::string path(filesystem::absolute(f.getPath()).string());
         this->in = new std::ifstream(path, std::ios::in | std::ios::binary);
         //this->in->get();
         ERABLE_DEBUG std::cout << "Opened:" << path << std::endl;

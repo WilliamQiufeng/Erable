@@ -57,7 +57,7 @@ namespace Erable {
     std::string findInFollowing(const std::vector<std::string> &paths, std::string reg) {
         std::regex regexp(reg, std::regex_constants::ECMAScript | std::regex_constants::icase);
         for (std::string s : paths) {
-            std::filesystem::path path(s);
+			filesystem::path path(s);
             std::string found = searchFile(path, regexp);
             if (!found.empty()) {
                 return found;
@@ -66,11 +66,11 @@ namespace Erable {
         return "";
     }
 
-    std::string searchFile(std::filesystem::path path, std::regex reg) {
-        std::filesystem::directory_iterator start(path);
-        std::filesystem::directory_iterator end;
+	std::string searchFile(filesystem::path path, std::regex reg) {
+		filesystem::directory_iterator start(path);
+		filesystem::directory_iterator end;
         for (; start != end; ++start) {
-            std::filesystem::path p = *start;
+			filesystem::path p = *start;
             /*if (boost::filesystem::is_directory(*start)) {
                 std::string found = searchFile(*start, reg);
                 if (!found.empty()) {

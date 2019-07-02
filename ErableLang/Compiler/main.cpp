@@ -1,4 +1,5 @@
 #include <iostream>
+#include "ParseTable.hpp"
 #include "Lexer.hpp"
 #include "Symbols.hpp"
 #include "Syntax.hpp"
@@ -11,6 +12,8 @@ int main(int argc, char *argv[]) {
     /*for (const auto &token : lexer.getTokens()) {
         std::cout << "Token " << token.name << "[" << token.data << "]" << std::endl;
     }*/
-	//std::cout<<Syntax::root->toString() << std::endl;
+	Parser::RuleIteration ruleIteration;
+	ruleIteration.generate();
+	std::cout << (*ruleIteration.rootNode) << std::endl;
     return 0;
 }

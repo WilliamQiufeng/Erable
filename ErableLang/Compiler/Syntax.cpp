@@ -4,17 +4,23 @@
 //
 
 #include "Syntax.hpp"
+#include "Symbols.hpp"
+#include <iostream>
 
 namespace Erable::Compiler::Syntax {
 
 	void initSyntax() {
-		auto A = "A"_rule;
-		auto S = "S"_rule;
-		A = A
-			| ("a"_token + A)
-			| ("b"_token);
+		auto A = "A"_container;
+		auto S = "S"_container;
 		S = S
-			| (A + A);
-		root = S;
+			| (-A + -A);
+		A = A | ("a"_token + -A)
+			| ("b"_token);
+		auto front = A->getFront();
+		for (auto &item : front) {
+			std::cout << item->toString() << " ";
+		}
+		std::cout << std::endl;
+		Syntax::root = Syntax::root | S;
 	}
 }

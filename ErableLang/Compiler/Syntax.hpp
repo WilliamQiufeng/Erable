@@ -9,7 +9,7 @@
 #include "Headers.hpp"
 
 namespace Erable::Compiler::Syntax {
-	inline static Symbols::SymbolPtr root;
+	inline Symbols::SymbolPtr root = "S'"_container;
 
 	void initSyntax();
 }
