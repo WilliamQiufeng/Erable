@@ -4,7 +4,7 @@ find_package(Doxygen)
 set(CMAKE_CXX_STANDARD 17)
 if (DOXYGEN_FOUND)
 
-    set(DOXYGEN_INPUT ${SOURCE_FILES})
+    set(DOXYGEN_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in)
     set(DOXYGEN_OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
 
     add_custom_command(

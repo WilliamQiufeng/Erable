@@ -6,21 +6,43 @@
 #include "Syntax.hpp"
 #include "Symbols.hpp"
 #include <iostream>
+#include <sstream>
 
 namespace Erable::Compiler::Syntax {
 
 	void initSyntax() {
-		auto A = "A"_container;
-		auto S = "S"_container;
-		S = S
-			| (-A + -A);
-		A = A | ("a"_token + -A)
-			| ("b"_token);
-		auto front = A->getFront();
-		for (auto &item : front) {
-			std::cout << item->toString() << " ";
+		auto A = "A"_rule;
+		auto S = "S"_rule;
+		auto SS = "S'"_rule;
+		SS - Symbols::SymbolList{
+				S
+		};
+		S - Symbols::SymbolList{
+				A + A
+		};
+		A - Symbols::SymbolList{
+				"a"_token + A,
+				"b"_token
+		};
+	}
+
+	std::string $syntaxListToString() {
+		std::stringstream ss;
+		for (auto &item : syntaxList) {
+			ss << item->getTag() << " -> ";
+			Symbols::CombineSymbolPtr combineSymbolPtr = std::static_pointer_cast<Symbols::CombineSymbol>(item);
+			ss << combineSymbolPtr->toString() << "\n";
 		}
-		std::cout << std::endl;
-		Syntax::root = Syntax::root | S;
+		return ss.str();
+	}
+
+	Symbols::SymbolList $find(std::string tag) {
+		Symbols::SymbolList symbolList;
+		for (auto &item : syntaxList) {
+			if (item->getTag() == tag) {
+				symbolList.push_back(item);
+			}
+		}
+		return symbolList;
 	}
 }

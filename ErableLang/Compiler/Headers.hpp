@@ -8,6 +8,7 @@
 
 #include <string>
 #include <memory>
+#include <unordered_set>
 /*
 namespace Erable::Compiler::Symbols {
 	class Symbol;
@@ -64,33 +65,22 @@ namespace Erable::Compiler::Symbols {
 	enum class SymbolType;
 	struct Symbol;
 	struct CombineSymbol;
-	struct RuleSymbol;
-	struct RuleRefSymbol;
-	struct RuleContainer;
-	struct TokenSymbol;
 	typedef std::shared_ptr<Symbol> SymbolPtr;
 	typedef std::shared_ptr<CombineSymbol> CombineSymbolPtr;
-	typedef std::shared_ptr<RuleSymbol> RuleSymbolPtr;
-	typedef std::shared_ptr<RuleRefSymbol> RuleRefSymbolPtr;
-	typedef std::shared_ptr<TokenSymbol> TokenSymbolPtr;
-	typedef std::shared_ptr<RuleContainer> RuleContainerPtr;
 	typedef std::vector<SymbolPtr> SymbolList;
-	typedef std::vector<TokenSymbolPtr> TokenSymbolList;
+	typedef std::vector<SymbolPtr> TokenSymbolList;
+	typedef std::unordered_set<SymbolPtr> LookaheadSet;
 }
 
 Erable::Compiler::Symbols::SymbolPtr operator "" _rule(const char *, std::size_t);
 
 Erable::Compiler::Symbols::SymbolPtr operator "" _token(const char *, std::size_t);
 
-Erable::Compiler::Symbols::SymbolPtr operator "" _container(const char *, std::size_t);
-
 Erable::Compiler::Symbols::SymbolPtr
 operator+(Erable::Compiler::Symbols::SymbolPtr, Erable::Compiler::Symbols::SymbolPtr);
 
 Erable::Compiler::Symbols::SymbolPtr
-operator|(Erable::Compiler::Symbols::SymbolPtr, Erable::Compiler::Symbols::SymbolPtr);
-
-Erable::Compiler::Symbols::SymbolPtr operator-(Erable::Compiler::Symbols::SymbolPtr);
+operator-(Erable::Compiler::Symbols::SymbolPtr, Erable::Compiler::Symbols::SymbolList);
 
 #include <vector>
 #include <deque>

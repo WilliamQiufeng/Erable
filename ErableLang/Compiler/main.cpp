@@ -12,8 +12,11 @@ int main(int argc, char *argv[]) {
     /*for (const auto &token : lexer.getTokens()) {
         std::cout << "Token " << token.name << "[" << token.data << "]" << std::endl;
     }*/
+
+	std::cout << Syntax::$syntaxListToString() << std::endl;
 	Parser::RuleIteration ruleIteration;
+	ruleIteration.generateFirstRound();
 	ruleIteration.generate();
-	std::cout << (*ruleIteration.rootNode) << std::endl;
+	std::cout << ruleIteration.rootNode << std::endl;
     return 0;
 }

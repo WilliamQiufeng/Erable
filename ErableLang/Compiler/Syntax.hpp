@@ -9,7 +9,11 @@
 #include "Headers.hpp"
 
 namespace Erable::Compiler::Syntax {
-	inline Symbols::SymbolPtr root = "S'"_container;
+	inline Symbols::SymbolList syntaxList;
+
+	std::string $syntaxListToString();
+
+	Symbols::SymbolList $find(std::string tag);
 
 	void initSyntax();
 }

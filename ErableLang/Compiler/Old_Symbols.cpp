@@ -148,18 +148,6 @@ bool ComplexSymbol::find(std::string) {
 	return false;
 }
 
-TokenSymbol::TokenSymbol(std::string ruleName) : ruleName(std::move(ruleName)) {
-	tag = this->ruleName;
-}
-
-std::string TokenSymbol::getType() {
-	return "TokenSymbol";
-}
-
-std::string TokenSymbol::toString() {
-	return "[" + this->ruleName + "]";
-}
-
 std::string TokenSymbol::getName() {
 	return ruleName;
 }
