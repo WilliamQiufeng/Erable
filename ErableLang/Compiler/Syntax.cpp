@@ -11,18 +11,39 @@
 namespace Erable::Compiler::Syntax {
 
 	void initSyntax() {
-		auto A = "A"_rule;
-		auto S = "S"_rule;
 		auto SS = "S'"_rule;
-		SS - Symbols::SymbolList{
-				S
+		auto S = "S"_rule;
+		/*auto Op = "Op"_rule;
+		auto Add = "Add"_rule;
+		auto Mul = "Mul"_rule;
+		auto num = "NUMBER"_token;
+		auto plus = "ADD"_token;
+		auto minus = "SUB"_token;
+		auto mul = "MUL"_token;
+		auto div = "DIV"_token;
+		S - Symbols::SymbolList{Op};
+		Op - Symbols::SymbolList{
+			Add,
+			Mul
 		};
+		Add - Symbols::SymbolList{
+			Add + plus + Mul,
+			Add + minus + Mul,
+			Mul
+		};
+		Mul - Symbols::SymbolList {
+			Mul + mul + num,
+			Mul + div + num,
+			num
+		};*/
+		auto A = "A"_token;
+		auto B = "B"_token;
+		auto C = "C"_token;
+		auto D = "D"_token;
+		SS - Symbols::SymbolList{S};
 		S - Symbols::SymbolList{
-				A + A
-		};
-		A - Symbols::SymbolList{
-				"a"_token + A,
-				"b"_token
+				A + B + C,
+				A + B + D
 		};
 	}
 

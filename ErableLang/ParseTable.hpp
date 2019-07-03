@@ -72,12 +72,15 @@ namespace Erable::Compiler::Parser {
 		 */
 		void generateFirstRound();
 
+		static void recursiveExpandRule(IterationNode *node, Symbols::SymbolPtr &symbol);
+
 		/**
 		 * If the symbol followed by the dot is a rule, expand the rule and keep doing this.
 		 * @param node
 		 * @param symbol
 		 */
-		static void recursiveExpandRule(IterationNode *node, Symbols::SymbolPtr &symbol);
+		static void
+		recursiveExpandRule(Symbols::SymbolSet &duplicateBuffer, IterationNode *node, Symbols::SymbolPtr &symbol);
 
 		bool isFinished(IterationNode *node);
 
@@ -88,6 +91,8 @@ namespace Erable::Compiler::Parser {
 							 Symbols::SymbolPtr symbolPtr);
 
 		void _generate(std::unordered_set<IterationNode *> &duplicateBuffer, IterationNode *);
+
+		static bool _notDuplicate(Symbols::SymbolSet &duplicateBuffer, Symbols::SymbolPtr);
 
 	};
 

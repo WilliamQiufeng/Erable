@@ -147,6 +147,12 @@ namespace Erable::Compiler::Parser {
 	}
 
 	void RuleIteration::recursiveExpandRule(IterationNode *node, Symbols::SymbolPtr &symbol) {
+		Symbols::SymbolSet duplicateBuffer;
+		recursiveExpandRule(duplicateBuffer, node, symbol);
+	}
+
+	void RuleIteration::recursiveExpandRule(Symbols::SymbolSet &duplicateBuffer, IterationNode *node,
+											Symbols::SymbolPtr &symbol) {
 		if (symbol->getType() == Symbols::SymbolType::COMBINATION) {
 			//Cast the symbol
 			auto combination = std::static_pointer_cast<Symbols::CombineSymbol>(symbol);
@@ -160,11 +166,14 @@ namespace Erable::Compiler::Parser {
 					for (auto &item : found) {
 						auto cloned = item->fullClone();
 						cloned->lookahead = combination->getFront();
-						cloneFound.push_back(cloned);
+						if (_notDuplicate(duplicateBuffer, cloned)) {
+							duplicateBuffer.insert(cloned);
+							cloneFound.push_back(cloned);
+						}
 					}
 					node->symbols.insert(node->symbols.end(), cloneFound.begin(), cloneFound.end());
 					for (auto &element : cloneFound) {
-						recursiveExpandRule(node, element);
+						recursiveExpandRule(duplicateBuffer, node, element);
 					}
 				}
 			}
@@ -217,6 +226,15 @@ namespace Erable::Compiler::Parser {
 				}
 			}
 		}
+	}
+
+	bool RuleIteration::_notDuplicate(Symbols::SymbolSet &duplicateBuffer, Symbols::SymbolPtr sym) {
+		for (auto &elem : duplicateBuffer) {
+			if (sym->is(elem)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	void ParseTable::_place(int line, std::string key, Action action) {

@@ -100,7 +100,7 @@ std::string Erable::Compiler::Symbols::CombineSymbol::toString() {
 }
 
 bool Erable::Compiler::Symbols::CombineSymbol::is(Erable::Compiler::Symbols::SymbolPtr that) {
-	if (that->getType() == SymbolType::COMBINATION) {
+	/*if (that->getType() == SymbolType::COMBINATION) {
 		if (this->getTag() != that->getTag())return false;
 		CombineSymbolPtr ptr = std::static_pointer_cast<CombineSymbol>(that);
 		if (this->list.size() != ptr->list.size()) return false;
@@ -113,7 +113,8 @@ bool Erable::Compiler::Symbols::CombineSymbol::is(Erable::Compiler::Symbols::Sym
 		}
 		return true;
 	}
-	return false;
+	return false;*/
+	return this->ruleId == that->ruleId;
 }
 
 Erable::Compiler::Symbols::LookaheadSet Erable::Compiler::Symbols::CombineSymbol::getFront() {
