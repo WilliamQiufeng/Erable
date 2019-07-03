@@ -10,6 +10,7 @@
 
 namespace Erable::Compiler::Syntax {
 	inline Symbols::SymbolList syntaxList;
+	inline Symbols::SymbolSet tokenList/*, ruleList*/;
 
 	std::string $syntaxListToString();
 

@@ -7,10 +7,25 @@
 #define ERABLELANG_PARSETABLE_HPP
 
 #include <ostream>
+#include <unordered_map>
 #include "Headers.hpp"
 
 namespace Erable::Compiler::Parser {
 	inline std::unordered_set<IterationNode *> INDuplicateBuffer;
+
+	enum class ActionType {
+		STATE,
+		REDUCE,
+		ACCEPT
+	};
+
+	struct Action {
+		ActionType type;
+		int i;
+
+		friend std::ostream &operator<<(std::ostream &os, const Action &action);
+
+	};
 	struct IterationNode {
 		int iterationIndex;
 		std::vector<Symbols::SymbolPtr> symbols;
@@ -74,6 +89,39 @@ namespace Erable::Compiler::Parser {
 
 		void _generate(std::unordered_set<IterationNode *> &duplicateBuffer, IterationNode *);
 
+	};
+
+	class ParseTable {
+		typedef std::unordered_map<std::string, Action> ActionLine;
+		typedef std::vector<ActionLine> ActionTable;
+		RuleIteration iteration;
+		ActionTable parseTable;
+		int stateAmount;
+	public:
+		ParseTable(const RuleIteration &iteration, int stateAmount);
+
+		ParseTable(const RuleIteration &iteration);
+
+		int getStateAmount() const;
+
+		void setStateAmount(int amount);
+
+		void generateTable();
+
+		friend std::ostream &operator<<(std::ostream &os, const ParseTable &table);
+
+	protected:
+		void _generateTable(IterationNodeSet &duplicateBuffer);
+
+		void _generateTable(IterationNodeSet &duplicateBuffer, IterationNode *node);
+
+		void _place(int line, std::string key, Action action);
+
+		void _place(int line, std::vector<std::string> keys, Action action);
+
+		void _place(int line, Symbols::SymbolList symbols, Action action);
+
+		void _place(int line, Symbols::SymbolSet symbols, Action action);
 	};
 }
 

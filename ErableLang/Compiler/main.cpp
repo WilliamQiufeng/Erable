@@ -18,5 +18,8 @@ int main(int argc, char *argv[]) {
 	ruleIteration.generateFirstRound();
 	ruleIteration.generate();
 	std::cout << ruleIteration.rootNode << std::endl;
+	Parser::ParseTable parseTable(ruleIteration);
+	parseTable.generateTable();
+	std::cout << parseTable << std::endl;
     return 0;
 }

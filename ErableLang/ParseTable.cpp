@@ -2,6 +2,7 @@
 #include <Syntax.hpp>
 #include <iostream>
 #include <sstream>
+#include <iomanip>
 
 //
 // Created by Qiufeng54321 on 2019-07-02.
@@ -103,16 +104,6 @@ namespace Erable::Compiler::Parser {
 	}
 
 	void RuleIteration::generateFirstRound() {
-		/*//Clone the root rule
-		auto clone = Syntax::root->fullClone();
-		//set lookahead
-		//auto dulplicateBuffer = Symbols::SymbolList{};
-		clone->lookahead = clone->getFront();
-		//Initialize the root node
-		rootNode = new IterationNode{this->currentIndex++, {clone}};
-		//Recursively expand the node/rule
-		recursiveExpandRule(rootNode, clone);
-		rootNode->symbols.erase(rootNode->symbols.begin());*/
 		if (Syntax::syntaxList.empty()) throw std::runtime_error("No input syntax given!!");
 		//Always, the first syntax declared is the root
 		auto &rootSyntax = Syntax::syntaxList[0];
@@ -153,65 +144,9 @@ namespace Erable::Compiler::Parser {
 						"Iteration Error: unknown operation which caused non-combination in iteration");
 			}
 		}
-//		std::cout << rootNode << std::endl;
-//		std::cout << "------------------------------------------" << std::endl;
-		/*//For each symbol in the parent node
-		for (auto &item : node->symbols) {
-
-			if (item->getType() == Symbols::SymbolType::CONTAINER) {
-				//cast the symbol to a rule container
-				Symbols::RuleContainerPtr ruleContainer = std::static_pointer_cast<Symbols::RuleContainer>(item);
-				//If the rule container's dot position reached its end
-				if (ruleContainer->container.size() <= item->dotPosition) {
-					continue;
-				}
-			} else if (item->getType() == Symbols::SymbolType::RULE) {
-				//cast the symbol to a rule
-				Symbols::RuleSymbolPtr ruleContainer = std::static_pointer_cast<Symbols::RuleSymbol>(item);
-				//If the rule container's dot position reached its end
-				if (ruleContainer->combination->list.size() <= item->dotPosition) {
-					continue;
-				}
-			} else {
-				throw std::runtime_error(
-						"CLR(1) Parse Table Error: the symbol must be a rule container or a rule in an iteration node");
-			}
-			//Create a clone for the symbol
-			auto clone = item->fullClone();
-			//Set the dot position to the parent's dot position
-			clone->dotPosition = item->dotPosition;
-			//Increase the dot position
-			clone->shiftDot();
-			//Lookahead doesn't change!!
-			clone->lookahead = item->lookahead;
-			//If there is a duplicate symbol
-			auto found = findMatch(clone);
-			if (found) {
-				//Connect them
-				clone->connectedToSymbol = found;
-			} else {
-				//Create a child node
-				auto *newNode = new IterationNode{this->currentIndex++, {clone}};
-				if (newNode->iterationIndex == 2) {
-
-				}
-				recursiveExpandRule(newNode, clone);
-				//Connect the node
-				item->connectedTo = newNode;
-			}
-		}*/
 	}
 
 	void RuleIteration::recursiveExpandRule(IterationNode *node, Symbols::SymbolPtr &symbol) {
-		/*if (symbol->getType() == Symbols::SymbolType::CONTAINER) {
-			//cast the symbol to a rule container
-			Symbols::RuleContainerPtr ruleContainer = std::static_pointer_cast<Symbols::RuleContainer>(symbol);
-			_expandContainer(node, ruleContainer);
-		} else if (symbol->getType() == Symbols::SymbolType::RULE) {
-			//cast the symbol to a rule container
-			Symbols::RuleSymbolPtr ruleContainer = std::static_pointer_cast<Symbols::RuleSymbol>(symbol);
-			_expandRule(node, ruleContainer);
-		}*/
 		if (symbol->getType() == Symbols::SymbolType::COMBINATION) {
 			//Cast the symbol
 			auto combination = std::static_pointer_cast<Symbols::CombineSymbol>(symbol);
@@ -236,6 +171,154 @@ namespace Erable::Compiler::Parser {
 		}
 	}
 
+	ParseTable::ParseTable(const RuleIteration &iteration, int stateAmount) : iteration(iteration) {
+		setStateAmount(stateAmount);
+	}
+
+	int ParseTable::getStateAmount() const {
+		return stateAmount;
+	}
+
+	void ParseTable::setStateAmount(int amount) {
+		ParseTable::stateAmount = amount;
+		parseTable.clear();
+		for (int i = 0; i < amount; i++) {
+			parseTable.push_back(ActionLine());
+		}
+	}
+
+	void ParseTable::generateTable() {
+		IterationNodeSet duplicateBuffer;
+		_generateTable(duplicateBuffer);
+	}
+
+	void ParseTable::_generateTable(IterationNodeSet &duplicateBuffer) {
+		_generateTable(duplicateBuffer, this->iteration.rootNode);
+	}
+
+	void ParseTable::_generateTable(IterationNodeSet &duplicateBuffer, IterationNode *node) {
+		for (auto &item : node->symbols) {
+			Symbols::CombineSymbolPtr ptr = std::static_pointer_cast<Symbols::CombineSymbol>(item);
+			if (ptr->dotPosition >= ptr->list.size()) {
+				//If the rule is the root rule
+				if (ptr->ruleId == 0) {
+					_place(node->iterationIndex, ptr->lookahead, {ActionType::ACCEPT});
+				} else {
+					_place(node->iterationIndex, ptr->lookahead, {ActionType::REDUCE, ptr->ruleId});
+				}
+			} else {
+				Symbols::SymbolPtr currentSymbol = ptr->list[ptr->dotPosition];
+				IterationNode *changedToNode = ptr->connectedTo;
+				_place(node->iterationIndex, currentSymbol->getTag(),
+					   {ActionType::STATE, changedToNode->iterationIndex});
+				if (duplicateBuffer.find(changedToNode) == duplicateBuffer.end()) {
+					duplicateBuffer.insert(changedToNode);
+					_generateTable(duplicateBuffer, changedToNode);
+				}
+			}
+		}
+	}
+
+	void ParseTable::_place(int line, std::string key, Action action) {
+		auto &tl = parseTable[line];
+		auto found = tl.find(key);
+		if (found == tl.end()) {
+			tl[key] = action;
+		} else {
+			std::cerr << "Conflict in state " << line << " symbol " << key << " with action " << (*found).second
+					  << " and " << action << std::endl;
+		}
+	}
+
+	void ParseTable::_place(int line, std::vector<std::string> keys, Action action) {
+		for (auto item : keys) {
+			_place(line, item, action);
+		}
+	}
+
+	void ParseTable::_place(int line, Symbols::SymbolList symbols, Action action) {
+		for (auto item : symbols) {
+			_place(line, item->getTag(), action);
+		}
+	}
+
+	void ParseTable::_place(int line, Symbols::SymbolSet symbols, Action action) {
+		for (auto item : symbols) {
+			_place(line, item->getTag(), action);
+		}
+	}
+
+	std::ostream &operator<<(std::ostream &os, const ParseTable &table) {
+		int stateWidth = 6;
+		int width = 10;
+		int tokensWidth = (Syntax::tokenList.size() + 1) * width;
+		os << std::setw(stateWidth) << std::left << "state" << "|";
+		for (auto tkn : Syntax::tokenList) {
+			os << std::setw(width) << tkn->getTag() << "|";
+		}
+		os << std::setw(width) << Symbols::EOT->getTag() << "|";
+		/*for (auto tkn : Syntax::ruleList) {
+			os << std::setw(width) << tkn->getTag() << "|";
+		}*/
+		os << std::endl;
+		for (int i = 0; i < table.getStateAmount(); i++) {
+			ParseTable::ActionLine line = table.parseTable[i];
+			os << std::setw(stateWidth) << std::left << i << "|";
+			for (auto tkn : Syntax::tokenList) {
+				auto tag = tkn->getTag();
+				auto found = line.find(tag);
+				if (found != line.end()) {
+					Action action = (*found).second;
+					std::stringstream ss;
+					ss << action;
+					os << std::setw(width) << ss.str() << "|";
+				} else {
+					os << std::setw(width) << " " << "|";
+				}
+			}
+			auto found = line.find(Symbols::EOT->getTag());
+			if (found != line.end()) {
+				Action action = (*found).second;
+				std::stringstream ss;
+				ss << action;
+				os << std::setw(width) << ss.str() << "|";
+			} else {
+				os << std::setw(width) << " " << "|";
+			}
+			/*for (auto tkn : Syntax::ruleList) {
+				auto tag = tkn->getTag();
+				auto found = line.find(tag);
+				if (found != line.end()) {
+					Action action = (*found).second;
+					std::stringstream ss;
+					ss << action;
+					os << std::setw(width) << ss.str() << "|";
+				} else {
+					os << std::setw(width) << " " << "|";
+				}
+			}*/
+			os << "\n";
+		}
+		return os;
+	}
+
+	ParseTable::ParseTable(const RuleIteration &iteration) : ParseTable(iteration, iteration.currentIndex) {}
+
+	std::ostream &operator<<(std::ostream &os, const Action &action) {
+		switch (action.type) {
+
+			case ActionType::STATE:
+				os << "s" << action.i;
+				break;
+			case ActionType::REDUCE:
+				os << "r" << action.i;
+				break;
+			case ActionType::ACCEPT:
+				os << "acc";
+				break;
+		}
+		return os;
+	}
 }
 
 std::string Erable::Compiler::Parser::IterationNode::toString() {
@@ -251,11 +334,6 @@ std::ostream &operator<<(std::ostream &os, Erable::Compiler::Parser::IterationNo
 		if (item->connectedTo)os << "I" << item->connectedTo->iterationIndex;
 		else if (item->connectedToSymbol)os << item->connectedToSymbol->toString();
 		else os << "None";
-		/*INcount--;
-		os << "\n";
-		for(int i = 0; i<INcount-1; i++) {
-			os << "\t";
-		}*/
 		os << ", (";
 		for (auto &tkn : item->lookahead) {
 			os << tkn->getTag() << " ";
@@ -269,6 +347,5 @@ std::ostream &operator<<(std::ostream &os, Erable::Compiler::Parser::IterationNo
 			Erable::Compiler::Parser::INDuplicateBuffer.end())
 			if (item->connectedTo)os << item->connectedTo << std::endl;
 	}
-	//Erable::Compiler::Parser::INDuplicateBuffer.clear();
 	return os;
 }

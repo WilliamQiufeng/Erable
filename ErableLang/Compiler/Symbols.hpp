@@ -19,6 +19,7 @@ namespace Erable::Compiler::Symbols {
 	public:
 		static int currentUid;
 		int uid = currentUid++;
+		int ruleId;
 		std::string tag;
 		Parser::IterationNode *connectedTo = nullptr;
 		SymbolPtr connectedToSymbol = nullptr;

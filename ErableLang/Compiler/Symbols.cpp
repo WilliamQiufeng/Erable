@@ -40,7 +40,9 @@ Erable::Compiler::Symbols::SymbolType Erable::Compiler::Symbols::Symbol::getType
 }
 
 Erable::Compiler::Symbols::SymbolPtr Erable::Compiler::Symbols::Symbol::fullClone() {
-	return std::make_shared<Symbol>(getTag());
+	auto ret = std::make_shared<Symbol>(getTag());
+	ret->ruleId = ruleId;
+	return ret;
 }
 
 Erable::Compiler::Symbols::LookaheadSet
@@ -58,6 +60,7 @@ Erable::Compiler::Symbols::SymbolType Erable::Compiler::Symbols::CombineSymbol::
 
 Erable::Compiler::Symbols::SymbolPtr Erable::Compiler::Symbols::CombineSymbol::fullClone() {
 	CombineSymbolPtr combination = std::make_shared<CombineSymbol>(getTag(), list);
+	combination->ruleId = ruleId;
 	return combination;
 }
 
@@ -161,11 +164,14 @@ Erable::Compiler::Symbols::Symbol::getFront(SymbolList &symbolList, SymbolPtr ex
 Erable::Compiler::Symbols::SymbolPtr operator "" _rule(const char *name, std::size_t size) {
 	auto tkn = operator ""_token(name, size);
 	tkn->type = Erable::Compiler::Symbols::SymbolType::RULE;
+//	Erable::Compiler::Syntax::ruleList.insert(tkn);
 	return tkn;
 }
 
 Erable::Compiler::Symbols::SymbolPtr operator "" _token(const char *name, std::size_t) {
-	return std::make_shared<Erable::Compiler::Symbols::Symbol>(name);
+	auto ret = std::make_shared<Erable::Compiler::Symbols::Symbol>(name);
+	Erable::Compiler::Syntax::tokenList.insert(ret);
+	return ret;
 };
 
 Erable::Compiler::Symbols::SymbolPtr
@@ -183,15 +189,17 @@ operator+(Erable::Compiler::Symbols::SymbolPtr lhs, Erable::Compiler::Symbols::S
 Erable::Compiler::Symbols::SymbolPtr
 operator-(Erable::Compiler::Symbols::SymbolPtr symbolPtr, Erable::Compiler::Symbols::SymbolList list) {
 	for (auto &item : list) {
+		Erable::Compiler::Symbols::SymbolPtr ptr;
 		if (item->getType() != Erable::Compiler::Symbols::SymbolType::COMBINATION) {
-			auto newSym = std::make_shared<Erable::Compiler::Symbols::CombineSymbol>(symbolPtr->getTag(),
-																					 Erable::Compiler::Symbols::SymbolList{
+			ptr = std::make_shared<Erable::Compiler::Symbols::CombineSymbol>(symbolPtr->getTag(),
+																			 Erable::Compiler::Symbols::SymbolList{
 																							 item});
-			Erable::Compiler::Syntax::syntaxList.push_back(newSym);
 		} else {
 			item->tag = symbolPtr->getTag();
-			Erable::Compiler::Syntax::syntaxList.push_back(item);
+			ptr = item;
 		}
+		ptr->ruleId = Erable::Compiler::Syntax::syntaxList.size();
+		Erable::Compiler::Syntax::syntaxList.push_back(ptr);
 	}
 	return symbolPtr;
 }
