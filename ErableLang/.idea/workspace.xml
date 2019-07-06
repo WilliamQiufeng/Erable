@@ -78,9 +78,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="843ad3e7-5740-4d46-80f4-e7c843e04bd1" name="Default Changelist" comment="clean up">
+    <list default="true" id="843ad3e7-5740-4d46-80f4-e7c843e04bd1" name="Default Changelist" comment="clean up doc">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/runtime/cmake-build-debug/" />
@@ -172,8 +171,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="539">
-              <caret line="109" column="5" selection-start-line="109" selection-start-column="5" selection-end-line="109" selection-end-column="5" />
+            <state relative-caret-position="497">
+              <caret line="107" column="7" selection-start-line="107" selection-start-column="7" selection-end-line="107" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -792,7 +791,7 @@
       <workItem from="1561186931189" duration="1877000" />
       <workItem from="1561212298286" duration="10066000" />
       <workItem from="1561590345329" duration="98660000" />
-      <workItem from="1562390865060" duration="1878000" />
+      <workItem from="1562390865060" duration="2032000" />
     </task>
     <task id="LOCAL-00001" summary="I've changed the IDE I use">
       <created>1558567629247</created>
@@ -1130,7 +1129,14 @@
       <option name="project" value="LOCAL" />
       <updated>1562395310328</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="clean up doc">
+      <created>1562395614410</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1562395614410</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1166,7 +1172,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="345429000" />
+    <option name="totallyTimeSpent" value="345583000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1298,7 +1304,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/Compiler/tests/googletest" />
     </ignored-roots>
-    <MESSAGE value="Lexer finished." />
     <MESSAGE value="Declare a rule just like this:&#10;&quot;rule&quot;_Rule - &quot;Token1&quot;_TokenSymbol&#10;              | &quot;Token2&quot;_TokenSymbol + &quot;Token3&quot;_TokenSymbol&#10;              &#10;Great!!!&gt;_&lt;" />
     <MESSAGE value="Moved the syntax tree in a single c++ file; added Rule::isRef() and Rule::isReal()" />
     <MESSAGE value="Added rule referencing" />
@@ -1323,7 +1328,8 @@
     <MESSAGE value="Some problems are found and I am working on it. This commit is just for showing daily progress" />
     <MESSAGE value=":art: Optimised and Corrected the FIRST method.&#10;:memo: Wrote **Erable Parser Specification**." />
     <MESSAGE value="clean up" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean up" />
+    <MESSAGE value="clean up doc" />
+    <option name="LAST_COMMIT_MESSAGE" value="clean up doc" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1847,8 +1853,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="109" column="5" selection-start-line="109" selection-start-column="5" selection-end-line="109" selection-end-column="5" />
+        <state relative-caret-position="497">
+          <caret line="107" column="7" selection-start-line="107" selection-start-column="7" selection-end-line="107" selection-end-column="7" />
         </state>
       </provider>
     </entry>
