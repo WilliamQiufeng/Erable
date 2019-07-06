@@ -23,13 +23,17 @@ namespace Erable::Compiler::Parser {
 		ActionType type;
 		int i;
 
+		bool operator==(const Action &rhs) const;
+
 		friend std::ostream &operator<<(std::ostream &os, const Action &action);
 
 	};
+
 	struct IterationNode {
 		int iterationIndex;
-		std::vector<Symbols::SymbolPtr> symbols;
+		Symbols::SymbolList symbols;
 
+		IterationNode(int iterationIndex, const Symbols::SymbolList &symbols);
 
 		std::string toString();
 	};
@@ -80,9 +84,17 @@ namespace Erable::Compiler::Parser {
 		 * @param symbol
 		 */
 		static void
-		recursiveExpandRule(Symbols::SymbolSet &duplicateBuffer, IterationNode *node, Symbols::SymbolPtr &symbol);
+		recursiveExpandRule(Symbols::SymbolList &duplicateBuffer, IterationNode *node, Symbols::SymbolPtr &symbol);
 
 		bool isFinished(IterationNode *node);
+
+		static bool notDuplicate(Symbols::SymbolSet &duplicateBuffer, Symbols::SymbolPtr sym);
+
+		static bool notDuplicate(Symbols::SymbolList &duplicateBuffer, Symbols::SymbolPtr sym);
+
+		static bool isExactlyDuplicate(Symbols::SymbolList &duplicateBuffer, Symbols::SymbolPtr sym);
+
+		static bool exactlyDuplicateWithLookahead(Symbols::SymbolList &duplicateBuffer, Symbols::SymbolPtr sym);
 
 	protected:
 		Symbols::SymbolPtr _find(IterationNode *node, Symbols::SymbolPtr symbolPtr, bool matchDotAndLookahead);
@@ -92,16 +104,16 @@ namespace Erable::Compiler::Parser {
 
 		void _generate(std::unordered_set<IterationNode *> &duplicateBuffer, IterationNode *);
 
-		static bool _notDuplicate(Symbols::SymbolSet &duplicateBuffer, Symbols::SymbolPtr);
 
 	};
 
 	class ParseTable {
-		typedef std::unordered_map<std::string, Action> ActionLine;
+		typedef std::unordered_multimap<std::string, Action> ActionLine;
 		typedef std::vector<ActionLine> ActionTable;
 		RuleIteration iteration;
 		ActionTable parseTable;
 		int stateAmount;
+		int maxWidth = 10;
 	public:
 		ParseTable(const RuleIteration &iteration, int stateAmount);
 

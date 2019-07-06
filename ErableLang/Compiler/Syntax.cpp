@@ -10,41 +10,77 @@
 
 namespace Erable::Compiler::Syntax {
 
-	void initSyntax() {
-		auto SS = "S'"_rule;
+
+	void initAddMulOpSyntax() {
 		auto S = "S"_rule;
-		/*auto Op = "Op"_rule;
+		auto Op = "Op"_rule;
 		auto Add = "Add"_rule;
 		auto Mul = "Mul"_rule;
+		auto Pow = "Pow"_rule;
 		auto num = "NUMBER"_token;
 		auto plus = "ADD"_token;
 		auto minus = "SUB"_token;
 		auto mul = "MUL"_token;
 		auto div = "DIV"_token;
+		auto pow = "POW"_token;
 		S - Symbols::SymbolList{Op};
 		Op - Symbols::SymbolList{
-			Add,
-			Mul
+				Add/*,
+			Mul*/
 		};
 		Add - Symbols::SymbolList{
-			Add + plus + Mul,
-			Add + minus + Mul,
-			Mul
+				Add + plus + Mul,
+				Add + minus + Mul,
+				Mul
 		};
-		Mul - Symbols::SymbolList {
-			Mul + mul + num,
-			Mul + div + num,
-			num
-		};*/
+		Mul - Symbols::SymbolList{
+				Mul + mul + Pow,
+				Mul + div + Pow,
+				Pow
+		};
+		Pow - Symbols::SymbolList{
+				num + pow + Pow,
+				num
+		};
+	}
+
+	void initAmbiguousSyntax() {
+		auto SS = "S'"_rule;
+		auto S = "S"_rule;
 		auto A = "A"_token;
-		auto B = "B"_token;
-		auto C = "C"_token;
-		auto D = "D"_token;
 		SS - Symbols::SymbolList{S};
 		S - Symbols::SymbolList{
-				A + B + C,
-				A + B + D
+				S + S,
+				A
 		};
+	}
+
+	void initWikipediaSyntax() {
+		auto SS = "S'"_rule;
+		auto S = "S"_rule;
+		auto E = "E"_rule;
+		auto T = "T"_rule;
+		auto LP = "("_token;
+		auto RP = ")"_token;
+		auto PL = "+"_token;
+		auto n = "n"_token;
+		SS - Symbols::SymbolList{S};
+		S - Symbols::SymbolList{E};
+		E - Symbols::SymbolList{
+				T,
+				LP + E + RP
+		};
+		T - Symbols::SymbolList{
+				n,
+				PL + T,
+				T + n
+		};
+	}
+
+	void initSyntax() {
+//		initAmbiguousSyntax();
+//		initAddMulOpSyntax();
+		initWikipediaSyntax();
 	}
 
 	std::string $syntaxListToString() {

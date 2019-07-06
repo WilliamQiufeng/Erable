@@ -8,10 +8,12 @@
 
 #include "Symbols.hpp"
 #include "Syntax.hpp"
+#include "ParseTable.hpp"
 #include <sstream>
 #include "Utils.h"
 
 int Erable::Compiler::Symbols::Symbol::currentUid = 0;
+
 std::string Erable::Compiler::Symbols::Symbol::getTag() {
 	return this->tag;
 }
@@ -32,7 +34,7 @@ std::string Erable::Compiler::Symbols::Symbol::toString() {
 
 Erable::Compiler::Symbols::LookaheadSet Erable::Compiler::Symbols::Symbol::getFront() {
 	SymbolList symbolList{};
-	return getFront(symbolList);
+	return getFirst(symbolList);
 }
 
 Erable::Compiler::Symbols::SymbolType Erable::Compiler::Symbols::Symbol::getType() {
@@ -42,12 +44,13 @@ Erable::Compiler::Symbols::SymbolType Erable::Compiler::Symbols::Symbol::getType
 Erable::Compiler::Symbols::SymbolPtr Erable::Compiler::Symbols::Symbol::fullClone() {
 	auto ret = std::make_shared<Symbol>(getTag());
 	ret->ruleId = ruleId;
+	ret->type = type;
 	return ret;
 }
 
 Erable::Compiler::Symbols::LookaheadSet
-Erable::Compiler::Symbols::Symbol::getFront(Erable::Compiler::Symbols::SymbolList &) {
-	return {EOT};
+Erable::Compiler::Symbols::Symbol::getFirst(Erable::Compiler::Symbols::SymbolList &symbolList) {
+	return {EPSILON};
 }
 
 bool Erable::Compiler::Symbols::Symbol::is(Erable::Compiler::Symbols::SymbolPtr that) {
@@ -74,13 +77,15 @@ Erable::Compiler::Symbols::CombineSymbol::CombineSymbol(std::string tag, Erable:
 		list)) {}
 
 Erable::Compiler::Symbols::LookaheadSet
-Erable::Compiler::Symbols::CombineSymbol::getFront(SymbolList &symbolList) {
+Erable::Compiler::Symbols::CombineSymbol::getFirst(SymbolList &symbolList) {
 	/*if (this->list.size() <= dotPosition) return {EOT};
 	auto &first = list[dotPosition];
-	return {Symbol::getFront(symbolList, first)};*/
-	if (this->list.empty()) return {EOT};
+	return {Symbol::getFirst(symbolList, first)};*/
+	if (this->list.empty()) return {};
 	auto &sym = this->list[0];
-	return Symbol::getFront(symbolList, sym);
+	LookaheadSet lookaheadSet = Symbol::getFront(symbolList, sym);
+	lookaheadSet.insert(lookahead.begin(), lookahead.end());
+	return lookaheadSet;
 }
 
 std::string Erable::Compiler::Symbols::CombineSymbol::toString() {
@@ -117,7 +122,7 @@ bool Erable::Compiler::Symbols::CombineSymbol::is(Erable::Compiler::Symbols::Sym
 	return this->ruleId == that->ruleId;
 }
 
-Erable::Compiler::Symbols::LookaheadSet Erable::Compiler::Symbols::CombineSymbol::getFront() {
+/*Erable::Compiler::Symbols::LookaheadSet Erable::Compiler::Symbols::CombineSymbol::getFront() {
 	SymbolList buffer;
 	if (this->getTag() == ANONYMOUS) return Symbol::getFront();
 	if (this->list.size() <= dotPosition + 1) {
@@ -129,7 +134,7 @@ Erable::Compiler::Symbols::LookaheadSet Erable::Compiler::Symbols::CombineSymbol
 	};
 	auto &first = list[dotPosition + 1];
 	return {Symbol::getFront(buffer, first)};
-}
+}*/
 
 
 Erable::Compiler::Symbols::LookaheadSet
@@ -138,27 +143,30 @@ Erable::Compiler::Symbols::Symbol::getFront(SymbolList &symbolList, SymbolPtr ex
 		case SymbolType::TOKEN:
 			return {exp};
 		case SymbolType::RULE:
-			if (Utils::ArrayUtils::indexOf(symbolList, exp) == -1) {
+			if (Parser::RuleIteration::notDuplicate(symbolList, exp)) {
 				symbolList.push_back(exp);
 				LookaheadSet ret;
 				SymbolList found = Syntax::$find(exp->getTag());
 				for (auto &item : found) {
-					SymbolList buffer;
-					LookaheadSet lookaheadSet = item->getFront(buffer);
+					LookaheadSet lookaheadSet = item->getFirst(symbolList);
 					ret.insert(lookaheadSet.begin(), lookaheadSet.end());
 				}
+//				return ret.empty() ? LookaheadSet{EOT} : ret;
 				return ret;
 			}
+			break;
 		case SymbolType::COMBINATION:
-			if (Utils::ArrayUtils::indexOf(symbolList, exp) == -1) {
+			if (Parser::RuleIteration::notDuplicate(symbolList, exp)) {
 				symbolList.push_back(exp);
-				auto front = exp->getFront(symbolList);
-				return front.empty() ? LookaheadSet{EOT} : front;
+				auto front = exp->getFirst(symbolList);
+//				return front.empty() ? LookaheadSet{EOT} : front;
+				return front;
 			}
 			//Else fall to default
 		default:
-			return {EOT};
+			return {};
 	}
+	return {};
 }
 
 
@@ -194,7 +202,7 @@ operator-(Erable::Compiler::Symbols::SymbolPtr symbolPtr, Erable::Compiler::Symb
 		if (item->getType() != Erable::Compiler::Symbols::SymbolType::COMBINATION) {
 			ptr = std::make_shared<Erable::Compiler::Symbols::CombineSymbol>(symbolPtr->getTag(),
 																			 Erable::Compiler::Symbols::SymbolList{
-																							 item});
+																					 item});
 		} else {
 			item->tag = symbolPtr->getTag();
 			ptr = item;

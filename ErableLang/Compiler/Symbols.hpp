@@ -60,10 +60,10 @@ namespace Erable::Compiler::Symbols {
 
 		/**
 		 * Gets the very front token of the current symbol.
-		 * @param duplicate records already-checked symbols in case for two rules that references each other at start.
+		 * @param symbolList records already-checked symbols in case for two rules that references each other at start.
 		 * @return tokens that may be at the very front
 		 */
-		virtual LookaheadSet getFront(SymbolList &duplicate);
+		virtual LookaheadSet getFirst(SymbolList &symbolList);
 
 		/**
 		 * Makes a string containing some infos about the symbol.
@@ -97,9 +97,9 @@ namespace Erable::Compiler::Symbols {
 
 		SymbolPtr fullClone() override;
 
-		LookaheadSet getFront() override;
+//		LookaheadSet getFront() override;
 
-		LookaheadSet getFront(SymbolList &list) override;
+		LookaheadSet getFirst(SymbolList &list) override;
 
 		std::string toString() override;
 
@@ -107,7 +107,7 @@ namespace Erable::Compiler::Symbols {
 	};
 
 	///End Of Token
-	inline auto EOT = std::make_shared<Symbol>("$EOT");
+	inline auto EPSILON = std::make_shared<Symbol>("$");
 	inline std::string ANONYMOUS = "_anonymous";
 }
 

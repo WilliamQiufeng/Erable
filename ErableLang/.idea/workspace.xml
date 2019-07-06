@@ -80,13 +80,12 @@
   <component name="ChangeListManager">
     <list default="true" id="843ad3e7-5740-4d46-80f4-e7c843e04bd1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Headers.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Headers.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler/Symbols.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Symbols.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler/Symbols.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Symbols.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Syntax.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Syntax.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compiler/Syntax.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/Syntax.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ParseTable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ParseTable.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ParseTable.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ParseTable.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docs/spec/Erable-Parser-Specification.md" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/spec/Erable-Parser-Specification.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/runtime/cmake-build-debug/" />
@@ -125,22 +124,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Compiler/main.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Compiler/Syntax.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+            <state relative-caret-position="199">
+              <caret line="80" column="29" selection-start-line="80" selection-start-column="29" selection-end-line="80" selection-end-column="29" />
               <folding>
                 <element signature="e#100#121#0" expanded="true" />
               </folding>
@@ -152,7 +139,19 @@
         <entry file="file://$PROJECT_DIR$/Compiler/Syntax.hpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
-              <caret line="12" column="51" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="53" />
+              <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Compiler/Headers.hpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="130">
+              <caret line="74" selection-start-line="74" selection-end-line="74" />
+              <folding>
+                <element signature="e#163#180#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -160,8 +159,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Compiler/Symbols.hpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-409">
-              <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+            <state relative-caret-position="75">
+              <caret line="95" column="37" lean-forward="true" selection-start-line="95" selection-start-column="37" selection-end-line="95" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../docs/spec/Erable-Parser-Specification.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="241">
+                <caret line="46" column="86" selection-start-line="46" selection-start-column="86" selection-end-line="46" selection-end-column="86" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -169,11 +180,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Compiler/Symbols.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="167" column="4" lean-forward="true" selection-start-line="167" selection-start-column="4" selection-end-line="167" selection-end-column="4" />
-              <folding>
-                <element signature="e#121#143#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-7">
+              <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -181,8 +189,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ParseTable.hpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
-              <caret line="93" column="38" lean-forward="true" selection-start-line="93" selection-start-column="38" selection-end-line="93" selection-end-column="38" />
+            <state relative-caret-position="215">
+              <caret line="96" column="112" selection-start-line="96" selection-start-column="112" selection-end-line="96" selection-end-column="112" />
               <folding>
                 <element signature="e#169#187#0" expanded="true" />
               </folding>
@@ -190,11 +198,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ParseTable.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="58">
-              <caret line="257" column="45" lean-forward="true" selection-start-line="257" selection-start-column="45" selection-end-line="257" selection-end-column="45" />
+            <state relative-caret-position="181">
+              <caret line="111" selection-start-line="111" selection-end-line="111" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
                 <element signature="e#100#125#0" expanded="true" />
@@ -204,31 +212,24 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/new">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="82">
+              <caret line="251" selection-start-line="251" selection-end-line="251" />
+              <folding>
+                <element signature="e#10598#10636#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/memory">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="3573" selection-start-line="3573" selection-end-line="3573" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/type_traits">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="2297" selection-start-line="2297" selection-end-line="2297" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Compiler/Headers.hpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="134" column="64" lean-forward="true" selection-start-line="134" selection-start-column="64" selection-end-line="134" selection-end-column="64" />
+            <state relative-caret-position="83">
+              <caret line="4188" selection-start-line="4188" selection-end-line="4188" />
               <folding>
-                <element signature="e#163#180#0" expanded="true" />
-                <element signature="e#1762#1779#0" expanded="true" />
+                <element signature="e#112839#112892#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -271,7 +272,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Compiler/tanpero_lexer.cpp" />
         <option value="$PROJECT_DIR$/VM/Program.hpp" />
         <option value="$PROJECT_DIR$/VM/ConstantPool.hpp" />
         <option value="$PROJECT_DIR$/stdlib/CMakeLists.txt" />
@@ -314,14 +314,15 @@
         <option value="$PROJECT_DIR$/Global/Global.cpp" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/Doxyfile.in" />
-        <option value="$PROJECT_DIR$/Compiler/Syntax.cpp" />
-        <option value="$PROJECT_DIR$/Compiler/Symbols.hpp" />
-        <option value="$PROJECT_DIR$/Compiler/Headers.hpp" />
         <option value="$PROJECT_DIR$/Compiler/main.cpp" />
-        <option value="$PROJECT_DIR$/ParseTable.hpp" />
-        <option value="$PROJECT_DIR$/Compiler/Symbols.cpp" />
         <option value="$PROJECT_DIR$/Compiler/Syntax.hpp" />
+        <option value="$PROJECT_DIR$/ParseTable.hpp" />
+        <option value="$PROJECT_DIR$/Compiler/Headers.hpp" />
+        <option value="$PROJECT_DIR$/Compiler/Syntax.cpp" />
         <option value="$PROJECT_DIR$/ParseTable.cpp" />
+        <option value="$PROJECT_DIR$/Compiler/Symbols.cpp" />
+        <option value="$PROJECT_DIR$/Compiler/Symbols.hpp" />
+        <option value="$PROJECT_DIR$/../docs/spec/Erable-Parser-Specification.md" />
       </list>
     </option>
   </component>
@@ -344,6 +345,46 @@
     </navigator>
     <panes>
       <pane id="Scope">
+        <subPane subId="Scope 'Project Non-Source Files'; set:Project Non-Source Files; class com.jetbrains.cidr.lang.search.scopes.ProjectSourcesScopeProvider$NonSourceFilesScope">
+          <expand>
+            <path>
+              <item name="ErableLang" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="$PROJECT_DIR$" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="ErableLang" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="$PROJECT_DIR$" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="Compiler" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ErableLang" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="$PROJECT_DIR$" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="Compiler" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="tests" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ErableLang" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="$PROJECT_DIR$" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="Playground" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ErableLang" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="$PROJECT_DIR$" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="stdlib" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ErableLang" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="$PROJECT_DIR$" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="tests" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ErableLang" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="$PROJECT_DIR$" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="VM" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
             <path>
@@ -765,7 +806,7 @@
       <workItem from="1561186835061" duration="61000" />
       <workItem from="1561186931189" duration="1877000" />
       <workItem from="1561212298286" duration="10066000" />
-      <workItem from="1561590345329" duration="74279000" />
+      <workItem from="1561590345329" duration="98112000" />
     </task>
     <task id="LOCAL-00001" summary="I've changed the IDE I use">
       <created>1558567629247</created>
@@ -1068,7 +1109,21 @@
       <option name="project" value="LOCAL" />
       <updated>1562131952114</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Parse Table now works!">
+      <created>1562141200973</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1562141200981</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Some problems are found and I am working on it. This commit is just for showing daily progress">
+      <created>1562154118478</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1562154118478</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1104,7 +1159,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="319170000" />
+    <option name="totallyTimeSpent" value="343003000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1141,7 +1196,7 @@
       <window_info anchor="bottom" id="Tool Output" order="16" sideWeight="0.49924472" weight="0.32991204" />
       <window_info anchor="bottom" id="ANTLR Preview" order="17" sideWeight="0.49924472" weight="0.32991204" />
       <window_info anchor="bottom" auto_hide="true" id="Statistic" order="18" weight="0.43255132" />
-      <window_info active="true" anchor="bottom" id="Run Dashboard" order="19" visible="true" weight="0.77272725" />
+      <window_info anchor="bottom" id="Run Dashboard" order="19" visible="true" weight="0.36950147" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -1236,8 +1291,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/Compiler/tests/googletest" />
     </ignored-roots>
-    <MESSAGE value="Update Progress" />
-    <MESSAGE value="Fixed regex problems" />
     <MESSAGE value="Now the lexer works properly. Added many tokens." />
     <MESSAGE value="Now the lexer works properly. Added many tokens.&#10;&#10;Signed-off-by: Qiufeng54321 &lt;williamcraft@163.com&gt;" />
     <MESSAGE value="Lexer finished." />
@@ -1261,7 +1314,9 @@
     <MESSAGE value=":art: Improving structure / format of the code.&#10;:construction: Deleted original dumb parser, now working on CLR(1) parser." />
     <MESSAGE value=":hankey: Writing bad code that needs to be improved." />
     <MESSAGE value="Iteration works!!!YEEEEEEEEAAAAAAAAAHHHHHHHH!!!!:D:D:D:D" />
-    <option name="LAST_COMMIT_MESSAGE" value="Iteration works!!!YEEEEEEEEAAAAAAAAAHHHHHHHH!!!!:D:D:D:D" />
+    <MESSAGE value="Parse Table now works!" />
+    <MESSAGE value="Some problems are found and I am working on it. This commit is just for showing daily progress" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some problems are found and I am working on it. This commit is just for showing daily progress" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1286,23 +1341,35 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/ParseTable.cpp</url>
-          <line>137</line>
-          <option name="timeStamp" value="122" />
+          <line>47</line>
+          <option name="timeStamp" value="124" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Compiler/Symbols.cpp</url>
+          <line>145</line>
+          <option name="timeStamp" value="128" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/ParseTable.cpp</url>
-          <line>47</line>
-          <option name="timeStamp" value="124" />
+          <line>173</line>
+          <option name="timeStamp" value="129" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/ParseTable.cpp</url>
+          <line>115</line>
+          <option name="timeStamp" value="130" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/ParseTable.cpp</url>
+          <line>111</line>
+          <option name="timeStamp" value="131" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
         <watch expression="Syntax::syntaxList" language="ObjectiveC" />
-        <watch expression="item-&gt;connectedTo" language="ObjectiveC" />
-        <watch expression="symbolPtr.__ptr_-&gt;toString()" language="ObjectiveC" />
-        <watch expression="item.__ptr_-&gt;toString()" language="ObjectiveC" />
-        <watch expression="node-&gt;iterationIndex" />
+        <watch expression="node-&gt;symbols" />
       </configuration>
     </watches-manager>
   </component>
@@ -1361,37 +1428,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Global/Utils.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="67">
-          <caret line="11" column="2" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
-          <folding>
-            <element signature="e#371#388#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VM/VMGlobal.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2075">
-          <caret line="13" column="68" selection-start-line="13" selection-start-column="68" selection-end-line="13" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VM/Metadata.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1092">
-          <caret line="54" column="43" selection-start-line="54" selection-start-column="43" selection-end-line="54" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/lex.erable">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1323">
-          <caret line="63" column="36" selection-start-line="63" selection-start-column="36" selection-end-line="63" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Compiler/Lexer.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -1577,13 +1613,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="36" column="60" selection-start-line="36" selection-start-column="60" selection-end-line="36" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Compiler/Old_Parser.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="212">
@@ -1710,67 +1739,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/memory">
+    <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/utility">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="3573" selection-start-line="3573" selection-end-line="3573" />
+        <state relative-caret-position="21">
+          <caret line="1060" selection-start-line="1060" selection-end-line="1060" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/Headers.hpp">
+    <entry file="file://$PROJECT_DIR$/Compiler/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="134" column="64" lean-forward="true" selection-start-line="134" selection-start-column="64" selection-end-line="134" selection-end-column="64" />
-          <folding>
-            <element signature="e#163#180#0" expanded="true" />
-            <element signature="e#1762#1779#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="154">
+          <caret line="36" column="60" selection-start-line="36" selection-start-column="60" selection-end-line="36" selection-end-column="60" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Compiler/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
+        <state relative-caret-position="67">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/memory">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="83">
+          <caret line="4188" selection-start-line="4188" selection-end-line="4188" />
+          <folding>
+            <element signature="e#112839#112892#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/new">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="251" selection-start-line="251" selection-end-line="251" />
+          <folding>
+            <element signature="e#10598#10636#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ParseTable.hpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="93" column="38" lean-forward="true" selection-start-line="93" selection-start-column="38" selection-end-line="93" selection-end-column="38" />
+        <state relative-caret-position="215">
+          <caret line="96" column="112" selection-start-line="96" selection-start-column="112" selection-end-line="96" selection-end-column="112" />
           <folding>
             <element signature="e#169#187#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/Symbols.cpp">
+    <entry file="file://$PROJECT_DIR$/Compiler/tanpero_lexer.cpp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/Headers.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
-          <caret line="167" column="4" lean-forward="true" selection-start-line="167" selection-start-column="4" selection-end-line="167" selection-end-column="4" />
+          <caret line="74" selection-start-line="74" selection-end-line="74" />
           <folding>
-            <element signature="e#121#143#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/Symbols.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-409">
-          <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/Syntax.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-          <folding>
-            <element signature="e#100#121#0" expanded="true" />
+            <element signature="e#163#180#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1778,18 +1809,52 @@
     <entry file="file://$PROJECT_DIR$/Compiler/Syntax.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
-          <caret line="12" column="51" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="53" />
+          <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/Syntax.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="80" column="29" selection-start-line="80" selection-start-column="29" selection-end-line="80" selection-end-column="29" />
+          <folding>
+            <element signature="e#100#121#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ParseTable.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="257" column="45" lean-forward="true" selection-start-line="257" selection-start-column="45" selection-end-line="257" selection-end-column="45" />
+        <state relative-caret-position="181">
+          <caret line="111" selection-start-line="111" selection-end-line="111" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
             <element signature="e#100#125#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/Symbols.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/Symbols.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="95" column="37" lean-forward="true" selection-start-line="95" selection-start-column="37" selection-end-line="95" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../docs/spec/Erable-Parser-Specification.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="241">
+            <caret line="46" column="86" selection-start-line="46" selection-start-column="86" selection-end-line="46" selection-end-column="86" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

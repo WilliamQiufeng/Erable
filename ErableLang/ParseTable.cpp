@@ -117,41 +117,47 @@ namespace Erable::Compiler::Parser {
 	}
 
 	void RuleIteration::generateOneRound(IterationNode *node) {
-
+		std::unordered_map<std::string, IterationNode *> mappingCurrentDot;
 		//For each symbol in the parent node
 		for (auto &item : node->symbols) {
-			if (item->connectedTo) return;
+			if (item->connectedTo) continue;
 			if (item->getType() == Symbols::SymbolType::COMBINATION) {
 				auto casted = std::static_pointer_cast<Symbols::CombineSymbol>(item);
 				if (casted->dotPosition >= casted->list.size()) continue;
-				auto cloned = casted->fullClone();
-				cloned->lookahead = casted->lookahead;
-				cloned->dotPosition = casted->dotPosition;
-				cloned->shiftDot();
-				auto found = findMatch(cloned);
+				auto &currentSymbol = casted->list[casted->dotPosition];
+				auto clone = casted->fullClone();
+				clone->dotPosition = casted->dotPosition;
+				clone->lookahead = casted->lookahead;
+				clone->shiftDot();
+				auto found = findMatch(clone);
 				if (found) {
-					item->connectedTo = found;
+					casted->connectedTo = found;
 					continue;
 				}
-				IterationNode *newNode = new IterationNode{this->currentIndex++, {cloned}};
-				if (newNode->iterationIndex == 8) {
-
+				if (mappingCurrentDot.find(currentSymbol->getTag()) == mappingCurrentDot.end()) {
+					mappingCurrentDot[currentSymbol->getTag()] = new IterationNode(this->currentIndex++,
+																				   Symbols::SymbolList{});
 				}
-				recursiveExpandRule(newNode, cloned);
-				item->connectedTo = newNode;
-			} else {
-				throw std::runtime_error(
-						"Iteration Error: unknown operation which caused non-combination in iteration");
+				mappingCurrentDot[currentSymbol->getTag()]->symbols.push_back(clone);
+				casted->connectedTo = mappingCurrentDot[currentSymbol->getTag()];
+			}
+		}
+		for (auto &pair : mappingCurrentDot) {
+			IterationNode *iterationNode = pair.second;
+			Symbols::SymbolList cloneCurrentSymbols = iterationNode->symbols;
+			Symbols::SymbolList cloneDuplicateSymbols = iterationNode->symbols;
+			for (auto &item : cloneCurrentSymbols) {
+				recursiveExpandRule(cloneDuplicateSymbols, iterationNode, item);
 			}
 		}
 	}
 
 	void RuleIteration::recursiveExpandRule(IterationNode *node, Symbols::SymbolPtr &symbol) {
-		Symbols::SymbolSet duplicateBuffer;
+		Symbols::SymbolList duplicateBuffer;
 		recursiveExpandRule(duplicateBuffer, node, symbol);
 	}
 
-	void RuleIteration::recursiveExpandRule(Symbols::SymbolSet &duplicateBuffer, IterationNode *node,
+	void RuleIteration::recursiveExpandRule(Symbols::SymbolList &duplicateBuffer, IterationNode *node,
 											Symbols::SymbolPtr &symbol) {
 		if (symbol->getType() == Symbols::SymbolType::COMBINATION) {
 			//Cast the symbol
@@ -165,9 +171,12 @@ namespace Erable::Compiler::Parser {
 					Symbols::SymbolList cloneFound;
 					for (auto &item : found) {
 						auto cloned = item->fullClone();
-						cloned->lookahead = combination->getFront();
-						if (_notDuplicate(duplicateBuffer, cloned)) {
-							duplicateBuffer.insert(cloned);
+						Symbols::SymbolList dup;
+						cloned->lookahead = cloned->getFirst(dup);
+//						cloned->lookahead = cloned->getFirst(dup);
+						auto duplicateDuplicateBuffer = duplicateBuffer;
+						if (!isExactlyDuplicate(duplicateDuplicateBuffer, cloned)) {
+							duplicateBuffer.push_back(cloned);
 							cloneFound.push_back(cloned);
 						}
 					}
@@ -228,7 +237,7 @@ namespace Erable::Compiler::Parser {
 		}
 	}
 
-	bool RuleIteration::_notDuplicate(Symbols::SymbolSet &duplicateBuffer, Symbols::SymbolPtr sym) {
+	bool RuleIteration::notDuplicate(Symbols::SymbolSet &duplicateBuffer, Symbols::SymbolPtr sym) {
 		for (auto &elem : duplicateBuffer) {
 			if (sym->is(elem)) {
 				return false;
@@ -237,15 +246,44 @@ namespace Erable::Compiler::Parser {
 		return true;
 	}
 
-	void ParseTable::_place(int line, std::string key, Action action) {
-		auto &tl = parseTable[line];
-		auto found = tl.find(key);
-		if (found == tl.end()) {
-			tl[key] = action;
-		} else {
-			std::cerr << "Conflict in state " << line << " symbol " << key << " with action " << (*found).second
-					  << " and " << action << std::endl;
+	bool RuleIteration::notDuplicate(Symbols::SymbolList &duplicateBuffer, Symbols::SymbolPtr sym) {
+		for (auto &elem : duplicateBuffer) {
+			if (sym->is(elem)) {
+				return false;
+			}
 		}
+		return true;
+	}
+
+	bool RuleIteration::isExactlyDuplicate(Symbols::SymbolList &duplicateBuffer, Symbols::SymbolPtr sym) {
+		for (auto &elem : duplicateBuffer) {
+			if (sym->is(elem) and sym->dotPosition == elem->dotPosition) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	bool RuleIteration::exactlyDuplicateWithLookahead(Symbols::SymbolList &duplicateBuffer, Symbols::SymbolPtr sym) {
+		for (auto &elem : duplicateBuffer) {
+			if (sym->is(elem) and sym->dotPosition == elem->dotPosition and sym->lookahead == elem->lookahead) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	void ParseTable::_place(int line, std::string key, Action action) {
+		ActionLine &tl = parseTable[line];
+		ParseTable::ActionLine::iterator it;
+		for (it = tl.equal_range(key).first; it != tl.equal_range(key).second; ++it) {
+			Action act = it->second;
+			if (act == action) return;
+		}
+		tl.insert(std::make_pair(key, action));
+		int amount = tl.count(key);
+		int width = amount * 3;
+		if (width > maxWidth) maxWidth = width;
 	}
 
 	void ParseTable::_place(int line, std::vector<std::string> keys, Action action) {
@@ -268,33 +306,42 @@ namespace Erable::Compiler::Parser {
 
 	std::ostream &operator<<(std::ostream &os, const ParseTable &table) {
 		int stateWidth = 6;
-		int width = 10;
-		int tokensWidth = (Syntax::tokenList.size() + 1) * width;
+		int width = table.maxWidth;
 		os << std::setw(stateWidth) << std::left << "state" << "|";
 		for (auto tkn : Syntax::tokenList) {
 			os << std::setw(width) << tkn->getTag() << "|";
 		}
-		os << std::setw(width) << Symbols::EOT->getTag() << "|";
+		os << std::setw(width) << Symbols::EPSILON->getTag() << "|";
 		/*for (auto tkn : Syntax::ruleList) {
 			os << std::setw(width) << tkn->getTag() << "|";
 		}*/
 		os << std::endl;
+		//For each line in the table
 		for (int i = 0; i < table.getStateAmount(); i++) {
 			ParseTable::ActionLine line = table.parseTable[i];
+			//Write state number
 			os << std::setw(stateWidth) << std::left << i << "|";
 			for (auto tkn : Syntax::tokenList) {
 				auto tag = tkn->getTag();
-				auto found = line.find(tag);
-				if (found != line.end()) {
-					Action action = (*found).second;
-					std::stringstream ss;
+//				auto found = line.find(tag);
+//				auto cloneFound = found;
+//				if (found != line.end()) {
+				std::stringstream ss;
+				ParseTable::ActionLine::iterator it;
+				for (it = line.equal_range(tag).first; it != line.equal_range(tag).second; ++it) {
+					Action action = it->second;
+					if (it != line.equal_range(tag).first) {
+						ss << "/";
+					}
 					ss << action;
-					os << std::setw(width) << ss.str() << "|";
-				} else {
-					os << std::setw(width) << " " << "|";
 				}
+				os << std::setw(width) << ss.str();
+				/*} else {
+					os << std::setw(width) << " ";
+				}*/
+				os << "|";
 			}
-			auto found = line.find(Symbols::EOT->getTag());
+			auto found = line.find(Symbols::EPSILON->getTag());
 			if (found != line.end()) {
 				Action action = (*found).second;
 				std::stringstream ss;
@@ -337,33 +384,42 @@ namespace Erable::Compiler::Parser {
 		}
 		return os;
 	}
+
+	bool Action::operator==(const Action &rhs) const {
+		return type == rhs.type &&
+			   i == rhs.i;
+	}
 }
 
 std::string Erable::Compiler::Parser::IterationNode::toString() {
-	std::stringstream ss;
-	ss << this;
-	return ss.str();
-}
-
-std::ostream &operator<<(std::ostream &os, Erable::Compiler::Parser::IterationNode *node) {
-	os << "I" << node->iterationIndex << ": ";
-	for (auto &item : node->symbols) {
+	std::stringstream os;
+	os << "I" << this->iterationIndex << ": ";
+	for (auto &item : this->symbols) {
 		os << "[" << item->getTag() << " -> " << item->toString() << " => ";
 		if (item->connectedTo)os << "I" << item->connectedTo->iterationIndex;
 		else if (item->connectedToSymbol)os << item->connectedToSymbol->toString();
 		else os << "None";
 		os << ", (";
 		for (auto &tkn : item->lookahead) {
-			os << tkn->getTag() << " ";
+			os << "'" << tkn->getTag() << "' ";
 		}
 		os << ")]\n\t";
 	}
-	Erable::Compiler::Parser::INDuplicateBuffer.insert(node);
+	Erable::Compiler::Parser::INDuplicateBuffer.insert(this);
 	os << "\n";
-	for (auto &item : node->symbols) {
+	for (auto &item : this->symbols) {
 		if (Erable::Compiler::Parser::INDuplicateBuffer.find(item->connectedTo) ==
 			Erable::Compiler::Parser::INDuplicateBuffer.end())
-			if (item->connectedTo)os << item->connectedTo << std::endl;
+			if (item->connectedTo)os << item->connectedTo->toString() << std::endl;
 	}
+	return os.str();
+}
+
+Erable::Compiler::Parser::IterationNode::IterationNode(int iterationIndex,
+													   const Erable::Compiler::Symbols::SymbolList &symbols)
+		: iterationIndex(iterationIndex), symbols(symbols) {}
+
+std::ostream &operator<<(std::ostream &os, Erable::Compiler::Parser::IterationNode *node) {
+	os << node->toString();
 	return os;
 }
