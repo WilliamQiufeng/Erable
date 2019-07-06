@@ -104,3 +104,7 @@ _deps
 
 Compiler/.idea/
 cmake-build-debug
+html
+latex
+*.html
+*.tex

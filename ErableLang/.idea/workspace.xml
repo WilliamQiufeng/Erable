@@ -79,11 +79,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="843ad3e7-5740-4d46-80f4-e7c843e04bd1" name="Default Changelist" comment="clean up">
-      <change afterPath="$PROJECT_DIR$/../CppIssue/build/Debug/GNU-MacOSX/main.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CppIssue/build/Debug/GNU-MacOSX/par.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CppIssue/build/Debug/GNU-MacOSX/sth.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CppIssue/dist/Debug/GNU-MacOSX/cppissue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -177,8 +172,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="98" column="12" selection-start-line="98" selection-start-column="12" selection-end-line="98" selection-end-column="12" />
+            <state relative-caret-position="539">
+              <caret line="109" column="5" selection-start-line="109" selection-start-column="5" selection-end-line="109" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -797,7 +792,7 @@
       <workItem from="1561186931189" duration="1877000" />
       <workItem from="1561212298286" duration="10066000" />
       <workItem from="1561590345329" duration="98660000" />
-      <workItem from="1562390865060" duration="1573000" />
+      <workItem from="1562390865060" duration="1878000" />
     </task>
     <task id="LOCAL-00001" summary="I've changed the IDE I use">
       <created>1558567629247</created>
@@ -1128,7 +1123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1562391649490</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="clean up">
+      <created>1562395310328</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1562395310328</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1164,7 +1166,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="345124000" />
+    <option name="totallyTimeSpent" value="345429000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1845,8 +1847,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="98" column="12" selection-start-line="98" selection-start-column="12" selection-end-line="98" selection-end-column="12" />
+        <state relative-caret-position="539">
+          <caret line="109" column="5" selection-start-line="109" selection-start-column="5" selection-end-line="109" selection-end-column="5" />
         </state>
       </provider>
     </entry>
