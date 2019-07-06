@@ -1,0 +1,5 @@
+add_test( [==[Name Construct]==] /williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/ErableCompilerTest [==[Name Construct]==])
+set_tests_properties( [==[Name Construct]==] PROPERTIES WORKING_DIRECTORY /williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests)
+add_test( [==[ID Test]==] /williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/ErableCompilerTest [==[ID Test]==])
+set_tests_properties( [==[ID Test]==] PROPERTIES WORKING_DIRECTORY /williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests)
+set( ErableCompilerTest_TESTS [==[Name Construct]==] [==[ID Test]==])

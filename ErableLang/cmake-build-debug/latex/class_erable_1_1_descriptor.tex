@@ -1,0 +1,289 @@
+\hypertarget{class_erable_1_1_descriptor}{}\section{Erable\+::Descriptor Class Reference}
+\label{class_erable_1_1_descriptor}\index{Erable::Descriptor@{Erable::Descriptor}}
+
+
+{\ttfamily \#include $<$Descriptor.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_erable_1_1_descriptor_a96b4e123aafc08c8dbaeccb4375e6451}{Descriptor}} ()
+\item 
+\mbox{\hyperlink{class_erable_1_1_descriptor_a9f082b3752be4d595a1a842de14c004d}{Descriptor}} (std\+::map$<$ int, \mbox{\hyperlink{class_erable_1_1_erable_1_1_types_1_1_instance}{Erable\+::\+Types\+::\+Instance}} $\ast$ $>$ $\ast$\mbox{\hyperlink{class_erable_1_1_descriptor_a10946ca25cb512e8a4c765c517509c7f}{idmap}})
+\item 
+\mbox{\hyperlink{class_erable_1_1_descriptor_ab178a09ab8bbae9e5693dfc8bb7ae948}{Descriptor}} (Program\+::\+Program\+Input\+Stream $\ast$in)
+\item 
+\mbox{\hyperlink{class_erable_1_1_descriptor_a189b746040601d4c605d7d9a778223d2}{Descriptor}} (\mbox{\hyperlink{class_erable_1_1_descriptor}{Descriptor}} $\ast$other)
+\item 
+void \mbox{\hyperlink{class_erable_1_1_descriptor_a069b8d3315849b50e2f094f90489252b}{init}} ()
+\item 
+void \mbox{\hyperlink{class_erable_1_1_descriptor_adf3369bced93494459b4b21cf7c1cab1}{reset}} ()
+\item 
+std\+::map$<$ int, \mbox{\hyperlink{class_erable_1_1_erable_1_1_types_1_1_instance}{Erable\+::\+Types\+::\+Instance}} $\ast$ $>$ $\ast$ \mbox{\hyperlink{class_erable_1_1_descriptor_a990fc70e63da77dab5efc550149cc6af}{get\+Idmap}} () const
+\item 
+void \mbox{\hyperlink{class_erable_1_1_descriptor_ac9fc4917b73d37dd28c3ed465ee77f67}{set\+Idmap}} (std\+::map$<$ int, \mbox{\hyperlink{class_erable_1_1_erable_1_1_types_1_1_instance}{Erable\+::\+Types\+::\+Instance}} $\ast$ $>$ $\ast$\mbox{\hyperlink{class_erable_1_1_descriptor_a10946ca25cb512e8a4c765c517509c7f}{idmap}})
+\item 
+void \mbox{\hyperlink{class_erable_1_1_descriptor_ab276c219050350ff23bfaab7ba2a884c}{set}} (int, \mbox{\hyperlink{class_erable_1_1_erable_1_1_types_1_1_instance}{Erable\+::\+Types\+::\+Instance}} $\ast$)
+\item 
+Types\+::\+Instance $\ast$ \mbox{\hyperlink{class_erable_1_1_descriptor_ac9f9ef44e3eacba39eca916360ced79b}{get}} (int)
+\item 
+void \mbox{\hyperlink{class_erable_1_1_descriptor_af9b36335f8dcb7b14c80fcd955fc94bc}{del}} (int)
+\item 
+Program\+::\+Program\+Input\+Stream $\ast$ \mbox{\hyperlink{class_erable_1_1_descriptor_a2d6db09d272799233fc908c566974eae}{get\+Input}} () const
+\item 
+void \mbox{\hyperlink{class_erable_1_1_descriptor_abc43cc0e7df1c5f70797b50077971d51}{set\+Input}} (Program\+::\+Program\+Input\+Stream $\ast$\mbox{\hyperlink{class_erable_1_1_descriptor_a75e285ecacfb1ac394fe90d178be84c4}{input}})
+\item 
+\mbox{\hyperlink{class_erable_1_1_descriptor}{Descriptor}} $\ast$ \mbox{\hyperlink{class_erable_1_1_descriptor_ade44929ba23d9f37b653c7c9589b14e0}{get\+Parent}} () const
+\item 
+void \mbox{\hyperlink{class_erable_1_1_descriptor_a0a5f35c5892712c6087515eb288d710b}{set\+Parent}} (\mbox{\hyperlink{class_erable_1_1_descriptor}{Descriptor}} $\ast$\mbox{\hyperlink{class_erable_1_1_descriptor_ac7d55cb4c5fb036dccc4310a7878ffab}{parent}})
+\item 
+int \mbox{\hyperlink{class_erable_1_1_descriptor_a735e3ee95355237de05da52dea59e381}{get\+Ret\+Id}} () const
+\item 
+void \mbox{\hyperlink{class_erable_1_1_descriptor_a0f548ce6b9c0123290548676da72b458}{set\+Ret\+Id}} (int \mbox{\hyperlink{class_erable_1_1_descriptor_ae5ae8353191e79f315d97f5b752c8e3e}{ret\+Id}})
+\item 
+Types\+::\+Instance $\ast$ \mbox{\hyperlink{class_erable_1_1_descriptor_abee030b1b047c6b81c497ae2211c5320}{get\+Ret\+Val}} () const
+\item 
+void \mbox{\hyperlink{class_erable_1_1_descriptor_ab54ea4e665991222eb08b4aa4a41f61a}{set\+Ret\+Val}} (Types\+::\+Instance $\ast$\mbox{\hyperlink{class_erable_1_1_descriptor_a1c1bf3943d3d7cbd9776eccba247182f}{ret\+Val}})
+\item 
+void \mbox{\hyperlink{class_erable_1_1_descriptor_a8aeac23332e1e5d5ad856dd8a6d290e1}{read\+Header}} ()
+\item 
+void \mbox{\hyperlink{class_erable_1_1_descriptor_a913b6872d839271596bc4a4a70411047}{execute}} (Program\+::\+Op op)
+\item 
+void \mbox{\hyperlink{class_erable_1_1_descriptor_a64542c35bdca40b4cb39c2f9452251db}{execute\+All}} (Program\+::\+Op until)
+\item 
+void \mbox{\hyperlink{class_erable_1_1_descriptor_a72638ee8fe6c5063212d69af69b4602c}{execute\+All}} (std\+::vector$<$ Program\+::\+Op $>$ code)
+\item 
+std\+::vector$<$ Program\+::\+Op $>$ \mbox{\hyperlink{class_erable_1_1_descriptor_acd9e9c90e71d2e95af3aa8503e2b59b5}{record\+All}} (Program\+::\+Op until)
+\item 
+Program\+::\+Op \mbox{\hyperlink{class_erable_1_1_descriptor_a485977cfcdce99ef5224bf45949af255}{record}} ()
+\item 
+void \mbox{\hyperlink{class_erable_1_1_descriptor_a4e8aa3a2456928b76d8969286e96a270}{do\+All}} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ int, \mbox{\hyperlink{class_erable_1_1_erable_1_1_types_1_1_instance}{Erable\+::\+Types\+::\+Instance}} $\ast$ $>$ $\ast$ \mbox{\hyperlink{class_erable_1_1_descriptor_a10946ca25cb512e8a4c765c517509c7f}{idmap}}
+\item 
+Program\+::\+Program\+Input\+Stream $\ast$ \mbox{\hyperlink{class_erable_1_1_descriptor_a75e285ecacfb1ac394fe90d178be84c4}{input}}
+\item 
+\mbox{\hyperlink{class_erable_1_1_descriptor}{Descriptor}} $\ast$ \mbox{\hyperlink{class_erable_1_1_descriptor_ac7d55cb4c5fb036dccc4310a7878ffab}{parent}}
+\item 
+Types\+::\+Instance $\ast$ \mbox{\hyperlink{class_erable_1_1_descriptor_a1c1bf3943d3d7cbd9776eccba247182f}{ret\+Val}}
+\item 
+int \mbox{\hyperlink{class_erable_1_1_descriptor_ae5ae8353191e79f315d97f5b752c8e3e}{ret\+Id}}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{class_erable_1_1_descriptor_abaf13535a8e1086f647a9d13e73d778e}{operator$<$$<$}} (std\+::ostream \&os, \mbox{\hyperlink{class_erable_1_1_descriptor}{Descriptor}} \&obj)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_erable_1_1_descriptor_a96b4e123aafc08c8dbaeccb4375e6451}\label{class_erable_1_1_descriptor_a96b4e123aafc08c8dbaeccb4375e6451}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!Descriptor@{Descriptor}}
+\index{Descriptor@{Descriptor}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{Descriptor()}{Descriptor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Erable\+::\+Descriptor\+::\+Descriptor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_a9f082b3752be4d595a1a842de14c004d}\label{class_erable_1_1_descriptor_a9f082b3752be4d595a1a842de14c004d}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!Descriptor@{Descriptor}}
+\index{Descriptor@{Descriptor}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{Descriptor()}{Descriptor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily Erable\+::\+Descriptor\+::\+Descriptor (\begin{DoxyParamCaption}\item[{std\+::map$<$ int, \mbox{\hyperlink{class_erable_1_1_erable_1_1_types_1_1_instance}{Erable\+::\+Types\+::\+Instance}} $\ast$ $>$ $\ast$}]{idmap }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_ab178a09ab8bbae9e5693dfc8bb7ae948}\label{class_erable_1_1_descriptor_ab178a09ab8bbae9e5693dfc8bb7ae948}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!Descriptor@{Descriptor}}
+\index{Descriptor@{Descriptor}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{Descriptor()}{Descriptor()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily Erable\+::\+Descriptor\+::\+Descriptor (\begin{DoxyParamCaption}\item[{Program\+::\+Program\+Input\+Stream $\ast$}]{in }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_a189b746040601d4c605d7d9a778223d2}\label{class_erable_1_1_descriptor_a189b746040601d4c605d7d9a778223d2}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!Descriptor@{Descriptor}}
+\index{Descriptor@{Descriptor}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{Descriptor()}{Descriptor()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily Erable\+::\+Descriptor\+::\+Descriptor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_erable_1_1_descriptor}{Descriptor}} $\ast$}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_erable_1_1_descriptor_af9b36335f8dcb7b14c80fcd955fc94bc}\label{class_erable_1_1_descriptor_af9b36335f8dcb7b14c80fcd955fc94bc}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!del@{del}}
+\index{del@{del}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{del()}{del()}}
+{\footnotesize\ttfamily void Erable\+::\+Descriptor\+::del (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_a4e8aa3a2456928b76d8969286e96a270}\label{class_erable_1_1_descriptor_a4e8aa3a2456928b76d8969286e96a270}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!doAll@{doAll}}
+\index{doAll@{doAll}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{doAll()}{doAll()}}
+{\footnotesize\ttfamily void Erable\+::\+Descriptor\+::do\+All (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_a913b6872d839271596bc4a4a70411047}\label{class_erable_1_1_descriptor_a913b6872d839271596bc4a4a70411047}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!execute@{execute}}
+\index{execute@{execute}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily void Erable\+::\+Descriptor\+::execute (\begin{DoxyParamCaption}\item[{Program\+::\+Op}]{op }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_a64542c35bdca40b4cb39c2f9452251db}\label{class_erable_1_1_descriptor_a64542c35bdca40b4cb39c2f9452251db}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!executeAll@{executeAll}}
+\index{executeAll@{executeAll}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{executeAll()}{executeAll()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Erable\+::\+Descriptor\+::execute\+All (\begin{DoxyParamCaption}\item[{Program\+::\+Op}]{until }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_a72638ee8fe6c5063212d69af69b4602c}\label{class_erable_1_1_descriptor_a72638ee8fe6c5063212d69af69b4602c}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!executeAll@{executeAll}}
+\index{executeAll@{executeAll}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{executeAll()}{executeAll()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Erable\+::\+Descriptor\+::execute\+All (\begin{DoxyParamCaption}\item[{std\+::vector$<$ Program\+::\+Op $>$}]{code }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_ac9f9ef44e3eacba39eca916360ced79b}\label{class_erable_1_1_descriptor_ac9f9ef44e3eacba39eca916360ced79b}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!get@{get}}
+\index{get@{get}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily Types\+::\+Instance $\ast$ Erable\+::\+Descriptor\+::get (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_a990fc70e63da77dab5efc550149cc6af}\label{class_erable_1_1_descriptor_a990fc70e63da77dab5efc550149cc6af}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!getIdmap@{getIdmap}}
+\index{getIdmap@{getIdmap}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{getIdmap()}{getIdmap()}}
+{\footnotesize\ttfamily std\+::map$<$int, \mbox{\hyperlink{class_erable_1_1_erable_1_1_types_1_1_instance}{Erable\+::\+Types\+::\+Instance}} $\ast$$>$$\ast$ Erable\+::\+Descriptor\+::get\+Idmap (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_a2d6db09d272799233fc908c566974eae}\label{class_erable_1_1_descriptor_a2d6db09d272799233fc908c566974eae}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!getInput@{getInput}}
+\index{getInput@{getInput}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{getInput()}{getInput()}}
+{\footnotesize\ttfamily Program\+::\+Program\+Input\+Stream$\ast$ Erable\+::\+Descriptor\+::get\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_ade44929ba23d9f37b653c7c9589b14e0}\label{class_erable_1_1_descriptor_ade44929ba23d9f37b653c7c9589b14e0}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!getParent@{getParent}}
+\index{getParent@{getParent}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{getParent()}{getParent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_erable_1_1_descriptor}{Descriptor}}$\ast$ Erable\+::\+Descriptor\+::get\+Parent (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_a735e3ee95355237de05da52dea59e381}\label{class_erable_1_1_descriptor_a735e3ee95355237de05da52dea59e381}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!getRetId@{getRetId}}
+\index{getRetId@{getRetId}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{getRetId()}{getRetId()}}
+{\footnotesize\ttfamily int Erable\+::\+Descriptor\+::get\+Ret\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_abee030b1b047c6b81c497ae2211c5320}\label{class_erable_1_1_descriptor_abee030b1b047c6b81c497ae2211c5320}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!getRetVal@{getRetVal}}
+\index{getRetVal@{getRetVal}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{getRetVal()}{getRetVal()}}
+{\footnotesize\ttfamily Types\+::\+Instance$\ast$ Erable\+::\+Descriptor\+::get\+Ret\+Val (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_a069b8d3315849b50e2f094f90489252b}\label{class_erable_1_1_descriptor_a069b8d3315849b50e2f094f90489252b}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!init@{init}}
+\index{init@{init}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void Erable\+::\+Descriptor\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_a8aeac23332e1e5d5ad856dd8a6d290e1}\label{class_erable_1_1_descriptor_a8aeac23332e1e5d5ad856dd8a6d290e1}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!readHeader@{readHeader}}
+\index{readHeader@{readHeader}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{readHeader()}{readHeader()}}
+{\footnotesize\ttfamily void Erable\+::\+Descriptor\+::read\+Header (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_a485977cfcdce99ef5224bf45949af255}\label{class_erable_1_1_descriptor_a485977cfcdce99ef5224bf45949af255}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!record@{record}}
+\index{record@{record}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{record()}{record()}}
+{\footnotesize\ttfamily Program\+::\+Op Erable\+::\+Descriptor\+::record (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_acd9e9c90e71d2e95af3aa8503e2b59b5}\label{class_erable_1_1_descriptor_acd9e9c90e71d2e95af3aa8503e2b59b5}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!recordAll@{recordAll}}
+\index{recordAll@{recordAll}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{recordAll()}{recordAll()}}
+{\footnotesize\ttfamily std\+::vector$<$ Program\+::\+Op $>$ Erable\+::\+Descriptor\+::record\+All (\begin{DoxyParamCaption}\item[{Program\+::\+Op}]{until }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_adf3369bced93494459b4b21cf7c1cab1}\label{class_erable_1_1_descriptor_adf3369bced93494459b4b21cf7c1cab1}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!reset@{reset}}
+\index{reset@{reset}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void Erable\+::\+Descriptor\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_ab276c219050350ff23bfaab7ba2a884c}\label{class_erable_1_1_descriptor_ab276c219050350ff23bfaab7ba2a884c}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!set@{set}}
+\index{set@{set}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily void Erable\+::\+Descriptor\+::set (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{\mbox{\hyperlink{class_erable_1_1_erable_1_1_types_1_1_instance}{Erable\+::\+Types\+::\+Instance}} $\ast$}]{instance }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_ac9fc4917b73d37dd28c3ed465ee77f67}\label{class_erable_1_1_descriptor_ac9fc4917b73d37dd28c3ed465ee77f67}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!setIdmap@{setIdmap}}
+\index{setIdmap@{setIdmap}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{setIdmap()}{setIdmap()}}
+{\footnotesize\ttfamily void Erable\+::\+Descriptor\+::set\+Idmap (\begin{DoxyParamCaption}\item[{std\+::map$<$ int, \mbox{\hyperlink{class_erable_1_1_erable_1_1_types_1_1_instance}{Erable\+::\+Types\+::\+Instance}} $\ast$ $>$ $\ast$}]{idmap }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_abc43cc0e7df1c5f70797b50077971d51}\label{class_erable_1_1_descriptor_abc43cc0e7df1c5f70797b50077971d51}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!setInput@{setInput}}
+\index{setInput@{setInput}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{setInput()}{setInput()}}
+{\footnotesize\ttfamily void Erable\+::\+Descriptor\+::set\+Input (\begin{DoxyParamCaption}\item[{Program\+::\+Program\+Input\+Stream $\ast$}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_a0a5f35c5892712c6087515eb288d710b}\label{class_erable_1_1_descriptor_a0a5f35c5892712c6087515eb288d710b}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!setParent@{setParent}}
+\index{setParent@{setParent}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{setParent()}{setParent()}}
+{\footnotesize\ttfamily void Erable\+::\+Descriptor\+::set\+Parent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_erable_1_1_descriptor}{Descriptor}} $\ast$}]{parent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_a0f548ce6b9c0123290548676da72b458}\label{class_erable_1_1_descriptor_a0f548ce6b9c0123290548676da72b458}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!setRetId@{setRetId}}
+\index{setRetId@{setRetId}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{setRetId()}{setRetId()}}
+{\footnotesize\ttfamily void Erable\+::\+Descriptor\+::set\+Ret\+Id (\begin{DoxyParamCaption}\item[{int}]{ret\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_ab54ea4e665991222eb08b4aa4a41f61a}\label{class_erable_1_1_descriptor_ab54ea4e665991222eb08b4aa4a41f61a}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!setRetVal@{setRetVal}}
+\index{setRetVal@{setRetVal}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{setRetVal()}{setRetVal()}}
+{\footnotesize\ttfamily void Erable\+::\+Descriptor\+::set\+Ret\+Val (\begin{DoxyParamCaption}\item[{Types\+::\+Instance $\ast$}]{ret\+Val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\subsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_erable_1_1_descriptor_abaf13535a8e1086f647a9d13e73d778e}\label{class_erable_1_1_descriptor_abaf13535a8e1086f647a9d13e73d778e}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{class_erable_1_1_descriptor}{Descriptor}} \&}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_erable_1_1_descriptor_a10946ca25cb512e8a4c765c517509c7f}\label{class_erable_1_1_descriptor_a10946ca25cb512e8a4c765c517509c7f}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!idmap@{idmap}}
+\index{idmap@{idmap}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{idmap}{idmap}}
+{\footnotesize\ttfamily std\+::map$<$int, \mbox{\hyperlink{class_erable_1_1_erable_1_1_types_1_1_instance}{Erable\+::\+Types\+::\+Instance}} $\ast$$>$$\ast$ Erable\+::\+Descriptor\+::idmap\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_a75e285ecacfb1ac394fe90d178be84c4}\label{class_erable_1_1_descriptor_a75e285ecacfb1ac394fe90d178be84c4}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!input@{input}}
+\index{input@{input}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{input}{input}}
+{\footnotesize\ttfamily Program\+::\+Program\+Input\+Stream$\ast$ Erable\+::\+Descriptor\+::input\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_ac7d55cb4c5fb036dccc4310a7878ffab}\label{class_erable_1_1_descriptor_ac7d55cb4c5fb036dccc4310a7878ffab}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!parent@{parent}}
+\index{parent@{parent}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{parent}{parent}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_erable_1_1_descriptor}{Descriptor}}$\ast$ Erable\+::\+Descriptor\+::parent\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_ae5ae8353191e79f315d97f5b752c8e3e}\label{class_erable_1_1_descriptor_ae5ae8353191e79f315d97f5b752c8e3e}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!retId@{retId}}
+\index{retId@{retId}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{retId}{retId}}
+{\footnotesize\ttfamily int Erable\+::\+Descriptor\+::ret\+Id\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_erable_1_1_descriptor_a1c1bf3943d3d7cbd9776eccba247182f}\label{class_erable_1_1_descriptor_a1c1bf3943d3d7cbd9776eccba247182f}} 
+\index{Erable::Descriptor@{Erable::Descriptor}!retVal@{retVal}}
+\index{retVal@{retVal}!Erable::Descriptor@{Erable::Descriptor}}
+\subsubsection{\texorpdfstring{retVal}{retVal}}
+{\footnotesize\ttfamily Types\+::\+Instance$\ast$ Erable\+::\+Descriptor\+::ret\+Val\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+V\+M/\mbox{\hyperlink{_descriptor_8hpp}{Descriptor.\+hpp}}\item 
+V\+M/\mbox{\hyperlink{_descriptor_8cpp}{Descriptor.\+cpp}}\end{DoxyCompactItemize}

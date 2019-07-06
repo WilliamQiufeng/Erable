@@ -1,0 +1,74 @@
+\hypertarget{_global_8hpp}{}\section{Global/\+Global.hpp File Reference}
+\label{_global_8hpp}\index{Global/Global.hpp@{Global/Global.hpp}}
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$filesystem$>$}\newline
+{\ttfamily \#include $<$regex$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_erable_1_1_config}{Erable\+::\+Config}}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespace_erable}{Erable}}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_global_8hpp_a89f330e1faf184413c421d6a66750a10}{G\+L\+O\+B\+A\+L\+M\+A\+C\+R\+O\+S\+\_\+\+H\+PP}}
+\item 
+\#define \mbox{\hyperlink{_global_8hpp_a252766fe9aa375b4c4a2cdd68390edd9}{R\+E\+P\+E\+AT}}(v,  t)~for(long long (v)=0;v$<$t;++ v)
+\item 
+\#define \mbox{\hyperlink{_global_8hpp_a240c626507210c9d2f52ca55ecc06395}{R\+E\+P\+E\+A\+T\+\_\+\+T\+I\+M\+ES}}(t)~\mbox{\hyperlink{_global_8hpp_a252766fe9aa375b4c4a2cdd68390edd9}{R\+E\+P\+E\+AT}}(\+\_\+,t)
+\item 
+\#define \mbox{\hyperlink{_global_8hpp_a9b7611b91829d672cd9f381a4f7e049c}{E\+R\+A\+B\+L\+E\+\_\+\+D\+E\+B\+UG}}~if(\mbox{\hyperlink{class_erable_1_1_config_acc39c2279f6c13e8f483787227c6dbb4}{Erable\+::\+Config\+::debug}})
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{namespace_erable_ae9dba4ed847d7fbcf9fc1f437578ef91}{Erable\+::get\+Lib}} ()
+\item 
+std\+::string \mbox{\hyperlink{namespace_erable_a55a887a018ba68ab971e3711a638dfa1}{Erable\+::get\+Bin}} ()
+\item 
+std\+::string \mbox{\hyperlink{namespace_erable_a88ace7b6867a84bf35b98b063516dd06}{Erable\+::find\+Std\+Lib}} ()
+\item 
+std\+::string \mbox{\hyperlink{namespace_erable_ab8dc07f5bbd7c2e716b38c2feaca831b}{Erable\+::search\+File}} (std\+::filesystem\+::path path, std\+::regex reg)
+\item 
+std\+::string \mbox{\hyperlink{namespace_erable_afa01b2a2d08571557c8442da41cb72ec}{Erable\+::find\+In\+Following}} (const std\+::vector$<$ std\+::string $>$ \&paths, std\+::string reg)
+\item 
+std\+::string \mbox{\hyperlink{namespace_erable_a9ac51d513b3b6629dcde72f4bf50dce2}{Erable\+::check\+Exists}} (const std\+::string \&key)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{namespace_erable_a6d9e1e498f68cd7fa1c71cb362c89333}{Erable\+::\+U\+N\+K\+N\+O\+WN}} = -\/1
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_global_8hpp_a9b7611b91829d672cd9f381a4f7e049c}\label{_global_8hpp_a9b7611b91829d672cd9f381a4f7e049c}} 
+\index{Global.hpp@{Global.hpp}!ERABLE\_DEBUG@{ERABLE\_DEBUG}}
+\index{ERABLE\_DEBUG@{ERABLE\_DEBUG}!Global.hpp@{Global.hpp}}
+\subsubsection{\texorpdfstring{ERABLE\_DEBUG}{ERABLE\_DEBUG}}
+{\footnotesize\ttfamily \#define E\+R\+A\+B\+L\+E\+\_\+\+D\+E\+B\+UG~if(\mbox{\hyperlink{class_erable_1_1_config_acc39c2279f6c13e8f483787227c6dbb4}{Erable\+::\+Config\+::debug}})}
+
+\mbox{\Hypertarget{_global_8hpp_a89f330e1faf184413c421d6a66750a10}\label{_global_8hpp_a89f330e1faf184413c421d6a66750a10}} 
+\index{Global.hpp@{Global.hpp}!GLOBALMACROS\_HPP@{GLOBALMACROS\_HPP}}
+\index{GLOBALMACROS\_HPP@{GLOBALMACROS\_HPP}!Global.hpp@{Global.hpp}}
+\subsubsection{\texorpdfstring{GLOBALMACROS\_HPP}{GLOBALMACROS\_HPP}}
+{\footnotesize\ttfamily \#define G\+L\+O\+B\+A\+L\+M\+A\+C\+R\+O\+S\+\_\+\+H\+PP}
+
+\mbox{\Hypertarget{_global_8hpp_a252766fe9aa375b4c4a2cdd68390edd9}\label{_global_8hpp_a252766fe9aa375b4c4a2cdd68390edd9}} 
+\index{Global.hpp@{Global.hpp}!REPEAT@{REPEAT}}
+\index{REPEAT@{REPEAT}!Global.hpp@{Global.hpp}}
+\subsubsection{\texorpdfstring{REPEAT}{REPEAT}}
+{\footnotesize\ttfamily \#define R\+E\+P\+E\+AT(\begin{DoxyParamCaption}\item[{}]{v,  }\item[{}]{t }\end{DoxyParamCaption})~for(long long (v)=0;v$<$t;++ v)}
+
+\mbox{\Hypertarget{_global_8hpp_a240c626507210c9d2f52ca55ecc06395}\label{_global_8hpp_a240c626507210c9d2f52ca55ecc06395}} 
+\index{Global.hpp@{Global.hpp}!REPEAT\_TIMES@{REPEAT\_TIMES}}
+\index{REPEAT\_TIMES@{REPEAT\_TIMES}!Global.hpp@{Global.hpp}}
+\subsubsection{\texorpdfstring{REPEAT\_TIMES}{REPEAT\_TIMES}}
+{\footnotesize\ttfamily \#define R\+E\+P\+E\+A\+T\+\_\+\+T\+I\+M\+ES(\begin{DoxyParamCaption}\item[{}]{t }\end{DoxyParamCaption})~\mbox{\hyperlink{_global_8hpp_a252766fe9aa375b4c4a2cdd68390edd9}{R\+E\+P\+E\+AT}}(\+\_\+,t)}
+

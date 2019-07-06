@@ -1,0 +1,130 @@
+\hypertarget{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol}{}\section{Erable\+::Compiler\+::Symbols\+::Token\+Symbol Class Reference}
+\label{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol}\index{Erable::Compiler::Symbols::TokenSymbol@{Erable::Compiler::Symbols::TokenSymbol}}
+
+
+{\ttfamily \#include $<$Old\+\_\+\+Symbols.\+hpp$>$}
+
+Inheritance diagram for Erable\+::Compiler\+::Symbols\+::Token\+Symbol\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_a4c1e8ae7336204598cc0f614a9edbb26}{Token\+Symbol}} (std\+::string \mbox{\hyperlink{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_aedef0a5b3fef634067b62c93934ecb08}{rule\+Name}})
+\item 
+std\+::string \mbox{\hyperlink{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_ab80bcf5e531cee5fbb5fe798449e4cbb}{get\+Type}} () override
+\item 
+std\+::string \mbox{\hyperlink{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_a2d9a65967a330721741d7f13ec299745}{get\+Name}} () override
+\item 
+std\+::string \mbox{\hyperlink{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_a0f8499152ff070ae70295c9b25b25b93}{to\+String}} () override
+\item 
+bool \mbox{\hyperlink{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_ad1946e481bf759d24425afbd869248fd}{find}} (std\+::string string) override
+\item 
+bool \mbox{\hyperlink{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_af55a8939414a0b0ddf7302f6eb0cc77e}{is\+Valid\+Token}} (\mbox{\hyperlink{struct_erable_1_1_compiler_1_1_data_1_1_processed_data}{Data\+::\+Processed\+Data}})
+\item 
+bool \mbox{\hyperlink{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_a0bc1350eeca0c23ef97f454589734ede}{matches\+Start}} (Data\+::\+Data\+Deque list) override
+\item 
+bool \mbox{\hyperlink{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_a89e31223762aafe7f77d545595a6e4ef}{matches\+All}} (Data\+::\+Data\+Deque list) override
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_aedef0a5b3fef634067b62c93934ecb08}{rule\+Name}}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_a4c1e8ae7336204598cc0f614a9edbb26}\label{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_a4c1e8ae7336204598cc0f614a9edbb26}} 
+\index{Erable::Compiler::Symbols::TokenSymbol@{Erable::Compiler::Symbols::TokenSymbol}!TokenSymbol@{TokenSymbol}}
+\index{TokenSymbol@{TokenSymbol}!Erable::Compiler::Symbols::TokenSymbol@{Erable::Compiler::Symbols::TokenSymbol}}
+\subsubsection{\texorpdfstring{TokenSymbol()}{TokenSymbol()}}
+{\footnotesize\ttfamily Erable\+::\+Compiler\+::\+Symbols\+::\+Token\+Symbol\+::\+Token\+Symbol (\begin{DoxyParamCaption}\item[{std\+::string}]{rule\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_ad1946e481bf759d24425afbd869248fd}\label{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_ad1946e481bf759d24425afbd869248fd}} 
+\index{Erable::Compiler::Symbols::TokenSymbol@{Erable::Compiler::Symbols::TokenSymbol}!find@{find}}
+\index{find@{find}!Erable::Compiler::Symbols::TokenSymbol@{Erable::Compiler::Symbols::TokenSymbol}}
+\subsubsection{\texorpdfstring{find()}{find()}}
+{\footnotesize\ttfamily bool Token\+Symbol\+::find (\begin{DoxyParamCaption}\item[{std\+::string}]{string }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_erable_1_1_compiler_1_1_symbols_1_1_symbol_ac1d8b1392aef2e93bd47520a86f8617f}{Erable\+::\+Compiler\+::\+Symbols\+::\+Symbol}}.
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_a2d9a65967a330721741d7f13ec299745}\label{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_a2d9a65967a330721741d7f13ec299745}} 
+\index{Erable::Compiler::Symbols::TokenSymbol@{Erable::Compiler::Symbols::TokenSymbol}!getName@{getName}}
+\index{getName@{getName}!Erable::Compiler::Symbols::TokenSymbol@{Erable::Compiler::Symbols::TokenSymbol}}
+\subsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily std\+::string Token\+Symbol\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_erable_1_1_compiler_1_1_symbols_1_1_symbol_a71aeae736d2ec43f0880341d53bbcc2c}{Erable\+::\+Compiler\+::\+Symbols\+::\+Symbol}}.
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_ab80bcf5e531cee5fbb5fe798449e4cbb}\label{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_ab80bcf5e531cee5fbb5fe798449e4cbb}} 
+\index{Erable::Compiler::Symbols::TokenSymbol@{Erable::Compiler::Symbols::TokenSymbol}!getType@{getType}}
+\index{getType@{getType}!Erable::Compiler::Symbols::TokenSymbol@{Erable::Compiler::Symbols::TokenSymbol}}
+\subsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily std\+::string Erable\+::\+Compiler\+::\+Symbols\+::\+Token\+Symbol\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_erable_1_1_compiler_1_1_symbols_1_1_symbol_a781d595ec8d14efcdbbf6d6123af1f50}{Erable\+::\+Compiler\+::\+Symbols\+::\+Symbol}}.
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_af55a8939414a0b0ddf7302f6eb0cc77e}\label{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_af55a8939414a0b0ddf7302f6eb0cc77e}} 
+\index{Erable::Compiler::Symbols::TokenSymbol@{Erable::Compiler::Symbols::TokenSymbol}!isValidToken@{isValidToken}}
+\index{isValidToken@{isValidToken}!Erable::Compiler::Symbols::TokenSymbol@{Erable::Compiler::Symbols::TokenSymbol}}
+\subsubsection{\texorpdfstring{isValidToken()}{isValidToken()}}
+{\footnotesize\ttfamily bool Token\+Symbol\+::is\+Valid\+Token (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_erable_1_1_compiler_1_1_data_1_1_processed_data}{Data\+::\+Processed\+Data}}}]{data }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_a89e31223762aafe7f77d545595a6e4ef}\label{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_a89e31223762aafe7f77d545595a6e4ef}} 
+\index{Erable::Compiler::Symbols::TokenSymbol@{Erable::Compiler::Symbols::TokenSymbol}!matchesAll@{matchesAll}}
+\index{matchesAll@{matchesAll}!Erable::Compiler::Symbols::TokenSymbol@{Erable::Compiler::Symbols::TokenSymbol}}
+\subsubsection{\texorpdfstring{matchesAll()}{matchesAll()}}
+{\footnotesize\ttfamily bool Token\+Symbol\+::matches\+All (\begin{DoxyParamCaption}\item[{Data\+::\+Data\+Deque}]{list }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_erable_1_1_compiler_1_1_symbols_1_1_symbol_a49dd91010baf238ed0d639004c3ec9ba}{Erable\+::\+Compiler\+::\+Symbols\+::\+Symbol}}.
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_a0bc1350eeca0c23ef97f454589734ede}\label{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_a0bc1350eeca0c23ef97f454589734ede}} 
+\index{Erable::Compiler::Symbols::TokenSymbol@{Erable::Compiler::Symbols::TokenSymbol}!matchesStart@{matchesStart}}
+\index{matchesStart@{matchesStart}!Erable::Compiler::Symbols::TokenSymbol@{Erable::Compiler::Symbols::TokenSymbol}}
+\subsubsection{\texorpdfstring{matchesStart()}{matchesStart()}}
+{\footnotesize\ttfamily bool Token\+Symbol\+::matches\+Start (\begin{DoxyParamCaption}\item[{Data\+::\+Data\+Deque}]{list }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_erable_1_1_compiler_1_1_symbols_1_1_symbol_a108a4a3e9b9a2785f14ed580e813a52a}{Erable\+::\+Compiler\+::\+Symbols\+::\+Symbol}}.
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_a0f8499152ff070ae70295c9b25b25b93}\label{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_a0f8499152ff070ae70295c9b25b25b93}} 
+\index{Erable::Compiler::Symbols::TokenSymbol@{Erable::Compiler::Symbols::TokenSymbol}!toString@{toString}}
+\index{toString@{toString}!Erable::Compiler::Symbols::TokenSymbol@{Erable::Compiler::Symbols::TokenSymbol}}
+\subsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily std\+::string Erable\+::\+Compiler\+::\+Symbols\+::\+Token\+Symbol\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_erable_1_1_compiler_1_1_symbols_1_1_symbol_ac133ad05913f81e836ae2f73815d1432}{Erable\+::\+Compiler\+::\+Symbols\+::\+Symbol}}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_aedef0a5b3fef634067b62c93934ecb08}\label{class_erable_1_1_compiler_1_1_symbols_1_1_token_symbol_aedef0a5b3fef634067b62c93934ecb08}} 
+\index{Erable::Compiler::Symbols::TokenSymbol@{Erable::Compiler::Symbols::TokenSymbol}!ruleName@{ruleName}}
+\index{ruleName@{ruleName}!Erable::Compiler::Symbols::TokenSymbol@{Erable::Compiler::Symbols::TokenSymbol}}
+\subsubsection{\texorpdfstring{ruleName}{ruleName}}
+{\footnotesize\ttfamily std\+::string Erable\+::\+Compiler\+::\+Symbols\+::\+Token\+Symbol\+::rule\+Name}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/williamye/program/antlr/erable/\+Erable\+Lang/\+Compiler/\mbox{\hyperlink{_old___symbols_8hpp}{Old\+\_\+\+Symbols.\+hpp}}\item 
+/williamye/program/antlr/erable/\+Erable\+Lang/\+Compiler/\mbox{\hyperlink{_old___symbols_8cpp}{Old\+\_\+\+Symbols.\+cpp}}\end{DoxyCompactItemize}

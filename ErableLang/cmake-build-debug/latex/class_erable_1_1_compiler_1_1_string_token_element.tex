@@ -1,0 +1,164 @@
+\hypertarget{class_erable_1_1_compiler_1_1_string_token_element}{}\section{Erable\+::Compiler\+::String\+Token\+Element Class Reference}
+\label{class_erable_1_1_compiler_1_1_string_token_element}\index{Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}}
+
+
+{\ttfamily \#include $<$Tokens.\+hpp$>$}
+
+Inheritance diagram for Erable\+::Compiler\+::String\+Token\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_erable_1_1_compiler_1_1_string_token_element}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_erable_1_1_compiler_1_1_string_token_element_a67cb17bbd6d478c79ac3d9322a574fa7}{String\+Token\+Element}} ()
+\item 
+bool \mbox{\hyperlink{class_erable_1_1_compiler_1_1_string_token_element_a25c4ee04b4aac868110d5a7d6fa6e965}{check}} (std\+::string string) override
+\item 
+void \mbox{\hyperlink{class_erable_1_1_compiler_1_1_string_token_element_a8db2f3d10cc46b873ccfb7db8c90c709}{consume\+One}} (char i) override
+\item 
+bool \mbox{\hyperlink{class_erable_1_1_compiler_1_1_string_token_element_a0fa477d39992b60c916c083ea90f1526}{finished}} () override
+\item 
+void \mbox{\hyperlink{class_erable_1_1_compiler_1_1_string_token_element_acf6ab613a09eb8220be24a83d3e28490}{finish}} () override
+\item 
+void \mbox{\hyperlink{class_erable_1_1_compiler_1_1_string_token_element_a7365b5382b57a6c01c7a77a5d8c6e5f6}{reset\+Escape}} (char c)
+\item 
+void \mbox{\hyperlink{class_erable_1_1_compiler_1_1_string_token_element_a2cab1cd560d82631ce7938cb52a26ac1}{reset\+Escapes}} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_erable_1_1_compiler_1_1_string_token_element_afc14c96d860e5fc072a3f35dc9321611}{escape}} = false
+\item 
+char \mbox{\hyperlink{class_erable_1_1_compiler_1_1_string_token_element_a6a1bb95be4a02c8a112f8500b5fb423d}{type}} = \textquotesingle{}\textbackslash{}0\textquotesingle{}
+\item 
+int \mbox{\hyperlink{class_erable_1_1_compiler_1_1_string_token_element_a337ad2e62fe967bd3f81389c5e6dbb32}{ind}} = 0
+\item 
+char \mbox{\hyperlink{class_erable_1_1_compiler_1_1_string_token_element_a15795cbf25a4ea93c90526e76782f331}{unicode}} = 0
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr char \mbox{\hyperlink{class_erable_1_1_compiler_1_1_string_token_element_acbcfa0e1743cc408c14479c48c72c031}{U\+N\+I\+C\+O\+DE}} = \textquotesingle{}u\textquotesingle{}
+\item 
+static std\+::vector$<$ char $>$ \mbox{\hyperlink{class_erable_1_1_compiler_1_1_string_token_element_a24c7901a54cbc2317d77abd6a09328e0}{hexes}}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_string_token_element_a67cb17bbd6d478c79ac3d9322a574fa7}\label{class_erable_1_1_compiler_1_1_string_token_element_a67cb17bbd6d478c79ac3d9322a574fa7}} 
+\index{Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}!StringTokenElement@{StringTokenElement}}
+\index{StringTokenElement@{StringTokenElement}!Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}}
+\subsubsection{\texorpdfstring{StringTokenElement()}{StringTokenElement()}}
+{\footnotesize\ttfamily Erable\+::\+Compiler\+::\+String\+Token\+Element\+::\+String\+Token\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_string_token_element_a25c4ee04b4aac868110d5a7d6fa6e965}\label{class_erable_1_1_compiler_1_1_string_token_element_a25c4ee04b4aac868110d5a7d6fa6e965}} 
+\index{Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}!check@{check}}
+\index{check@{check}!Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}}
+\subsubsection{\texorpdfstring{check()}{check()}}
+{\footnotesize\ttfamily bool Erable\+::\+Compiler\+::\+String\+Token\+Element\+::check (\begin{DoxyParamCaption}\item[{std\+::string}]{string }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_erable_1_1_compiler_1_1_token_element_a939f70ed141904d769b6d9f6ecf39cb1}{Erable\+::\+Compiler\+::\+Token\+Element}}.
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_string_token_element_a8db2f3d10cc46b873ccfb7db8c90c709}\label{class_erable_1_1_compiler_1_1_string_token_element_a8db2f3d10cc46b873ccfb7db8c90c709}} 
+\index{Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}!consumeOne@{consumeOne}}
+\index{consumeOne@{consumeOne}!Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}}
+\subsubsection{\texorpdfstring{consumeOne()}{consumeOne()}}
+{\footnotesize\ttfamily void Erable\+::\+Compiler\+::\+String\+Token\+Element\+::consume\+One (\begin{DoxyParamCaption}\item[{char}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_erable_1_1_compiler_1_1_token_element_a36d20884e5ba6cfa46fcd28711be9589}{Erable\+::\+Compiler\+::\+Token\+Element}}.
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_string_token_element_acf6ab613a09eb8220be24a83d3e28490}\label{class_erable_1_1_compiler_1_1_string_token_element_acf6ab613a09eb8220be24a83d3e28490}} 
+\index{Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}!finish@{finish}}
+\index{finish@{finish}!Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}}
+\subsubsection{\texorpdfstring{finish()}{finish()}}
+{\footnotesize\ttfamily void Erable\+::\+Compiler\+::\+String\+Token\+Element\+::finish (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_erable_1_1_compiler_1_1_token_element_a481e4deb721a1a5f435ee27f850cdf81}{Erable\+::\+Compiler\+::\+Token\+Element}}.
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_string_token_element_a0fa477d39992b60c916c083ea90f1526}\label{class_erable_1_1_compiler_1_1_string_token_element_a0fa477d39992b60c916c083ea90f1526}} 
+\index{Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}!finished@{finished}}
+\index{finished@{finished}!Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}}
+\subsubsection{\texorpdfstring{finished()}{finished()}}
+{\footnotesize\ttfamily bool Erable\+::\+Compiler\+::\+String\+Token\+Element\+::finished (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_erable_1_1_compiler_1_1_token_element_a1ff3e31b4064cd22463c91130a819646}{Erable\+::\+Compiler\+::\+Token\+Element}}.
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_string_token_element_a7365b5382b57a6c01c7a77a5d8c6e5f6}\label{class_erable_1_1_compiler_1_1_string_token_element_a7365b5382b57a6c01c7a77a5d8c6e5f6}} 
+\index{Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}!resetEscape@{resetEscape}}
+\index{resetEscape@{resetEscape}!Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}}
+\subsubsection{\texorpdfstring{resetEscape()}{resetEscape()}}
+{\footnotesize\ttfamily void Erable\+::\+Compiler\+::\+String\+Token\+Element\+::reset\+Escape (\begin{DoxyParamCaption}\item[{char}]{c }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_string_token_element_a2cab1cd560d82631ce7938cb52a26ac1}\label{class_erable_1_1_compiler_1_1_string_token_element_a2cab1cd560d82631ce7938cb52a26ac1}} 
+\index{Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}!resetEscapes@{resetEscapes}}
+\index{resetEscapes@{resetEscapes}!Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}}
+\subsubsection{\texorpdfstring{resetEscapes()}{resetEscapes()}}
+{\footnotesize\ttfamily void Erable\+::\+Compiler\+::\+String\+Token\+Element\+::reset\+Escapes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_string_token_element_afc14c96d860e5fc072a3f35dc9321611}\label{class_erable_1_1_compiler_1_1_string_token_element_afc14c96d860e5fc072a3f35dc9321611}} 
+\index{Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}!escape@{escape}}
+\index{escape@{escape}!Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}}
+\subsubsection{\texorpdfstring{escape}{escape}}
+{\footnotesize\ttfamily bool Erable\+::\+Compiler\+::\+String\+Token\+Element\+::escape = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_string_token_element_a24c7901a54cbc2317d77abd6a09328e0}\label{class_erable_1_1_compiler_1_1_string_token_element_a24c7901a54cbc2317d77abd6a09328e0}} 
+\index{Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}!hexes@{hexes}}
+\index{hexes@{hexes}!Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}}
+\subsubsection{\texorpdfstring{hexes}{hexes}}
+{\footnotesize\ttfamily std\+::vector$<$ char $>$ Erable\+::\+Compiler\+::\+String\+Token\+Element\+::hexes\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{            \textcolor{charliteral}{'0'}, \textcolor{charliteral}{'1'}, \textcolor{charliteral}{'2'}, \textcolor{charliteral}{'3'}, \textcolor{charliteral}{'4'}, \textcolor{charliteral}{'5'}, \textcolor{charliteral}{'6'}, \textcolor{charliteral}{'7'}, \textcolor{charliteral}{'8'}, \textcolor{charliteral}{'9'}, \textcolor{charliteral}{'a'}, \textcolor{charliteral}{'b'}, \textcolor{charliteral}{'c'}, \textcolor{charliteral}{'d'}, \textcolor{charliteral}{'e'}, \textcolor{charliteral}{'f'}}
+\DoxyCodeLine{    \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_string_token_element_a337ad2e62fe967bd3f81389c5e6dbb32}\label{class_erable_1_1_compiler_1_1_string_token_element_a337ad2e62fe967bd3f81389c5e6dbb32}} 
+\index{Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}!ind@{ind}}
+\index{ind@{ind}!Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}}
+\subsubsection{\texorpdfstring{ind}{ind}}
+{\footnotesize\ttfamily int Erable\+::\+Compiler\+::\+String\+Token\+Element\+::ind = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_string_token_element_a6a1bb95be4a02c8a112f8500b5fb423d}\label{class_erable_1_1_compiler_1_1_string_token_element_a6a1bb95be4a02c8a112f8500b5fb423d}} 
+\index{Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}!type@{type}}
+\index{type@{type}!Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}}
+\subsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily char Erable\+::\+Compiler\+::\+String\+Token\+Element\+::type = \textquotesingle{}\textbackslash{}0\textquotesingle{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_string_token_element_a15795cbf25a4ea93c90526e76782f331}\label{class_erable_1_1_compiler_1_1_string_token_element_a15795cbf25a4ea93c90526e76782f331}} 
+\index{Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}!unicode@{unicode}}
+\index{unicode@{unicode}!Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}}
+\subsubsection{\texorpdfstring{unicode}{unicode}}
+{\footnotesize\ttfamily char Erable\+::\+Compiler\+::\+String\+Token\+Element\+::unicode = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_string_token_element_acbcfa0e1743cc408c14479c48c72c031}\label{class_erable_1_1_compiler_1_1_string_token_element_acbcfa0e1743cc408c14479c48c72c031}} 
+\index{Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}!UNICODE@{UNICODE}}
+\index{UNICODE@{UNICODE}!Erable::Compiler::StringTokenElement@{Erable::Compiler::StringTokenElement}}
+\subsubsection{\texorpdfstring{UNICODE}{UNICODE}}
+{\footnotesize\ttfamily constexpr char Erable\+::\+Compiler\+::\+String\+Token\+Element\+::\+U\+N\+I\+C\+O\+DE = \textquotesingle{}u\textquotesingle{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Compiler/\mbox{\hyperlink{_tokens_8hpp}{Tokens.\+hpp}}\item 
+Compiler/\mbox{\hyperlink{_tokens_8cpp}{Tokens.\+cpp}}\end{DoxyCompactItemize}

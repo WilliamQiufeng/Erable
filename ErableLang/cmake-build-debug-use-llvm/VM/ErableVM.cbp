@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="ErableVM"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="clang"/>
+		<Option virtualFolders="CMake Files\;CMake Files\Compiler\;CMake Files\stdlib\;CMake Files\VM\;CMake Files\Playground\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ErableVMStatic">
+				<Option output="/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/libErableVMStatic.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/VM/../Global"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/VM/.."/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/VM/../include"/>
+					<Add directory="/usr/local/Cellar/llvm/8.0.0_1/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/Cellar/llvm/8.0.0_1/lib/clang/8.0.0/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 ErableVMStatic"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ErableVMStatic/fast">
+				<Option output="/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/libErableVMStatic.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/VM/../Global"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/VM/.."/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/VM/../include"/>
+					<Add directory="/usr/local/Cellar/llvm/8.0.0_1/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/Cellar/llvm/8.0.0_1/lib/clang/8.0.0/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 ErableVMStatic/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ErableVMDyn">
+				<Option output="/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/libErableVMDyn.dylib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/VM/../Global"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/VM/.."/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/VM/../include"/>
+					<Add directory="/usr/local/Cellar/llvm/8.0.0_1/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/Cellar/llvm/8.0.0_1/lib/clang/8.0.0/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 ErableVMDyn"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ErableVMDyn/fast">
+				<Option output="/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/libErableVMDyn.dylib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/VM/../Global"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/VM/.."/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/VM/../include"/>
+					<Add directory="/usr/local/Cellar/llvm/8.0.0_1/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/Cellar/llvm/8.0.0_1/lib/clang/8.0.0/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 ErableVMDyn/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ErableVM">
+				<Option output="/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/ErableVM" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/VM/../Global"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/VM/.."/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/VM/../include"/>
+					<Add directory="/usr/local/Cellar/llvm/8.0.0_1/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/Cellar/llvm/8.0.0_1/lib/clang/8.0.0/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 ErableVM"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ErableVM/fast">
+				<Option output="/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/ErableVM" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/VM/../Global"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/VM/.."/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/VM/../include"/>
+					<Add directory="/usr/local/Cellar/llvm/8.0.0_1/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/Cellar/llvm/8.0.0_1/lib/clang/8.0.0/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 ErableVM/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/VM/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Global/Exceptions.cpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Global/Exceptions.hpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Global/Global.cpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Global/Global.hpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Global/IO.cpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Global/IO.hpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Global/Utils.h">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/VM/ConstantPool.cpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/VM/ConstantPool.hpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/VM/Descriptor.cpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/VM/Descriptor.hpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/VM/LibLoader.cpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/VM/LibLoader.hpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/VM/Metadata.cpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/VM/Metadata.hpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/VM/NativeFunctions.cpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/VM/NativeFunctions.hpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/VM/Program.cpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/VM/Program.hpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/VM/Types.cpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/VM/Types.hpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/VM/VMGlobal.hpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/VM/main.cpp">
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/include/cmdline.h">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/include/dynamicro.cpp">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/include/dynamicro.h">
+			<Option target="ErableVMStatic"/>
+			<Option target="ErableVMDyn"/>
+			<Option target="ErableVM"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\Compiler\"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/stdlib/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\stdlib\"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/VM/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\VM\"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Playground/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\Playground\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

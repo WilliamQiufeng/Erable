@@ -1,0 +1,5 @@
+if(EXISTS "/williamye/program/antlr/erable/ErableLang/Compiler/tests/cmake-build-debug/ErableCompilerTest_tests-b858cb2.cmake")
+  include("/williamye/program/antlr/erable/ErableLang/Compiler/tests/cmake-build-debug/ErableCompilerTest_tests-b858cb2.cmake")
+else()
+  add_test(ErableCompilerTest_NOT_BUILT-b858cb2 ErableCompilerTest_NOT_BUILT-b858cb2)
+endif()

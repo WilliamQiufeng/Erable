@@ -1,0 +1,123 @@
+\hypertarget{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration}{}\section{Erable\+::Compiler\+::Parser\+::Rule\+Iteration Class Reference}
+\label{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration}\index{Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}}
+
+
+{\ttfamily \#include $<$Parse\+Table.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_aeb8b75387f60c6f92c94124fef149a3e}{shift\+Dot}} (\mbox{\hyperlink{struct_erable_1_1_compiler_1_1_parser_1_1_iteration_node}{Iteration\+Node}} $\ast$)
+\item 
+\mbox{\hyperlink{namespace_erable_1_1_compiler_1_1_symbols_a8f0bc762f448ea4d84e8713ab3e140b9}{Symbols\+::\+Symbol\+Ptr}} \mbox{\hyperlink{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_ad3a2635baa4caa8648a35ee2ed25c34f}{find}} (\mbox{\hyperlink{namespace_erable_1_1_compiler_1_1_symbols_a8f0bc762f448ea4d84e8713ab3e140b9}{Symbols\+::\+Symbol\+Ptr}})
+\item 
+\mbox{\hyperlink{namespace_erable_1_1_compiler_1_1_symbols_a8f0bc762f448ea4d84e8713ab3e140b9}{Symbols\+::\+Symbol\+Ptr}} \mbox{\hyperlink{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_a086a865a1b222a17e251c149987dff89}{find\+Match}} (\mbox{\hyperlink{namespace_erable_1_1_compiler_1_1_symbols_a8f0bc762f448ea4d84e8713ab3e140b9}{Symbols\+::\+Symbol\+Ptr}})
+\item 
+void \mbox{\hyperlink{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_a90cfe4cc7501262ccf555a1d119b7a1a}{generate}} ()
+\item 
+void \mbox{\hyperlink{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_a58d564d18a470ecb1b9b99f962ce4b9e}{generate\+One\+Round}} (\mbox{\hyperlink{struct_erable_1_1_compiler_1_1_parser_1_1_iteration_node}{Iteration\+Node}} $\ast$)
+\item 
+void \mbox{\hyperlink{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_a0c66d23f8b37d69f81ba939e130797f7}{generate\+First\+Round}} ()
+\item 
+void \mbox{\hyperlink{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_af9818a44b7528c9b81cde2aac0e14815}{recursive\+Expand\+Rule}} (\mbox{\hyperlink{struct_erable_1_1_compiler_1_1_parser_1_1_iteration_node}{Iteration\+Node}} $\ast$node, \mbox{\hyperlink{namespace_erable_1_1_compiler_1_1_symbols_a8f0bc762f448ea4d84e8713ab3e140b9}{Symbols\+::\+Symbol\+Ptr}} \&symbol)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_ad2d208cfc66ecb245c84b13103a05f1f}{current\+Index}} = 0
+\item 
+\mbox{\hyperlink{struct_erable_1_1_compiler_1_1_parser_1_1_iteration_node}{Iteration\+Node}} $\ast$ \mbox{\hyperlink{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_abde5cb07b4c7e8aa73bc636c082605a0}{root\+Node}}
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespace_erable_1_1_compiler_1_1_symbols_a8f0bc762f448ea4d84e8713ab3e140b9}{Symbols\+::\+Symbol\+Ptr}} \mbox{\hyperlink{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_abfa1a1f8f0b9ac2afa7c386203156f1c}{\+\_\+find}} (\mbox{\hyperlink{struct_erable_1_1_compiler_1_1_parser_1_1_iteration_node}{Iteration\+Node}} $\ast$node, \mbox{\hyperlink{namespace_erable_1_1_compiler_1_1_symbols_a8f0bc762f448ea4d84e8713ab3e140b9}{Symbols\+::\+Symbol\+Ptr}} symbol\+Ptr, bool match\+Dot\+And\+Lookahead)
+\item 
+void \mbox{\hyperlink{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_a04aa2fb027d1e4787198c8c6373d1422}{\+\_\+generate}} (\mbox{\hyperlink{struct_erable_1_1_compiler_1_1_parser_1_1_iteration_node}{Iteration\+Node}} $\ast$)
+\item 
+void \mbox{\hyperlink{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_a0dd755ac2b64434af8b386d9a5ec8d81}{\+\_\+expand\+Rule}} (\mbox{\hyperlink{struct_erable_1_1_compiler_1_1_parser_1_1_iteration_node}{Iteration\+Node}} $\ast$node, \mbox{\hyperlink{namespace_erable_1_1_compiler_1_1_symbols_a8f0bc762f448ea4d84e8713ab3e140b9}{Symbols\+::\+Symbol\+Ptr}} \&symbol)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_a0dd755ac2b64434af8b386d9a5ec8d81}\label{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_a0dd755ac2b64434af8b386d9a5ec8d81}} 
+\index{Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}!\_expandRule@{\_expandRule}}
+\index{\_expandRule@{\_expandRule}!Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}}
+\subsubsection{\texorpdfstring{\_expandRule()}{\_expandRule()}}
+{\footnotesize\ttfamily void Erable\+::\+Compiler\+::\+Parser\+::\+Rule\+Iteration\+::\+\_\+expand\+Rule (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_erable_1_1_compiler_1_1_parser_1_1_iteration_node}{Iteration\+Node}} $\ast$}]{node,  }\item[{\mbox{\hyperlink{namespace_erable_1_1_compiler_1_1_symbols_a8f0bc762f448ea4d84e8713ab3e140b9}{Symbols\+::\+Symbol\+Ptr}} \&}]{symbol }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_abfa1a1f8f0b9ac2afa7c386203156f1c}\label{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_abfa1a1f8f0b9ac2afa7c386203156f1c}} 
+\index{Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}!\_find@{\_find}}
+\index{\_find@{\_find}!Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}}
+\subsubsection{\texorpdfstring{\_find()}{\_find()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespace_erable_1_1_compiler_1_1_symbols_a8f0bc762f448ea4d84e8713ab3e140b9}{Symbols\+::\+Symbol\+Ptr}} Erable\+::\+Compiler\+::\+Parser\+::\+Rule\+Iteration\+::\+\_\+find (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_erable_1_1_compiler_1_1_parser_1_1_iteration_node}{Iteration\+Node}} $\ast$}]{node,  }\item[{\mbox{\hyperlink{namespace_erable_1_1_compiler_1_1_symbols_a8f0bc762f448ea4d84e8713ab3e140b9}{Symbols\+::\+Symbol\+Ptr}}}]{symbol\+Ptr,  }\item[{bool}]{match\+Dot\+And\+Lookahead }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_a04aa2fb027d1e4787198c8c6373d1422}\label{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_a04aa2fb027d1e4787198c8c6373d1422}} 
+\index{Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}!\_generate@{\_generate}}
+\index{\_generate@{\_generate}!Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}}
+\subsubsection{\texorpdfstring{\_generate()}{\_generate()}}
+{\footnotesize\ttfamily void Erable\+::\+Compiler\+::\+Parser\+::\+Rule\+Iteration\+::\+\_\+generate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_erable_1_1_compiler_1_1_parser_1_1_iteration_node}{Iteration\+Node}} $\ast$}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_ad3a2635baa4caa8648a35ee2ed25c34f}\label{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_ad3a2635baa4caa8648a35ee2ed25c34f}} 
+\index{Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}!find@{find}}
+\index{find@{find}!Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}}
+\subsubsection{\texorpdfstring{find()}{find()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespace_erable_1_1_compiler_1_1_symbols_a8f0bc762f448ea4d84e8713ab3e140b9}{Symbols\+::\+Symbol\+Ptr}} Erable\+::\+Compiler\+::\+Parser\+::\+Rule\+Iteration\+::find (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespace_erable_1_1_compiler_1_1_symbols_a8f0bc762f448ea4d84e8713ab3e140b9}{Symbols\+::\+Symbol\+Ptr}}}]{symbol\+Ptr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_a086a865a1b222a17e251c149987dff89}\label{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_a086a865a1b222a17e251c149987dff89}} 
+\index{Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}!findMatch@{findMatch}}
+\index{findMatch@{findMatch}!Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}}
+\subsubsection{\texorpdfstring{findMatch()}{findMatch()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespace_erable_1_1_compiler_1_1_symbols_a8f0bc762f448ea4d84e8713ab3e140b9}{Symbols\+::\+Symbol\+Ptr}} Erable\+::\+Compiler\+::\+Parser\+::\+Rule\+Iteration\+::find\+Match (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespace_erable_1_1_compiler_1_1_symbols_a8f0bc762f448ea4d84e8713ab3e140b9}{Symbols\+::\+Symbol\+Ptr}}}]{symbol\+Ptr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_a90cfe4cc7501262ccf555a1d119b7a1a}\label{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_a90cfe4cc7501262ccf555a1d119b7a1a}} 
+\index{Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}!generate@{generate}}
+\index{generate@{generate}!Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}}
+\subsubsection{\texorpdfstring{generate()}{generate()}}
+{\footnotesize\ttfamily void Erable\+::\+Compiler\+::\+Parser\+::\+Rule\+Iteration\+::generate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_a0c66d23f8b37d69f81ba939e130797f7}\label{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_a0c66d23f8b37d69f81ba939e130797f7}} 
+\index{Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}!generateFirstRound@{generateFirstRound}}
+\index{generateFirstRound@{generateFirstRound}!Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}}
+\subsubsection{\texorpdfstring{generateFirstRound()}{generateFirstRound()}}
+{\footnotesize\ttfamily void Erable\+::\+Compiler\+::\+Parser\+::\+Rule\+Iteration\+::generate\+First\+Round (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_a58d564d18a470ecb1b9b99f962ce4b9e}\label{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_a58d564d18a470ecb1b9b99f962ce4b9e}} 
+\index{Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}!generateOneRound@{generateOneRound}}
+\index{generateOneRound@{generateOneRound}!Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}}
+\subsubsection{\texorpdfstring{generateOneRound()}{generateOneRound()}}
+{\footnotesize\ttfamily void Erable\+::\+Compiler\+::\+Parser\+::\+Rule\+Iteration\+::generate\+One\+Round (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_erable_1_1_compiler_1_1_parser_1_1_iteration_node}{Iteration\+Node}} $\ast$}]{node }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_af9818a44b7528c9b81cde2aac0e14815}\label{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_af9818a44b7528c9b81cde2aac0e14815}} 
+\index{Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}!recursiveExpandRule@{recursiveExpandRule}}
+\index{recursiveExpandRule@{recursiveExpandRule}!Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}}
+\subsubsection{\texorpdfstring{recursiveExpandRule()}{recursiveExpandRule()}}
+{\footnotesize\ttfamily void Erable\+::\+Compiler\+::\+Parser\+::\+Rule\+Iteration\+::recursive\+Expand\+Rule (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_erable_1_1_compiler_1_1_parser_1_1_iteration_node}{Iteration\+Node}} $\ast$}]{node,  }\item[{\mbox{\hyperlink{namespace_erable_1_1_compiler_1_1_symbols_a8f0bc762f448ea4d84e8713ab3e140b9}{Symbols\+::\+Symbol\+Ptr}} \&}]{symbol }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_aeb8b75387f60c6f92c94124fef149a3e}\label{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_aeb8b75387f60c6f92c94124fef149a3e}} 
+\index{Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}!shiftDot@{shiftDot}}
+\index{shiftDot@{shiftDot}!Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}}
+\subsubsection{\texorpdfstring{shiftDot()}{shiftDot()}}
+{\footnotesize\ttfamily void Erable\+::\+Compiler\+::\+Parser\+::\+Rule\+Iteration\+::shift\+Dot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_erable_1_1_compiler_1_1_parser_1_1_iteration_node}{Iteration\+Node}} $\ast$}]{iteration\+Node }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_ad2d208cfc66ecb245c84b13103a05f1f}\label{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_ad2d208cfc66ecb245c84b13103a05f1f}} 
+\index{Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}!currentIndex@{currentIndex}}
+\index{currentIndex@{currentIndex}!Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}}
+\subsubsection{\texorpdfstring{currentIndex}{currentIndex}}
+{\footnotesize\ttfamily int Erable\+::\+Compiler\+::\+Parser\+::\+Rule\+Iteration\+::current\+Index = 0}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_abde5cb07b4c7e8aa73bc636c082605a0}\label{class_erable_1_1_compiler_1_1_parser_1_1_rule_iteration_abde5cb07b4c7e8aa73bc636c082605a0}} 
+\index{Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}!rootNode@{rootNode}}
+\index{rootNode@{rootNode}!Erable::Compiler::Parser::RuleIteration@{Erable::Compiler::Parser::RuleIteration}}
+\subsubsection{\texorpdfstring{rootNode}{rootNode}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_erable_1_1_compiler_1_1_parser_1_1_iteration_node}{Iteration\+Node}}$\ast$ Erable\+::\+Compiler\+::\+Parser\+::\+Rule\+Iteration\+::root\+Node}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/williamye/program/antlr/erable/\+Erable\+Lang/\mbox{\hyperlink{_parse_table_8hpp}{Parse\+Table.\+hpp}}\item 
+/williamye/program/antlr/erable/\+Erable\+Lang/\mbox{\hyperlink{_parse_table_8cpp}{Parse\+Table.\+cpp}}\end{DoxyCompactItemize}

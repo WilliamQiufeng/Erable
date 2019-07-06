@@ -1,0 +1,145 @@
+\hypertarget{class_erable_1_1_compiler_1_1_old___parser}{}\section{Erable\+::Compiler\+::Old\+\_\+\+Parser Class Reference}
+\label{class_erable_1_1_compiler_1_1_old___parser}\index{Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}}
+
+
+{\ttfamily \#include $<$Old\+\_\+\+Parser.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser_a1ebc9556a66e666f2786b595ee3e7500}{Old\+\_\+\+Parser}} (Erable\+::\+Compiler\+::\+Token\+List \mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser_ae6ba8138c01225a6f91445bd9a331b3d}{input\+Tokens}})
+\item 
+\mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser_ad580c7534eb475d28c168c53b514dab9}{Old\+\_\+\+Parser}} (\mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser}{Erable\+::\+Compiler\+::\+Old\+\_\+\+Parser}} $\ast$\mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser_a8295ed96c8f71b828024e97fe0da88aa}{parent}}, Erable\+::\+Compiler\+::\+Token\+List \mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser_ae6ba8138c01225a6f91445bd9a331b3d}{input\+Tokens}})
+\item 
+\mbox{\hyperlink{struct_erable_1_1_compiler_1_1_data_1_1_processed_data}{Data\+::\+Processed\+Data}} \mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser_a591695085aaff057e5fbfcbb4ac1d72e}{read}} ()
+\item 
+\mbox{\hyperlink{struct_erable_1_1_compiler_1_1_data_1_1_processed_data}{Data\+::\+Processed\+Data}} \mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser_aae8c00e9a6ec13d2f0895733c6d607f4}{forward}} ()
+\item 
+\mbox{\hyperlink{struct_erable_1_1_compiler_1_1_data_1_1_processed_data}{Data\+::\+Processed\+Data}} \mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser_ab77eb298a60bd36d81c554703ada42aa}{parse\+Rule}} (\mbox{\hyperlink{namespace_erable_1_1_compiler_1_1_symbols_a8f0bc762f448ea4d84e8713ab3e140b9}{Symbols\+::\+Symbol\+Ptr}}, Token\+List \&)
+\item 
+bool \mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser_a98a0ccf54ede094d2ed00d1e953eeaa5}{is\+Subparser}} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static Symbols\+::\+Syntax\+List \mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser_ab0f475bddc9180e53ceb540f5e79fe48}{scan\+Available}} (\mbox{\hyperlink{namespace_erable_1_1_compiler_1_1_symbols_a8f0bc762f448ea4d84e8713ab3e140b9}{Symbols\+::\+Symbol\+Ptr}})
+\item 
+static Symbols\+::\+Syntax\+List \mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser_a13282e8f2853da91ca8eaba83d5d6791}{update\+Available}} (Symbols\+::\+Syntax\+List)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Token\+List \mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser_ae6ba8138c01225a6f91445bd9a331b3d}{input\+Tokens}}
+\item 
+Data\+::\+Data\+List \mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser_af4b24149c33f8eab9411c8e1f28bd762}{data\+List}}
+\item 
+\mbox{\hyperlink{struct_erable_1_1_compiler_1_1_data_1_1_processed_data}{Data\+::\+Processed\+Data}} \mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser_a6d914ac6d9915b2858d42522e57d0b0c}{forward\+Data}}
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser}{Old\+\_\+\+Parser}} $\ast$ \mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser_a8295ed96c8f71b828024e97fe0da88aa}{parent}} = nullptr
+\item 
+\mbox{\hyperlink{struct_erable_1_1_compiler_1_1_data_1_1_processed_data}{Data\+::\+Processed\+Data}} \mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser_a59f98b202f375921888a1cb79bba9842}{last\+Parsed}}
+\item 
+Data\+::\+Data\+Deque \mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser_aa739607e8e8a9aa93aba91a0719ca17e}{stack}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_old___parser_a1ebc9556a66e666f2786b595ee3e7500}\label{class_erable_1_1_compiler_1_1_old___parser_a1ebc9556a66e666f2786b595ee3e7500}} 
+\index{Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}!Old\_Parser@{Old\_Parser}}
+\index{Old\_Parser@{Old\_Parser}!Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}}
+\subsubsection{\texorpdfstring{Old\_Parser()}{Old\_Parser()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Erable\+::\+Compiler\+::\+Old\+\_\+\+Parser\+::\+Old\+\_\+\+Parser (\begin{DoxyParamCaption}\item[{Erable\+::\+Compiler\+::\+Token\+List}]{input\+Tokens }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_old___parser_ad580c7534eb475d28c168c53b514dab9}\label{class_erable_1_1_compiler_1_1_old___parser_ad580c7534eb475d28c168c53b514dab9}} 
+\index{Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}!Old\_Parser@{Old\_Parser}}
+\index{Old\_Parser@{Old\_Parser}!Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}}
+\subsubsection{\texorpdfstring{Old\_Parser()}{Old\_Parser()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Erable\+::\+Compiler\+::\+Old\+\_\+\+Parser\+::\+Old\+\_\+\+Parser (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser}{Erable\+::\+Compiler\+::\+Old\+\_\+\+Parser}} $\ast$}]{parent,  }\item[{Erable\+::\+Compiler\+::\+Token\+List}]{input\+Tokens }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_old___parser_aae8c00e9a6ec13d2f0895733c6d607f4}\label{class_erable_1_1_compiler_1_1_old___parser_aae8c00e9a6ec13d2f0895733c6d607f4}} 
+\index{Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}!forward@{forward}}
+\index{forward@{forward}!Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}}
+\subsubsection{\texorpdfstring{forward()}{forward()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_erable_1_1_compiler_1_1_data_1_1_processed_data}{Data\+::\+Processed\+Data}} Erable\+::\+Compiler\+::\+Old\+\_\+\+Parser\+::forward (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_old___parser_a98a0ccf54ede094d2ed00d1e953eeaa5}\label{class_erable_1_1_compiler_1_1_old___parser_a98a0ccf54ede094d2ed00d1e953eeaa5}} 
+\index{Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}!isSubparser@{isSubparser}}
+\index{isSubparser@{isSubparser}!Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}}
+\subsubsection{\texorpdfstring{isSubparser()}{isSubparser()}}
+{\footnotesize\ttfamily bool Erable\+::\+Compiler\+::\+Old\+\_\+\+Parser\+::is\+Subparser (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_old___parser_ab77eb298a60bd36d81c554703ada42aa}\label{class_erable_1_1_compiler_1_1_old___parser_ab77eb298a60bd36d81c554703ada42aa}} 
+\index{Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}!parseRule@{parseRule}}
+\index{parseRule@{parseRule}!Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}}
+\subsubsection{\texorpdfstring{parseRule()}{parseRule()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_erable_1_1_compiler_1_1_data_1_1_processed_data}{Data\+::\+Processed\+Data}} Erable\+::\+Compiler\+::\+Old\+\_\+\+Parser\+::parse\+Rule (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespace_erable_1_1_compiler_1_1_symbols_a8f0bc762f448ea4d84e8713ab3e140b9}{Symbols\+::\+Symbol\+Ptr}}}]{root,  }\item[{Token\+List \&}]{token\+List }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_old___parser_a591695085aaff057e5fbfcbb4ac1d72e}\label{class_erable_1_1_compiler_1_1_old___parser_a591695085aaff057e5fbfcbb4ac1d72e}} 
+\index{Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}!read@{read}}
+\index{read@{read}!Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}}
+\subsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_erable_1_1_compiler_1_1_data_1_1_processed_data}{Data\+::\+Processed\+Data}} Erable\+::\+Compiler\+::\+Old\+\_\+\+Parser\+::read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_old___parser_ab0f475bddc9180e53ceb540f5e79fe48}\label{class_erable_1_1_compiler_1_1_old___parser_ab0f475bddc9180e53ceb540f5e79fe48}} 
+\index{Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}!scanAvailable@{scanAvailable}}
+\index{scanAvailable@{scanAvailable}!Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}}
+\subsubsection{\texorpdfstring{scanAvailable()}{scanAvailable()}}
+{\footnotesize\ttfamily Symbols\+::\+Syntax\+List Erable\+::\+Compiler\+::\+Old\+\_\+\+Parser\+::scan\+Available (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespace_erable_1_1_compiler_1_1_symbols_a8f0bc762f448ea4d84e8713ab3e140b9}{Symbols\+::\+Symbol\+Ptr}}}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_old___parser_a13282e8f2853da91ca8eaba83d5d6791}\label{class_erable_1_1_compiler_1_1_old___parser_a13282e8f2853da91ca8eaba83d5d6791}} 
+\index{Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}!updateAvailable@{updateAvailable}}
+\index{updateAvailable@{updateAvailable}!Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}}
+\subsubsection{\texorpdfstring{updateAvailable()}{updateAvailable()}}
+{\footnotesize\ttfamily Symbols\+::\+Syntax\+List Erable\+::\+Compiler\+::\+Old\+\_\+\+Parser\+::update\+Available (\begin{DoxyParamCaption}\item[{Symbols\+::\+Syntax\+List}]{syntax\+List }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_old___parser_af4b24149c33f8eab9411c8e1f28bd762}\label{class_erable_1_1_compiler_1_1_old___parser_af4b24149c33f8eab9411c8e1f28bd762}} 
+\index{Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}!dataList@{dataList}}
+\index{dataList@{dataList}!Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}}
+\subsubsection{\texorpdfstring{dataList}{dataList}}
+{\footnotesize\ttfamily Data\+::\+Data\+List Erable\+::\+Compiler\+::\+Old\+\_\+\+Parser\+::data\+List}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_old___parser_a6d914ac6d9915b2858d42522e57d0b0c}\label{class_erable_1_1_compiler_1_1_old___parser_a6d914ac6d9915b2858d42522e57d0b0c}} 
+\index{Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}!forwardData@{forwardData}}
+\index{forwardData@{forwardData}!Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}}
+\subsubsection{\texorpdfstring{forwardData}{forwardData}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_erable_1_1_compiler_1_1_data_1_1_processed_data}{Data\+::\+Processed\+Data}} Erable\+::\+Compiler\+::\+Old\+\_\+\+Parser\+::forward\+Data}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_old___parser_ae6ba8138c01225a6f91445bd9a331b3d}\label{class_erable_1_1_compiler_1_1_old___parser_ae6ba8138c01225a6f91445bd9a331b3d}} 
+\index{Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}!inputTokens@{inputTokens}}
+\index{inputTokens@{inputTokens}!Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}}
+\subsubsection{\texorpdfstring{inputTokens}{inputTokens}}
+{\footnotesize\ttfamily Token\+List Erable\+::\+Compiler\+::\+Old\+\_\+\+Parser\+::input\+Tokens}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_old___parser_a59f98b202f375921888a1cb79bba9842}\label{class_erable_1_1_compiler_1_1_old___parser_a59f98b202f375921888a1cb79bba9842}} 
+\index{Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}!lastParsed@{lastParsed}}
+\index{lastParsed@{lastParsed}!Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}}
+\subsubsection{\texorpdfstring{lastParsed}{lastParsed}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_erable_1_1_compiler_1_1_data_1_1_processed_data}{Data\+::\+Processed\+Data}} Erable\+::\+Compiler\+::\+Old\+\_\+\+Parser\+::last\+Parsed\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_old___parser_a8295ed96c8f71b828024e97fe0da88aa}\label{class_erable_1_1_compiler_1_1_old___parser_a8295ed96c8f71b828024e97fe0da88aa}} 
+\index{Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}!parent@{parent}}
+\index{parent@{parent}!Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}}
+\subsubsection{\texorpdfstring{parent}{parent}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_erable_1_1_compiler_1_1_old___parser}{Old\+\_\+\+Parser}}$\ast$ Erable\+::\+Compiler\+::\+Old\+\_\+\+Parser\+::parent = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_erable_1_1_compiler_1_1_old___parser_aa739607e8e8a9aa93aba91a0719ca17e}\label{class_erable_1_1_compiler_1_1_old___parser_aa739607e8e8a9aa93aba91a0719ca17e}} 
+\index{Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}!stack@{stack}}
+\index{stack@{stack}!Erable::Compiler::Old\_Parser@{Erable::Compiler::Old\_Parser}}
+\subsubsection{\texorpdfstring{stack}{stack}}
+{\footnotesize\ttfamily Data\+::\+Data\+Deque Erable\+::\+Compiler\+::\+Old\+\_\+\+Parser\+::stack\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Compiler/\mbox{\hyperlink{_old___parser_8hpp}{Old\+\_\+\+Parser.\+hpp}}\item 
+Compiler/\mbox{\hyperlink{_old___parser_8cpp}{Old\+\_\+\+Parser.\+cpp}}\end{DoxyCompactItemize}

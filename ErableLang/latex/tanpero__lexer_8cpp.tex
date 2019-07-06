@@ -1,0 +1,65 @@
+\hypertarget{tanpero__lexer_8cpp}{}\section{/williamye/program/antlr/erable/\+Erable\+Lang/\+Compiler/tanpero\+\_\+lexer.cpp File Reference}
+\label{tanpero__lexer_8cpp}\index{/williamye/program/antlr/erable/ErableLang/Compiler/tanpero\_lexer.cpp@{/williamye/program/antlr/erable/ErableLang/Compiler/tanpero\_lexer.cpp}}
+{\ttfamily \#include \char`\"{}tanpero\+\_\+lexer.\+hpp\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{tanpero__lexer_8cpp_a3971fcfa933716904d7474e7b8036d92}{get\+Next\+Char}} (lexer $\ast$lexer)
+\item 
+static bool \mbox{\hyperlink{tanpero__lexer_8cpp_a4b73c3a2fe4a278240201468b2354d2b}{match\+Next\+Char}} (lexer $\ast$lexer, char expected\+Char)
+\item 
+static void \mbox{\hyperlink{tanpero__lexer_8cpp_a6b14cb51c4668a69023e8e7b7407a7ad}{skip\+Blanks}} (\mbox{\hyperlink{class_lexer}{Lexer}} $\ast$lexer)
+\item 
+static void \mbox{\hyperlink{tanpero__lexer_8cpp_a4eca121c7f41615a4137b9b84d989032}{parse\+Id}} (\mbox{\hyperlink{class_lexer}{Lexer}} $\ast$lexer, \mbox{\hyperlink{tanpero__token_8hpp_aa520fbf142ba1e7e659590c07da31921}{Token\+Type}} type)
+\item 
+static void \mbox{\hyperlink{tanpero__lexer_8cpp_a2a412f0a6fed75b261af63bb5b0329cf}{parse\+Unicode\+Code\+Point}} (\mbox{\hyperlink{class_lexer}{Lexer}} $\ast$lexer, Byte\+Buffer $\ast$buf)
+\item 
+static void \mbox{\hyperlink{tanpero__lexer_8cpp_a41099e783e392663c222d4c8b88f28b2}{parse\+String}} (\mbox{\hyperlink{class_lexer}{Lexer}} $\ast$lexer)
+\item 
+static void \mbox{\hyperlink{tanpero__lexer_8cpp_afb17ed616c9e991fc13e54ee65257b2c}{skip\+A\+Line}} (\mbox{\hyperlink{class_lexer}{Lexer}} $\ast$lexer)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{tanpero__lexer_8cpp_a3971fcfa933716904d7474e7b8036d92}\label{tanpero__lexer_8cpp_a3971fcfa933716904d7474e7b8036d92}} 
+\index{tanpero\_lexer.cpp@{tanpero\_lexer.cpp}!getNextChar@{getNextChar}}
+\index{getNextChar@{getNextChar}!tanpero\_lexer.cpp@{tanpero\_lexer.cpp}}
+\subsubsection{\texorpdfstring{getNextChar()}{getNextChar()}}
+{\footnotesize\ttfamily static void get\+Next\+Char (\begin{DoxyParamCaption}\item[{lexer $\ast$}]{lexer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{tanpero__lexer_8cpp_a4b73c3a2fe4a278240201468b2354d2b}\label{tanpero__lexer_8cpp_a4b73c3a2fe4a278240201468b2354d2b}} 
+\index{tanpero\_lexer.cpp@{tanpero\_lexer.cpp}!matchNextChar@{matchNextChar}}
+\index{matchNextChar@{matchNextChar}!tanpero\_lexer.cpp@{tanpero\_lexer.cpp}}
+\subsubsection{\texorpdfstring{matchNextChar()}{matchNextChar()}}
+{\footnotesize\ttfamily static bool match\+Next\+Char (\begin{DoxyParamCaption}\item[{lexer $\ast$}]{lexer,  }\item[{char}]{expected\+Char }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{tanpero__lexer_8cpp_a4eca121c7f41615a4137b9b84d989032}\label{tanpero__lexer_8cpp_a4eca121c7f41615a4137b9b84d989032}} 
+\index{tanpero\_lexer.cpp@{tanpero\_lexer.cpp}!parseId@{parseId}}
+\index{parseId@{parseId}!tanpero\_lexer.cpp@{tanpero\_lexer.cpp}}
+\subsubsection{\texorpdfstring{parseId()}{parseId()}}
+{\footnotesize\ttfamily static void parse\+Id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_lexer}{Lexer}} $\ast$}]{lexer,  }\item[{\mbox{\hyperlink{tanpero__token_8hpp_aa520fbf142ba1e7e659590c07da31921}{Token\+Type}}}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{tanpero__lexer_8cpp_a41099e783e392663c222d4c8b88f28b2}\label{tanpero__lexer_8cpp_a41099e783e392663c222d4c8b88f28b2}} 
+\index{tanpero\_lexer.cpp@{tanpero\_lexer.cpp}!parseString@{parseString}}
+\index{parseString@{parseString}!tanpero\_lexer.cpp@{tanpero\_lexer.cpp}}
+\subsubsection{\texorpdfstring{parseString()}{parseString()}}
+{\footnotesize\ttfamily static void parse\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_lexer}{Lexer}} $\ast$}]{lexer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{tanpero__lexer_8cpp_a2a412f0a6fed75b261af63bb5b0329cf}\label{tanpero__lexer_8cpp_a2a412f0a6fed75b261af63bb5b0329cf}} 
+\index{tanpero\_lexer.cpp@{tanpero\_lexer.cpp}!parseUnicodeCodePoint@{parseUnicodeCodePoint}}
+\index{parseUnicodeCodePoint@{parseUnicodeCodePoint}!tanpero\_lexer.cpp@{tanpero\_lexer.cpp}}
+\subsubsection{\texorpdfstring{parseUnicodeCodePoint()}{parseUnicodeCodePoint()}}
+{\footnotesize\ttfamily static void parse\+Unicode\+Code\+Point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_lexer}{Lexer}} $\ast$}]{lexer,  }\item[{Byte\+Buffer $\ast$}]{buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{tanpero__lexer_8cpp_afb17ed616c9e991fc13e54ee65257b2c}\label{tanpero__lexer_8cpp_afb17ed616c9e991fc13e54ee65257b2c}} 
+\index{tanpero\_lexer.cpp@{tanpero\_lexer.cpp}!skipALine@{skipALine}}
+\index{skipALine@{skipALine}!tanpero\_lexer.cpp@{tanpero\_lexer.cpp}}
+\subsubsection{\texorpdfstring{skipALine()}{skipALine()}}
+{\footnotesize\ttfamily static void skip\+A\+Line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_lexer}{Lexer}} $\ast$}]{lexer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{tanpero__lexer_8cpp_a6b14cb51c4668a69023e8e7b7407a7ad}\label{tanpero__lexer_8cpp_a6b14cb51c4668a69023e8e7b7407a7ad}} 
+\index{tanpero\_lexer.cpp@{tanpero\_lexer.cpp}!skipBlanks@{skipBlanks}}
+\index{skipBlanks@{skipBlanks}!tanpero\_lexer.cpp@{tanpero\_lexer.cpp}}
+\subsubsection{\texorpdfstring{skipBlanks()}{skipBlanks()}}
+{\footnotesize\ttfamily static void skip\+Blanks (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_lexer}{Lexer}} $\ast$}]{lexer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+

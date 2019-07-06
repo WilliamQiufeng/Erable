@@ -1,0 +1,138 @@
+\hypertarget{namespace_erable}{}\section{Erable Namespace Reference}
+\label{namespace_erable}\index{Erable@{Erable}}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespace_erable_1_1_compiler}{Compiler}}
+\item 
+ \mbox{\hyperlink{namespace_erable_1_1_erable}{Erable}}
+\item 
+ \mbox{\hyperlink{namespace_erable_1_1_exceptions}{Exceptions}}
+\item 
+ \mbox{\hyperlink{namespace_erable_1_1_i_o}{IO}}
+\item 
+ \mbox{\hyperlink{namespace_erable_1_1_meta}{Meta}}
+\item 
+ \mbox{\hyperlink{namespace_erable_1_1_native}{Native}}
+\item 
+ \mbox{\hyperlink{namespace_erable_1_1_program}{Program}}
+\item 
+ \mbox{\hyperlink{namespace_erable_1_1_types}{Types}}
+\item 
+ \mbox{\hyperlink{namespace_erable_1_1_utils}{Utils}}
+\end{DoxyCompactItemize}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_erable_1_1_code}{Code}}
+\item 
+class \mbox{\hyperlink{class_erable_1_1_config}{Config}}
+\item 
+class \mbox{\hyperlink{class_erable_1_1_constant_pool}{Constant\+Pool}}
+\item 
+class \mbox{\hyperlink{class_erable_1_1_descriptor}{Descriptor}}
+\item 
+class \mbox{\hyperlink{class_erable_1_1_op_code__t}{Op\+Code\+\_\+t}}
+\item 
+class \mbox{\hyperlink{class_erable_1_1_op_code_element}{Op\+Code\+Element}}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{namespace_erable_a9ac51d513b3b6629dcde72f4bf50dce2}{check\+Exists}} (const std\+::string \&key)
+\item 
+std\+::string \mbox{\hyperlink{namespace_erable_ae9dba4ed847d7fbcf9fc1f437578ef91}{get\+Lib}} ()
+\item 
+std\+::string \mbox{\hyperlink{namespace_erable_a55a887a018ba68ab971e3711a638dfa1}{get\+Bin}} ()
+\item 
+std\+::string \mbox{\hyperlink{namespace_erable_a88ace7b6867a84bf35b98b063516dd06}{find\+Std\+Lib}} ()
+\item 
+std\+::string \mbox{\hyperlink{namespace_erable_afa01b2a2d08571557c8442da41cb72ec}{find\+In\+Following}} (const std\+::vector$<$ std\+::string $>$ \&paths, std\+::string reg)
+\item 
+std\+::string \mbox{\hyperlink{namespace_erable_ab8dc07f5bbd7c2e716b38c2feaca831b}{search\+File}} (std\+::filesystem\+::path path, std\+::regex reg)
+\item 
+std\+::ostream \& \mbox{\hyperlink{namespace_erable_a248ccc14098f3d28bd8c59ac41eeee0f}{operator$<$$<$}} (std\+::ostream \&os, \mbox{\hyperlink{class_erable_1_1_constant_pool}{Constant\+Pool}} \&obj)
+\item 
+std\+::ostream \& \mbox{\hyperlink{namespace_erable_ad7b7bf528e735eaad7f3d472002b1f74}{operator$<$$<$}} (std\+::ostream \&os, \mbox{\hyperlink{class_erable_1_1_descriptor}{Descriptor}} \&obj)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{namespace_erable_a6d9e1e498f68cd7fa1c71cb362c89333}{U\+N\+K\+N\+O\+WN}} = -\/1
+\item 
+std\+::string \mbox{\hyperlink{namespace_erable_a60c921f1f338c12555495547451795f3}{O\+P\+C\+O\+D\+E\+\_\+\+W\+H\+A\+T\+E\+V\+ER}} = \char`\"{}W\+H\+A\+T\+E\+V\+ER\char`\"{}
+\item 
+\mbox{\hyperlink{class_erable_1_1_op_code__t}{Erable\+::\+Op\+Code\+\_\+t}} \mbox{\hyperlink{namespace_erable_adf78214f7408cc5507bb91e4e022379c}{Op\+Code}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespace_erable_a9ac51d513b3b6629dcde72f4bf50dce2}\label{namespace_erable_a9ac51d513b3b6629dcde72f4bf50dce2}} 
+\index{Erable@{Erable}!checkExists@{checkExists}}
+\index{checkExists@{checkExists}!Erable@{Erable}}
+\subsubsection{\texorpdfstring{checkExists()}{checkExists()}}
+{\footnotesize\ttfamily std\+::string Erable\+::check\+Exists (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_erable_afa01b2a2d08571557c8442da41cb72ec}\label{namespace_erable_afa01b2a2d08571557c8442da41cb72ec}} 
+\index{Erable@{Erable}!findInFollowing@{findInFollowing}}
+\index{findInFollowing@{findInFollowing}!Erable@{Erable}}
+\subsubsection{\texorpdfstring{findInFollowing()}{findInFollowing()}}
+{\footnotesize\ttfamily std\+::string Erable\+::find\+In\+Following (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{paths,  }\item[{std\+::string}]{reg }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_erable_a88ace7b6867a84bf35b98b063516dd06}\label{namespace_erable_a88ace7b6867a84bf35b98b063516dd06}} 
+\index{Erable@{Erable}!findStdLib@{findStdLib}}
+\index{findStdLib@{findStdLib}!Erable@{Erable}}
+\subsubsection{\texorpdfstring{findStdLib()}{findStdLib()}}
+{\footnotesize\ttfamily std\+::string Erable\+::find\+Std\+Lib (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_erable_a55a887a018ba68ab971e3711a638dfa1}\label{namespace_erable_a55a887a018ba68ab971e3711a638dfa1}} 
+\index{Erable@{Erable}!getBin@{getBin}}
+\index{getBin@{getBin}!Erable@{Erable}}
+\subsubsection{\texorpdfstring{getBin()}{getBin()}}
+{\footnotesize\ttfamily std\+::string Erable\+::get\+Bin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_erable_ae9dba4ed847d7fbcf9fc1f437578ef91}\label{namespace_erable_ae9dba4ed847d7fbcf9fc1f437578ef91}} 
+\index{Erable@{Erable}!getLib@{getLib}}
+\index{getLib@{getLib}!Erable@{Erable}}
+\subsubsection{\texorpdfstring{getLib()}{getLib()}}
+{\footnotesize\ttfamily std\+::string Erable\+::get\+Lib (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_erable_a248ccc14098f3d28bd8c59ac41eeee0f}\label{namespace_erable_a248ccc14098f3d28bd8c59ac41eeee0f}} 
+\index{Erable@{Erable}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Erable@{Erable}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::ostream\& Erable\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{class_erable_1_1_constant_pool}{Constant\+Pool}} \&}]{obj }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_erable_ad7b7bf528e735eaad7f3d472002b1f74}\label{namespace_erable_ad7b7bf528e735eaad7f3d472002b1f74}} 
+\index{Erable@{Erable}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Erable@{Erable}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::ostream\& Erable\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{class_erable_1_1_descriptor}{Descriptor}} \&}]{obj }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_erable_ab8dc07f5bbd7c2e716b38c2feaca831b}\label{namespace_erable_ab8dc07f5bbd7c2e716b38c2feaca831b}} 
+\index{Erable@{Erable}!searchFile@{searchFile}}
+\index{searchFile@{searchFile}!Erable@{Erable}}
+\subsubsection{\texorpdfstring{searchFile()}{searchFile()}}
+{\footnotesize\ttfamily std\+::string Erable\+::search\+File (\begin{DoxyParamCaption}\item[{std\+::filesystem\+::path}]{path,  }\item[{std\+::regex}]{reg }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{namespace_erable_adf78214f7408cc5507bb91e4e022379c}\label{namespace_erable_adf78214f7408cc5507bb91e4e022379c}} 
+\index{Erable@{Erable}!OpCode@{OpCode}}
+\index{OpCode@{OpCode}!Erable@{Erable}}
+\subsubsection{\texorpdfstring{OpCode}{OpCode}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_erable_1_1_op_code__t}{Erable\+::\+Op\+Code\+\_\+t}} Erable\+::\+Op\+Code\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespace_erable_a60c921f1f338c12555495547451795f3}\label{namespace_erable_a60c921f1f338c12555495547451795f3}} 
+\index{Erable@{Erable}!OPCODE\_WHATEVER@{OPCODE\_WHATEVER}}
+\index{OPCODE\_WHATEVER@{OPCODE\_WHATEVER}!Erable@{Erable}}
+\subsubsection{\texorpdfstring{OPCODE\_WHATEVER}{OPCODE\_WHATEVER}}
+{\footnotesize\ttfamily std\+::string Erable\+::\+O\+P\+C\+O\+D\+E\+\_\+\+W\+H\+A\+T\+E\+V\+ER = \char`\"{}W\+H\+A\+T\+E\+V\+ER\char`\"{}\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespace_erable_a6d9e1e498f68cd7fa1c71cb362c89333}\label{namespace_erable_a6d9e1e498f68cd7fa1c71cb362c89333}} 
+\index{Erable@{Erable}!UNKNOWN@{UNKNOWN}}
+\index{UNKNOWN@{UNKNOWN}!Erable@{Erable}}
+\subsubsection{\texorpdfstring{UNKNOWN}{UNKNOWN}}
+{\footnotesize\ttfamily int Erable\+::\+U\+N\+K\+N\+O\+WN = -\/1\hspace{0.3cm}{\ttfamily [inline]}}
+

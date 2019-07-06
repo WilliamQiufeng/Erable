@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Playground"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="clang"/>
+		<Option virtualFolders="CMake Files\;CMake Files\Compiler\;CMake Files\stdlib\;CMake Files\VM\;CMake Files\Playground\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/Playground"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/Playground/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/Playground/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/Playground/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/Playground/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Playground">
+				<Option output="/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/Playground/Playground" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/Playground"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/usr/local/Cellar/llvm/8.0.0_1/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/local/Cellar/llvm/8.0.0_1/lib/clang/8.0.0/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/Playground/Makefile&quot;  VERBOSE=1 Playground"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/Playground/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/Playground/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/Playground/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Playground/fast">
+				<Option output="/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/Playground/Playground" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/Playground"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/usr/local/Cellar/llvm/8.0.0_1/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/local/Cellar/llvm/8.0.0_1/lib/clang/8.0.0/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/Playground/Makefile&quot;  VERBOSE=1 Playground/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/Playground/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/Playground/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug-use-llvm/Playground/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Playground/main.cpp">
+			<Option target="Playground"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\Compiler\"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/stdlib/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\stdlib\"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/VM/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\VM\"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Playground/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\Playground\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
