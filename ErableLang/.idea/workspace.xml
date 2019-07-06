@@ -78,18 +78,14 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="843ad3e7-5740-4d46-80f4-e7c843e04bd1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/statistic.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/statistic.xml" afterDir="false" />
+    <list default="true" id="843ad3e7-5740-4d46-80f4-e7c843e04bd1" name="Default Changelist" comment="clean up">
+      <change afterPath="$PROJECT_DIR$/../CppIssue/build/Debug/GNU-MacOSX/main.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CppIssue/build/Debug/GNU-MacOSX/par.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CppIssue/build/Debug/GNU-MacOSX/sth.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CppIssue/dist/Debug/GNU-MacOSX/cppissue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Old_Parser.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Old_Parser.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Old_Symbols.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Old_Symbols.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Old_Syntax.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/Old_Syntax.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/tanpero_lexer.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/tanpero_lexer.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler/tanpero_token.hpp" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/runtime/cmake-build-debug/" />
@@ -127,18 +123,6 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Compiler/Syntax.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1701">
-              <caret line="81" column="29" selection-start-line="81" selection-start-column="29" selection-end-line="81" selection-end-column="29" />
-              <folding>
-                <element signature="e#100#121#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Compiler/Syntax.hpp">
           <provider selected="true" editor-type-id="text-editor">
@@ -181,11 +165,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Compiler/Symbols.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1">
               <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="371">
+              <caret line="98" column="12" selection-start-line="98" selection-start-column="12" selection-end-line="98" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -264,7 +257,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/VM/Program.hpp" />
         <option value="$PROJECT_DIR$/VM/ConstantPool.hpp" />
         <option value="$PROJECT_DIR$/stdlib/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/VM/Descriptor.cpp" />
@@ -315,6 +307,7 @@
         <option value="$PROJECT_DIR$/Compiler/Symbols.cpp" />
         <option value="$PROJECT_DIR$/Compiler/Symbols.hpp" />
         <option value="$PROJECT_DIR$/../docs/spec/Erable-Parser-Specification.md" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -382,6 +375,11 @@
             <path>
               <item name="ErableLang" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="$PROJECT_DIR$" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="ErableLang" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="$PROJECT_DIR$" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="cmake-build-debug" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="ErableLang" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -799,7 +797,7 @@
       <workItem from="1561186931189" duration="1877000" />
       <workItem from="1561212298286" duration="10066000" />
       <workItem from="1561590345329" duration="98660000" />
-      <workItem from="1562390865060" duration="712000" />
+      <workItem from="1562390865060" duration="1573000" />
     </task>
     <task id="LOCAL-00001" summary="I've changed the IDE I use">
       <created>1558567629247</created>
@@ -1123,7 +1121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1562390169469</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="clean up">
+      <created>1562391649489</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1562391649490</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1159,7 +1164,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="344263000" />
+    <option name="totallyTimeSpent" value="345124000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1172,8 +1177,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="768" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" auto_hide="true" content_ui="combo" id="Project" order="0" sideWeight="0.49344978" visible="true" weight="0.38897282" />
+      <window_info auto_hide="true" content_ui="combo" id="Project" order="0" sideWeight="0.49344978" weight="0.38897282" />
       <window_info id="Structure" order="1" sideWeight="0.5065502" side_tool="true" weight="0.35725075" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -1290,7 +1296,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/Compiler/tests/googletest" />
     </ignored-roots>
-    <MESSAGE value="Now the lexer works properly. Added many tokens.&#10;&#10;Signed-off-by: Qiufeng54321 &lt;williamcraft@163.com&gt;" />
     <MESSAGE value="Lexer finished." />
     <MESSAGE value="Declare a rule just like this:&#10;&quot;rule&quot;_Rule - &quot;Token1&quot;_TokenSymbol&#10;              | &quot;Token2&quot;_TokenSymbol + &quot;Token3&quot;_TokenSymbol&#10;              &#10;Great!!!&gt;_&lt;" />
     <MESSAGE value="Moved the syntax tree in a single c++ file; added Rule::isRef() and Rule::isReal()" />
@@ -1315,7 +1320,8 @@
     <MESSAGE value="Parse Table now works!" />
     <MESSAGE value="Some problems are found and I am working on it. This commit is just for showing daily progress" />
     <MESSAGE value=":art: Optimised and Corrected the FIRST method.&#10;:memo: Wrote **Erable Parser Specification**." />
-    <option name="LAST_COMMIT_MESSAGE" value=":art: Optimised and Corrected the FIRST method.&#10;:memo: Wrote **Erable Parser Specification**." />
+    <MESSAGE value="clean up" />
+    <option name="LAST_COMMIT_MESSAGE" value="clean up" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1427,14 +1433,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Compiler/tests/catch.hpp" />
-    <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/streambuf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="229" selection-start-line="229" selection-end-line="229" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/ios">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="124">
@@ -1835,6 +1833,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1">
           <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../gitign">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="518">
+          <caret line="117" selection-start-line="117" selection-end-line="117" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="98" column="12" selection-start-line="98" selection-start-column="12" selection-end-line="98" selection-end-column="12" />
         </state>
       </provider>
     </entry>

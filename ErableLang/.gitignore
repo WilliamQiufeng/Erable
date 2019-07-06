@@ -97,19 +97,10 @@ CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
 CMakeScripts
-Testing
 Makefile
 cmake_install.cmake
-install_manifest.txt
 compile_commands.json
-CTestTestfile.cmake
 _deps
 
 Compiler/.idea/
-Compiler/cmake-build-debug/Compiler.cbp
-VM/cmake-build-debug/ErableVM.cbp
-cmake-build-debug/Erable.cbp
-cmake-build-debug/ErableLang.cbp
-cmake-build-debug/VM/ErableVM
-cmake-build-debug/VM/ErableVM.cbp
-cmake-build-debug/stdlib/ErableStdlib.cbp
+cmake-build-debug
