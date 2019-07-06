@@ -1,9 +1,0 @@
-VAR_IDS=1
-LETTER=2
-NUM=3
-NAME=4
-EQU=5
-SPLIT=6
-WS=7
-'='=5
-';'=6
