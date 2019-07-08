@@ -84,6 +84,22 @@ namespace Erable::Compiler::Symbols {
 		 * @return tokens that is at the very front
 		 */
 		static LookaheadSet getFront(SymbolList &, SymbolPtr exp);
+
+		static LookaheadSet getLookahead(SymbolPtr exp, SymbolList symbolList);
+
+		/**
+		 * returns the 'lookahead' of a symbol.
+		 * Internally, it first checks if exp is a combination(production).
+		 * If it is, returns _getLookahead(the next symbol of the symbol followed by the dot in exp)
+		 * else, returns _getLookahead(exp).
+		 * @param duplicateSymbol to avoid duplicate symbols caused by recursive referencing, etc.
+		 * @param exp the symbol to find lookahead for
+		 * @return exp's lookahead set
+		 */
+		static LookaheadSet getLookahead(SymbolList &duplicateSymbol, SymbolPtr exp, SymbolList symbolList);
+
+	protected:
+//		static LookaheadSet _getLookAhead(SymbolList &duplicateSymbol, SymbolPtr exp);
 	};
 
 	struct CombineSymbol : public Symbol {
@@ -107,7 +123,8 @@ namespace Erable::Compiler::Symbols {
 	};
 
 	///End Of Token
-	inline auto EPSILON = std::make_shared<Symbol>("$");
+	inline auto EOT = "$"_token;
+	inline auto EPSILON = "ε"_token;
 	inline std::string ANONYMOUS = "_anonymous";
 }
 

@@ -109,7 +109,7 @@ namespace Erable::Compiler::Parser {
 		auto &rootSyntax = Syntax::syntaxList[0];
 		auto clone = rootSyntax->fullClone();
 		//Set lookahead(always $EOT at start but whatever :P)
-		clone->lookahead = clone->getFront();
+		clone->lookahead = {Symbols::EOT};
 		//Initialize the root node
 		rootNode = new IterationNode{this->currentIndex++, {clone}};
 		//Recursively expand the rule
@@ -117,6 +117,9 @@ namespace Erable::Compiler::Parser {
 	}
 
 	void RuleIteration::generateOneRound(IterationNode *node) {
+		if (currentIndex == 1) {
+
+		}
 		std::unordered_map<std::string, IterationNode *> mappingCurrentDot;
 		//For each symbol in the parent node
 		for (auto &item : node->symbols) {
@@ -146,8 +149,14 @@ namespace Erable::Compiler::Parser {
 			IterationNode *iterationNode = pair.second;
 			Symbols::SymbolList cloneCurrentSymbols = iterationNode->symbols;
 			Symbols::SymbolList cloneDuplicateSymbols = iterationNode->symbols;
+			int cloneDuplicateSymbolsSize = cloneDuplicateSymbols.size();
 			for (auto &item : cloneCurrentSymbols) {
 				recursiveExpandRule(cloneDuplicateSymbols, iterationNode, item);
+			}
+
+			for (int i = cloneDuplicateSymbolsSize; i < iterationNode->symbols.size(); i++) {
+				auto sym = iterationNode->symbols[i];
+				sym->lookahead = Symbols::Symbol::getLookahead(sym, iterationNode->symbols);
 			}
 		}
 	}
@@ -155,6 +164,9 @@ namespace Erable::Compiler::Parser {
 	void RuleIteration::recursiveExpandRule(IterationNode *node, Symbols::SymbolPtr &symbol) {
 		Symbols::SymbolList duplicateBuffer;
 		recursiveExpandRule(duplicateBuffer, node, symbol);
+		for (auto sym : node->symbols) {
+			sym->lookahead = Symbols::Symbol::getLookahead(sym, node->symbols);
+		}
 	}
 
 	void RuleIteration::recursiveExpandRule(Symbols::SymbolList &duplicateBuffer, IterationNode *node,
@@ -172,7 +184,7 @@ namespace Erable::Compiler::Parser {
 					for (auto &item : found) {
 						auto cloned = item->fullClone();
 						Symbols::SymbolList dup;
-						cloned->lookahead = cloned->getFirst(dup);
+
 //						cloned->lookahead = cloned->getFirst(dup);
 						auto duplicateDuplicateBuffer = duplicateBuffer;
 						if (!isExactlyDuplicate(duplicateDuplicateBuffer, cloned)) {
@@ -311,7 +323,7 @@ namespace Erable::Compiler::Parser {
 		for (auto tkn : Syntax::tokenList) {
 			os << std::setw(width) << tkn->getTag() << "|";
 		}
-		os << std::setw(width) << Symbols::EPSILON->getTag() << "|";
+		os << std::setw(width) << Symbols::EOT->getTag() << "|";
 		/*for (auto tkn : Syntax::ruleList) {
 			os << std::setw(width) << tkn->getTag() << "|";
 		}*/
@@ -341,7 +353,7 @@ namespace Erable::Compiler::Parser {
 				}*/
 				os << "|";
 			}
-			auto found = line.find(Symbols::EPSILON->getTag());
+			auto found = line.find(Symbols::EOT->getTag());
 			if (found != line.end()) {
 				Action action = (*found).second;
 				std::stringstream ss;
@@ -369,6 +381,16 @@ namespace Erable::Compiler::Parser {
 
 	ParseTable::ParseTable(const RuleIteration &iteration) : ParseTable(iteration, iteration.currentIndex) {}
 
+	const ParseTable::ActionTable &ParseTable::getParseTable() const {
+		return parseTable;
+	}
+
+	void ParseTable::setParseTable(const ParseTable::ActionTable &parseTable) {
+		ParseTable::parseTable = parseTable;
+	}
+
+	ParseTable::ParseTable(int stateAmount) : stateAmount(stateAmount) {}
+
 	std::ostream &operator<<(std::ostream &os, const Action &action) {
 		switch (action.type) {
 
@@ -395,15 +417,11 @@ std::string Erable::Compiler::Parser::IterationNode::toString() {
 	std::stringstream os;
 	os << "I" << this->iterationIndex << ": ";
 	for (auto &item : this->symbols) {
-		os << "[" << item->getTag() << " -> " << item->toString() << " => ";
+		os << "[" << item->toString() << " => ";
 		if (item->connectedTo)os << "I" << item->connectedTo->iterationIndex;
 		else if (item->connectedToSymbol)os << item->connectedToSymbol->toString();
 		else os << "None";
-		os << ", (";
-		for (auto &tkn : item->lookahead) {
-			os << "'" << tkn->getTag() << "' ";
-		}
-		os << ")]\n\t";
+		os << "]\n\t";
 	}
 	Erable::Compiler::Parser::INDuplicateBuffer.insert(this);
 	os << "\n";

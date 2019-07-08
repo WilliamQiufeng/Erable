@@ -56,6 +56,7 @@
 				<Compiler>
 					<Add option="-DERABLE_MAJOR=1"/>
 					<Add option="-DERABLE_MINOR=0"/>
+					<Add option="-DERABLE_PARSE_TABLE_PATH=&quot;/usr/local/ErableParseTable.pt&quot;"/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/.."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../Global"/>
@@ -87,6 +88,7 @@
 				<Compiler>
 					<Add option="-DERABLE_MAJOR=1"/>
 					<Add option="-DERABLE_MINOR=0"/>
+					<Add option="-DERABLE_PARSE_TABLE_PATH=&quot;/usr/local/ErableParseTable.pt&quot;"/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/.."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../Global"/>

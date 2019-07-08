@@ -119,6 +119,8 @@ namespace Erable::Compiler::Parser {
 
 		ParseTable(const RuleIteration &iteration);
 
+		ParseTable(int stateAmount);
+
 		int getStateAmount() const;
 
 		void setStateAmount(int amount);
@@ -126,6 +128,10 @@ namespace Erable::Compiler::Parser {
 		void generateTable();
 
 		friend std::ostream &operator<<(std::ostream &os, const ParseTable &table);
+
+		const ActionTable &getParseTable() const;
+
+		void setParseTable(const ActionTable &parseTable);
 
 	protected:
 		void _generateTable(IterationNodeSet &duplicateBuffer);

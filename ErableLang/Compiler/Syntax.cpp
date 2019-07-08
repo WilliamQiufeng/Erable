@@ -79,14 +79,13 @@ namespace Erable::Compiler::Syntax {
 
 	void initSyntax() {
 //		initAmbiguousSyntax();
-//		initAddMulOpSyntax();
-		initWikipediaSyntax();
+		initAddMulOpSyntax();
+//		initWikipediaSyntax();
 	}
 
 	std::string $syntaxListToString() {
 		std::stringstream ss;
 		for (auto &item : syntaxList) {
-			ss << item->getTag() << " -> ";
 			Symbols::CombineSymbolPtr combineSymbolPtr = std::static_pointer_cast<Symbols::CombineSymbol>(item);
 			ss << combineSymbolPtr->toString() << "\n";
 		}

@@ -26,6 +26,7 @@
 				<Compiler>
 					<Add option="-DERABLE_MAJOR=1"/>
 					<Add option="-DERABLE_MINOR=0"/>
+					<Add option="-DERABLE_PARSE_TABLE_PATH=&quot;/usr/local/ErableParseTable.pt&quot;"/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/.."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../Global"/>
@@ -53,6 +54,7 @@
 				<Compiler>
 					<Add option="-DERABLE_MAJOR=1"/>
 					<Add option="-DERABLE_MINOR=0"/>
+					<Add option="-DERABLE_PARSE_TABLE_PATH=&quot;/usr/local/ErableParseTable.pt&quot;"/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/.."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../Global"/>
@@ -80,6 +82,7 @@
 				<Compiler>
 					<Add option="-DERABLE_MAJOR=1"/>
 					<Add option="-DERABLE_MINOR=0"/>
+					<Add option="-DERABLE_PARSE_TABLE_PATH=&quot;/usr/local/ErableParseTable.pt&quot;"/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/.."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../Global"/>
@@ -107,6 +110,7 @@
 				<Compiler>
 					<Add option="-DERABLE_MAJOR=1"/>
 					<Add option="-DERABLE_MINOR=0"/>
+					<Add option="-DERABLE_PARSE_TABLE_PATH=&quot;/usr/local/ErableParseTable.pt&quot;"/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/.."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../Global"/>
@@ -164,6 +168,7 @@
 				<Compiler>
 					<Add option="-DERABLE_MAJOR=1"/>
 					<Add option="-DERABLE_MINOR=0"/>
+					<Add option="-DERABLE_PARSE_TABLE_PATH=&quot;/usr/local/ErableParseTable.pt&quot;"/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/.."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../Global"/>
@@ -195,6 +200,7 @@
 				<Compiler>
 					<Add option="-DERABLE_MAJOR=1"/>
 					<Add option="-DERABLE_MINOR=0"/>
+					<Add option="-DERABLE_PARSE_TABLE_PATH=&quot;/usr/local/ErableParseTable.pt&quot;"/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/.."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../Global"/>
@@ -251,6 +257,30 @@
 			<Option target="ErableCompiler"/>
 		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/ParseTable.hpp">
+			<Option target="ErableCompilerDyn"/>
+			<Option target="ErableCompiler"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/ParseTableIO.cpp">
+			<Option target="ErableCompilerDyn"/>
+			<Option target="ErableCompiler"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/ParseTableIO.hpp">
+			<Option target="ErableCompilerDyn"/>
+			<Option target="ErableCompiler"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/ParseTableInput.cpp">
+			<Option target="ErableCompilerDyn"/>
+			<Option target="ErableCompiler"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/ParseTableInput.hpp">
+			<Option target="ErableCompilerDyn"/>
+			<Option target="ErableCompiler"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/ParseTableOutput.cpp">
+			<Option target="ErableCompilerDyn"/>
+			<Option target="ErableCompiler"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/ParseTableOutput.hpp">
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
