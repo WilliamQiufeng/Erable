@@ -10,6 +10,7 @@
 #include <memory>
 #include <unordered_set>
 #include <unordered_map>
+#include <set>
 #include <vector>
 #include <deque>
 #include <fstream>
@@ -25,7 +26,7 @@ namespace Erable {
 			typedef std::vector<SymbolPtr> SymbolList;
 			typedef std::vector<SymbolPtr> TokenSymbolList;
 			typedef std::unordered_set<SymbolPtr> SymbolSet;
-			typedef std::unordered_set<SymbolPtr> LookaheadSet;
+			typedef SymbolSet LookaheadSet;
 		}
 		namespace Data {
 			struct ProcessedData;
@@ -82,6 +83,7 @@ namespace Erable {
 
 		typedef std::vector<Token> TokenList;
 	}
+	inline int UNKNOWN = -1;
 }
 
 Erable::Compiler::Symbols::SymbolPtr operator "" _rule(const char *, std::size_t);

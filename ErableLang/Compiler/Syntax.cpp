@@ -55,6 +55,23 @@ namespace Erable::Compiler::Syntax {
 		};
 	}
 
+	void initSimpleSyntax() {
+		auto SS = "S'"_rule;
+		auto S = "S"_rule;
+		auto A = "A"_rule;
+		auto a = "a"_token;
+		auto b = "b"_token;
+		SS - Symbols::SymbolList{S};
+		S - Symbols::SymbolList{
+				A + A
+		};
+		A - Symbols::SymbolList{
+				a + A,
+				b
+		};
+
+	}
+
 	void initWikipediaSyntax() {
 		auto SS = "S'"_rule;
 		auto S = "S"_rule;
@@ -78,6 +95,7 @@ namespace Erable::Compiler::Syntax {
 	}
 
 	void initSyntax() {
+//		initSimpleSyntax();
 //		initAmbiguousSyntax();
 		initAddMulOpSyntax();
 //		initWikipediaSyntax();

@@ -52,6 +52,12 @@ Erable::Compiler::Symbols::SymbolPtr Erable::Compiler::Symbols::Symbol::fullClon
 	return ret;
 }
 
+Erable::Compiler::Symbols::SymbolPtr Erable::Compiler::Symbols::Symbol::fullCloneWithNeg1Dot() {
+	auto cloned = this->fullClone();
+	cloned->dotPosition = UNKNOWN;
+	return cloned;
+}
+
 Erable::Compiler::Symbols::LookaheadSet
 Erable::Compiler::Symbols::Symbol::getFirst(Erable::Compiler::Symbols::SymbolList &symbolList) {
 	return {EOT};
@@ -180,27 +186,31 @@ Erable::Compiler::Symbols::Symbol::getFront(SymbolList &symbolList, SymbolPtr ex
 
 Erable::Compiler::Symbols::LookaheadSet
 Erable::Compiler::Symbols::Symbol::getLookahead(Erable::Compiler::Symbols::SymbolList &duplicateSymbol,
-												Erable::Compiler::Symbols::SymbolPtr exp, SymbolList symbolList) {
+												Erable::Compiler::Symbols::SymbolPtr exp, SymbolList symbolList,
+												int startOffset) {
 	std::cout << "New Lookahead called for " << exp->toString() << "---------------------" << std::endl;
 	if ((not Syntax::syntaxList.empty()) and Syntax::syntaxList[0]->getTag() == exp->getTag()) return {EOT};
 	LookaheadSet lookaheadSet;
-	for (auto &item : symbolList) {
-		if (Parser::RuleIteration::notDuplicate(duplicateSymbol, item)) {
+	for (int i = startOffset; i < symbolList.size(); i++) {
+		auto &item = symbolList[i];
+		std::cout << "\t" << item->toString() << std::endl;
+		if (!Parser::RuleIteration::isExactlyDuplicate(duplicateSymbol, item)) {
 			if (item->getType() != SymbolType::COMBINATION)
 				throw std::runtime_error("Internal Error: item should be combination.");
 			auto comb = std::static_pointer_cast<CombineSymbol>(item);
 			bool shouldAddFirst = false;
 			//for S->aAb
-			for (auto &sym : comb->list) {
+			for (int ladp = comb->dotPosition; ladp < comb->list.size(); ladp++) {
+				auto &sym = comb->list[ladp];
 				//The next symbol of exp
 				if (shouldAddFirst) {
-					std::cout << sym->toString() << " is the next symbol after  " << exp->toString() << " in " <<
-							  comb->toString() << std::endl;
+					std::cout << "\t\t" << sym->toString() << " is the next symbol after  " << exp->toString() << " in "
+							  << comb->toString() << std::endl;
 					shouldAddFirst = false;
 					SymbolList buff;
 					//get FIRST(sym)
 					auto first = Symbol::getFront(buff, sym);
-					std::cout << "the first gotten of " << sym->toString() << " in rule " << comb->toString()
+					std::cout << "\t\tthe first gotten of " << sym->toString() << " in rule " << comb->toString()
 							  << " is: (";
 					for (auto &tk : first) {
 						std::cout << "'" << tk->toString() << "' ";
@@ -220,17 +230,18 @@ Erable::Compiler::Symbols::Symbol::getLookahead(Erable::Compiler::Symbols::Symbo
 				}
 				//If matches the exp's tag then set shouldAddFirst to true( which means the next symbol will be selected)
 				if (sym->getTag() == exp->getTag()) {
-					std::cout << "There is a tag named " << sym->getTag() << " which is the same as " << exp->getTag()
+					std::cout << "\t\tThere is a tag named " << sym->getTag() << " which is the same as "
+							  << exp->getTag()
 							  << " in " << comb->toString() << std::endl;
 					shouldAddFirst = true;
 				}
 			}
 			//If S->aB
 			if (shouldAddFirst) {
-				std::cout << item->toString() << " matches S->aB with " << exp->getTag() << std::endl;
+				std::cout << "\t\t" << item->toString() << " matches S->aB with " << exp->getTag() << std::endl;
 				//calculate FOLLOW(S)
-				SymbolList dupl{item};
-				LookaheadSet follow = getLookahead(dupl, item, symbolList);
+				SymbolList dupl{item->fullCloneWithNeg1Dot()};
+				LookaheadSet follow = getLookahead(dupl, item, symbolList, startOffset);
 				std::cout << "They are: (";
 				for (auto &tk : follow) {
 					std::cout << "'" << tk->toString() << "' ";
@@ -240,16 +251,20 @@ Erable::Compiler::Symbols::Symbol::getLookahead(Erable::Compiler::Symbols::Symbo
 				lookaheadSet.insert(follow.begin(), follow.end());
 			}
 			duplicateSymbol.push_back(item);
+		} else {
+			std::cout << "\t\tThe symbol is duplicate: " << item->toString() << " and " << exp->toString() << std::endl;
 		}
 	}
 	std::cout << "End lookahead calling for " << exp->toString() << std::endl;
-	return lookaheadSet;
+	return lookaheadSet.empty() ? exp->lookahead : lookaheadSet;
+//	return lookaheadSet;
 }
 
 Erable::Compiler::Symbols::LookaheadSet
-Erable::Compiler::Symbols::Symbol::getLookahead(Erable::Compiler::Symbols::SymbolPtr exp, SymbolList symbolList) {
+Erable::Compiler::Symbols::Symbol::getLookahead(Erable::Compiler::Symbols::SymbolPtr exp, SymbolList symbolList,
+												int startOffset) {
 	SymbolList buffer;
-	return getLookahead(buffer, std::move(exp), std::move(symbolList));
+	return getLookahead(buffer, std::move(exp), std::move(symbolList), startOffset);
 }
 
 /*

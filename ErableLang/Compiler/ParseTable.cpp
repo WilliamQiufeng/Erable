@@ -114,12 +114,12 @@ namespace Erable::Compiler::Parser {
 		rootNode = new IterationNode{this->currentIndex++, {clone}};
 		//Recursively expand the rule
 		recursiveExpandRule(rootNode, clone);
+		for (auto &sym : rootNode->symbols) {
+			sym->lookahead = Symbols::Symbol::getLookahead(sym, rootNode->symbols, 0);
+		}
 	}
 
 	void RuleIteration::generateOneRound(IterationNode *node) {
-		if (currentIndex == 1) {
-
-		}
 		std::unordered_map<std::string, IterationNode *> mappingCurrentDot;
 		//For each symbol in the parent node
 		for (auto &item : node->symbols) {
@@ -147,6 +147,7 @@ namespace Erable::Compiler::Parser {
 		}
 		for (auto &pair : mappingCurrentDot) {
 			IterationNode *iterationNode = pair.second;
+			std::cout << "Iteration " << iterationNode->iterationIndex << "-----" << std::endl;
 			Symbols::SymbolList cloneCurrentSymbols = iterationNode->symbols;
 			Symbols::SymbolList cloneDuplicateSymbols = iterationNode->symbols;
 			int cloneDuplicateSymbolsSize = cloneDuplicateSymbols.size();
@@ -156,7 +157,7 @@ namespace Erable::Compiler::Parser {
 
 			for (int i = cloneDuplicateSymbolsSize; i < iterationNode->symbols.size(); i++) {
 				auto sym = iterationNode->symbols[i];
-				sym->lookahead = Symbols::Symbol::getLookahead(sym, iterationNode->symbols);
+				sym->lookahead = Symbols::Symbol::getLookahead(sym, iterationNode->symbols, 0);
 			}
 		}
 	}
@@ -164,9 +165,12 @@ namespace Erable::Compiler::Parser {
 	void RuleIteration::recursiveExpandRule(IterationNode *node, Symbols::SymbolPtr &symbol) {
 		Symbols::SymbolList duplicateBuffer;
 		recursiveExpandRule(duplicateBuffer, node, symbol);
+		/*if(node->iterationIndex == 6) {
+
+		}
 		for (auto sym : node->symbols) {
 			sym->lookahead = Symbols::Symbol::getLookahead(sym, node->symbols);
-		}
+		}*/
 	}
 
 	void RuleIteration::recursiveExpandRule(Symbols::SymbolList &duplicateBuffer, IterationNode *node,
@@ -269,7 +273,7 @@ namespace Erable::Compiler::Parser {
 
 	bool RuleIteration::isExactlyDuplicate(Symbols::SymbolList &duplicateBuffer, Symbols::SymbolPtr sym) {
 		for (auto &elem : duplicateBuffer) {
-			if (sym->is(elem) and sym->dotPosition == elem->dotPosition) {
+			if (sym->is(elem) and (sym->dotPosition == elem->dotPosition or elem->dotPosition == -1)) {
 				return true;
 			}
 		}

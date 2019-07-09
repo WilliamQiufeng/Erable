@@ -48,6 +48,12 @@ namespace Erable::Compiler::Symbols {
 		virtual SymbolPtr fullClone();
 
 		/**
+		 * Full clones the whole symbol and set the dotPosition to UNKNOWN(-1)
+		 * @return the cloned Symbol Pointer
+		 */
+		SymbolPtr fullCloneWithNeg1Dot();
+
+		/**
 		 * increase the dotPosition by 1.
 		 */
 		virtual void shiftDot();
@@ -85,7 +91,7 @@ namespace Erable::Compiler::Symbols {
 		 */
 		static LookaheadSet getFront(SymbolList &, SymbolPtr exp);
 
-		static LookaheadSet getLookahead(SymbolPtr exp, SymbolList symbolList);
+		static LookaheadSet getLookahead(SymbolPtr exp, SymbolList symbolList, int startOffset);
 
 		/**
 		 * returns the 'lookahead' of a symbol.
@@ -96,10 +102,9 @@ namespace Erable::Compiler::Symbols {
 		 * @param exp the symbol to find lookahead for
 		 * @return exp's lookahead set
 		 */
-		static LookaheadSet getLookahead(SymbolList &duplicateSymbol, SymbolPtr exp, SymbolList symbolList);
+		static LookaheadSet
+		getLookahead(SymbolList &duplicateSymbol, SymbolPtr exp, SymbolList symbolList, int startOffset);
 
-	protected:
-//		static LookaheadSet _getLookAhead(SymbolList &duplicateSymbol, SymbolPtr exp);
 	};
 
 	struct CombineSymbol : public Symbol {
