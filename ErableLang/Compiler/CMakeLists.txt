@@ -36,11 +36,30 @@ set(ERABLE_PARSE_TABLE_PATH ${CMAKE_INSTALL_PREFIX}/ErableParseTable.pt)
 add_definitions(-DERABLE_MAJOR=1 -DERABLE_MINOR=0 -DERABLE_PARSE_TABLE_PATH="${ERABLE_PARSE_TABLE_PATH}")
 #link_directories(${OPENMP_DIRECTORES})
 #include_directories(/usr/local/Cellar/leveldb/1.22/include)
-set(EXECUTABLES Tokens.cpp Tokens.hpp Lexer.cpp Lexer.hpp Scanner.hpp #[[Old_Parser.cpp Old_Parser.hpp Old_Symbols.cpp Old_Symbols.hpp Old_Syntax.cpp Old_Syntax.hpp]] ProcessedData.cpp ProcessedData.hpp AST.cpp AST.hpp ID.cpp ID.hpp Headers.hpp Symbols.cpp Symbols.hpp Syntax.cpp Syntax.hpp ParseTable.cpp ParseTable.hpp ParseTableOutput.cpp ParseTableOutput.hpp ParseTableIO.cpp ParseTableIO.hpp ParseTableInput.cpp ParseTableInput.hpp)
+set(EXECUTABLES
+        Lexer/Tokens.cpp Lexer/Tokens.hpp
+        Lexer/Lexer.cpp Lexer/Lexer.hpp
+        Scanner.hpp
+        #[[Old_Parser.cpp Old_Parser.hpp Old_Symbols.cpp Old_Symbols.hpp Old_Syntax.cpp Old_Syntax.hpp]]
+        ProcessedData.cpp ProcessedData.hpp
+        AST.cpp AST.hpp
+        ID.cpp ID.hpp
+        Headers.hpp
+        Lexer/Symbols.cpp Lexer/Symbols.hpp
+        Syntax.cpp Syntax.hpp
+        Parser/ParseTable.cpp Parser/ParseTable.hpp
+        Parser/ParseTableOutput.cpp Parser/ParseTableOutput.hpp
+        Parser/ParseTableIO.cpp Parser/ParseTableIO.hpp
+        Parser/ParseTableInput.cpp Parser/ParseTableInput.hpp
+        Parser/Parser.cpp Parser/Parser.hpp
+        #[[Parser/.IntList.cpp Parser/.IntList.hpp]]
+        Parser/MultiStack.cpp Parser/MultiStack.hpp
+        )
 add_executable(ErableCompiler main.cpp ${EXECUTABLES})
 add_library(ErableCompilerDyn SHARED ${EXECUTABLES})
+add_library(ErableCompilerStatic STATIC ${EXECUTABLES})
 
-add_subdirectory(tests)
+#add_subdirectory(tests)
 
 message("Prefix: ${ERABLE_PARSE_TABLE_PATH}")
 

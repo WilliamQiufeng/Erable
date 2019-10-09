@@ -14,8 +14,21 @@
 #include <vector>
 #include <deque>
 #include <fstream>
+//#include <memory>
 
 namespace Erable {
+	namespace Utils {/*
+		template<typename T>
+		struct Node;
+		template<typename T>
+		class BidirectionalIterator;
+		template<typename T>
+		class IntList;
+		template<typename T>
+		struct MultiNode;
+		template<typename T>
+		class MultiStack;*/
+	}
 	namespace Compiler {
 		namespace Symbols {
 			enum class SymbolType;

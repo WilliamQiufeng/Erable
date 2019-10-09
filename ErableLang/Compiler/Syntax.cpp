@@ -4,7 +4,7 @@
 //
 
 #include "Syntax.hpp"
-#include "Symbols.hpp"
+#include "Lexer/Symbols.hpp"
 #include <iostream>
 #include <sstream>
 
@@ -94,11 +94,32 @@ namespace Erable::Compiler::Syntax {
 		};
 	}
 
+	void initTomitaGLRSyntax1() {
+		auto SS = "S'"_rule;
+		auto S = "S"_rule;
+		auto T = "T"_rule;
+		auto D = "D"_rule;
+		auto a = "a"_token;
+		auto b = "b"_token;
+
+		SS - Symbols::SymbolList{S};
+		S - Symbols::SymbolList{T + b};
+		T - Symbols::SymbolList{
+				T + b,
+				D + T,
+				a + b,
+				a,
+				b
+		};
+		D - Symbols::SymbolList{a, b};
+	}
+
 	void initSyntax() {
 //		initSimpleSyntax();
 //		initAmbiguousSyntax();
-		initAddMulOpSyntax();
-//		initWikipediaSyntax();
+//		initAddMulOpSyntax();
+		initWikipediaSyntax();
+//		initTomitaGLRSyntax1();
 	}
 
 	std::string $syntaxListToString() {

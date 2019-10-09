@@ -24,74 +24,71 @@
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="ErableLang" targetName="NightlyBuild" />
-      <config projectName="ErableLang" targetName="Playground" />
       <config projectName="ErableLang" targetName="ErableVMDyn" />
-      <config projectName="ErableLang" targetName="ContinuousTest" />
-      <config projectName="ErableLang" targetName="NightlyMemoryCheck" />
-      <config projectName="ErableLang" targetName="NightlyStart" />
-      <config projectName="ErableLang" targetName="Experimental" />
-      <config projectName="ErableLang" targetName="ContinuousSubmit" />
+      <config projectName="ErableLang" targetName="Playground" />
       <config projectName="ErableLang" targetName="ErableCompilerDyn" />
-      <config projectName="ErableLang" targetName="ContinuousConfigure" />
-      <config projectName="ErableLang" targetName="ExperimentalMemCheck" />
-      <config projectName="ErableLang" targetName="NightlySubmit" />
-      <config projectName="ErableLang" targetName="Continuous" />
-      <config projectName="ErableLang" targetName="ContinuousBuild" />
-      <config projectName="ErableLang" targetName="ExperimentalSubmit" />
-      <config projectName="ErableLang" targetName="NightlyConfigure" />
-      <config projectName="ErableLang" targetName="ContinuousUpdate" />
-      <config projectName="ErableLang" targetName="NightlyCoverage" />
-      <config projectName="ErableLang" targetName="ExperimentalBuild" />
-      <config projectName="ErableLang" targetName="ContinuousStart" />
-      <config projectName="ErableLang" targetName="ErableCompilerTest" />
-      <config projectName="ErableLang" targetName="ErableStdlib" />
-      <config projectName="ErableLang" targetName="ContinuousCoverage" />
-      <config projectName="ErableLang" targetName="ExperimentalStart" />
-      <config projectName="ErableLang" targetName="NightlyMemCheck" />
-      <config projectName="ErableLang" targetName="ErableVM" />
-      <config projectName="ErableLang" targetName="Nightly" />
-      <config projectName="ErableLang" targetName="ExperimentalUpdate" />
-      <config projectName="ErableLang" targetName="ExperimentalTest" />
-      <config projectName="ErableLang" targetName="NightlyTest" />
-      <config projectName="ErableLang" targetName="ContinuousMemCheck" />
-      <config projectName="ErableLang" targetName="NightlyUpdate" />
       <config projectName="ErableLang" targetName="ErableCompiler" />
       <config projectName="ErableLang" targetName="ErableVMStatic" />
       <config projectName="ErableLang" targetName="apidoc_forced" />
       <config projectName="ErableLang" targetName="apidoc" />
-      <config projectName="ErableLang" targetName="ExperimentalConfigure" />
-      <config projectName="ErableLang" targetName="ExperimentalCoverage" />
+      <config projectName="ErableLang" targetName="ErableStdlib" />
+      <config projectName="ErableLang" targetName="ErableCompilerStatic" />
+      <config projectName="ErableLang" targetName="ErableVM" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
     <configurations>
-      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" TOOLCHAIN_NAME="Default" />
     </configurations>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64587cbb-66be-4489-b3f3-a39fdb57e449" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/jessiezhang.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/ParseTableIO.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/ParseTableIO.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/ParseTableInput.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/ParseTableInput.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/ParseTableOutput.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/ParseTableOutput.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/.IntList.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/.IntList.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/MultiStack.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/MultiStack.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/Parser.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/Parser.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/tests/Erable_Utils_List.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/tests/Erable_Utils_List.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Headers.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Headers.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/ParseTable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/ParseTable.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/ParseTable.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/ParseTable.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Symbols.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Symbols.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Symbols.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Symbols.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Lexer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Lexer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Lexer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Lexer.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/ParseTable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTable.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/ParseTable.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTable.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/ParseTableIO.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTableIO.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/ParseTableIO.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTableIO.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/ParseTableInput.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTableInput.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/ParseTableInput.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTableInput.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/ParseTableOutput.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTableOutput.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/ParseTableOutput.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTableOutput.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/ProcessedData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/ProcessedData.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Symbols.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Symbols.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Symbols.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Symbols.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Syntax.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Syntax.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Tokens.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Tokens.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Tokens.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Tokens.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/tests/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/tests/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/Compiler" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/Compiler.cbp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/ErableCompiler" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/ErableCompiler" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/ErableCompiler.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/ErableCompiler.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/tests/ErableCompilerTest.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/tests/ErableCompilerTest.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/tests/DartConfiguration.tcl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/tests/ErableCompilerTest" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/tests/ErableCompilerTest.cbp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/tests/ErableCompilerTest_include-b858cb2.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/tests/ErableCompilerTest_tests-b858cb2.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/ErableVM" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/ErableVM.cbp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Playground/Playground" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Playground/Playground.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Playground/Playground.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Project.cbp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/stdlib/stdlib.cbp" beforeDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/ErableLang/cmake-build-debug/" />
-    <ignored path="$PROJECT_DIR$/ErableLang/CMakeFiles/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,108 +98,21 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/Headers.hpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="95" selection-start-line="95" selection-end-line="95" />
-              <folding>
-                <element signature="e#163#180#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/Syntax.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1258">
-              <caret line="82" column="24" selection-start-line="82" selection-start-column="24" selection-end-line="82" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/Syntax.hpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-75" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/Symbols.hpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="96" column="106" selection-start-line="96" selection-start-column="106" selection-end-line="96" selection-end-column="106" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/Symbols.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="250" selection-start-line="250" selection-end-line="250" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/ParseTable.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2231">
-              <caret line="134" column="44" lean-forward="true" selection-start-line="134" selection-start-column="44" selection-end-line="134" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/memory">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
-              <caret line="2236" selection-start-line="2236" selection-end-line="2236" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/ParseTableOutput.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="53" column="109" selection-start-line="53" selection-start-column="109" selection-end-line="53" selection-end-column="109" />
-              <folding>
-                <element signature="e#69#100#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/ParseTableOutput.hpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/ParseTableInput.hpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
@@ -212,83 +122,31 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SIGN_OFF_COMMIT" value="true" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/ErableVM/main.cpp" />
-        <option value="$PROJECT_DIR$/ErableVM/Global.hpp" />
-        <option value="$PROJECT_DIR$/ErableLang/Compiler/GrammarOutput.hpp" />
-        <option value="$PROJECT_DIR$/ErableLang/Compiler/SyntaxOutput.cpp" />
-        <option value="$PROJECT_DIR$/ErableLang/Compiler/SyntaxOutput.hpp" />
-        <option value="$PROJECT_DIR$/ErableLang/Compiler/ParseTable.hpp" />
-        <option value="$PROJECT_DIR$/ErableLang/Compiler/ParseTableIO.hpp" />
-        <option value="$PROJECT_DIR$/ErableLang/Compiler/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/ErableLang/Compiler/ParseTableOutput.cpp" />
-        <option value="$PROJECT_DIR$/ErableLang/Compiler/ParseTableOutput.hpp" />
-        <option value="$PROJECT_DIR$/ErableLang/Compiler/ParseTableInput.cpp" />
-        <option value="$PROJECT_DIR$/ErableLang/Compiler/ParseTableInput.hpp" />
-        <option value="$PROJECT_DIR$/ErableLang/Compiler/Headers.hpp" />
-        <option value="$PROJECT_DIR$/ErableLang/Compiler/Symbols.hpp" />
-        <option value="$PROJECT_DIR$/ErableLang/Compiler/Symbols.cpp" />
-        <option value="$PROJECT_DIR$/ErableLang/Compiler/ParseTable.cpp" />
-        <option value="$PROJECT_DIR$/ErableLang/Compiler/Syntax.cpp" />
-      </list>
-    </option>
-  </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="BtGrQRvH" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
-    <option name="x" value="10" />
-    <option name="y" value="20" />
-    <option name="width" value="1346" />
-    <option name="height" value="728" />
-  </component>
+  <component name="ProjectId" id="1OgJ3jsHoDMG7xgqtwmuPoud4sX" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
-  </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="ErableLang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="erable" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ErableLang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="erable" type="462c0819:PsiDirectoryNode" />
-              <item name="ErableLang" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ErableLang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="erable" type="462c0819:PsiDirectoryNode" />
-              <item name="ErableLang" type="462c0819:PsiDirectoryNode" />
-              <item name="Compiler" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="add_unversioned_files" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ErableLang/Compiler/Lexer" />
+      <recent name="$PROJECT_DIR$/ErableLang/Compiler/Parser" />
       <recent name="$PROJECT_DIR$/ErableLang/Compiler" />
     </key>
   </component>
@@ -305,49 +163,10 @@
     </option>
   </component>
   <component name="RunManager" selected="CMake Application.ErableCompiler">
-    <configuration name="Continuous" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="Continuous" CONFIG_NAME="Debug">
+    <configuration name="Insert and iterate" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ErableCompilerTest" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ErableCompilerTest" TEST_CLASS="[insertion][iteration]" TEST_METHOD="Insert and iterate" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ContinuousBuild" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ContinuousBuild" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ContinuousBuild">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ContinuousConfigure" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ContinuousConfigure" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ContinuousConfigure">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ContinuousCoverage" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ContinuousCoverage" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ContinuousCoverage">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ContinuousMemCheck" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ContinuousMemCheck" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ContinuousMemCheck">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ContinuousStart" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ContinuousStart" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ContinuousStart">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ContinuousSubmit" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ContinuousSubmit" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ContinuousSubmit">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ContinuousTest" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ContinuousTest" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ContinuousTest">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ContinuousUpdate" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ContinuousUpdate" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ContinuousUpdate">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="ErableCompiler" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ErableCompiler" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ErableCompiler">
@@ -360,7 +179,7 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ErableCompilerTest" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ErableCompilerTest" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ErableCompilerTest">
+    <configuration name="ErableCompilerStatic" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ErableCompilerStatic" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -381,101 +200,6 @@
       </method>
     </configuration>
     <configuration name="ErableVMStatic" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ErableVMStatic" CONFIG_NAME="Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Experimental" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="Experimental" CONFIG_NAME="Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExperimentalBuild" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ExperimentalBuild" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ExperimentalBuild">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExperimentalConfigure" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ExperimentalConfigure" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ExperimentalConfigure">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExperimentalCoverage" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ExperimentalCoverage" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ExperimentalCoverage">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExperimentalMemCheck" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ExperimentalMemCheck" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ExperimentalMemCheck">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExperimentalStart" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ExperimentalStart" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ExperimentalStart">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExperimentalSubmit" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ExperimentalSubmit" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ExperimentalSubmit">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExperimentalTest" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ExperimentalTest" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ExperimentalTest">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExperimentalUpdate" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="ExperimentalUpdate" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="ExperimentalUpdate">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Nightly" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="Nightly" CONFIG_NAME="Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NightlyBuild" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="NightlyBuild" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="NightlyBuild">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NightlyConfigure" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="NightlyConfigure" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="NightlyConfigure">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NightlyCoverage" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="NightlyCoverage" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="NightlyCoverage">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NightlyMemCheck" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="NightlyMemCheck" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="NightlyMemCheck">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NightlyMemoryCheck" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="NightlyMemoryCheck" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="NightlyMemoryCheck">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NightlyStart" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="NightlyStart" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="NightlyStart">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NightlySubmit" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="NightlySubmit" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="NightlySubmit">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NightlyTest" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="NightlyTest" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="NightlyTest">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NightlyUpdate" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ErableLang" TARGET_NAME="NightlyUpdate" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ErableLang" RUN_TARGET_NAME="NightlyUpdate">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -502,45 +226,24 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="CMake Application.apidoc" />
-      <item itemvalue="CMake Application.apidoc_forced" />
-      <item itemvalue="CMake Application.ErableCompiler" />
+      <item itemvalue="Catch.Insert and iterate" />
       <item itemvalue="CMake Application.ErableCompilerDyn" />
-      <item itemvalue="CMake Application.Continuous" />
-      <item itemvalue="CMake Application.ContinuousBuild" />
-      <item itemvalue="CMake Application.ContinuousConfigure" />
-      <item itemvalue="CMake Application.ContinuousCoverage" />
-      <item itemvalue="CMake Application.ContinuousMemCheck" />
-      <item itemvalue="CMake Application.ContinuousStart" />
-      <item itemvalue="CMake Application.ContinuousSubmit" />
-      <item itemvalue="CMake Application.ContinuousTest" />
-      <item itemvalue="CMake Application.ContinuousUpdate" />
-      <item itemvalue="CMake Application.ErableCompilerTest" />
-      <item itemvalue="CMake Application.Experimental" />
-      <item itemvalue="CMake Application.ExperimentalBuild" />
-      <item itemvalue="CMake Application.ExperimentalConfigure" />
-      <item itemvalue="CMake Application.ExperimentalCoverage" />
-      <item itemvalue="CMake Application.ExperimentalMemCheck" />
-      <item itemvalue="CMake Application.ExperimentalStart" />
-      <item itemvalue="CMake Application.ExperimentalSubmit" />
-      <item itemvalue="CMake Application.ExperimentalTest" />
-      <item itemvalue="CMake Application.ExperimentalUpdate" />
-      <item itemvalue="CMake Application.Nightly" />
-      <item itemvalue="CMake Application.NightlyBuild" />
-      <item itemvalue="CMake Application.NightlyConfigure" />
-      <item itemvalue="CMake Application.NightlyCoverage" />
-      <item itemvalue="CMake Application.NightlyMemCheck" />
-      <item itemvalue="CMake Application.NightlyMemoryCheck" />
-      <item itemvalue="CMake Application.NightlyStart" />
-      <item itemvalue="CMake Application.NightlySubmit" />
-      <item itemvalue="CMake Application.NightlyTest" />
-      <item itemvalue="CMake Application.NightlyUpdate" />
-      <item itemvalue="CMake Application.Playground" />
+      <item itemvalue="CMake Application.ErableCompilerStatic" />
+      <item itemvalue="CMake Application.ErableCompiler" />
       <item itemvalue="CMake Application.ErableStdlib" />
-      <item itemvalue="CMake Application.ErableVM" />
       <item itemvalue="CMake Application.ErableVMDyn" />
       <item itemvalue="CMake Application.ErableVMStatic" />
+      <item itemvalue="CMake Application.ErableVM" />
+      <item itemvalue="CMake Application.Playground" />
+      <item itemvalue="CMake Application.apidoc" />
+      <item itemvalue="CMake Application.apidoc_forced" />
+      <item itemvalue="Makefile.Debug" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Catch.Insert and iterate" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -554,7 +257,26 @@
       <updated>1558515637429</updated>
       <workItem from="1558515643895" duration="647000" />
       <workItem from="1558516507871" duration="2917000" />
-      <workItem from="1562396024641" duration="17833000" />
+      <workItem from="1562396024641" duration="25894000" />
+      <workItem from="1562852780570" duration="263000" />
+      <workItem from="1562853414280" duration="8514000" />
+      <workItem from="1563350982123" duration="5949000" />
+      <workItem from="1564011488300" duration="4845000" />
+      <workItem from="1564393124406" duration="2048000" />
+      <workItem from="1565071716045" duration="227000" />
+      <workItem from="1565072000928" duration="73000" />
+      <workItem from="1565072211445" duration="623000" />
+      <workItem from="1565589016325" duration="3390000" />
+      <workItem from="1565592526150" duration="1162000" />
+      <workItem from="1565657475023" duration="1369000" />
+      <workItem from="1565920851916" duration="383000" />
+      <workItem from="1565959347677" duration="42000" />
+      <workItem from="1565959419762" duration="17000" />
+      <workItem from="1565959828365" duration="29000" />
+      <workItem from="1565959863948" duration="6000" />
+      <workItem from="1565961160919" duration="115000" />
+      <workItem from="1567413485393" duration="550000" />
+      <workItem from="1570595263101" duration="4550000" />
     </task>
     <task id="LOCAL-00001" summary=":art: Moved ParseTable.cpp&amp;hpp to Compiler/.">
       <created>1562396257768</created>
@@ -563,183 +285,48 @@
       <option name="project" value="LOCAL" />
       <updated>1562396257768</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="FOLLOW set finished. It may work because it looks fine but the result is not the same as another website's.">
+      <created>1562572567602</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1562572567602</updated>
+    </task>
+    <task id="LOCAL-00003" summary="FOLLOW set corrected. It may work because it looks fine but the result is not the same as another website's.">
+      <created>1562655107257</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1562655107316</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21397000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1366" height="768" extended-state="6" />
-    <layout>
-      <window_info auto_hide="true" content_ui="combo" id="Project" order="0" weight="0.25377643" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Statistic" />
-      <window_info anchor="bottom" id="Messages" weight="0.32991204" />
-      <window_info anchor="bottom" id="CMake" weight="0.32991204" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" auto_hide="true" id="Run" order="2" visible="true" weight="0.36363637" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.398827" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="TeamCity" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Cargo" order="3" />
-      <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" id="make" order="5" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <MESSAGE value=":art: Moved ParseTable.cpp&amp;hpp to Compiler/." />
-    <option name="LAST_COMMIT_MESSAGE" value=":art: Moved ParseTable.cpp&amp;hpp to Compiler/." />
+    <MESSAGE value="FOLLOW set finished. It may work because it looks fine but the result is not the same as another website's." />
+    <MESSAGE value="FOLLOW set corrected. It may work because it looks fine but the result is not the same as another website's." />
+    <option name="LAST_COMMIT_MESSAGE" value="FOLLOW set corrected. It may work because it looks fine but the result is not the same as another website's." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ErableVM/nbproject/Makefile-Debug.mk" />
-    <entry file="file://$PROJECT_DIR$/ErableVM/Global.hpp" />
-    <entry file="file://$PROJECT_DIR$/ErableVM/nbproject/Makefile-impl.mk" />
-    <entry file="file://$PROJECT_DIR$/ErableVM/Makefile" />
-    <entry file="file://$PROJECT_DIR$/ErableVM/main.cpp" />
-    <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/ParseTable.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="121" column="8" selection-start-line="121" selection-start-column="8" selection-end-line="121" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/ParseTableIO.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-          <folding>
-            <element signature="e#122#144#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ErableLang/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-778" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="44" column="42" selection-start-line="44" selection-start-column="42" selection-end-line="44" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/ParseTableIO.cpp">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/ParseTableInput.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/ParseTableOutput.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="53" column="109" selection-start-line="53" selection-start-column="109" selection-end-line="53" selection-end-column="109" />
-          <folding>
-            <element signature="e#69#100#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/Headers.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="95" selection-start-line="95" selection-end-line="95" />
-          <folding>
-            <element signature="e#163#180#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/Syntax.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-75" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/ParseTableOutput.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/ParseTableInput.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/memory">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="2236" selection-start-line="2236" selection-end-line="2236" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/Symbols.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="96" column="106" selection-start-line="96" selection-start-column="106" selection-end-line="96" selection-end-column="106" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/Symbols.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="250" selection-start-line="250" selection-end-line="250" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/ParseTable.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2231">
-          <caret line="134" column="44" lean-forward="true" selection-start-line="134" selection-start-column="44" selection-end-line="134" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ErableLang/Compiler/Syntax.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1258">
-          <caret line="82" column="24" selection-start-line="82" selection-start-column="24" selection-end-line="82" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
   </component>
 </project>

@@ -5,13 +5,69 @@
 		<Option title="ErableCompiler"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\Compiler\;CMake Files\Compiler\tests\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\usr\local\;CMake Files\..\..\..\..\..\usr\local\lib\;CMake Files\..\..\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\..\..\usr\local\lib\cmake\Catch2\;CMake Files\stdlib\;CMake Files\VM\;CMake Files\Playground\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\Compiler\;CMake Files\stdlib\;CMake Files\VM\;CMake Files\Playground\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler"/>
 				<Option type="4"/>
 				<MakeCommands>
 					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ErableCompilerStatic">
+				<Option output="/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/libErableCompilerStatic.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DERABLE_MAJOR=1"/>
+					<Add option="-DERABLE_MINOR=0"/>
+					<Add option="-DERABLE_PARSE_TABLE_PATH=&quot;/usr/local/ErableParseTable.pt&quot;"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/."/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/.."/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../Global"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/Makefile&quot;  VERBOSE=1 ErableCompilerStatic"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ErableCompilerStatic/fast">
+				<Option output="/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/libErableCompilerStatic.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DERABLE_MAJOR=1"/>
+					<Add option="-DERABLE_MINOR=0"/>
+					<Add option="-DERABLE_PARSE_TABLE_PATH=&quot;/usr/local/ErableParseTable.pt&quot;"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/."/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/.."/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../Global"/>
+					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/Makefile&quot;  VERBOSE=1 ErableCompilerStatic/fast"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/Makefile&quot;  VERBOSE=1 clean"/>
@@ -31,12 +87,12 @@
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/.."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../Global"/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
 					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/Makefile&quot;  VERBOSE=1 ErableCompilerDyn"/>
@@ -59,12 +115,12 @@
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/.."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../Global"/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
 					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/Makefile&quot;  VERBOSE=1 ErableCompilerDyn/fast"/>
@@ -87,12 +143,12 @@
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/.."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../Global"/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
 					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/Makefile&quot;  VERBOSE=1 ErableCompiler"/>
@@ -115,12 +171,12 @@
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/.."/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../Global"/>
 					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
 					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/Makefile&quot;  VERBOSE=1 ErableCompiler/fast"/>
@@ -129,223 +185,155 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="Nightly">
-				<Option working_dir="/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/Makefile&quot;  VERBOSE=1 Nightly"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="Continuous">
-				<Option working_dir="/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/Makefile&quot;  VERBOSE=1 Continuous"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="Experimental">
-				<Option working_dir="/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/Makefile&quot;  VERBOSE=1 Experimental"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="ErableCompilerTest">
-				<Option output="/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/ErableCompilerTest" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add option="-DERABLE_MAJOR=1"/>
-					<Add option="-DERABLE_MINOR=0"/>
-					<Add option="-DERABLE_PARSE_TABLE_PATH=&quot;/usr/local/ErableParseTable.pt&quot;"/>
-					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/."/>
-					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/.."/>
-					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../Global"/>
-					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../include"/>
-					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/tests/."/>
-					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/tests/.."/>
-					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/tests/../Global"/>
-					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/tests/../include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/Makefile&quot;  VERBOSE=1 ErableCompilerTest"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="ErableCompilerTest/fast">
-				<Option output="/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/ErableCompilerTest" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add option="-DERABLE_MAJOR=1"/>
-					<Add option="-DERABLE_MINOR=0"/>
-					<Add option="-DERABLE_PARSE_TABLE_PATH=&quot;/usr/local/ErableParseTable.pt&quot;"/>
-					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/."/>
-					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/.."/>
-					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../Global"/>
-					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/../include"/>
-					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/tests/."/>
-					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/tests/.."/>
-					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/tests/../Global"/>
-					<Add directory="/williamye/program/antlr/erable/ErableLang/Compiler/tests/../include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/Makefile&quot;  VERBOSE=1 ErableCompilerTest/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/williamye/program/antlr/erable/ErableLang/cmake-build-debug/Compiler/tests/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
 		</Build>
 		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/AST.cpp">
+			<Option target="ErableCompilerStatic"/>
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/AST.hpp">
+			<Option target="ErableCompilerStatic"/>
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Headers.hpp">
+			<Option target="ErableCompilerStatic"/>
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/ID.cpp">
+			<Option target="ErableCompilerStatic"/>
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/ID.hpp">
+			<Option target="ErableCompilerStatic"/>
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Lexer.cpp">
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Lexer/Lexer.cpp">
+			<Option target="ErableCompilerStatic"/>
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Lexer.hpp">
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Lexer/Lexer.hpp">
+			<Option target="ErableCompilerStatic"/>
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/ParseTable.cpp">
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Lexer/Symbols.cpp">
+			<Option target="ErableCompilerStatic"/>
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/ParseTable.hpp">
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Lexer/Symbols.hpp">
+			<Option target="ErableCompilerStatic"/>
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/ParseTableIO.cpp">
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Lexer/Tokens.cpp">
+			<Option target="ErableCompilerStatic"/>
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/ParseTableIO.hpp">
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Lexer/Tokens.hpp">
+			<Option target="ErableCompilerStatic"/>
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/ParseTableInput.cpp">
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Parser/MultiStack.cpp">
+			<Option target="ErableCompilerStatic"/>
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/ParseTableInput.hpp">
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Parser/MultiStack.hpp">
+			<Option target="ErableCompilerStatic"/>
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/ParseTableOutput.cpp">
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Parser/ParseTable.cpp">
+			<Option target="ErableCompilerStatic"/>
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/ParseTableOutput.hpp">
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Parser/ParseTable.hpp">
+			<Option target="ErableCompilerStatic"/>
+			<Option target="ErableCompilerDyn"/>
+			<Option target="ErableCompiler"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Parser/ParseTableIO.cpp">
+			<Option target="ErableCompilerStatic"/>
+			<Option target="ErableCompilerDyn"/>
+			<Option target="ErableCompiler"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Parser/ParseTableIO.hpp">
+			<Option target="ErableCompilerStatic"/>
+			<Option target="ErableCompilerDyn"/>
+			<Option target="ErableCompiler"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Parser/ParseTableInput.cpp">
+			<Option target="ErableCompilerStatic"/>
+			<Option target="ErableCompilerDyn"/>
+			<Option target="ErableCompiler"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Parser/ParseTableInput.hpp">
+			<Option target="ErableCompilerStatic"/>
+			<Option target="ErableCompilerDyn"/>
+			<Option target="ErableCompiler"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Parser/ParseTableOutput.cpp">
+			<Option target="ErableCompilerStatic"/>
+			<Option target="ErableCompilerDyn"/>
+			<Option target="ErableCompiler"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Parser/ParseTableOutput.hpp">
+			<Option target="ErableCompilerStatic"/>
+			<Option target="ErableCompilerDyn"/>
+			<Option target="ErableCompiler"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Parser/Parser.cpp">
+			<Option target="ErableCompilerStatic"/>
+			<Option target="ErableCompilerDyn"/>
+			<Option target="ErableCompiler"/>
+		</Unit>
+		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Parser/Parser.hpp">
+			<Option target="ErableCompilerStatic"/>
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/ProcessedData.cpp">
+			<Option target="ErableCompilerStatic"/>
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/ProcessedData.hpp">
+			<Option target="ErableCompilerStatic"/>
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Scanner.hpp">
-			<Option target="ErableCompilerDyn"/>
-			<Option target="ErableCompiler"/>
-		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Symbols.cpp">
-			<Option target="ErableCompilerDyn"/>
-			<Option target="ErableCompiler"/>
-		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Symbols.hpp">
+			<Option target="ErableCompilerStatic"/>
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Syntax.cpp">
+			<Option target="ErableCompilerStatic"/>
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Syntax.hpp">
-			<Option target="ErableCompilerDyn"/>
-			<Option target="ErableCompiler"/>
-		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Tokens.cpp">
-			<Option target="ErableCompilerDyn"/>
-			<Option target="ErableCompiler"/>
-		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/Tokens.hpp">
+			<Option target="ErableCompilerStatic"/>
 			<Option target="ErableCompilerDyn"/>
 			<Option target="ErableCompiler"/>
 		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/main.cpp">
 			<Option target="ErableCompiler"/>
 		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/tests/Erable_Compiler_AST_Name_Test.cpp">
-			<Option target="ErableCompilerTest"/>
-		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableLang/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\Compiler\"/>
-		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/Compiler/tests/CMakeLists.txt">
-			<Option virtualFolder="CMake Files\Compiler\tests\"/>
-		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/../../../../../usr/local/lib/cmake/Catch2/Catch.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\Catch2\"/>
-		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/../../../../../usr/local/lib/cmake/Catch2/Catch2Config.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\Catch2\"/>
-		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/../../../../../usr/local/lib/cmake/Catch2/Catch2ConfigVersion.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\Catch2\"/>
-		</Unit>
-		<Unit filename="/williamye/program/antlr/erable/ErableLang/../../../../../usr/local/lib/cmake/Catch2/Catch2Targets.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\Catch2\"/>
 		</Unit>
 		<Unit filename="/williamye/program/antlr/erable/ErableLang/stdlib/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\stdlib\"/>
