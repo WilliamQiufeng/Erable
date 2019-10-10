@@ -42,52 +42,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64587cbb-66be-4489-b3f3-a39fdb57e449" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/.IntList.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/.IntList.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/MultiStack.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/MultiStack.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/Parser.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/Parser.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/tests/Erable_Utils_List.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ErableLang/Compiler/tests/Erable_Utils_List.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="64587cbb-66be-4489-b3f3-a39fdb57e449" name="Default Changelist" comment="Ah. I've changed the generation method from DFS to GFS, and here comes the errors I have to overcome. Ju..Just let me finish it on the next few commits. I have to push it now....Oh, I've also optimised the structure! Seeya!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Headers.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Headers.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Lexer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Lexer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Lexer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Lexer.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/ParseTable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTable.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/ParseTable.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTable.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/ParseTableIO.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTableIO.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/ParseTableIO.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTableIO.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/ParseTableInput.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTableInput.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/ParseTableInput.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTableInput.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/ParseTableOutput.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTableOutput.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/ParseTableOutput.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTableOutput.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/ProcessedData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/ProcessedData.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Symbols.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Symbols.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Symbols.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Symbols.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Symbols.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Symbols.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTable.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Syntax.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Syntax.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Tokens.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Tokens.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Tokens.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Tokens.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/tests/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/tests/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/Compiler" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/Compiler.cbp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/ErableCompiler" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/ErableCompiler" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/ErableCompiler.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/ErableCompiler.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/tests/DartConfiguration.tcl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/tests/ErableCompilerTest" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/tests/ErableCompilerTest.cbp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/tests/ErableCompilerTest_include-b858cb2.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/tests/ErableCompilerTest_tests-b858cb2.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/ErableVM" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/ErableVM.cbp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Playground/Playground" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Playground/Playground.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Playground/Playground.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Project.cbp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/stdlib/stdlib.cbp" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -125,6 +85,7 @@
   <component name="MacroExpansionManager">
     <option name="directoryName" value="BtGrQRvH" />
   </component>
+  <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectId" id="1OgJ3jsHoDMG7xgqtwmuPoud4sX" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -276,7 +237,7 @@
       <workItem from="1565959863948" duration="6000" />
       <workItem from="1565961160919" duration="115000" />
       <workItem from="1567413485393" duration="550000" />
-      <workItem from="1570595263101" duration="4550000" />
+      <workItem from="1570595263101" duration="7815000" />
     </task>
     <task id="LOCAL-00001" summary=":art: Moved ParseTable.cpp&amp;hpp to Compiler/.">
       <created>1562396257768</created>
@@ -299,7 +260,14 @@
       <option name="project" value="LOCAL" />
       <updated>1562655107316</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Ah. I've changed the generation method from DFS to GFS, and here comes the errors I have to overcome. Ju..Just let me finish it on the next few commits. I have to push it now....Oh, I've also optimised the structure! Seeya!">
+      <created>1570623538245</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1570623538246</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -324,7 +292,8 @@
     <MESSAGE value=":art: Moved ParseTable.cpp&amp;hpp to Compiler/." />
     <MESSAGE value="FOLLOW set finished. It may work because it looks fine but the result is not the same as another website's." />
     <MESSAGE value="FOLLOW set corrected. It may work because it looks fine but the result is not the same as another website's." />
-    <option name="LAST_COMMIT_MESSAGE" value="FOLLOW set corrected. It may work because it looks fine but the result is not the same as another website's." />
+    <MESSAGE value="Ah. I've changed the generation method from DFS to GFS, and here comes the errors I have to overcome. Ju..Just let me finish it on the next few commits. I have to push it now....Oh, I've also optimised the structure! Seeya!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ah. I've changed the generation method from DFS to GFS, and here comes the errors I have to overcome. Ju..Just let me finish it on the next few commits. I have to push it now....Oh, I've also optimised the structure! Seeya!" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

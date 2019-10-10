@@ -189,20 +189,29 @@ Erable::Compiler::Symbols::Symbol::getLookahead(Erable::Compiler::Symbols::Symbo
 												Erable::Compiler::Symbols::SymbolPtr exp, SymbolList symbolList,
 												int startOffset) {
 	std::cout << "New Lookahead called for " << exp->toString() << "---------------------" << std::endl;
+	//The first syntax's lookahead is always '$'
 	if ((not Syntax::syntaxList.empty()) and Syntax::syntaxList[0]->getTag() == exp->getTag()) return {EOT};
 	LookaheadSet lookaheadSet;
 	for (int i = startOffset; i < symbolList.size(); i++) {
+		//For every symbol in the list from startOffset
 		auto &item = symbolList[i];
 		std::cout << "\t" << item->toString() << std::endl;
+		//If the symbol is not duplicated
 		if (!Parser::RuleIteration::isExactlyDuplicate(duplicateSymbol, item)) {
+			//If the type of this item is not a combination, (which is not going to happen)throw an exception
 			if (item->getType() != SymbolType::COMBINATION)
 				throw std::runtime_error("Internal Error: item should be combination.");
+			//Cast the item into the specific CombineSymbol type.
 			auto comb = std::static_pointer_cast<CombineSymbol>(item);
+			//Declares and initializes shouldAddFirst to false
 			bool shouldAddFirst = false;
-			//for S->aAb
+			//for S->aAb grammar detection
+			//Start form the combination's dot position
 			for (int ladp = comb->dotPosition; ladp < comb->list.size(); ladp++) {
+				//Get the symbol form the combination on the index(ladp)
 				auto &sym = comb->list[ladp];
 				//The next symbol of exp
+				//Should it be added to FOLLOW(exp) set?
 				if (shouldAddFirst) {
 					std::cout << "\t\t" << sym->toString() << " is the next symbol after  " << exp->toString() << " in "
 							  << comb->toString() << std::endl;
@@ -210,6 +219,7 @@ Erable::Compiler::Symbols::Symbol::getLookahead(Erable::Compiler::Symbols::Symbo
 					SymbolList buff;
 					//get FIRST(sym)
 					auto first = Symbol::getFront(buff, sym);
+					//Verbose
 					std::cout << "\t\tthe first gotten of " << sym->toString() << " in rule " << comb->toString()
 							  << " is: (";
 					for (auto &tk : first) {
@@ -228,7 +238,7 @@ Erable::Compiler::Symbols::Symbol::getLookahead(Erable::Compiler::Symbols::Symbo
 					lookaheadSet.insert(first.begin(), first.end());
 					continue;
 				}
-				//If matches the exp's tag then set shouldAddFirst to true( which means the next symbol will be selected)
+				//If matches the exp's tag then set shouldAddFirst to true (which means the next symbol will be selected)
 				if (sym->getTag() == exp->getTag()) {
 					std::cout << "\t\tThere is a tag named " << sym->getTag() << " which is the same as "
 							  << exp->getTag()
@@ -236,7 +246,7 @@ Erable::Compiler::Symbols::Symbol::getLookahead(Erable::Compiler::Symbols::Symbo
 					shouldAddFirst = true;
 				}
 			}
-			//If S->aB
+			//If S->aB (the syntax ends without a token at the end)
 			if (shouldAddFirst) {
 				std::cout << "\t\t" << item->toString() << " matches S->aB with " << exp->getTag() << std::endl;
 				//calculate FOLLOW(S)
@@ -256,6 +266,7 @@ Erable::Compiler::Symbols::Symbol::getLookahead(Erable::Compiler::Symbols::Symbo
 		}
 	}
 	std::cout << "End lookahead calling for " << exp->toString() << std::endl;
+	//If the lookahead set is empty, then return the original lookahead, or else return lookaheadSet
 	return lookaheadSet.empty() ? exp->lookahead : lookaheadSet;
 //	return lookaheadSet;
 }

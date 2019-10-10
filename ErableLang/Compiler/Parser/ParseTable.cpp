@@ -141,38 +141,54 @@ namespace Erable::Compiler::Parser {
 		std::unordered_map<std::string, IterationNode *> mappingCurrentDot;
 		//For each symbol in the parent node
 		for (auto &item : node->symbols) {
+			//If the item already connects to another node, then skip this item
 			if (item->connectedTo) continue;
+			//Just to check if the type of the item is a combination
 			if (item->getType() == Symbols::SymbolType::COMBINATION) {
+				//Cask the item to combination(because it is a combination originally)
 				auto casted = std::static_pointer_cast<Symbols::CombineSymbol>(item);
+				//If the item's dot position has already reached the list's end, then it is finished with iteration and it can be skipped now
 				if (casted->dotPosition >= casted->list.size()) continue;
+				//Get the symbol pointed by the dotPosition of the item
 				auto &currentSymbol = casted->list[casted->dotPosition];
+				//Clone the item
+				//This is the next state of the item as expected
 				auto clone = casted->fullClone();
+				//Copy the position and lookahead to the clone
 				clone->dotPosition = casted->dotPosition;
 				clone->lookahead = casted->lookahead;
+				//Shift the dot position
 				clone->shiftDot();
+				//If the clone already exists in other nodes
 				auto found = findMatch(clone);
 				if (found) {
+					//The item will be connected to the found next state
 					casted->connectedTo = found;
 					continue;
 				}
+				//Add a pair recording the tag of the current symbol and a new node
 				if (mappingCurrentDot.find(currentSymbol->getTag()) == mappingCurrentDot.end()) {
 					mappingCurrentDot[currentSymbol->getTag()] = new IterationNode(this->currentIndex++,
 																				   Symbols::SymbolList{});
 				}
+				//Add the clone to the node with the same tag
 				mappingCurrentDot[currentSymbol->getTag()]->symbols.push_back(clone);
+				//Connect it to the item now
 				casted->connectedTo = mappingCurrentDot[currentSymbol->getTag()];
 			}
 		}
+		//Iterate the map
 		for (auto &pair : mappingCurrentDot) {
 			IterationNode *iterationNode = pair.second;
 			std::cout << "Iteration " << iterationNode->iterationIndex << "-----" << std::endl;
 			Symbols::SymbolList cloneCurrentSymbols = iterationNode->symbols;
 			Symbols::SymbolList cloneDuplicateSymbols = iterationNode->symbols;
 			int cloneDuplicateSymbolsSize = cloneDuplicateSymbols.size();
+			//Expand each rule in the node
 			for (auto &item : cloneCurrentSymbols) {
 				recursiveExpandRule(cloneDuplicateSymbols, iterationNode, item);
 			}
-
+			//Set lookahead for each rule in the node
 			for (int i = cloneDuplicateSymbolsSize; i < iterationNode->symbols.size(); i++) {
 				auto sym = iterationNode->symbols[i];
 				sym->lookahead = Symbols::Symbol::getLookahead(sym, iterationNode->symbols, 0);
@@ -201,6 +217,7 @@ namespace Erable::Compiler::Parser {
 				//Check if the current symbol is a rule
 				auto &get = combination->list[combination->dotPosition];
 				if (get->getType() == Symbols::SymbolType::COMBINATION or get->getType() == Symbols::SymbolType::RULE) {
+					//Get every rule with the same tag
 					auto found = Syntax::$find(get->getTag());
 					Symbols::SymbolList cloneFound;
 					for (auto &item : found) {
@@ -214,8 +231,10 @@ namespace Erable::Compiler::Parser {
 							cloneFound.push_back(cloned);
 						}
 					}
+					//Add the rules
 					node->symbols.insert(node->symbols.end(), cloneFound.begin(), cloneFound.end());
 					for (auto &element : cloneFound) {
+						//Expand new found rules
 						recursiveExpandRule(duplicateBuffer, node, element);
 					}
 				}
@@ -249,20 +268,29 @@ namespace Erable::Compiler::Parser {
 	}
 
 	void ParseTable::_generateTable(IterationNodeSet &duplicateBuffer, IterationNode *node) {
+		//For each item in the node
 		for (auto &item : node->symbols) {
+			//Cast the node into combination symbol
 			Symbols::CombineSymbolPtr ptr = std::static_pointer_cast<Symbols::CombineSymbol>(item);
+			//If the dot position is the size of the item's component list
 			if (ptr->dotPosition >= ptr->list.size()) {
 				//If the rule is the root rule
 				if (ptr->ruleId == 0) {
+					//Accept the process and end
 					_place(node->iterationIndex, ptr->lookahead, {ActionType::ACCEPT});
 				} else {
+					//Place reduce command
 					_place(node->iterationIndex, ptr->lookahead, {ActionType::REDUCE, ptr->ruleId});
 				}
 			} else {
+				//Get the symbol being pointed by the node's dot position
 				Symbols::SymbolPtr currentSymbol = ptr->list[ptr->dotPosition];
+				//Get the node that is connected by the symbol
 				IterationNode *changedToNode = ptr->connectedTo;
+				//Place STATE(changedToNode->iterationIndex)
 				_place(node->iterationIndex, currentSymbol->getTag(),
 					   {ActionType::STATE, changedToNode->iterationIndex});
+				//Recursively generate the table if the node connected by the symbol has not been covered yet
 				if (duplicateBuffer.find(changedToNode) == duplicateBuffer.end()) {
 					duplicateBuffer.insert(changedToNode);
 					_generateTable(duplicateBuffer, changedToNode);
