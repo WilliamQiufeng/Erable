@@ -14,6 +14,7 @@
 #include <vector>
 #include <deque>
 #include <fstream>
+#include <variant>
 //#include <memory>
 
 namespace Erable {

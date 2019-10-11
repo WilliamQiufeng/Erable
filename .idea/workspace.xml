@@ -24,16 +24,16 @@
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
+      <config projectName="ErableLang" targetName="apidoc" />
       <config projectName="ErableLang" targetName="ErableVMDyn" />
+      <config projectName="ErableLang" targetName="apidoc_forced" />
+      <config projectName="ErableLang" targetName="ErableCompilerStatic" />
+      <config projectName="ErableLang" targetName="ErableVMStatic" />
+      <config projectName="ErableLang" targetName="ErableVM" />
+      <config projectName="ErableLang" targetName="ErableStdlib" />
       <config projectName="ErableLang" targetName="Playground" />
       <config projectName="ErableLang" targetName="ErableCompilerDyn" />
       <config projectName="ErableLang" targetName="ErableCompiler" />
-      <config projectName="ErableLang" targetName="ErableVMStatic" />
-      <config projectName="ErableLang" targetName="apidoc_forced" />
-      <config projectName="ErableLang" targetName="apidoc" />
-      <config projectName="ErableLang" targetName="ErableStdlib" />
-      <config projectName="ErableLang" targetName="ErableCompilerStatic" />
-      <config projectName="ErableLang" targetName="ErableVM" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -42,12 +42,19 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64587cbb-66be-4489-b3f3-a39fdb57e449" name="Default Changelist" comment="Ah. I've changed the generation method from DFS to GFS, and here comes the errors I have to overcome. Ju..Just let me finish it on the next few commits. I have to push it now....Oh, I've also optimised the structure! Seeya!">
+    <list default="true" id="64587cbb-66be-4489-b3f3-a39fdb57e449" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/statistic.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Symbols.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Symbols.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTable.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Headers.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Headers.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Symbols.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Symbols.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Tokens.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Tokens.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Parser/MultiStack.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/MultiStack.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Parser/MultiStack.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/MultiStack.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Parser/Parser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/Parser.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Parser/Parser.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/Parser.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Syntax.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Syntax.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/ErableCompiler" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/ErableCompiler" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/tests/lex.erable" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/tests/lex.erable" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +109,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.statistic.project.settings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -237,7 +244,8 @@
       <workItem from="1565959863948" duration="6000" />
       <workItem from="1565961160919" duration="115000" />
       <workItem from="1567413485393" duration="550000" />
-      <workItem from="1570595263101" duration="7815000" />
+      <workItem from="1570595263101" duration="15895000" />
+      <workItem from="1570749143781" duration="7120000" />
     </task>
     <task id="LOCAL-00001" summary=":art: Moved ParseTable.cpp&amp;hpp to Compiler/.">
       <created>1562396257768</created>
@@ -267,7 +275,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570623538246</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary=":bulb: Commented the codes in ParseTable.cpp and Symbols.cpp">
+      <created>1570682662168</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1570682662168</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -293,7 +308,8 @@
     <MESSAGE value="FOLLOW set finished. It may work because it looks fine but the result is not the same as another website's." />
     <MESSAGE value="FOLLOW set corrected. It may work because it looks fine but the result is not the same as another website's." />
     <MESSAGE value="Ah. I've changed the generation method from DFS to GFS, and here comes the errors I have to overcome. Ju..Just let me finish it on the next few commits. I have to push it now....Oh, I've also optimised the structure! Seeya!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ah. I've changed the generation method from DFS to GFS, and here comes the errors I have to overcome. Ju..Just let me finish it on the next few commits. I have to push it now....Oh, I've also optimised the structure! Seeya!" />
+    <MESSAGE value=":bulb: Commented the codes in ParseTable.cpp and Symbols.cpp" />
+    <option name="LAST_COMMIT_MESSAGE" value=":bulb: Commented the codes in ParseTable.cpp and Symbols.cpp" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

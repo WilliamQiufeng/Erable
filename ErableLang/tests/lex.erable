@@ -4,13 +4,17 @@
     Licensed by GPL v3
 */
 
-struct bool occupies 1; // One-bit-long boolean type
-struct uint occupies 16; //Unsigned integers occupies the whole 16 bits
-struct ulong occupies 32; // The same
-struct int occupies 1,15; //Signed integers occupies 16 bits with one bit for sign at start and 15 bits for the rest
-struct long occupies 1,31; //Signed longs occupies 32 bits with one bit for sign at start and 31 bits for the rest
-struct udouble occupies 32,32; //Unsigned doubles
-struct double occupies 1,31,32; //Signed doubles
+integral int(32) { //Specify the total bit it occupies
+    SIGN : 1,
+    AVAIL : 31
+}
+integral uint(32) {
+    AVAIL : 32
+}
+integral double { //Can also let the compiler deduct it itself
+    SIGN : 1,
+    AVAIL : 63
+}
 
 
 var a : int = 0;
@@ -25,6 +29,13 @@ while(whilecond){
     a += a;
 }
 
+/*
+    Global Function
+*/
+function fibonacci(count : int) -> int {
+
+}
+
 class B {
     abstract function add <type A, type B, type C = A + B > (a: A, b: B) -> C {
         return a + b;
@@ -36,7 +47,7 @@ class A : B {
     init(aVal: int){
         this.a = aVal;
     }
-    override function add <int,int>(int a, int b) {
+    override function add <int, int>(int a, int b) {
         return a + b;
     }
 }
@@ -53,7 +64,7 @@ class Shape {
 }
 
 class Rectangle : Shape {
-    override function area() {
+    override function area() { //Overriding functions don't need to specify the return type when there are no more than 1 overload functions
         return this.width * this.height;
     }
     override function perimeter() {
@@ -61,4 +72,4 @@ class Rectangle : Shape {
     }
 }
 
-var state : struct occupies 2 = 0b11;
+var state : integral(2) = 0b11;

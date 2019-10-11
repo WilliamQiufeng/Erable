@@ -130,6 +130,7 @@ namespace Erable::Compiler::Symbols {
 	///End Of Token
 	inline auto EOT = "$"_token;
 	inline auto EPSILON = "ε"_token;
+	inline auto EMPTY_PLACEHOLDER = "__null"_rule;
 	inline std::string ANONYMOUS = "_anonymous";
 }
 
