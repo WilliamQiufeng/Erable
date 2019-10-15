@@ -108,13 +108,13 @@ namespace Erable::Compiler::Parser {
 	};
 
 	class ParseTable {
+	public:
 		typedef std::unordered_multimap<std::string, Action> ActionLine;
 		typedef std::vector<ActionLine> ActionTable;
 		RuleIteration iteration;
 		ActionTable parseTable;
 		int stateAmount;
 		int maxWidth = 10;
-	public:
 		ParseTable(const RuleIteration &iteration, int stateAmount);
 
 		ParseTable(const RuleIteration &iteration);

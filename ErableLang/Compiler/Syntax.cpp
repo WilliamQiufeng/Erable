@@ -116,10 +116,10 @@ namespace Erable::Compiler::Syntax {
 
 	void initSyntax() {
 //		initSimpleSyntax();
-//		initAmbiguousSyntax();
+		initAmbiguousSyntax();
 //		initAddMulOpSyntax();
 //		initWikipediaSyntax();
-		initTomitaGLRSyntax1();
+//		initTomitaGLRSyntax1();
 	}
 
 	std::string $syntaxListToString() {

@@ -9,56 +9,63 @@
 
 namespace Erable::Utils {
 
-	template<typename T>
 	class MultiStack;
 
-	template<typename T>
 	struct MultiStackNode;
 
 	typedef std::vector<int> MultiStackPath;
 
-	template<typename T>
 	class MultiStack {
+
 	public:
-		typedef MultiStackNode<T> Node;
+		typedef MultiStackNode Node;
+		typedef Compiler::Parser::NodeData T;
 		typedef std::shared_ptr<Node> NodeType;
 		typedef std::vector<NodeType> NodeList;
-		NodeType root;
+		NodeType root = nullptr;
 
 		MultiStack(const NodeType &root);
 
 		MultiStack();
 
-		T &&get(MultiStackPath index);
+		T get(const MultiStackPath &index);
+
+		NodeType getPtr(const MultiStackPath &index);
 
 		NodeList getList(MultiStackPath index);
+
+		int getElementSize(MultiStackPath index);
 
 		void set(MultiStackPath index, T &&value);
 
 		void setPath(MultiStackPath index, NodeList list);
 	};
 
-	template<typename T>
 	struct MultiStackNode {
+		using T = MultiStack::T;
 		T &&value;
-		typename MultiStack<T>::NodeList nodes;
+		typename MultiStack::NodeList nodes;
 
-		MultiStackNode<T> &operator[](std::size_t size);
+		MultiStack::NodeType operator[](std::size_t size);
 
-		explicit MultiStackNode(T &&value = T(), const typename MultiStack<T>::NodeList &nodes = {});
+		explicit MultiStackNode(T value, typename MultiStack::NodeList nodes = {});
 
 		bool operator==(const MultiStackNode &rhs) const;
 
 		bool operator!=(const MultiStackNode &rhs) const;
 	};
+
+	struct Const {
+		static MultiStack::T *start_symbol;
+	};
 }
 
 template<typename T>
 bool
-operator==(typename Erable::Utils::MultiStack<T>::NodeType lhs, typename Erable::Utils::MultiStack<T>::NodeType rhs);
+operator==(typename Erable::Utils::MultiStack::NodeType lhs, typename Erable::Utils::MultiStack::NodeType rhs);
 
 template<typename T>
 bool
-operator!=(typename Erable::Utils::MultiStack<T>::NodeType lhs, typename Erable::Utils::MultiStack<T>::NodeType rhs);
+operator!=(typename Erable::Utils::MultiStack::NodeType lhs, typename Erable::Utils::MultiStack::NodeType rhs);
 
 #endif //ERABLELANG_MULTISTACK_HPP

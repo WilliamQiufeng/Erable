@@ -21,6 +21,14 @@
     <option name="SHOW_CLOSE_PROMPT" value="true" />
     <option name="TOOL_WINDOW_SELECTED_CONTENT_INDEX" value="0" />
     <option name="FILTER_BY_CURRENT_PROJECT" value="true" />
+    <treeState key="project">
+      <selectedPath>
+        <pathElement>
+          <option name="myNodeId" value="helperText" />
+          <option name="myNodeType" value="jetbrains.buildServer.tree.descriptors.LinkedTextDescriptor" />
+        </pathElement>
+      </selectedPath>
+    </treeState>
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
@@ -43,18 +51,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64587cbb-66be-4489-b3f3-a39fdb57e449" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/statistic.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Headers.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Headers.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Symbols.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Symbols.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Tokens.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Lexer/Tokens.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Parser/MultiStack.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/MultiStack.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Parser/MultiStack.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/MultiStack.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTable.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/ParseTable.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Parser/Parser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/Parser.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Parser/Parser.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Parser/Parser.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/Syntax.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/Syntax.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErableLang/Compiler/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/Compiler/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/ErableCompiler" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/cmake-build-debug/Compiler/ErableCompiler" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErableLang/tests/lex.erable" beforeDir="false" afterPath="$PROJECT_DIR$/ErableLang/tests/lex.erable" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -245,7 +252,9 @@
       <workItem from="1565961160919" duration="115000" />
       <workItem from="1567413485393" duration="550000" />
       <workItem from="1570595263101" duration="15895000" />
-      <workItem from="1570749143781" duration="7120000" />
+      <workItem from="1570749143781" duration="8855000" />
+      <workItem from="1571046842592" duration="3181000" />
+      <workItem from="1571099366441" duration="11954000" />
     </task>
     <task id="LOCAL-00001" summary=":art: Moved ParseTable.cpp&amp;hpp to Compiler/.">
       <created>1562396257768</created>
@@ -282,7 +291,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570682662168</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary=":art: Improved the code of MultiStack.&#10;:construction: Updated basic structure of class Parser.">
+      <created>1570795947745</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1570795947745</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -309,9 +325,28 @@
     <MESSAGE value="FOLLOW set corrected. It may work because it looks fine but the result is not the same as another website's." />
     <MESSAGE value="Ah. I've changed the generation method from DFS to GFS, and here comes the errors I have to overcome. Ju..Just let me finish it on the next few commits. I have to push it now....Oh, I've also optimised the structure! Seeya!" />
     <MESSAGE value=":bulb: Commented the codes in ParseTable.cpp and Symbols.cpp" />
-    <option name="LAST_COMMIT_MESSAGE" value=":bulb: Commented the codes in ParseTable.cpp and Symbols.cpp" />
+    <MESSAGE value=":art: Improved the code of MultiStack.&#10;:construction: Updated basic structure of class Parser." />
+    <option name="LAST_COMMIT_MESSAGE" value=":art: Improved the code of MultiStack.&#10;:construction: Updated basic structure of class Parser." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/ErableLang/Compiler/main.cpp</url>
+          <line>16</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="CMakeRunConfiguration">
+        <watch expression="this-&gt;multiStack.root.__ptr_-&gt;value" />
+        <watch expression="this-&gt;multiStack.root.__ptr_-&gt;value.state" />
+        <watch expression="parser.multiStack.root.__ptr_-&gt;value" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

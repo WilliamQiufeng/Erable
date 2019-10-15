@@ -89,6 +89,10 @@ namespace Erable {
 
 		};
 
+		namespace Parser {
+			struct NodeData;
+		}
+
 		class TokenElement;
 
 		class PlainTokenElement;

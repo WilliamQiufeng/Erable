@@ -7,17 +7,28 @@
 #include "Parser.hpp"
 
 namespace Erable::Utils {
-	template<typename T>
-	T &&MultiStack<T>::get(MultiStackPath index) {
+	using T = MultiStack::T;
+	using NodeType = MultiStack::NodeType;
+
+	T *Const::start_symbol = new T{Compiler::Symbols::EOT};
+
+	T MultiStack::get(const MultiStackPath &index) {
+		return getPtr(index)->value;
+	}
+
+	typename MultiStack::NodeType MultiStack::getPtr(const MultiStackPath &index) {
 		NodeType current = root;
 		for (int i : index) {
 			current = current->nodes[i];
 		}
-		return std::forward<decltype(current->value)>(current->value);
+		return current;
 	}
 
-	template<typename T>
-	typename MultiStack<T>::NodeList MultiStack<T>::getList(MultiStackPath index) {
+	int MultiStack::getElementSize(MultiStackPath index) {
+		return getPtr(index)->nodes.size();
+	}
+
+	typename MultiStack::NodeList MultiStack::getList(MultiStackPath index) {
 		NodeList nodeList;
 		NodeType current = root;
 		for (int i : index) {
@@ -28,8 +39,7 @@ namespace Erable::Utils {
 		return nodeList;
 	}
 
-	template<typename T>
-	void MultiStack<T>::set(MultiStackPath index, T &&value) {
+	void MultiStack::set(MultiStackPath index, T &&value) {
 		NodeType current = root;
 		for (int i : index) {
 			current = current->nodes[i];
@@ -37,12 +47,16 @@ namespace Erable::Utils {
 		current->value = value;
 	}
 
-	template<typename T>
-	void MultiStack<T>::setPath(MultiStackPath index, MultiStack::NodeList list) {
+	void MultiStack::setPath(MultiStackPath index, MultiStack::NodeList list) {
 		assert(index.size() == list.size() - 1);
 		NodeType current = root;
 		//Because the list starts with the root node's value, so the list's size is 1 bigger than the index list.
+		int j = 0;
 		for (int i : index) {
+			if (j++ >= list.size() - 1) {
+				current->nodes.erase(current->nodes.begin() + i);
+				break;
+			}
 			if (current->value != list[i]->value)
 				current->value = list[i]->value;
 			current = current->nodes[i];
@@ -50,49 +64,40 @@ namespace Erable::Utils {
 		current->value = list[list.size() - 1]->value;
 	}
 
-	template<typename T>
-	MultiStack<T>::MultiStack(const MultiStack::NodeType &root):root(root) {}
+	MultiStack::MultiStack(const MultiStack::NodeType &root) : root(root) {}
 
-	template<typename T>
-	MultiStack<T>::MultiStack() {
-		static_assert(std::is_class<Compiler::Parser::NodeData>::value,
+	MultiStack::MultiStack() {
+		static_assert(std::is_base_of<Compiler::Parser::NodeData, T>::value,
 					  "Constructing MultiStack with no arguments requires type T be NodeData!");
-		Compiler::Parser::NodeData data;
-		root = std::make_shared<Node>();
+		root = std::make_shared<Node>(*Const::start_symbol);
 	}
 
-	template<typename T>
-	MultiStackNode<T> &MultiStackNode<T>::operator[](std::size_t size) {
+	MultiStack::NodeType MultiStackNode::operator[](std::size_t size) {
 		return nodes[size];
 	}
 
-	template<typename T>
-	bool MultiStackNode<T>::operator==(const MultiStackNode &rhs) const {
+	bool MultiStackNode::operator==(const MultiStackNode &rhs) const {
 		return value == rhs.value &&
 			   nodes == rhs.nodes;
 	}
 
-	template<typename T>
-	bool MultiStackNode<T>::operator!=(const MultiStackNode &rhs) const {
+	bool MultiStackNode::operator!=(const MultiStackNode &rhs) const {
 		return !(rhs == *this);
 	}
 
-	template<typename T>
-	MultiStackNode<T>::MultiStackNode(T &&value, const typename MultiStack<T>::NodeList &nodes):value(
-			std::forward<T>(value)), nodes(nodes) {}
+	MultiStackNode::MultiStackNode(T value, typename MultiStack::NodeList nodes) : value(
+			std::move(value)), nodes(std::move(nodes)) {}
 
-	template
-	class MultiStack<Compiler::Parser::MultiStackIntegralType>;
 }
 
 template<typename T>
 bool
-operator==(typename Erable::Utils::MultiStack<T>::NodeType lhs, typename Erable::Utils::MultiStack<T>::NodeType rhs) {
-	return lhs->value == rhs->value && lhs->nodes == rhs->value;
+operator==(typename Erable::Utils::MultiStack::NodeType lhs, typename Erable::Utils::MultiStack::NodeType rhs) {
+	return lhs->value == rhs->value && lhs->nodes == rhs->nodes;
 }
 
 template<typename T>
 bool
-operator!=(typename Erable::Utils::MultiStack<T>::NodeType lhs, typename Erable::Utils::MultiStack<T>::NodeType rhs) {
+operator!=(typename Erable::Utils::MultiStack::NodeType lhs, typename Erable::Utils::MultiStack::NodeType rhs) {
 	return !(lhs == rhs);
 }

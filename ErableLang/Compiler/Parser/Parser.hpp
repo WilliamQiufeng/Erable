@@ -11,12 +11,18 @@
 
 namespace Erable::Compiler::Parser {
 	struct NodeData {
-		std::variant<Symbols::SymbolPtr, Token> type;
+		Symbols::SymbolPtr symbolPtr;
+		Token token;
 		std::vector<NodeData> subData;
 		int state;
 
-		explicit NodeData(const std::variant<Symbols::SymbolPtr, Token> &type = Symbols::EMPTY_PLACEHOLDER,
-						  const std::vector<NodeData> &subData = {}, int state = 0);
+		explicit NodeData(Symbols::SymbolPtr type = Symbols::EMPTY_PLACEHOLDER,
+						  std::vector<NodeData> subData = {}, int state = 0);
+
+		explicit NodeData(Token type = Symbols::EOT_TOKEN,
+						  std::vector<NodeData> subData = {}, int state = 0);
+
+		std::string getTag();
 
 		bool operator==(const NodeData &rhs) const;
 
@@ -24,7 +30,7 @@ namespace Erable::Compiler::Parser {
 	};
 
 	typedef NodeData MultiStackIntegralType;
-	typedef Utils::MultiStack<MultiStackIntegralType> MultiStackType;
+	typedef Utils::MultiStack MultiStackType;
 	//This is a GLR(1) Parser
 	class Parser {
 		typedef std::vector<Utils::MultiStackPath> IndexesType;
@@ -32,16 +38,29 @@ namespace Erable::Compiler::Parser {
 		ParseTable parseTable;
 		IndexesType indexes;
 
-		void parse(TokenList tokenList);
+	public:
+		explicit Parser(ParseTable parseTable);
+
+		bool parse(TokenList tokenList);
 
 		bool allError();
 
-		void parseNext(Token token);
+		IndexesType parseNext(Token token);
 
 		bool isParsable(Token token);
 
-		bool next(Utils::MultiStackPath path, Action action);
+		IndexesType next(Utils::MultiStackPath path, Action action, Token token);
+
+		IndexesType doState(Utils::MultiStackPath &path, MultiStackType::NodeList &list, Token token, int state);
+
+		IndexesType doReduce(Utils::MultiStackPath &path, MultiStackType::NodeList &list, int reduce);
+
+		Utils::MultiStackPath findDuplicate(const NodeData &nodeData, Utils::MultiStackPath indexBuff = {0});
 	};
 }
+
+std::ostream &operator<<(std::ostream &os, Erable::Compiler::Parser::NodeData nodeData);
+
+std::ostream &operator<<(std::ostream &os, Erable::Compiler::Parser::MultiStackType multiStack);
 
 #endif //ERABLELANG_PARSER_HPP

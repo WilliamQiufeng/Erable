@@ -1,30 +1,30 @@
 #include <iostream>
 #include "Headers.hpp"
 #include "Parser/ParseTable.hpp"
+#include "Parser/Parser.hpp"
 #include "Lexer/Lexer.hpp"
 #include "Lexer/Symbols.hpp"
 #include "Syntax.hpp"
 #include "Parser/.IntList.hpp"
 
-void testList() {
-//	using namespace Erable;
-//	Erable::Utils::IntList intList;
-//	intList.push(2);
-//	intList.push(3);
-//	intList.push(4);
-//	intList.erase(intList.end());
-//	intList.erase(intList.begin());
-//	for(int i : intList) {
-//		std::cout << i << std::endl;
-//	}
+
+using namespace Erable::Compiler;
+
+Parser::ParseTable parseTable({});
+
+void testParse() {
+	TokenList tokenList{{"A", ""},
+						{"A", ""},
+						{"A", ""}};
+	Parser::Parser parser(parseTable);
+	parser.parse(tokenList);
 }
 
 void test() {
-	testList();
+	testParse();
 }
 
 int main(int argc, char *argv[]) {
-    using namespace Erable::Compiler;
 	Syntax::initSyntax();
     Lexer lexer = Lexer("/williamye/program/antlr/erable/ErableLang/tests/lex.erable");
     lexer.lex();
@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
 	ruleIteration.generateFirstRound();
 	ruleIteration.generate();
 	std::cout << ruleIteration.rootNode << std::endl;
-	Parser::ParseTable parseTable(ruleIteration);
+	parseTable = ruleIteration;
 	parseTable.generateTable();
 	std::cout << parseTable << std::endl;
 
