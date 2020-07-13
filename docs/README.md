@@ -6,7 +6,7 @@
 
 [spec](spec) 目录用于存放 Erable Programming Language 和 Erable Virtual Machine 的正式规范文档。
 
-- [Erable Virtual Machine Opeation Codes Specification](spec/Erable-Virtual-Machine-Opeation-Codes-Specification.md)
+- [Erable Virtual Machine Operation Codes Specification](spec/Erable-Virtual-Machine-Operation-Codes-Specification.md)
 
   Erable 虚拟机指令码规范
 
